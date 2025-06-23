@@ -29,7 +29,7 @@ Item {
     property real openOffset
 
     // calculate the position needed to at when the expanded drawer is active
-    readonly property real fullOpenOffset: popupDrawerOpened ? aboveNotificationFullOffset + aboveNotificationHeight + Kirigami.Units.gridUnit : 0
+    readonly property real fullOpenOffset: popupDrawerOpened ? aboveNotificationFullOffset + aboveNotificationHeight + Kirigami.Units.largeSpacing : 0
     property real aboveNotificationFullOffset: 0
     property int aboveNotificationHeight: 0
 
@@ -324,6 +324,9 @@ Item {
         notificationsModel: notificationPopup.notificationsModel
         notificationsModelType: notificationPopup.notificationsModelType
         timeSource: notificationPopup.timeDataSource
+        panelType:  notificationPopup.popupDrawerOpened ?
+                    MobileShell.PanelBackground.PanelType.Drawer :
+                    MobileShell.PanelBackground.PanelType.Popup
 
         currentPopupHeight: popupNotifications.currentPopupHeight
 

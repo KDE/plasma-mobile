@@ -24,7 +24,8 @@ BaseNotificationItem {
     id: notificationItem
     implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
 
-    property bool inLockscreen: false
+    property bool inLockScreen: false
+    property int panelType: MobileShell.PanelBackground.PanelType.Drawer
 
     signal dragStart()
     signal dragEnd()
@@ -37,7 +38,7 @@ BaseNotificationItem {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        inLockscreen: root.inLockscreen
+        inLockScreen: notificationItem.inLockScreen
 
         Kirigami.Theme.colorSet: Kirigami.Theme.Header
         Kirigami.Theme.inherit: false
@@ -62,6 +63,8 @@ BaseNotificationItem {
         onTapped: notificationItem.actionInvoked("default");
         swipeGestureEnabled: notificationItem.closable
         onDismissRequested: notificationItem.close();
+        inLockScreen: notificationItem.inLockScreen
+        panelType: notificationItem.panelType
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()

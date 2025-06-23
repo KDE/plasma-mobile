@@ -29,7 +29,8 @@ BaseNotificationItem {
     property real remainingTimeProgress: 1
     property bool closeTimerRunning: false
 
-    property bool inLockscreen: false
+    property bool inLockScreen: false
+    property int panelType: MobileShell.PanelBackground.PanelType.Drawer
 
     signal dragStart()
     signal dragEnd()
@@ -48,6 +49,8 @@ BaseNotificationItem {
         currentPopupHeight: notificationItem.currentPopupHeight
         remainingTimeProgress: notificationItem.remainingTimeProgress
         closeTimerRunning: notificationItem.closeTimerRunning
+        inLockScreen: notificationItem.inLockScreen
+        panelType: notificationItem.panelType
         tapEnabled: notificationItem.hasDefaultAction
         onTapped: notificationItem.actionInvoked("default");
         swipeGestureEnabled: notificationItem.closable

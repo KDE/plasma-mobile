@@ -27,7 +27,15 @@ import org.kde.notificationmanager as NotificationManager
 Item {
     id: root
 
-    property bool inLockscreen: false
+    /**
+     * If the notification is in the lockscreen.
+     */
+    property bool inLockScreen: false
+
+    /**
+     * The panel background type for all the notifications within the widget.
+     */
+    property int panelType: MobileShell.PanelBackground.PanelType.Drawer
 
     /**
      * The notification model for the widget.
@@ -165,7 +173,7 @@ Item {
         readonly property int listHeight: contentItem.childrenRect.height
 
         bottomMargin: spacing
-        height: count === 0 ? (root.topPadding + (showHeader ? root.header.height + listHeight : 0)) : (listOverflowing ? root.height : listHeight + bottomMargin)
+        height: count === 0 ? (root.topPadding + (showHeader ? root.header.height + listHeight + Kirigami.Units.largeSpacing * 2 : 0)) : (listOverflowing ? root.height : listHeight + bottomMargin)
 
         anchors {
             top: parent.top
@@ -192,7 +200,7 @@ Item {
                     id: headerComponentProxy
 
                     contentItem: showHeader ? root.header : null
-                    y: root.topPadding - Kirigami.Units.largeSpacing
+                    y: root.topPadding + Kirigami.Units.largeSpacing
 
                     width: parent.width - Kirigami.Units.gridUnit * 2
                     anchors.left: parent.left
@@ -309,7 +317,7 @@ Item {
                     Item {
                         id: headerSpace
                         width: parent.width
-                        height: index == 0 ? root.topPadding + (showHeader ? root.header.height : 0) : 0
+                        height: index == 0 ? root.topPadding + (showHeader && root.header.visible ? root.header.height + Kirigami.Units.largeSpacing * 2 : 0) : 0
                         visible: index == 0
                     }
 
@@ -333,7 +341,7 @@ Item {
                     Item {
                         id: headerSpace
                         width: parent.width
-                        height: index == 0 ? root.topPadding + (showHeader ? root.header.height : 0) : 0
+                        height: index == 0 ? root.topPadding + (showHeader && root.header.visible ? root.header.height + Kirigami.Units.largeSpacing * 2 : 0) : 0
                         visible: index == 0
                     }
 
@@ -342,7 +350,8 @@ Item {
                         width: parent.width
                         height: implicitHeight
 
-                        inLockscreen: root.inLockscreen
+                        inLockScreen: root.inLockScreen
+                        panelType: root.panelType
 
                         model: delegateLoader.model
                         modelIndex: delegateLoader.index

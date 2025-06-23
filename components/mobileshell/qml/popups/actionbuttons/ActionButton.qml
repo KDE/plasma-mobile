@@ -124,35 +124,10 @@ Window {
             yScale: content.scale
         }
 
-        MultiEffect {
+        MobileShell.PanelBackground {
             anchors.fill: parent
-            source: simpleShadow
-            blurMax: 16
-            shadowEnabled: true
-            shadowVerticalOffset: 1
-            shadowOpacity: 0.85
-            shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
-        }
-
-        Rectangle {
-            id: simpleShadow
-            anchors.fill: parent
-            anchors.leftMargin: -1
-            anchors.rightMargin: -1
-            anchors.bottomMargin: -1
-
-            color: {
-                let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
-                return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, 0.5)
-            }
+            panelType: MobileShell.PanelBackground.PanelType.Popup
             radius: root.size
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            color: Qt.lighter(Kirigami.Theme.backgroundColor, 1.5)
-            radius: root.size
-            opacity: 0.85
         }
 
         Controls.AbstractButton {

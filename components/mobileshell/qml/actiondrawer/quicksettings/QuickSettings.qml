@@ -20,7 +20,9 @@ import org.kde.kirigami 2.20 as Kirigami
  */
 Item {
     id: root
-    clip: true
+    // to prevent clipping off the shadows form the BrightnessItem when the rest of the action panel view
+    // is transparent, we stop clipping the base view when fullViewProgress is not less then 1
+    clip: fullViewProgress < 1
 
     required property var actionDrawer
 
@@ -124,6 +126,9 @@ Item {
 
             SwipeView {
                 id: swipeView
+                // we need to clip this view here to prevent the other quick settings pages from being visable
+                // when fullViewProgress is not less then 1 and the base view is no longer being clipped
+                clip: true
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: rowCount * rowHeight

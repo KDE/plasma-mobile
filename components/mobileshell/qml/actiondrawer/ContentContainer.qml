@@ -105,7 +105,7 @@ Item {
             opacity: Math.max(0, Math.min(root.brightnessPressedValue, actionDrawer.offsetResistance / root.minimizedQuickSettingsOffset))
 
             anchors {
-                topMargin: notificationDrawer.height
+                topMargin: notificationDrawer.height + 1
                 leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : 10
                 rightMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.notificationWidget.anchors.rightMargin + Kirigami.Units.gridUnit - notificationDrawer.anchors.leftMargin + 370
                 top: parent.top
@@ -277,8 +277,6 @@ Item {
 
     property MobileShell.MediaControlsWidget mediaControlsWidget: MobileShell.MediaControlsWidget {
         id: mediaWidget
-        inActionDrawer: root.actionDrawer.mode == ActionDrawer.Portrait
-
         opacity: brightnessPressedValue
     }
 }

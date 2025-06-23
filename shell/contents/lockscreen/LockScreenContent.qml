@@ -104,6 +104,7 @@ Item {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 25
             Layout.leftMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
             Layout.rightMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
+            panelType: MobileShell.PanelBackground.PanelType.Wallpaper
         }
     }
 

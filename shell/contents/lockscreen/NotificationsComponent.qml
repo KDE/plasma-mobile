@@ -83,7 +83,8 @@ Loader {
                 actionsRequireUnlock: true
                 historyModel: root.notificationsModel
                 notificationSettings: root.notificationSettings
-                inLockscreen: true
+                panelType: MobileShell.PanelBackground.PanelType.Wallpaper
+                inLockScreen: true
                 topPadding: root.topPadding // Kirigami.Units.gridUnit
                 bottomPadding: Kirigami.Units.gridUnit
                 listView.interactive: !root.scrollLock && listView.listOverflowing

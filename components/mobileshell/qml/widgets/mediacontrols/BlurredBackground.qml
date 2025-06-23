@@ -30,6 +30,13 @@ Item {
         }
     }
 
+    // darken background when pressed
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+        opacity: root.darken ? 0.05 : 0
+    }
+
     Image {
         id: img
         source: root.imageSource
@@ -41,8 +48,11 @@ Item {
         // ensure text is readable
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(Kirigami.Theme.backgroundColor.r * (inActionDrawer ? 0.85 : 0.95), Kirigami.Theme.backgroundColor.g * (inActionDrawer ? 0.85 : 0.95), Kirigami.Theme.backgroundColor.b * (inActionDrawer ? 0.85 : 0.95), root.darken ? 0.95 : 0.85)
+            color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.2)
+            visible: img.progress
         }
+
+        opacity: 0.1
 
         // apply lighten, saturate and blur effect
         layer.enabled: true

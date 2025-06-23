@@ -13,6 +13,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell.screenbrightnessplugin as ScreenBrightness
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Item {
     id: root
@@ -31,15 +32,15 @@ Item {
         id: screenBrightness
     }
 
-    Rectangle {
+    MobileShell.PanelBackground {
         anchors.fill: parent
         anchors.leftMargin: -Kirigami.Units.smallSpacing
         anchors.rightMargin: -Kirigami.Units.smallSpacing
         anchors.topMargin: -Kirigami.Units.smallSpacing * 2
         anchors.bottomMargin: -Kirigami.Units.smallSpacing * 2
 
-        color: Kirigami.Theme.backgroundColor
-        radius: Kirigami.Units.cornerRadius
+        panelType: MobileShell.PanelBackground.PanelType.Base
+        flatten:  root.brightnessPressedValue
     }
 
     RowLayout {
