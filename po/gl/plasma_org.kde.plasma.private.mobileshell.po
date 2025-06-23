@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-06-23 00:44+0000\n"
 "PO-Revision-Date: 2024-11-13 21:22+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -106,13 +106,13 @@ msgid "Show additional options for %1"
 msgstr "Mostrar opcións adicionais para %1."
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Unmute"
 msgstr "Activar o son"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Mute"
 msgstr "Silenciar"
@@ -151,7 +151,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Non se atopou o nome do fluxo"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
 #, kde-format
 msgid "configure audio streams"
 msgstr "configurar os fluxos de son"
@@ -177,22 +177,22 @@ msgstr "Buscar…"
 msgid "Search…"
 msgstr "Buscar…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
 #, kde-format
 msgid "No media playing"
 msgstr "Non se está a reproducir nada."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
 #, kde-format
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Reproducir ou deter o contido multimedia"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
 #, kde-format
 msgid "Next track"
 msgstr "Seguinte pista"
@@ -388,23 +388,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Restan %1 horas"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:226
+#: qml/widgets/notifications/NotificationsWidget.qml:234
 #, kde-format
 msgid "Notification service not available"
 msgstr "O servizo de notificacións non está dispoñíbel"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:235
+#: qml/widgets/notifications/NotificationsWidget.qml:243
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Actualmente as notificacións fornéceas «%1 %2»"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:395
+#: qml/widgets/notifications/NotificationsWidget.qml:404
 #, kde-format
 msgid "Show Fewer"
 msgstr "Amosar menos"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:397
+#: qml/widgets/notifications/NotificationsWidget.qml:406
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"

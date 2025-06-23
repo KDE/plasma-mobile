@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-06-23 00:44+0000\n"
 "PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -107,13 +107,13 @@ msgid "Show additional options for %1"
 msgstr "Montri pliajn opciojn por %1"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Unmute"
 msgstr "Malŝalti"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Mute"
 msgstr "Silentigi"
@@ -152,7 +152,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Flugnomo ne trovita"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
 #, kde-format
 msgid "configure audio streams"
 msgstr "agordi sonfluojn"
@@ -178,22 +178,22 @@ msgstr "Serĉi…"
 msgid "Search…"
 msgstr "Serĉi…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
 #, kde-format
 msgid "No media playing"
 msgstr "Neniu aŭdvidaĵo ludanta"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
 #, kde-format
 msgid "Previous track"
 msgstr "Antaŭa trako"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Ludi aŭ Paŭzi aŭdvidaĵon"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
 #, kde-format
 msgid "Next track"
 msgstr "Sekva trako"
@@ -389,23 +389,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 h restanta"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:226
+#: qml/widgets/notifications/NotificationsWidget.qml:234
 #, kde-format
 msgid "Notification service not available"
 msgstr "Servo de sciigo ne havebla"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:235
+#: qml/widgets/notifications/NotificationsWidget.qml:243
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Sciigoj estas aktuale provizitaj de '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:395
+#: qml/widgets/notifications/NotificationsWidget.qml:404
 #, kde-format
 msgid "Show Fewer"
 msgstr "Montri Malpli"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:397
+#: qml/widgets/notifications/NotificationsWidget.qml:406
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"

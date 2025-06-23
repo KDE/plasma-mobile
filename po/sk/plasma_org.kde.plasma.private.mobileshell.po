@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-06-23 00:44+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -105,13 +105,13 @@ msgid "Show additional options for %1"
 msgstr "Zobraziť dodatočné voľby pre %1"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Unmute"
 msgstr "Zrušiť stlmenie"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Mute"
 msgstr "Stlmiť"
@@ -150,7 +150,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Názov prúdu nebol nájdený"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"
@@ -178,22 +178,22 @@ msgstr "Hľadať..."
 msgid "Search…"
 msgstr "Hľadať..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
 #, kde-format
 msgid "No media playing"
 msgstr "Neprehráva sa žiadne médium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
 #, kde-format
 msgid "Previous track"
 msgstr "Predchádzajúca skladba"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Prehrať alebo pozastaviť médium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
 #, kde-format
 msgid "Next track"
 msgstr "Nasledujúca skladba"
@@ -400,23 +400,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1h zostáva"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:226
+#: qml/widgets/notifications/NotificationsWidget.qml:234
 #, kde-format
 msgid "Notification service not available"
 msgstr "Služba upozornení nie je dostupná"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:235
+#: qml/widgets/notifications/NotificationsWidget.qml:243
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Oznámenia v súčasnosti poskytuje '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:395
+#: qml/widgets/notifications/NotificationsWidget.qml:404
 #, kde-format
 msgid "Show Fewer"
 msgstr "Zobraziť menej"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:397
+#: qml/widgets/notifications/NotificationsWidget.qml:406
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"

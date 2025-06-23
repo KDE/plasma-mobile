@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-06-23 00:44+0000\n"
 "PO-Revision-Date: 2025-02-07 23:06+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -106,13 +106,13 @@ msgid "Show additional options for %1"
 msgstr "顯示 %1 的額外設定"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Unmute"
 msgstr "取消靜音"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Mute"
 msgstr "靜音"
@@ -151,7 +151,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "找不到串流名稱"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
 #, kde-format
 msgid "configure audio streams"
 msgstr "設定音效串流"
@@ -177,22 +177,22 @@ msgstr "搜尋…"
 msgid "Search…"
 msgstr "搜尋…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
 #, kde-format
 msgid "No media playing"
 msgstr "沒有播放任何媒體"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
 #, kde-format
 msgid "Previous track"
 msgstr "上一個音軌"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
 #, kde-format
 msgid "Play or Pause media"
 msgstr "播放或暫停媒體"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
 #, kde-format
 msgid "Next track"
 msgstr "下一個音軌"
@@ -382,23 +382,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "剩餘 %1 小時"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:226
+#: qml/widgets/notifications/NotificationsWidget.qml:234
 #, kde-format
 msgid "Notification service not available"
 msgstr "無法使用通知服務"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:235
+#: qml/widgets/notifications/NotificationsWidget.qml:243
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "目前通知由「%1 %2」提供"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:395
+#: qml/widgets/notifications/NotificationsWidget.qml:404
 #, kde-format
 msgid "Show Fewer"
 msgstr "顯示較少通知"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:397
+#: qml/widgets/notifications/NotificationsWidget.qml:406
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"

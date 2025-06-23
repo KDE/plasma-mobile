@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
+"POT-Creation-Date: 2025-06-23 00:44+0000\n"
 "PO-Revision-Date: 2024-05-17 01:05+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -108,13 +108,13 @@ msgid "Show additional options for %1"
 msgstr "Rodyti papildomas %1 parinktis"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Unmute"
 msgstr "Įjungti garsą"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
 #, kde-format
 msgid "Mute"
 msgstr "Nutildyti"
@@ -153,7 +153,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Srauto pavadinimas nerastas"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"
@@ -181,22 +181,22 @@ msgstr "Ieškoti…"
 msgid "Search…"
 msgstr "Ieškoti…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
 #, kde-format
 msgid "No media playing"
 msgstr "Neatkuriama jokia medija"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
 #, kde-format
 msgid "Previous track"
 msgstr "Ankstesnis takelis"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Atkurti ar Pristabdyti mediją"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
 #, kde-format
 msgid "Next track"
 msgstr "Kitas takelis"
@@ -409,23 +409,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "liko %1 val."
 
-#: qml/widgets/notifications/NotificationsWidget.qml:226
+#: qml/widgets/notifications/NotificationsWidget.qml:234
 #, kde-format
 msgid "Notification service not available"
 msgstr "Pranešimų tarnyba yra neprieinama"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:235
+#: qml/widgets/notifications/NotificationsWidget.qml:243
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Šiuo metu pranešimus teikia „%1 %2“"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:395
+#: qml/widgets/notifications/NotificationsWidget.qml:404
 #, kde-format
 msgid "Show Fewer"
 msgstr "Rodyti mažiau"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:397
+#: qml/widgets/notifications/NotificationsWidget.qml:406
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
