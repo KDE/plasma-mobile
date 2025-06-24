@@ -49,9 +49,6 @@ void TaskModel::setupWindowConnections(Window *window)
     connect(window, &Window::outputChanged, this, [this, window]() {
         markRoleChanged(window, OutputRole);
     });
-    connect(window, &Window::activitiesChanged, this, [this, window]() {
-        markRoleChanged(window, ActivityRole);
-    });
 }
 
 void TaskModel::handleWindowAdded(Window *window)
@@ -87,7 +84,6 @@ QHash<int, QByteArray> TaskModel::roleNames() const
         {WindowRole, QByteArrayLiteral("window")},
         {OutputRole, QByteArrayLiteral("output")},
         {DesktopRole, QByteArrayLiteral("desktop")},
-        {ActivityRole, QByteArrayLiteral("activity")},
     };
 }
 
@@ -107,8 +103,6 @@ QVariant TaskModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(window->output());
     case DesktopRole:
         return QVariant::fromValue(window->desktops());
-    case ActivityRole:
-        return window->activities();
     case LastActivatedRole:
         return lastActivated;
     default:

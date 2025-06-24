@@ -23,7 +23,6 @@ public:
         WindowRole = Qt::UserRole + 1,
         OutputRole,
         DesktopRole,
-        ActivityRole,
         LastActivatedRole
     };
 
