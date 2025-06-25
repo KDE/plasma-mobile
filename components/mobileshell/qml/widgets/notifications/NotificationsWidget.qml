@@ -15,6 +15,7 @@ import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
@@ -103,13 +104,12 @@ Item {
         if (doNotDisturbModeEnabled) {
             notificationSettings.defaults();
         } else {
+            // We just have a global toggle, so set it to a really long time (in this case, a year)
             var until = new Date();
-
             until.setFullYear(until.getFullYear() + 1);
 
             notificationSettings.notificationsInhibitedUntil = until;
         }
-
         notificationSettings.save();
     }
 
@@ -118,6 +118,17 @@ Item {
      */
     function openNotificationSettings() {
         MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_notifications");
+    }
+
+    // Implement listening to system "do not disturb" requests
+    Connections {
+        target: MobileShellState.ShellDBusClient
+
+        function onDoNotDisturbChanged() {
+            if (root.doNotDisturbModeEnabled !== MobileShellState.ShellDBusClient.doNotDisturb) {
+                root.toggleDoNotDisturbMode();
+            }
+        }
     }
 
     P5Support.DataSource {
