@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2025-04-07 16:52+0300\n"
+"PO-Revision-Date: 2025-06-24 12:52+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -199,17 +199,17 @@ msgstr "Тёмная тема"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Навигация системы"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Выберите способ навигации в системе."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Навигация с помощью жестов"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -217,21 +217,24 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Проведите пальцем вверх из нижней части экрана для просмотра запущенных "
+"приложений. Перелистните для перехода на домашний экран."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Навигация с помощью кнопок"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "Используйте кнопки на панели навигации для навигации в системе."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
 msgstr ""
+"Выбранный способ навигации возможно изменить в разделе настройки позже."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format

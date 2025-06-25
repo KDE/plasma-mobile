@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-04-07 16:51+0300\n"
+"PO-Revision-Date: 2025-06-24 13:08+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -47,7 +47,7 @@ msgstr "Если этот параметр отключён, использов�
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Автоматическое скрытие панелей"
 
 #: ui/main.qml:56
 #, kde-format
@@ -55,6 +55,9 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Если этот параметр включён, будет выполняться автоматическое скрытие строки "
+"состояния и панели навигации, что позволит приложениям занять всё экранное "
+"пространство."
 
 #: ui/main.qml:67
 #, kde-format
@@ -76,12 +79,12 @@ msgstr ""
 #: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Процент заряда батареи"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Показывать процент заряда батареи в строке состояния."
 
 #: ui/main.qml:102
 #, kde-format
@@ -195,37 +198,37 @@ msgstr "Режим открытия из верхнего правого угл�
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Ярлыки на экране блокировки"
 
 #: ui/main.qml:225
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Нет"
 
 #: ui/main.qml:226
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Фонарик"
 
 #: ui/main.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Камера"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Левая кнопка"
 
 #: ui/main.qml:253
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Правая кнопка"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
