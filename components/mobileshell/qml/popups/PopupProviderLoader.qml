@@ -20,9 +20,15 @@ Item {
     // WARNING: only call this load from within the plasmashell process, because
     // multiple bindings of the shortcut may break it entirely (hardware volume keys)
     function load() {
-        volumeOSD.active = true;
-        notifications.active = true;
-        actionButtons.active = true;
+        if (!volumeOSD.active) {
+            volumeOSD.active = true;
+        }
+        if (!notifications.active) {
+            notifications.active = true;
+        }
+        if (!actionButtons.active) {
+            actionButtons.active = true;
+        }
     }
 
     Loader {
