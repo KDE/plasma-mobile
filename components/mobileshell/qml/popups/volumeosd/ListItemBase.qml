@@ -161,8 +161,9 @@ Controls.Control {
                     from: PulseAudio.MinimalVolume
                     to: PulseAudio.NormalVolume
                     stepSize: to / (to / PulseAudio.NormalVolume * 100.0)
-                    visible: HasVolume
-                    enabled: VolumeWritable
+
+                    visible: model.HasVolume === true // (may be undefined)
+                    enabled: model.VolumeWritable
                     opacity: Muted ? 0.5 : 1
 
                     Accessible.name: i18nc("Accessibility data on volume slider", "Adjust volume for %1", baseItem.label)
