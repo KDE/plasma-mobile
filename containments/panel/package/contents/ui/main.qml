@@ -118,12 +118,6 @@ ContainmentItem {
         function onCloseActionDrawerRequested() {
             drawer.actionDrawer.close();
         }
-
-        function onDoNotDisturbChanged() {
-            if (drawer.actionDrawer.notificationsWidget.doNotDisturbModeEnabled !== MobileShellState.ShellDBusClient.doNotDisturb) {
-                drawer.actionDrawer.notificationsWidget.toggleDoNotDisturbMode();
-            }
-        }
     }
 
     Binding {

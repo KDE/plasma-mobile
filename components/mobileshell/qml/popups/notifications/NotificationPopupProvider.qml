@@ -62,10 +62,15 @@ QtObject {
         }
     }
 
+    // TODO use pulseaudio-qt for this once it becomes a framework
+    property QtObject __pulseAudio: Loader {
+        source: "PulseAudio.qml"
+    }
+
     property bool inhibited: false
 
     onInhibitedChanged: {
-        var pa = pulseAudio.item;
+        var pa = __pulseAudio.item;
         if (!pa) {
             return;
         }
