@@ -56,11 +56,23 @@ ContainmentItem {
         screenGeometry: Plasmoid.containment.screenGeometry
     }
 
+    MobileShell.HomeScreenWallpaperBlur {
+        id: wallpaperBlur
+        active: Plasmoid.settings.showWallpaperBlur
+        anchors.fill: parent
+        wallpaperItem: Plasmoid.wallpaperGraphicsObject
+
+        blurOpacity: Math.min(1,
+            Math.max(1 - homeScreen.contentOpacity,
+                halcyonHomeScreen.settingsOpenFactor
+            )
+        )
+    }
+
     Rectangle {
         id: darkenBackground
         color: (halcyonHomeScreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
         anchors.fill: parent
-        z: -1
         Behavior on color {
             ColorAnimation { duration: Kirigami.Units.longDuration }
         }
@@ -71,7 +83,6 @@ ContainmentItem {
         color: Qt.rgba(0, 0, 0, 0.7)
         opacity: halcyonHomeScreen.settingsOpenFactor
         anchors.fill: parent
-        z: -1
         Behavior on color {
             ColorAnimation { duration: Kirigami.Units.longDuration }
         }

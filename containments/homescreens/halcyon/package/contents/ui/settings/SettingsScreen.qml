@@ -103,12 +103,40 @@ Item {
 
                 onClicked: {
                     root.homeScreen.settingsOpen = false;
-                    root.homeScreen.openContainmentSettings();
+
+                    if (settingsWindowLoader.active) {
+                        // Ensure that if the window is already opened, it gets raised to the top
+                        settingsWindowLoader.item.hide();
+                        settingsWindowLoader.item.showMaximized();
+                    } else {
+                        settingsWindowLoader.active = true;
+                    }
                 }
             }
         }
     }
 
+    // Only load settings window when visible
+    Loader {
+        id: settingsWindowLoader
+        asynchronous: true
+        active: false
+
+        onLoaded: item.showMaximized();
+
+        sourceComponent: SettingsWindow {
+            onVisibleChanged: {
+                if (!visible) {
+                    settingsWindowLoader.active = false;
+                }
+            }
+            onRequestConfigureMenu: {
+                root.homeScreen.openContainmentSettings();
+            }
+        }
+    }
+
+    // Only load wallpaper selector when visible
     Loader {
         id: wallpaperSelectorLoader
         asynchronous: true

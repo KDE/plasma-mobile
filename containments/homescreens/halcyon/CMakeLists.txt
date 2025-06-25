@@ -5,6 +5,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.mobile.homes
 
 set(homescreen_SRCS
     homescreen.cpp
+    halcyonsettings.cpp
 )
 
 add_library(org.kde.plasma.mobile.homescreen.halcyon MODULE ${homescreen_SRCS})
@@ -14,11 +15,11 @@ target_link_libraries(org.kde.plasma.mobile.homescreen.halcyon
                       Qt::Qml
                       Qt::Quick
                       Plasma::Plasma
+                      Plasma::KWaylandClient
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui
                       KF6::Notifications
-                      Plasma::KWaylandClient
                       KF6::WindowSystem
 )
 

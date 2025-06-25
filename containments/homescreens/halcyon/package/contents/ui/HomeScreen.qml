@@ -13,6 +13,9 @@ import org.kde.draganddrop as DragDrop
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.plasma.private.mobileshell as MobileShell
+
+import "settings" as Settings
 
 Item {
     id: root
@@ -62,7 +65,7 @@ Item {
         }
     }
 
-    SettingsScreen {
+    Settings.SettingsScreen {
         id: settings
         bottomMargin: root.bottomMargin
         anchors.fill: parent
@@ -104,6 +107,15 @@ Item {
                 }
 
                 onLongPressed: root.openConfigure()
+                onDoubleTapped: {
+                    if (Plasmoid.settings.doubleTapToSleep) {
+                        doubleTapToSleep.doubleTapped();
+                    }
+                }
+            }
+
+            MobileShell.DoubleTapToSleep {
+                id: doubleTapToSleep
             }
 
             FavoritesView {

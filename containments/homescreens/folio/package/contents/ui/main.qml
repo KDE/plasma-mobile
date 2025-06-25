@@ -31,45 +31,20 @@ ContainmentItem {
         forceActiveFocus();
     }
 
-    Loader {
-        id: wallpaperBlurLoader
+    MobileShell.HomeScreenWallpaperBlur {
+        id: wallpaperBlur
         active: folio.FolioSettings.showWallpaperBlur
         anchors.fill: parent
+        wallpaperItem: Plasmoid.wallpaperGraphicsObject
 
-        sourceComponent: Item {
-            id: wallpaper
-            anchors.fill: parent
-
-            // only take samples from wallpaper when we need the blur for performance
-            ShaderEffectSource {
-                id: controlledWallpaperSource
-                anchors.fill: parent
-
-                sourceItem: Plasmoid.wallpaperGraphicsObject
-                live: blur.visible
-                hideSource: false
-                visible: false
-            }
-
-            // wallpaper blur
-            // we attempted to use MultiEffect in the past, but it had very poor performance on the PinePhone
-            FastBlur {
-                id: blur
-                radius: 50
-                cached: true
-                source: controlledWallpaperSource
-                anchors.fill: parent
-                visible: opacity > 0
-                opacity: Math.min(1,
-                    Math.max(
-                        1 - homeScreen.contentOpacity,
-                        folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
-                        folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
-                        folio.HomeScreenState.folderOpenProgress
-                    )
-                )
-            }
-        }
+        blurOpacity: Math.min(1,
+            Math.max(
+                1 - homeScreen.contentOpacity,
+                folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
+                folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
+                folio.HomeScreenState.folderOpenProgress
+            )
+        )
     }
 
     WindowPlugin.WindowMaximizedTracker {
