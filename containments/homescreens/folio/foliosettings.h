@@ -24,6 +24,7 @@ class FolioSettings : public QObject
     Q_PROPERTY(
         FolioSettings::PageTransitionEffect pageTransitionEffect READ pageTransitionEffect WRITE setPageTransitionEffect NOTIFY pageTransitionEffectChanged)
     Q_PROPERTY(bool showWallpaperBlur READ showWallpaperBlur WRITE setShowWallpaperBlur NOTIFY showWallpaperBlurChanged)
+    Q_PROPERTY(bool doubleTapToSleep READ doubleTapToSleep WRITE setDoubleTapToSleep NOTIFY doubleTapToSleepChanged)
 
 public:
     FolioSettings(HomeScreen *parent = nullptr);
@@ -68,6 +69,9 @@ public:
     bool showWallpaperBlur() const;
     void setShowWallpaperBlur(bool showWallpaperBlur);
 
+    bool doubleTapToSleep() const;
+    void setDoubleTapToSleep(bool doubleTapToSleep);
+
     Q_INVOKABLE void load();
 
     Q_INVOKABLE bool saveLayoutToFile(QString path);
@@ -83,6 +87,7 @@ Q_SIGNALS:
     void showFavouritesBarBackgroundChanged();
     void pageTransitionEffectChanged();
     void showWallpaperBlurChanged();
+    void doubleTapToSleepChanged();
 
 private:
     void save();
@@ -98,4 +103,5 @@ private:
     bool m_showFavouritesBarBackground{false};
     PageTransitionEffect m_pageTransitionEffect{SlideTransition};
     bool m_showWallpaperBlur{false};
+    bool m_doubleTapToSleep{false};
 };

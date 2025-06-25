@@ -31,6 +31,12 @@ MouseArea {
         id: haptics
     }
 
+    MobileShell.DoubleTapToSleep {
+        id: doubleTapToSleep
+        enabled: folio.FolioSettings.doubleTapToSleep
+        anchors.fill: parent
+    }
+
     Repeater {
         id: repeater
         model: folio.FavouritesModel

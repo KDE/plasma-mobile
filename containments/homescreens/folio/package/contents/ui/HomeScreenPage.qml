@@ -28,6 +28,12 @@ Item {
         id: haptics
     }
 
+    MobileShell.DoubleTapToSleep {
+        id: doubleTapToSleep
+        enabled: folio.FolioSettings.doubleTapToSleep
+        anchors.fill: parent
+    }
+
     // background when in settings view (for rearranging pages)
     Rectangle {
         id: settingsViewBackground

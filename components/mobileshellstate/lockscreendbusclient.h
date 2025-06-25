@@ -20,6 +20,7 @@ public:
     explicit LockscreenDBusClient(QObject *parent = nullptr);
 
     bool lockscreenActive() const;
+    Q_INVOKABLE void lockScreen();
 
 Q_SIGNALS:
     void lockscreenActiveChanged();

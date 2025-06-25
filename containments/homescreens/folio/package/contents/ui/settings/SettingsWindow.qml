@@ -233,6 +233,19 @@ Window {
 
                         onCurrentValueChanged: folio.FolioSettings.pageTransitionEffect = currentValue
                     }
+
+                    FormCard.FormDelegateSeparator { above: pageTransitionCombobox; below: doubleTapToSleepSwitch }
+
+                    FormCard.FormSwitchDelegate {
+                        id: doubleTapToSleepSwitch
+                        text: i18n("Double tap to lock device")
+                        checked: folio.FolioSettings.doubleTapToSleep
+                        onCheckedChanged: {
+                            if (checked != folio.FolioSettings.doubleTapToSleep) {
+                                folio.FolioSettings.doubleTapToSleep = checked;
+                            }
+                        }
+                    }
                 }
 
                 FormCard.FormHeader {

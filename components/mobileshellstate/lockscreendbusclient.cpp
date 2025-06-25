@@ -33,6 +33,15 @@ bool LockscreenDBusClient::lockscreenActive() const
     return m_lockscreenActive;
 }
 
+void LockscreenDBusClient::lockScreen()
+{
+    QDBusMessage request = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.ScreenSaver"),
+                                                          QStringLiteral("/ScreenSaver"),
+                                                          QStringLiteral("org.freedesktop.ScreenSaver"),
+                                                          QStringLiteral("Lock"));
+    QDBusConnection::sessionBus().call(request);
+}
+
 void LockscreenDBusClient::slotLockscreenActiveChanged(bool active)
 {
     if (active != m_lockscreenActive) {
