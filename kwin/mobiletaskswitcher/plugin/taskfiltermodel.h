@@ -20,7 +20,7 @@ namespace KWin
 class TaskFilterModel : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY(TaskModel *windowModel READ windowModel WRITE setWindowModel NOTIFY windowModelChanged)
+    Q_PROPERTY(KWin::TaskModel *windowModel READ windowModel WRITE setWindowModel NOTIFY windowModelChanged)
     Q_PROPERTY(QString screenName READ screenName WRITE setScreenName NOTIFY screenNameChanged)
     QML_ELEMENT
 
@@ -28,7 +28,7 @@ public:
     explicit TaskFilterModel(QObject *parent = nullptr);
 
     TaskModel *windowModel() const;
-    void setWindowModel(TaskModel *taskModel);
+    void setWindowModel(KWin::TaskModel *taskModel);
 
     QString screenName() const;
     void setScreenName(const QString &screenName);

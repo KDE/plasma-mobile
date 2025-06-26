@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
-// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
+// SPDX-FileCopyrightText: 2024-2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -41,18 +41,18 @@ Item {
     opacity: 1 - dragOffset / taskSwitcher.height
 
 //BEGIN functions
-    function closeApp() {
+    function closeApp(): void {
         delegate.window.closeWindow();
     }
 
-    function activateApp() {
+    function activateApp(): void {
         if (!ShellSettings.Settings.convergenceModeEnabled) {
             delegate.window.setMaximize(true, true);
         }
         taskSwitcherHelpers.openApp(model.index);
     }
 
-    function minimizeApp() {
+    function minimizeApp(): void {
         delegate.window.minimized = true;
     }
 //END functions

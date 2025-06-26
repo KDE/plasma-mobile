@@ -48,12 +48,12 @@ class MobileTaskSwitcherState : public QObject
     Q_PROPERTY(qreal yPosition READ yPosition WRITE setYPosition NOTIFY yPositionChanged)
 
     Q_PROPERTY(bool gestureInProgress READ gestureInProgress NOTIFY gestureInProgressChanged)
-    Q_PROPERTY(Status status READ status WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(KWin::MobileTaskSwitcherState::Status status READ status WRITE setStatus NOTIFY statusChanged)
 
     Q_PROPERTY(qint64 elapsedTimeSinceStart READ getElapsedTimeSinceStart)
     Q_PROPERTY(qint64 doubleClickInterval READ getDoubleClickInterval) // is there a better way than to forward this?
 
-    Q_PROPERTY(TaskModel *taskModel READ taskModel CONSTANT)
+    Q_PROPERTY(KWin::TaskModel *taskModel READ taskModel CONSTANT)
     QML_ELEMENT
 
 public:

@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
 // SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
-// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
+// SPDX-FileCopyrightText: 2024-2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -46,7 +46,7 @@ FocusScope {
         id: haptics
     }
 
-    property var tasksModel: TaskSwitcherPlugin.TaskFilterModel {
+    property TaskSwitcherPlugin.TaskFilterModel tasksModel: TaskSwitcherPlugin.TaskFilterModel {
         screenName: root.targetScreen.name
         windowModel: root.state.taskModel
     }
@@ -87,7 +87,7 @@ FocusScope {
         initialSetup();
     }
 
-    function initialSetup() {
+    function initialSetup(): void {
         taskSwitcherHelpers.cancelAnimations();
         state.updateWasInActiveTask(KWinComponents.Workspace.activeWindow);
 
@@ -143,15 +143,15 @@ FocusScope {
     }
 
     // called by c++ plugin
-    function hideAnimation() {
+    function hideAnimation(): void {
         closeAnim.restart();
     }
 
-    function instantHide() {
+    function instantHide(): void {
         root.state.deactivate(true);
     }
 
-    function hide() {
+    function hide(): void {
         root.state.deactivate(false);
     }
 
@@ -159,7 +159,7 @@ FocusScope {
         target: root.state
 
         // task scrub mode allows scrubbing through a number of tasks with a mostly horizontal motion
-        function taskScrubMode() {
+        function taskScrubMode(): void {
             taskList.setTaskOffsetValue(0, false, Easing.OutQuart);
             if (!taskSwitcherHelpers.isInTaskScrubMode) {
                 backgroundColorOpacity = 1;
@@ -180,7 +180,7 @@ FocusScope {
             }
         }
 
-        function onTouchPositionChanged() {
+        function onTouchPositionChanged(): void {
             let unmodifiedYposition = Math.abs(state.touchYPosition)
             if (taskSwitcherHelpers.isInTaskScrubMode || // once in scrub mode, let's not allow to go out, that can result in inconsistent UX
                 (Math.abs(state.xVelocity) > Math.abs(state.yVelocity) * 3 && // gesture needs to be almost completely horizontal
@@ -220,7 +220,7 @@ FocusScope {
             }
         }
 
-        function updateTaskSwitcherState() {
+        function updateTaskSwitcherState(): void {
             let unmodifiedYposition = Math.abs(state.touchYPosition)
 
             // if the touch is above heightThreshold, set reachedHeightThreshold to true
@@ -309,13 +309,13 @@ FocusScope {
 
         // returns to the currently centered app. usually used to "back out" of the switcher
         // if accidentally invoked, but can also be used to switch to an adjacent app and then open it
-        function returnToApp() {
+        function returnToApp(): void {
             let newIndex = taskSwitcherHelpers.getNearestTaskIndex();
             taskSwitcherHelpers.openApp(newIndex);
         }
 
         // diagonal quick switch gesture logic
-        function quickSwitch() {
+        function quickSwitch(): void {
             // should "quick switch" to adjacent app in task switcher, but only if we were in an app before
             let unmodifiedYposition = Math.abs(state.touchYPosition)
             let newIndex = state.currentTaskIndex;
@@ -361,7 +361,7 @@ FocusScope {
         }
 
         // Logic for deciding how to handle the end of a gesture input
-        function onGestureInProgressChanged() {
+        function onGestureInProgressChanged(): void {
             taskSwitcherHelpers.fromButton = false;
             if (state.gestureInProgress) {
                 taskSwitcherHelpers.currentDisplayTask = state.currentTaskIndex;
@@ -409,11 +409,11 @@ FocusScope {
             }
         }
 
-        function onVelocityChanged() {
+        function onVelocityChanged(): void {
 
         }
 
-        function onXPositionChanged() {
+        function onXPositionChanged(): void {
             taskSwitcherHelpers.updateTaskIndex();
         }
     }
@@ -425,7 +425,7 @@ FocusScope {
         onTriggered: taskSwitcherHelpers.taskSwitchCanLaunch = true;
     }
 
-    function setTaskDrawerState(value) {
+    function setTaskDrawerState(value: int): void {
         if (taskSwitcherHelpers.gestureState != TaskSwitcherHelpers.GestureStates.TaskSwitcher && value == TaskSwitcherHelpers.GestureStates.TaskSwitcher) {
             // vibrate only if switching to task drawer
             if (!taskSwitcherHelpers.hasVibrated) {

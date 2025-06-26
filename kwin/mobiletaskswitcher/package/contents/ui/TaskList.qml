@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -41,17 +42,17 @@ MouseArea {
         return taskYBase - trackFingerYOffsetClamped;
     }
 
-    function getTaskAt(index) {
+    function getTaskAt(index: int): Task {
         return repeater.itemAt(index);
     }
 
-    function closeAll() {
+    function closeAll(): void {
         for (let i = 0; i < repeater.count; i++) {
             repeater.itemAt(i).closeApp();
         }
     }
 
-    function minimizeAll() {
+    function minimizeAll(): void {
         for (let i = 0; i < repeater.count; i++) {
             let item = repeater.itemAt(i);
 
@@ -62,7 +63,7 @@ MouseArea {
         }
     }
 
-    function jumpToFirstVisibleWindow() {
+    function jumpToFirstVisibleWindow(): void {
         for (let i = 0; i < repeater.count; i++) {
             let item = repeater.itemAt(i);
 
@@ -94,7 +95,7 @@ MouseArea {
     }
 
     // dynamic task offset animation duration based off of the touch position and task scale
-    function dynamicDuration(left = true) {
+    function dynamicDuration(left = true): int {
         // if the close animation is running, use the standard long duration time for consistency
         let duration = Kirigami.Units.longDuration * 1.75
         if (!taskSwitcherHelpers.closeAnim.running && taskSwitcherHelpers.notHomeScreenState && taskSwitcherHelpers.gestureState != TaskSwitcherHelpers.GestureStates.HorizontalSwipe && !taskSwitcherHelpers.isInTaskScrubMode) {
@@ -117,7 +118,7 @@ MouseArea {
     property bool setOffsetDurationImmediately: true
 
     // set the task offset value with an animation unless specified otherwise
-    function setTaskOffsetValue(value, immediately = false, taskEasing = ((taskSwitcherHelpers.notHomeScreenState || (value != 0)) && (baseTaskOffset != taskSwitcherHelpers.taskOffsetValue)) ? Easing.InOutQuart : Easing.OutQuart) {
+    function setTaskOffsetValue(value: int, immediately = false, taskEasing = ((taskSwitcherHelpers.notHomeScreenState || (value != 0)) && (baseTaskOffset != taskSwitcherHelpers.taskOffsetValue)) ? Easing.InOutQuart : Easing.OutQuart): void {
         if (baseTaskOffset == value && immediately) {
             baseTaskOffset = value + 1;
         }

@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
@@ -65,7 +66,7 @@ Flickable {
         }
     }
 
-    function resetPosition() {
+    function resetPosition(): void {
         oldContentX = startContentX;
         contentX = startContentX;
     }

@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
-// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
+// SPDX-FileCopyrightText: 2024-2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.15
@@ -175,7 +175,7 @@ QtObject {
         xAnim.stop();
     }
 
-    function getTaskIndexFromWindow(window) {
+    function getTaskIndexFromWindow(window: KWinComponents.Window): int {
         for (let i = 0; i < taskSwitcher.tasksModel.rowCount(); i++) {
             const modelWindow = taskSwitcher.tasksModel.data(taskSwitcher.tasksModel.index(i, 0), Qt.DisplayRole);
             if (modelWindow == window) {
@@ -185,20 +185,20 @@ QtObject {
         return 0;
     }
 
-    function getTaskIndexFromXPosition() {
+    function getTaskIndexFromXPosition(): int {
         let candidateIndex = Math.round(-root.state.xPosition / (taskSpacing + taskWidth));
         return Math.max(0, Math.min(taskSwitcher.tasksCount - 1, candidateIndex));
     }
 
     // TODO either use updateTaskIndex to always have the "newest current task index" in the state var or use "getNearestTaskIndex", not both it's redundant
-    function updateTaskIndex() {
+    function updateTaskIndex(): void {
         // only set if not gesture currently in progress to prevent glitching
         if (!(state.gestureInProgress || root.closeAnim.running || root.openAppAnim.running) || root.isInTaskScrubMode) {
             root.state.currentTaskIndex = getTaskIndexFromXPosition();
         }
     }
 
-    function open() {
+    function open(): void {
         root.gestureState = TaskSwitcherHelpers.GestureStates.TaskSwitcher;
         openAnim.restart();
 
@@ -206,7 +206,7 @@ QtObject {
         taskList.setTaskOffsetValue(0, false, Easing.OutQuart);
     }
 
-    function close() {
+    function close(): void {
         // update the task offset position
         taskList.setTaskOffsetValue(homeOffsetValue + 0.25, false, Easing.Linear);
 
@@ -218,7 +218,7 @@ QtObject {
         closeFactorAnim.restart();
     }
 
-    function openApp(index, duration = Kirigami.Units.shortDuration, horizontalEasing = Easing.OutBack) {
+    function openApp(index: int, duration = Kirigami.Units.shortDuration, horizontalEasing = Easing.OutBack): void {
         // cancel any opening animations ongoing
         openAnim.stop();
         cancelAnimations();
@@ -229,24 +229,24 @@ QtObject {
     }
 
     // get the xPosition where the task will be centered on the screen
-    function xPositionFromTaskIndex(index) {
+    function xPositionFromTaskIndex(index: int): int {
         return -index * (taskWidth + taskSpacing);
     }
 
     // instantly go to the task index
-    function goToTaskIndex(index) {
+    function goToTaskIndex(index: int): void {
         root.state.xPosition = xPositionFromTaskIndex(index);
     }
 
     // go to the task index, animated
-    function animateGoToTaskIndex(index, duration = Kirigami.Units.longDuration * 2, easing = Easing.OutExpo) {
+    function animateGoToTaskIndex(index: int, duration = Kirigami.Units.longDuration * 2, easing = Easing.OutExpo): void {
         xAnimDuration = duration;
         xAnimEasingType = easing;
         xAnim.to = xPositionFromTaskIndex(index) - (gestureState == TaskSwitcherHelpers.GestureStates.HorizontalSwipe && !state.gestureInProgress && notHomeScreenState ? taskSpacing / 2 : 0);
         xAnim.restart();
     }
 
-    function getNearestTaskIndex() {
+    function getNearestTaskIndex(): int {
         let newTaskIndex = getTaskIndexFromXPosition();
         let currentTaskIndexPosition = xPositionFromTaskIndex(root.state.currentTaskIndex);
         if (root.state.xPosition > currentTaskIndexPosition) {
@@ -269,14 +269,14 @@ QtObject {
             }
         }
     }
-    function snapToNearestTask() {
+    function snapToNearestTask(): void {
         let index = getNearestTaskIndex();
         animateGoToTaskIndex(index);
     }
 
     // This is a workaround for flickable not actually flicking, so we just snap to the next task
     // based on old movement direction, ignoring momentum (because flickable doesn't give us any momentum)
-    function snapToNearestTaskWorkaround(movingRight) {
+    function snapToNearestTaskWorkaround(movingRight: bool): void {
         let currentTaskIndexPosition = xPositionFromTaskIndex(root.state.currentTaskIndex);
         if (root.state.xPosition > currentTaskIndexPosition) {
             if (movingRight) {
