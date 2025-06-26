@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-06-26 00:44+0000\n"
 "PO-Revision-Date: 2025-04-23 09:06+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -29,11 +29,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Cerca applicazioni…"
 
-#: package/contents/ui/FavouritesBar.qml:162
-#: package/contents/ui/FavouritesBar.qml:238
+#: package/contents/ui/FavouritesBar.qml:168
+#: package/contents/ui/FavouritesBar.qml:244
 #: package/contents/ui/FolderView.qml:298
-#: package/contents/ui/HomeScreenPage.qml:226
-#: package/contents/ui/HomeScreenPage.qml:311
+#: package/contents/ui/HomeScreenPage.qml:232
+#: package/contents/ui/HomeScreenPage.qml:317
 #, kde-format
 msgid "Remove"
 msgstr "Rimuovi"
@@ -124,66 +124,71 @@ msgstr "Pila"
 msgid "Rotation"
 msgstr "Rotazione"
 
-#: package/contents/ui/settings/SettingsWindow.qml:239
+#: package/contents/ui/settings/SettingsWindow.qml:241
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Barra dei preferiti"
 
-#: package/contents/ui/settings/SettingsWindow.qml:255
+#: package/contents/ui/settings/SettingsWindow.qml:268
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Sfondo"
 
-#: package/contents/ui/settings/SettingsWindow.qml:261
+#: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "Mostra l'effetto di sfocatura dello sfondo"
 
-#: package/contents/ui/settings/SettingsWindow.qml:272
+#: package/contents/ui/settings/SettingsWindow.qml:285
 #, kde-format
 msgid "General"
 msgstr "Generale"
 
-#: package/contents/ui/settings/SettingsWindow.qml:279
+#: package/contents/ui/settings/SettingsWindow.qml:292
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "Passa tra le schermate Home e altre opzioni per lo sfondo"
 
-#: package/contents/ui/settings/SettingsWindow.qml:306
+#: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "Export layout to"
 msgstr "Esporta la disposizione  in"
 
-#: package/contents/ui/settings/SettingsWindow.qml:325
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "Import layout from"
 msgstr "Importa disposizione da"
 
-#: package/contents/ui/settings/SettingsWindow.qml:336
-#: package/contents/ui/settings/SettingsWindow.qml:343
+#: package/contents/ui/settings/SettingsWindow.qml:349
+#: package/contents/ui/settings/SettingsWindow.qml:356
 #, kde-format
 msgid "Export Status"
 msgstr "Esporta stato"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: package/contents/ui/settings/SettingsWindow.qml:350
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Impossibile esportare in %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:344
+#: package/contents/ui/settings/SettingsWindow.qml:357
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Disposizione della schermata principale esportata correttamente in %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:350
+#: package/contents/ui/settings/SettingsWindow.qml:363
 #, kde-format
 msgid "Confirm Import"
 msgstr "Conferma importazione"
 
-#: package/contents/ui/settings/SettingsWindow.qml:351
+#: package/contents/ui/settings/SettingsWindow.qml:364
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""

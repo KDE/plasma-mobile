@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-06-26 00:44+0000\n"
 "PO-Revision-Date: 2024-07-27 13:00+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -31,11 +31,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "搜尋應用程式…"
 
-#: package/contents/ui/FavouritesBar.qml:162
-#: package/contents/ui/FavouritesBar.qml:238
+#: package/contents/ui/FavouritesBar.qml:168
+#: package/contents/ui/FavouritesBar.qml:244
 #: package/contents/ui/FolderView.qml:298
-#: package/contents/ui/HomeScreenPage.qml:226
-#: package/contents/ui/HomeScreenPage.qml:311
+#: package/contents/ui/HomeScreenPage.qml:232
+#: package/contents/ui/HomeScreenPage.qml:317
 #, kde-format
 msgid "Remove"
 msgstr "移除"
@@ -125,66 +125,71 @@ msgstr "堆疊"
 msgid "Rotation"
 msgstr "旋轉"
 
-#: package/contents/ui/settings/SettingsWindow.qml:239
+#: package/contents/ui/settings/SettingsWindow.qml:241
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format
 msgid "Favorites Bar"
 msgstr "最愛列"
 
-#: package/contents/ui/settings/SettingsWindow.qml:255
+#: package/contents/ui/settings/SettingsWindow.qml:268
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "桌布"
 
-#: package/contents/ui/settings/SettingsWindow.qml:261
+#: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "顯示桌布模糊效果"
 
-#: package/contents/ui/settings/SettingsWindow.qml:272
+#: package/contents/ui/settings/SettingsWindow.qml:285
 #, kde-format
 msgid "General"
 msgstr "一般"
 
-#: package/contents/ui/settings/SettingsWindow.qml:279
+#: package/contents/ui/settings/SettingsWindow.qml:292
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "在主畫面與更多桌布選項之間切換"
 
-#: package/contents/ui/settings/SettingsWindow.qml:306
+#: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "Export layout to"
 msgstr "匯出佈局至"
 
-#: package/contents/ui/settings/SettingsWindow.qml:325
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "Import layout from"
 msgstr "匯入佈局"
 
-#: package/contents/ui/settings/SettingsWindow.qml:336
-#: package/contents/ui/settings/SettingsWindow.qml:343
+#: package/contents/ui/settings/SettingsWindow.qml:349
+#: package/contents/ui/settings/SettingsWindow.qml:356
 #, kde-format
 msgid "Export Status"
 msgstr "匯出狀態"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: package/contents/ui/settings/SettingsWindow.qml:350
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "匯出至 %1 失敗"
 
-#: package/contents/ui/settings/SettingsWindow.qml:344
+#: package/contents/ui/settings/SettingsWindow.qml:357
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "主畫面佈局成功匯出至 %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:350
+#: package/contents/ui/settings/SettingsWindow.qml:363
 #, kde-format
 msgid "Confirm Import"
 msgstr "確認匯入"
 
-#: package/contents/ui/settings/SettingsWindow.qml:351
+#: package/contents/ui/settings/SettingsWindow.qml:364
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "這會覆寫您目前的主畫面佈局！"

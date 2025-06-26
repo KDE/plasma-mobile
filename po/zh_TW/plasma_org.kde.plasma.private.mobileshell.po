@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-23 00:44+0000\n"
+"POT-Creation-Date: 2025-06-26 00:44+0000\n"
 "PO-Revision-Date: 2025-02-07 23:06+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -117,19 +117,19 @@ msgstr "取消靜音"
 msgid "Mute"
 msgstr "靜音"
 
-#: qml/popups/volumeosd/ListItemBase.qml:168
+#: qml/popups/volumeosd/ListItemBase.qml:169
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "調整 %1 的音量"
 
-#: qml/popups/volumeosd/ListItemBase.qml:246
+#: qml/popups/volumeosd/ListItemBase.qml:247
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/popups/volumeosd/ListItemBase.qml:261
+#: qml/popups/volumeosd/ListItemBase.qml:262
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -382,23 +382,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "剩餘 %1 小時"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:234
+#: qml/widgets/notifications/NotificationsWidget.qml:245
 #, kde-format
 msgid "Notification service not available"
 msgstr "無法使用通知服務"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:243
+#: qml/widgets/notifications/NotificationsWidget.qml:254
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "目前通知由「%1 %2」提供"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:404
+#: qml/widgets/notifications/NotificationsWidget.qml:415
 #, kde-format
 msgid "Show Fewer"
 msgstr "顯示較少通知"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:406
+#: qml/widgets/notifications/NotificationsWidget.qml:417
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
