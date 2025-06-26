@@ -7,13 +7,13 @@
 
 #include "phonepanel.h"
 
+K_PLUGIN_CLASS_WITH_JSON(PhonePanel, "metadata.json")
+
 PhonePanel::PhonePanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment(parent, data, args)
 {
 }
 
 PhonePanel::~PhonePanel() = default;
-
-K_PLUGIN_CLASS(PhonePanel)
 
 #include "phonepanel.moc"

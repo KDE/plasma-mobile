@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -83,7 +82,6 @@
         "Description[x-test]": "xxTop panel for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的顶部面板",
         "Description[zh_TW]": "Plasma 行動的頂部面板",
-        "Id": "org.kde.plasma.mobile.panel",
         "License": "GPLv2+",
         "Name": "Phone Panel",
         "Name[ar]": "لوحة الهاتف",
