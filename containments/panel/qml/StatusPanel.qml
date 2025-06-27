@@ -49,17 +49,6 @@ Item {
 
 //END API implementation
 
-    Component.onCompleted: {
-        // register dbus
-        MobileShellState.ShellDBusObject.registerObject();
-
-        // HACK: we need to initialize the DBus server somewhere, it might as well be here...
-        // Initialize the volume osd, and volume keys.
-        // Initialize notification popups.
-        // Initialize action popup buttons.
-        MobileShell.PopupProviderLoader.load();
-    }
-
     // Startup feedback fill animation
     MobileShell.StartupFeedbackPanelFill {
         id: startupFeedbackColorAnimation
@@ -141,15 +130,16 @@ Item {
     MobileShell.ActionDrawerWindow {
         id: drawer
 
-        Loader {
-            // Needs to be reloaded for each drawer open
-            active: drawer.visible && MobileShellState.LockscreenDBusClient.lockscreenActive
-
-            // Raise drawer over the lockscreen
-            sourceComponent: LockscreenOverlay {
-                id: lockScreenOverlay
-                window: drawer
+        onVisibleChanged: {
+            if (visible && MobileShellState.LockscreenDBusClient.lockscreenActive) {
+                // This works as long the wayland surface is the same (no window.close(), just window.visible = false)
+                lockScreenOverlay.raiseOverlay();
             }
+        }
+
+        LockscreenOverlay {
+            id: lockScreenOverlay
+            window: drawer
         }
 
         actionDrawer.restrictedPermissions: MobileShellState.LockscreenDBusClient.lockscreenActive
