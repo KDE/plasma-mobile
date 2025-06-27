@@ -13,6 +13,8 @@
 
 #include "qwayland-kde-lockscreen-overlay-v1.h"
 
+static int globalSerial = 0;
+
 class WaylandAboveLockscreen : public QWaylandClientExtensionTemplate<WaylandAboveLockscreen>, public QtWayland::kde_lockscreen_overlay_v1
 {
 public:
@@ -25,10 +27,15 @@ public:
 
 RaiseLockscreen::RaiseLockscreen(QObject *parent)
     : QObject{parent}
+    , m_serial{globalSerial++} // Use unique serial for each instance of RaiseLockscreen
     , m_implementation(std::make_unique<WaylandAboveLockscreen>())
 {
-    QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, this, [this](int, const QString &token) {
-        qCDebug(LOGGING_CATEGORY) << "XDG activation token arrived, activating window...";
+    QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, this, [this](int serial, const QString &token) {
+        if (serial != m_serial) {
+            return;
+        }
+
+        qCDebug(LOGGING_CATEGORY) << "XDG activation token arrived, activating window:" << m_window;
         // Activate window over lockscreen once we have activation token
         KWindowSystem::setCurrentXdgActivationToken(token);
         KWindowSystem::activateWindow(m_window);
@@ -141,5 +148,5 @@ void RaiseLockscreen::raiseOverlay()
     }
 
     qCDebug(LOGGING_CATEGORY) << "Attempting to raise overlay: " << m_window << m_initialized;
-    KWaylandExtras::requestXdgActivationToken(m_window, 0, QStringLiteral("org.kde.plasmashell.desktop"));
+    KWaylandExtras::requestXdgActivationToken(m_window, m_serial, QStringLiteral("org.kde.plasmashell.desktop"));
 }
