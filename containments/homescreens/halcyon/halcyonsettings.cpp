@@ -3,26 +3,26 @@
 
 #include "halcyonsettings.h"
 
-const QString CFG_KEY_SHOW_WALLPAPER_BLUR = QStringLiteral("showWallpaperBlur");
+const QString CFG_KEY_SHOW_WALLPAPER_BLUR = QStringLiteral("wallpaperBlurEffect");
 const QString CFG_KEY_DOUBLE_TAP_TO_LOCK = QStringLiteral("doubleTapToLock");
 
 HalcyonSettings::HalcyonSettings(QObject *parent, KConfigGroup config)
-    : QObject{parent}
-    , m_config{config}
+: QObject{parent}
+, m_config{config}
 {
     load();
 }
 
-bool HalcyonSettings::showWallpaperBlur() const
+HalcyonSettings::WallpaperBlurEffect HalcyonSettings::wallpaperBlurEffect() const
 {
-    return m_showWallpaperBlur;
+    return m_wallpaperBlurEffect;
 }
 
-void HalcyonSettings::setShowWallpaperBlur(bool showWallpaperBlur)
+void HalcyonSettings::setWallpaperBlurEffect(WallpaperBlurEffect wallpaperBlurEffect)
 {
-    if (m_showWallpaperBlur != showWallpaperBlur) {
-        m_showWallpaperBlur = showWallpaperBlur;
-        Q_EMIT showWallpaperBlurChanged();
+    if (m_wallpaperBlurEffect != wallpaperBlurEffect) {
+        m_wallpaperBlurEffect = wallpaperBlurEffect;
+        Q_EMIT wallpaperBlurEffectChanged();
         save();
     }
 }
@@ -43,7 +43,7 @@ void HalcyonSettings::setDoubleTapToLock(bool doubleTapToLock)
 
 void HalcyonSettings::save()
 {
-    m_config.writeEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, m_showWallpaperBlur);
+    m_config.writeEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, (int)m_wallpaperBlurEffect);
     m_config.writeEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, m_doubleTapToLock);
 
     m_config.sync();
@@ -51,6 +51,9 @@ void HalcyonSettings::save()
 
 void HalcyonSettings::load()
 {
-    m_showWallpaperBlur = m_config.readEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, false);
+    m_wallpaperBlurEffect = static_cast<WallpaperBlurEffect>(m_config.readEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, (int)Full));
     m_doubleTapToLock = m_config.readEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, true);
+
+    Q_EMIT doubleTapToLockChanged();
+    Q_EMIT wallpaperBlurEffectChanged();
 }

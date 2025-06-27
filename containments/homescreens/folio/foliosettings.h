@@ -23,7 +23,7 @@ class FolioSettings : public QObject
     Q_PROPERTY(bool showFavouritesBarBackground READ showFavouritesBarBackground WRITE setShowFavouritesBarBackground NOTIFY showFavouritesBarBackgroundChanged)
     Q_PROPERTY(
         FolioSettings::PageTransitionEffect pageTransitionEffect READ pageTransitionEffect WRITE setPageTransitionEffect NOTIFY pageTransitionEffectChanged)
-    Q_PROPERTY(bool showWallpaperBlur READ showWallpaperBlur WRITE setShowWallpaperBlur NOTIFY showWallpaperBlurChanged)
+    Q_PROPERTY(FolioSettings::WallpaperBlurEffect wallpaperBlurEffect READ wallpaperBlurEffect WRITE setWallpaperBlurEffect NOTIFY wallpaperBlurEffectChanged)
     Q_PROPERTY(bool doubleTapToLock READ doubleTapToLock WRITE setDoubleTapToLock NOTIFY doubleTapToLockChanged)
 
 public:
@@ -38,6 +38,13 @@ public:
         RotationTransition = 4,
     };
     Q_ENUM(PageTransitionEffect)
+
+    enum WallpaperBlurEffect {
+        None = 0,
+        Simple = 1,
+        Full = 2,
+    };
+    Q_ENUM(WallpaperBlurEffect)
 
     // number of rows and columns in the config for the homescreen
     // NOTE: use HomeScreenState.pageRows() instead in UI logic since we may have the rows and
@@ -66,8 +73,8 @@ public:
     PageTransitionEffect pageTransitionEffect() const;
     void setPageTransitionEffect(PageTransitionEffect pageTransitionEffect);
 
-    bool showWallpaperBlur() const;
-    void setShowWallpaperBlur(bool showWallpaperBlur);
+    WallpaperBlurEffect wallpaperBlurEffect() const;
+    void setWallpaperBlurEffect(WallpaperBlurEffect wallpaperBlurEffect);
 
     bool doubleTapToLock() const;
     void setDoubleTapToLock(bool doubleTapToLock);
@@ -86,7 +93,7 @@ Q_SIGNALS:
     void delegateIconSizeChanged();
     void showFavouritesBarBackgroundChanged();
     void pageTransitionEffectChanged();
-    void showWallpaperBlurChanged();
+    void wallpaperBlurEffectChanged();
     void doubleTapToLockChanged();
 
 private:
@@ -102,6 +109,6 @@ private:
     qreal m_delegateIconSize{48};
     bool m_showFavouritesBarBackground{false};
     PageTransitionEffect m_pageTransitionEffect{SlideTransition};
-    bool m_showWallpaperBlur{false};
+    WallpaperBlurEffect m_wallpaperBlurEffect{Full};
     bool m_doubleTapToLock{false};
 };

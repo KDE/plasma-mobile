@@ -19,6 +19,7 @@ AbstractDelegate {
 
     contentItem: DelegateFolderIcon {
         folio: root.folio
+        maskManager: root.maskManager
         folder: root.folder
         expandBackground: root.appHoveredOver
     }

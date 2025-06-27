@@ -56,26 +56,42 @@ ContainmentItem {
         screenGeometry: Plasmoid.containment.screenGeometry
     }
 
-    MobileShell.HomeScreenWallpaperBlur {
-        id: wallpaperBlur
-        active: Plasmoid.settings.showWallpaperBlur
-        anchors.fill: parent
-        wallpaperItem: Plasmoid.wallpaperGraphicsObject
+    property MobileShell.MaskManager maskManager: MobileShell.MaskManager {
+        height: root.height
+        width: root.width
+    }
 
-        blurOpacity: Math.min(1,
-            Math.max(1 - homeScreen.contentOpacity,
-                halcyonHomeScreen.settingsOpenFactor
-            )
+    property MobileShell.MaskManager frontMaskManager: MobileShell.MaskManager {
+        height: root.height
+        width: root.width
+    }
+
+    // wallpaper blur layer
+    MobileShell.BlurEffect {
+        id: wallpaperBlur
+        active: Plasmoid.settings.wallpaperBlurEffect > 0
+        anchors.fill: parent
+        sourceLayer: Plasmoid.wallpaperGraphicsObject
+        maskSourceLayer: Plasmoid.settings.wallpaperBlurEffect > 1 ? maskManager.maskLayer : null
+
+        fullBlur: Math.min(1,
+                           Math.max(1 - homeScreen.contentOpacity,
+                                    halcyonHomeScreen.settingsOpenFactor,
+                                    root.darkenBackgroundFactor,
+                                    search.openFactor
+                           )
         )
+    }
+
+    property real darkenBackgroundFactor: halcyonHomeScreen.page == 1 ? 1 : 0
+    Behavior on darkenBackgroundFactor {
+        NumberAnimation { duration: Kirigami.Units.longDuration }
     }
 
     Rectangle {
         id: darkenBackground
-        color: (halcyonHomeScreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
+        color: Qt.rgba(0, 0, 0, 0.2 + (0.5 * root.darkenBackgroundFactor))
         anchors.fill: parent
-        Behavior on color {
-            ColorAnimation { duration: Kirigami.Units.longDuration }
-        }
     }
 
     Rectangle {
@@ -106,6 +122,7 @@ ContainmentItem {
             HomeScreen {
                 id: halcyonHomeScreen
                 anchors.fill: parent
+                maskManager: root.maskManager
 
                 topMargin: homeScreen.topMargin
                 bottomMargin: homeScreen.bottomMargin
@@ -114,6 +131,8 @@ ContainmentItem {
 
                 searchWidget: search
                 interactive: true
+
+                onWallpaperSelectorTriggered: wallpaperSelectorLoader.active = true
             }
 
             // search component
@@ -128,6 +147,72 @@ ContainmentItem {
                 bottomMargin: homeScreen.bottomMargin
                 leftMargin: homeScreen.leftMargin
                 rightMargin: homeScreen.rightMargin
+            }
+        }
+    }
+
+    // top blur layer for items on top of the base homescreen
+    MobileShell.BlurEffect {
+        id: homescreenBlur
+        anchors.fill: parent
+        active: Plasmoid.settings.wallpaperBlurEffect > 1 && wallpaperSelectorLoader.active
+        visible: active
+        fullBlur: 0
+
+        sourceLayer: homeScreenLayer
+        maskSourceLayer: frontMaskManager.maskLayer
+
+        // stacking both wallpaper and homescreen layers so we can blur them in one pass
+        Item {
+            id: homeScreenLayer
+            anchors.fill: parent
+            opacity: 0
+
+            // wallpaper blur
+            ShaderEffectSource {
+                anchors.fill: parent
+
+                textureSize: homescreenBlur.textureSize
+                sourceItem: Plasmoid.wallpaperGraphicsObject
+                hideSource: false
+            }
+
+            // homescreen blur
+            ShaderEffectSource {
+                anchors.fill: parent
+
+                textureSize: homescreenBlur.textureSize
+                sourceItem: homeScreen
+                hideSource: false
+            }
+        }
+    }
+
+    // loader for wallpaper selector
+    Loader {
+        id: wallpaperSelectorLoader
+        anchors.fill: parent
+        asynchronous: true
+        active: false
+
+        onLoaded: {
+            wallpaperSelectorLoader.item.open();
+        }
+
+        sourceComponent: MobileShell.WallpaperSelector {
+            maskManager: root.frontMaskManager
+            horizontal: root.width > root.height
+            edge: horizontal ? Qt.LeftEdge : Qt.BottomEdge
+            bottomMargin: horizontal ? 0 : halcyonHomeScreen.bottomMargin
+            leftMargin: horizontal ? halcyonHomeScreen.leftMargin : 0
+            rightMargin: horizontal ? halcyonHomeScreen.rightMargin : 0
+            onClosed: {
+                wallpaperSelectorLoader.active = false;
+            }
+
+            onWallpaperSettingsRequested: {
+                close();
+                halcyonHomeScreen.openContainmentSettings();
             }
         }
     }

@@ -13,6 +13,7 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 MouseArea {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
 
     property var homeScreen
 
@@ -44,6 +45,7 @@ MouseArea {
         delegate: HomeScreenPage {
             id: homeScreenPage
             folio: root.folio
+            maskManager: root.maskManager
             pageNum: model.index
             pageModel: model.delegate
             homeScreen: root.homeScreen
@@ -64,7 +66,7 @@ MouseArea {
                 switch (folio.FolioSettings.pageTransitionEffect) {
                     case Folio.FolioSettings.StackTransition:
                         return (positionX < 0) ? progressToCenter :
-                            ((progressToCenter < 0.3) ? 0 : ((1 / 0.7) * (progressToCenter - 0.3)))
+                        ((progressToCenter < 0.3) ? 0 : ((1 / 0.7) * (progressToCenter - 0.3)))
                     default:
                         return progressToCenter;
                 }
@@ -109,8 +111,8 @@ MouseArea {
             Rotation {
                 id: cubeTransitionRotation
                 origin.x: (positionX < 0) ?
-                            (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
-                            (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
+                (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
+                (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
                 origin.y: folio.HomeScreenState.pageHeight / 2;
                 axis { x: 0; y: 1; z: 0 }
                 angle: {
@@ -121,8 +123,8 @@ MouseArea {
             Rotation {
                 id: rotationTransitionRotation
                 origin.x: (positionX < 0) ?
-                            (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
-                            (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
+                (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
+                (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
                 origin.y: 0
                 axis { x: -0.2; y: 0.3; z: 0.5 }
                 angle: {

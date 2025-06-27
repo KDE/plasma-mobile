@@ -75,7 +75,7 @@ Item {
 
                 onClicked: {
                     root.homeScreen.settingsOpen = false;
-                    wallpaperSelectorLoader.active = true;
+                    root.homeScreen.wallpaperSelectorTriggered();
                 }
             }
 
@@ -131,32 +131,6 @@ Item {
                 }
             }
             onRequestConfigureMenu: {
-                root.homeScreen.openContainmentSettings();
-            }
-        }
-    }
-
-    // Only load wallpaper selector when visible
-    Loader {
-        id: wallpaperSelectorLoader
-        asynchronous: true
-        active: false
-
-        onLoaded: {
-            wallpaperSelectorLoader.item.open();
-        }
-
-        sourceComponent: MobileShell.WallpaperSelector {
-            horizontal: root.width > root.height
-            edge: horizontal ? Qt.LeftEdge : Qt.BottomEdge
-            bottomMargin: root.bottomMargin
-            leftMargin: root.leftMargin
-            rightMargin: root.rightMargin
-            onClosed: {
-                wallpaperSelectorLoader.active = false;
-            }
-            onWallpaperSettingsRequested: {
-                close();
                 root.homeScreen.openContainmentSettings();
             }
         }

@@ -11,9 +11,12 @@ set(mobileshellplugin_SRCS
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
     notifications/notificationfileinfo.cpp
+    masklayer/masklayer.cpp
+    masklayer/maskmanager.cpp
 )
 target_include_directories(mobileshellplugin PRIVATE components)
 target_include_directories(mobileshellplugin PRIVATE notifications)
+target_include_directories(mobileshellplugin PRIVATE masklayer)
 target_sources(mobileshellplugin PRIVATE ${mobileshellplugin_SRCS})
 
 # Singleton declarations

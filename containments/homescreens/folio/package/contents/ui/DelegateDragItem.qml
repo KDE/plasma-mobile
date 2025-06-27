@@ -6,12 +6,14 @@ import QtQuick.Layouts
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import "./delegate"
 
 Item {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
     property Folio.FolioDelegate delegate
 
     width: folio.HomeScreenState.pageCellWidth
@@ -34,7 +36,7 @@ Item {
     }
 
     // animate drop x
-    XAnimator on x {
+    NumberAnimation on x {
         id: dragXAnim
         running: false
         duration: Kirigami.Units.longDuration
@@ -46,7 +48,7 @@ Item {
     }
 
     // animate drop y
-    YAnimator on y {
+    NumberAnimation on y {
         id: dragYAnim
         running: false
         duration: Kirigami.Units.longDuration
@@ -140,7 +142,7 @@ Item {
 
                 // scale animation if we are creating, or inserting into a folder
                 scaleAnim.restart();
-            }
+                }
         }
 
         // if the drop has been abandoned, just hide
@@ -158,6 +160,7 @@ Item {
         DelegateIconLoader {
             id: loader
             folio: root.folio
+            maskManager: root.maskManager
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.minimumWidth: folio.FolioSettings.delegateIconSize
             Layout.minimumHeight: folio.FolioSettings.delegateIconSize

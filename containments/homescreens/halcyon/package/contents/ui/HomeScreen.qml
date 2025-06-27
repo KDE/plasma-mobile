@@ -19,6 +19,7 @@ import "settings" as Settings
 
 Item {
     id: root
+    property MobileShell.MaskManager maskManager
 
     required property real topMargin
     required property real bottomMargin
@@ -32,6 +33,8 @@ Item {
 
     property bool settingsOpen: false
     property real settingsOpenFactor: settingsOpen ? 1 : 0
+
+    signal wallpaperSelectorTriggered()
 
     Behavior on settingsOpenFactor {
         NumberAnimation { duration: 200 }
@@ -121,6 +124,7 @@ Item {
             FavoritesView {
                 id: favoritesView
                 anchors.fill: parent
+                maskManager: root.maskManager
                 searchWidget: root.searchWidget
                 interactive: root.interactive && swipeView.contentItem.contentX === 0
                 onOpenConfigureRequested: root.openConfigure()

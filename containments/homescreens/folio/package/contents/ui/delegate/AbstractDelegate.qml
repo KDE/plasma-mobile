@@ -18,6 +18,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 Folio.DelegateTouchArea {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
 
     property string name
     property bool shadow: false
@@ -29,10 +30,10 @@ Folio.DelegateTouchArea {
     signal afterClickAnimation()
 
     // grow/shrink animation
-    property real zoomScale: 1
+    property real scaleAmount: 1
     property bool clickRequested: false
 
-    NumberAnimation on zoomScale {
+    NumberAnimation on scaleAmount {
         id: shrinkAnim
         running: false
         duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
@@ -44,7 +45,7 @@ Folio.DelegateTouchArea {
         }
     }
 
-    NumberAnimation on zoomScale {
+    NumberAnimation on scaleAmount {
         id: growAnim
         running: false
         duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
@@ -86,8 +87,8 @@ Folio.DelegateTouchArea {
             transform: Scale {
                 origin.x: root.width / 2;
                 origin.y: root.height / 2;
-                xScale: root.zoomScale
-                yScale: root.zoomScale
+                xScale: root.scaleAmount
+                yScale: root.scaleAmount
             }
 
             MobileShell.BaseItem {

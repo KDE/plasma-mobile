@@ -116,7 +116,7 @@ Window {
                 FormCard.FormCard {
                     id: iconsCard
                     readonly property bool isVerticalOrientation: folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RegularPosition ||
-                                                                folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RotateUpsideDown
+                    folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RotateUpsideDown
 
                     readonly property string numOfRowsText: i18n("Number of rows")
                     readonly property string numOfColumnsText: i18n("Number of columns")
@@ -269,15 +269,24 @@ Window {
                 }
 
                 FormCard.FormCard {
-                    FormCard.FormSwitchDelegate {
-                        id: showWallpaperBlur
-                        text: i18nc("@option:check", "Show wallpaper blur effect")
-                        checked: folio.FolioSettings.showWallpaperBlur
-                        onCheckedChanged: {
-                            if (checked != folio.FolioSettings.showWallpaperBlur) {
-                                folio.FolioSettings.showWallpaperBlur = checked;
-                            }
+                    FormCard.FormComboBoxDelegate {
+                        id: wallpaperBlurCombobox
+                        text: i18n("Wallpaper blur effect")
+
+                        model: [
+                            {"name": i18nc("Wallpaper blur effect", "None"), "value": 0},
+                            {"name": i18nc("Wallpaper blur effect", "Simple"), "value": 1},
+                            {"name": i18nc("Wallpaper blur effect", "Full"), "value": 2}
+                        ]
+
+                        textRole: "name"
+                        valueRole: "value"
+
+                        Component.onCompleted: {
+                            currentIndex = indexOfValue(folio.FolioSettings.wallpaperBlurEffect);
+                            dialog.parent = root;
                         }
+                        onCurrentValueChanged: folio.FolioSettings.wallpaperBlurEffect = currentValue
                     }
                 }
 
@@ -323,8 +332,7 @@ Window {
                 onAccepted: {
                     console.log('saving layout to ' + selectedFile);
                     if (selectedFile) {
-                        let status = folio.FolioSettings.saveLayoutToFile(selectedFile);
-                        if (status) {
+                        let status = folio.FolioSettings.saveLayoutToFile(selectedFile);                            if (status) {
                             exportedSuccessfullyPrompt.open();
                         } else {
                             exportFailedPrompt.open();

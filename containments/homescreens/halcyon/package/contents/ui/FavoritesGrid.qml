@@ -15,6 +15,7 @@ import org.kde.private.mobile.homescreen.halcyon as Halcyon
 
 MobileShell.GridView {
     id: root
+    property MobileShell.MaskManager maskManager
     required property var searchWidget
 
     // don't set anchors.margins since we want everywhere to be draggable
@@ -207,6 +208,7 @@ MobileShell.GridView {
             // actual visual delegate
             FavoritesAppDelegate {
                 id: appDelegate
+                maskManager: root.maskManager
                 visualIndex: delegateRoot.visualIndex
 
                 isFolder: model.isFolder

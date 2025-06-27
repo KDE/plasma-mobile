@@ -87,18 +87,27 @@ Window {
                 }
 
                 FormCard.FormCard {
-                    FormCard.FormSwitchDelegate {
-                        id: showWallpaperBlur
-                        text: i18nc("@option:check", "Show wallpaper blur effect")
-                        checked: Plasmoid.settings.showWallpaperBlur
-                        onCheckedChanged: {
-                            if (checked != Plasmoid.settings.showWallpaperBlur) {
-                                Plasmoid.settings.showWallpaperBlur = checked;
-                            }
+                    FormCard.FormComboBoxDelegate {
+                        id: wallpaperBlurCombobox
+                        text: i18n("Wallpaper blur effect")
+
+                        model: [
+                            {"name": i18nc("Wallpaper blur effect", "None"), "value": 0},
+                            {"name": i18nc("Wallpaper blur effect", "Simple"), "value": 1},
+                            {"name": i18nc("Wallpaper blur effect", "Full"), "value": 2}
+                        ]
+
+                        textRole: "name"
+                        valueRole: "value"
+
+                        Component.onCompleted: {
+                            currentIndex = indexOfValue(Plasmoid.settings.wallpaperBlurEffect);
+                            dialog.parent = root;
                         }
+                        onCurrentValueChanged: Plasmoid.settings.wallpaperBlurEffect = currentValue
                     }
 
-                    FormCard.FormDelegateSeparator { above: showWallpaperBlur; below: doubleTapToSleepSwitch }
+                    FormCard.FormDelegateSeparator { above: wallpaperBlurCombobox; below: doubleTapToSleepSwitch }
 
                     FormCard.FormSwitchDelegate {
                         id: doubleTapToSleepSwitch

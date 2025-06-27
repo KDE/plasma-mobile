@@ -105,7 +105,7 @@ Item {
         }
     }
 
-//END API implementation
+    //END API implementation
 
     Component.onCompleted: {
         // determine the margins used

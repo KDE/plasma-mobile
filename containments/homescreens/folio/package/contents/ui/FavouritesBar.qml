@@ -17,6 +17,7 @@ import "./delegate"
 MouseArea {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
 
     property var homeScreen
 
@@ -53,11 +54,11 @@ MouseArea {
 
             readonly property var dragState: folio.HomeScreenState.dragState
             readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Favourites &&
-                                              dragState.candidateDropPosition.favouritesPosition === delegate.index
+            dragState.candidateDropPosition.favouritesPosition === delegate.index
             readonly property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                                            dragState.dropDelegate &&
-                                            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
-                                            isDropPositionThis
+            dragState.dropDelegate &&
+            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
+            isDropPositionThis
 
             readonly property bool isLocationBottom: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
 
@@ -111,6 +112,7 @@ MouseArea {
                 AppDelegate {
                     id: appDelegate
                     folio: root.folio
+                    maskManager: root.maskManager
                     application: delegate.delegateModel.application
                     name: folio.FolioSettings.showFavouritesAppLabels ? delegate.delegateModel.application.name : ""
                     shadow: true
@@ -184,14 +186,15 @@ MouseArea {
                 AppFolderDelegate {
                     id: appFolderDelegate
                     folio: root.folio
+                    maskManager: root.maskManager
                     shadow: true
                     folder: delegate.delegateModel.folder
                     name: folio.FolioSettings.showFavouritesAppLabels ? delegate.delegateModel.folder.name : ""
 
                     // do not show if the drop animation is running to this delegate, and the drop delegate is a folder
                     visible: !(root.homeScreen.dropAnimationRunning &&
-                               delegate.isDropPositionThis &&
-                               delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
+                        delegate.isDropPositionThis &&
+                        delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
 
                     appHoveredOver: delegate.isAppHoveredOver
 

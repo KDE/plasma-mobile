@@ -9,10 +9,12 @@ import QtQuick.Effects
 import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Item {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
 
     property Folio.FolioApplicationFolder folder
 
@@ -26,6 +28,12 @@ Item {
         radius: Kirigami.Units.cornerRadius
         color: Qt.rgba(255, 255, 255, 0.3)
         anchors.fill: parent
+
+        Component.onCompleted: {
+            if (maskManager) {
+                maskManager.assignToMask(this)
+            }
+        }
 
         property real scaleAmount: root.expandBackground ? 1.2 : 1.0
 

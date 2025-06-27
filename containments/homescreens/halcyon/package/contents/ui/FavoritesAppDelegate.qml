@@ -20,6 +20,7 @@ import org.kde.kirigami 2.19 as Kirigami
 
 Item {
     id: delegate
+    property MobileShell.MaskManager maskManager
 
     property int visualIndex: 0
     property real dragFolderAnimationProgress: 0
@@ -77,7 +78,7 @@ Item {
     }
 
     function launchAppWithAnim(x: int, y: int, source, title: string, storageId: string) {
-         if (source !== "") {
+        if (source !== "") {
             MobileShellState.ShellDBusClient.openAppLaunchAnimationWithPosition(
                 Plasmoid.screen,
                 source,
@@ -265,6 +266,12 @@ Item {
                 color: Qt.rgba(255, 255, 255, 0.2)
                 radius: Kirigami.Units.cornerRadius
                 opacity: delegate.dragFolderAnimationProgress
+
+                Component.onCompleted: {
+                    if (maskManager) {
+                        maskManager.assignToMask(this)
+                    }
+                }
             }
 
             Kirigami.Icon {
@@ -318,6 +325,12 @@ Item {
                     origin.y: rect.height / 2
                     xScale: 1 + delegate.dragFolderAnimationProgress * 0.5
                     yScale: 1 + delegate.dragFolderAnimationProgress * 0.5
+                }
+
+                Component.onCompleted: {
+                    if (maskManager) {
+                        maskManager.assignToMask(this)
+                    }
                 }
             }
 

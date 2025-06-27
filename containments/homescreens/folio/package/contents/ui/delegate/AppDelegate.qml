@@ -62,6 +62,12 @@ AbstractDelegate {
             color: Qt.rgba(255, 255, 255, 0.3)
             anchors.fill: parent
 
+            Component.onCompleted: {
+                if (maskManager) {
+                    maskManager.assignToMask(this)
+                }
+            }
+
             opacity: root.turnToFolder ? 1 : 0
             property real scaleAmount: root.turnToFolder ? 1.2 : 1.0
 

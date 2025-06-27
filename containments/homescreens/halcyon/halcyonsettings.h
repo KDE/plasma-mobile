@@ -10,27 +10,34 @@
 class HalcyonSettings : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool showWallpaperBlur READ showWallpaperBlur WRITE setShowWallpaperBlur NOTIFY showWallpaperBlurChanged)
+    Q_PROPERTY(HalcyonSettings::WallpaperBlurEffect wallpaperBlurEffect READ wallpaperBlurEffect WRITE setWallpaperBlurEffect NOTIFY wallpaperBlurEffectChanged)
     Q_PROPERTY(bool doubleTapToLock READ doubleTapToLock WRITE setDoubleTapToLock NOTIFY doubleTapToLockChanged)
 
 public:
     HalcyonSettings(QObject *parent = nullptr, KConfigGroup config = {});
 
-    bool showWallpaperBlur() const;
-    void setShowWallpaperBlur(bool blurWallpaper);
+    enum WallpaperBlurEffect {
+        None = 0,
+        Simple = 1,
+        Full = 2,
+    };
+    Q_ENUM(WallpaperBlurEffect)
+
+    WallpaperBlurEffect wallpaperBlurEffect() const;
+    void setWallpaperBlurEffect(WallpaperBlurEffect wallpaperBlurEffect);
 
     bool doubleTapToLock() const;
     void setDoubleTapToLock(bool doubleTapToLock);
 
 Q_SIGNALS:
-    void showWallpaperBlurChanged();
+    void wallpaperBlurEffectChanged();
     void doubleTapToLockChanged();
 
 private:
     void save();
     void load();
 
-    bool m_showWallpaperBlur{false};
+    WallpaperBlurEffect m_wallpaperBlurEffect{Full};
     bool m_doubleTapToLock{true};
 
     KConfigGroup m_config;

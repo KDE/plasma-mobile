@@ -11,10 +11,13 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 import org.kde.kquickcontrolsaddons 2.0 as Addons
 import org.kde.plasma.private.mobileshell.wallpaperimageplugin as WallpaperImagePlugin
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Controls.Drawer {
     id: imageWallpaperDrawer
     dragMargin: 0
+
+    property MobileShell.MaskManager maskManager
 
     required property bool horizontal
 
@@ -51,8 +54,8 @@ Controls.Drawer {
 
         header: Controls.ItemDelegate {
             id: openSettings
-            width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
-            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : parent.height
+            width: imageWallpaperDrawer.horizontal ? wallpapersView.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
+            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : wallpapersView.height
             padding: Kirigami.Units.gridUnit / 2
             leftPadding: padding
             topPadding: padding
@@ -62,6 +65,12 @@ Controls.Drawer {
             background: Rectangle {
                 radius: Kirigami.Units.cornerRadius
                 color: Qt.rgba(255, 255, 255, (openSettings.down || openSettings.highlighted) ? 0.3 : 0.2)
+
+                Component.onCompleted: {
+                    if (maskManager) {
+                        maskManager.assignToMask(this)
+                    }
+                }
             }
 
             contentItem: Item {
@@ -81,11 +90,11 @@ Controls.Drawer {
         delegate: Controls.ItemDelegate {
             id: delegate
 
-            width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
-            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : (parent ? parent.height : 0)
-            padding: Kirigami.Units.largeSpacing - (ListView.isCurrentItem ? Kirigami.Units.smallSpacing : 0)
-            property real inset: ListView.isCurrentItem ? 0 : Kirigami.Units.smallSpacing
-            Behavior on inset {
+            width: imageWallpaperDrawer.horizontal ? wallpapersView.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
+            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : (wallpapersView ? wallpapersView.height : 0)
+            padding: Kirigami.Units.largeSpacing - (wallpapersView.currentIndex === index ? Kirigami.Units.smallSpacing : 0)
+            property real scaleAmount: wallpapersView.currentIndex === index ? 0 : Kirigami.Units.smallSpacing
+            Behavior on scaleAmount {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
@@ -102,10 +111,10 @@ Controls.Drawer {
             topPadding: padding
             rightPadding: padding
             bottomPadding: padding
-            topInset: inset
-            bottomInset: inset
-            leftInset: inset
-            rightInset: inset
+            topInset: scaleAmount
+            bottomInset: scaleAmount
+            leftInset: scaleAmount
+            rightInset: scaleAmount
 
             property bool isCurrent: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPath == model.path
             onIsCurrentChanged: {
@@ -143,6 +152,12 @@ Controls.Drawer {
             background: Rectangle {
                 color: Qt.rgba(255, 255, 255, (delegate.down || delegate.highlighted) ? 0.4 : 0.2)
                 radius: Kirigami.Units.cornerRadius
+
+                Component.onCompleted: {
+                    if (maskManager) {
+                        maskManager.assignToMask(this)
+                    }
+                }
             }
         }
     }

@@ -20,6 +20,7 @@ import "./settings"
 Item {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
     property Folio.HomeScreenState homeScreenState: folio.HomeScreenState
 
     property real topMargin: 0
@@ -42,6 +43,8 @@ Item {
     onBottomMarginChanged: folio.HomeScreenState.viewBottomPadding = root.bottomMargin
     onLeftMarginChanged: folio.HomeScreenState.viewLeftPadding = root.leftMargin
     onRightMarginChanged: folio.HomeScreenState.viewRightPadding = root.rightMargin
+
+    signal wallpaperSelectorTriggered()
 
     // called by any delegates when starting drag
     // returns the mapped coordinates to be used in the home screen state
@@ -107,10 +110,10 @@ Item {
         interactive: root.interactive &&
             settings.homeScreenInteractive &&
             (appDrawer.flickable.contentY <= 10 || // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
-                folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
-                folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
-                folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
-                folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
+            folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
+            folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
+            folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
+            folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
 
         onSwipeStarted: (currentPos, startPos) => {
             const deltaX = currentPos.x - startPos.x;
@@ -182,6 +185,7 @@ Item {
             HomeScreenPages {
                 id: homeScreenPages
                 folio: root.folio
+                maskManager: root.maskManager
                 homeScreen: root
 
                 anchors.topMargin: root.topMargin
@@ -247,6 +251,8 @@ Item {
                 id: favouritesBarScrim
                 color: Qt.rgba(255, 255, 255, 0.2)
 
+                Component.onCompleted: maskManager.assignToMask(this)
+
                 // don't show in settings mode
                 opacity: 1 - folio.HomeScreenState.settingsOpenProgress
                 visible: folio.FolioSettings.showFavouritesBarBackground
@@ -266,6 +272,7 @@ Item {
             FavouritesBar {
                 id: favouritesBar
                 folio: root.folio
+                maskManager: root.maskManager
                 homeScreen: root
 
                 // don't show in settings mode
@@ -397,18 +404,6 @@ Item {
             homeScreen: root
             opacity: homeScreenState.folderOpenProgress
             transform: Translate { y: folderView.opacity > 0 ? 0 : folderView.height }
-        }
-
-        // drag and drop component
-        DelegateDragItem {
-            id: delegateDragItem
-            folio: root.folio
-        }
-
-        // drag and drop for widgets
-        WidgetDragItem {
-            id: widgetDragItem
-            folio: root.folio
         }
 
         // bottom app drawer

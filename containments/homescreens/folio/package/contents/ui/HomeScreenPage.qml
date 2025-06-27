@@ -18,6 +18,7 @@ import "./private"
 Item {
     id: root
     property Folio.HomeScreen folio
+    property MobileShell.MaskManager maskManager
 
     property int pageNum
 
@@ -50,10 +51,10 @@ Item {
 
         // only show if it is an empty spot on this page
         visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                    dropPosition.location === Folio.DelegateDragPosition.Pages &&
-                    dropPosition.page === root.pageNum &&
-                    !dropDelegateIsWidget &&
-                    folio.HomeScreenState.getPageDelegateAt(root.pageNum, dropPosition.pageRow, dropPosition.pageColumn) === null
+        dropPosition.location === Folio.DelegateDragPosition.Pages &&
+        dropPosition.page === root.pageNum &&
+        !dropDelegateIsWidget &&
+        folio.HomeScreenState.getPageDelegateAt(root.pageNum, dropPosition.pageRow, dropPosition.pageColumn) === null
 
         x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth
         y: dropPosition.pageRow * folio.HomeScreenState.pageCellHeight
@@ -71,10 +72,10 @@ Item {
 
         // only show if the widget can be placed here
         visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                    dropPosition.location === Folio.DelegateDragPosition.Pages &&
-                    dropPosition.page === root.pageNum &&
-                    dropDelegateIsWidget &&
-                    pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
+        dropPosition.location === Folio.DelegateDragPosition.Pages &&
+        dropPosition.page === root.pageNum &&
+        dropDelegateIsWidget &&
+        pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
 
         radius: Kirigami.Units.cornerRadius
         color: Qt.rgba(255, 255, 255, 0.3)
@@ -100,14 +101,14 @@ Item {
             property var dragState: folio.HomeScreenState.dragState
 
             property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Pages &&
-                                              dragState.candidateDropPosition.page === root.pageNum &&
-                                              dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
-                                              dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
+            dragState.candidateDropPosition.page === root.pageNum &&
+            dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
+            dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
 
             property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                                            dragState.dropDelegate &&
-                                            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
-                                            isDropPositionThis
+            dragState.dropDelegate &&
+            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
+            isDropPositionThis
 
             implicitWidth: loader.item ? loader.item.implicitWidth : 0
             implicitHeight: loader.item ? loader.item.implicitHeight : 0
@@ -118,7 +119,7 @@ Item {
             y: row * folio.HomeScreenState.pageCellHeight
 
             visible: row >= 0 && row < folio.HomeScreenState.pageRows &&
-                     column >= 0 && column < folio.HomeScreenState.pageColumns
+            column >= 0 && column < folio.HomeScreenState.pageColumns
 
             // called when we want to delete this delegate
             function removeSelf() {
@@ -161,6 +162,7 @@ Item {
                 AppDelegate {
                     id: appDelegate
                     folio: root.folio
+                    maskManager: root.maskManager
                     name: folio.FolioSettings.showPagesAppLabels ? delegate.pageDelegate.application.name : ""
                     application: delegate.pageDelegate.application
                     turnToFolder: delegate.isAppHoveredOver
@@ -238,6 +240,7 @@ Item {
                 AppFolderDelegate {
                     id: appFolderDelegate
                     folio: root.folio
+                    maskManager: root.maskManager
                     name: folio.FolioSettings.showPagesAppLabels ? delegate.pageDelegate.folder.name : ""
                     folder: delegate.pageDelegate.folder
 
@@ -248,8 +251,8 @@ Item {
 
                     // do not show if the drop animation is running to this delegate, and the drop delegate is a folder
                     visible: !(root.homeScreen.dropAnimationRunning &&
-                               delegate.isDropPositionThis &&
-                               delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
+                    delegate.isDropPositionThis &&
+                    delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
 
                     // don't show label in drag and drop mode
                     labelOpacity: delegate.opacity
@@ -334,7 +337,7 @@ Item {
                     // background: there is only one "visual" instance of the widget, once this delegate loads
                     //             it will reparent it to here (but we don't want it to happen while the drop animation is running)
                     property bool suppressAppletReparent: (root.homeScreen.currentlyDraggedWidget === delegate.pageDelegate.widget)
-                                                            && delegate.isDropPositionThis
+                    && delegate.isDropPositionThis
 
                     visible: !suppressAppletReparent
                     widget: suppressAppletReparent ? null : delegate.pageDelegate.widget

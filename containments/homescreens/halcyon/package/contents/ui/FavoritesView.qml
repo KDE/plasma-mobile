@@ -16,6 +16,7 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 Item {
     id: root
     layer.enabled: true
+    property MobileShell.MaskManager maskManager
 
     required property bool interactive
     required property var searchWidget
@@ -67,6 +68,7 @@ Item {
         property real openFolderProgress: 0
         anchors.fill: parent
 
+        maskManager: root.maskManager
         interactive: root.interactive
         searchWidget: root.searchWidget
 
