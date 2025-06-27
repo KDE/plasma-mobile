@@ -4,7 +4,7 @@
 #include "halcyonsettings.h"
 
 const QString CFG_KEY_SHOW_WALLPAPER_BLUR = QStringLiteral("showWallpaperBlur");
-const QString CFG_KEY_DOUBLE_TAP_TO_SLEEP = QStringLiteral("doubleTapToSleep");
+const QString CFG_KEY_DOUBLE_TAP_TO_LOCK = QStringLiteral("doubleTapToLock");
 
 HalcyonSettings::HalcyonSettings(QObject *parent, KConfigGroup config)
     : QObject{parent}
@@ -27,16 +27,16 @@ void HalcyonSettings::setShowWallpaperBlur(bool showWallpaperBlur)
     }
 }
 
-bool HalcyonSettings::doubleTapToSleep() const
+bool HalcyonSettings::doubleTapToLock() const
 {
-    return m_doubleTapToSleep;
+    return m_doubleTapToLock;
 }
 
-void HalcyonSettings::setDoubleTapToSleep(bool doubleTapToSleep)
+void HalcyonSettings::setDoubleTapToLock(bool doubleTapToLock)
 {
-    if (m_doubleTapToSleep != doubleTapToSleep) {
-        m_doubleTapToSleep = doubleTapToSleep;
-        Q_EMIT doubleTapToSleepChanged();
+    if (m_doubleTapToLock != doubleTapToLock) {
+        m_doubleTapToLock = doubleTapToLock;
+        Q_EMIT doubleTapToLockChanged();
         save();
     }
 }
@@ -44,7 +44,7 @@ void HalcyonSettings::setDoubleTapToSleep(bool doubleTapToSleep)
 void HalcyonSettings::save()
 {
     m_config.writeEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, m_showWallpaperBlur);
-    m_config.writeEntry(CFG_KEY_DOUBLE_TAP_TO_SLEEP, m_doubleTapToSleep);
+    m_config.writeEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, m_doubleTapToLock);
 
     m_config.sync();
 }
@@ -52,5 +52,5 @@ void HalcyonSettings::save()
 void HalcyonSettings::load()
 {
     m_showWallpaperBlur = m_config.readEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, false);
-    m_doubleTapToSleep = m_config.readEntry(CFG_KEY_DOUBLE_TAP_TO_SLEEP, true);
+    m_doubleTapToLock = m_config.readEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, true);
 }

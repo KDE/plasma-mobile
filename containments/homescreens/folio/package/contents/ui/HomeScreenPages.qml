@@ -19,13 +19,23 @@ MouseArea {
     readonly property real verticalMargin: Math.round((folio.HomeScreenState.pageHeight - folio.HomeScreenState.pageContentHeight) / 2)
     readonly property real horizontalMargin: Math.round((folio.HomeScreenState.pageWidth - folio.HomeScreenState.pageContentWidth) / 2)
 
+    onPressAndHold: {
+        folio.HomeScreenState.openSettingsView()
+        haptics.buttonVibrate();
+    }
+
+    onDoubleClicked: {
+        if (folio.FolioSettings.doubleTapToLock) {
+            deviceLock.triggerLock();
+        }
+    }
+
     MobileShell.HapticsEffect {
         id: haptics
     }
 
-    onPressAndHold: {
-        folio.HomeScreenState.openSettingsView()
-        haptics.buttonVibrate();
+    MobileShell.DeviceLock {
+        id: deviceLock
     }
 
     Repeater {

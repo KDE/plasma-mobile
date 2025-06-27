@@ -19,7 +19,7 @@ const QString CFG_KEY_DELEGATE_ICON_SIZE = QStringLiteral("delegateIconSize");
 const QString CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND = QStringLiteral("showFavoritesBarBackground");
 const QString CFG_KEY_PAGE_TRANSITION_EFFECT = QStringLiteral("pageTransitionEffect");
 const QString CFG_KEY_SHOW_WALLPAPER_BLUR = QStringLiteral("showWallpaperBlur");
-const QString CFG_KEY_DOUBLE_TAP_TO_SLEEP = QStringLiteral("doubleTapToSleep");
+const QString CFG_KEY_DOUBLE_TAP_TO_LOCK = QStringLiteral("doubleTapToLock");
 
 FolioSettings::FolioSettings(HomeScreen *parent)
     : QObject{parent}
@@ -154,16 +154,16 @@ void FolioSettings::setShowWallpaperBlur(bool showWallpaperBlur)
     }
 }
 
-bool FolioSettings::doubleTapToSleep() const
+bool FolioSettings::doubleTapToLock() const
 {
-    return m_doubleTapToSleep;
+    return m_doubleTapToLock;
 }
 
-void FolioSettings::setDoubleTapToSleep(bool doubleTapToSleep)
+void FolioSettings::setDoubleTapToLock(bool doubleTapToLock)
 {
-    if (m_doubleTapToSleep != doubleTapToSleep) {
-        m_doubleTapToSleep = doubleTapToSleep;
-        Q_EMIT doubleTapToSleepChanged();
+    if (m_doubleTapToLock != doubleTapToLock) {
+        m_doubleTapToLock = doubleTapToLock;
+        Q_EMIT doubleTapToLockChanged();
         save();
     }
 }
@@ -183,7 +183,7 @@ void FolioSettings::save()
     m_homeScreen->config().writeEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, m_showFavouritesBarBackground);
     m_homeScreen->config().writeEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)m_pageTransitionEffect);
     m_homeScreen->config().writeEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, m_showWallpaperBlur);
-    m_homeScreen->config().writeEntry(CFG_KEY_DOUBLE_TAP_TO_SLEEP, m_doubleTapToSleep);
+    m_homeScreen->config().writeEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, m_doubleTapToLock);
 
     Q_EMIT m_homeScreen->configNeedsSaving();
 }
@@ -203,7 +203,7 @@ void FolioSettings::load()
     m_showFavouritesBarBackground = m_homeScreen->config().readEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, true);
     m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_homeScreen->config().readEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)SlideTransition));
     m_showWallpaperBlur = m_homeScreen->config().readEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, true);
-    m_doubleTapToSleep = m_homeScreen->config().readEntry(CFG_KEY_DOUBLE_TAP_TO_SLEEP, true);
+    m_doubleTapToLock = m_homeScreen->config().readEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, true);
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
@@ -212,7 +212,7 @@ void FolioSettings::load()
     Q_EMIT lockLayoutChanged();
     Q_EMIT delegateIconSizeChanged();
     Q_EMIT showWallpaperBlurChanged();
-    Q_EMIT doubleTapToSleepChanged();
+    Q_EMIT doubleTapToLockChanged();
 }
 
 bool FolioSettings::saveLayoutToFile(QString path)

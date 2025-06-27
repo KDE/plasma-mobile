@@ -27,14 +27,18 @@ MouseArea {
         haptics.buttonVibrate();
     }
 
+    onDoubleClicked: {
+        if (folio.FolioSettings.doubleTapToLock) {
+            deviceLock.triggerLock();
+        }
+    }
+
     MobileShell.HapticsEffect {
         id: haptics
     }
 
-    MobileShell.DoubleTapToSleep {
-        id: doubleTapToSleep
-        enabled: folio.FolioSettings.doubleTapToSleep
-        anchors.fill: parent
+    MobileShell.DeviceLock {
+        id: deviceLock
     }
 
     Repeater {

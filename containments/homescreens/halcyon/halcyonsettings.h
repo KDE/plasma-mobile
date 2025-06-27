@@ -11,7 +11,7 @@ class HalcyonSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool showWallpaperBlur READ showWallpaperBlur WRITE setShowWallpaperBlur NOTIFY showWallpaperBlurChanged)
-    Q_PROPERTY(bool doubleTapToSleep READ doubleTapToSleep WRITE setDoubleTapToSleep NOTIFY doubleTapToSleepChanged)
+    Q_PROPERTY(bool doubleTapToLock READ doubleTapToLock WRITE setDoubleTapToLock NOTIFY doubleTapToLockChanged)
 
 public:
     HalcyonSettings(QObject *parent = nullptr, KConfigGroup config = {});
@@ -19,19 +19,19 @@ public:
     bool showWallpaperBlur() const;
     void setShowWallpaperBlur(bool blurWallpaper);
 
-    bool doubleTapToSleep() const;
-    void setDoubleTapToSleep(bool doubleTapToSleep);
+    bool doubleTapToLock() const;
+    void setDoubleTapToLock(bool doubleTapToLock);
 
 Q_SIGNALS:
     void showWallpaperBlurChanged();
-    void doubleTapToSleepChanged();
+    void doubleTapToLockChanged();
 
 private:
     void save();
     void load();
 
     bool m_showWallpaperBlur{false};
-    bool m_doubleTapToSleep{true};
+    bool m_doubleTapToLock{true};
 
     KConfigGroup m_config;
 };

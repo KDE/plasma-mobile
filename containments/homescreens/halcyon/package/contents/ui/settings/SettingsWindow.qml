@@ -103,10 +103,10 @@ Window {
                     FormCard.FormSwitchDelegate {
                         id: doubleTapToSleepSwitch
                         text: i18n("Double tap to lock device")
-                        checked: Plasmoid.settings.doubleTapToSleep
+                        checked: Plasmoid.settings.doubleTapToLock
                         onCheckedChanged: {
-                            if (checked != Plasmoid.settings.doubleTapToSleep) {
-                                Plasmoid.settings.doubleTapToSleep = checked;
+                            if (checked != Plasmoid.settings.doubleTapToLock) {
+                                Plasmoid.settings.doubleTapToLock = checked;
                             }
                         }
                     }

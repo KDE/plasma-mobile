@@ -108,14 +108,14 @@ Item {
 
                 onLongPressed: root.openConfigure()
                 onDoubleTapped: {
-                    if (Plasmoid.settings.doubleTapToSleep) {
-                        doubleTapToSleep.doubleTapped();
+                    if (Plasmoid.settings.doubleTapToLock) {
+                        deviceLock.triggerLock();
                     }
                 }
             }
 
-            MobileShell.DoubleTapToSleep {
-                id: doubleTapToSleep
+            MobileShell.DeviceLock {
+                id: deviceLock
             }
 
             FavoritesView {
