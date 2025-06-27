@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-26 00:44+0000\n"
-"PO-Revision-Date: 2025-04-22 09:25+0300\n"
+"PO-Revision-Date: 2025-06-26 08:55+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -126,7 +126,7 @@ msgstr "Обертання"
 #: package/contents/ui/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Подвійне торкання для блокування пристрою"
 
 #: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format

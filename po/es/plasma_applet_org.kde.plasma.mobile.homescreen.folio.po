@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-26 00:44+0000\n"
-"PO-Revision-Date: 2025-05-26 01:07+0100\n"
+"PO-Revision-Date: 2025-06-26 23:26+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -129,7 +129,7 @@ msgstr "Rotación"
 #: package/contents/ui/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Doble toque para bloquear el dispositivo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format

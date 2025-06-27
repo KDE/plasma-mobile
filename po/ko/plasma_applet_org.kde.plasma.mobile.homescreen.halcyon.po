@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:41+0000\n"
+"POT-Creation-Date: 2025-06-27 00:44+0000\n"
 "PO-Revision-Date: 2022-07-13 12:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -42,6 +42,33 @@ msgstr "책갈피에 추가"
 #, kde-format
 msgid "Applications"
 msgstr "앱"
+
+#: package/contents/ui/settings/SettingsWindow.qml:76
+#, kde-format
+msgid "Homescreen Settings"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:86
+#, kde-format
+msgid "Homescreen"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:92
+#, kde-format
+msgctxt "@option:check"
+msgid "Show wallpaper blur effect"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:105
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:121
+#, kde-format
+msgctxt "@action:button"
+msgid "Switch between homescreens and more wallpaper options"
+msgstr ""
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format

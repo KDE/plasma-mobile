@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-26 00:44+0000\n"
-"PO-Revision-Date: 2025-04-22 06:32+0200\n"
+"PO-Revision-Date: 2025-06-26 06:23+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -127,7 +127,7 @@ msgstr "Zasuk"
 #: package/contents/ui/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Dvakrat se dotaknite, da zaklenete napravo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format
