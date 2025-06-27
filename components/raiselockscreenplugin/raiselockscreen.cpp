@@ -90,37 +90,26 @@ void RaiseLockscreen::setOverlay()
     }
     auto waylandWindow = m_window->nativeInterface<QNativeInterface::Private::QWaylandWindow>();
     if (!waylandWindow) {
+        // Add event filter to listen for when wayland window appears, and try again
         m_window->installEventFilter(this);
         setInitialized(false);
         qCWarning(LOGGING_CATEGORY) << "Unable to set overlay: unable to get wayland window";
         return;
     }
-    if (!waylandWindow->surface()) {
-        connect(waylandWindow, &QNativeInterface::Private::QWaylandWindow::surfaceCreated, this, &RaiseLockscreen::setOverlay, Qt::SingleShotConnection);
-        setInitialized(false);
-        qCWarning(LOGGING_CATEGORY) << "Unable to set overlay: unable to get wayland window surface";
-        return;
+
+    // Listen to when new surface roles are created, and re-allow again.
+    // This can happen when a window is hidden, and then shown again (same surface, different surface role)
+    connect(waylandWindow, &QNativeInterface::Private::QWaylandWindow::surfaceRoleCreated, this, [this, waylandWindow]() {
+        m_implementation->allow(waylandWindow->surface());
+        setInitialized(true);
+        qCDebug(LOGGING_CATEGORY) << "Initialized overlay successfully";
+    });
+
+    if (waylandWindow->surface()) {
+        m_implementation->allow(waylandWindow->surface());
+        setInitialized(true);
+        qCDebug(LOGGING_CATEGORY) << "Initialized overlay successfully";
     }
-
-    // We need to allow the overlay only when there's a shell surface, otherwise it gets ignored
-    if (!m_window->isExposed()) {
-        setInitialized(false);
-        connect(
-            waylandWindow,
-            &QNativeInterface::Private::QWaylandWindow::surfaceRoleCreated,
-            this,
-            [this, waylandWindow]() {
-                m_implementation->allow(waylandWindow->surface());
-                setInitialized(true);
-            },
-            Qt::SingleShotConnection);
-
-        qCWarning(LOGGING_CATEGORY) << "Unable to set overlay: no shell surface";
-    }
-
-    m_implementation->allow(waylandWindow->surface());
-    setInitialized(true);
-    qCDebug(LOGGING_CATEGORY) << "Initialized overlay successfully";
 }
 
 bool RaiseLockscreen::eventFilter(QObject *watched, QEvent *event)
