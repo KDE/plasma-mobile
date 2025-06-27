@@ -111,7 +111,10 @@ Item {
      * Run pending action that was pending for authentication when unlockRequested() was emitted.
      */
     function runPendingAction() {
-        list.pendingNotificationWithAction.runPendingAction();
+        if (list.pendingNotificationWithAction) {
+            list.pendingNotificationWithAction.runPendingAction();
+            list.pendingNotificationWithAction = null;
+        }
     }
 
     /**
@@ -175,7 +178,7 @@ Item {
 
         currentIndex: 0
 
-        property var pendingNotificationWithAction
+        property NotificationItem pendingNotificationWithAction: null
 
         readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
 
