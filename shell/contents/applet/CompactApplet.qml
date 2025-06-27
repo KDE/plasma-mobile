@@ -41,7 +41,6 @@ Item {
     }
 
     onFullRepresentationChanged: {
-
         if (!fullRepresentation) {
             return;
         }
@@ -49,6 +48,18 @@ Item {
         fullRepresentation.parent = appletParent;
         fullRepresentation.anchors.fill = fullRepresentation.parent;
         fullRepresentation.anchors.margins = appletParent.margins.top;
+        fullRepresentation.visible = true;
+
+        // If plasmoidItem is expanded, we need to update expanded overlay to display it
+        updateExpandedOverlay();
+    }
+
+    function updateExpandedOverlay(): void {
+      if (plasmoidItem?.expanded && fullRepresentation) {
+        expandedOverlay.showFullScreen()
+      } else {
+        expandedOverlay.visible = false;
+      }
     }
 
     FocusScope {
@@ -95,18 +106,16 @@ Item {
     Connections {
         target: plasmoidItem
         function onExpandedChanged() {
-            if (plasmoidItem.expanded) {
-                expandedOverlay.showFullScreen()
-            } else {
-                expandedOverlay.visible = false;
-            }
+          // When plasmoidItem is expanded, it can be possible fullRepresentation is null
+          // so we not need to display expandedOverlay now to avoid display empty expandedOverlay
+          updateExpandedOverlay();
         }
     }
 
     NanoShell.FullScreenOverlay {
         id: expandedOverlay
         color: Qt.rgba(0, 0, 0, 0.6)
-        visible: plasmoidItem && plasmoidItem.expanded
+        visible: plasmoidItem?.expanded && fullRepresentation
         width: Screen.width
         height: Screen.height
         MouseArea {
