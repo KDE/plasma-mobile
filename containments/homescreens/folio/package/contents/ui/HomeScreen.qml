@@ -464,8 +464,7 @@ Item {
                 function onSearchWidgetOpenProgressChanged() {
                     if (homeScreenState.searchWidgetOpenProgress === 1.0) {
                         searchWidget.requestFocus();
-                    } else {
-                        // TODO this gets called a lot, can we have a more performant way?
+                    } else if (!root.activeFocus) {
                         root.forceActiveFocus();
                     }
                 }

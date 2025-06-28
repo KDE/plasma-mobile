@@ -346,6 +346,9 @@ private:
     void setViewState(ViewState viewState);
     void setSwipeState(SwipeState swipeState);
 
+    void setAppDrawerOpenProgress(qreal progress);
+    void setSearchWidgetOpenProgress(qreal progress);
+
     void startDelegateDrag(qreal startX, qreal startY, qreal pointerOffsetX, qreal pointerOffsetY);
 
     void cancelAppDrawerAnimations();
