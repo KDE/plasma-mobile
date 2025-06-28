@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-27 00:44+0000\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
 "PO-Revision-Date: 2023-05-03 23:31+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FavoritesGrid.qml:223
 #: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr ""
 
-#: package/contents/ui/FavoritesGrid.qml:291
+#: package/contents/ui/FavoritesGrid.qml:293
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr ""
@@ -55,16 +55,33 @@ msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:105
+#: package/contents/ui/settings/SettingsWindow.qml:95
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:96
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:97
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"

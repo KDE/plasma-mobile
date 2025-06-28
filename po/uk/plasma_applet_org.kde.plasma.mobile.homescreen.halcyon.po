@@ -1,30 +1,30 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-27 00:44+0000\n"
-"PO-Revision-Date: 2022-07-12 09:18+0300\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"PO-Revision-Date: 2025-06-27 11:26+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.3\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FavoritesGrid.qml:223
 #: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Вилучити з улюблених"
 
-#: package/contents/ui/FavoritesGrid.qml:291
+#: package/contents/ui/FavoritesGrid.qml:293
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Додайте програми до списку улюблених, щоб їх було показано тут."
@@ -47,29 +47,49 @@ msgstr "Програми"
 #: package/contents/ui/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Параметри домашньої сторінки"
 
 #: package/contents/ui/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Домашня сторінка"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
+msgstr "Показувати ефект розмивання шпалер"
+
+#: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgctxt "Wallpaper blur effect"
+msgid "None"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:105
+#: package/contents/ui/settings/SettingsWindow.qml:96
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:97
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Подвійний дотик для блокування пристрою"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
+"Перемкнутися між домашніми екранами і додатковими варіантами зображень тла"
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format

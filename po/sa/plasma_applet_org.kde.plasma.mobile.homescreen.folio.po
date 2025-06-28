@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -30,11 +30,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "अनुप्रयोगाः अन्वेषणं कुर्वन्तु..."
 
-#: package/contents/ui/FavouritesBar.qml:168
-#: package/contents/ui/FavouritesBar.qml:244
+#: package/contents/ui/FavouritesBar.qml:174
+#: package/contents/ui/FavouritesBar.qml:251
 #: package/contents/ui/FolderView.qml:298
-#: package/contents/ui/HomeScreenPage.qml:232
-#: package/contents/ui/HomeScreenPage.qml:317
+#: package/contents/ui/HomeScreenPage.qml:228
+#: package/contents/ui/HomeScreenPage.qml:314
 #, kde-format
 msgid "Remove"
 msgstr "अपाकरोति"
@@ -141,54 +141,73 @@ msgid "Wallpaper"
 msgstr "वॉलपेपर"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
 msgstr "वॉलपेपर धुंधला प्रभावं दर्शयतु"
 
-#: package/contents/ui/settings/SettingsWindow.qml:285
+#: package/contents/ui/settings/SettingsWindow.qml:277
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:278
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:279
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "General"
 msgstr "सामान्य"
 
-#: package/contents/ui/settings/SettingsWindow.qml:292
+#: package/contents/ui/settings/SettingsWindow.qml:301
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "होमस्क्रीन् अधिकानि वॉलपेपरविकल्पानि च मध्ये स्विच कुर्वन्तु"
 
-#: package/contents/ui/settings/SettingsWindow.qml:319
+#: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export layout to"
 msgstr "विन्यासं निर्यातयन्तु to"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:346
 #, kde-format
 msgid "Import layout from"
 msgstr "तः विन्यासम् आयातयन्तु"
 
-#: package/contents/ui/settings/SettingsWindow.qml:349
-#: package/contents/ui/settings/SettingsWindow.qml:356
+#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:364
 #, kde-format
 msgid "Export Status"
 msgstr "निर्यातस्य स्थितिः"
 
-#: package/contents/ui/settings/SettingsWindow.qml:350
+#: package/contents/ui/settings/SettingsWindow.qml:358
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1 प्रति निर्यातं कर्तुं असफलम्"
 
-#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:365
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "होमस्क्रीन् विन्यासः %1 मध्ये सफलतया निर्यातितः"
 
-#: package/contents/ui/settings/SettingsWindow.qml:363
+#: package/contents/ui/settings/SettingsWindow.qml:371
 #, kde-format
 msgid "Confirm Import"
 msgstr "आयातस्य पुष्टिं कुर्वन्तु"
 
-#: package/contents/ui/settings/SettingsWindow.qml:364
+#: package/contents/ui/settings/SettingsWindow.qml:372
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "एतेन भवतः विद्यमानं होमस्क्रीन् विन्यासः अधिलिखितः भविष्यति!"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-26 00:44+0000\n"
-"PO-Revision-Date: 2025-04-22 19:57+0300\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"PO-Revision-Date: 2025-06-27 10:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -28,11 +28,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Uygulamalar ara…"
 
-#: package/contents/ui/FavouritesBar.qml:168
-#: package/contents/ui/FavouritesBar.qml:244
+#: package/contents/ui/FavouritesBar.qml:174
+#: package/contents/ui/FavouritesBar.qml:251
 #: package/contents/ui/FolderView.qml:298
-#: package/contents/ui/HomeScreenPage.qml:232
-#: package/contents/ui/HomeScreenPage.qml:317
+#: package/contents/ui/HomeScreenPage.qml:228
+#: package/contents/ui/HomeScreenPage.qml:314
 #, kde-format
 msgid "Remove"
 msgstr "Kaldır"
@@ -125,7 +125,7 @@ msgstr "Döndür"
 #: package/contents/ui/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Aygıtı kilitlemek için iki kez dokun"
 
 #: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format
@@ -139,54 +139,73 @@ msgid "Wallpaper"
 msgstr "Duvar Kağıdı"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
 msgstr "Duvar kağıdını bulanıklaştırma efektini göster"
 
-#: package/contents/ui/settings/SettingsWindow.qml:285
+#: package/contents/ui/settings/SettingsWindow.qml:277
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:278
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:279
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "General"
 msgstr "Genel"
 
-#: package/contents/ui/settings/SettingsWindow.qml:292
+#: package/contents/ui/settings/SettingsWindow.qml:301
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "Ana ekranlar ve duvar kağıdı seçenekleri arasında geçiş yap"
 
-#: package/contents/ui/settings/SettingsWindow.qml:319
+#: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export layout to"
 msgstr "Şuraya yerleşimi dışa aktar"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:346
 #, kde-format
 msgid "Import layout from"
 msgstr "Şuradan yerleşim içe aktar"
 
-#: package/contents/ui/settings/SettingsWindow.qml:349
-#: package/contents/ui/settings/SettingsWindow.qml:356
+#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:364
 #, kde-format
 msgid "Export Status"
 msgstr "Dışa Aktarma Durumu"
 
-#: package/contents/ui/settings/SettingsWindow.qml:350
+#: package/contents/ui/settings/SettingsWindow.qml:358
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1 konumuna dışa aktarılamadı"
 
-#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:365
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Ana ekran yerleşimi, %1 konumuna başarıyla dışa aktarıldı"
 
-#: package/contents/ui/settings/SettingsWindow.qml:363
+#: package/contents/ui/settings/SettingsWindow.qml:371
 #, kde-format
 msgid "Confirm Import"
 msgstr "İçe Aktarmayı Onayla"
 
-#: package/contents/ui/settings/SettingsWindow.qml:364
+#: package/contents/ui/settings/SettingsWindow.qml:372
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Bu, var olan ana ekran yerleşiminizin üzerine yazacaktır!"

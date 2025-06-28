@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-27 00:44+0000\n"
-"PO-Revision-Date: 2023-03-06 10:04+0100\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"PO-Revision-Date: 2025-06-27 11:21+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.2\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FavoritesGrid.qml:223
 #: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Uit favorieten verwijderen"
 
-#: package/contents/ui/FavoritesGrid.qml:291
+#: package/contents/ui/FavoritesGrid.qml:293
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Toepassingen aan uw favorieten toevoegen zodat ze zich hier vertonen."
@@ -46,29 +46,49 @@ msgstr "Toepassingen"
 #: package/contents/ui/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Instellingen van standaard scherm"
 
 #: package/contents/ui/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Standaard scherm"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
+msgstr "Vervagingseffect op achtergrondafbeelding tonen"
+
+#: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgctxt "Wallpaper blur effect"
+msgid "None"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:105
+#: package/contents/ui/settings/SettingsWindow.qml:96
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:97
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Tik tweemaal om apparaat te vergrendelen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
+"Tussen homescherm en meer opties voor achtergrondafbeeldingen schakelen"
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format

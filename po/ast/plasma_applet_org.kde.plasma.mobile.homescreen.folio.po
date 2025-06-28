@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
 "PO-Revision-Date: 2023-05-09 00:09+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -29,11 +29,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Aplicaciones"
 
-#: package/contents/ui/FavouritesBar.qml:168
-#: package/contents/ui/FavouritesBar.qml:244
+#: package/contents/ui/FavouritesBar.qml:174
+#: package/contents/ui/FavouritesBar.qml:251
 #: package/contents/ui/FolderView.qml:298
-#: package/contents/ui/HomeScreenPage.qml:232
-#: package/contents/ui/HomeScreenPage.qml:317
+#: package/contents/ui/HomeScreenPage.qml:228
+#: package/contents/ui/HomeScreenPage.qml:314
 #, kde-format
 msgid "Remove"
 msgstr ""
@@ -141,53 +141,70 @@ msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:285
+#: package/contents/ui/settings/SettingsWindow.qml:277
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:278
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:279
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "General"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:292
+#: package/contents/ui/settings/SettingsWindow.qml:301
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:319
+#: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export layout to"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:346
 #, kde-format
 msgid "Import layout from"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:349
-#: package/contents/ui/settings/SettingsWindow.qml:356
+#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:364
 #, kde-format
 msgid "Export Status"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:350
+#: package/contents/ui/settings/SettingsWindow.qml:358
 #, kde-format
 msgid "Failed to export to %1"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:365
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:363
+#: package/contents/ui/settings/SettingsWindow.qml:371
 #, kde-format
 msgid "Confirm Import"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:364
+#: package/contents/ui/settings/SettingsWindow.qml:372
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""

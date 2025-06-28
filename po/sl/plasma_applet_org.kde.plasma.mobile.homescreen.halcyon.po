@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-27 00:44+0000\n"
-"PO-Revision-Date: 2022-07-13 05:11+0200\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"PO-Revision-Date: 2025-06-27 06:18+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Poedit 3.6\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FavoritesGrid.qml:223
 #: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Odstrani iz priljubljenih"
 
-#: package/contents/ui/FavoritesGrid.qml:291
+#: package/contents/ui/FavoritesGrid.qml:293
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Dodaj aplikacije k vašim priljubljenim, tako da se prikažejo tukaj."
@@ -47,29 +47,48 @@ msgstr "Aplikacije"
 #: package/contents/ui/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Nastavitve začetnega zaslona"
 
 #: package/contents/ui/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Začetni zaslon"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
+msgstr "Prikaži učinek zameglitve ozadja"
+
+#: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgctxt "Wallpaper blur effect"
+msgid "None"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:105
+#: package/contents/ui/settings/SettingsWindow.qml:96
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:97
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Dvakrat se dotaknite za zaklepanje naprave"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Preklapljanje med začetnimi zasloni in več možnostmi ozadja"
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format

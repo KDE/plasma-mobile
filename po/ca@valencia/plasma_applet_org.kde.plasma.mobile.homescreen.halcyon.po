@@ -1,15 +1,15 @@
 # Translation of plasma_applet_org.kde.plasma.mobile.homescreen.halcyon.po to Catalan (Valencian)
-# Copyright (C) 2023 This_file_is_part_of_KDE
+# Copyright (C) 2023-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-27 00:44+0000\n"
-"PO-Revision-Date: 2023-03-06 11:15+0100\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"PO-Revision-Date: 2025-06-27 08:20+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FavoritesGrid.qml:223
 #: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Elimina de les preferides"
 
-#: package/contents/ui/FavoritesGrid.qml:291
+#: package/contents/ui/FavoritesGrid.qml:293
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Afig aplicacions a les preferides de manera que es mostren ací."
@@ -48,29 +48,48 @@ msgstr "Aplicacions"
 #: package/contents/ui/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Configureu la pàgina d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Pantalla d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
+msgstr "Mostra l'efecte difuminat del fons de pantalla"
+
+#: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgctxt "Wallpaper blur effect"
+msgid "None"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:105
+#: package/contents/ui/settings/SettingsWindow.qml:96
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:97
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Toc doble per a bloquejar el dispositiu"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format

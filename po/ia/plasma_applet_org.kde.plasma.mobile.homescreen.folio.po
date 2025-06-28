@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-28 00:43+0000\n"
 "PO-Revision-Date: 2025-04-22 12:25+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -29,11 +29,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Cerca applicationes..."
 
-#: package/contents/ui/FavouritesBar.qml:168
-#: package/contents/ui/FavouritesBar.qml:244
+#: package/contents/ui/FavouritesBar.qml:174
+#: package/contents/ui/FavouritesBar.qml:251
 #: package/contents/ui/FolderView.qml:298
-#: package/contents/ui/HomeScreenPage.qml:232
-#: package/contents/ui/HomeScreenPage.qml:317
+#: package/contents/ui/HomeScreenPage.qml:228
+#: package/contents/ui/HomeScreenPage.qml:314
 #, kde-format
 msgid "Remove"
 msgstr "Remove"
@@ -140,17 +140,36 @@ msgid "Wallpaper"
 msgstr "Tapete de papiro"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
 msgstr "Monstra effecto velate (blur) de tepate de papiro"
 
-#: package/contents/ui/settings/SettingsWindow.qml:285
+#: package/contents/ui/settings/SettingsWindow.qml:277
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:278
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:279
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "General"
 msgstr "General"
 
-#: package/contents/ui/settings/SettingsWindow.qml:292
+#: package/contents/ui/settings/SettingsWindow.qml:301
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
@@ -158,38 +177,38 @@ msgstr ""
 "Commuta inter schermos de initio (homescreens) e plus optiones de tapete de "
 "papiro"
 
-#: package/contents/ui/settings/SettingsWindow.qml:319
+#: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export layout to"
 msgstr "Exporta disposition a"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:346
 #, kde-format
 msgid "Import layout from"
 msgstr "Importa Disposition ab"
 
-#: package/contents/ui/settings/SettingsWindow.qml:349
-#: package/contents/ui/settings/SettingsWindow.qml:356
+#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:364
 #, kde-format
 msgid "Export Status"
 msgstr "Exporta stato"
 
-#: package/contents/ui/settings/SettingsWindow.qml:350
+#: package/contents/ui/settings/SettingsWindow.qml:358
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Falleva a exportar a %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:357
+#: package/contents/ui/settings/SettingsWindow.qml:365
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Disposition de schermo initial exportate con successo a %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:363
+#: package/contents/ui/settings/SettingsWindow.qml:371
 #, kde-format
 msgid "Confirm Import"
 msgstr "Confirma Importation"
 
-#: package/contents/ui/settings/SettingsWindow.qml:364
+#: package/contents/ui/settings/SettingsWindow.qml:372
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Isto superscribera tu disposition de schermo initial existente!"
