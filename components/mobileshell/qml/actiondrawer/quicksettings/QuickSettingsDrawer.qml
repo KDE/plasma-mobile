@@ -76,7 +76,7 @@ MobileShell.BaseItem {
             antialiasing: true
 
             // Only show separator on dark background
-            visible: (Kirigami.ColorUtils.brightnessForColor(background.color)) === Kirigami.ColorUtils.Dark ? 1 : 0
+            visible: (Kirigami.ColorUtils.brightnessForColor(background.panelColor)) === Kirigami.ColorUtils.Dark ? 1 : 0
             height: 1
             color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.textColor, Kirigami.Theme.backgroundColor, 0.9)
         }
