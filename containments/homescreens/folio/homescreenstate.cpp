@@ -572,6 +572,16 @@ qreal HomeScreenState::appDrawerOpenProgress()
     return m_appDrawerOpenProgress;
 }
 
+void HomeScreenState::setAppDrawerOpenProgress(qreal appDrawerOpenProgress)
+{
+    if (appDrawerOpenProgress == m_appDrawerOpenProgress) {
+        return;
+    }
+
+    m_appDrawerOpenProgress = appDrawerOpenProgress;
+    Q_EMIT appDrawerOpenProgressChanged();
+}
+
 qreal HomeScreenState::appDrawerY()
 {
     return m_appDrawerY;
@@ -579,10 +589,12 @@ qreal HomeScreenState::appDrawerY()
 
 void HomeScreenState::setAppDrawerY(qreal appDrawerY)
 {
-    m_appDrawerY = appDrawerY;
-    m_appDrawerOpenProgress = 1 - qBound(0.0, m_appDrawerY, APP_DRAWER_OPEN_DIST) / APP_DRAWER_OPEN_DIST;
-    Q_EMIT appDrawerYChanged();
-    Q_EMIT appDrawerOpenProgressChanged();
+    if (m_appDrawerY != appDrawerY) {
+        m_appDrawerY = appDrawerY;
+        Q_EMIT appDrawerYChanged();
+    }
+
+    setAppDrawerOpenProgress(1 - qBound(0.0, m_appDrawerY, APP_DRAWER_OPEN_DIST) / APP_DRAWER_OPEN_DIST);
 }
 
 qreal HomeScreenState::searchWidgetOpenProgress()
@@ -590,17 +602,29 @@ qreal HomeScreenState::searchWidgetOpenProgress()
     return m_searchWidgetOpenProgress;
 }
 
+void HomeScreenState::setSearchWidgetOpenProgress(qreal progress)
+{
+    if (m_searchWidgetOpenProgress == progress) {
+        return;
+    }
+
+    m_searchWidgetOpenProgress = progress;
+    Q_EMIT searchWidgetOpenProgressChanged();
+}
+
 qreal HomeScreenState::searchWidgetY()
 {
-    return m_searchWidgetOpenProgress;
+    return m_searchWidgetY;
 }
 
 void HomeScreenState::setSearchWidgetY(qreal searchWidgetY)
 {
-    m_searchWidgetY = searchWidgetY;
-    m_searchWidgetOpenProgress = 1 - qBound(0.0, m_searchWidgetY, SEARCH_WIDGET_OPEN_DIST) / SEARCH_WIDGET_OPEN_DIST;
-    Q_EMIT searchWidgetYChanged();
-    Q_EMIT searchWidgetOpenProgressChanged();
+    if (m_searchWidgetY != searchWidgetY) {
+        m_searchWidgetY = searchWidgetY;
+        Q_EMIT searchWidgetYChanged();
+    }
+
+    setSearchWidgetOpenProgress(1 - qBound(0.0, m_searchWidgetY, SEARCH_WIDGET_OPEN_DIST) / SEARCH_WIDGET_OPEN_DIST);
 }
 
 qreal HomeScreenState::delegateDragX()
