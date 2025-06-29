@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:43+0000\n"
+"POT-Creation-Date: 2025-06-29 00:44+0000\n"
 "PO-Revision-Date: 2025-03-14 16:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -25,7 +25,7 @@ msgstr "Panoya Kopyala"
 msgid "View Error Details…"
 msgstr "Hata Ayrıntılarını Görüntüle…"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "Aç: %1"
 

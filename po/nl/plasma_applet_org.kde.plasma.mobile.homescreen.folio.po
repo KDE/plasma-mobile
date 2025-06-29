@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-06-26 12:50+0200\n"
+"PO-Revision-Date: 2025-06-28 18:40+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -140,29 +140,27 @@ msgid "Wallpaper"
 msgstr "Achtergrondafbeelding"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Vervagingseffect op achtergrondafbeelding tonen"
+msgstr "Vervagingseffect op achtergrondafbeelding"
 
 #: package/contents/ui/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 #: package/contents/ui/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Eenvoudig"
 
 #: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Volledig"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format

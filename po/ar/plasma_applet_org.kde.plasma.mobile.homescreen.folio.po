@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-04-24 10:57+0400\n"
+"PO-Revision-Date: 2025-06-28 17:46+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -126,7 +126,7 @@ msgstr "التّدوير"
 #: package/contents/ui/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "طرق مزدوج لقفل الجهاز"
 
 #: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format
@@ -140,29 +140,27 @@ msgid "Wallpaper"
 msgstr "صورة الخلفية"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "أظهر تأثير طمس الخلفية"
+msgstr "تأثير طمس الخلفية"
 
 #: package/contents/ui/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 #: package/contents/ui/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "بسيط"
 
 #: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "كامل"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format

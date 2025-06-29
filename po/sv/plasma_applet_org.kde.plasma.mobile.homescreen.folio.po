@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-05-31 12:48+0200\n"
+"PO-Revision-Date: 2025-06-28 20:13+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -125,7 +125,7 @@ msgstr "Rotation"
 #: package/contents/ui/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Dubbeltryck för att låsa apparaten"
 
 #: package/contents/ui/settings/SettingsWindow.qml:252
 #, kde-format
@@ -139,29 +139,27 @@ msgid "Wallpaper"
 msgstr "Skrivbordsunderlägg"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Visa suddighetseffekt för skrivbordsunderlägg"
+msgstr "Suddighetseffekt för skrivbordsunderlägg"
 
 #: package/contents/ui/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: package/contents/ui/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Enkel"
 
 #: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Fullständig"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format

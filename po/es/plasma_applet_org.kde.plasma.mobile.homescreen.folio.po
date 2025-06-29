@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-06-26 23:26+0100\n"
+"PO-Revision-Date: 2025-06-28 23:46+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -143,29 +143,27 @@ msgid "Wallpaper"
 msgstr "Fondo de escritorio"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Mostrar efecto de desenfoque del fondo de escritorio"
+msgstr "Efecto de desenfoque del fondo de escritorio"
 
 #: package/contents/ui/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #: package/contents/ui/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Sencillo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Completo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format

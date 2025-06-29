@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-04-21 18:05+0400\n"
+"PO-Revision-Date: 2025-06-28 17:46+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -47,46 +47,46 @@ msgstr "التّطبيقات"
 #: package/contents/ui/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "إعدادات الشاشة الرئيسة"
 
 #: package/contents/ui/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "الشاشة الرئيسة"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "تأثير طمس الخلفية"
 
 #: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 #: package/contents/ui/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "بسيط"
 
 #: package/contents/ui/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "كامل"
 
 #: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "طرق مزدوج لقفل الجهاز"
 
 #: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "التبديل بين الشاشات الرئيسة والمزيد من خيارات صور الخلفيات"
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format

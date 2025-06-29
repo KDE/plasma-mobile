@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-06-27 06:18+0200\n"
+"PO-Revision-Date: 2025-06-28 08:21+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -55,29 +55,27 @@ msgid "Homescreen"
 msgstr "Začetni zaslon"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Prikaži učinek zameglitve ozadja"
+msgstr "Učinek zameglitve ozadja"
 
 #: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Brez"
 
 #: package/contents/ui/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Enostaven"
 
 #: package/contents/ui/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Poln"
 
 #: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format

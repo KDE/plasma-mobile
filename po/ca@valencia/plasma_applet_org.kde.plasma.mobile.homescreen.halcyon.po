@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-28 00:43+0000\n"
-"PO-Revision-Date: 2025-06-27 08:20+0200\n"
+"PO-Revision-Date: 2025-06-28 10:33+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -56,29 +56,27 @@ msgid "Homescreen"
 msgstr "Pantalla d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Mostra l'efecte difuminat del fons de pantalla"
+msgstr "Efecte de difuminat del fons de pantalla"
 
 #: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Sense"
 
 #: package/contents/ui/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Senzill"
 
 #: package/contents/ui/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Complet"
 
 #: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
