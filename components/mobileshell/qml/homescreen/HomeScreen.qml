@@ -128,7 +128,7 @@ Item {
 
         // animations
         opacity: 0
-        property real zoomScale: 1
+        property real scaleAmount: 1
 
         readonly property real zoomScaleOut: 0.8
 
@@ -150,7 +150,7 @@ Item {
         function zoomOutImmediately() {
             scaleAnim.stop();
             opacityAnim.stop();
-            zoomScale = zoomScaleOut;
+            scaleAmount = zoomScaleOut;
             opacity = 0;
         }
 
@@ -160,7 +160,7 @@ Item {
             running: false
         }
 
-        NumberAnimation on zoomScale {
+        NumberAnimation on scaleAmount {
             id: scaleAnim
             duration: 600
             running: false
@@ -179,8 +179,8 @@ Item {
         transform: Scale {
             origin.x: itemContainer.width / 2;
             origin.y: itemContainer.height / 2;
-            xScale: itemContainer.zoomScale
-            yScale: itemContainer.zoomScale
+            xScale: itemContainer.scaleAmount
+            yScale: itemContainer.scaleAmount
         }
     }
 
