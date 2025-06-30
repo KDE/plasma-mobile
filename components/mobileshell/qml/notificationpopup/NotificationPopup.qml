@@ -47,7 +47,6 @@ Item {
         onTriggered: {
             visible = true;
             updateNotificationPopups();
-            checkActionDrawerOpened();
         }
     }
 
@@ -70,7 +69,7 @@ Item {
             }
             return true;
         }
-        onTriggered: notificationPopup.closePopup()
+        onTriggered: notificationPopup.closePopup(popupIndex);
     }
 
     // the value of how much time is left, normalized from 1 to 0
@@ -172,9 +171,6 @@ Item {
             popupNotifications.currentPopupIndex = popupIndex;
         }
     }
-    // if the action drawer opens, it is best to dismiss all popup notifications
-    onIsActionDrawerOpenChanged: checkActionDrawerOpened()
-
     property bool isActionDrawerOpen: MobileShellState.ShellDBusClient.isActionDrawerOpen
 
     property bool waiting: true
@@ -204,16 +200,6 @@ Item {
             return dismissTimeout;
         }
         return model.timeout;
-    }
-
-    // check if the action drawer is opened and the popup is fully created
-    // if so, close the popup with a scale effect
-    function checkActionDrawerOpened() {
-        if (isActionDrawerOpen && popupNotifications.objectAt(popupIndex)) {
-            notificationPopup.expired();
-            keyboardInteractivity = LayerShell.Window.KeyboardInteractivityNone;
-            notificationItem.state = "closeWithScale";
-        }
     }
 
     // show the top most notification in the list and move the rest to the popup drawer
@@ -447,8 +433,8 @@ Item {
                             preventDismissTimeout = true;
                             if (dismissTimeout) {
                                 notificationPopup.dismissClicked();
-                            } else if (!isActionDrawerOpen) {
-                               notificationPopup.expired();
+                            } else {
+                                notificationPopup.expired();
                             }
                         }
                     }
