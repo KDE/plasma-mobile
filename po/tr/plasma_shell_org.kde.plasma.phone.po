@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-29 00:44+0000\n"
-"PO-Revision-Date: 2025-03-14 16:04+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-06-29 09:04+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -47,15 +47,15 @@ msgstr "Kullanılacak ana ekran yerleşimi."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:93
 msgid "Wallpaper Plugin"
-msgstr "Duvar Kağıdı Eklentisi"
+msgstr "Duvar Kâğıdı Eklentisi"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:94
 msgid "The wallpaper plugin to use."
-msgstr "Kullanılacak duvar kağıdı eklentisi."
+msgstr "Kullanılacak duvar kâğıdı eklentisi."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Wallpaper Plugins"
-msgstr "Duvar Kağıdı Eklentileri"
+msgstr "Duvar Kâğıdı Eklentileri"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Get New Plugins…"
@@ -71,7 +71,7 @@ msgstr "Şimdi Uygula"
 
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
-msgstr "Duvar Kağıdı"
+msgstr "Duvar Kâğıdı"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
