@@ -61,6 +61,20 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: autoHidePanels; below: doubleTapWakeup }
+
+            FormCard.FormSwitchDelegate {
+                id: doubleTapWakeup
+                text: i18n("Double Tap to Wakeup")
+                description: i18n("When active, it allow to wakeup the device just with double tap when the screen is off.")
+                checked: ShellSettings.KWinSettings.doubleTapWakeup
+                onCheckedChanged: {
+                    if (checked != ShellSettings.KWinSettings.doubleTapWakeup) {
+                        ShellSettings.KWinSettings.doubleTapWakeup = checked;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {
