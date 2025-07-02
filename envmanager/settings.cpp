@@ -80,6 +80,7 @@ void Settings::applyMobileConfiguration()
 
         auto kwinrc = kwinrcConfig();
         writeKeys(MOBILE_KWINRC_FILE, kwinrc, kwinSettings);
+        writeKeys(MOBILE_KWINRC_FILE, kwinrc, KWINRC_DEFAULT_SETTINGS); // only write, don't make immutable
         kwinrc->sync();
         reloadKWinConfig();
 
