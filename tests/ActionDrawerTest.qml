@@ -40,7 +40,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        height: Kirigami.Units.gridUnit * 1.25
+        height: MobileShell.Constants.topPanelHeight
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.Complementary

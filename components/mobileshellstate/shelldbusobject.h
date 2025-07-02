@@ -38,6 +38,7 @@ Q_SIGNALS:
     Q_SCRIPTABLE void openHomeScreenRequested();
     Q_SCRIPTABLE void resetHomeScreenPositionRequested();
     Q_SCRIPTABLE void showVolumeOSDRequested();
+    Q_SCRIPTABLE void openLockScreenKeypadRequested();
 
 public Q_SLOTS:
     Q_SCRIPTABLE bool doNotDisturb();
@@ -70,6 +71,7 @@ public Q_SLOTS:
     Q_SCRIPTABLE void openHomeScreen();
     Q_SCRIPTABLE void resetHomeScreenPosition();
     Q_SCRIPTABLE void showVolumeOSD();
+    Q_SCRIPTABLE void openLockScreenKeypad();
 
 private:
     bool m_initialized{false};

@@ -34,6 +34,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(ECMFindQmlModule)
 include(ECMGenerateQmlTypes)
+include(ECMConfiguredInstall)
 include(ECMFindQmlModule)
 include(GenerateExportHeader)
 include(KDEGitCommitHooks)
@@ -100,6 +101,14 @@ find_package(KWin ${PROJECT_DEP_VERSION} REQUIRED COMPONENTS
 )
 
 find_package(LayerShellQt REQUIRED)
+find_package(Wayland REQUIRED)
+find_package(PlasmaWaylandProtocols 1.8 CONFIG)
+set_package_properties(PlasmaWaylandProtocols PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "Collection of Plasma-specific Wayland protocols"
+    URL "https://invent.kde.org/libraries/plasma-wayland-protocols/"
+)
+
 
 find_package(LibKWorkspace CONFIG REQUIRED)
 find_package(Libudev REQUIRED)

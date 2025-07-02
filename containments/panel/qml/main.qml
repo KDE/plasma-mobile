@@ -11,7 +11,6 @@ import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
@@ -24,249 +23,97 @@ import org.kde.layershell 1.0 as LayerShell
 
 ContainmentItem {
     id: root
-    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
-    Plasmoid.status: PlasmaCore.Types.PassiveStatus // ensure that the panel never takes focus away from the running app
 
-    // filled in by the shell (Panel.qml) with the plasma-workspace PanelView
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
+    Plasmoid.status: PlasmaCore.Types.PassiveStatus // Ensure that the panel never takes focus away from the running app
+
+    // Filled in by the shell (Panel.qml) with the plasma-workspace PanelView
     property var panel: null
     onPanelChanged: setWindowProperties()
 
-    MobileShell.HapticsEffect {
-        id: haptics
+    // Whether the startup feedback is showing
+    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback
+
+    // Whether an app is maximized and showing (does not include startup feedback)
+    readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
+
+    // Whether the currently showing app is in "fullscreen"
+    readonly property bool fullscreen: {
+        if (windowMaximizedTracker.isCurrentWindowFullscreen) {
+            return true;
+        }
+
+        // The "autoHidePanelsEnabled" settings option treats every app as a fullscreen window
+        return (ShellSettings.Settings.autoHidePanelsEnabled && showingApp);
+    }
+    onFullscreenChanged: {
+        MobileShellState.ShellDBusClient.panelState = fullscreen ? "hidden" : "default";
     }
 
-    readonly property real statusPanelHeight: MobileShell.Constants.topPanelHeight
-    readonly property real intendedWindowThickness: statusPanelHeight
+    property WindowPlugin.WindowMaximizedTracker windowMaximizedTracker: WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
 
-    // use a timer so we don't have to maximize for every single pixel
-    // - improves performance if the shell is run in a window, and can be resized
-    Timer {
-        id: maximizeTimer
-        running: false
-        interval: 100
-        onTriggered:  root.panel.maximize()
+        onShowingWindowChanged: {
+            // Hide panel when we open the task switcher and an app is "fullscreen"
+            if (windowMaximizedTracker.showingWindow
+                && MobileShellState.ShellDBusClient.isTaskSwitcherVisible
+                && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen)) {
+                MobileShellState.ShellDBusClient.panelState = "hidden";
+            }
+        }
     }
 
     function setWindowProperties() {
         if (root.panel) {
             root.panel.floating = false;
             root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
-            root.panel.thickness = statusPanelHeight;
+            root.panel.thickness = MobileShell.Constants.topPanelHeight;
             root.panel.visibilityMode = ShellSettings.Settings.autoHidePanelsEnabled ? 3 : 0;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay)
             root.updateTouchArea();
         }
     }
 
-    // update the touch area when hidden to minimize the space the panel takes for touch input
+    // Update the touch area when hidden to minimize the space the panel takes for touch input
     function updateTouchArea() {
         const hiddenTouchAreaThickness = Kirigami.Units.gridUnit;
 
-        if (statusPanel.state == "hidden") {
+        if (MobileShellState.ShellDBusClient.panelState == "hidden") {
             MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(0, 0, root.panel.width, hiddenTouchAreaThickness));
         } else {
             MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(0, 0, 0, 0));
         }
     }
 
-    Connections {
-        target: ShellSettings.Settings
-
-        function onAutoHidePanelsEnabled() {
-            root.setWindowProperties();
-        }
+    // Overlay the panel over the lockscreen when brought up
+    LockscreenOverlay {
+        window: root.Window.window
     }
 
-    // only opaque if there are no maximized windows on this screen
-    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && startupFeedbackColorAnimation.visible && windowMaximizedTracker.windowCount === 1
-    readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
-    readonly property color backgroundColor: topPanel.colorScopeColor
-    readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
-    readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.autoHidePanelsEnabled && showingApp)
-    onFullscreenChanged: {
-        MobileShellState.ShellDBusClient.panelState = fullscreen ? "hidden" : "default";
-    }
-
-    WindowPlugin.WindowMaximizedTracker {
-        id: windowMaximizedTracker
-        screenGeometry: Plasmoid.containment.screenGeometry
-
-        onShowingWindowChanged: {
-            if (windowMaximizedTracker.showingWindow && MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen)) {
-                MobileShellState.ShellDBusClient.panelState = "hidden";
-                statusPanel.offset = -root.statusPanelHeight;
-            }
-        }
-    }
-
-    // enforce thickness
+    // Enforce thickness of panel
     Binding {
         target: panel // assumed to be plasma-workspace "PanelView" component
         property: "thickness"
         value: MobileShell.Constants.topPanelHeight
     }
 
-//BEGIN API implementation
-
     Connections {
-        target: MobileShellState.ShellDBusClient
+        target: ShellSettings.Settings
 
-        function onOpenActionDrawerRequested() {
-            drawer.actionDrawer.open();
-        }
-
-        function onCloseActionDrawerRequested() {
-            drawer.actionDrawer.close();
+        function onAutoHidePanelsEnabledChanged() {
+            root.setWindowProperties();
         }
     }
-
-    Binding {
-        target: MobileShellState.ShellDBusClient
-        property: "isActionDrawerOpen"
-        value: drawer.visible
-    }
-
-//END API implementation
 
     Component.onCompleted: {
         root.setWindowProperties();
     }
 
-    MobileShell.StartupFeedbackPanelFill {
-        id: startupFeedbackColorAnimation
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        fullHeight: root.height
-        screen: Plasmoid.screen
-        maximizedTracker: windowMaximizedTracker
-
-        visible: !root.fullscreen
-    }
-
-    Rectangle {
+    // Visual panel component
+    StatusPanel {
         id: statusPanel
         anchors.fill: parent
-        Kirigami.Theme.colorSet: root.showingApp ? Kirigami.Theme.Header : Kirigami.Theme.Complementary
-        Kirigami.Theme.inherit: false
-
-        color: statusPanel.state == "default" && (root.showingApp || root.fullscreen) ? Kirigami.Theme.backgroundColor : "transparent"
-
-        property real offset: 0
-
-        // top panel component
-        MobileShell.StatusBar {
-            id: topPanel
-            anchors.fill: parent
-
-            showDropShadow: !root.showingApp
-            backgroundColor: statusPanel.state != "default" && root.showingApp ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
-
-            transform: [
-                Translate {
-                    y: statusPanel.offset
-                }
-            ]
-        }
-
-        state: MobileShellState.ShellDBusClient.panelState
-        onStateChanged: {
-            if (statusPanel.state != "hidden") {
-                root.setWindowProperties();
-                hiddenTimer.restart();
-            }
-        }
-
-        Timer {
-            id: hiddenTimer
-            running: false
-            interval: 3000
-            onTriggered: {
-                if (statusPanel.state == "visible") {
-                    MobileShellState.ShellDBusClient.panelState = "hidden";
-                }
-            }
-        }
-
-        states: [
-            State {
-                name: "default"
-                PropertyChanges {
-                    target: statusPanel; offset: 0
-                }
-            },
-            State {
-                name: "visible"
-                PropertyChanges {
-                    target: statusPanel; offset: 0
-                }
-            },
-            State {
-                name: "hidden"
-                PropertyChanges {
-                    target: statusPanel; offset: -root.statusPanelHeight
-                }
-            }
-        ]
-
-        transitions: Transition {
-            SequentialAnimation {
-                ParallelAnimation {
-                    PropertyAnimation {
-                        properties: "offset"; easing.type: statusPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
-                    }
-                }
-                ScriptAction {
-                    script: {
-                        root.setWindowProperties();
-                    }
-                }
-            }
-        }
-    }
-
-    // swiping area for swipe-down drawer
-    MobileShell.ActionDrawerOpenSurface {
-        id: swipeArea
-        actionDrawer: drawer.actionDrawer
-        anchors.fill: parent
-
-        readonly property alias drawerVisible: drawer.visible
-        readonly property alias offset: drawer.actionDrawer.offset
-
-        // if in a fullscreen app, the panels are visible, and the action drawer is opened
-        // set the panels to a hidden state
-        onDrawerVisibleChanged: {
-            if (statusPanel.state == "visible") {
-                MobileShellState.ShellDBusClient.panelState = "hidden";
-            }
-        }
-    }
-
-    // swipe-down drawer component
-    MobileShell.ActionDrawerWindow {
-        id: drawer
-
-        actionDrawer.notificationSettings: NotificationManager.Settings {}
-        actionDrawer.notificationModel: NotificationManager.Notifications {
-            showExpired: true
-            showDismissed: true
-            showJobs: drawer.actionDrawer.notificationSettings.jobsInNotifications
-            sortMode: NotificationManager.Notifications.SortByTypeAndUrgency
-            groupMode: NotificationManager.Notifications.GroupApplicationsFlat
-            groupLimit: 2
-            expandUnread: true
-            blacklistedDesktopEntries: drawer.actionDrawer.notificationSettings.historyBlacklistedApplications
-            blacklistedNotifyRcNames: drawer.actionDrawer.notificationSettings.historyBlacklistedServices
-            urgencies: {
-                var urgencies = NotificationManager.Notifications.CriticalUrgency
-                            | NotificationManager.Notifications.NormalUrgency;
-                if (drawer.actionDrawer.notificationSettings.lowPriorityHistory) {
-                    urgencies |= NotificationManager.Notifications.LowUrgency;
-                }
-                return urgencies;
-            }
-        }
+        containmentItem: root
     }
 }

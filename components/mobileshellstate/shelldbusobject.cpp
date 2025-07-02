@@ -150,3 +150,8 @@ void ShellDBusObject::showVolumeOSD()
 {
     Q_EMIT showVolumeOSDRequested();
 }
+
+void ShellDBusObject::openLockScreenKeypad()
+{
+    Q_EMIT openLockScreenKeypadRequested();
+}
