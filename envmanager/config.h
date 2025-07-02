@@ -13,7 +13,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 
-// applications-blacklistrc
+// .config/applications-blacklistrc
 // NOTE: we only write these entries if they are not already defined in the config
 const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS = {
     {"Applications",
@@ -26,13 +26,20 @@ const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETT
        "waydroid.com.android.inputmethod.latin,waydroid.com.android.settings,waydroid.org.lineageos.eleven,waydroid.org.lineageos.etar,"
        "waydroid.org.lineageos.jelly,waydroid.org.lineageos.recorder,wordview"}}}};
 
-// kdeglobals
-// NOTE: we only write these entries if they are not already defined in the config
+// .config/plasma-mobile/kdeglobals - non-immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_DEFAULT_SETTINGS = {{"General", {{"BrowserApplication", "angelfish"}}}};
 
+// .config/plasma-mobile/kdeglobals - immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_SETTINGS = {{"KDE", {{"LookAndFeelPackage", "org.kde.breeze.mobile"}}}};
 
-// plasma-mobile/kwinrc
+// .config/plasma-mobile/kwinrc - non-immutable settings:
+const QMap<QString, QMap<QString, QVariant>> KWINRC_DEFAULT_SETTINGS = {
+    {"Wayland",
+     {
+         {"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"} // ensure maliit is our default vkbd
+     }}};
+
+// .config/plasma-mobile/kwinrc - immutable settings:
 QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mobileConfig)
 {
     auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
@@ -54,7 +61,6 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
              }},
             {"Wayland",
              {
-                 {"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, // ensure maliit is our vkbd
                  {"VirtualKeyboardEnabled", true} // enable vkbd
              }},
             {"org.kde.kdecoration2",
@@ -73,5 +79,5 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
 const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
 
-// plasma-mobile/ksmserver
+// .config/plasma-mobile/ksmserver - immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};
