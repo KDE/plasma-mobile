@@ -140,11 +140,9 @@ msgid "Wallpaper"
 msgstr "壁纸"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "显示壁纸模糊效果"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:277
 #, kde-format

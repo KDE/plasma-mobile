@@ -47,12 +47,12 @@ msgstr "应用程序"
 #: package/contents/ui/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "主屏幕设置"
 
 #: package/contents/ui/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "主屏幕"
 
 #: package/contents/ui/settings/SettingsWindow.qml:92
 #, kde-format
@@ -80,13 +80,13 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "双击锁定设备"
 
 #: package/contents/ui/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "切换主屏幕和更多壁纸选项"
 
 #: plugin/pinnedmodel.cpp:151
 #, kde-format
