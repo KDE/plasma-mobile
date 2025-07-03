@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:07+0000\n"
-"PO-Revision-Date: 2025-04-26 12:12+0400\n"
+"PO-Revision-Date: 2025-07-03 09:54+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -60,14 +60,14 @@ msgstr ""
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "طرق مزدوج للاستيقاظ"
 
 #: ui/main.qml:70
 #, kde-format
 msgid ""
 "When active, it allow to wakeup the device just with double tap when the "
 "screen is off."
-msgstr ""
+msgstr "عند تنشيطه، يسمح بإيقاظ الجهاز بطرق مزدوج فقط عندما تكون الشاشة مغلقة."
 
 #: ui/main.qml:81
 #, kde-format
