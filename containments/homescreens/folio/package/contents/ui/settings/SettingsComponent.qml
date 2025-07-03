@@ -21,7 +21,7 @@ Item {
     property var homeScreen
     property real settingsModeHomeScreenScale
 
-    readonly property bool homeScreenInteractive: !appletListViewer.open
+    readonly property bool homeScreenInteractive: !appletListViewerLoader.active
 
     property real bottomMargin: 0
     property real leftMargin: 0
@@ -33,7 +33,7 @@ Item {
         // Close applet viewer when settings view closes
         function onViewStateChanged() {
             if (folio.HomeScreenState.viewState !== Folio.HomeScreenState.SettingsView) {
-                appletListViewer.requestClose();
+                appletListViewerLoader.requestClose();
             }
         }
     }
@@ -142,7 +142,7 @@ Item {
                 }
 
                 onClicked: {
-                    appletListViewer.open = true;
+                    appletListViewerLoader.active = true;
                 }
             }
         }
@@ -215,27 +215,50 @@ Item {
         }
     ]
 
-    AppletListViewer {
-        id: appletListViewer
-        folio: root.folio
+    Loader {
+        id: appletListViewerLoader
+        asynchronous: true
+        active: false
+
+        signal requestClose()
+        onRequestClose: item?.requestClose()
+
         width: parent.width
         height: parent.height
 
-        property bool open: false
-        onRequestClose: open = false
-
-        opacity: open ? 1 : 0
-
+        opacity: status == Loader.Ready ? 1 : 0
         // move the settings out of the way if it is not visible
         // NOTE: we do this instead of setting visible to false, because
         //       it doesn't mess with widget drag and drop
-        y: (opacity === 0) ? appletListViewer.height : 0
-
-        homeScreen: root.homeScreen
+        y: (opacity > 0) ? 0 : parent.height
 
         Behavior on opacity {
             NumberAnimation { duration: Kirigami.Units.shortDuration }
         }
+        
+        sourceComponent: AppletListViewer {
+            id: appletListViewer
+            folio: root.folio
+
+            width: parent.width
+            height: parent.height
+
+            onRequestClose: parent.active = false
+
+            homeScreen: root.homeScreen
+        }
+    }
+
+    PC3.BusyIndicator {
+        id: appletListLoadingIndicator
+        anchors.centerIn: parent
+        visible: appletListViewerLoader.status === Loader.Loading
+
+        implicitHeight: Kirigami.Units.iconSizes.huge
+        implicitWidth: Kirigami.Units.iconSizes.huge
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     }
 
     SettingsWindow {
