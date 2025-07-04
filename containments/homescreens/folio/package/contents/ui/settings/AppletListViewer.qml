@@ -121,6 +121,10 @@ MouseArea {
             readonly property string pluginName: model.pluginName
 
             onPressAndHold: {
+                if (!model.isSupported) {
+                    return
+                }
+
                 root.requestClose();
                 folio.HomeScreenState.closeSettingsView();
                 haptics.buttonVibrate();
@@ -193,7 +197,7 @@ MouseArea {
                     Layout.alignment: Qt.AlignTop
                     // otherwise causes binding loop due to the way the Plasma sets the height
                     height: implicitHeight
-                    text: model.description
+                    text: model.isSupported ? model.description : model.unsupportedMessage
                     font.pointSize: Kirigami.Theme.smallFont.pointSize
                     wrapMode: Text.Wrap
                     elide: Text.ElideRight
