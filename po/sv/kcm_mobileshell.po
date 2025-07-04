@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:07+0000\n"
-"PO-Revision-Date: 2025-05-31 12:48+0200\n"
+"PO-Revision-Date: 2025-07-03 15:55+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -59,7 +59,7 @@ msgstr ""
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "Dubbeltryck för att vakna"
 
 #: ui/main.qml:70
 #, kde-format
@@ -67,6 +67,8 @@ msgid ""
 "When active, it allow to wakeup the device just with double tap when the "
 "screen is off."
 msgstr ""
+"När det är aktivt, kan apparaten väckas med ett dubbeltryck när skärmen är "
+"av."
 
 #: ui/main.qml:81
 #, kde-format
