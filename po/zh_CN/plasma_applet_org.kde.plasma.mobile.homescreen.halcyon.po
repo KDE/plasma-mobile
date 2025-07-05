@@ -57,25 +57,25 @@ msgstr "主屏幕"
 #: package/contents/ui/settings/SettingsWindow.qml:92
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "壁纸模糊效果"
 
 #: package/contents/ui/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: package/contents/ui/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "简单"
 
 #: package/contents/ui/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "完全"
 
 #: package/contents/ui/settings/SettingsWindow.qml:114
 #, kde-format
