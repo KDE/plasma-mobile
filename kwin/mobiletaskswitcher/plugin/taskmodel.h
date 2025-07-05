@@ -10,6 +10,7 @@
 #include <QHash>
 #include <QSortFilterProxyModel>
 #include <QVariant>
+#include <qqmlregistration.h>
 
 namespace KWin
 {
@@ -17,6 +18,8 @@ namespace KWin
 class TaskModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     enum Roles {
