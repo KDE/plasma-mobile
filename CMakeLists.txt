@@ -119,6 +119,12 @@ set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus inter
     PURPOSE "Needed for virtual keyboard toggle button"
 )
 
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS Auth)
+set_package_properties(KF6::AuthCore PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "Allows Plasma Mobile to configure Waydroid"
+)
+
 include(CheckIncludeFiles)
 
 ecm_find_qmlmodule(org.kde.pipewire 0.1)

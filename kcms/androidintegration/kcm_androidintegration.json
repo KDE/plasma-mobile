@@ -1,0 +1,25 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "florian.richer@protonmail.com",
+                "Name": "Florian RICHER"
+            }
+        ],
+        "Category": "Android Integration",
+        "Description": "Configure the system shell",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop",
+            "handset",
+            "tablet",
+            "mediacenter"
+        ],
+        "Icon": "preferences-desktop-plasma",
+        "License": "GPL",
+        "Name": "Android Integration",
+        "Website": "https://plasma-mobile.org/"
+    },
+    "X-KDE-Keywords": "system,shell,panel",
+    "X-KDE-System-Settings-Parent-Category": "personalization"
+}
