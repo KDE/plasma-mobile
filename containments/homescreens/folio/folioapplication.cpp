@@ -33,8 +33,8 @@ FolioApplication::FolioApplication(KService::Ptr service, const QStringList &cat
 , m_categories{categories}
 , m_service{service}
 {
-    if (service && service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
-        m_name = service->genericName();
+    if (service && !service->property<QString>(QStringLiteral("X-KDE-PlasmaMobileName")).isEmpty()) {
+        m_name = service->property<QString>(QStringLiteral("X-KDE-PlasmaMobileName"));
     }
 
     auto windows = WindowListener::instance()->windowsFromStorageId(m_storageId);
