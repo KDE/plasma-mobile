@@ -16,8 +16,8 @@ FolioApplication::FolioApplication(HomeScreen *parent, KService::Ptr service)
     , m_icon{service->icon()}
     , m_storageId{service->storageId()}
 {
-    if (service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
-        m_name = service->genericName();
+    if (!service->property<QString>(QStringLiteral("X-KDE-PlasmaMobileName")).isEmpty()) {
+        m_name = service->property<QString>(QStringLiteral("X-KDE-PlasmaMobileName"));
     }
 
     auto windows = WindowListener::instance()->windowsFromStorageId(m_storageId);
