@@ -12,6 +12,7 @@ plasma_install_package(autohidepanels org.kde.plasma.quicksetting.autohidepanels
 plasma_install_package(keyboardtoggle org.kde.plasma.quicksetting.keyboardtoggle quicksettings)
 plasma_install_package(mobiledata org.kde.plasma.quicksetting.mobiledata quicksettings)
 plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quicksettings)
+plasma_install_package(waydroid org.kde.plasma.quicksetting.waydroid quicksettings)
 plasma_install_package(wifi org.kde.plasma.quicksetting.wifi quicksettings)
 plasma_install_package(hotspot org.kde.plasma.quicksetting.hotspot quicksettings)
 add_subdirectory(flashlight)

@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "florian.richer@protonmail.com",
+                "Name": "Florian RICHER"
+            }
+        ],
+        "Description": "Waydroid quick setting for Plasma Mobile",
+        "Icon": "folder-android-symbolic",
+        "Id": "org.kde.plasma.quicksetting.waydroid",
+        "License": "GPL-2.0+",
+        "Name": "Waydroid",
+        "Website": "https://kde.org"
+    }
+}
