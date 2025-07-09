@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:07+0000\n"
-"PO-Revision-Date: 2025-04-23 11:45+0200\n"
+"PO-Revision-Date: 2025-07-03 11:03+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -60,7 +60,7 @@ msgstr ""
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "Appuyez deux fois pour se réveiller"
 
 #: ui/main.qml:70
 #, kde-format
@@ -68,6 +68,8 @@ msgid ""
 "When active, it allow to wakeup the device just with double tap when the "
 "screen is off."
 msgstr ""
+"Lorsqu'il est actif, il permet de réveiller le périphérique en appuyant deux "
+"fois lorsque l'écran est éteint."
 
 #: ui/main.qml:81
 #, kde-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"POT-Creation-Date: 2025-07-09 00:45+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -39,10 +39,22 @@ msgstr "अनुप्रयोगाः अन्वेषणं कुर्�
 msgid "Remove"
 msgstr "अपाकरोति"
 
-#: package/contents/ui/settings/AppletListViewer.qml:62
+#: package/contents/ui/settings/AppletListViewer.qml:75
 #, kde-format
 msgid "Widgets"
 msgstr "विजेट्"
+
+#: package/contents/ui/settings/AppletListViewer.qml:84
+#, kde-format
+msgctxt "@action:button The word 'new' refers to widgets"
+msgid "Get New Widgets…"
+msgstr ""
+
+#: package/contents/ui/settings/AppletListViewer.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Widgets…"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format

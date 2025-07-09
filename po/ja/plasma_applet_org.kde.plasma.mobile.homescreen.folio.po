@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"POT-Creation-Date: 2025-07-09 00:45+0000\n"
 "PO-Revision-Date: 2016-10-07 23:55-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -35,9 +35,21 @@ msgstr "アプリケーション"
 msgid "Remove"
 msgstr "取り除く"
 
-#: package/contents/ui/settings/AppletListViewer.qml:62
+#: package/contents/ui/settings/AppletListViewer.qml:75
 #, kde-format
 msgid "Widgets"
+msgstr ""
+
+#: package/contents/ui/settings/AppletListViewer.qml:84
+#, kde-format
+msgctxt "@action:button The word 'new' refers to widgets"
+msgid "Get New Widgets…"
+msgstr ""
+
+#: package/contents/ui/settings/AppletListViewer.qml:85
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Widgets…"
 msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
