@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
@@ -130,8 +132,8 @@ MouseArea {
     transform: Scale {
         origin.x: root.width / 2
         origin.y: root.height / 2
-        xScale: taskSwitcherHelpers.currentScale
-        yScale: taskSwitcherHelpers.currentScale
+        xScale: root.taskSwitcherHelpers.currentScale
+        yScale: root.taskSwitcherHelpers.currentScale
     }
 
     onClicked: {
@@ -149,18 +151,18 @@ MouseArea {
 
     Repeater {
         id: repeater
-        model: taskSwitcher.tasksModel
+        model: root.taskSwitcher.tasksModel
 
         // left margin from root edge such that the task is centered
-        readonly property real leftMargin: (root.width / 2) - (taskSwitcherHelpers.taskWidth / 2)
+        readonly property real leftMargin: (root.width / 2) - (root.taskSwitcherHelpers.taskWidth / 2)
 
         delegate: Task {
             id: task
             readonly property int currentIndex: model.index
-            readonly property bool isCurrentTask: currentIndex == taskSwitcherHelpers.currentDisplayTask
+            readonly property bool isCurrentTask: currentIndex == root.taskSwitcherHelpers.currentDisplayTask
 
             // this is the x-position with respect to the list
-            property real listX: taskSwitcherHelpers.xPositionFromTaskIndex(currentIndex)
+            property real listX: root.taskSwitcherHelpers.xPositionFromTaskIndex(currentIndex)
             Behavior on listX {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
@@ -169,71 +171,71 @@ MouseArea {
             }
 
             // the animated task offset value (always will be 0 if it is the current task in the task drawer)
-            property real taskOffsetNormalized: (baseTaskOffset * ((taskSwitcherHelpers.taskDrawerOpened && isCurrentTask) ? 0 : 1))
+            property real taskOffsetNormalized: (root.baseTaskOffset * ((root.taskSwitcherHelpers.taskDrawerOpened && isCurrentTask) ? 0 : 1))
             Behavior on taskOffsetNormalized {
                 NumberAnimation {
-                    duration: taskSwitcherHelpers.currentDisplayTask > currentIndex ? taskOffsetDurationRight : taskOffsetDurationLeft
-                    easing.type: taskOffsetEasing
+                    duration: root.taskSwitcherHelpers.currentDisplayTask > task.currentIndex ? root.taskOffsetDurationRight : root.taskOffsetDurationLeft
+                    easing.type: root.taskOffsetEasing
                     easing.overshoot: 0.85
                 }
             }
 
             // calculate which direction to offset
-            readonly property real offsetDir: (taskSwitcherHelpers.currentDisplayTask > currentIndex ? -1 : 1)
+            readonly property real offsetDir: (root.taskSwitcherHelpers.currentDisplayTask > currentIndex ? -1 : 1)
 
             // check if this task should be offset
             readonly property real isOffScreenOffset: {
-                let isOffsetBase = ((!taskSwitcherState.wasInActiveTask && !taskSwitcherHelpers.taskDrawerOpened) || !isCurrentTask) ? (taskSwitcherHelpers.isInTaskScrubMode && taskSwitcherHelpers.notHomeScreenState ? 0 : 1) : 0
-                let isOffsetTaskDrawer = (currentIndex == taskSwitcherHelpers.currentDisplayTask ? 0 : 1)
-                return taskSwitcherHelpers.taskDrawerOpened ? isOffsetTaskDrawer : isOffsetBase
+                let isOffsetBase = ((!root.taskSwitcherState.wasInActiveTask && !root.taskSwitcherHelpers.taskDrawerOpened) || !isCurrentTask) ? (root.taskSwitcherHelpers.isInTaskScrubMode && root.taskSwitcherHelpers.notHomeScreenState ? 0 : 1) : 0
+                let isOffsetTaskDrawer = (currentIndex == root.taskSwitcherHelpers.currentDisplayTask ? 0 : 1)
+                return root.taskSwitcherHelpers.taskDrawerOpened ? isOffsetTaskDrawer : isOffsetBase
             }
 
             // how far the task needs to travel to be off screen
-            readonly property real scrollXOffset: Math.abs(taskSwitcherHelpers.xPositionFromTaskIndex(taskSwitcherHelpers.currentDisplayTask) - (taskSwitcherState.xPosition + (taskSwitcherState.touchXPosition / taskSwitcherHelpers.currentScale)))
-            readonly property real offScreenOffset: (taskSwitcherHelpers.windowWidth * (((taskSwitcherHelpers.notHomeScreenState ? taskSwitcherState.touchXPosition : 0) * offsetDir * ((homeTouchPositionX == 0) ? 1 : 0) + (taskSwitcherHelpers.windowWidth / 2)) / taskSwitcherHelpers.windowWidth));
+            readonly property real scrollXOffset: Math.abs(root.taskSwitcherHelpers.xPositionFromTaskIndex(root.taskSwitcherHelpers.currentDisplayTask) - (root.taskSwitcherState.xPosition + (root.taskSwitcherState.touchXPosition / root.taskSwitcherHelpers.currentScale)))
+            readonly property real offScreenOffset: (root.taskSwitcherHelpers.windowWidth * (((root.taskSwitcherHelpers.notHomeScreenState ? root.taskSwitcherState.touchXPosition : 0) * offsetDir * ((root.homeTouchPositionX == 0) ? 1 : 0) + (root.taskSwitcherHelpers.windowWidth / 2)) / root.taskSwitcherHelpers.windowWidth));
 
 
             // calculate the actual task offset
-            readonly property real taskOffset: ((offScreenOffset + (taskSwitcherHelpers.notHomeScreenState ? scrollXOffset : 0)) / taskSwitcherHelpers.currentScale - (homeTouchPositionX * (1 - Math.max(0, Math.min(1, (taskOffsetNormalized - taskSwitcherHelpers.peekOffsetValue) / (taskSwitcherHelpers.homeOffsetValue - taskSwitcherHelpers.peekOffsetValue)))))) * taskOffsetNormalized * isOffScreenOffset * offsetDir
+            readonly property real taskOffset: ((offScreenOffset + (root.taskSwitcherHelpers.notHomeScreenState ? scrollXOffset : 0)) / root.taskSwitcherHelpers.currentScale - (root.homeTouchPositionX * (1 - Math.max(0, Math.min(1, (taskOffsetNormalized - root.taskSwitcherHelpers.peekOffsetValue) / (root.taskSwitcherHelpers.homeOffsetValue - root.taskSwitcherHelpers.peekOffsetValue)))))) * taskOffsetNormalized * isOffScreenOffset * offsetDir
 
             // extra resistance calculated for non-current task in the task drawer
-            readonly property real nonCurrentScaleResistance: ((isCurrentTask && taskSwitcherHelpers.notHomeScreenState) || taskSwitcherHelpers.fromButton) ? 0 : 1 - Math.min(taskSwitcherHelpers.currentScale, 1)
-            readonly property real nonCurrentScaleXOffset: (isCurrentTask && taskSwitcherHelpers.notHomeScreenState) ? 0 : ((taskSwitcherHelpers.taskWidth) * (scale - 1) * (currentIndex - taskSwitcherHelpers.currentDisplayTask))
-            readonly property real nonCurrentXPositionResistance: (isCurrentTask && taskSwitcherHelpers.notHomeScreenState) ? 0 : (taskSwitcherHelpers.taskWidth * (scale - 1)) * (taskSwitcherHelpers.notHomeScreenState ? 0.25 : 1.0) * offsetDir
-            readonly property real nonCurrentYPositionResistance: (isCurrentTask && taskSwitcherHelpers.notHomeScreenState) ? 0 : ((taskSwitcher.height / 2)) * nonCurrentScaleResistance
+            readonly property real nonCurrentScaleResistance: ((isCurrentTask && root.taskSwitcherHelpers.notHomeScreenState) || root.taskSwitcherHelpers.fromButton) ? 0 : 1 - Math.min(root.taskSwitcherHelpers.currentScale, 1)
+            readonly property real nonCurrentScaleXOffset: (isCurrentTask && root.taskSwitcherHelpers.notHomeScreenState) ? 0 : ((root.taskSwitcherHelpers.taskWidth) * (scale - 1) * (currentIndex - root.taskSwitcherHelpers.currentDisplayTask))
+            readonly property real nonCurrentXPositionResistance: (isCurrentTask && root.taskSwitcherHelpers.notHomeScreenState) ? 0 : (root.taskSwitcherHelpers.taskWidth * (scale - 1)) * (root.taskSwitcherHelpers.notHomeScreenState ? 0.25 : 1.0) * offsetDir
+            readonly property real nonCurrentYPositionResistance: (isCurrentTask && root.taskSwitcherHelpers.notHomeScreenState) ? 0 : ((taskSwitcher.height / 2)) * nonCurrentScaleResistance
 
             // this is the actual displayed x-position on screen
-            x: listX + repeater.leftMargin - taskSwitcherState.xPosition - taskOffset - nonCurrentScaleXOffset + nonCurrentXPositionResistance
-            y: ((taskSwitcherState.wasInActiveTask || taskSwitcherHelpers.taskDrawerOpened) ? root.taskY + nonCurrentYPositionResistance * 0.5: root.taskY / (taskSwitcherHelpers.fromButton ? 1 : (1 + taskOffsetNormalized * 0.075))) // add more resistance when not the current task
+            x: listX + repeater.leftMargin - root.taskSwitcherState.xPosition - taskOffset - nonCurrentScaleXOffset + nonCurrentXPositionResistance
+            y: ((root.taskSwitcherState.wasInActiveTask || root.taskSwitcherHelpers.taskDrawerOpened) ? root.taskY + nonCurrentYPositionResistance * 0.5: root.taskY / (root.taskSwitcherHelpers.fromButton ? 1 : (1 + taskOffsetNormalized * 0.075))) // add more resistance when not the current task
 
-            scale: ((isCurrentTask && taskSwitcherHelpers.notHomeScreenState) || taskSwitcherHelpers.fromButton) ? 1 : (1 + nonCurrentScaleResistance) * (1 + taskOffsetNormalized * 0.075) // add more resistance when not the current task and resist even further if the task is offset
+            scale: ((isCurrentTask && root.taskSwitcherHelpers.notHomeScreenState) || root.taskSwitcherHelpers.fromButton) ? 1 : (1 + nonCurrentScaleResistance) * (1 + taskOffsetNormalized * 0.075) // add more resistance when not the current task and resist even further if the task is offset
 
             // ensure current task is above others
             z: isCurrentTask ? 1 : 0
 
             // only show header once task switcher is opened
-            showHeader: !taskSwitcherState.gestureInProgress && !taskSwitcherHelpers.currentlyBeingClosed && !taskSwitcherHelpers.isInTaskScrubMode
+            showHeader: !root.taskSwitcherState.gestureInProgress && !root.taskSwitcherHelpers.currentlyBeingClosed && !root.taskSwitcherHelpers.isInTaskScrubMode
 
             // darken effect as task gets away from the center of the screen
             darken: {
-                const distFromCentreProgress = Math.abs(x - repeater.leftMargin - (taskSwitcherHelpers.currentlyBeingOpened || taskSwitcherHelpers.currentlyBeingClosed ? (taskSwitcherHelpers.xPositionFromTaskIndex(taskSwitcherHelpers.currentDisplayTask)) - taskSwitcherState.xPosition : 0)) / taskSwitcherHelpers.taskWidth;
+                const distFromCentreProgress = Math.abs(x - repeater.leftMargin - (root.taskSwitcherHelpers.currentlyBeingOpened || root.taskSwitcherHelpers.currentlyBeingClosed ? (root.taskSwitcherHelpers.xPositionFromTaskIndex(root.taskSwitcherHelpers.currentDisplayTask)) - root.taskSwitcherState.xPosition : 0)) / root.taskSwitcherHelpers.taskWidth;
                 const upperBoundAdjust = Math.min(0.25, distFromCentreProgress) - 0.2;
                 return Math.max(0, upperBoundAdjust);
             }
 
             // fade out as the task closes
-            opacity: taskSwitcherHelpers.closingFactor
+            opacity: root.taskSwitcherHelpers.closingFactor
 
             // update count of tasks being interacted with, so we know whether we are in a swipe up action
             onInteractingActiveChanged: {
                 let offset = interactingActive ? 1 : -1;
-                taskInteractingCount = Math.max(0, taskInteractingCount + offset);
+                root.taskInteractingCount = Math.max(0, root.taskInteractingCount + offset);
             }
 
-            width: taskSwitcherHelpers.taskWidth
-            height: taskSwitcherHelpers.taskHeight
-            previewWidth: taskSwitcherHelpers.previewWidth
-            previewHeight: taskSwitcherHelpers.previewHeight
+            width: root.taskSwitcherHelpers.taskWidth
+            height: root.taskSwitcherHelpers.taskHeight
+            previewWidth: root.taskSwitcherHelpers.previewWidth
+            previewHeight: root.taskSwitcherHelpers.previewHeight
 
             taskSwitcher: root.taskSwitcher
         }

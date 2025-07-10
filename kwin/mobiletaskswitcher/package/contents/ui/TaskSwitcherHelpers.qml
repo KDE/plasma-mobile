@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2024-2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+pragma ComponentBehavior: Bound
+
 import QtQuick 2.15
 
 import org.kde.kirigami 2.20 as Kirigami
@@ -107,7 +109,7 @@ QtObject {
 
     // finger position y with resistance
     readonly property real trackFingerYOffset: {
-        if (taskSwitcherHelpers.isScaleClamped) {
+        if (isScaleClamped) {
             let directTrackingOffset = openedYPosition * 0.2
             if (root.state.yPosition < openedYPosition + directTrackingOffset) {
                 // Allow the task list to move further up than the fully opened position
@@ -298,19 +300,19 @@ QtObject {
     property var xAnim: NumberAnimation {
         target: root.state
         property: "xPosition"
-        duration: xAnimDuration
-        easing.type: xAnimEasingType
+        duration: root.xAnimDuration
+        easing.type: root.xAnimEasingType
     }
 
     property var openAnim: NumberAnimation {
         target: root.state
         property: "yPosition"
-        to: openedYPosition
+        to: root.openedYPosition
         duration: 250
         easing.type: Easing.OutQuart
 
         onFinished: {
-            if (!isInTaskScrubMode) {
+            if (!root.isInTaskScrubMode) {
                 root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Active;
             }
         }
@@ -328,7 +330,7 @@ QtObject {
 
         onFinished: {
             root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive;
-            taskSwitcher.instantHide();
+            root.taskSwitcher.instantHide();
         }
     }
 
@@ -340,7 +342,7 @@ QtObject {
         easing.type: Easing.InQuad
 
         onStopped: {
-            closingScalingFactor = 1;
+            root.closingScalingFactor = 1;
         }
     }
 
@@ -360,7 +362,7 @@ QtObject {
         easing.type: Easing.OutQuint
         onFinished: {
             root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive;
-            taskSwitcher.instantHide();
+            root.taskSwitcher.instantHide();
         }
     }
 }

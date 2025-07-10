@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: 2024-2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
@@ -17,6 +19,7 @@ Item {
     id: delegate
 
     required property var taskSwitcher
+    property var taskSwitcherHelpers: taskSwitcher.taskSwitcherHelpers
 
     required property QtObject window
 
@@ -49,7 +52,7 @@ Item {
         if (!ShellSettings.Settings.convergenceModeEnabled) {
             delegate.window.setMaximize(true, true);
         }
-        taskSwitcherHelpers.openApp(model.index);
+        delegate.taskSwitcherHelpers.openApp(model.index);
     }
 
     function minimizeApp(): void {
@@ -59,8 +62,8 @@ Item {
 
     MouseArea {
         id: control
-        width: parent.width
-        height: parent.height
+        width: delegate.width
+        height: delegate.height
 
         // set cursor shape here, since taphandler seems to not be able to do it
         cursorShape: Qt.PointingHandCursor
@@ -117,7 +120,7 @@ Item {
             // run animation when finger lets go
             if (!pressed) {
                 if (control.movingUp && control.y < -Kirigami.Units.gridUnit * 2) {
-                    yAnimator.to = -root.height;
+                    yAnimator.to = -control.height;
                 } else {
                     yAnimator.to = 0;
                 }
@@ -143,7 +146,7 @@ Item {
             to: 0
             onFinished: {
                 if (to != 0) { // close app
-                    taskSwitcherHelpers.lastClosedTask = currentIndex;
+                    delegate.taskSwitcherHelpers.lastClosedTask = delegate.currentIndex;
                     delegate.closeApp();
                     uncloseTimer.start();
                 }
@@ -153,7 +156,7 @@ Item {
         // application
         ColumnLayout {
             id: column
-            anchors.fill: parent
+            anchors.fill: control
             spacing: 0
 
             // header
@@ -195,7 +198,7 @@ Item {
                     icon.width: Kirigami.Units.iconSizes.smallMedium
                     icon.height: Kirigami.Units.iconSizes.smallMedium
                     onClicked: {
-                        taskSwitcherHelpers.lastClosedTask = currentIndex;
+                        delegate.taskSwitcherHelpers.lastClosedTask = delegate.currentIndex;
                         delegate.closeApp()
                     }
                 }
@@ -204,10 +207,10 @@ Item {
             // app preview
             Rectangle {
                 id: appView
-                Layout.preferredWidth: taskSwitcherHelpers.previewWidth
-                Layout.preferredHeight: taskSwitcherHelpers.previewHeight
-                Layout.maximumWidth: taskSwitcherHelpers.previewWidth
-                Layout.maximumHeight: taskSwitcherHelpers.previewHeight
+                Layout.preferredWidth: delegate.taskSwitcherHelpers.previewWidth
+                Layout.preferredHeight: delegate.taskSwitcherHelpers.previewHeight
+                Layout.maximumWidth: delegate.taskSwitcherHelpers.previewWidth
+                Layout.maximumHeight: delegate.taskSwitcherHelpers.previewHeight
 
                 radius: Kirigami.Units.largeSpacing
                 color: Qt.rgba(0, 0, 0, 0.2)
@@ -231,12 +234,12 @@ Item {
 
                 Item {
                     id: item
-                    anchors.fill: parent
+                    anchors.fill: appView
 
                     KWinComponents.WindowThumbnail {
                         id: thumbSource
                         wId: delegate.window.internalId
-                        anchors.fill: parent
+                        anchors.fill: item
 
                         layer.enabled: true
                         layer.effect: ColorOverlay {

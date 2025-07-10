@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2025 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 
 Flickable {
@@ -12,6 +14,7 @@ Flickable {
 
     required property var taskSwitcherState
     required property var taskSwitcherHelpers
+    required property int tasksCount
 
     // we use flickable solely for capturing flicks, not positioning elements
     // the horizontal distance we can swipe in one flick
