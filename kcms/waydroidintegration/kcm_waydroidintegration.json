@@ -1,0 +1,25 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "florian.richer@protonmail.com",
+                "Name": "Florian RICHER"
+            }
+        ],
+        "Category": "Waydroid Integration",
+        "Description": "Waydroid configuration",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "desktop",
+            "handset",
+            "tablet",
+            "mediacenter"
+        ],
+        "Icon": "folder-android-symbolic",
+        "License": "GPL",
+        "Name": "Waydroid Integration",
+        "Website": "https://plasma-mobile.org/"
+    },
+    "X-KDE-Keywords": "waydroid",
+    "X-KDE-System-Settings-Parent-Category": "system-administration"
+}

@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2025 Florian RICHER <florian.richer@protonmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+[Domain]
+Name=Waydroid Management
+Icon=color
+
+[org.kde.plasma.mobileshell.waydroidhelper.initialize]
+Name=Initialize Waydroid
+Description=Allow initialization of Waydroid
+Policy=yes
+PolicyInactive=yes
+Persistence=session
