@@ -24,6 +24,7 @@ ColumnLayout {
             text: i18n("IP address")
             description: AIP.WaydroidState.ipAddress
             trailing: PC3.Button {
+                visible: AIP.WaydroidState.ipAddress !== ""
                 text: i18n('Copy')
                 icon.name: 'edit-copy-symbolic'
                 onClicked: AIP.WaydroidState.copyToClipboard(AIP.WaydroidState.ipAddress)
@@ -38,6 +39,12 @@ ColumnLayout {
                 text: i18n("Stop session")
                 onClicked: AIP.WaydroidState.stopSession()
             }
+        }
+
+        FormCard.FormButtonDelegate {
+            id: quickSettingsButton
+            text: i18n("Certify my device for Google Play Protect")
+            onClicked: kcm.push("WaydroidGooglePlayProtectConfigurationPage.qml")
         }
     }
 

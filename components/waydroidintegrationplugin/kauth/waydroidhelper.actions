@@ -38,3 +38,10 @@ Description[x-test]=xxAllow initialization of Waydroidxx
 Policy=yes
 PolicyInactive=yes
 Persistence=session
+
+[org.kde.plasma.mobileshell.waydroidhelper.getandroidid]
+Name=Fetch Android ID for Google Services
+Description=Allow get Android ID of Waydroid container to activate Google services
+Policy=yes
+PolicyInactive=yes
+Persistence=session
