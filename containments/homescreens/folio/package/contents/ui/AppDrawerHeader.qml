@@ -18,8 +18,29 @@ Item {
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     Kirigami.Theme.inherit: false
 
+    function addSearchText(text: string) {
+        searchField.text += text;
+    }
+
     function clearSearchText(): void {
         searchField.text = '';
+    }
+
+    // Request to not focus on the search bar
+    signal releaseFocusRequested()
+
+    onFocusChanged: {
+        if (focus) {
+            searchField.focus = true;
+        }
+    }
+
+    // Keyboard navigation
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_Escape || event.key === Qt.Key_Back) {
+            root.releaseFocusRequested();
+            event.accepted = true;
+        }
     }
 
     RowLayout {

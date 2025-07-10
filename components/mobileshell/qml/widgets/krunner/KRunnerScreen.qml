@@ -72,7 +72,21 @@ MouseArea {
 
             font.weight: Font.Bold
 
-            KeyNavigation.down: listView
+            // Keyboard navigation
+            Keys.onPressed: (event) => {
+                if (event.key === Qt.Key_Down) {
+                    if (listView.count === 0) {
+                        // Close if listview has no elements
+                        root.requestedClose();
+                    } else {
+                        // Focus on listview if there are elements
+                        listView.forceActiveFocus();
+                        listView.currentIndex = 0;
+                    }
+                    event.accepted = true;
+                }
+            }
+
         }
 
         QQC2.ScrollView {

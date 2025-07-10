@@ -437,16 +437,37 @@ Item {
             y: (opacity > 0) ? animationY : parent.height
 
             headerHeight: Math.round(Kirigami.Units.gridUnit * 4)
-            headerItem: AppDrawerHeader { folio: root.folio }
+            headerItem: AppDrawerHeader {
+                id: appDrawerHeader
+                folio: root.folio
 
-            // account for panels
+                onReleaseFocusRequested: appDrawer.forceActiveFocus()
+            }
+
+            // Account for panels
             topPadding: root.topMargin
             bottomPadding: root.bottomMargin
             leftPadding: root.leftMargin
             rightPadding: root.rightMargin
 
+            // Forward keyboard text to the search bar
+            Keys.onPressed: (event) => {
+                if (event.text.trim().length > 0) {
+                    appDrawerHeader.addSearchText(event.text);
+                    appDrawerHeader.forceActiveFocus();
+                    event.accepted = true;
+                } else if (event.key === Qt.Key_Left || event.key === Qt.Key_Right || event.key === Qt.Key_Up || event.key === Qt.Key_Down) {
+                    appDrawerHeader.forceActiveFocus();
+                    event.accepted = true;
+                }
+            }
+
             Connections {
                 target: folio.HomeScreenState
+
+                function onAppDrawerOpened() {
+                    appDrawer.forceActiveFocus();
+                }
 
                 function onAppDrawerClosed() {
                     // reset app drawer position when closed
