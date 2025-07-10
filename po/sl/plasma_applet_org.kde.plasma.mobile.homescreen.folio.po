@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-09 00:45+0000\n"
-"PO-Revision-Date: 2025-06-28 08:21+0200\n"
+"PO-Revision-Date: 2025-07-09 07:15+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -48,13 +48,13 @@ msgstr "Gradniki"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Dobi nove gradnike…"
 
 #: package/contents/ui/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Dobi nove gradnike…"
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format

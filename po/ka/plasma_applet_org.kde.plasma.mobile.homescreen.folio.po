@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-09 00:45+0000\n"
-"PO-Revision-Date: 2025-06-28 03:51+0200\n"
+"PO-Revision-Date: 2025-07-09 05:27+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -47,13 +47,13 @@ msgstr "ვიჯეტები"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "ახალი ვიჯეტების მიღება…"
 
 #: package/contents/ui/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "ახალი ვიჯეტების მიღება…"
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format
