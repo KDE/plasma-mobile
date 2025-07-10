@@ -57,6 +57,13 @@ Item {
         Plasmoid.editMode = false;
     }
 
+    // Pass focus to swipe view child
+    onFocusChanged: {
+        if (focus) {
+            swipeView.focusChild();
+        }
+    }
+
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
         screenGeometry: Plasmoid.containment.screenGeometry

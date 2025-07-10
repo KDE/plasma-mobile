@@ -136,17 +136,17 @@ ContainmentItem {
             }
 
             // search component
-            MobileShell.KRunnerWidget {
+            SearchWidget {
                 id: search
                 anchors.fill: parent
                 visible: openFactor > 0
 
-                onActionTriggered: search.close()
+                topPadding: homeScreen.topMargin
+                bottomPadding: homeScreen.bottomMargin
+                leftPadding: homeScreen.leftMargin
+                rightPadding: homeScreen.rightMargin
 
-                topMargin: homeScreen.topMargin
-                bottomMargin: homeScreen.bottomMargin
-                leftMargin: homeScreen.leftMargin
-                rightMargin: homeScreen.rightMargin
+                onReleaseFocusRequested: halcyonHomeScreen.forceActiveFocus()
             }
         }
     }
