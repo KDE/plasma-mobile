@@ -86,13 +86,13 @@ MobileShell.NavigationPanel {
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
 
-        enabled: Keyboards.KWinVirtualKeyboard.active || WindowPlugin.WindowUtil.hasCloseableActiveWindow
-        iconSource: Keyboards.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
+        enabled: Keyboards.KWinVirtualKeyboard.visible || WindowPlugin.WindowUtil.hasCloseableActiveWindow
+        iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have fewer margins than icons from breeze-icons
-        iconSizeFactor: Keyboards.KWinVirtualKeyboard.active ? 1 : 0.75
+        iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
 
         onTriggered: {
-            if (Keyboards.KWinVirtualKeyboard.active) {
+            if (Keyboards.KWinVirtualKeyboard.visible) {
                 // close keyboard if it is open
                 Keyboards.KWinVirtualKeyboard.active = false;
             } else if (WindowPlugin.WindowUtil.hasCloseableActiveWindow) {
