@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-09 00:45+0000\n"
+"POT-Creation-Date: 2025-07-11 00:44+0000\n"
 "PO-Revision-Date: 2016-10-07 23:55-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: package/contents/ui/AppDrawerHeader.qml:52
+#: package/contents/ui/AppDrawerHeader.qml:73
 #, fuzzy, kde-format
 #| msgid "Applications"
 msgctxt "@info:placeholder"

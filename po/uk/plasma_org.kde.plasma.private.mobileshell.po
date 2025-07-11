@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-03 06:58+0000\n"
+"POT-Creation-Date: 2025-07-11 00:44+0000\n"
 "PO-Revision-Date: 2024-11-13 16:48+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -170,11 +170,6 @@ msgstr "%1%"
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
 msgctxt "@info:placeholder"
-msgid "Search…"
-msgstr "Шукати…"
-
-#: qml/widgets/krunner/KRunnerWidget.qml:181
-#, kde-format
 msgid "Search…"
 msgstr "Шукати…"
 
@@ -422,6 +417,9 @@ msgstr "Показувати менше"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Показати ще %1"
+
+#~ msgid "Search…"
+#~ msgstr "Шукати…"
 
 #~ msgid "100%"
 #~ msgstr "100%"

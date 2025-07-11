@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-03 06:58+0000\n"
+"POT-Creation-Date: 2025-07-11 00:44+0000\n"
 "PO-Revision-Date: 2025-05-03 09:53+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -172,11 +172,6 @@ msgstr "%1 %"
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
 msgctxt "@info:placeholder"
-msgid "Search…"
-msgstr "Suchen ..."
-
-#: qml/widgets/krunner/KRunnerWidget.qml:181
-#, kde-format
 msgid "Search…"
 msgstr "Suchen ..."
 
@@ -412,6 +407,9 @@ msgstr "Weniger anzeigen"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1 mehr anzeigen"
+
+#~ msgid "Search…"
+#~ msgstr "Suchen ..."
 
 #~ msgid "100%"
 #~ msgstr "100 %"

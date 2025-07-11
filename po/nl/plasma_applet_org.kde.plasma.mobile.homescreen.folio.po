@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-09 00:45+0000\n"
-"PO-Revision-Date: 2025-06-28 18:40+0200\n"
+"POT-Creation-Date: 2025-07-11 00:44+0000\n"
+"PO-Revision-Date: 2025-07-10 13:25+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,14 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
 msgstr "Map"
 
-#: package/contents/ui/AppDrawerHeader.qml:52
+#: package/contents/ui/AppDrawerHeader.qml:73
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
@@ -46,13 +46,13 @@ msgstr "Widgets"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Nieuwe widgets ophalen…"
 
 #: package/contents/ui/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Nieuwe widgets ophalen…"
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format

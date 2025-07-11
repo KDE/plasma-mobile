@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-03 06:58+0000\n"
+"POT-Creation-Date: 2025-07-11 00:44+0000\n"
 "PO-Revision-Date: 2024-11-13 11:48+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -169,11 +169,6 @@ msgstr "%1%"
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
 msgctxt "@info:placeholder"
-msgid "Search…"
-msgstr "Zoeken…"
-
-#: qml/widgets/krunner/KRunnerWidget.qml:181
-#, kde-format
 msgid "Search…"
 msgstr "Zoeken…"
 
@@ -409,6 +404,9 @@ msgstr "Minder tonen"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1 meer tonen"
+
+#~ msgid "Search…"
+#~ msgstr "Zoeken…"
 
 #~ msgid "100%"
 #~ msgstr "100%"
