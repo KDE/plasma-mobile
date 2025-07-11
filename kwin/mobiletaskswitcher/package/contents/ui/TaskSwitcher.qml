@@ -199,7 +199,7 @@ FocusScope {
                     // setup some values and return to the initial setup so that the user can always navigate with no down time
                     root.state.wasInActiveTask = root.taskSwitcherHelpers.openAppAnim.running ? true : false
                     taskList.setTaskOffsetValue(root.state.wasInActiveTask ? root.taskSwitcherHelpers.taskOffsetValue : root.taskSwitcherHelpers.homeOffsetValue, true);
-                    root.state.status = !root.state.wasInActiveTask ? (root.taskSwitcherHelpers.openAppAnim.closeAnim && !root.taskSwitcherHelpers.taskDrawerWillOpen ? TaskSwitcherPlugin.TaskSwitcherState.Active : TaskSwitcherPlugin.TaskSwitcherState.Inactive) : TaskSwitcherPlugin.TaskSwitcherState.Inactive
+                    root.state.status = !root.state.wasInActiveTask ? (root.taskSwitcherHelpers.openAppAnim.closeAnim && !root.taskSwitcherHelpers.taskDrawerWillOpen ? TaskSwitcherPlugin.MobileTaskSwitcherState.Active : TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive) : TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive
                     root.initialSetup();
                 } else if (root.taskSwitcherHelpers.openAnim.running) {
                     root.taskSwitcherHelpers.cancelAnimations();
@@ -732,15 +732,6 @@ FocusScope {
                 shellTopMargin: root.topMargin
                 shellBottomMargin: root.bottomMargin
 
-                opacity: {
-                    // animate opacity only if we are *not* opening from the homescreen
-                    // TODO! do we really not want to animate it always? it's a bit harsh to look at when opening from homescreen
-                    if (root.state.wasInActiveTask || !root.state.currentlyBeingOpened) {
-                        return 1;
-                    } else {
-                        return Math.min(1, root.state.yPosition / root.state.openedYPosition);
-                    }
-                }
 
                 x: flickable.contentX
                 width: flickable.width
