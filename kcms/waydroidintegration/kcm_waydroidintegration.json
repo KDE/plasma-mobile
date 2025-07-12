@@ -3,11 +3,13 @@
         "Authors": [
             {
                 "Email": "florian.richer@protonmail.com",
-                "Name": "Florian RICHER"
+                "Name": "Florian RICHER",
+                "Name[x-test]": "xxFlorian RICHERxx"
             }
         ],
         "Category": "Waydroid Integration",
         "Description": "Waydroid configuration",
+        "Description[x-test]": "xxWaydroid configurationxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -18,8 +20,10 @@
         "Icon": "folder-android-symbolic",
         "License": "GPL",
         "Name": "Waydroid Integration",
+        "Name[x-test]": "xxWaydroid Integrationxx",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "waydroid",
+    "X-KDE-Keywords[x-test]": "xxwaydroidxx",
     "X-KDE-System-Settings-Parent-Category": "system-administration"
 }
