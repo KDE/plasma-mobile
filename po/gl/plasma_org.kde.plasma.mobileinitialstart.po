@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:45+0000\n"
+"POT-Creation-Date: 2025-07-12 02:40+0000\n"
 "PO-Revision-Date: 2025-03-20 08:10+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -273,17 +273,17 @@ msgstr "Conecte a unha rede WiFi para acceder á rede."
 msgid "Password…"
 msgstr "Contrasinal…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Benvida a<br/><b>Plasma Mobile</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Construído con<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Seguinte"

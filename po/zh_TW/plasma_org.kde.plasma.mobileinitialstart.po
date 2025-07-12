@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:45+0000\n"
+"POT-Creation-Date: 2025-07-12 02:40+0000\n"
 "PO-Revision-Date: 2025-02-07 23:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -267,17 +267,17 @@ msgstr "連線到 WiFi 網路來存取網路。"
 msgid "Password…"
 msgstr "密碼…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "歡迎來到<br/><b>Plasma 行動</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "基於<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "下一步"

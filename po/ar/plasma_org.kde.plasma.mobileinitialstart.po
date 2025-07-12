@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:45+0000\n"
+"POT-Creation-Date: 2025-07-12 02:40+0000\n"
 "PO-Revision-Date: 2025-04-24 11:28+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -272,17 +272,17 @@ msgstr "الاتصال بشبكة واي فاي للوصول إلى الشبكة
 msgid "Password…"
 msgstr "كلمة السر…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "مرحبًا في<br/><b>بلازما الجوال</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "ممكنة بواسطة<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "التالي"
