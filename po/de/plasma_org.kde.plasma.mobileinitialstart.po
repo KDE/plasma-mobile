@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:45+0000\n"
+"POT-Creation-Date: 2025-07-12 00:44+0000\n"
 "PO-Revision-Date: 2024-05-11 16:57+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -275,19 +275,19 @@ msgstr "Verbinden Sie sich mit einem WLAN-Netzwerk für den Netzwerkzugang."
 msgid "Password…"
 msgstr "Passwort ..."
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, fuzzy, kde-format
 #| msgid "Welcome to<br/><b>%1</b>"
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Willkommen zu<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, fuzzy, kde-format
 #| msgid "Welcome to<br/><b>%1</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Willkommen zu<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Weiter"
