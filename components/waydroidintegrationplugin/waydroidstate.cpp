@@ -9,6 +9,7 @@
 
 #include <QClipboard>
 #include <QDebug>
+#include <QDir>
 #include <QGuiApplication>
 #include <QProcess>
 #include <QRegularExpression>
@@ -28,12 +29,14 @@ using namespace Qt::StringLiterals;
 
 static const QRegularExpression sessionRegExp(u"Session:\\s*(\\w+)"_s);
 static const QRegularExpression ipAdressRegExp(u"IP address:\\s*(\\d+\\.\\d+\\.\\d+\\.\\d+)"_s);
+static const QRegularExpression systemOtaRegExp(u"system_ota\\s*=\\s*(\\S+)"_s);
 
 WaydroidState::WaydroidState(QObject *parent)
     : QObject{parent}
 {
     // Connect it-self to auto-refresh when required status has changed
     connect(this, &WaydroidState::statusChanged, this, &WaydroidState::refreshSessionInfo);
+    connect(this, &WaydroidState::statusChanged, this, &WaydroidState::refreshInstallationInfo);
     connect(this, &WaydroidState::sessionStatusChanged, this, &WaydroidState::refreshPropsInfo);
 
     refreshSupportsInfo();
@@ -61,6 +64,33 @@ void WaydroidState::refreshSupportsInfo()
         m_status = NotInitialized;
     }
     Q_EMIT statusChanged();
+}
+
+void WaydroidState::refreshInstallationInfo()
+{
+    if (m_status != Initialized) {
+        return;
+    }
+
+    QFile file("/var/lib/waydroid/waydroid.cfg");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QTextStream in(&file);
+    const QString fileContent = in.readAll();
+
+    const QString systemMatch = extractRegExp(fileContent, systemOtaRegExp);
+    if (systemMatch.contains("vanilla", Qt::CaseInsensitive)) {
+        m_systemType = Vanilla;
+    } else if (systemMatch.contains("gapps", Qt::CaseInsensitive)) {
+        m_systemType = Gapps;
+    } else if (systemMatch.contains("foss", Qt::CaseInsensitive)) {
+        m_systemType = Foss;
+    } else {
+        m_systemType = UnknownSystemType;
+    }
+    Q_EMIT systemTypeChanged();
 }
 
 void WaydroidState::refreshSessionInfo()
@@ -163,6 +193,9 @@ void WaydroidState::initialize(const SystemType systemType, const RomType romTyp
         break;
     case SystemType::Gapps:
         systemTypeArg = "GAPPS";
+        break;
+    default:
+        systemTypeArg = "VANILLA";
         break;
     }
 
@@ -275,6 +308,11 @@ WaydroidState::Status WaydroidState::status() const
 WaydroidState::SessionStatus WaydroidState::sessionStatus() const
 {
     return m_sessionStatus;
+}
+
+WaydroidState::SystemType WaydroidState::systemType() const
+{
+    return m_systemType;
 }
 
 QString WaydroidState::ipAddress() const
