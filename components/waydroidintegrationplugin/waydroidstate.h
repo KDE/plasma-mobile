@@ -25,6 +25,7 @@ class WaydroidState : public QObject
 
     Q_PROPERTY(Status status READ status NOTIFY statusChanged)
     Q_PROPERTY(SessionStatus sessionStatus READ sessionStatus NOTIFY sessionStatusChanged)
+    Q_PROPERTY(SystemType systemType READ systemType NOTIFY systemTypeChanged)
     Q_PROPERTY(QString ipAddress READ ipAddress NOTIFY ipAddressChanged)
     Q_PROPERTY(QString androidId READ androidId NOTIFY androidIdChanged)
     Q_PROPERTY(QString errorTitle READ errorTitle NOTIFY errorTitleChanged)
@@ -66,7 +67,8 @@ public:
     enum SystemType {
         Vanilla = 0, ///< Vanilla Android system.
         Foss, ///< Free and Open Source Software variant.
-        Gapps ///< Variant with Google Apps included.
+        Gapps, ///< Variant with Google Apps included.
+        UnknownSystemType
     };
     Q_ENUM(SystemType)
 
@@ -83,6 +85,7 @@ public:
     Q_ENUM(RomType)
 
     Q_INVOKABLE void refreshSupportsInfo();
+    Q_INVOKABLE void refreshInstallationInfo();
     Q_INVOKABLE void refreshSessionInfo();
     Q_INVOKABLE void refreshAndroidId();
     Q_INVOKABLE void refreshPropsInfo();
@@ -94,6 +97,7 @@ public:
 
     Status status() const;
     SessionStatus sessionStatus() const;
+    SystemType systemType() const;
     QString ipAddress() const;
     QString androidId() const;
     QString errorTitle() const;
@@ -108,6 +112,7 @@ public:
 Q_SIGNALS:
     void statusChanged();
     void sessionStatusChanged();
+    void systemTypeChanged();
     void ipAddressChanged();
     void multiWindowsChanged();
     void suspendChanged();
@@ -119,6 +124,7 @@ Q_SIGNALS:
 private:
     Status m_status{NotInitialized};
     SessionStatus m_sessionStatus{SessionStopped};
+    SystemType m_systemType{SystemType::UnknownSystemType};
     QString m_ipAddress{""};
     QString m_errorTitle{""};
     QString m_errorMessage{""};
