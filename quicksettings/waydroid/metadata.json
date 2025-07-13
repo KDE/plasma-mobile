@@ -4,7 +4,16 @@
         "Authors": [
             {
                 "Email": "florian.richer@protonmail.com",
-                "Name": "Florian RICHER"
+                "Name": "Florian RICHER",
+                "Name[ca]": "Florian RICHER",
+                "Name[es]": "Florian RICHER",
+                "Name[he]": "פלוריאן רישה",
+                "Name[it]": "Florian RICHER",
+                "Name[ka]": "Florian RICHER",
+                "Name[nl]": "Florian RICHER",
+                "Name[sl]": "Florian RICHER",
+                "Name[uk]": "Florian RICHER",
+                "Name[x-test]": "xxFlorian RICHERxx"
             }
         ],
         "Description": "Waydroid quick setting for Plasma Mobile",

@@ -4,6 +4,7 @@
 [Domain]
 Name=Waydroid Management
 Name[ca]=Gestió del Waydroid
+Name[ca@valencia]=Gestioneu Waydroid
 Name[es]=Gestión de Waydroid
 Name[he]=ניהול Waydroid
 Name[ka]=Waydroid-ის მართვა
@@ -16,6 +17,7 @@ Icon=color
 [org.kde.plasma.mobileshell.waydroidhelper.initialize]
 Name=Initialize Waydroid
 Name[ca]=Inicialitza el Waydroid
+Name[ca@valencia]=Restablix Waydroid
 Name[es]=Inicializar Waydroid
 Name[he]=אתחול Waydroid
 Name[ka]=Waydroid-ის ინიციალიზაცია
@@ -25,6 +27,7 @@ Name[uk]=Ініціалізувати Waydroid
 Name[x-test]=xxInitialize Waydroidxx
 Description=Allow initialization of Waydroid
 Description[ca]=Permet la inicialització del Waydroid
+Description[ca@valencia]=Permet la inicialització de Waydroid
 Description[es]=Permitir la inicialización de Waydroid
 Description[he]=לאפשר אתחול של Waydroid
 Description[ka]=Waydroid-ის ინიციალიზაციის დაშვება
