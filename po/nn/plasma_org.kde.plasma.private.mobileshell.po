@@ -405,6 +405,3 @@ msgstr "Vis færre"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Vis %1 fleire"
-
-#~ msgid "Search…"
-#~ msgstr "Søk …"

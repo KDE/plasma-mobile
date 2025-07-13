@@ -406,6 +406,3 @@ msgstr "Mostra'n menys"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Mostra'n %1 més"
-
-#~ msgid "Search…"
-#~ msgstr "Busca…"
