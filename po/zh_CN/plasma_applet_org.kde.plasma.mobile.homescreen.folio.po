@@ -47,13 +47,13 @@ msgstr "挂件"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "获取新挂件…"
 
 #: package/contents/ui/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "获取新挂件…"
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format

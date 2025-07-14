@@ -57,14 +57,14 @@ msgstr "当激活时，状态和导航面板将自动隐藏，允许应用程序
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "双击唤醒"
 
 #: ui/main.qml:70
 #, kde-format
 msgid ""
 "When active, it allow to wakeup the device just with double tap when the "
 "screen is off."
-msgstr ""
+msgstr "启用后，当屏幕关闭时，只需双击即可唤醒设备。"
 
 #: ui/main.qml:81
 #, kde-format

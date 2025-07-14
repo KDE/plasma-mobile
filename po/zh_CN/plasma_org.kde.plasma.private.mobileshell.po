@@ -399,6 +399,3 @@ msgstr "显示更少"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "显示其他 %1 条"
-
-#~ msgid "Search…"
-#~ msgstr "搜索"

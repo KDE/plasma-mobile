@@ -36,7 +36,7 @@ msgstr "屏幕键盘"
 #: ui/main.qml:33
 #, kde-format
 msgid "Type anything here…"
-msgstr "请在此随意输入一些内容…"
+msgstr "请在此随意输入任意内容…"
 
 #: ui/main.qml:38
 #, kde-format
@@ -52,7 +52,7 @@ msgstr "声音"
 #: ui/main.qml:45
 #, kde-format
 msgid "Whether to emit a sound on keypress."
-msgstr "是否在按键时发出按键音。"
+msgstr "是否在按键时发声。"
 
 #: ui/main.qml:54
 #, kde-format
@@ -83,7 +83,7 @@ msgstr "句首字母大写"
 #: ui/main.qml:87
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
-msgstr "点击空格键使用第一个建议完成当前单词"
+msgstr "点击空格键使用第一个建议补全当前单词"
 
 #: ui/main.qml:96
 #, kde-format
