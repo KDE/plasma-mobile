@@ -5,6 +5,7 @@
             {
                 "Email": "florian.richer@protonmail.com",
                 "Name": "Florian RICHER",
+                "Name[ca@valencia]": "Florian RICHER",
                 "Name[ca]": "Florian RICHER",
                 "Name[es]": "Florian RICHER",
                 "Name[he]": "פלוריאן רישה",
@@ -17,10 +18,14 @@
             }
         ],
         "Description": "Waydroid quick setting for Plasma Mobile",
+        "Description[ka]": "Waydroid-ის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
+        "Description[x-test]": "xxWaydroid quick setting for Plasma Mobilexx",
         "Icon": "folder-android-symbolic",
         "Id": "org.kde.plasma.quicksetting.waydroid",
         "License": "GPL-2.0+",
         "Name": "Waydroid",
+        "Name[ka]": "Waydroid",
+        "Name[x-test]": "xxWaydroidxx",
         "Website": "https://kde.org"
     }
 }

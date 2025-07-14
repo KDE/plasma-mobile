@@ -4,6 +4,7 @@
             {
                 "Email": "florian.richer@protonmail.com",
                 "Name": "Florian RICHER",
+                "Name[ca@valencia]": "Florian RICHER",
                 "Name[ca]": "Florian RICHER",
                 "Name[es]": "Florian RICHER",
                 "Name[he]": "פלוריאן רישה",
@@ -17,6 +18,7 @@
         ],
         "Category": "Waydroid Integration",
         "Description": "Waydroid configuration",
+        "Description[ca@valencia]": "Configureu Waydroid",
         "Description[ca]": "Configuració del Waydroid",
         "Description[es]": "Configuración de Waydroid",
         "Description[he]": "הגדרות Waydroid",
@@ -36,6 +38,7 @@
         "Icon": "folder-android-symbolic",
         "License": "GPL",
         "Name": "Waydroid Integration",
+        "Name[ca@valencia]": "Integració de Waydroid",
         "Name[ca]": "Integració del Waydroid",
         "Name[es]": "Integración con Waydroid",
         "Name[he]": "שילוב מול Waydroid",
@@ -48,6 +51,7 @@
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "waydroid",
+    "X-KDE-Keywords[ca@valencia]": "waydroid",
     "X-KDE-Keywords[ca]": "waydroid",
     "X-KDE-Keywords[es]": "waydroid",
     "X-KDE-Keywords[he]": "waydroid",
