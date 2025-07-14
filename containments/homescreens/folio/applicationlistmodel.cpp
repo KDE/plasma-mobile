@@ -24,6 +24,7 @@ using namespace std::chrono_literals;
 
 ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     : QAbstractListModel(parent)
+    , m_homeScreen{parent}
     , m_reloadAppsTimer{new QTimer{this}}
 {
     m_reloadAppsTimer->setSingleShot(true);
