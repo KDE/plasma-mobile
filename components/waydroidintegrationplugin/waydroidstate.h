@@ -6,10 +6,14 @@
 
 #pragma once
 
+#include "waydroidapplicationlistmodel.h"
+
 #include <QObject>
 
 #include <qqmlregistration.h>
 #include <qtmetamacros.h>
+
+class WaydroidApplicationListModel;
 
 /**
  * This class provides an interface to interact with the Waydroid container,
@@ -33,6 +37,7 @@ class WaydroidState : public QObject
     Q_PROPERTY(bool multiWindows READ multiWindows WRITE setMultiWindows NOTIFY multiWindowsChanged)
     Q_PROPERTY(bool suspend READ suspend WRITE setSuspend NOTIFY suspendChanged)
     Q_PROPERTY(bool uevent READ uevent WRITE setUevent NOTIFY ueventChanged)
+    Q_PROPERTY(WaydroidApplicationListModel *applicationListModel READ applicationListModel CONSTANT)
 
 public:
     WaydroidState(QObject *parent = nullptr);
@@ -102,6 +107,8 @@ public:
     QString androidId() const;
     QString errorTitle() const;
     QString errorMessage() const;
+    WaydroidApplicationListModel *applicationListModel() const;
+
     bool multiWindows() const;
     void setMultiWindows(const bool multiWindows);
     bool suspend() const;
@@ -129,6 +136,7 @@ private:
     QString m_errorTitle{""};
     QString m_errorMessage{""};
     QString m_androidId{""};
+    WaydroidApplicationListModel *m_applicationListModel{nullptr};
 
     // Waydroid props. See https://docs.waydro.id/usage/waydroid-prop-options
     bool m_multiWindows{false};

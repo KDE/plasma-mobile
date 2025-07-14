@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 ecm_add_qml_module(waydroidintegrationplugin URI org.kde.plasma.private.mobileshell.waydroidintegrationplugin GENERATE_PLUGIN_SOURCE)
-target_sources(waydroidintegrationplugin PRIVATE waydroidstate.cpp)
+target_sources(waydroidintegrationplugin PRIVATE waydroidstate.cpp waydroidapplication.cpp waydroidapplicationlistmodel.cpp)
 
 target_link_libraries(waydroidintegrationplugin PRIVATE
     Qt::Gui
