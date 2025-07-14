@@ -42,10 +42,14 @@ ColumnLayout {
         }
 
         FormCard.FormButtonDelegate {
-            id: quickSettingsButton
             visible: AIP.WaydroidState.systemType === AIP.WaydroidState.Gapps
             text: i18n("Certify my device for Google Play Protect")
             onClicked: kcm.push("WaydroidGooglePlayProtectConfigurationPage.qml")
+        }
+
+        FormCard.FormButtonDelegate {
+            text: i18n("Waydroid applications")
+            onClicked: kcm.push("WaydroidApplicationsPage.qml")
         }
     }
 

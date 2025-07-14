@@ -6,6 +6,7 @@
 
 #include "waydroidstate.h"
 #include "waydroidintegrationplugin_debug.h"
+#include "waydroidshared.h"
 
 #include <QClipboard>
 #include <QDebug>
@@ -22,7 +23,6 @@
 
 using namespace Qt::StringLiterals;
 
-#define WAYDROID_COMMAND "waydroid"
 #define MULTI_WINDOWS_PROP_KEY "persist.waydroid.multi_windows"
 #define SUSPEND_PROP_KEY "persist.waydroid.suspend"
 #define UEVENT_PROP_KEY "persist.waydroid.uevent"
@@ -33,6 +33,7 @@ static const QRegularExpression systemOtaRegExp(u"system_ota\\s*=\\s*(\\S+)"_s);
 
 WaydroidState::WaydroidState(QObject *parent)
     : QObject{parent}
+    , m_applicationListModel{new WaydroidApplicationListModel{this}}
 {
     // Connect it-self to auto-refresh when required status has changed
     connect(this, &WaydroidState::statusChanged, this, &WaydroidState::refreshSessionInfo);
@@ -333,6 +334,11 @@ QString WaydroidState::errorMessage() const
 QString WaydroidState::androidId() const
 {
     return m_androidId;
+}
+
+WaydroidApplicationListModel *WaydroidState::applicationListModel() const
+{
+    return m_applicationListModel;
 }
 
 bool WaydroidState::multiWindows() const
