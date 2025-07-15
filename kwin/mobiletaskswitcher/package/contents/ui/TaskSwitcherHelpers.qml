@@ -45,10 +45,22 @@ QtObject {
     readonly property bool gestureMovingUp: state.yVelocity < 0
 
     readonly property bool currentlyBeingOpened: state.gestureInProgress || openAnim.running
-    readonly property bool currentlyBeingClosed: closeAnim.running || openAppAnim.running
+    readonly property bool currentlyBeingClosed: closeAnim.running || openAppAnim.running || inLastFrame
+
+    // indicates whether taskswitcher is in last frame before dismissal. this happens after open app or close animation
+    // and is required because openApp/close animation isRunning is false in said last frame which can lead to visual
+    // glitches in said frame.
+    property bool inLastFrame: false
 
     // yPosition when the task switcher is completely open
-    readonly property real openedYPosition: (taskSwitcher.height - taskHeight) / 2
+    readonly property real openedYPosition: Math.round((taskSwitcher.height - taskHeight) / 2)
+    readonly property real scrubModeOverrun: {
+        return Math.max(0, scrubModeBottomMargin + Kirigami.Units.iconSizes.huge + Kirigami.Units.smallSpacing - openedYPosition);
+    }
+
+    readonly property real scrubModeBottomMargin: {
+        return Math.round(openedYPosition * 5 / 8);
+    }
 
     // yPosition threshold below which opening the task switcher should be undone and returned to the previously active task
     readonly property real undoYThreshold: openedYPosition / 2
@@ -329,6 +341,7 @@ QtObject {
         easing.type: Easing.InBack
 
         onFinished: {
+            root.inLastFrame = true;
             root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive;
             root.taskSwitcher.instantHide();
         }
@@ -361,6 +374,7 @@ QtObject {
         duration: 300
         easing.type: Easing.OutQuint
         onFinished: {
+            root.inLastFrame = true;
             root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive;
             root.taskSwitcher.instantHide();
         }

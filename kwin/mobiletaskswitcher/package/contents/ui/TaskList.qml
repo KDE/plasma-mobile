@@ -26,6 +26,7 @@ MouseArea {
     property int taskInteractingCount: 0
 
     // account for system header and footer offset (center the preview image)
+    // if there's too little space space for the task scrub icons, shift it slightly above center to make space
     readonly property real taskYBase: {
         let headerHeight = shellTopMargin;
         let footerHeight = shellBottomMargin;
@@ -41,7 +42,12 @@ MouseArea {
             trackFingerYOffsetClamped = taskSwitcherHelpers.trackFingerYOffset;
         }
 
-        return taskYBase - trackFingerYOffsetClamped;
+        let scrubModeOffset = 0;
+        if (taskSwitcherHelpers.isInTaskScrubMode && !taskSwitcherHelpers.currentlyBeingClosed) {
+            scrubModeOffset = taskSwitcherHelpers.scrubModeOverrun;
+        }
+
+        return Math.round(taskYBase - trackFingerYOffsetClamped - scrubModeOffset);
     }
 
     function getTaskAt(index: int): Task {

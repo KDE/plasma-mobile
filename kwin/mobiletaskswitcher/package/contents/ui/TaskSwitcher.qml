@@ -97,6 +97,7 @@ FocusScope {
         taskSwitcherHelpers.reachedHeightThreshold = false;
         taskSwitcherHelpers.gestureState = TaskSwitcherHelpers.GestureStates.Undecided;
         taskSwitcherHelpers.isInTaskScrubMode = false;
+        taskSwitcherHelpers.inLastFrame = false;
 
         taskSwitcherHelpers.hasVibrated = false;
 
@@ -375,7 +376,6 @@ FocusScope {
                 root.taskSwitcherHelpers.close();
             } if (root.taskSwitcherHelpers.isInTaskScrubMode) {
                 // TODO! do we want to handle upwards flick to dismiss in task scrub mode?
-                // TODO do we want to show a list of thumbnails in task scrub mode?
                 let unmodifiedYposition = Math.abs(root.state.touchYPosition)
                 root.backgroundColorOpacity = 1;
                 if (root.taskSwitcherHelpers.taskDrawerOpened || unmodifiedYposition > root.taskSwitcherHelpers.undoYThreshold) {
@@ -641,7 +641,7 @@ FocusScope {
 
             anchors.bottom: container.bottom
             anchors.right: container.horizontalCenter
-            anchors.bottomMargin: root.taskSwitcherHelpers.openedYPosition * 5 / 8
+            anchors.bottomMargin: root.taskSwitcherHelpers.scrubModeBottomMargin
 
             anchors.rightMargin: {
                 let size = Kirigami.Units.iconSizes.large + Kirigami.Units.largeSpacing * 2;
