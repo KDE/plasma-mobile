@@ -3,6 +3,7 @@
 
 [Domain]
 Name=Waydroid Management
+Name[ar]=إدارة ويدرويد
 Name[ca]=Gestió del Waydroid
 Name[ca@valencia]=Gestioneu Waydroid
 Name[es]=Gestión de Waydroid
@@ -12,10 +13,12 @@ Name[nl]=Waydroid-beheer
 Name[sl]=Upravljanje Waydroid
 Name[uk]=Керування Waydroid
 Name[x-test]=xxWaydroid Managementxx
+Name[zh_CN]=Waydroid 管理
 Icon=color
 
 [org.kde.plasma.mobileshell.waydroidhelper.initialize]
 Name=Initialize Waydroid
+Name[ar]=تمهيد ويدرويد
 Name[ca]=Inicialitza el Waydroid
 Name[ca@valencia]=Restablix Waydroid
 Name[es]=Inicializar Waydroid
@@ -25,7 +28,9 @@ Name[nl]=Waydroid initialiseren
 Name[sl]=Inicializiraj Waydroid
 Name[uk]=Ініціалізувати Waydroid
 Name[x-test]=xxInitialize Waydroidxx
+Name[zh_CN]=初始化 Waydroid
 Description=Allow initialization of Waydroid
+Description[ar]=السماح بتمهيد ويدرويد
 Description[ca]=Permet la inicialització del Waydroid
 Description[ca@valencia]=Permet la inicialització de Waydroid
 Description[es]=Permitir la inicialización de Waydroid
@@ -35,6 +40,7 @@ Description[nl]=Initialisatie van Waydroid toestaan
 Description[sl]=Dovoli inicializacijo Waydroida
 Description[uk]=Дозволити ініціалізацію Waydroid
 Description[x-test]=xxAllow initialization of Waydroidxx
+Description[zh_CN]=允许初始化 Waydroid
 Policy=yes
 PolicyInactive=yes
 Persistence=session
