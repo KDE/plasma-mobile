@@ -16,12 +16,16 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+#include <qqmlregistration.h>
+
 /**
  * @short Object that represents an application.
  */
 class Application : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("Managed by ApplicationListModel")
     Q_PROPERTY(bool running READ running NOTIFY windowChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)

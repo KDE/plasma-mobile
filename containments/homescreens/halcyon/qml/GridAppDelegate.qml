@@ -12,10 +12,11 @@ import QtQuick.Controls as Controls
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons
+import org.kde.plasma.plasmoid
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.private.mobile.homescreen.halcyon as Halcyon
+import plasma.applet.org.kde.plasma.mobile.homescreen.halcyon as Halcyon
 
 import org.kde.kirigami as Kirigami
 
@@ -63,7 +64,7 @@ MouseArea {
                 icon.name: "emblem-favorite"
                 text: i18n("Add to favourites")
                 onClicked: {
-                    Halcyon.PinnedModel.addApp(application.storageId, 0);
+                    Plasmoid.pinnedModel.addApp(application.storageId, 0);
                 }
             }
             onClosed: dialogLoader.active = false

@@ -9,9 +9,12 @@
 #include <QDebug>
 #include <QQuickItem>
 
+K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "metadata.json")
+
 HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment{parent, data, args}
     , m_settings{new HalcyonSettings{this, config()}}
+    , m_pinnedModel{new PinnedModel{this}}
 {
     setHasConfigurationInterface(true);
 }
@@ -23,6 +26,9 @@ HalcyonSettings *HomeScreen::settings() const
     return m_settings;
 }
 
-K_PLUGIN_CLASS(HomeScreen)
+PinnedModel *HomeScreen::pinnedModel() const
+{
+    return m_pinnedModel;
+}
 
 #include "homescreen.moc"

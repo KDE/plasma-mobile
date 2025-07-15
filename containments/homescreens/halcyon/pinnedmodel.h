@@ -19,20 +19,26 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+#include <qqmlregistration.h>
+
 /**
  * @short The applications and folders model on the main page.
  */
 class PinnedModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(Plasma::Applet *applet READ applet WRITE setApplet NOTIFY appletChanged)
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
-    enum Roles { IsFolderRole = Qt::UserRole + 1, ApplicationRole, FolderRole };
+    enum Roles {
+        IsFolderRole = Qt::UserRole + 1,
+        ApplicationRole,
+        FolderRole
+    };
 
-    PinnedModel(QObject *parent = nullptr);
+    PinnedModel(Plasma::Applet *parent = nullptr);
     ~PinnedModel() override;
-    static PinnedModel *self();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -53,9 +59,6 @@ public:
 
 public Q_SLOTS:
     void addAppFromFolder(const QString &storageId);
-
-Q_SIGNALS:
-    void appletChanged();
 
 private:
     void load();

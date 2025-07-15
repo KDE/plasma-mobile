@@ -12,7 +12,7 @@ import org.kde.draganddrop as DragDrop
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.private.mobile.homescreen.halcyon as Halcyon
+import plasma.applet.org.kde.plasma.mobile.homescreen.halcyon as Halcyon
 
 MobileShell.GridView {
     id: root

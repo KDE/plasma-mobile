@@ -11,15 +11,15 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
-import org.kde.private.mobile.homescreen.halcyon as Halcyon
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+
+import plasma.applet.org.kde.plasma.mobile.homescreen.halcyon as Halcyon
 
 ContainmentItem {
     id: root
 
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
-        Halcyon.PinnedModel.applet = root.plasmoid;
         forceActiveFocus();
     }
 

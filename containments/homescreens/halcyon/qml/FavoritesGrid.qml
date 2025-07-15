@@ -8,10 +8,11 @@ import QtQml.Models
 
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.draganddrop as DragDrop
+import org.kde.plasma.plasmoid
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.private.mobile.homescreen.halcyon as Halcyon
+import plasma.applet.org.kde.plasma.mobile.homescreen.halcyon as Halcyon
 
 MobileShell.GridView {
     id: root
@@ -74,7 +75,7 @@ MobileShell.GridView {
     Keys.onReturnPressed: currentItem.appDelegate.launch()
     model: DelegateModel {
         id: visualModel
-        model: Halcyon.PinnedModel
+        model: Plasmoid.pinnedModel
 
         delegate: Item {
             id: delegateRoot
@@ -87,7 +88,7 @@ MobileShell.GridView {
             function moveDragToCurrentPos(from, to) {
                 if (from !== to) {
                     visualModel.items.move(from, to);
-                    Halcyon.PinnedModel.moveEntry(from, to);
+                    Plasmoid.pinnedModel.moveEntry(from, to);
                 }
             }
 
@@ -189,9 +190,9 @@ MobileShell.GridView {
                 onDropped: (drop) => {
                     if (transitionAnim.running || appDelegate.drag.active || drag.source.isFolder) return; // don't do anything when reordering
                     if (appDelegate.isFolder) {
-                        Halcyon.PinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
+                        Plasmoid.pinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
                     } else {
-                        Halcyon.PinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
+                        Plasmoid.pinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
                     }
                     folderAnim.to = 0;
                     folderAnim.restart();
@@ -221,7 +222,7 @@ MobileShell.GridView {
                     Kirigami.Action {
                         icon.name: "emblem-favorite"
                         text: i18n("Remove from favourites")
-                        onTriggered: Halcyon.PinnedModel.removeEntry(model.index)
+                        onTriggered: Plasmoid.pinnedModel.removeEntry(model.index)
                     }
                 ]
 

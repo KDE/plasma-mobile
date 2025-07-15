@@ -13,19 +13,29 @@
 #include <QSet>
 #include <QTimer>
 
+#include <qqmlregistration.h>
+
+class QJSEngine;
+class QQmlEngine;
+
 /**
  * @short The base application list, used directly by the full app list page.
  */
 class ApplicationListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
-    enum Roles { ApplicationRole = Qt::UserRole + 1 };
+    enum Roles {
+        ApplicationRole = Qt::UserRole + 1
+    };
 
     ApplicationListModel(QObject *parent = nullptr);
     ~ApplicationListModel() override;
     static ApplicationListModel *self();
+    static ApplicationListModel *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

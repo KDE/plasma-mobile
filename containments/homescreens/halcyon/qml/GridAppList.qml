@@ -12,7 +12,7 @@ import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
-import org.kde.private.mobile.homescreen.halcyon 1.0 as Halcyon
+import plasma.applet.org.kde.plasma.mobile.homescreen.halcyon as Halcyon
 import org.kde.plasma.plasmoid
 
 MobileShell.GridView {

@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -83,7 +82,6 @@
         "Description[x-test]": "xxA mobile homescreen focused on simplicity and ease-of-use.xx",
         "Description[zh_CN]": "简约易用的手机主屏幕方案。",
         "Description[zh_TW]": "著重於簡潔與易用性的手機主畫面。",
-        "Id": "org.kde.plasma.mobile.homescreen.halcyon",
         "License": "GPLv2+",
         "Name": "Halcyon",
         "Name[ar]": "قيون",

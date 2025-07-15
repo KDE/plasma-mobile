@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QModelIndex>
 #include <QProcess>
+#include <QQmlEngine>
 #include <QQuickWindow>
 
 #include <KApplicationTrader>
@@ -39,6 +40,15 @@ ApplicationListModel *ApplicationListModel::self()
 {
     static ApplicationListModel *inst = new ApplicationListModel(nullptr);
     return inst;
+}
+
+ApplicationListModel *ApplicationListModel::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(qmlEngine);
+    Q_UNUSED(jsEngine);
+    auto *model = self();
+    QQmlEngine::setObjectOwnership(model, QQmlEngine::CppOwnership);
+    return model;
 }
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const

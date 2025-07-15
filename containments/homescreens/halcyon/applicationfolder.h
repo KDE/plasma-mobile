@@ -16,6 +16,8 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+#include <qqmlregistration.h>
+
 /**
  * @short Object that represents an application folder on the main page.
  */
@@ -24,6 +26,8 @@ class ApplicationFolderModel;
 class ApplicationFolder : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("Managed by ApplicationListModel")
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QList<Application *> appPreviews READ appPreviews NOTIFY applicationsChanged)
     Q_PROPERTY(ApplicationFolderModel *applications READ applications NOTIFY applicationsReset)
@@ -67,7 +71,9 @@ class ApplicationFolderModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    enum Roles { ApplicationRole = Qt::UserRole + 1 };
+    enum Roles {
+        ApplicationRole = Qt::UserRole + 1
+    };
     ApplicationFolderModel(ApplicationFolder *folder);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
