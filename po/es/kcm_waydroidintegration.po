@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-11 00:44+0000\n"
+"POT-Creation-Date: 2025-07-15 00:46+0000\n"
 "PO-Revision-Date: 2025-07-12 01:43+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -77,48 +77,53 @@ msgstr "Información general"
 msgid "IP address"
 msgstr "Dirección IP"
 
-#: ui/WaydroidConfigurationForm.qml:34
+#: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
 msgid "Waydroid status"
 msgstr "Estado de Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:36
 #, kde-format
 msgid "Running"
 msgstr "En ejecución"
 
-#: ui/WaydroidConfigurationForm.qml:38
+#: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stop session"
 msgstr "Detener sesión"
 
-#: ui/WaydroidConfigurationForm.qml:54
+#: ui/WaydroidConfigurationForm.qml:47
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Propiedades de Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:65
+#: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr ""
 "Puede requerir el reinicio de la sesión de Waydroid para que tenga efecto"
 
-#: ui/WaydroidConfigurationForm.qml:82
+#: ui/WaydroidConfigurationForm.qml:90
 #, kde-format
 msgid "Multi Windows"
 msgstr "Multiventana"
 
-#: ui/WaydroidConfigurationForm.qml:83
+#: ui/WaydroidConfigurationForm.qml:91
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Activa o desactiva la integración de ventanas con el escritorio"
 
-#: ui/WaydroidConfigurationForm.qml:95
+#: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "Suspend"
 msgstr "Suspender"
 
-#: ui/WaydroidConfigurationForm.qml:96
+#: ui/WaydroidConfigurationForm.qml:104
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -127,15 +132,47 @@ msgstr ""
 "Permitir que el contenedor de Waydroid entre en suspensión (cuando se apague "
 "la pantalla) si no hay aplicaciones activas"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:116
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:117
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Permitir que Android acceda directamente a los dispositivos conectados"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr ""
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid session is starting.\n"
+#| "It can take a few seconds."
+msgid ""
+"We fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"La sesión de Waydroid se está iniciando.\n"
+"Puede tardar unos segundos."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#, kde-format
+msgid ""
+"When launching waydroid with GAPPS for the first time you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID on the field in the website. Then, give "
+"the Google services some minutes to reflect the change and restart waydroid."
+msgstr ""
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr ""
 
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format

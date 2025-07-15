@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-11 00:44+0000\n"
+"POT-Creation-Date: 2025-07-15 00:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -21,17 +21,17 @@ msgstr ""
 #: ui/main.qml:19
 #, kde-format
 msgid "Waydroid Integration"
-msgstr ""
+msgstr "Waydroid 集成"
 
 #: ui/main.qml:32
 #, kde-format
 msgid "Waydroid is not installed"
-msgstr ""
+msgstr "没有安装 Waydroid"
 
 #: ui/main.qml:39
 #, kde-format
 msgid "Check installation"
-msgstr ""
+msgstr "检查软件安装情况"
 
 #: ui/main.qml:51
 #, kde-format
@@ -39,16 +39,18 @@ msgid ""
 "Waydroid is initializing.\n"
 "It can take a few minutes."
 msgstr ""
+"Waydroid 正在初始化。\n"
+"可能需要几分钟。"
 
 #: ui/main.qml:60
 #, kde-format
 msgid "The Waydroid session is not running."
-msgstr ""
+msgstr "Waydroid 会话没有运行。"
 
 #: ui/main.qml:66
 #, kde-format
 msgid "Start the session"
-msgstr ""
+msgstr "开始会话"
 
 #: ui/main.qml:74
 #, kde-format
@@ -56,90 +58,129 @@ msgid ""
 "Waydroid session is starting.\n"
 "It can take a few seconds."
 msgstr ""
+"Waydroid 会话正在启动。\n"
+"可能需要几秒钟。"
 
 #: ui/main.qml:105
 #, kde-format
 msgid "Go back"
-msgstr ""
+msgstr "返回"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
-msgstr ""
+msgstr "常规信息"
 
 #: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
-msgstr ""
-
-#: ui/WaydroidConfigurationForm.qml:34
-#, kde-format
-msgid "Waydroid status"
-msgstr ""
+msgstr "IP 地址"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
-msgid "Running"
-msgstr ""
+msgid "Waydroid status"
+msgstr "Waydroid 状态"
 
-#: ui/WaydroidConfigurationForm.qml:38
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "正在运行"
+
+#: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stop session"
+msgstr "停止会话"
+
+#: ui/WaydroidConfigurationForm.qml:47
+#, kde-format
+msgid "Certify my device for Google Play Protect"
 msgstr ""
 
-#: ui/WaydroidConfigurationForm.qml:54
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Waydroid properties"
-msgstr ""
+msgstr "Waydroid 属性"
 
-#: ui/WaydroidConfigurationForm.qml:65
+#: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
-msgstr ""
+msgstr "可能需要重启 waydroid 会话才能应用更改"
 
-#: ui/WaydroidConfigurationForm.qml:82
+#: ui/WaydroidConfigurationForm.qml:90
 #, kde-format
 msgid "Multi Windows"
-msgstr ""
+msgstr "多窗口"
 
-#: ui/WaydroidConfigurationForm.qml:83
+#: ui/WaydroidConfigurationForm.qml:91
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
-msgstr ""
+msgstr "启用/禁用与桌面的窗口集成"
 
-#: ui/WaydroidConfigurationForm.qml:95
+#: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "Suspend"
-msgstr ""
+msgstr "挂起"
 
-#: ui/WaydroidConfigurationForm.qml:96
+#: ui/WaydroidConfigurationForm.qml:104
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
 "are active"
-msgstr ""
+msgstr "当没有应用处于活动状态时，让 Waydroid 容器睡眠 (显示器超时后)"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:116
 #, kde-format
 msgid "UEvent"
-msgstr ""
+msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:117
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
+msgstr "允许安卓直接访问热插拔设备"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr ""
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid session is starting.\n"
+#| "It can take a few seconds."
+msgid ""
+"We fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid 会话正在启动。\n"
+"可能需要几秒钟。"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#, kde-format
+msgid ""
+"When launching waydroid with GAPPS for the first time you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID on the field in the website. Then, give "
+"the Google services some minutes to reflect the change and restart waydroid."
+msgstr ""
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
 msgstr ""
 
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format
 msgid "Initial configuration"
-msgstr ""
+msgstr "初始配置"
 
 #: ui/WaydroidInitialConfigurationForm.qml:22
 #, kde-format
 msgid "System type"
-msgstr ""
+msgstr "系统类型"
 
 #: ui/WaydroidInitialConfigurationForm.qml:36
 #, kde-format
 msgid "Configure waydroid"
-msgstr ""
+msgstr "配置 waydroid"

@@ -22,16 +22,16 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Waydroid"
-msgstr ""
+msgstr "Waydroid"
 
 #: contents/ui/main.qml:12
 #, kde-format
 msgctxt "@info:status"
 msgid "Running"
-msgstr ""
+msgstr "正在运行"
 
 #: contents/ui/main.qml:12
 #, kde-format
 msgctxt "@info:status"
 msgid "Stopped"
-msgstr ""
+msgstr "已停止"

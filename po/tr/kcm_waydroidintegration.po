@@ -1,38 +1,36 @@
-# Translation of kcm_waydroidintegration.po to Catalan
-# Copyright (C) 2025 This_file_is_part_of_KDE
-# This file is distributed under the license LGPL version 2.1 or
-# version 3 or later versions approved by the membership of KDE e.V.
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2025.
+# SPDX-FileCopyrightText: 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-15 00:46+0000\n"
-"PO-Revision-Date: 2025-07-11 13:24+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
-"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
-"Language: ca\n"
+"PO-Revision-Date: 2025-07-14 13:46+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: ui/main.qml:19
 #, kde-format
 msgid "Waydroid Integration"
-msgstr "Integració del Waydroid"
+msgstr "Waydroid Tümleştirmesi"
 
 #: ui/main.qml:32
 #, kde-format
 msgid "Waydroid is not installed"
-msgstr "El Waydroid no està instal·lat"
+msgstr "Waydroid kurulu değil"
 
 #: ui/main.qml:39
 #, kde-format
 msgid "Check installation"
-msgstr "Comprova la instal·lació"
+msgstr "Kurulumu Denetle"
 
 #: ui/main.qml:51
 #, kde-format
@@ -40,18 +38,18 @@ msgid ""
 "Waydroid is initializing.\n"
 "It can take a few minutes."
 msgstr ""
-"El Waydroid s'està inicialitzant.\n"
-"Pot trigar alguns minuts."
+"Waydroid ilklendiriliyor.\n"
+"Bu, birkaç dakika alabilir."
 
 #: ui/main.qml:60
 #, kde-format
 msgid "The Waydroid session is not running."
-msgstr "No s'està executant la sessió del Waydroid."
+msgstr "Waydroid oturumu çalışmıyor."
 
 #: ui/main.qml:66
 #, kde-format
 msgid "Start the session"
-msgstr "Inicia la sessió"
+msgstr "Oturumu Başlat"
 
 #: ui/main.qml:74
 #, kde-format
@@ -59,38 +57,38 @@ msgid ""
 "Waydroid session is starting.\n"
 "It can take a few seconds."
 msgstr ""
-"El Waydroid s'està iniciant\n"
-"Pot trigar alguns segons."
+"Waydroid oturumu başlatılıyor.\n"
+"Bu, birkaç saniye alabilir."
 
 #: ui/main.qml:105
 #, kde-format
 msgid "Go back"
-msgstr "Retrocedeix"
+msgstr "Geri Git"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
-msgstr "Informació general"
+msgstr "Genel Bilgi"
 
 #: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
-msgstr "Adreça IP"
+msgstr "IP adresi"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
 msgid "Waydroid status"
-msgstr "Estat del Waydroid"
+msgstr "Waydroid durumu"
 
 #: ui/WaydroidConfigurationForm.qml:36
 #, kde-format
 msgid "Running"
-msgstr "En execució"
+msgstr "Çalışıyor"
 
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stop session"
-msgstr "Atura la sessió"
+msgstr "Oturumu Durdur"
 
 #: ui/WaydroidConfigurationForm.qml:47
 #, kde-format
@@ -100,27 +98,27 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Waydroid properties"
-msgstr "Propietats del Waydroid"
+msgstr "Waydroid Özellikleri"
 
 #: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
-msgstr "Pot requerir reiniciar la sessió del «waydroid» per a aplicar"
+msgstr "Uygulanması için Waydroid oturumunun yeniden başlatılması gerekebilir"
 
 #: ui/WaydroidConfigurationForm.qml:90
 #, kde-format
 msgid "Multi Windows"
-msgstr "Finestres múltiples"
+msgstr "Çoklu Pencereler"
 
 #: ui/WaydroidConfigurationForm.qml:91
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
-msgstr "Activa/desactiva la integració de les finestres amb l'escriptori"
+msgstr "Masaüstü ile pencere tümleştirmesini etkinleştirir/devre dışı bırakır"
 
 #: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "Suspend"
-msgstr "Suspèn"
+msgstr "Askıya Al"
 
 #: ui/WaydroidConfigurationForm.qml:104
 #, kde-format
@@ -128,8 +126,8 @@ msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
 "are active"
 msgstr ""
-"Permet que el contenidor Waydroid dormi (després del temps d'espera de la "
-"pantalla) quan no hi hagi cap aplicació activa"
+"Etkin uygulama yokken (görüntü zaman aşımından sonra) Waydroid "
+"kapsayıcısının uyumasına izin ver"
 
 #: ui/WaydroidConfigurationForm.qml:116
 #, kde-format
@@ -139,7 +137,7 @@ msgstr "UEvent"
 #: ui/WaydroidConfigurationForm.qml:117
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
-msgstr "Permet l'accés directe d'Android als dispositius connectats"
+msgstr "Tak–çıkar aygıtlara Android’in doğrudan erişmesine izin ver"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -155,8 +153,8 @@ msgid ""
 "We fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"El Waydroid s'està iniciant\n"
-"Pot trigar alguns segons."
+"Waydroid oturumu başlatılıyor.\n"
+"Bu, birkaç saniye alabilir."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
 #, kde-format
@@ -176,14 +174,14 @@ msgstr ""
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format
 msgid "Initial configuration"
-msgstr "Configuració inicial"
+msgstr "Başlangıç yapılandırması"
 
 #: ui/WaydroidInitialConfigurationForm.qml:22
 #, kde-format
 msgid "System type"
-msgstr "Tipus de sistema"
+msgstr "Sistem türü"
 
 #: ui/WaydroidInitialConfigurationForm.qml:36
 #, kde-format
 msgid "Configure waydroid"
-msgstr "Configura el Waydroid"
+msgstr "Waydroid’i Yapılandır"

@@ -1,21 +1,22 @@
-# Copyright (C) 2025 This file is copyright:
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# SPDX-FileCopyrightText: 2025 Freek de Kruijf <freekdekruijf@kde.nl>
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-13 14:05+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: \n"
-"Language: nl\n"
+"PO-Revision-Date: 2025-07-14 05:24+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Poedit 3.6\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
@@ -27,10 +28,10 @@ msgstr "Waydroid"
 #, kde-format
 msgctxt "@info:status"
 msgid "Running"
-msgstr "Actief"
+msgstr "გაშვებულია"
 
 #: contents/ui/main.qml:12
 #, kde-format
 msgctxt "@info:status"
 msgid "Stopped"
-msgstr "Gestopt"
+msgstr "გაჩერებულია"
