@@ -34,9 +34,9 @@ class FolioApplication : public QObject, public std::enable_shared_from_this<Fol
 public:
     typedef std::shared_ptr<FolioApplication> Ptr;
 
-    FolioApplication(HomeScreen *parent = nullptr, KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr});
+    FolioApplication(KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr}, QObject *parent = nullptr);
 
-    static FolioApplication::Ptr fromJson(QJsonObject &obj, HomeScreen *parent); // may return nullptr
+    static FolioApplication::Ptr fromJson(QJsonObject &obj); // may return nullptr
     QJsonObject toJson() const;
 
     bool running() const;

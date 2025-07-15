@@ -34,10 +34,10 @@ class FolioWidget : public QObject, public std::enable_shared_from_this<FolioWid
 public:
     typedef std::shared_ptr<FolioWidget> Ptr;
 
-    FolioWidget(HomeScreen *parent = nullptr, int id = -1, int gridWidth = 0, int gridHeight = 0);
-    FolioWidget(HomeScreen *parent, Plasma::Applet *applet, int gridWidth, int gridHeight);
+    FolioWidget(HomeScreen *homeScreen = nullptr, int id = -1, int gridWidth = 0, int gridHeight = 0, QObject *parent = nullptr);
+    FolioWidget(HomeScreen *homeScreen, Plasma::Applet *applet, int gridWidth, int gridHeight, QObject *parent = nullptr);
 
-    static std::shared_ptr<FolioWidget> fromJson(QJsonObject &obj, HomeScreen *parent);
+    static std::shared_ptr<FolioWidget> fromJson(QJsonObject &obj, HomeScreen *homeScreen);
     QJsonObject toJson() const;
 
     int id() const;

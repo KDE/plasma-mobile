@@ -34,12 +34,12 @@ public:
     };
     Q_ENUM(Type)
 
-    FolioDelegate(HomeScreen *parent);
-    FolioDelegate(std::shared_ptr<FolioApplication> application, HomeScreen *parent);
-    FolioDelegate(std::shared_ptr<FolioApplicationFolder> folder, HomeScreen *parent);
-    FolioDelegate(std::shared_ptr<FolioWidget> widget, HomeScreen *parent);
+    FolioDelegate(QObject *parent = nullptr);
+    FolioDelegate(std::shared_ptr<FolioApplication> application, QObject *parent = nullptr);
+    FolioDelegate(std::shared_ptr<FolioApplicationFolder> folder, QObject *parent = nullptr);
+    FolioDelegate(std::shared_ptr<FolioWidget> widget, QObject *parent = nullptr);
 
-    static std::shared_ptr<FolioDelegate> fromJson(QJsonObject &obj, HomeScreen *parent);
+    static std::shared_ptr<FolioDelegate> fromJson(QJsonObject &obj, HomeScreen *homeScreen);
 
     virtual QJsonObject toJson() const;
 
@@ -71,13 +71,13 @@ class FolioPageDelegate : public FolioDelegate
 public:
     typedef std::shared_ptr<FolioPageDelegate> Ptr;
 
-    FolioPageDelegate(int row = 0, int column = 0, HomeScreen *parent = nullptr);
-    FolioPageDelegate(int row, int column, std::shared_ptr<FolioApplication> application, HomeScreen *parent);
-    FolioPageDelegate(int row, int column, std::shared_ptr<FolioApplicationFolder> folder, HomeScreen *parent);
-    FolioPageDelegate(int row, int column, std::shared_ptr<FolioWidget> widget, HomeScreen *parent);
-    FolioPageDelegate(int row, int column, std::shared_ptr<FolioDelegate> delegate, HomeScreen *parent);
+    FolioPageDelegate(int row = 0, int column = 0, HomeScreen *homeScreen = nullptr, QObject *parent = nullptr);
+    FolioPageDelegate(int row, int column, std::shared_ptr<FolioApplication> application, HomeScreen *homeScreen, QObject *parent = nullptr);
+    FolioPageDelegate(int row, int column, std::shared_ptr<FolioApplicationFolder> folder, HomeScreen *homeScreen, QObject *parent = nullptr);
+    FolioPageDelegate(int row, int column, std::shared_ptr<FolioWidget> widget, HomeScreen *homeScreen, QObject *parent = nullptr);
+    FolioPageDelegate(int row, int column, std::shared_ptr<FolioDelegate> delegate, HomeScreen *homeScreen, QObject *parent = nullptr);
 
-    static std::shared_ptr<FolioPageDelegate> fromJson(QJsonObject &obj, HomeScreen *parent);
+    static std::shared_ptr<FolioPageDelegate> fromJson(QJsonObject &obj, HomeScreen *homeScreen);
     static int getTranslatedTopLeftRow(HomeScreen *homeScreen, int realRow, int realColumn, std::shared_ptr<FolioDelegate> fd);
     static int getTranslatedTopLeftColumn(HomeScreen *homeScreen, int realRow, int realColumn, std::shared_ptr<FolioDelegate> fd);
     static int getTranslatedRow(HomeScreen *homeScreen, int realRow, int realColumn);

@@ -5,9 +5,9 @@
 #include "homescreenstate.h"
 #include "widgetsmanager.h"
 
-FolioWidget::FolioWidget(HomeScreen *parent, int id, int realGridWidth, int realGridHeight)
+FolioWidget::FolioWidget(HomeScreen *homeScreen, int id, int realGridWidth, int realGridHeight, QObject *parent)
     : QObject{parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_id{id}
     , m_realGridWidth{realGridWidth}
     , m_realGridHeight{realGridHeight}
@@ -21,9 +21,9 @@ FolioWidget::FolioWidget(HomeScreen *parent, int id, int realGridWidth, int real
     init();
 }
 
-FolioWidget::FolioWidget(HomeScreen *parent, Plasma::Applet *applet, int realGridWidth, int realGridHeight)
+FolioWidget::FolioWidget(HomeScreen *homeScreen, Plasma::Applet *applet, int realGridWidth, int realGridHeight, QObject *parent)
     : QObject{parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_id{applet ? static_cast<int>(applet->id()) : -1}
     , m_realGridWidth{realGridWidth}
     , m_realGridHeight{realGridHeight}
@@ -51,12 +51,12 @@ void FolioWidget::init()
     });
 }
 
-FolioWidget::Ptr FolioWidget::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioWidget::Ptr FolioWidget::fromJson(QJsonObject &obj, HomeScreen *homeScreen)
 {
     int id = obj[QStringLiteral("id")].toInt();
     int gridWidth = obj[QStringLiteral("gridWidth")].toInt();
     int gridHeight = obj[QStringLiteral("gridHeight")].toInt();
-    return std::make_shared<FolioWidget>(parent, id, gridWidth, gridHeight);
+    return std::make_shared<FolioWidget>(homeScreen, id, gridWidth, gridHeight);
 }
 
 QJsonObject FolioWidget::toJson() const

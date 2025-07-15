@@ -196,7 +196,7 @@ void FavouritesModel::setGhostEntry(int row)
 
     // if it doesn't, add a new empty delegate
     if (!found) {
-        FolioDelegate::Ptr ghost = std::make_shared<FolioDelegate>(m_homeScreen);
+        FolioDelegate::Ptr ghost = std::make_shared<FolioDelegate>();
         addEntry(row, ghost);
     }
 }

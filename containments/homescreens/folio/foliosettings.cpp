@@ -22,8 +22,8 @@ const QString CFG_KEY_SHOW_WALLPAPER_BLUR = QStringLiteral("wallpaperBlurEffect"
 const QString CFG_KEY_DOUBLE_TAP_TO_LOCK = QStringLiteral("doubleTapToLock");
 
 FolioSettings::FolioSettings(HomeScreen *parent)
-: QObject{parent}
-, m_homeScreen{parent}
+    : QObject{parent}
+    , m_homeScreen{parent}
 {
 }
 

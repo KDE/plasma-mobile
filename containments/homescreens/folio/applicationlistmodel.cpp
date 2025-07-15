@@ -130,8 +130,8 @@ void ApplicationListModel::load()
 
     // Append new elements
     for (const KService::Ptr &service : toInsert) {
-        FolioApplication::Ptr app = std::make_shared<FolioApplication>(m_homeScreen, service);
-        FolioDelegate::Ptr delegate = std::make_shared<FolioDelegate>(app, m_homeScreen);
+        FolioApplication::Ptr app = std::make_shared<FolioApplication>(service);
+        FolioDelegate::Ptr delegate = std::make_shared<FolioDelegate>(app);
 
         beginInsertRows({}, m_delegates.size(), m_delegates.size());
         m_delegates.append(delegate);

@@ -7,25 +7,25 @@
 #include <QJsonArray>
 #include <algorithm>
 
-FolioApplicationFolder::FolioApplicationFolder(HomeScreen *parent, QString name)
+FolioApplicationFolder::FolioApplicationFolder(HomeScreen *homeScreen, QString name, QObject *parent)
     : QObject{parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_name{name}
     , m_applicationFolderModel{new ApplicationFolderModel{this}}
 {
 }
 
-FolioApplicationFolder::Ptr FolioApplicationFolder::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioApplicationFolder::Ptr FolioApplicationFolder::fromJson(QJsonObject &obj, HomeScreen *homeScreen)
 {
     QString name = obj[QStringLiteral("name")].toString();
     QList<FolioApplication::Ptr> apps;
     for (auto storageId : obj[QStringLiteral("apps")].toArray()) {
         if (KService::Ptr service = KService::serviceByStorageId(storageId.toString())) {
-            apps.append(std::make_shared<FolioApplication>(parent, service));
+            apps.append(std::make_shared<FolioApplication>(service));
         }
     }
 
-    FolioApplicationFolder::Ptr folder = std::make_shared<FolioApplicationFolder>(parent, name);
+    FolioApplicationFolder::Ptr folder = std::make_shared<FolioApplicationFolder>(homeScreen, name);
     folder->setApplications(apps);
     return folder;
 }
@@ -339,7 +339,7 @@ void ApplicationFolderModel::setGhostEntry(int index)
     }
 
     if (!ghost) {
-        ghost = std::make_shared<FolioDelegate>(m_folder->m_homeScreen);
+        ghost = std::make_shared<FolioDelegate>();
     }
 
     // add empty delegate at new position

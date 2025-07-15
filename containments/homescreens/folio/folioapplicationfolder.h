@@ -38,7 +38,7 @@ class FolioApplicationFolder : public QObject, public std::enable_shared_from_th
 public:
     typedef std::shared_ptr<FolioApplicationFolder> Ptr;
 
-    FolioApplicationFolder(HomeScreen *parent = nullptr, QString name = QString{});
+    FolioApplicationFolder(HomeScreen *homeScreen = nullptr, QString name = QString{}, QObject *parent = nullptr);
 
     static std::shared_ptr<FolioApplicationFolder> fromJson(QJsonObject &obj, HomeScreen *parent);
     QJsonObject toJson() const;
