@@ -5,6 +5,7 @@
             {
                 "Email": "florian.richer@protonmail.com",
                 "Name": "Florian RICHER",
+                "Name[ar]": "فلوريان ريشر",
                 "Name[ca@valencia]": "Florian RICHER",
                 "Name[ca]": "Florian RICHER",
                 "Name[es]": "Florian RICHER",
@@ -13,11 +14,14 @@
                 "Name[ka]": "Florian RICHER",
                 "Name[nl]": "Florian RICHER",
                 "Name[sl]": "Florian RICHER",
+                "Name[tr]": "Florian RICHER",
                 "Name[uk]": "Florian RICHER",
-                "Name[x-test]": "xxFlorian RICHERxx"
+                "Name[x-test]": "xxFlorian RICHERxx",
+                "Name[zh_CN]": "Florian RICHER"
             }
         ],
         "Description": "Waydroid quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لويدرويد لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida de Waydroid per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del Waydroid per al Plasma Mobile",
         "Description[es]": "Ajuste rápido de Waydroid para Plasma Mobile",
@@ -25,12 +29,15 @@
         "Description[ka]": "Waydroid-ის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Waydroid snelle instelling van audio voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve za Plasma Mobile",
+        "Description[tr]": "Plasma Cep Waydroid tez ayarı",
         "Description[uk]": "Швидке налаштовування Waydroid для Мобільної Плазми",
         "Description[x-test]": "xxWaydroid quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的 Waydroid 快捷设置",
         "Icon": "folder-android-symbolic",
         "Id": "org.kde.plasma.quicksetting.waydroid",
         "License": "GPL-2.0+",
         "Name": "Waydroid",
+        "Name[ar]": "ويدرويد",
         "Name[ca@valencia]": "Waydroid",
         "Name[ca]": "Waydroid",
         "Name[es]": "Waydroid",
@@ -38,8 +45,10 @@
         "Name[ka]": "Waydroid",
         "Name[nl]": "Waydroid",
         "Name[sl]": "Waydroid",
+        "Name[tr]": "Waydroid",
         "Name[uk]": "Waydroid",
         "Name[x-test]": "xxWaydroidxx",
+        "Name[zh_CN]": "Waydroid",
         "Website": "https://kde.org"
     }
 }

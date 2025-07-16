@@ -4,6 +4,7 @@
             {
                 "Email": "florian.richer@protonmail.com",
                 "Name": "Florian RICHER",
+                "Name[ar]": "فلوريان ريشر",
                 "Name[ca@valencia]": "Florian RICHER",
                 "Name[ca]": "Florian RICHER",
                 "Name[es]": "Florian RICHER",
@@ -12,12 +13,15 @@
                 "Name[ka]": "Florian RICHER",
                 "Name[nl]": "Florian RICHER",
                 "Name[sl]": "Florian RICHER",
+                "Name[tr]": "Florian RICHER",
                 "Name[uk]": "Florian RICHER",
-                "Name[x-test]": "xxFlorian RICHERxx"
+                "Name[x-test]": "xxFlorian RICHERxx",
+                "Name[zh_CN]": "Florian RICHER"
             }
         ],
         "Category": "Waydroid Integration",
         "Description": "Waydroid configuration",
+        "Description[ar]": "ضبط ويدرويد",
         "Description[ca@valencia]": "Configureu Waydroid",
         "Description[ca]": "Configuració del Waydroid",
         "Description[es]": "Configuración de Waydroid",
@@ -26,8 +30,10 @@
         "Description[ka]": "Waydroid-ის მორგება",
         "Description[nl]": "Waydroid-configuratie",
         "Description[sl]": "Konfiguracija Waydroid",
+        "Description[tr]": "Waydroid yapılandırması",
         "Description[uk]": "Налаштовування Waydroid",
         "Description[x-test]": "xxWaydroid configurationxx",
+        "Description[zh_CN]": "Waydroid 配置",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -38,6 +44,7 @@
         "Icon": "folder-android-symbolic",
         "License": "GPL",
         "Name": "Waydroid Integration",
+        "Name[ar]": "تكامل ويدرويد",
         "Name[ca@valencia]": "Integració de Waydroid",
         "Name[ca]": "Integració del Waydroid",
         "Name[es]": "Integración con Waydroid",
@@ -46,11 +53,14 @@
         "Name[ka]": "ინტეგრაცია Waydroid-თან",
         "Name[nl]": "Waydroid-integratie",
         "Name[sl]": "Integracija Waydroid",
+        "Name[tr]": "Waydroid Tümleştirmesi",
         "Name[uk]": "Інтеграція з Waydroid",
         "Name[x-test]": "xxWaydroid Integrationxx",
+        "Name[zh_CN]": "Waydroid 集成",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "waydroid",
+    "X-KDE-Keywords[ar]": "ويدرويد",
     "X-KDE-Keywords[ca@valencia]": "waydroid",
     "X-KDE-Keywords[ca]": "waydroid",
     "X-KDE-Keywords[es]": "waydroid",
@@ -59,7 +69,9 @@
     "X-KDE-Keywords[ka]": "waydroid",
     "X-KDE-Keywords[nl]": "waydroid",
     "X-KDE-Keywords[sl]": "waydroid",
+    "X-KDE-Keywords[tr]": "waydroid",
     "X-KDE-Keywords[uk]": "waydroid",
     "X-KDE-Keywords[x-test]": "xxwaydroidxx",
+    "X-KDE-Keywords[zh_CN]": "waydroid",
     "X-KDE-System-Settings-Parent-Category": "system-administration"
 }

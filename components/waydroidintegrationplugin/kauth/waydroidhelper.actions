@@ -47,7 +47,23 @@ Persistence=session
 
 [org.kde.plasma.mobileshell.waydroidhelper.getandroidid]
 Name=Fetch Android ID for Google Services
+Name[ar]=أحضر معرّف أندرويد لخدمات غوغل
+Name[ca]=Recupera l'ID de l'Android per als Google Services
+Name[es]=Obtener ID de Android para los servicios de Google
+Name[he]=משיכת מזהה Android לשירותי Google
+Name[ka]=Android ID-ის მიღება Google-ის სერვისებისთვის
+Name[nl]=Haal Android-ID op voor Google Services
+Name[uk]=Отримання ідентифікатора Android для служб Google
+Name[x-test]=xxFetch Android ID for Google Servicesxx
 Description=Allow get Android ID of Waydroid container to activate Google services
+Description[ar]=اسمح بالحصول على معرف أندرويد لحاوية ويدرويد لتفعيل خدمات غوغل
+Description[ca]=Permet obtenir l'ID de l'Android del contenidor Waydroid per activar els serveis de Google
+Description[es]=Permitir la obtención del ID de Android del contenedor Waydroid para activar los servicios de Google
+Description[he]=לאפשר משיכת מזהה Android של מכולת Waydroid כדי להפעיל שירותי Google
+Description[ka]=Android ID-ის ან Waydroid-ის კონტეინერის მიღების დაშვება Google-ის სერვისების გასააქტიურებლად
+Description[nl]=Sta ophalen van Android-ID van Waydroid-container toe om Google services te activeren
+Description[uk]=Уможливлює отримання ідентифікатора Android контейнера Waydroid для активації служб Google
+Description[x-test]=xxAllow get Android ID of Waydroid container to activate Google servicesxx
 Policy=yes
 PolicyInactive=yes
 Persistence=session
