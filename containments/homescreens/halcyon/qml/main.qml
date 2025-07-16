@@ -19,6 +19,9 @@ ContainmentItem {
     id: root
 
     Component.onCompleted: {
+        Plasmoid.settings.load();
+        Plasmoid.pinnedModel.load();
+
         Halcyon.ApplicationListModel.loadApplications();
         forceActiveFocus();
     }

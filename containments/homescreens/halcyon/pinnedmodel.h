@@ -5,14 +5,13 @@
 
 #include "application.h"
 #include "applicationfolder.h"
+#include "halcyonsettings.h"
 
 #include <QAbstractListModel>
 #include <QList>
 #include <QObject>
 #include <QQuickItem>
 #include <QSet>
-
-#include <Plasma/Applet>
 
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/plasmawindowmanagement.h>
@@ -37,7 +36,7 @@ public:
         FolderRole
     };
 
-    PinnedModel(Plasma::Applet *parent = nullptr);
+    PinnedModel(HalcyonSettings *settings = nullptr, QObject *parent = nullptr);
     ~PinnedModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -52,19 +51,15 @@ public:
     Q_INVOKABLE void createFolderFromApps(int sourceAppRow, int draggedAppRow);
     Q_INVOKABLE void addAppToFolder(int appRow, int folderRow);
 
+    Q_INVOKABLE void load();
     void save();
-
-    Plasma::Applet *applet();
-    void setApplet(Plasma::Applet *applet);
 
 public Q_SLOTS:
     void addAppFromFolder(const QString &storageId);
 
 private:
-    void load();
-
     QList<Application *> m_applications;
     QList<ApplicationFolder *> m_folders;
 
-    Plasma::Applet *m_applet;
+    HalcyonSettings *m_settings;
 };

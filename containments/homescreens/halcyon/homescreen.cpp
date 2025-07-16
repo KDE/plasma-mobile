@@ -13,8 +13,8 @@ K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "metadata.json")
 
 HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment{parent, data, args}
-    , m_settings{new HalcyonSettings{this, config()}}
-    , m_pinnedModel{new PinnedModel{this}}
+    , m_settings{new HalcyonSettings{this, this}}
+    , m_pinnedModel{new PinnedModel{m_settings, this}}
 {
     setHasConfigurationInterface(true);
 }

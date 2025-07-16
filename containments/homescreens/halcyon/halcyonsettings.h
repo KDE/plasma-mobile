@@ -7,6 +7,8 @@
 
 #include <KConfigGroup>
 
+#include <Plasma/Applet>
+
 #include <qqmlregistration.h>
 
 class HalcyonSettings : public QObject
@@ -18,7 +20,7 @@ class HalcyonSettings : public QObject
     Q_PROPERTY(bool doubleTapToLock READ doubleTapToLock WRITE setDoubleTapToLock NOTIFY doubleTapToLockChanged)
 
 public:
-    HalcyonSettings(QObject *parent = nullptr, KConfigGroup config = {});
+    HalcyonSettings(Plasma::Applet *applet = nullptr, QObject *parent = nullptr);
 
     enum WallpaperBlurEffect {
         None = 0,
@@ -27,11 +29,16 @@ public:
     };
     Q_ENUM(WallpaperBlurEffect)
 
+    QString pinned() const;
+    void setPinned(const QString &pinnedJson);
+
     WallpaperBlurEffect wallpaperBlurEffect() const;
     void setWallpaperBlurEffect(WallpaperBlurEffect wallpaperBlurEffect);
 
     bool doubleTapToLock() const;
     void setDoubleTapToLock(bool doubleTapToLock);
+
+    Q_INVOKABLE void load();
 
 Q_SIGNALS:
     void wallpaperBlurEffectChanged();
@@ -39,10 +46,12 @@ Q_SIGNALS:
 
 private:
     void save();
-    void load();
+    KConfigGroup configGroup() const;
+
+    void migrateConfigFromPlasma6_4();
 
     WallpaperBlurEffect m_wallpaperBlurEffect{Full};
     bool m_doubleTapToLock{true};
 
-    KConfigGroup m_config;
+    Plasma::Applet *m_applet;
 };

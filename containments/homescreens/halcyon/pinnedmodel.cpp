@@ -8,11 +8,10 @@
 
 #include <KLocalizedString>
 
-PinnedModel::PinnedModel(Plasma::Applet *parent)
+PinnedModel::PinnedModel(HalcyonSettings *settings, QObject *parent)
     : QAbstractListModel{parent}
-    , m_applet{parent}
+    , m_settings{settings}
 {
-    load();
 }
 
 PinnedModel::~PinnedModel() = default;
@@ -181,11 +180,7 @@ void PinnedModel::addAppToFolder(int appRow, int folderRow)
 
 void PinnedModel::load()
 {
-    if (!m_applet) {
-        return;
-    }
-
-    QJsonDocument doc = QJsonDocument::fromJson(m_applet->config().readEntry("Pinned", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_settings->pinned().toUtf8());
 
     beginResetModel();
 
@@ -218,10 +213,6 @@ void PinnedModel::load()
 
 void PinnedModel::save()
 {
-    if (!m_applet) {
-        return;
-    }
-
     QJsonArray arr;
     for (int i = 0; i < m_applications.size() && i < m_folders.size(); i++) {
         if (m_applications[i]) {
@@ -232,16 +223,10 @@ void PinnedModel::save()
     }
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_applet->config().writeEntry("Pinned", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_applet->configNeedsSaving();
+    m_settings->setPinned(QString::fromStdString(data.toStdString()));
 }
 
 void PinnedModel::addAppFromFolder(const QString &storageId)
 {
     addApp(storageId, 0);
-}
-
-Plasma::Applet *PinnedModel::applet()
-{
-    return m_applet;
 }
