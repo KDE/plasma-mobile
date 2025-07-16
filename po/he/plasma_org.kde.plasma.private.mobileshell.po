@@ -1,98 +1,97 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2025-04-21 18:19+0400\n"
-"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
-"Language-Team: ar\n"
-"Language: ar\n"
+"PO-Revision-Date: 2025-07-14 16:28+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: notifications/notificationfilemenu.cpp:109
 #, kde-format
 msgid "Open Containing Folder"
-msgstr "افتح المجلد الحاوي"
+msgstr "פתיחת התיקייה המכילה"
 
 #: notifications/notificationfilemenu.cpp:123
 #, kde-format
 msgid "&Copy"
-msgstr "ا&نسخ"
+msgstr "ה&עתקה"
 
 #: notifications/notificationfilemenu.cpp:131
 #, kde-format
 msgctxt "@action:incontextmenu"
 msgid "Copy Location"
-msgstr "انسخ المكان"
+msgstr "העתקת מקום"
 
 #: notifications/notificationfilemenu.cpp:176
 #, kde-format
 msgid "Properties"
-msgstr "الخصائص"
+msgstr "מאפיינים"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
 #, kde-format
 msgid "On"
-msgstr "يعمل"
+msgstr "כבוי"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
 #, kde-format
 msgid "Off"
-msgstr "مغلق"
+msgstr "פעיל"
 
 #: qml/dataproviders/AudioProvider.qml:171
 #, kde-format
 msgid "Audio"
-msgstr "الصوت"
+msgstr "שמע"
 
 #: qml/dataproviders/AudioProvider.qml:175
 #, kde-format
 msgid "Increase Volume"
-msgstr "زد الصوت"
+msgstr "הגברת עוצמת השמע"
 
 #: qml/dataproviders/AudioProvider.qml:182
 #, kde-format
 msgid "Decrease Volume"
-msgstr "اخفض الصوت"
+msgstr "הנמכת עוצמת השמע"
 
 #: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
 #, kde-format
 msgid "Mute"
-msgstr "اكتم"
+msgstr "השתקה"
 
 #: qml/dataproviders/SignalStrengthInfo.qml:15
 #, kde-format
 msgid "SIM Locked"
-msgstr "الشريحة مقفلة"
+msgstr "ה־SIM נעול"
 
 #: qml/osd/volume/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
-msgstr "المخرجات"
+msgstr "ערוצי פלט"
 
 #: qml/osd/volume/AudioApplet.qml:103
 #, kde-format
 msgid "Inputs"
-msgstr "المدخلات"
+msgstr "ערוצי קלט"
 
 #: qml/osd/volume/AudioApplet.qml:134
 #, kde-format
 msgid "Playback Streams"
-msgstr "تدفقات التشغيل"
+msgstr "תזרימי נגינה"
 
 #: qml/osd/volume/AudioApplet.qml:187
 #, kde-format
 msgid "Recording Streams"
-msgstr "تدفقات التّسجيل"
+msgstr "תזרימי הקלטה"
 
 #: qml/osd/volume/DeviceListItem.qml:25
 #, kde-format
@@ -103,24 +102,24 @@ msgstr "%1 (%2)"
 #: qml/osd/volume/DeviceListItem.qml:34
 #, kde-format
 msgid "Device name not found"
-msgstr "لم يعثر على اسم الجهاز"
+msgstr "שם המכשיר לא נמצא"
 
 #: qml/osd/volume/ListItemBase.qml:104
 #, kde-format
 msgid "Show additional options for %1"
-msgstr "أظهر خيارات إضافية لـ%1"
+msgstr "להציג אפשרויות נוספות עבור %1"
 
 #: qml/osd/volume/ListItemBase.qml:160
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
-msgstr "اضبط المستوى إلى %1"
+msgstr "כיוון עוצמת השמע עבור %1"
 
 #: qml/osd/volume/ListItemBase.qml:242
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1٪"
+msgstr "%1%"
 
 #: qml/osd/volume/ListItemBase.qml:257
 #, kde-format
@@ -131,7 +130,7 @@ msgstr "100%"
 #: qml/osd/volume/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
-msgstr "أصوات الإشعارات"
+msgstr "צלילי התראות"
 
 #: qml/osd/volume/StreamListItem.qml:24
 #, kde-format
@@ -142,12 +141,12 @@ msgstr "%1: %2"
 #: qml/osd/volume/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
-msgstr "اسم الدفق غير موجود"
+msgstr "שם התזרים לא נמצא"
 
 #: qml/osd/volume/VolumeOSD.qml:108
 #, kde-format
 msgid "Unmute"
-msgstr "ألغ الكتم"
+msgstr "ביטול השתקה"
 
 #: qml/osd/volume/VolumeOSD.qml:132
 #, kde-format
@@ -158,151 +157,151 @@ msgstr "100%"
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
-msgstr "%1٪"
+msgstr "%1%"
 
 #: qml/osd/volume/VolumeOSD.qml:162
 #, kde-format
 msgid "Open audio settings"
-msgstr "افتح إعدادات الصوت"
+msgstr "פתיחת הגדרות שמע"
 
 #: qml/osd/volume/VolumeOSD.qml:175
 #, kde-format
 msgid "Audio Settings"
-msgstr "إعدادات الصوت"
+msgstr "הגדרות שמע"
 
 #: qml/osd/volume/VolumeOSD.qml:182
 #, kde-format
 msgid "Toggle showing audio streams"
-msgstr "تبديل عرض تدفقات الصوت"
+msgstr "החלפת הופעת תזרימי שמע"
 
 #: qml/statusbar/indicators/BatteryIndicator.qml:36
 #, kde-format
 msgid "%1%"
-msgstr "%1٪"
+msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
 msgid "Search…"
-msgstr "ابحث..."
+msgstr "חיפוש…"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
 #, kde-format
 msgid "No media playing"
-msgstr "لا وسائط تعمل"
+msgstr "לא מתנגנת מדיה"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
 #, kde-format
 msgid "Previous track"
-msgstr "المقطوعة السابقة"
+msgstr "הרצועה הקודמת"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
 #, kde-format
 msgid "Play or Pause media"
-msgstr "شغّل أو أوقف الوسيط"
+msgstr "לנגן או להשהות מדיה"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
 #, kde-format
 msgid "Next track"
-msgstr "المقطوعة التالية"
+msgstr "הרצועה הבאה"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:55
 #, kde-format
 msgctxt "Reply to message"
 msgid "Reply"
-msgstr "رد"
+msgstr "להגיב"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:36
 #, kde-format
 msgctxt "Text field placeholder"
 msgid "Type a reply…"
-msgstr "اكتب رد.."
+msgstr "נא להקליד תגובה…"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Send"
-msgstr "أرسل"
+msgstr "שליחה"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:176
 #, kde-format
 msgid "Notification service not available"
-msgstr "خدمة الإشعارات غير متوفرة"
+msgstr "שירות ההתראות לא זמין"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:185
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
-msgstr "الإشعارات تزود حاليا بواسطة '%1 %2' "
+msgstr "ההתראות מסופקות כרגע על ידי ‚%1 %2’"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:321
 #, kde-format
 msgid "Show Fewer"
-msgstr "اعرض أقل"
+msgstr "להציג פחות"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:323
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
-msgstr "اعرض أكثر بـ%1"
+msgstr "להציג עוד %1"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:382
 #, kde-format
 msgid "Clear All Notifications"
-msgstr "امسح جميع الإشعارات"
+msgstr "פינוי כל ההתראות"
 
 #: qml/widgets/notifications/ThumbnailStrip.qml:132
 #, kde-format
 msgid "More Options…"
-msgstr "خيارات أكثر..."
+msgstr "אפשרויות נוספות…"
 
 #: qml/widgets/notifications/util.js:14
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
-msgstr "%1 (مُلبثة)"
+msgstr "%1 (מושהית)"
 
 #: qml/widgets/notifications/util.js:19
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr "%1 (فشلت)"
+msgstr "%1 (נכשלה)"
 
 #: qml/widgets/notifications/util.js:21
 #, kde-format
 msgid "Job Failed"
-msgstr "فشلت المهمّة"
+msgstr "המשימה נכשלה"
 
 #: qml/widgets/notifications/util.js:24
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
-msgstr "%1 (انتهت العملية)"
+msgstr "%1 (הסתיימה)"
 
 #: qml/widgets/notifications/util.js:26
 #, kde-format
 msgid "Job Finished"
-msgstr "انتهت المهمّة"
+msgstr "המשימה הסתיימה"
 
 #: qml/widgets/notifications/util.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr "منذ %1د"
+msgstr "לפני %1 דק׳"
 
 #: qml/widgets/notifications/util.js:81
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr "%1 ث متبقي"
+msgstr "נותרו %1 שנ׳"
 
 #: qml/widgets/notifications/util.js:84
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr "المتبقي %1د"
+msgstr "נותרו %1 דק׳"
 
 #: qml/widgets/notifications/util.js:87
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr "%1 س متبقية"
+msgstr "נותרו %1 שע׳"

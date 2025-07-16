@@ -1,193 +1,191 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2025-04-26 12:12+0400\n"
-"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
-"Language-Team: ar\n"
-"Language: ar\n"
+"PO-Revision-Date: 2025-07-14 16:28+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "الصدَفة"
+msgstr "מעטפת"
 
 #: package/contents/ui/main.qml:36
 #, kde-format
 msgid "General"
-msgstr "عامّ"
+msgstr "כללי"
 
 #: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr "اهتزازات الصدفة"
+msgstr "רטט במעטפת"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Animations"
-msgstr "التّحريكات"
+msgstr "הנפשות"
 
 #: package/contents/ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr "إذا كان هذا متوقفًا، فستقلل الرسوم المتحركة قدر الإمكان."
+msgstr "אם אפשרות זו כבויה, ההנפשות תופחתנה לכמה שפחות."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
-msgstr "لوحة التنقل"
+msgstr "לוח ניווט"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr "وضع الإيماءات فقط"
+msgstr "מצב מחוות בלבד"
 
 #: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr "ما إذا كنت تريد إخفاء لوحة التنقل أم لا."
+msgstr "האם להסתיר את לוח הניווט."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr "مبدّل المهام"
+msgstr "מחליף משימות"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr "اعرض معاينات التطبيق"
+msgstr "הצגת תצוגות יישומונים מקדימות"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr "قد يساعد إيقاف تشغيل هذا في تحسين الأداء."
+msgstr "כיבוי האפשרות הזאת עשוי לשפר את הביצועים."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr "دُرج الإجراءات"
+msgstr "מגירת פעולות"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
 #: package/contents/ui/QuickSettingsForm.qml:34
 #, kde-format
 msgid "Quick Settings"
-msgstr "إعدادات سريعة"
+msgstr "הגדרות מהירות"
 
 #: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr "وضع المثبت"
+msgstr "מצב נעוץ"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr "وضع الموسّع"
+msgstr "מצב מורחב"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr "وضع الدرج الأيسر العلوي"
+msgstr "מצב מגירה שמאלית עליונה"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr "الوضع عند الفتح من أعلى اليسار."
+msgstr "מצב בעת פתיחה מהפינה השמאלית העליונה."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr "وضع الدرج العلوي الأيمن"
+msgstr "מצב מגירה ימנית עליונה"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr "الوضع عند الفتح من أعلى اليمين."
+msgstr "מצב בעת פתיחה מהפינה הימנית העליונה."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr "خصّص ترتيب الإعدادات السريعة في اللوحة المنسدلة."
+msgstr "התאמת סדר ההגדרות המהירות בלוח הנשלף מלמעלה."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "ما إذا كان يجب تمكين الاهتزازات."
+msgstr "האם להפעיל רטט במעטפת."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr "شدة الاهتزاز"
+msgstr "חוזק רטט"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr "مدى شدة الاهتزازات."
+msgstr "כמה חזק צריך להיות הרטט במעטפת."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr "منخفض"
+msgstr "חלש"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr "متوسط"
+msgstr "בינוני"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr "عالي"
+msgstr "חזק"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr "مدة الاهتزاز"
+msgstr "משך רטט"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr "كم من الوقت يجب أن تكون الاهتزازات."
+msgstr "מה יהיה אורך הרטט במעטפת."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "طويل"
+msgstr "ארוך"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "متوسط"
+msgstr "בינוני"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "قصير"
+msgstr "קצר"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr ""
-"يُتحكم في اهتزازات لوحة المفاتيح بشكل منفصل في وحدة إعدادات لوحة المفاتيح."
+msgstr "הרטט במקלדת נשלט בנפרד דרך מודול הגדרות המקלדת."
