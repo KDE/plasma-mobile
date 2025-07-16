@@ -26,6 +26,9 @@ class HomeScreen;
 class FolioApplication : public QObject, public std::enable_shared_from_this<FolioApplication>
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(bool running READ running NOTIFY windowChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)

@@ -24,6 +24,9 @@ class HomeScreen;
 class HomeScreenState : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(HomeScreenState::SwipeState swipeState READ swipeState NOTIFY swipeStateChanged)
     Q_PROPERTY(HomeScreenState::ViewState viewState READ viewState NOTIFY viewStateChanged)
     Q_PROPERTY(DragState *dragState READ dragState CONSTANT)

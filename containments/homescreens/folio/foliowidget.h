@@ -25,6 +25,9 @@ public:
 class FolioWidget : public QObject, public std::enable_shared_from_this<FolioWidget>
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(int id READ id NOTIFY idChanged)
     Q_PROPERTY(int gridWidth READ gridWidth NOTIFY gridWidthChanged)
     Q_PROPERTY(int gridHeight READ gridHeight NOTIFY gridHeightChanged)

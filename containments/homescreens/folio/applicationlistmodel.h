@@ -24,6 +24,8 @@ class FolioDelegate;
 class ApplicationListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     enum Roles {
@@ -59,6 +61,8 @@ protected:
 class ApplicationListSearchModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     ApplicationListSearchModel(HomeScreen *parent = nullptr, ApplicationListModel *model = nullptr);

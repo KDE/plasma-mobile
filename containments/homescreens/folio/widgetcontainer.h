@@ -10,9 +10,9 @@
 class WidgetContainer : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY(bool editMode READ editMode WRITE setEditMode NOTIFY editModeChanged)
+    QML_ELEMENT
 
-    QML_NAMED_ELEMENT(WidgetContainer)
+    Q_PROPERTY(bool editMode READ editMode WRITE setEditMode NOTIFY editModeChanged)
 
 public:
     WidgetContainer(QQuickItem *parent = nullptr);

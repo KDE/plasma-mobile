@@ -17,6 +17,9 @@ class HomeScreenState;
 class DelegateDragPosition : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(DelegateDragPosition::Location location READ location NOTIFY locationChanged)
     Q_PROPERTY(int page READ page NOTIFY pageChanged)
     Q_PROPERTY(int pageRow READ pageRow NOTIFY pageRowChanged)

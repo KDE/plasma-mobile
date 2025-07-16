@@ -16,6 +16,7 @@
 class DelegateTouchArea : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged FINAL)
     Q_PROPERTY(bool hovered READ hovered NOTIFY hoveredChanged FINAL)

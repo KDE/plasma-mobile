@@ -11,6 +11,8 @@
 #include <QQmlExtensionPlugin>
 #include <QQuickItem>
 
+K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "metadata.json")
+
 HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment{parent, data, args}
     , m_folioSettings{new FolioSettings{this}}
@@ -23,24 +25,6 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
 {
     // HomeScreenState init() has dependencies on other objects
     m_homeScreenState->init();
-
-    const char *uri = "org.kde.private.mobile.homescreen.folio";
-    qmlRegisterUncreatableType<HomeScreen>(uri, 1, 0, "HomeScreen", "");
-    qmlRegisterUncreatableType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", "");
-    qmlRegisterUncreatableType<ApplicationListSearchModel>(uri, 1, 0, "ApplicationListSearchModel", "");
-    qmlRegisterUncreatableType<FavouritesModel>(uri, 1, 0, "FavouritesModel", "");
-    qmlRegisterUncreatableType<PageListModel>(uri, 1, 0, "PageListModel", "");
-    qmlRegisterUncreatableType<FolioSettings>(uri, 1, 0, "FolioSettings", "");
-    qmlRegisterUncreatableType<HomeScreenState>(uri, 1, 0, "HomeScreenState", "");
-    qmlRegisterUncreatableType<FolioApplication>(uri, 1, 0, "FolioApplication", "");
-    qmlRegisterUncreatableType<FolioApplicationFolder>(uri, 1, 0, "FolioApplicationFolder", "");
-    qmlRegisterUncreatableType<FolioWidget>(uri, 1, 0, "FolioWidget", "");
-    qmlRegisterUncreatableType<FolioDelegate>(uri, 1, 0, "FolioDelegate", "");
-    qmlRegisterUncreatableType<PageModel>(uri, 1, 0, "PageModel", "");
-    qmlRegisterUncreatableType<FolioPageDelegate>(uri, 1, 0, "FolioPageDelegate", "");
-    qmlRegisterType<DelegateTouchArea>(uri, 1, 0, "DelegateTouchArea");
-    qmlRegisterUncreatableType<DelegateDragPosition>(uri, 1, 0, "DelegateDragPosition", "");
-    qmlRegisterType<WidgetContainer>(uri, 1, 0, "WidgetContainer");
 
     setHasConfigurationInterface(true);
 
@@ -102,7 +86,5 @@ PageListModel *HomeScreen::pageListModel()
 {
     return m_pageListModel;
 }
-
-K_PLUGIN_CLASS(HomeScreen)
 
 #include "homescreen.moc"

@@ -27,6 +27,8 @@ struct FavouritesDelegate {
 class FavouritesModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     enum Roles {

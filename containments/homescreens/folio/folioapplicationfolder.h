@@ -31,6 +31,9 @@ class FolioApplication;
 class FolioApplicationFolder : public QObject, public std::enable_shared_from_this<FolioApplicationFolder>
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QList<FolioApplication *> appPreviews READ appPreviews NOTIFY applicationsChanged)
     Q_PROPERTY(ApplicationFolderModel *applications READ applications NOTIFY applicationsReset)

@@ -17,6 +17,9 @@ class PageModel;
 class PageListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(int length READ length NOTIFY lengthChanged)
 
 public:

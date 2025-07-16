@@ -18,6 +18,9 @@ class FolioWidget;
 class FolioDelegate : public QObject, public std::enable_shared_from_this<FolioDelegate>
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(FolioDelegate::Type type READ type CONSTANT)
     Q_PROPERTY(FolioApplication *application READ applicationRaw CONSTANT)
     Q_PROPERTY(FolioApplicationFolder *folder READ folderRaw CONSTANT)
@@ -64,9 +67,11 @@ protected:
 class FolioPageDelegate : public FolioDelegate
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(int row READ row NOTIFY rowChanged)
     Q_PROPERTY(int column READ column NOTIFY columnChanged)
-    QML_UNCREATABLE("")
 
 public:
     typedef std::shared_ptr<FolioPageDelegate> Ptr;
