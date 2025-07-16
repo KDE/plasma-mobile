@@ -252,8 +252,7 @@ void FavouritesModel::save()
     QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_homeScreen->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_homeScreen->configNeedsSaving();
+    m_homeScreen->folioSettings()->setFavorites(QString::fromStdString(data.toStdString()));
 }
 
 void FavouritesModel::load()
@@ -262,7 +261,7 @@ void FavouritesModel::load()
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->config().readEntry("Favourites", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->folioSettings()->favorites().toUtf8());
     loadFromJson(doc.array());
 }
 

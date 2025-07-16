@@ -46,6 +46,14 @@ public:
     };
     Q_ENUM(WallpaperBlurEffect)
 
+    // JSON object
+    QString favorites() const;
+    void setFavorites(const QString &favoritesJson);
+
+    // JSON object
+    QString pages() const;
+    void setPages(const QString &pagesJson);
+
     // number of rows and columns in the config for the homescreen
     // NOTE: use HomeScreenState.pageRows() instead in UI logic since we may have the rows and
     //       columns swapped (in landscape layouts)
@@ -98,6 +106,10 @@ Q_SIGNALS:
 
 private:
     void save();
+    KConfigGroup generalConfigGroup() const;
+
+    // Legacy
+    void migrateConfigFromPlasma6_4();
 
     HomeScreen *m_homeScreen{nullptr};
 
