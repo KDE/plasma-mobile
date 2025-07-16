@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-15 00:46+0000\n"
-"PO-Revision-Date: 2025-07-12 01:43+0100\n"
+"PO-Revision-Date: 2025-07-16 00:35+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -95,7 +95,7 @@ msgstr "Detener sesión"
 #: ui/WaydroidConfigurationForm.qml:47
 #, kde-format
 msgid "Certify my device for Google Play Protect"
-msgstr ""
+msgstr "Certificar mi dispositivo para Google Play Protect"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
@@ -145,18 +145,15 @@ msgstr "Permitir que Android acceda directamente a los dispositivos conectados"
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
 msgid "Google Play Protect configuration"
-msgstr ""
+msgstr "Configuración de Google Play Protect"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "We fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"La sesión de Waydroid se está iniciando.\n"
+"Extrayendo su ID de Android.\n"
 "Puede tardar unos segundos."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
@@ -167,12 +164,17 @@ msgid ""
 "your device, paste the Android ID on the field in the website. Then, give "
 "the Google services some minutes to reflect the change and restart waydroid."
 msgstr ""
+"Al lanzar Waydroid con GAPPS por primera vez, se le mostrará una "
+"notificación indicando que el dispositivo no está certificado para Google "
+"Play Protect. Para certificar su dispositivo, pegue el ID de Android en el "
+"sitio web. A continuación, espere unos minutos para que los servicios de "
+"Google reflejen el cambio y reinicie Waydroid."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
-msgstr ""
+msgstr "Copiar ID de Android y abrir el sitio web"
 
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format

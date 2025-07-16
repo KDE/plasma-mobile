@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-28 00:43+0000\n"
+"POT-Creation-Date: 2025-07-16 00:44+0000\n"
 "PO-Revision-Date: 2022-06-10 23:41-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -14,78 +14,77 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/FavoritesGrid.qml:223
-#: package/contents/ui/FolderGrid.qml:189
+#: pinnedmodel.cpp:147
+#, kde-format
+msgctxt "Default application folder name."
+msgid "Folder"
+msgstr "フォルダー"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "お気に入りから削除する"
 
-#: package/contents/ui/FavoritesGrid.qml:293
+#: qml/FavoritesGrid.qml:294
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "アプリケーションをお気に入りに登録して、ここに表示させる。"
 
-#: package/contents/ui/FolderGrid.qml:194
+#: qml/FolderGrid.qml:194
 #, kde-format
 msgid "Move out of folder"
 msgstr "フォルダーの外に移動する"
 
-#: package/contents/ui/GridAppDelegate.qml:64
+#: qml/GridAppDelegate.qml:65
 #, kde-format
 msgid "Add to favourites"
 msgstr "お気に入りに追加する"
 
-#: package/contents/ui/GridAppList.qml:68
+#: qml/GridAppList.qml:68
 #, kde-format
 msgid "Applications"
 msgstr "アプリケーション"
 
-#: package/contents/ui/settings/SettingsWindow.qml:76
+#: qml/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:86
+#: qml/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:92
+#: qml/settings/SettingsWindow.qml:92
 #, kde-format
 msgid "Wallpaper blur effect"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:95
+#: qml/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:96
+#: qml/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:97
+#: qml/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:114
+#: qml/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:130
+#: qml/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
-
-#: plugin/pinnedmodel.cpp:151
-#, kde-format
-msgctxt "Default application folder name."
-msgid "Folder"
-msgstr "フォルダー"

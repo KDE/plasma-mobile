@@ -144,16 +144,11 @@ msgid "Google Play Protect configuration"
 msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "We fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid 会话正在启动。\n"
-"可能需要几秒钟。"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
 #, kde-format

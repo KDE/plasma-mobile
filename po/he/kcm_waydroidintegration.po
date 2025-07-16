@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-15 00:46+0000\n"
-"PO-Revision-Date: 2025-07-11 10:01+0300\n"
+"PO-Revision-Date: 2025-07-15 08:04+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -94,7 +94,7 @@ msgstr "עצירת הפעלה"
 #: ui/WaydroidConfigurationForm.qml:47
 #, kde-format
 msgid "Certify my device for Google Play Protect"
-msgstr ""
+msgstr "הסמכת המכשיר שלי ל־Google Play Protect"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
@@ -143,19 +143,16 @@ msgstr "לאפשר ל־Android לגשת ישירות להתקנים בחיבור
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
 msgid "Google Play Protect configuration"
-msgstr ""
+msgstr "הגדרות Google Play Protect"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "We fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"הפעלת Waydroid מתחילה.\n"
-"זה יכול לארוך כמה שניות."
+"אנחנו מושכים את מזהה ה־Android שלך.\n"
+"זה עלול לארוך כמה שניות."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
 #, kde-format
@@ -165,12 +162,16 @@ msgid ""
 "your device, paste the Android ID on the field in the website. Then, give "
 "the Google services some minutes to reflect the change and restart waydroid."
 msgstr ""
+"בעת הפעלת waydroid עם GAPPS (יישומוני Google) לראשונה תופיע הודעה שהמכשיר לא "
+"הוסמך ל־Google Play Protect. כדי להסמיך את המכשיר שלך בעצמך, יש להדביק את "
+"מזהה ה־Android בשדה שבאתר. לאחר מכן, להמתין לשירותי Google במשך כמה דקות כדי "
+"שהשינויים יחולו ואז להפעיל את wyadroid מחדש."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
-msgstr ""
+msgstr "העתקת מזהה Android ופתיחת האתר"
 
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format
