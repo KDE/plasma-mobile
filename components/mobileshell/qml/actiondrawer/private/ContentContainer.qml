@@ -83,14 +83,14 @@ Item {
         // Proxy in the layout that switches between landscape and portrait mode.
         ColumnLayout {
             anchors.fill: parent
-            visible: root.actionDrawer.mode != ActionDrawer.Portrait
+            visible: root.actionDrawer.mode != MobileShell.ActionDrawer.Portrait
             LayoutItemProxy { target: contentContainerLoader }
         }
 
         // Mouse area for dismissing action drawer in portrait mode when background is clicked.
         MouseArea {
             anchors.fill: parent
-            visible: root.actionDrawer.mode == ActionDrawer.Portrait
+            visible: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait
 
             // dismiss drawer when background is clicked
             onClicked: root.actionDrawer.close();
@@ -106,8 +106,8 @@ Item {
 
             anchors {
                 topMargin: notificationDrawer.height + 1
-                leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : 10
-                rightMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.notificationWidget.anchors.rightMargin + Kirigami.Units.gridUnit - notificationDrawer.anchors.leftMargin + 370
+                leftMargin: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? 0 : 10
+                rightMargin: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? 0 : notificationDrawer.notificationWidget.anchors.rightMargin + Kirigami.Units.gridUnit - notificationDrawer.anchors.leftMargin + 370
                 top: parent.top
                 left: parent.left
                 right: parent.right
@@ -170,8 +170,8 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
-            rightMargin: root.actionDrawer.mode == ActionDrawer.Portrait ? 0 : 360
-            leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.minWidthHeight * 0.06
+            rightMargin: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? 0 : 360
+            leftMargin: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? 0 : notificationDrawer.minWidthHeight * 0.06
         }
     }
 
@@ -185,8 +185,8 @@ Item {
             left: parent.left
             right: parent.right
         }
-        height: root.actionDrawer.mode === ActionDrawer.Portrait ? actionDrawer.offsetResistance : root.height
-        interactive: root.actionDrawer.mode === ActionDrawer.Portrait
+        height: root.actionDrawer.mode === MobileShell.ActionDrawer.Portrait ? actionDrawer.offsetResistance : root.height
+        interactive: root.actionDrawer.mode === MobileShell.ActionDrawer.Portrait
 
         onSwipeStarted: root.startSwipe()
         onSwipeEnded: root.endSwipe()
@@ -199,7 +199,7 @@ Item {
         // Proxy in the layout that switches between landscape and portrait mode.
         ColumnLayout {
             anchors.fill: parent
-            visible: root.actionDrawer.mode == ActionDrawer.Portrait
+            visible: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait
             LayoutItemProxy { target: contentContainerLoader }
         }
     }
@@ -219,7 +219,7 @@ Item {
         readonly property real minimizedToFullProgress: root.actionDrawer.openToPinnedMode ? (root.actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0) : 1
 
         asynchronous: true
-        sourceComponent: root.actionDrawer.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
+        sourceComponent: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
     }
 
     // The portrait content container.
@@ -252,11 +252,11 @@ Item {
     // Components shared between the two layouts.
     // This allows us to avoid having to reload the components every time the screen size changes.
 
-    property MobileShell.QuickSettings quickSettings: MobileShell.QuickSettings {
+    property QuickSettings quickSettings: QuickSettings {
         id: quickSettings
         actionDrawer: root.actionDrawer
         quickSettingsModel: root.quickSettingsModel
-        fullViewProgress: (root.actionDrawer.mode == ActionDrawer.Portrait) ? contentContainerLoader.minimizedToFullProgress : 1.0
+        fullViewProgress: (root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait) ? contentContainerLoader.minimizedToFullProgress : 1.0
     }
 
     property MobileShell.StatusBar statusBar: MobileShell.StatusBar {
@@ -265,9 +265,9 @@ Item {
         Kirigami.Theme.inherit: false
 
         backgroundColor: "transparent"
-        showSecondRow: root.actionDrawer.mode == ActionDrawer.Portrait
+        showSecondRow: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait
         showDropShadow: false
-        showTime: root.actionDrawer.mode == ActionDrawer.Portrait
+        showTime: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait
 
         // security reasons, system tray also doesn't work on lockscreen
         disableSystemTray: root.actionDrawer.restrictedPermissions

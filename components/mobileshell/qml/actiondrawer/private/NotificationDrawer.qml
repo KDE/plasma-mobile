@@ -24,8 +24,8 @@ Item {
     property alias notificationWidget: notificationWidget
     property real contentY: notificationWidget.listView.contentY
 
-    property real topPadding: actionDrawer.mode == ActionDrawer.Portrait ? Kirigami.Units.largeSpacing : date.y + date.height + Kirigami.Units.smallSpacing * 6
-    property real topMargin: actionDrawer.mode == ActionDrawer.Portrait ? actionDrawer.offsetResistance + 1 : 0
+    property real topPadding: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? Kirigami.Units.largeSpacing : date.y + date.height + Kirigami.Units.smallSpacing * 6
+    property real topMargin: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? actionDrawer.offsetResistance + 1 : 0
 
     readonly property real minWidthHeight: Math.min(actionDrawer.width, actionDrawer.height)
     readonly property bool hasNotifications: notificationWidget.hasNotifications
@@ -54,8 +54,8 @@ Item {
         id: notificationWidget
         anchors.fill: parent
         anchors.topMargin: root.topMargin
-        anchors.rightMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : Math.max(root.width - Kirigami.Units.gridUnit * 25, 0)
-        anchors.leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : -Kirigami.Units.gridUnit
+        anchors.rightMargin: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? 0 : Math.max(root.width - Kirigami.Units.gridUnit * 25, 0)
+        anchors.leftMargin: actionDrawer.mode == MobileShell.ActionDrawer.Portrait ? 0 : -Kirigami.Units.gridUnit
 
         historyModel: actionDrawer.notificationModel
         historyModelType: actionDrawer.notificationModelType
@@ -63,7 +63,7 @@ Item {
         actionsRequireUnlock: actionDrawer.restrictedPermissions
         onUnlockRequested: actionDrawer.permissionsRequested()
         topPadding: root.topPadding
-        showHeader: actionDrawer.mode != ActionDrawer.Portrait
+        showHeader: actionDrawer.mode != MobileShell.ActionDrawer.Portrait
         listView.interactive: !actionDrawer.dragging && root.listOverflowing
 
         Connections {
@@ -158,7 +158,7 @@ Item {
     Item {
         id: landscapeModeHeader
         anchors.fill: parent
-        visible: actionDrawer.mode != ActionDrawer.Portrait
+        visible: actionDrawer.mode != MobileShell.ActionDrawer.Portrait
 
         transform: [
             Translate {

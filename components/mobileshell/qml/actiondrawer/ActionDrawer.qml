@@ -12,9 +12,11 @@ import QtQuick.Window 2.2
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
+import org.kde.plasma.private.mobileshell as MobileShell
+
+import 'actiondrawer/private'
 
 Item {
     id: root
@@ -96,7 +98,7 @@ Item {
     /**
      * The mode of the action drawer (portrait or landscape).
      */
-    property int mode: (height > width && width <= largePortraitThreshold) ? ActionDrawer.Portrait : ActionDrawer.Landscape
+    property int mode: (height > width && width <= largePortraitThreshold) ? MobileShell.ActionDrawer.Portrait : MobileShell.ActionDrawer.Landscape
 
     /**
      * At some point, even if the screen is technically portrait, if we have a ton of width it'd be best to just show the landscape mode.
