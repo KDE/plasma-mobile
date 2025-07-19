@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-11 00:44+0000\n"
+"POT-Creation-Date: 2025-07-19 05:23+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -50,17 +50,17 @@ msgstr "复制地址"
 msgid "Properties"
 msgstr "属性"
 
-#: qml/actiondrawer/ContentContainer.qml:151
+#: qml/actiondrawer/private/ContentContainer.qml:151
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "清除所有通知"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "On"
 msgstr "开"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "Off"
 msgstr "关"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-15 00:46+0000\n"
-"PO-Revision-Date: 2025-07-11 13:24+0200\n"
+"PO-Revision-Date: 2025-07-15 10:18+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -95,7 +95,7 @@ msgstr "Para la sessió"
 #: ui/WaydroidConfigurationForm.qml:47
 #, kde-format
 msgid "Certify my device for Google Play Protect"
-msgstr ""
+msgstr "Certifica el meu dispositiu per a Google Play Protect"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
@@ -105,7 +105,7 @@ msgstr "Propietats de Waydroid"
 #: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
-msgstr "Pot requerir reiniciar la sessió del «waydroid» per a aplicar"
+msgstr "Pot requerir reiniciar la sessió de «waydroid» per a aplicar"
 
 #: ui/WaydroidConfigurationForm.qml:90
 #, kde-format
@@ -144,18 +144,15 @@ msgstr "Permet l'accés directe d'Android als dispositius connectats"
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
 msgid "Google Play Protect configuration"
-msgstr ""
+msgstr "Configuració de Google Play Protect"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "We fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid s'està iniciant\n"
+"S'està recuperant l'ID d'Android.\n"
 "Pot tardar alguns segons."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
@@ -166,12 +163,17 @@ msgid ""
 "your device, paste the Android ID on the field in the website. Then, give "
 "the Google services some minutes to reflect the change and restart waydroid."
 msgstr ""
+"En iniciar Waydroid amb GAPPS per primera vegada se vos notificarà que el "
+"dispositiu no està certificat per a Google Play Protect. Per certificar el "
+"vostre dispositiu, apegueu l'ID d'Android al camp del lloc web. A "
+"continuació, espereu alguns minuts a que els serveis de Google consoliden el "
+"canvi i reinicieu Waydroid."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
-msgstr ""
+msgstr "Copia l'ID d'Android i obri el lloc web"
 
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format

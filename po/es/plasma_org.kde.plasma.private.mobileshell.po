@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-11 00:44+0000\n"
+"POT-Creation-Date: 2025-07-19 05:23+0000\n"
 "PO-Revision-Date: 2025-05-26 01:08+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -51,17 +51,17 @@ msgstr "Copiar ubicación"
 msgid "Properties"
 msgstr "Propiedades"
 
-#: qml/actiondrawer/ContentContainer.qml:151
+#: qml/actiondrawer/private/ContentContainer.qml:151
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Borrar todas las notificaciones"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "On"
 msgstr "Activado"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "Off"
 msgstr "Desactivado"
