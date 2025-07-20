@@ -45,6 +45,6 @@ private:
     QList<WaydroidApplication::Ptr> m_applications;
     QTimer *m_refreshTimer{nullptr};
 
+    void loadApplications(const QList<WaydroidApplication::Ptr> applications);
     void refreshApplications();
-    QList<WaydroidApplication::Ptr> queryApplications() const;
 };

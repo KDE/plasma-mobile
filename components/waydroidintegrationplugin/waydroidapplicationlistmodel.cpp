@@ -33,7 +33,7 @@ WaydroidApplicationListModel::WaydroidApplicationListModel(WaydroidState *parent
 
 WaydroidApplicationListModel::~WaydroidApplicationListModel() = default;
 
-void WaydroidApplicationListModel::refreshApplications()
+void WaydroidApplicationListModel::loadApplications(const QList<WaydroidApplication::Ptr> applications)
 {
     if (m_waydroidState->sessionStatus() != WaydroidState::SessionRunning) {
         return;
@@ -47,10 +47,9 @@ void WaydroidApplicationListModel::refreshApplications()
         appIdMap.insert(application->packageName(), i);
     }
 
-    QList<WaydroidApplication::Ptr> currentApps = queryApplications();
     QList<WaydroidApplication::Ptr> toInsert;
 
-    for (const WaydroidApplication::Ptr &application : currentApps) {
+    for (const WaydroidApplication::Ptr &application : applications) {
         auto it = appIdMap.find(application->packageName());
         if (it != appIdMap.end()) {
             // Application already in m_applications
@@ -85,7 +84,7 @@ void WaydroidApplicationListModel::refreshApplications()
     }
 }
 
-QList<WaydroidApplication::Ptr> WaydroidApplicationListModel::queryApplications() const
+void WaydroidApplicationListModel::refreshApplications()
 {
     QList<WaydroidApplication::Ptr> applications;
 
@@ -93,33 +92,36 @@ QList<WaydroidApplication::Ptr> WaydroidApplicationListModel::queryApplications(
 
     QProcess *process = new QProcess(m_waydroidState);
     process->start(WAYDROID_COMMAND, arguments);
-    process->waitForFinished();
 
-    if (process->exitCode() != 0) {
-        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to run waydroid app list command: " << process->readAllStandardError();
-        return applications;
-    }
-
-    const QByteArray data = process->readAllStandardOutput();
-    if (data.isEmpty()) {
-        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Empty data: " << process->readAllStandardError();
-        return applications;
-    }
-
-    qCDebug(WAYDROIDINTEGRATIONPLUGIN) << "Waydroid output: " << data;
-    QTextStream output = QTextStream(data);
-
-    while (!output.atEnd()) {
-        const WaydroidApplication::Ptr app = WaydroidApplication::fromWaydroidLog(output);
-        if (app == nullptr) {
-            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to fetch the application: Maybe wrong QTextStream cursor position.";
-            break;
+    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
+        if (exitCode != 0 || exitStatus == QProcess::ExitStatus::CrashExit) {
+            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to run waydroid app list command: " << process->readAllStandardError();
+            return;
         }
 
-        qCDebug(WAYDROIDINTEGRATIONPLUGIN) << "Waydroid application found: " << app.get()->name() << " (" << app.get()->packageName() << ")";
-        applications.append(app);
-    }
-    return applications;
+        const QByteArray data = process->readAllStandardOutput();
+        if (data.isEmpty()) {
+            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Empty data: " << process->readAllStandardError();
+            return;
+        }
+
+        qCDebug(WAYDROIDINTEGRATIONPLUGIN) << "Waydroid output: " << data;
+        QTextStream output = QTextStream(data);
+
+        QList<WaydroidApplication::Ptr> applications;
+        while (!output.atEnd()) {
+            const WaydroidApplication::Ptr app = WaydroidApplication::fromWaydroidLog(output);
+            if (app == nullptr) {
+                qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to fetch the application: Maybe wrong QTextStream cursor position.";
+                break;
+            }
+
+            qCDebug(WAYDROIDINTEGRATIONPLUGIN) << "Waydroid application found: " << app.get()->name() << " (" << app.get()->packageName() << ")";
+            applications.append(app);
+        }
+
+        loadApplications(applications);
+    });
 }
 
 QHash<int, QByteArray> WaydroidApplicationListModel::roleNames() const
