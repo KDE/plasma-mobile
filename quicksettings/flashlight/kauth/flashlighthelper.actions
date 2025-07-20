@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2025 Florian RICHER <florian.richer@protonmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+[Domain]
+Name=Waydroid Management
+Icon=color
+
+[org.kde.plasma.mobileshell.flashlighthelper.setbrightness]
+Name=Set flashlight brightness
+Description=Allow set brightness on led device
+Policy=yes
+PolicyInactive=yes
+Persistence=session

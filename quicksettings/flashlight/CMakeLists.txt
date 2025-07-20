@@ -13,6 +13,7 @@ target_link_libraries(flashlightplugin PRIVATE
     Qt::Qml
     Qt::Quick
     Qt::DBus
+    KF6::AuthCore
     KF6::CoreAddons
     KF6::ConfigCore
     KF6::ConfigGui
@@ -24,3 +25,5 @@ target_link_libraries(flashlightplugin PRIVATE
 ecm_finalize_qml_module(flashlightplugin)
 
 plasma_install_package(package org.kde.plasma.quicksetting.flashlight quicksettings)
+
+add_subdirectory(kauth)
