@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-18 00:43+0000\n"
-"PO-Revision-Date: 2025-06-10 22:25+0200\n"
+"PO-Revision-Date: 2025-07-21 01:15+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -43,13 +43,13 @@ msgstr "위젯"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "새 위젯 가져오기…"
 
 #: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "새 위젯 가져오기…"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -134,7 +134,7 @@ msgstr "회전"
 #: qml/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "두 번 탭하여 장치 잠금"
 
 #: qml/settings/SettingsWindow.qml:252
 #, kde-format
@@ -148,29 +148,27 @@ msgid "Wallpaper"
 msgstr "배경 그림"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "배경 그림 흐림 효과 표시"
+msgstr "배경 그림 흐림 효과"
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 #: qml/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "간단히"
 
 #: qml/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "전체"
 
 #: qml/settings/SettingsWindow.qml:294
 #, kde-format
