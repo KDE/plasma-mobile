@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 00:46+0000\n"
+"POT-Creation-Date: 2025-07-22 00:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -66,6 +66,29 @@ msgstr ""
 msgid "Go back"
 msgstr "返回"
 
+#: ui/WaydroidApplicationsPage.qml:25
+#, fuzzy, kde-format
+#| msgid "Waydroid properties"
+msgid "Waydroid applications"
+msgstr "Waydroid 属性"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr ""
+
+#: ui/WaydroidApplicationsPage.qml:59
+#, kde-format
+msgid "You must selected local file"
+msgstr ""
+
+#: ui/WaydroidApplicationsPage.qml:99
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr ""
+
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
@@ -91,49 +114,54 @@ msgstr "正在运行"
 msgid "Stop session"
 msgstr "停止会话"
 
-#: ui/WaydroidConfigurationForm.qml:47
+#: ui/WaydroidConfigurationForm.qml:46
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "为我的设备认证 Google Play Protect"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:66
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroid 属性"
 
-#: ui/WaydroidConfigurationForm.qml:73
+#: ui/WaydroidConfigurationForm.qml:77
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr "可能需要重启 waydroid 会话才能应用更改"
 
-#: ui/WaydroidConfigurationForm.qml:90
+#: ui/WaydroidConfigurationForm.qml:94
 #, kde-format
 msgid "Multi Windows"
 msgstr "多窗口"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:95
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "启用/禁用与桌面的窗口集成"
 
-#: ui/WaydroidConfigurationForm.qml:103
+#: ui/WaydroidConfigurationForm.qml:107
 #, kde-format
 msgid "Suspend"
 msgstr "挂起"
 
-#: ui/WaydroidConfigurationForm.qml:104
+#: ui/WaydroidConfigurationForm.qml:108
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
 "are active"
 msgstr "当没有应用处于活动状态时，让 Waydroid 容器睡眠 (显示器超时后)"
 
-#: ui/WaydroidConfigurationForm.qml:116
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:117
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "允许安卓直接访问热插拔设备"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 00:46+0000\n"
+"POT-Creation-Date: 2025-07-22 00:44+0000\n"
 "PO-Revision-Date: 2025-07-16 10:27+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -66,6 +66,29 @@ msgstr ""
 msgid "Go back"
 msgstr "عُد"
 
+#: ui/WaydroidApplicationsPage.qml:25
+#, fuzzy, kde-format
+#| msgid "Waydroid properties"
+msgid "Waydroid applications"
+msgstr "خصائص ويدرويد"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr ""
+
+#: ui/WaydroidApplicationsPage.qml:59
+#, kde-format
+msgid "You must selected local file"
+msgstr ""
+
+#: ui/WaydroidApplicationsPage.qml:99
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr ""
+
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
@@ -91,37 +114,42 @@ msgstr "يعمل"
 msgid "Stop session"
 msgstr "أوقف الجلسة"
 
-#: ui/WaydroidConfigurationForm.qml:47
+#: ui/WaydroidConfigurationForm.qml:46
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "اعتماد جهازي  لحماية متجر غوغل"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:66
 #, kde-format
 msgid "Waydroid properties"
 msgstr "خصائص ويدرويد"
 
-#: ui/WaydroidConfigurationForm.qml:73
+#: ui/WaydroidConfigurationForm.qml:77
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr "قد يطلب إعادة تشغيل جلسة ويدرويد للتطبيق التعديلات"
 
-#: ui/WaydroidConfigurationForm.qml:90
+#: ui/WaydroidConfigurationForm.qml:94
 #, kde-format
 msgid "Multi Windows"
 msgstr "نوافذ متعددة"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:95
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "تمكين/تعطيل تكامل النافذة مع سطح المكتب"
 
-#: ui/WaydroidConfigurationForm.qml:103
+#: ui/WaydroidConfigurationForm.qml:107
 #, kde-format
 msgid "Suspend"
 msgstr "علّق"
 
-#: ui/WaydroidConfigurationForm.qml:104
+#: ui/WaydroidConfigurationForm.qml:108
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -130,12 +158,12 @@ msgstr ""
 "دع حاوية ويدرويد في وضع السكون (بعد انتهاء مهلة العرض) عندما لا تكون أي "
 "تطبيقات نشطة"
 
-#: ui/WaydroidConfigurationForm.qml:116
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:117
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "السماح للأندرويد بالوصول المباشر إلى الأجهزة الموصولة مباشرةً"

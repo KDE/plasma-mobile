@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-15 00:46+0000\n"
+"POT-Creation-Date: 2025-07-22 00:44+0000\n"
 "PO-Revision-Date: 2025-07-16 00:35+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -67,6 +67,29 @@ msgstr ""
 msgid "Go back"
 msgstr "Volver"
 
+#: ui/WaydroidApplicationsPage.qml:25
+#, fuzzy, kde-format
+#| msgid "Waydroid properties"
+msgid "Waydroid applications"
+msgstr "Propiedades de Waydroid"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr ""
+
+#: ui/WaydroidApplicationsPage.qml:59
+#, kde-format
+msgid "You must selected local file"
+msgstr ""
+
+#: ui/WaydroidApplicationsPage.qml:99
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr ""
+
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
@@ -92,38 +115,43 @@ msgstr "En ejecución"
 msgid "Stop session"
 msgstr "Detener sesión"
 
-#: ui/WaydroidConfigurationForm.qml:47
+#: ui/WaydroidConfigurationForm.qml:46
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "Certificar mi dispositivo para Google Play Protect"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:66
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Propiedades de Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:73
+#: ui/WaydroidConfigurationForm.qml:77
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr ""
 "Puede requerir el reinicio de la sesión de Waydroid para que tenga efecto"
 
-#: ui/WaydroidConfigurationForm.qml:90
+#: ui/WaydroidConfigurationForm.qml:94
 #, kde-format
 msgid "Multi Windows"
 msgstr "Multiventana"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:95
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Activa o desactiva la integración de ventanas con el escritorio"
 
-#: ui/WaydroidConfigurationForm.qml:103
+#: ui/WaydroidConfigurationForm.qml:107
 #, kde-format
 msgid "Suspend"
 msgstr "Suspender"
 
-#: ui/WaydroidConfigurationForm.qml:104
+#: ui/WaydroidConfigurationForm.qml:108
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -132,12 +160,12 @@ msgstr ""
 "Permitir que el contenedor de Waydroid entre en suspensión (cuando se apague "
 "la pantalla) si no hay aplicaciones activas"
 
-#: ui/WaydroidConfigurationForm.qml:116
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:117
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Permitir que Android acceda directamente a los dispositivos conectados"
