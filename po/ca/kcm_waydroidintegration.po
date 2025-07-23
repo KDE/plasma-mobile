@@ -3,21 +3,22 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2025.
+# SPDX-FileCopyrightText: 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2025 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-22 00:44+0000\n"
-"PO-Revision-Date: 2025-07-15 10:18+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 15:05+0200\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: ui/main.qml:19
 #, kde-format
@@ -68,27 +69,26 @@ msgid "Go back"
 msgstr "Retrocedeix"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Propietats del Waydroid"
+msgstr "Aplicacions Waydroid"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "Instal·la APK"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "Cal seleccionar un fitxer local"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "Suprimeix l'aplicació"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -123,7 +123,7 @@ msgstr "Certifica el meu dispositiu per a Google Play Protect"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "Aplicacions instal·lades"
 
 #: ui/WaydroidConfigurationForm.qml:66
 #, kde-format

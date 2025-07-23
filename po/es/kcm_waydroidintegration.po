@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-22 00:44+0000\n"
-"PO-Revision-Date: 2025-07-16 00:35+0100\n"
+"PO-Revision-Date: 2025-07-23 00:52+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -68,27 +68,26 @@ msgid "Go back"
 msgstr "Volver"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Propiedades de Waydroid"
+msgstr "Aplicaciones de Waydroid"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "Instalar APK"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "Debe seleccionar un archivo local"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "Borrar la aplicación"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -123,7 +122,7 @@ msgstr "Certificar mi dispositivo para Google Play Protect"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "Aplicaciones instaladas"
 
 #: ui/WaydroidConfigurationForm.qml:66
 #, kde-format

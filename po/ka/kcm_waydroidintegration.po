@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-22 00:44+0000\n"
-"PO-Revision-Date: 2025-07-15 03:55+0200\n"
+"PO-Revision-Date: 2025-07-22 04:45+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -67,27 +67,26 @@ msgid "Go back"
 msgstr "უკან გადასვლა"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Waydroid-ის თვისებები"
+msgstr "Waydroid-ის აპლიკაციები"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "APK-ის დაყენება"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "უნდა აირჩიოთ ლოკალური ფაილი"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "აპლიკაციის წაშლა"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -122,7 +121,7 @@ msgstr "ჩემი მოწყობილობის სერტიფი�
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "დაყენებული აპლიკაციები"
 
 #: ui/WaydroidConfigurationForm.qml:66
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-22 00:44+0000\n"
-"PO-Revision-Date: 2025-07-15 12:11+0200\n"
+"PO-Revision-Date: 2025-07-22 11:46+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -66,27 +66,26 @@ msgid "Go back"
 msgstr "Ga terug"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Waydroid-eigenschappen"
+msgstr "Waydroid-toepassingen"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "APK installeren"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "U moet een lokaal bestand selecteren"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "De toepassing verwijderen"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -121,7 +120,7 @@ msgstr "Certificeer mijn apparaat voor Google Play Protect"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "Geïnstalleerde toepassingen"
 
 #: ui/WaydroidConfigurationForm.qml:66
 #, kde-format
