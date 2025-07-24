@@ -3,6 +3,21 @@
 
 [Domain]
 Name=Waydroid Management
+Name[ar]=إدارة ويدرويد
+Name[ca]=Gestió del Waydroid
+Name[ca@valencia]=Gestioneu Waydroid
+Name[es]=Gestión de Waydroid
+Name[fr]=Gestion de Waydroid
+Name[he]=ניהול Waydroid
+Name[it]=Gestione di Waydroid
+Name[ka]=Waydroid-ის მართვა
+Name[ko]=Waydroid 관리
+Name[nl]=Waydroid-beheer
+Name[sl]=Upravljanje Waydroid
+Name[tr]=Waydroid Yönetimi
+Name[uk]=Керування Waydroid
+Name[x-test]=xxWaydroid Managementxx
+Name[zh_CN]=Waydroid 管理
 Icon=color
 
 [org.kde.plasma.mobileshell.flashlighthelper.setbrightness]
