@@ -67,10 +67,9 @@ msgid "Go back"
 msgstr "返回"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Waydroid 属性"
+msgstr ""
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
