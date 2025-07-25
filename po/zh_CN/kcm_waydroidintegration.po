@@ -69,24 +69,24 @@ msgstr "返回"
 #: ui/WaydroidApplicationsPage.qml:25
 #, kde-format
 msgid "Waydroid applications"
-msgstr ""
+msgstr "Waydroid 应用程序"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "安装 APK"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "您必须选择本地文件"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "删除应用程序"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -121,7 +121,7 @@ msgstr "为我的设备认证 Google Play Protect"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "已安装的应用程序"
 
 #: ui/WaydroidConfigurationForm.qml:66
 #, kde-format
