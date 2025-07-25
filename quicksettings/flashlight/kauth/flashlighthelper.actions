@@ -22,7 +22,25 @@ Icon=color
 
 [org.kde.plasma.mobileshell.flashlighthelper.setbrightness]
 Name=Set flashlight brightness
+Name[ca]=Estableix la lluminositat del llum de flaix
+Name[es]=Ajustar el brillo de la linterna
+Name[he]=הגדרת בהירות פנס
+Name[ka]=განათების სიკაშკაშის დაყენება
+Name[nl]=Helderheid van flitser instellen
+Name[sl]=Nastavi svetlost svetilke
+Name[tr]=Fener Parlaklığını Ayarla
+Name[uk]=Встановлення яскравості спалаху
+Name[x-test]=xxSet flashlight brightnessxx
 Description=Allow set brightness on led device
+Description[ca]=Permet establir la lluminositat del dispositiu LED
+Description[es]=Permitir ajustar el brillo del led del dispositivo
+Description[he]=לאפשר להגדיר בהירות על התקן נורית
+Description[ka]=LED მოწყობილობებზე სიკაშკაშის დაყენების დაშვება
+Description[nl]=Instellen toestaan van helderheid van led-apparaat
+Description[sl]=Dovoli nastavitev svetlosti na LED napravi
+Description[tr]=LED aygıt parlaklığını ayarlamaya olanak tanıyın
+Description[uk]=Надає змогу налаштувати яскравість на світлодіодному пристрої
+Description[x-test]=xxAllow set brightness on led devicexx
 Policy=yes
 PolicyInactive=yes
 Persistence=session
