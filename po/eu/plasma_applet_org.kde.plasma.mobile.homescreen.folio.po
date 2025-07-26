@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-18 00:43+0000\n"
-"PO-Revision-Date: 2025-07-23 14:13+0200\n"
+"PO-Revision-Date: 2025-07-25 14:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -46,13 +46,13 @@ msgstr "Trepetak"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Lortu trepeta berriak…"
 
 #: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Lortu trepeta berriak…"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -152,29 +152,27 @@ msgid "Wallpaper"
 msgstr "Horma-papera"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Erakutsi horma-paper lauso efektua"
+msgstr "Horma-paper lauso efektua"
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Bat ere ez"
 
 #: qml/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Sinplea"
 
 #: qml/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Osoa"
 
 #: qml/settings/SettingsWindow.qml:294
 #, kde-format
@@ -185,7 +183,7 @@ msgstr "Orokorra"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr "Aldatu etxeko-pantailen eta horma-paper aukeren artean"
+msgstr "Aldatu pantaila-nagusien eta horma-paperen aukera gehiagoren artean"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
