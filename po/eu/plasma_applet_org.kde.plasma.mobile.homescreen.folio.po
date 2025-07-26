@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-02 00:43+0000\n"
-"PO-Revision-Date: 2025-07-23 14:13+0200\n"
+"PO-Revision-Date: 2025-07-25 14:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -152,7 +152,7 @@ msgstr "Orokorra"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr "Aldatu etxeko-pantailen eta horma-paper aukeren artean"
+msgstr "Aldatu pantaila-nagusien eta horma-paperen aukera gehiagoren artean"
 
 #: package/contents/ui/settings/SettingsWindow.qml:306
 #, kde-format
