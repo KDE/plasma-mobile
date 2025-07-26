@@ -118,6 +118,8 @@ public:
 
 Q_SIGNALS:
     void statusChanged();
+    // download and total is in MB and speed in Kbps
+    void downloadStatusChanged(float downloaded, float total, float speed);
     void sessionStatusChanged();
     void systemTypeChanged();
     void ipAddressChanged();

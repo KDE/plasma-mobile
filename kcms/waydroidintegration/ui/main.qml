@@ -46,9 +46,20 @@ KCM.SimpleKCM {
         visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.NotInitialized
     }
 
-    WaydroidLoader {
+    WaydroidDownloadStatus {
+        id: downloadStatus
         visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Initializing
-        text: i18n("Waydroid is initializing.\nIt can take a few minutes.")
+        text: i18n("Downloading Android and vendor images.\nIt can take a few minutes.")
+
+        Connections {
+            target: AIP.WaydroidState
+
+            function onDownloadStatusChanged(downloaded, total, speed) {
+                downloadStatus.downloaded = downloaded
+                downloadStatus.total = total
+                downloadStatus.speed = speed
+            }
+        }
     }
 
     ColumnLayout {
