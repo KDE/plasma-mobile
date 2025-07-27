@@ -24,6 +24,7 @@ Icon=color
 [org.kde.plasma.mobileshell.flashlighthelper.setbrightness]
 Name=Set flashlight brightness
 Name[ca]=Estableix la lluminositat del llum de flaix
+Name[ca@valencia]=Establix la brillantor del llum de flaix
 Name[es]=Ajustar el brillo de la linterna
 Name[eu]=Ezarri esku-argiaren distira
 Name[he]=הגדרת בהירות פנס
@@ -36,6 +37,7 @@ Name[x-test]=xxSet flashlight brightnessxx
 Name[zh_CN]=设置手电筒亮度
 Description=Allow set brightness on led device
 Description[ca]=Permet establir la lluminositat del dispositiu LED
+Description[ca@valencia]=Permet establir la lluminositat del dispositiu LED
 Description[es]=Permitir ajustar el brillo del led del dispositivo
 Description[eu]=LED-gailuaren distira ezartzeko aukera eskaintzen du
 Description[he]=לאפשר להגדיר בהירות על התקן נורית
