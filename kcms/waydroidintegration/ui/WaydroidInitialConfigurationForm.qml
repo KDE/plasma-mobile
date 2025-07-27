@@ -23,7 +23,6 @@ ColumnLayout {
 
             model: [
                 {"name": "Vanilla", "value": AIP.WaydroidState.Vanilla},
-                {"name": "FOSS", "value": AIP.WaydroidState.Foss},
                 {"name": "GAPPS", "value": AIP.WaydroidState.Gapps}
             ]
 
