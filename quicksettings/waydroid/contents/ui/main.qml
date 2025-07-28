@@ -18,9 +18,9 @@ QS.QuickSetting {
 
     function toggle(): void {
         if (AIP.WaydroidState.sessionStatus === AIP.WaydroidState.SessionRunning) {
-            AIP.WaydroidState.stopSession()
+            AIP.WaydroidState.stopSessionQml()
         } else {
-            AIP.WaydroidState.startSession()
+            AIP.WaydroidState.startSessionQml()
         }
     }
 }

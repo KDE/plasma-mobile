@@ -76,7 +76,7 @@ KCM.SimpleKCM {
         PC3.Button {
             text: i18n("Start the session")
             Layout.alignment: Qt.AlignHCenter
-            onClicked: AIP.WaydroidState.startSession()
+            onClicked: AIP.WaydroidState.startSessionQml()
         }
     }
 

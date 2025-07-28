@@ -87,7 +87,7 @@ find_package(KPipeWire ${PROJECT_DEP_VERSION} REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 
-find_package(QCoro6 REQUIRED COMPONENTS DBus)
+find_package(QCoro6 REQUIRED COMPONENTS DBus Qml)
 qcoro_enable_coroutines()
 kde_enable_exceptions()
 

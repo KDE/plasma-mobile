@@ -36,6 +36,6 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
         enabled: systemType.currentValue !== undefined
 
-        onClicked: AIP.WaydroidState.initialize(systemType.currentValue, AIP.WaydroidState.Lineage)
+        onClicked: AIP.WaydroidState.initializeQml(systemType.currentValue, AIP.WaydroidState.Lineage)
     }
 }

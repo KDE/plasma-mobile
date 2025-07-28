@@ -37,7 +37,7 @@ ColumnLayout {
 
             trailing: PC3.Button {
                 text: i18n("Stop session")
-                onClicked: AIP.WaydroidState.stopSession()
+                onClicked: AIP.WaydroidState.stopSessionQml()
             }
         }
 
