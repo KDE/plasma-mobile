@@ -9,6 +9,7 @@ target_link_libraries(waydroidintegrationplugin PRIVATE
     Qt::Qml
     Qt::Quick
     KF6::AuthCore
+    KF6::ConfigCore
     KF6::I18n
     QCoro::Core
     QCoro::Qml

@@ -52,7 +52,8 @@ public:
         NotSupported = 0,
         NotInitialized,
         Initializing,
-        Initialized
+        Initialized,
+        Resetting
     };
     Q_ENUM(Status)
 
@@ -103,7 +104,9 @@ public:
     QCoro::Task<void> startSession();
     Q_INVOKABLE QCoro::QmlTask stopSessionQml();
     QCoro::Task<void> stopSession();
-    
+    Q_INVOKABLE QCoro::QmlTask resetWaydroidQml();
+    QCoro::Task<void> resetWaydroid();
+
     Q_INVOKABLE void copyToClipboard(const QString text);
 
     Status status() const;
@@ -202,4 +205,7 @@ private:
      *       https://github.com/waydroid/waydroid/blob/2c41162d8bfef5bf83333a6ce4834af0c3c2b535/tools/actions/session_manager.py#L31
      */
     void checkSessionStarting(const int limit, const int tried = 0);
+
+    QString desktopFileDirectory();
+    bool removeWaydroidApplications();
 };

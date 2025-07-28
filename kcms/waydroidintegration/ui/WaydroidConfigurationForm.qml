@@ -51,6 +51,21 @@ ColumnLayout {
             text: i18n("Installed applications")
             onClicked: kcm.push("WaydroidApplicationsPage.qml")
         }
+
+        FormCard.FormButtonDelegate {
+            text: i18n("Reset waydroid")
+            onClicked: confirmDialog.open()
+        }
+
+        Kirigami.PromptDialog {
+            id: confirmDialog
+            title: i18nc("@title:window", "Confirm Waydroid Reset")
+            subtitle: i18n("Are you sure you want to reset Waydroid ? This is a destructive action, and will wipe all user data.")
+            standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+            
+            onAccepted: AIP.WaydroidState.resetWaydroidQml()
+        }
+
     }
 
     // Some informations as IP address can take time to be set by Waydroid

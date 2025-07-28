@@ -10,6 +10,7 @@
 #include <KAuth/HelperSupport>
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QLoggingCategory>
@@ -20,6 +21,8 @@
 using namespace Qt::StringLiterals;
 
 #define WAYDROID_COMMAND "waydroid"
+#define WAYDROID_FOLDER "/var/lib/waydroid"
+#define WAYDROID_USER_FOLDER "/.local/share/waydroid/"
 
 // Extract current downloaded size, total_size and speed.
 // Example of log: "[Downloading]   62.19 MB/1197.24 MB    96740.75 kbps(approx.)"
@@ -31,6 +34,10 @@ class WaydroidHelper : public QObject
 public Q_SLOTS:
     KAuth::ActionReply initialize(const QVariantMap &args);
     KAuth::ActionReply getandroidid(const QVariantMap &args);
+    KAuth::ActionReply reset(const QVariantMap &args);
+
+private:
+    bool removeDir(const QString dirPath);
 };
 
 KAuth::ActionReply WaydroidHelper::initialize(const QVariantMap &args)
@@ -119,6 +126,34 @@ KAuth::ActionReply WaydroidHelper::getandroidid(const QVariantMap &args)
         qCWarning(WAYDROIDHELPER) << "Failed to get Android ID: " << process->readAllStandardError();
         return KAuth::ActionReply::HelperErrorReply();
     }
+}
+
+KAuth::ActionReply WaydroidHelper::reset(const QVariantMap &args)
+{
+    const QString homeDir = args.value("homeDir"_L1).toString();
+
+    if (!removeDir(WAYDROID_FOLDER)) {
+        qCWarning(WAYDROIDHELPER) << "Failed to remove Waydroid directory";
+        return KAuth::ActionReply::HelperErrorReply();
+    }
+
+    if (!removeDir(homeDir % WAYDROID_USER_FOLDER)) {
+        qCWarning(WAYDROIDHELPER) << "Failed to remove user Waydroid directory";
+        return KAuth::ActionReply::HelperErrorReply();
+    }
+
+    return KAuth::ActionReply::SuccessReply();
+}
+
+bool WaydroidHelper::removeDir(const QString dirPath)
+{
+    qCWarning(WAYDROIDHELPER) << "Removing " << dirPath;
+    QDir qDir(dirPath);
+    if (!qDir.exists()) {
+        return true; // Ignore if directory not exists
+    }
+
+    return qDir.removeRecursively();
 }
 
 KAUTH_HELPER_MAIN("org.kde.plasma.mobileshell.waydroidhelper", WaydroidHelper)

@@ -15,12 +15,16 @@
 #include <QGuiApplication>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QStandardPaths>
 #include <QTimer>
 #include <QtLogging>
 
 #include <KAuth/Action>
 #include <KAuth/ExecuteJob>
+#include <KConfigGroup>
+#include <KDesktopFile>
 #include <KLocalizedString>
+#include <KSandbox>
 
 using namespace Qt::StringLiterals;
 
@@ -328,6 +332,50 @@ void WaydroidState::copyToClipboard(const QString text)
     qGuiApp->clipboard()->setText(text);
 }
 
+QCoro::QmlTask WaydroidState::resetWaydroidQml()
+{
+    return resetWaydroid();
+}
+
+QCoro::Task<void> WaydroidState::resetWaydroid()
+{
+    if (m_status != Initialized || m_sessionStatus == SessionStarting) {
+        co_return;
+    }
+
+    m_status = Resetting;
+    Q_EMIT statusChanged();
+
+    if (m_sessionStatus == SessionRunning) {
+        co_await stopSession();
+    }
+
+    const QVariantMap args = {{u"homeDir"_s, QDir::homePath()}};
+
+    KAuth::Action writeAction(u"org.kde.plasma.mobileshell.waydroidhelper.reset"_s);
+    writeAction.setHelperId(u"org.kde.plasma.mobileshell.waydroidhelper"_s);
+    writeAction.setArguments(args);
+
+    KAuth::ExecuteJob *job = writeAction.execute();
+    job->start();
+
+    co_await qCoro(job, &KAuth::ExecuteJob::finished);
+
+    removeWaydroidApplications();
+
+    if (job->error() == 0) {
+        m_status = NotInitialized;
+    } else {
+        m_errorTitle = i18n("Failed to reset Waydroid.");
+        Q_EMIT errorTitleChanged();
+
+        m_status = Initialized;
+        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "KAuth returned an error code:" << job->error() << " message: " << job->errorString();
+    }
+
+    Q_EMIT statusChanged();
+}
+
 WaydroidState::Status WaydroidState::status() const
 {
     return m_status;
@@ -497,4 +545,53 @@ void WaydroidState::checkSessionStarting(const int limit, const int tried)
             checkSessionStarting(limit, tried + 1);
         });
     }
+}
+
+QString WaydroidState::desktopFileDirectory()
+{
+    auto dir = []() -> QString {
+        if (KSandbox::isFlatpak()) {
+            return qEnvironmentVariable("HOME") % u"/.local/share/applications/";
+        }
+        return QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
+    }();
+
+    QDir(dir).mkpath(QStringLiteral("."));
+
+    return dir;
+}
+
+bool WaydroidState::removeWaydroidApplications()
+{
+    const QDir appsDir(desktopFileDirectory());
+    const auto fileInfos = appsDir.entryInfoList(QDir::Files);
+    if (fileInfos.length() < 1) {
+        return false;
+    }
+
+    bool allFileRemoved = true;
+
+    for (const auto &fileInfo : fileInfos) {
+        if (fileInfo.fileName().contains(QStringView(u".desktop"))) {
+            const KDesktopFile desktopFile(fileInfo.filePath());
+            const KConfigGroup configGroup = desktopFile.desktopGroup();
+
+            if (!configGroup.hasKey(u"Categories"_s)) {
+                continue;
+            }
+
+            const auto categories = configGroup.readEntry(u"Categories"_s);
+            if (!categories.contains(u"X-WayDroid-App"_s)) {
+                continue;
+            }
+
+            QFile file(fileInfo.filePath());
+            if (!file.remove()) {
+                allFileRemoved &= false;
+                qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to remove: " << desktopFile.name();
+            }
+        }
+    }
+
+    return allFileRemoved;
 }

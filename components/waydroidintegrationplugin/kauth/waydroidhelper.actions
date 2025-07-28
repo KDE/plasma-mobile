@@ -104,3 +104,10 @@ Description[zh_CN]=允许获取 Waydroid 容器的 Android ID 以激活谷歌服
 Policy=yes
 PolicyInactive=yes
 Persistence=session
+
+[org.kde.plasma.mobileshell.waydroidhelper.reset]
+Name=Reset Waydroid
+Description=Allow delete waydroid folder
+Policy=yes
+PolicyInactive=yes
+Persistence=session

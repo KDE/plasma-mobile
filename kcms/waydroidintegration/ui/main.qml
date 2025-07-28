@@ -62,6 +62,11 @@ KCM.SimpleKCM {
         }
     }
 
+    WaydroidLoader {
+        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Resetting
+        text: i18n("Waydroid is resetting.\nIt can take a few seconds.")
+    }
+
     ColumnLayout {
         visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Initialized && AIP.WaydroidState.sessionStatus == AIP.WaydroidState.SessionStopped
         anchors.centerIn: parent
