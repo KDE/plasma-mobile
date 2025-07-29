@@ -60,7 +60,7 @@ Item {
         screen: Plasmoid.screen
         maximizedTracker: containmentItem.windowMaximizedTracker
 
-        visible: !containmentItem.fullscreen
+        visible: !MobileShellState.LockscreenDBusClient.lockscreenActive && !containmentItem.fullscreen
     }
 
     // Status bar component
