@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-22 00:44+0000\n"
+"POT-Creation-Date: 2025-07-29 00:43+0000\n"
 "PO-Revision-Date: 2025-07-21 01:35+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -210,7 +210,7 @@ msgstr "초기 설정"
 msgid "System type"
 msgstr "시스템 형식"
 
-#: ui/WaydroidInitialConfigurationForm.qml:36
+#: ui/WaydroidInitialConfigurationForm.qml:35
 #, kde-format
 msgid "Configure waydroid"
 msgstr "Waydroid 설정"
