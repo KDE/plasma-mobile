@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:43+0000\n"
+"POT-Creation-Date: 2025-07-31 00:43+0000\n"
 "PO-Revision-Date: 2025-07-22 15:05+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -35,26 +35,29 @@ msgstr "Waydroid no està instal·lat"
 msgid "Check installation"
 msgstr "Comprova la instal·lació"
 
-#: ui/main.qml:51
-#, kde-format
+#: ui/main.qml:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid is initializing.\n"
+#| "It can take a few minutes."
 msgid ""
-"Waydroid is initializing.\n"
+"Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
 "Waydroid s'està inicialitzant.\n"
 "Pot tardar alguns minuts."
 
-#: ui/main.qml:60
+#: ui/main.qml:71
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "No s'està executant la sessió de Waydroid."
 
-#: ui/main.qml:66
+#: ui/main.qml:77
 #, kde-format
 msgid "Start the session"
 msgstr "Inicia la sessió"
 
-#: ui/main.qml:74
+#: ui/main.qml:85
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -63,7 +66,7 @@ msgstr ""
 "Waydroid s'està iniciant\n"
 "Pot tardar alguns segons."
 
-#: ui/main.qml:105
+#: ui/main.qml:116
 #, kde-format
 msgid "Go back"
 msgstr "Retrocedix"
@@ -168,6 +171,21 @@ msgstr "UEvent"
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Permet l'accés directe d'Android als dispositius connectats"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1Mb/s"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1Kb/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

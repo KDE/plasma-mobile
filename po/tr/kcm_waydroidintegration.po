@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:43+0000\n"
+"POT-Creation-Date: 2025-07-31 00:43+0000\n"
 "PO-Revision-Date: 2025-07-22 21:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -32,26 +32,29 @@ msgstr "Waydroid kurulu değil"
 msgid "Check installation"
 msgstr "Kurulumu Denetle"
 
-#: ui/main.qml:51
-#, kde-format
+#: ui/main.qml:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid is initializing.\n"
+#| "It can take a few minutes."
 msgid ""
-"Waydroid is initializing.\n"
+"Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
 "Waydroid ilklendiriliyor.\n"
 "Bu, birkaç dakika alabilir."
 
-#: ui/main.qml:60
+#: ui/main.qml:71
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Waydroid oturumu çalışmıyor."
 
-#: ui/main.qml:66
+#: ui/main.qml:77
 #, kde-format
 msgid "Start the session"
 msgstr "Oturumu Başlat"
 
-#: ui/main.qml:74
+#: ui/main.qml:85
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -60,7 +63,7 @@ msgstr ""
 "Waydroid oturumu başlatılıyor.\n"
 "Bu, birkaç saniye alabilir."
 
-#: ui/main.qml:105
+#: ui/main.qml:116
 #, kde-format
 msgid "Go back"
 msgstr "Geri Git"
@@ -165,6 +168,21 @@ msgstr "UEvent"
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Tak–çıkar aygıtlara Android’in doğrudan erişmesine izin ver"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1Mb/s"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1Kb/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

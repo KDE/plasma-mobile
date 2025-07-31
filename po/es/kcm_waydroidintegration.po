@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:43+0000\n"
+"POT-Creation-Date: 2025-07-31 00:43+0000\n"
 "PO-Revision-Date: 2025-07-23 00:52+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -34,26 +34,29 @@ msgstr "Waydroid no está instalado"
 msgid "Check installation"
 msgstr "Comprobar instalación"
 
-#: ui/main.qml:51
-#, kde-format
+#: ui/main.qml:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid is initializing.\n"
+#| "It can take a few minutes."
 msgid ""
-"Waydroid is initializing.\n"
+"Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
 "Waydroid se está inicializando.\n"
 "Puede tardar unos minutos."
 
-#: ui/main.qml:60
+#: ui/main.qml:71
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "La sesión de Waydroid no se está ejecutando."
 
-#: ui/main.qml:66
+#: ui/main.qml:77
 #, kde-format
 msgid "Start the session"
 msgstr "Iniciar la sesión"
 
-#: ui/main.qml:74
+#: ui/main.qml:85
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -62,7 +65,7 @@ msgstr ""
 "La sesión de Waydroid se está iniciando.\n"
 "Puede tardar unos segundos."
 
-#: ui/main.qml:105
+#: ui/main.qml:116
 #, kde-format
 msgid "Go back"
 msgstr "Volver"
@@ -168,6 +171,21 @@ msgstr "UEvent"
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Permitir que Android acceda directamente a los dispositivos conectados"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1Mb/s"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1Kb/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

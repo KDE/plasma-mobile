@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:43+0000\n"
+"POT-Creation-Date: 2025-07-31 00:43+0000\n"
 "PO-Revision-Date: 2025-07-22 07:01+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -30,26 +30,29 @@ msgstr "Waydroid ni nameščen"
 msgid "Check installation"
 msgstr "Preverite namestitev"
 
-#: ui/main.qml:51
-#, kde-format
+#: ui/main.qml:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid is initializing.\n"
+#| "It can take a few minutes."
 msgid ""
-"Waydroid is initializing.\n"
+"Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
 "Waydroid se inicializira.\n"
 "Lahko traja nekaj minut."
 
-#: ui/main.qml:60
+#: ui/main.qml:71
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Seja Waydroid se ne izvaja."
 
-#: ui/main.qml:66
+#: ui/main.qml:77
 #, kde-format
 msgid "Start the session"
 msgstr "Zaženi sejo"
 
-#: ui/main.qml:74
+#: ui/main.qml:85
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -58,7 +61,7 @@ msgstr ""
 "Seja Waydroid se začenja.\n"
 "Lahko traja nekaj sekund."
 
-#: ui/main.qml:105
+#: ui/main.qml:116
 #, kde-format
 msgid "Go back"
 msgstr "Pojdi nazaj"
@@ -164,6 +167,21 @@ msgstr "UEvent"
 msgid "Allow android direct access to hotplugged devices"
 msgstr ""
 "Dovoli Androidu neposreden dostop do vroče priključenih naprav med delovanjem"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1Mb/s"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1Kb/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

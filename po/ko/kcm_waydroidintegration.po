@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:43+0000\n"
+"POT-Creation-Date: 2025-07-31 00:43+0000\n"
 "PO-Revision-Date: 2025-07-21 01:35+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -32,26 +32,29 @@ msgstr "Waydroid가 설치되어 있지 않음"
 msgid "Check installation"
 msgstr "설치 상태를 확인하십시오"
 
-#: ui/main.qml:51
-#, kde-format
+#: ui/main.qml:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid is initializing.\n"
+#| "It can take a few minutes."
 msgid ""
-"Waydroid is initializing.\n"
+"Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
 "Waydroid가 초기화 중입니다.\n"
 "몇 분 정도 걸릴 수 있습니다."
 
-#: ui/main.qml:60
+#: ui/main.qml:71
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Waydroid 세션이 실행 중이 아닙니다."
 
-#: ui/main.qml:66
+#: ui/main.qml:77
 #, kde-format
 msgid "Start the session"
 msgstr "세션 시작"
 
-#: ui/main.qml:74
+#: ui/main.qml:85
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -60,7 +63,7 @@ msgstr ""
 "Waydroid 세션이 시작 중입니다.\n"
 "몇 초 정도 걸릴 수 있습니다."
 
-#: ui/main.qml:105
+#: ui/main.qml:116
 #, kde-format
 msgid "Go back"
 msgstr "뒤로 가기"
@@ -166,6 +169,21 @@ msgstr "UEvent"
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "안드로이드에서 핫플러그된 장치에 직접 접근 허용"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1Mb/s"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1Kb/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
