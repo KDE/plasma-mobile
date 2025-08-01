@@ -166,7 +166,7 @@ void QuickSettingsModel::loadQuickSetting(KPluginMetaData metaData, bool emitIns
 void QuickSettingsModel::removeQuickSetting(int index)
 {
     if (index >= 0) {
-        beginRemoveRows({}, index, 0);
+        beginRemoveRows({}, index, index);
         m_quickSettings.removeAt(index);
         m_quickSettingsMetaData.removeAt(index);
         endRemoveRows();
