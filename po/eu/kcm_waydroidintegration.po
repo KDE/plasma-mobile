@@ -1,7 +1,7 @@
 # Translation for kcm_waydroidintegration.po to Euskara/Basque (eu).
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # SPDX-FileCopyrightText: 2025 Iñigo Salvador Azurmendi <xalba@ni.eus>
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-31 00:43+0000\n"
-"PO-Revision-Date: 2025-07-25 15:55+0200\n"
+"PO-Revision-Date: 2025-07-31 12:19+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -36,15 +36,12 @@ msgid "Check installation"
 msgstr "Ikuskatu instalazioa"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Waydroid hasieratzen ari da.\n"
+"Androiden eta saltzaileen irudiak zama-jaisten.\n"
 "Minutu batzuk beharko ditu."
 
 #: ui/main.qml:71
@@ -176,17 +173,17 @@ msgstr ""
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "%1MB/%2MB zama-jaisten abiadura %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1Mb/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1Kb/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

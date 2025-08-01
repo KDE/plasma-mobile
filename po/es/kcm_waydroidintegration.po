@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-31 00:43+0000\n"
-"PO-Revision-Date: 2025-07-23 00:52+0100\n"
+"PO-Revision-Date: 2025-08-01 00:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -35,15 +35,12 @@ msgid "Check installation"
 msgstr "Comprobar instalación"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Waydroid se está inicializando.\n"
+"Descargando imágenes de Android y del fabricante.\n"
 "Puede tardar unos minutos."
 
 #: ui/main.qml:71
@@ -175,17 +172,17 @@ msgstr "Permitir que Android acceda directamente a los dispositivos conectados"
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "Descargando %1 MB/%2 MB, velocidad %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1 Mb/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1 Kb/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

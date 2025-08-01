@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-31 00:43+0000\n"
-"PO-Revision-Date: 2025-07-29 12:37+0200\n"
+"PO-Revision-Date: 2025-07-31 08:03+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -33,15 +33,12 @@ msgid "Check installation"
 msgstr "Kontrollera installation"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Initierar Waydroid.\n"
+"Laddar ner Android och leverantörsbilder.\n"
 "Det kan ta några minuter."
 
 #: ui/main.qml:71
@@ -172,17 +169,17 @@ msgstr "Tillåt direkt åtkomst för Android till enheter anslutna under gång"
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "Laddar ner %1 MB/%2 MB Hastighet %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1 Mb/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1 Kb/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

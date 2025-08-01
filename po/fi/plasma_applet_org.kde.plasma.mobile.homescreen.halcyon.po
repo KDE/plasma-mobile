@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Tommi Nieminen <translator@legisign.org>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-17 00:43+0000\n"
-"PO-Revision-Date: 2022-07-21 18:54+0300\n"
+"PO-Revision-Date: 2025-07-13 18:02+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -50,43 +51,43 @@ msgstr "Sovellukset"
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Kotinäytön asetukset"
 
 #: qml/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Kotinäyttö"
 
 #: qml/settings/SettingsWindow.qml:92
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "Taustakuvan sumennustehoste"
 
 #: qml/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: qml/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Yksinkertainen"
 
 #: qml/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Täysi"
 
 #: qml/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Lukitse laite kaksoisnapautuksella"
 
 #: qml/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Vaihda kotinäytöstä toiseen ja muita taustakuva-asetuksia"

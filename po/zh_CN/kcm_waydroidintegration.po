@@ -34,16 +34,11 @@ msgid "Check installation"
 msgstr "检查软件安装情况"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Waydroid 正在初始化。\n"
-"可能需要几分钟。"
 
 #: ui/main.qml:71
 #, kde-format

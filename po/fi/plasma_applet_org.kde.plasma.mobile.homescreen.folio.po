@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-18 00:43+0000\n"
-"PO-Revision-Date: 2025-05-25 10:13+0300\n"
+"PO-Revision-Date: 2025-07-13 18:01+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -43,13 +43,13 @@ msgstr "Sovelmat"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Hae uusia sovelmia…"
 
 #: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Hae uusia sovelmia…"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -134,7 +134,7 @@ msgstr "Kierto"
 #: qml/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Lukitse laite kaksoisnapautuksella"
 
 #: qml/settings/SettingsWindow.qml:252
 #, kde-format
@@ -148,29 +148,27 @@ msgid "Wallpaper"
 msgstr "Taustakuva"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Näytä taustakuvan sumennustehoste"
+msgstr "Taustakuvan sumennustehoste"
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: qml/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Yksinkertainen"
 
 #: qml/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Täysi"
 
 #: qml/settings/SettingsWindow.qml:294
 #, kde-format
