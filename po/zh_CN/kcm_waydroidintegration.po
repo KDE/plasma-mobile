@@ -39,6 +39,8 @@ msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
+"正在下载安卓和制造商图像。\n"
+"这可能需要几分钟。"
 
 #: ui/main.qml:71
 #, kde-format
@@ -166,17 +168,17 @@ msgstr "允许安卓直接访问热插拔设备"
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "正在下载 %1MB/%2MB 速度 %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1Mb/秒"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1Kb/秒"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
