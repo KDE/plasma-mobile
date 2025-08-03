@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-31 00:43+0000\n"
+"POT-Creation-Date: 2025-08-03 00:43+0000\n"
 "PO-Revision-Date: 2025-07-13 18:00+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -39,17 +39,29 @@ msgid ""
 "It can take a few minutes."
 msgstr ""
 
-#: ui/main.qml:71
+#: ui/main.qml:67
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid session is starting.\n"
+#| "It can take a few seconds."
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid-istunto käynnistyy.\n"
+"Tämä voi kestää pari sekuntia."
+
+#: ui/main.qml:76
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Waydroid-istunto ei ole käynnissä."
 
-#: ui/main.qml:77
+#: ui/main.qml:82
 #, kde-format
 msgid "Start the session"
 msgstr "Aloita istunto"
 
-#: ui/main.qml:85
+#: ui/main.qml:90
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -58,7 +70,7 @@ msgstr ""
 "Waydroid-istunto käynnistyy.\n"
 "Tämä voi kestää pari sekuntia."
 
-#: ui/main.qml:116
+#: ui/main.qml:121
 #, kde-format
 msgid "Go back"
 msgstr "Siirry taaksepäin"
@@ -120,32 +132,52 @@ msgstr ""
 msgid "Installed applications"
 msgstr ""
 
-#: ui/WaydroidConfigurationForm.qml:66
+#: ui/WaydroidConfigurationForm.qml:56
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgid "Reset waydroid"
+msgstr "Waydroidin asetukset"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Waydroidin asetukset"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid ? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroidin ominaisuudet"
 
-#: ui/WaydroidConfigurationForm.qml:77
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr "Käyttöönotto voi vaatia Waydroid-istunnon käynnistämistä uudelleen"
 
-#: ui/WaydroidConfigurationForm.qml:94
+#: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Multi Windows"
 msgstr "Useampi ikkuna"
 
-#: ui/WaydroidConfigurationForm.qml:95
+#: ui/WaydroidConfigurationForm.qml:110
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Ottaa työpöydän ikkunaeheytyksen käyttöön tai poistaa sen käytöstä"
 
-#: ui/WaydroidConfigurationForm.qml:107
+#: ui/WaydroidConfigurationForm.qml:122
 #, kde-format
 msgid "Suspend"
 msgstr "Valmiustila"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:123
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -154,12 +186,12 @@ msgstr ""
 "Salli Waydroid-säilön siirtyä valmiustilaan (näytön aikakatkaisun jälkeen), "
 "ellei aktiivisia sovelluksia ole"
 
-#: ui/WaydroidConfigurationForm.qml:120
+#: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:136
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr ""

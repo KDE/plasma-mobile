@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-31 00:43+0000\n"
+"POT-Creation-Date: 2025-08-03 00:43+0000\n"
 "PO-Revision-Date: 2025-07-31 03:40+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -42,17 +42,29 @@ msgstr ""
 "მიმდინარეობს Android-ის და მომწოდებლის დისკის ასლის ფაილების გადმოწერა.\n"
 "ამას რამდენიმე წუთი შეიძლება, დასჭირდეს."
 
-#: ui/main.qml:71
+#: ui/main.qml:67
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid session is starting.\n"
+#| "It can take a few seconds."
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"მიმდინარეობს Waydroid-ის სესიის გაშვება.\n"
+"ამას რამდენიმე წამი შეიძლება, დასჭირდეს."
+
+#: ui/main.qml:76
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Waydroid-ის სესია გაშვებული არაა."
 
-#: ui/main.qml:77
+#: ui/main.qml:82
 #, kde-format
 msgid "Start the session"
 msgstr "სესიით დაწყება"
 
-#: ui/main.qml:85
+#: ui/main.qml:90
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -61,7 +73,7 @@ msgstr ""
 "მიმდინარეობს Waydroid-ის სესიის გაშვება.\n"
 "ამას რამდენიმე წამი შეიძლება, დასჭირდეს."
 
-#: ui/main.qml:116
+#: ui/main.qml:121
 #, kde-format
 msgid "Go back"
 msgstr "უკან გადასვლა"
@@ -123,32 +135,52 @@ msgstr "ჩემი მოწყობილობის სერტიფი�
 msgid "Installed applications"
 msgstr "დაყენებული აპლიკაციები"
 
-#: ui/WaydroidConfigurationForm.qml:66
+#: ui/WaydroidConfigurationForm.qml:56
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgid "Reset waydroid"
+msgstr "Waydroid-ის მორგება"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Waydroid-ის მორგება"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid ? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroid-ის თვისებები"
 
-#: ui/WaydroidConfigurationForm.qml:77
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr "გამოსაყენებლად, შეიძლება, Waydroid-ის სესიის გადატვირთვა იყოს საჭირო"
 
-#: ui/WaydroidConfigurationForm.qml:94
+#: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Multi Windows"
 msgstr "ბევრი ფანჯარა"
 
-#: ui/WaydroidConfigurationForm.qml:95
+#: ui/WaydroidConfigurationForm.qml:110
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "ჩართავს/გამორთავს ფანჯრის ინტეგრაციას სამუშაო მაგიდასთან"
 
-#: ui/WaydroidConfigurationForm.qml:107
+#: ui/WaydroidConfigurationForm.qml:122
 #, kde-format
 msgid "Suspend"
 msgstr "შეჩერება"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:123
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -157,12 +189,12 @@ msgstr ""
 "Waydroid-ის კონტეინერისთვის ძილის უფლების მიცემა(ეკრანის მოლოდინის ვადის "
 "ამოწურვის შემდეგ), როცა აპლიკაციები აქტიური არაა"
 
-#: ui/WaydroidConfigurationForm.qml:120
+#: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:136
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr ""

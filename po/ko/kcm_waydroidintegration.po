@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-31 00:43+0000\n"
+"POT-Creation-Date: 2025-08-03 00:43+0000\n"
 "PO-Revision-Date: 2025-07-21 01:35+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -44,17 +44,29 @@ msgstr ""
 "Waydroid가 초기화 중입니다.\n"
 "몇 분 정도 걸릴 수 있습니다."
 
-#: ui/main.qml:71
+#: ui/main.qml:67
+#, fuzzy, kde-format
+#| msgid ""
+#| "Waydroid session is starting.\n"
+#| "It can take a few seconds."
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid 세션이 시작 중입니다.\n"
+"몇 초 정도 걸릴 수 있습니다."
+
+#: ui/main.qml:76
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Waydroid 세션이 실행 중이 아닙니다."
 
-#: ui/main.qml:77
+#: ui/main.qml:82
 #, kde-format
 msgid "Start the session"
 msgstr "세션 시작"
 
-#: ui/main.qml:85
+#: ui/main.qml:90
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -63,7 +75,7 @@ msgstr ""
 "Waydroid 세션이 시작 중입니다.\n"
 "몇 초 정도 걸릴 수 있습니다."
 
-#: ui/main.qml:116
+#: ui/main.qml:121
 #, kde-format
 msgid "Go back"
 msgstr "뒤로 가기"
@@ -126,32 +138,52 @@ msgstr "내 장치를 Google Play Protect에 인증"
 msgid "Installed applications"
 msgstr ""
 
-#: ui/WaydroidConfigurationForm.qml:66
+#: ui/WaydroidConfigurationForm.qml:56
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgid "Reset waydroid"
+msgstr "Waydroid 설정"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Waydroid 설정"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid ? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroid 속성"
 
-#: ui/WaydroidConfigurationForm.qml:77
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "May require restarting the waydroid session to apply"
 msgstr "적용하려면 Waydroid 세션을 다시 시작해야 할 수도 있음"
 
-#: ui/WaydroidConfigurationForm.qml:94
+#: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Multi Windows"
 msgstr "멀티 윈도"
 
-#: ui/WaydroidConfigurationForm.qml:95
+#: ui/WaydroidConfigurationForm.qml:110
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "데스크톱과 창 통합 활성화/비활성화"
 
-#: ui/WaydroidConfigurationForm.qml:107
+#: ui/WaydroidConfigurationForm.qml:122
 #, kde-format
 msgid "Suspend"
 msgstr "일시 정지"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:123
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -160,12 +192,12 @@ msgstr ""
 "활성화된 앱이 없을 때 Waydroid 컨테이너가 (디스플레이 시간 제한 이후) 대기 상"
 "태로 진입하도록 허용"
 
-#: ui/WaydroidConfigurationForm.qml:120
+#: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:136
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "안드로이드에서 핫플러그된 장치에 직접 접근 허용"
