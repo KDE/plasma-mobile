@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-03 00:43+0000\n"
-"PO-Revision-Date: 2025-07-31 17:33+0200\n"
+"PO-Revision-Date: 2025-08-03 11:17+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -45,15 +45,12 @@ msgstr ""
 "Pot tardar alguns minuts."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid s'està iniciant\n"
+"Waydroid s'està reiniciant.\n"
 "Pot tardar alguns segons."
 
 #: ui/main.qml:76
@@ -138,17 +135,15 @@ msgid "Installed applications"
 msgstr "Aplicacions instal·lades"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Configura Waydroid"
+msgstr "Reinicialitza Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Configura Waydroid"
+msgstr "Confirmeu la reinicialització de Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -156,6 +151,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Segur que voleu reinicialitzar Waydroid? Esta és una acció destructiva i "
+"esborrarà totes les dades d'usuari."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format

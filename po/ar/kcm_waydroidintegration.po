@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-03 00:43+0000\n"
-"PO-Revision-Date: 2025-07-16 10:27+0400\n"
+"PO-Revision-Date: 2025-08-03 08:32+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -34,16 +34,13 @@ msgid "Check installation"
 msgstr "تأكد من التثبيت"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"يهيئ ويدرويد.\n"
-"قد تأخذ بعض الوقت."
+"تنزيل صور أندرويد والموردين.\n"
+"قد يستغرق الأمر بضع دقائق."
 
 #: ui/main.qml:67
 #, fuzzy, kde-format
@@ -82,27 +79,26 @@ msgid "Go back"
 msgstr "عُد"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "خصائص ويدرويد"
+msgstr "تطبيقات ويدرويد"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "ثبّت APK"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "يجب عليك تحديد ملف محلي"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "احذف التطبيق"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -137,7 +133,7 @@ msgstr "اعتماد جهازي  لحماية متجر غوغل"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "التطبيقات المثبتة"
 
 #: ui/WaydroidConfigurationForm.qml:56
 #, fuzzy, kde-format
@@ -206,17 +202,17 @@ msgstr "السماح للأندرويد بالوصول المباشر إلى ا�
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "تنزيل %1ميغابايت/%2 ميغابايت السرعة %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1 م.ب/ث"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1ك‌ب/ث"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

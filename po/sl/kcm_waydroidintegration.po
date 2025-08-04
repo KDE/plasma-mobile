@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-03 00:43+0000\n"
-"PO-Revision-Date: 2025-07-31 07:49+0200\n"
+"PO-Revision-Date: 2025-08-03 10:19+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -40,15 +40,12 @@ msgstr ""
 "To lahko traja nekaj minut."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Seja Waydroid se začenja.\n"
+"Seja Waydroid se ponovno nastavlja.\n"
 "Lahko traja nekaj sekund."
 
 #: ui/main.qml:76
@@ -133,17 +130,15 @@ msgid "Installed applications"
 msgstr "Nameščene aplikacije"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Konfiguriraj Waydroid"
+msgstr "Ponovno nastavi Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Konfiguriraj Waydroid"
+msgstr "Potrdi ponovno nastavitev Waydroida"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -151,6 +146,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Ali ste prepričani, da želite ponovno nastaviti Waydroid. To je rušilna "
+"dejavnost in bo splaknila vse uporabniške podatke."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format

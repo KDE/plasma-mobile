@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-03 00:43+0000\n"
-"PO-Revision-Date: 2025-07-31 13:19+0200\n"
+"PO-Revision-Date: 2025-08-03 09:26+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -42,15 +42,12 @@ msgstr ""
 "Het kan een paar minuten duren."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid sessie wordt gestart.\n"
+"Waydroid wordt gereset.\n"
 "Het kan een paar seconden duren."
 
 #: ui/main.qml:76
@@ -135,17 +132,15 @@ msgid "Installed applications"
 msgstr "Geïnstalleerde toepassingen"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Waydroid configureren"
+msgstr "Waydroid resetten"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Waydroid configureren"
+msgstr "Resetten van Waydroid bevestigen"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -153,6 +148,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Wilt u Waydroid resetten? Dit is een destructieve actie en zal alle "
+"gebruikersgegevens wissen."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format

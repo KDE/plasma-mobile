@@ -75,7 +75,7 @@ msgstr "عدد الأعمدة"
 #: qml/settings/SettingsWindow.qml:126
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr "حجم الأيقونات في الشاشة الرئيسية"
+msgstr "حجم الأيقونات في الشاشة الرئيسة"
 
 #: qml/settings/SettingsWindow.qml:165
 #, kde-format

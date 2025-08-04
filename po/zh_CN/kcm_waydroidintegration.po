@@ -43,16 +43,11 @@ msgstr ""
 "这可能需要几分钟。"
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid 会话正在启动。\n"
-"可能需要几秒钟。"
 
 #: ui/main.qml:76
 #, kde-format
@@ -136,17 +131,15 @@ msgid "Installed applications"
 msgstr "已安装的应用程序"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "配置 waydroid"
+msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "配置 waydroid"
+msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format

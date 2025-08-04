@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-03 00:43+0000\n"
-"PO-Revision-Date: 2025-07-13 10:37+0200\n"
+"PO-Revision-Date: 2025-08-03 16:12+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -33,28 +33,22 @@ msgid "Check installation"
 msgstr "Controlla l'installazione"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Waydroid si sta inizializzando.\n"
+"Scaricamento di Android e delle immagini del fornitore.\n"
 "Ciò può richiedere qualche minuto."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"La sessione di Waydroid si sta avviando.\n"
-"Ciò può richiedere qualche secondo."
+"Waydroid si sta ripristinando.\n"
+"Ciò può richiedere qualche istante."
 
 #: ui/main.qml:76
 #, kde-format
@@ -73,7 +67,7 @@ msgid ""
 "It can take a few seconds."
 msgstr ""
 "La sessione di Waydroid si sta avviando.\n"
-"Ciò può richiedere qualche secondo."
+"Ciò può richiedere qualche istante."
 
 #: ui/main.qml:121
 #, kde-format
@@ -81,27 +75,26 @@ msgid "Go back"
 msgstr "Indietro"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Proprietà di Waydroid"
+msgstr "Applicazioni Waydroid"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "Installa APK"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "Devi selezionare un file locale"
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "Elimina l'applicazione"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -131,25 +124,23 @@ msgstr "Arresta la sessione"
 #: ui/WaydroidConfigurationForm.qml:46
 #, kde-format
 msgid "Certify my device for Google Play Protect"
-msgstr ""
+msgstr "Certifica il mio dispositivo per Google Play Protect"
 
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "Applicazioni installate"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Configura waydroid"
+msgstr "Ripristina waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Configura waydroid"
+msgstr "Conferma il ripristino di Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -157,6 +148,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Sei sicuro di voler ripristinare Waydroid? È un'azione distruttiva, e "
+"cancellerà tutti i dati utente."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
@@ -207,22 +200,22 @@ msgstr "Permetti ad android l'accesso diretto ai dispositivi collegati a caldo"
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "Scaricamento di %1MB/%2MB Velocità %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1Mb/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1Kb/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
 msgid "Google Play Protect configuration"
-msgstr ""
+msgstr "Configurazione di Google Play Protect"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
 #, kde-format
@@ -230,6 +223,8 @@ msgid ""
 "We fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
+"Sto recuperando il tuo ID Android.\n"
+"Ciò può richiedere qualche istante."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
 #, kde-format
@@ -239,12 +234,17 @@ msgid ""
 "your device, paste the Android ID on the field in the website. Then, give "
 "the Google services some minutes to reflect the change and restart waydroid."
 msgstr ""
+"Quando avvii per la prima volta Waydroid con le GAPPS, ti verrà notificato "
+"che il dispositivo non è certificato per Google Play Protect. Per "
+"autocertificare il tuo dispositivo, incolla l'ID Android nel campo del sito "
+"web, poi attendi qualche minuto affinché i servizi Google riflettano la "
+"modifica. Poi riavvia Waydroid."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
-msgstr ""
+msgstr "Copia l'ID Android e apri il sito web"
 
 #: ui/WaydroidInitialConfigurationForm.qml:16
 #, kde-format

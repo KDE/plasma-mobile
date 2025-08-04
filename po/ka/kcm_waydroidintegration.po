@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-03 00:43+0000\n"
-"PO-Revision-Date: 2025-07-31 03:40+0200\n"
+"PO-Revision-Date: 2025-08-03 05:14+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -43,15 +43,12 @@ msgstr ""
 "ამას რამდენიმე წუთი შეიძლება, დასჭირდეს."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"მიმდინარეობს Waydroid-ის სესიის გაშვება.\n"
+"მიმდინარეობს Waydroid-ის პარამეტრების ჩამოყრა.\n"
 "ამას რამდენიმე წამი შეიძლება, დასჭირდეს."
 
 #: ui/main.qml:76
@@ -136,17 +133,15 @@ msgid "Installed applications"
 msgstr "დაყენებული აპლიკაციები"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Waydroid-ის მორგება"
+msgstr "Waydroid-ის ჩამოყრა"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Waydroid-ის მორგება"
+msgstr "დაადასტურეთ Waydroid-ის ჩამოყრა"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -154,6 +149,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"მართლა გნებავთ Waydroid-ის ჩამოყრა? ეს გამანადგურებელი ქმედებაა და "
+"მომხმარებლის მონაცემებს სრულად წაშლის."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
