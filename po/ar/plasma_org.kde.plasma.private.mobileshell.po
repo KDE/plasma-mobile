@@ -248,7 +248,7 @@ msgstr "اعرض أكثر بـ%1"
 #: qml/widgets/notifications/NotificationsWidget.qml:382
 #, kde-format
 msgid "Clear All Notifications"
-msgstr "امسح جميع الإشعارات"
+msgstr "امحُ جميع الإشعارات"
 
 #: qml/widgets/notifications/ThumbnailStrip.qml:132
 #, kde-format
