@@ -20,4 +20,4 @@ msgstr ""
 #: package/contents/ui/main.qml:10
 #, kde-format
 msgid "Auto-rotate"
-msgstr "تدوير آلي"
+msgstr "تدوير آليّ"
