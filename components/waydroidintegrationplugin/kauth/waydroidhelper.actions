@@ -112,6 +112,7 @@ Persistence=session
 
 [org.kde.plasma.mobileshell.waydroidhelper.reset]
 Name=Reset Waydroid
+Name[ar]=صفّر ويدرويد
 Name[ca]=Reinicialitza el Waydroid
 Name[ca@valencia]=Reinicialitza Waydroid
 Name[es]=Reiniciar Waydroid
@@ -126,7 +127,9 @@ Name[sv]=Återställ Waydroid
 Name[tr]=Waydroid’i Sıfırla
 Name[uk]=Скидання Waydroid
 Name[x-test]=xxReset Waydroidxx
+Name[zh_CN]=重置 Waydroid
 Description=Allow delete waydroid folder
+Description[ar]=اسمح بحذف مجلد ويدرويد
 Description[ca]=Permet la supressió de la carpeta del Waydroid
 Description[ca@valencia]=Permet la supressió de la carpeta de Waydroid
 Description[es]=Permitir el borrado de la carpeta de Waydroid
@@ -140,6 +143,7 @@ Description[sv]=Tillåt borttagning av Waydroids katalog
 Description[tr]=Waydroid klasörünü silmeye izin verin
 Description[uk]=Уможливлення вилучення теки waydroid
 Description[x-test]=xxAllow delete waydroid folderxx
+Description[zh_CN]=允许删除 waydroid 文件夹
 Policy=yes
 PolicyInactive=yes
 Persistence=session
