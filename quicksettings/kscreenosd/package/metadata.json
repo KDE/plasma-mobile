@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "sebas@kde.org",
+                "Name": "Sebastian Kügler"
+            }
+        ],
+        "Description": "Screen setup OSD quick setting for Plasma Mobile",
+        "Icon": "osd-duplicate",
+        "Id": "org.kde.plasma.quicksetting.kscreenosd",
+        "License": "GPL-2.0+",
+        "Name": "Screen OSD",
+        "Website": "https://kde.org"
+    }
+}
