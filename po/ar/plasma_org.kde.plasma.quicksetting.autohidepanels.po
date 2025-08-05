@@ -21,4 +21,4 @@ msgstr ""
 #: contents/ui/main.qml:10
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr "إخفاء اللوحات آليًا"
+msgstr "إخفاء اللوحات آليًّا"

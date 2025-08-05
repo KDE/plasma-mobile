@@ -2941,12 +2941,12 @@ msgstr "الوقت والتاريخ"
 #: ui/main.qml:63
 #, kde-format
 msgid "Automatic Time Synchronization"
-msgstr "مزامنة الوقت آليًا"
+msgstr "مزامنة الوقت آليًّا"
 
 #: ui/main.qml:64
 #, kde-format
 msgid "Whether to set the time automatically."
-msgstr "ما إذا كان يجب ضبط الوقت آليًا."
+msgstr "ما إذا كان يجب ضبط الوقت آليًّا."
 
 #: ui/main.qml:78
 #, kde-format

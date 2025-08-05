@@ -48,6 +48,8 @@ msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
+"Waydroid 正在重置。\n"
+"可能需要几秒钟。"
 
 #: ui/main.qml:76
 #, kde-format
@@ -133,20 +135,20 @@ msgstr "已安装的应用程序"
 #: ui/WaydroidConfigurationForm.qml:56
 #, kde-format
 msgid "Reset waydroid"
-msgstr ""
+msgstr "重置 Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr ""
+msgstr "确认 Waydroid 重置"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
-msgstr ""
+msgstr "您确定要重置 Waydroid 吗？这是一个破坏性操作，将会清除所有用户数据。"
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format

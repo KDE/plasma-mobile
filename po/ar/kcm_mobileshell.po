@@ -46,7 +46,7 @@ msgstr "إذا كان هذا متوقفًا، فستقلل الرسوم المت
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr "إخفاء اللوحات آليًا"
+msgstr "إخفاء اللوحات آليًّا"
 
 #: ui/main.qml:56
 #, kde-format
@@ -54,7 +54,7 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
-"عندما تنشط، ستخفي لوحات الحالة والتنقل آليًا، مما يسمح للتطبيقات بملء مساحة "
+"عندما تنشط، ستخفي لوحات الحالة والتنقل آليًّا، مما يسمح للتطبيقات بملء مساحة "
 "الشاشة بأكملها."
 
 #: ui/main.qml:69
