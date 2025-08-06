@@ -22,12 +22,12 @@ ColumnLayout {
     FormCard.FormCard {
         FormCard.FormTextDelegate {
             text: i18n("IP address")
-            description: AIP.WaydroidState.ipAddress
+            description: AIP.WaydroidDBusClient.ipAddress
             trailing: PC3.Button {
-                visible: AIP.WaydroidState.ipAddress !== ""
+                visible: AIP.WaydroidDBusClient.ipAddress !== ""
                 text: i18n("Copy")
                 icon.name: 'edit-copy-symbolic'
-                onClicked: AIP.WaydroidState.copyToClipboard(AIP.WaydroidState.ipAddress)
+                onClicked: AIP.WaydroidDBusClient.copyToClipboard(AIP.WaydroidDBusClient.ipAddress)
             }
         }
 
@@ -37,12 +37,12 @@ ColumnLayout {
 
             trailing: PC3.Button {
                 text: i18n("Stop session")
-                onClicked: AIP.WaydroidState.stopSessionQml()
+                onClicked: AIP.WaydroidDBusClient.stopSession()
             }
         }
 
         FormCard.FormButtonDelegate {
-            visible: AIP.WaydroidState.systemType === AIP.WaydroidState.Gapps
+            visible: AIP.WaydroidDBusClient.systemType === AIP.WaydroidDBusClient.Gapps
             text: i18n("Certify my device for Google Play Protect")
             onClicked: kcm.push("WaydroidGooglePlayProtectConfigurationPage.qml")
         }
@@ -63,7 +63,7 @@ ColumnLayout {
             subtitle: i18n("Are you sure you want to reset Waydroid ? This is a destructive action, and will wipe all user data.")
             standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
-            onAccepted: AIP.WaydroidState.resetWaydroidQml()
+            onAccepted: AIP.WaydroidDBusClient.resetWaydroid()
         }
 
     }
@@ -74,7 +74,7 @@ ColumnLayout {
         interval: 2000
         repeat: true
         running: root.visible
-        onTriggered: AIP.WaydroidState.refreshSessionInfo()
+        onTriggered: AIP.WaydroidDBusClient.refreshSessionInfo()
     }
 
     FormCard.FormHeader {
@@ -96,7 +96,7 @@ ColumnLayout {
     }
 
     Connections {
-        target: AIP.WaydroidState
+        target: AIP.WaydroidDBusClient
 
         function onSessionStatusChanged() {
             infoMessage.visible = false
@@ -108,9 +108,9 @@ ColumnLayout {
             id: multiWindows
             text: i18n("Multi Windows")
             description: i18n("Enables/Disables window integration with the desktop")
-            checked: AIP.WaydroidState.multiWindows
+            checked: AIP.WaydroidDBusClient.multiWindows
             onToggled: {
-                AIP.WaydroidState.multiWindows = checked
+                AIP.WaydroidDBusClient.multiWindows = checked
                 infoMessage.visible = true
             }
         }
@@ -121,9 +121,9 @@ ColumnLayout {
             id: suspend
             text: i18n("Suspend")
             description: i18n("Let the Waydroid container sleep (after the display timeout) when no apps are active")
-            checked: AIP.WaydroidState.suspend
+            checked: AIP.WaydroidDBusClient.suspend
             onToggled: {
-                AIP.WaydroidState.suspend = checked
+                AIP.WaydroidDBusClient.suspend = checked
                 infoMessage.visible = true
             }
         }
@@ -134,9 +134,9 @@ ColumnLayout {
             id: uevent
             text: i18n("UEvent")
             description: i18n("Allow android direct access to hotplugged devices")
-            checked: AIP.WaydroidState.uevent
+            checked: AIP.WaydroidDBusClient.uevent
             onToggled: {
-                AIP.WaydroidState.uevent = checked
+                AIP.WaydroidDBusClient.uevent = checked
                 infoMessage.visible = true
             }
         }
