@@ -23,6 +23,9 @@ Item {
         if (!volumeOSD.active) {
             volumeOSD.active = true;
         }
+        if (!kscreenOSD.active) {
+            kscreenOSD.active = true;
+        }
         if (!notifications.active) {
             notifications.active = true;
         }
@@ -35,6 +38,13 @@ Item {
         id: volumeOSD
         sourceComponent: Component {
             MobileShell.VolumeOSDProvider {}
+        }
+    }
+
+    Loader {
+        id: kscreenOSD
+        sourceComponent: Component {
+            MobileShell.KScreenOSDProvider {}
         }
     }
 

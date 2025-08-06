@@ -80,6 +80,8 @@ ecm_target_qml_sources(mobileshellplugin SOURCES
     qml/popups/notifications/NotificationPopupProvider.qml
     qml/popups/notifications/PulseAudio.qml
 
+    qml/popups/kscreenosd/KScreenOSDProvider.qml
+
     qml/popups/volumeosd/AudioApplet.qml
     qml/popups/volumeosd/DeviceListItem.qml
     qml/popups/volumeosd/icon.js
