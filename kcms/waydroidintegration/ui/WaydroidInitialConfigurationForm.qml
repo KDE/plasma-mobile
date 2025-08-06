@@ -22,8 +22,8 @@ ColumnLayout {
             text: i18n("System type")
 
             model: [
-                {"name": "Vanilla", "value": AIP.WaydroidState.Vanilla},
-                {"name": "GAPPS", "value": AIP.WaydroidState.Gapps}
+                {"name": "Vanilla", "value": AIP.WaydroidDBusClient.Vanilla},
+                {"name": "GAPPS", "value": AIP.WaydroidDBusClient.Gapps}
             ]
 
             textRole: "name"
@@ -36,6 +36,6 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
         enabled: systemType.currentValue !== undefined
 
-        onClicked: AIP.WaydroidState.initializeQml(systemType.currentValue, AIP.WaydroidState.Lineage)
+        onClicked: AIP.WaydroidDBusClient.initialize(systemType.currentValue, AIP.WaydroidDBusClient.Lineage)
     }
 }

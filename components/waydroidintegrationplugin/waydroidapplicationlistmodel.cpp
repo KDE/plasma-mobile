@@ -86,6 +86,10 @@ void WaydroidApplicationListModel::loadApplications(const QList<WaydroidApplicat
 
 void WaydroidApplicationListModel::refreshApplications()
 {
+    if (m_waydroidState->sessionStatus() != WaydroidState::SessionRunning) {
+        return;
+    }
+
     QList<WaydroidApplication::Ptr> applications;
 
     QStringList arguments = {u"app"_s, u"list"_s};
