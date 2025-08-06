@@ -24,7 +24,7 @@ KCM.SimpleKCM {
     rightPadding: 0
 
     ColumnLayout {
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.NotSupported
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.NotSupported
         anchors.centerIn: parent
         spacing: Kirigami.Units.largeSpacing
 
@@ -38,21 +38,21 @@ KCM.SimpleKCM {
         PC3.Button {
             text: i18n("Check installation")
             Layout.alignment: Qt.AlignHCenter
-            onClicked: AIP.WaydroidState.refreshSupportsInfo()
+            onClicked: AIP.WaydroidDBusClient.refreshSupportsInfo()
         }
     }
 
     WaydroidInitialConfigurationForm {
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.NotInitialized
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.NotInitialized
     }
 
     WaydroidDownloadStatus {
         id: downloadStatus
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Initializing
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.Initializing
         text: i18n("Downloading Android and vendor images.\nIt can take a few minutes.")
 
         Connections {
-            target: AIP.WaydroidState
+            target: AIP.WaydroidDBusClient
 
             function onDownloadStatusChanged(downloaded, total, speed) {
                 downloadStatus.downloaded = downloaded
@@ -63,12 +63,12 @@ KCM.SimpleKCM {
     }
 
     WaydroidLoader {
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Resetting
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.Resetting
         text: i18n("Waydroid is resetting.\nIt can take a few seconds.")
     }
 
     ColumnLayout {
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Initialized && AIP.WaydroidState.sessionStatus == AIP.WaydroidState.SessionStopped
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.Initialized && AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionStopped
         anchors.centerIn: parent
         spacing: Kirigami.Units.largeSpacing
 
@@ -81,46 +81,24 @@ KCM.SimpleKCM {
         PC3.Button {
             text: i18n("Start the session")
             Layout.alignment: Qt.AlignHCenter
-            onClicked: AIP.WaydroidState.startSessionQml()
+            onClicked: AIP.WaydroidDBusClient.startSession()
         }
     }
 
     WaydroidLoader {
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Initialized && AIP.WaydroidState.sessionStatus == AIP.WaydroidState.SessionStarting
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.Initialized && AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionStarting
         text: i18n("Waydroid session is starting.\nIt can take a few seconds.")
     }
 
     WaydroidConfigurationForm {
-        visible: AIP.WaydroidState.errorTitle === "" && AIP.WaydroidState.status == AIP.WaydroidState.Initialized && AIP.WaydroidState.sessionStatus == AIP.WaydroidState.SessionRunning
+        visible: AIP.WaydroidDBusClient.status === AIP.WaydroidDBusClient.Initialized && AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionRunning
     }
 
-    ColumnLayout {
-        visible: AIP.WaydroidState.errorTitle !== ""
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent
-        anchors.leftMargin: Kirigami.Units.largeSpacing
-        anchors.right: parent
-        anchors.rightMargin: Kirigami.Units.largeSpacing
-        spacing: Kirigami.Units.largeSpacing
+    Connections {
+        target: AIP.WaydroidDBusClient
 
-        QQC2.Label {
-            text: AIP.WaydroidState.errorTitle
-            Layout.alignment: Qt.AlignHCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        QQC2.TextArea {
-            visible: AIP.WaydroidState.errorMessage !== ""
-            text: AIP.WaydroidState.errorMessage
-            readOnly: true
-            wrapMode: TextEdit.Wrap
-            Layout.fillWidth: true
-        }
-
-        PC3.Button {
-            text: i18n("Go back")
-            Layout.alignment: Qt.AlignHCenter
-            onClicked: AIP.WaydroidState.resetError()
+        function onErrorOccurred(title, message) {
+            kcm.push("WaydroidErrorPage.qml", { title, message })
         }
     }
 }

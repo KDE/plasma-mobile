@@ -23,18 +23,18 @@ KCM.SimpleKCM {
     title: i18n("Google Play Protect configuration")
 
     Component.onCompleted: {
-        if (AIP.WaydroidState.androidId === "") {
-            AIP.WaydroidState.refreshAndroidId()
+        if (AIP.WaydroidDBusClient.androidId === "") {
+            AIP.WaydroidDBusClient.refreshAndroidId()
         }
     }
 
     WaydroidLoader {
-        visible: AIP.WaydroidState.androidId === ""
+        visible: AIP.WaydroidDBusClient.androidId === ""
         text: i18n("We fetching your Android ID.\nIt can take a few seconds.")
     }
 
     ColumnLayout {
-        visible: AIP.WaydroidState.androidId !== ""
+        visible: AIP.WaydroidDBusClient.androidId !== ""
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent
         anchors.leftMargin: Kirigami.Units.largeSpacing
@@ -52,7 +52,7 @@ KCM.SimpleKCM {
             icon.name: 'edit-copy-symbolic'
             Layout.alignment: Qt.AlignHCenter
             onClicked: {
-                AIP.WaydroidState.copyToClipboard(AIP.WaydroidState.androidId)
+                AIP.WaydroidDBusClient.copyToClipboard(AIP.WaydroidDBusClient.androidId)
                 Qt.openUrlExternally("https://www.google.com/android/uncertified")
             }
         }

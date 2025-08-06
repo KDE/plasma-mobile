@@ -34,7 +34,7 @@ KCM.SimpleKCM {
     ]
 
     Connections {
-        target: AIP.WaydroidState.applicationListModel
+        target: AIP.WaydroidDBusClient
 
         function onActionFinished(message: string): void {
             inlineMessage.text = message
@@ -42,11 +42,19 @@ KCM.SimpleKCM {
             inlineMessage.type = Kirigami.MessageType.Positive
         }
 
-        function onErrorOccurred(error: string): void {
+        function onActionFailed(error: string): void {
             inlineMessage.text = error
             inlineMessage.visible = true
             inlineMessage.type = Kirigami.MessageType.Error
         }
+    }
+
+    Timer {
+        id: autoRefreshApplicationsTimer
+        interval: 2000
+        repeat: true
+        running: root.visible
+        onTriggered: AIP.WaydroidDBusClient.refreshApplications()
     }
 
     FileDialog {
@@ -60,7 +68,7 @@ KCM.SimpleKCM {
                 inlineMessage.visible = true
                 inlineMessage.type = Kirigami.MessageType.Error
             } else {
-                AIP.WaydroidState.applicationListModel.installApk(url.pathname)
+                AIP.WaydroidDBusClient.installApk(url.pathname)
             }
         }
     }
@@ -79,7 +87,7 @@ KCM.SimpleKCM {
 
         FormCard.FormCard {
             Repeater {
-                model: AIP.WaydroidState.applicationListModel
+                model: AIP.WaydroidDBusClient.applicationListModel
 
                 delegate: FormCard.AbstractFormDelegate {
                     id: appDelegate
@@ -99,7 +107,7 @@ KCM.SimpleKCM {
                             text: i18nc("@action:button", "Delete the application")
                             icon.name: "usermenu-delete"
 
-                            onClicked: AIP.WaydroidState.applicationListModel.deleteApplication(model.id)
+                            onClicked: AIP.WaydroidDBusClient.deleteApplication(model.id)
 
                             QQC2.ToolTip.visible: hovered
                             QQC2.ToolTip.text: text

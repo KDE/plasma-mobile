@@ -9,18 +9,36 @@ import org.kde.plasma.private.mobileshell.waydroidintegrationplugin as AIP
 
 QS.QuickSetting {
     text: i18nc("@action:button", "Waydroid")
-    status: AIP.WaydroidState.sessionStatus === AIP.WaydroidState.SessionRunning ? i18nc("@info:status", "Running") : i18nc("@info:status", "Stopped")
+    status: statusText()
     icon: "folder-android-symbolic"
     settingsCommand: "plasma-open-settings kcm_waydroidintegration"
 
-    enabled: AIP.WaydroidState.sessionStatus === AIP.WaydroidState.SessionRunning
-    available: AIP.WaydroidState.status === AIP.WaydroidState.Initialized
+    available: AIP.WaydroidDBusClient.status !== AIP.WaydroidDBusClient.NotSupported
+    enabled: AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionRunning
+
+    Component.onCompleted: {
+        AIP.WaydroidDBusObject.registerObject()
+    }
 
     function toggle(): void {
-        if (AIP.WaydroidState.sessionStatus === AIP.WaydroidState.SessionRunning) {
-            AIP.WaydroidState.stopSessionQml()
+        if (AIP.WaydroidDBusClient.status !== AIP.WaydroidDBusClient.Initialized) {
+            return
+        }
+
+        if (AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionRunning) {
+            AIP.WaydroidDBusClient.stopSession()
         } else {
-            AIP.WaydroidState.startSessionQml()
+            AIP.WaydroidDBusClient.startSession()
+        }
+    }
+
+    function statusText(): string {
+        if (AIP.WaydroidDBusClient.status !== AIP.WaydroidDBusClient.Initialized) {
+            return i18nc("@info:status", "Not initialized")
+        } else if (AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionRunning) {
+            return i18nc("@info:status", "Running")
+        } else {
+            return i18nc("@info:status", "Stopped")
         }
     }
 }

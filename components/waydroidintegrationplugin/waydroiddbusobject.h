@@ -6,16 +6,16 @@
 
 #pragma once
 
-#include "waydroidapplicationlistmodel.h"
+#include "waydroidapplicationdbusobject.h"
 
-#include <QCoroCore>
-#include <QCoroQmlTask>
+#include <QDBusObjectPath>
+#include <QList>
 #include <QObject>
+#include <QString>
 
 #include <qqmlregistration.h>
-#include <qtmetamacros.h>
 
-class WaydroidApplicationListModel;
+class WaydroidApplicationDBusObject;
 
 /**
  * This class provides an interface to interact with the Waydroid container,
@@ -23,26 +23,15 @@ class WaydroidApplicationListModel;
  *
  * @author Florian RICHER <florian.richer@protonmail.com>
  */
-class WaydroidState : public QObject
+class WaydroidDBusObject : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
     QML_SINGLETON
-
-    Q_PROPERTY(Status status READ status NOTIFY statusChanged)
-    Q_PROPERTY(SessionStatus sessionStatus READ sessionStatus NOTIFY sessionStatusChanged)
-    Q_PROPERTY(SystemType systemType READ systemType NOTIFY systemTypeChanged)
-    Q_PROPERTY(QString ipAddress READ ipAddress NOTIFY ipAddressChanged)
-    Q_PROPERTY(QString androidId READ androidId NOTIFY androidIdChanged)
-    Q_PROPERTY(QString errorTitle READ errorTitle NOTIFY errorTitleChanged)
-    Q_PROPERTY(QString errorMessage READ errorMessage NOTIFY errorMessageChanged)
-    Q_PROPERTY(bool multiWindows READ multiWindows WRITE setMultiWindows NOTIFY multiWindowsChanged)
-    Q_PROPERTY(bool suspend READ suspend WRITE setSuspend NOTIFY suspendChanged)
-    Q_PROPERTY(bool uevent READ uevent WRITE setUevent NOTIFY ueventChanged)
-    Q_PROPERTY(WaydroidApplicationListModel *applicationListModel READ applicationListModel CONSTANT)
+    Q_CLASSINFO("D-Bus Interface", "org.kde.plasmashell.Waydroid")
 
 public:
-    WaydroidState(QObject *parent = nullptr);
+    explicit WaydroidDBusObject(QObject *parent = nullptr);
 
     /**
      * @enum Status
@@ -92,67 +81,71 @@ public:
     };
     Q_ENUM(RomType)
 
-    Q_INVOKABLE void refreshSupportsInfo();
-    Q_INVOKABLE void refreshInstallationInfo();
-    Q_INVOKABLE void refreshSessionInfo();
-    Q_INVOKABLE void refreshAndroidId();
-    Q_INVOKABLE void refreshPropsInfo();
-    Q_INVOKABLE void resetError();
-    Q_INVOKABLE QCoro::QmlTask initializeQml(const SystemType systemType, const RomType romType, const bool forced = false);
-    QCoro::Task<void> initialize(const SystemType systemType, const RomType romType, const bool forced = false);
-    Q_INVOKABLE QCoro::QmlTask startSessionQml();
-    QCoro::Task<void> startSession();
-    Q_INVOKABLE QCoro::QmlTask stopSessionQml();
-    QCoro::Task<void> stopSession();
-    Q_INVOKABLE QCoro::QmlTask resetWaydroidQml();
-    QCoro::Task<void> resetWaydroid();
-
-    Q_INVOKABLE void copyToClipboard(const QString text);
-
-    Status status() const;
-    SessionStatus sessionStatus() const;
-    SystemType systemType() const;
-    QString ipAddress() const;
-    QString androidId() const;
-    QString errorTitle() const;
-    QString errorMessage() const;
-    WaydroidApplicationListModel *applicationListModel() const;
-
-    bool multiWindows() const;
-    void setMultiWindows(const bool multiWindows);
-    bool suspend() const;
-    void setSuspend(const bool suspend);
-    bool uevent() const;
-    void setUevent(const bool uevent);
+    // called by QML
+    Q_INVOKABLE void registerObject();
 
 Q_SIGNALS:
-    void statusChanged();
+    Q_SCRIPTABLE void statusChanged();
     // download and total is in MB and speed in Kbps
-    void downloadStatusChanged(float downloaded, float total, float speed);
-    void sessionStatusChanged();
-    void systemTypeChanged();
-    void ipAddressChanged();
-    void multiWindowsChanged();
-    void suspendChanged();
-    void ueventChanged();
-    void errorTitleChanged();
-    void errorMessageChanged();
-    void androidIdChanged();
+    Q_SCRIPTABLE void downloadStatusChanged(double downloaded, double total, double speed);
+    Q_SCRIPTABLE void sessionStatusChanged();
+    Q_SCRIPTABLE void systemTypeChanged();
+    Q_SCRIPTABLE void ipAddressChanged();
+    Q_SCRIPTABLE void androidIdChanged();
+    Q_SCRIPTABLE void multiWindowsChanged();
+    Q_SCRIPTABLE void suspendChanged();
+    Q_SCRIPTABLE void ueventChanged();
+
+    Q_SCRIPTABLE void applicationAdded(QDBusObjectPath path);
+    Q_SCRIPTABLE void applicationRemoved(QDBusObjectPath path);
+
+    // Use to display banner
+    Q_SCRIPTABLE void actionFinished(const QString message);
+    Q_SCRIPTABLE void actionFailed(const QString message);
+
+    // General error
+    Q_SCRIPTABLE void errorOccurred(const QString title, const QString message);
+
+public Q_SLOTS:
+    Q_SCRIPTABLE int status() const;
+    Q_SCRIPTABLE int sessionStatus() const;
+    Q_SCRIPTABLE int systemType() const;
+    Q_SCRIPTABLE QString ipAddress() const;
+    Q_SCRIPTABLE QString androidId() const;
+    Q_SCRIPTABLE bool multiWindows() const;
+    Q_SCRIPTABLE void setMultiWindows(const bool multiWindows);
+    Q_SCRIPTABLE bool suspend() const;
+    Q_SCRIPTABLE void setSuspend(const bool suspend);
+    Q_SCRIPTABLE bool uevent() const;
+    Q_SCRIPTABLE void setUevent(const bool uevent);
+    Q_SCRIPTABLE QList<QDBusObjectPath> applications() const;
+
+    Q_SCRIPTABLE void initialize(const int systemType, const int romType, const bool forced = false);
+    Q_SCRIPTABLE void startSession();
+    Q_SCRIPTABLE void stopSession();
+    Q_SCRIPTABLE void resetWaydroid();
+    Q_SCRIPTABLE void installApk(const QString apkFile);
+    Q_SCRIPTABLE void deleteApplication(const QString appId);
+    Q_SCRIPTABLE void refreshSessionInfo();
+    Q_SCRIPTABLE void refreshAndroidId();
+    Q_SCRIPTABLE void refreshApplications();
 
 private:
+    bool m_dbusInitialized{false};
     Status m_status{NotInitialized};
     SessionStatus m_sessionStatus{SessionStopped};
-    SystemType m_systemType{SystemType::UnknownSystemType};
+    SystemType m_systemType{UnknownSystemType};
     QString m_ipAddress{""};
-    QString m_errorTitle{""};
-    QString m_errorMessage{""};
     QString m_androidId{""};
-    WaydroidApplicationListModel *m_applicationListModel{nullptr};
 
     // Waydroid props. See https://docs.waydro.id/usage/waydroid-prop-options
     bool m_multiWindows{false};
     bool m_suspend{false};
     bool m_uevent{false};
+
+    void refreshSupportsInfo();
+    void refreshInstallationInfo();
+    void refreshPropsInfo();
 
     /**
      * @brief Executes the command to retrieve the current session status and related
@@ -208,4 +201,7 @@ private:
 
     QString desktopFileDirectory();
     bool removeWaydroidApplications();
+
+    QString fetchApplicationsList();
+    QList<WaydroidApplicationDBusObject::Ptr> m_applicationObjects;
 };

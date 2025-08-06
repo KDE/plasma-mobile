@@ -6,14 +6,13 @@
 
 #pragma once
 
-#include "waydroidapplication.h"
-#include "waydroidstate.h"
+#include "waydroidapplicationdbusclient.h"
 
 #include <QAbstractListModel>
 #include <QObject>
 #include <QTimer>
 
-class WaydroidState;
+class WaydroidDBusClient;
 
 class WaydroidApplicationListModel : public QAbstractListModel
 {
@@ -26,25 +25,23 @@ public:
         IdRole
     };
 
-    WaydroidApplicationListModel(WaydroidState *parent = nullptr);
+    explicit WaydroidApplicationListModel(WaydroidDBusClient *parent = nullptr);
     ~WaydroidApplicationListModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    Q_INVOKABLE void installApk(const QString apkFile);
-    Q_INVOKABLE void deleteApplication(const QString appId);
+    void initializeApplications(const QList<QDBusObjectPath> &applicationObjectPaths);
 
-Q_SIGNALS:
-    void actionFinished(const QString message);
-    void errorOccurred(const QString message);
+public Q_SLOTS:
+    void addApplication(const QDBusObjectPath &objectPath);
+    void removeApplication(const QDBusObjectPath &objectPath);
 
 private:
-    WaydroidState *m_waydroidState{nullptr};
-    QList<WaydroidApplication::Ptr> m_applications;
+    WaydroidDBusClient *m_waydroidDBusClient{nullptr};
+    QList<WaydroidApplicationDBusClient::Ptr> m_applications;
     QTimer *m_refreshTimer{nullptr};
 
-    void loadApplications(const QList<WaydroidApplication::Ptr> applications);
-    void refreshApplications();
+    void updateApplication(const QDBusObjectPath &objectPath, const QList<int> &roles);
 };
