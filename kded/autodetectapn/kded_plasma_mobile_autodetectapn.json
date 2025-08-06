@@ -1,7 +1,7 @@
 {
     "KPlugin": {
         "Description": "Autodetect cellular APNs in Plasma Mobile",
-        "Description[ar]": "التعرف الآلي لأسماء نقاط الوصول لبلازما الجوال",
+        "Description[ar]": "التعرف الآليّ لأسماء نقاط الوصول لبلازما الجوال",
         "Description[ca@valencia]": "Detecta automàticament els APN mòbils en Plasma Mobile",
         "Description[ca]": "Detecta automàticament els APN mòbils en el Plasma Mobile",
         "Description[en_GB]": "Autodetect cellular APNs in Plasma Mobile",
@@ -33,7 +33,7 @@
         "Description[zh_CN]": "在 Plasma Mobile 中自动检测蜂窝网络 APN",
         "Description[zh_TW]": "在 Plasma 行動中自動偵測行動 APN",
         "Name": "Plasma Mobile Autodetect APNs",
-        "Name[ar]": "التعرف الآلي لأسماء نقاط الوصول",
+        "Name[ar]": "التعرف الآليّ لأسماء نقاط الوصول",
         "Name[ca@valencia]": "Detecció automàtica dels APN de Plasma Mobile",
         "Name[ca]": "Detecció automàtica dels APN del Plasma Mobile",
         "Name[cs]": "Automatická detekce APN v Plasma Mobile",

@@ -32,7 +32,7 @@
             }
         ],
         "Description": "Auto Hide Panels quick setting for Plasma Mobile",
-        "Description[ar]": "إعداد سريع للإخفاء الآلي للوحات لبلازما الجوال",
+        "Description[ar]": "إعداد سريع للإخفاء الآليّ للوحات لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida per a ocultar automàticament els quadros en Plasma Mobile",
         "Description[ca]": "Configuració ràpida per a ocultar automàticament els plafons al Plasma Mobile",
         "Description[es]": "Ajuste rápido de ocultación automática de paneles para Plasma Mobile",
@@ -60,7 +60,7 @@
         "Id": "org.kde.plasma.quicksetting.autohidepanels",
         "License": "GPL-2.0+",
         "Name": "Auto Hide Panels",
-        "Name[ar]": "إخفاء اللوحات آليًا",
+        "Name[ar]": "إخفاء اللوحات آليًّا",
         "Name[ca@valencia]": "Oculta automàticament els quadros",
         "Name[ca]": "Oculta automàticament els plafons",
         "Name[es]": "Ocultar paneles automáticamente",
