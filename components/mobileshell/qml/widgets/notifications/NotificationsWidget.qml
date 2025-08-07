@@ -118,12 +118,21 @@ Item {
     }
 
     /**
-     * Toggles Do Not Disturb mode.
+     * Sets Do Not Disturb mode to the intended setting.
+     * Note: The state may not change to the desired setting, always read doNotDisturbEnabled for the current state.
      */
-    function toggleDoNotDisturbMode() {
-        if (doNotDisturbModeEnabled) {
-            notificationSettings.defaults();
+    function setDoNotDisturbMode(doNotDisturb: bool) {
+        if (!doNotDisturb) {
+            // Turn off do not disturb
+
+            notificationSettings.notificationsInhibitedUntil = undefined;
+            notificationSettings.revokeApplicationInhibitions();
+            notificationSettings.fullscreenFocused = false;
+            // overrules current mirrored screen setup, updates again when screen configuration changes
+            notificationSettings.screensMirrored = false;
+
         } else {
+            // Turn on do not disturb
             // We just have a global toggle, so set it to a really long time (in this case, a year)
             var until = new Date();
             until.setFullYear(until.getFullYear() + 1);
@@ -146,7 +155,7 @@ Item {
 
         function onDoNotDisturbChanged() {
             if (root.doNotDisturbModeEnabled !== MobileShellState.ShellDBusClient.doNotDisturb) {
-                root.toggleDoNotDisturbMode();
+                root.setDoNotDisturbMode(MobileShellState.ShellDBusClient.doNotDisturb);
             }
         }
     }
