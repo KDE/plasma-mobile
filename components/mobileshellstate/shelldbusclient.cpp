@@ -52,6 +52,11 @@ void ShellDBusClient::connectSignals()
     connect(m_interface, &OrgKdePlasmashellInterface::showVolumeOSDRequested, this, &ShellDBusClient::showVolumeOSDRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::openLockScreenKeypadRequested, this, &ShellDBusClient::openLockScreenKeypadRequested);
 
+    // Initial state fetch
+    updatePanelState();
+    updateIsActionDrawerOpen();
+    updateIsVolumeOSDOpen();
+    updateIsNotificationPopupDrawerOpen();
     updateDoNotDisturb();
     updateIsTaskSwitcherVisible();
 }
@@ -164,8 +169,12 @@ void ShellDBusClient::updatePanelState()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QString> reply = *watcher;
-        m_panelState = reply.argumentAt<0>();
-        Q_EMIT panelStateChanged();
+        QString panelState = reply.argumentAt<0>();
+
+        if (panelState != m_panelState) {
+            m_panelState = panelState;
+            Q_EMIT panelStateChanged();
+        }
     });
 }
 
@@ -176,8 +185,12 @@ void ShellDBusClient::updateDoNotDisturb()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
-        m_doNotDisturb = reply.argumentAt<0>();
-        Q_EMIT doNotDisturbChanged();
+        bool doNotDisturb = reply.argumentAt<0>();
+
+        if (doNotDisturb != m_doNotDisturb) {
+            m_doNotDisturb = doNotDisturb;
+            Q_EMIT doNotDisturbChanged();
+        }
     });
 }
 
@@ -188,8 +201,12 @@ void ShellDBusClient::updateIsActionDrawerOpen()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
-        m_isActionDrawerOpen = reply.argumentAt<0>();
-        Q_EMIT isActionDrawerOpenChanged();
+        bool isActionDrawerOpen = reply.argumentAt<0>();
+
+        if (isActionDrawerOpen != m_isActionDrawerOpen) {
+            m_isActionDrawerOpen = isActionDrawerOpen;
+            Q_EMIT isActionDrawerOpenChanged();
+        }
     });
 }
 
@@ -200,8 +217,12 @@ void ShellDBusClient::updateIsVolumeOSDOpen()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
-        m_isVolumeOSDOpen = reply.argumentAt<0>();
-        Q_EMIT isVolumeOSDOpenChanged();
+        bool isVolumeOSDOpen = reply.argumentAt<0>();
+
+        if (isVolumeOSDOpen != m_isVolumeOSDOpen) {
+            m_isVolumeOSDOpen = isVolumeOSDOpen;
+            Q_EMIT isVolumeOSDOpenChanged();
+        }
     });
 }
 
@@ -212,8 +233,12 @@ void ShellDBusClient::updateIsNotificationPopupDrawerOpen()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
-        m_isNotificationPopupDrawerOpen = reply.argumentAt<0>();
-        Q_EMIT isNotificationPopupDrawerOpenChanged();
+        bool isNotificationPopupDrawerOpen = reply.argumentAt<0>();
+
+        if (isNotificationPopupDrawerOpen != m_isNotificationPopupDrawerOpen) {
+            m_isNotificationPopupDrawerOpen = isNotificationPopupDrawerOpen;
+            Q_EMIT isNotificationPopupDrawerOpenChanged();
+        }
     });
 }
 
@@ -224,7 +249,11 @@ void ShellDBusClient::updateIsTaskSwitcherVisible()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
-        m_isTaskSwitcherVisible = reply.argumentAt<0>();
-        Q_EMIT isTaskSwitcherVisibleChanged();
+        bool isTaskSwitcherVisible = reply.argumentAt<0>();
+
+        if (isTaskSwitcherVisible != m_isTaskSwitcherVisible) {
+            m_isTaskSwitcherVisible = isTaskSwitcherVisible;
+            Q_EMIT isTaskSwitcherVisibleChanged();
+        }
     });
 }
