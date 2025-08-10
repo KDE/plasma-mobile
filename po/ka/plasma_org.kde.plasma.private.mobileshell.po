@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-19 05:23+0000\n"
+"POT-Creation-Date: 2025-08-10 00:45+0000\n"
 "PO-Revision-Date: 2024-11-14 02:55+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -384,23 +384,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1სთ დარჩენილია"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:248
+#: qml/widgets/notifications/NotificationsWidget.qml:257
 #, kde-format
 msgid "Notification service not available"
 msgstr "შეტყობინებების სერვისი მიუწვდოელია"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:257
+#: qml/widgets/notifications/NotificationsWidget.qml:266
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "შეტყობინებები ამჟამად მოწოდებულია '%1 %2'-ის მიერ"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:418
+#: qml/widgets/notifications/NotificationsWidget.qml:427
 #, kde-format
 msgid "Show Fewer"
 msgstr "ნაკლების ჩვენება"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:420
+#: qml/widgets/notifications/NotificationsWidget.qml:429
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
