@@ -10,6 +10,7 @@ include:
       - /gitlab-templates/alpine-qt6.yml
       - /gitlab-templates/xml-lint.yml
       - /gitlab-templates/yaml-lint.yml
+      - /gitlab-templates/qml-lint.yml
 
 posix-script-compliance:
   image:

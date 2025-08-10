@@ -20,7 +20,7 @@ SceneEffect {
 
     ShortcutHandler {
         name: 'Mobile Task Switcher'
-        text: i18n('Toggle Mobile Task Switcher')
+        text: i18n("Toggle Mobile Task Switcher")
         sequence: 'Meta+C'
 
         onActivated: taskSwitcherState.toggle()

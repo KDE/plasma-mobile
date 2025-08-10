@@ -79,7 +79,7 @@ Item {
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n('Wallpapers')
+                        text: i18n("Wallpapers")
                         font.bold: true
                     }
                 }
@@ -107,7 +107,7 @@ Item {
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n('Settings')
+                        text: i18n("Settings")
                         font.bold: true
                     }
                 }
@@ -136,7 +136,7 @@ Item {
 
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n('Widgets')
+                        text: i18n("Widgets")
                         font.bold: true
                     }
                 }

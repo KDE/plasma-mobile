@@ -25,7 +25,7 @@ ColumnLayout {
             description: AIP.WaydroidState.ipAddress
             trailing: PC3.Button {
                 visible: AIP.WaydroidState.ipAddress !== ""
-                text: i18n('Copy')
+                text: i18n("Copy")
                 icon.name: 'edit-copy-symbolic'
                 onClicked: AIP.WaydroidState.copyToClipboard(AIP.WaydroidState.ipAddress)
             }
@@ -62,7 +62,7 @@ ColumnLayout {
             title: i18nc("@title:window", "Confirm Waydroid Reset")
             subtitle: i18n("Are you sure you want to reset Waydroid ? This is a destructive action, and will wipe all user data.")
             standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
-            
+
             onAccepted: AIP.WaydroidState.resetWaydroidQml()
         }
 

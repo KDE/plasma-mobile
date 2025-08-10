@@ -192,7 +192,7 @@ Item {
             PC3.Button {
                 id: button
                 icon.name: 'settings-configure'
-                text: i18n('Options')
+                text: i18n("Options")
                 display: (resizeFrame.handleContainer.width > Kirigami.Units.gridUnit * 7) ? PC3.Button.TextBesideIcon : PC3.Button.IconOnly
 
                 readonly property var handleContainer: resizeFrame.handleContainer
@@ -206,7 +206,7 @@ Item {
                 id: contextMenuDialog
                 preferredWidth: Kirigami.Units.gridUnit * 20
                 padding: 0
-                title: i18n('Widget Options')
+                title: i18n("Widget Options")
 
                 // workaround: remove background so that it doesn't remain if the widget is deleted (and this is de-initialized without closing)
                 QQC2.Overlay.modal: null
@@ -246,14 +246,14 @@ Item {
     Kirigami.Action {
         id: removeDelegateAction
         icon.name: 'edit-delete-remove'
-        text: i18n('Remove widget')
+        text: i18n("Remove widget")
         onTriggered: root.removeRequested()
     }
 
     Kirigami.Action {
         id: configureAppletAction
         icon.name: 'settings-configure'
-        text: i18n('Configure widget')
+        text: i18n("Configure widget")
         onTriggered: root.widget.applet.internalAction('configure').trigger();
     }
 }

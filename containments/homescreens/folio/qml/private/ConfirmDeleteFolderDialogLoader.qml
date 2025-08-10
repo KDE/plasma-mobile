@@ -31,8 +31,8 @@ Loader {
 
     sourceComponent: Kirigami.PromptDialog {
         id: menu
-        title: i18n('Confirm Folder Deletion')
-        subtitle: i18n('Are you sure you want to delete this folder?')
+        title: i18n("Confirm Folder Deletion")
+        subtitle: i18n("Are you sure you want to delete this folder?")
         standardButtons: Kirigami.Dialog.Yes | Kirigami.Dialog.Cancel
 
         onAccepted: root.accepted()

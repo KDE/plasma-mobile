@@ -374,7 +374,7 @@ Item {
 
                     PC3.ToolTip {
                         visible: widgetDelegate.editMode && pressed
-                        text: i18n('Release to configure, drag to move')
+                        text: i18n("Release to configure, drag to move")
                     }
 
                     WidgetDelegateConfig {

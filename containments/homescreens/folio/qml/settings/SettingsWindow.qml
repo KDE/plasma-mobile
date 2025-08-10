@@ -102,7 +102,7 @@ Window {
                             anchors.centerIn: parent
                             implicitHeight: folio.HomeScreenState.pageCellHeight
                             implicitWidth: folio.HomeScreenState.pageCellWidth
-                            name: i18n('Application')
+                            name: i18n("Application")
 
                             contentItem: DelegateAppIcon {
                                 height: root.folio.FolioSettings.delegateIconSize
@@ -254,7 +254,7 @@ Window {
 
                 FormCard.FormCard {
                     FormCard.FormSwitchDelegate {
-                        text: i18n('Show background')
+                        text: i18n("Show background")
                         checked: folio.FolioSettings.showFavouritesBarBackground
                         onCheckedChanged: {
                             if (checked !== folio.FolioSettings.showFavouritesBarBackground) {
@@ -307,7 +307,7 @@ Window {
 
                     FormCard.FormButtonDelegate {
                         id: exportSettings
-                        text: i18n('Export layout')
+                        text: i18n("Export layout")
                         icon.name: 'document-export'
                         onClicked: exportFileDialog.open()
                     }
@@ -316,7 +316,7 @@ Window {
 
                     FormCard.FormButtonDelegate {
                         id: importSettings
-                        text: i18n('Import layout')
+                        text: i18n("Import layout")
                         icon.name: 'document-import'
                         onClicked: importFileDialog.open()
                     }

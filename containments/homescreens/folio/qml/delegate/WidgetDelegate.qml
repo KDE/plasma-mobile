@@ -116,7 +116,7 @@ Folio.WidgetContainer {
             visible: root.widget && !root.widget.visualApplet
             color: 'white'
             wrapMode: Text.Wrap
-            text: i18n('This widget was not found.')
+            text: i18n("This widget was not found.")
             horizontalAlignment: Text.AlignHCenter
 
             anchors.left: parent.left
@@ -134,7 +134,7 @@ Folio.WidgetContainer {
         PC3.Button {
             id: configurationRequiredButton
             anchors.centerIn: parent
-            text: i18n('Configure…')
+            text: i18n("Configure…")
             icon.name: 'configure'
             visible: root.widget && root.widget.applet && root.widget.applet.configurationRequired
             onClicked: root.widget.applet.internalAction('configure').trigger();
