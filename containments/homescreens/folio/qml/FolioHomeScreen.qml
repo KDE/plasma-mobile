@@ -43,6 +43,8 @@ Item {
     onBottomMarginChanged: folio.HomeScreenState.viewBottomPadding = root.bottomMargin
     onLeftMarginChanged: folio.HomeScreenState.viewLeftPadding = root.leftMargin
     onRightMarginChanged: folio.HomeScreenState.viewRightPadding = root.rightMargin
+    onWidthChanged: folio.HomeScreenState.viewWidth = width
+    onHeightChanged: folio.HomeScreenState.viewHeight = height
 
     signal wallpaperSelectorTriggered()
 
@@ -75,6 +77,16 @@ Item {
         Plasmoid.internalAction("configure").trigger();
     }
 
+    Keys.onPressed: (event) => {
+        // The root is focused when we aren't in key navigation mode
+        // Begin key navigation when arrow keys are pressed
+        if (event.key === Qt.Key_Up || event.key === Qt.Key_Down
+            || event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+            homeScreenPages.forceActiveFocus();
+            event.accepted = true;
+        }
+    }
+
     // determine how tall an app label is, for delegate measurements
     DelegateLabel {
         id: appLabelMetrics
@@ -88,18 +100,21 @@ Item {
         }
     }
 
-    // determine screen dimensions
-    Item {
-        id: screenDimensions
-        anchors.fill: parent
-
-        onWidthChanged: folio.HomeScreenState.viewWidth = width;
-        onHeightChanged: folio.HomeScreenState.viewHeight = height;
-    }
-
     // a way of stopping focus
     FocusScope {
         id: noFocus
+    }
+
+    // Listen to view changes
+    Connections {
+        target: folio.HomeScreenState
+
+        function onViewStateChanged() {
+            if (folio.HomeScreenState.viewState === Folio.HomeScreenState.PageView) {
+                // Focus root when on page view
+                root.forceActiveFocus();
+            }
+        }
     }
 
     // area that can be swiped
@@ -211,6 +226,50 @@ Item {
                     homeScreenState.pageHeight = homeScreenPages.height;
                 }
 
+                // Keyboard navigation from pages
+                Keys.onPressed: (event) => {
+                    switch (event.key) {
+                    case Qt.Key_Up:
+                        // Open search widget when going up
+                        folio.HomeScreenState.openSearchWidget();
+                        event.accepted = true;
+                        break;
+                    case Qt.Key_Down:
+                        // Focus on favorites bar or app drawer, depending on its physical location
+                        if (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom) {
+                            favouritesBar.forceActiveFocus();
+                        } else {
+                            folio.HomeScreenState.openAppDrawer();
+                        }
+                        event.accepted = true;
+                        break;
+                    case Qt.Key_Left:
+                        if (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left) {
+                            // If favorites bar is on the left, navigate to it
+                            favouritesBar.forceActiveFocus();
+                        } else {
+                            // Otherwise go to page on the left
+                            folio.HomeScreenState.goToPage(folio.HomeScreenState.currentPage - 1, false);
+                            homeScreenPages.focusCurrentPageForKeyboardNav();
+                        }
+                        event.accepted = true;
+                        break;
+                    case Qt.Key_Right:
+                        if (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right) {
+                            // If favorites bar is on the right, navigate to it
+                            favouritesBar.forceActiveFocus();
+                        } else {
+                            // Otherwise go to page on the right
+                            folio.HomeScreenState.goToPage(folio.HomeScreenState.currentPage + 1, false);
+                            homeScreenPages.focusCurrentPageForKeyboardNav();
+                        }
+                        event.accepted = true;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+
                 transform: [
                     Scale {
                         // animation when settings opens
@@ -297,6 +356,42 @@ Item {
                 anchors.bottomMargin: root.bottomMargin
                 anchors.leftMargin: root.leftMargin
                 anchors.rightMargin: root.rightMargin
+
+                // Keyboard navigation on favorites bar
+                Keys.onPressed: (event) => {
+                    switch (event.key) {
+                    case Qt.Key_Up:
+                        // Focus on homescreen pages or search widget depending on physical position
+                        if (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom) {
+                            homeScreenPages.forceActiveFocus();
+                        } else {
+                            folio.HomeScreenState.openSearchWidget();
+                        }
+                        event.accepted = true;
+                        break;
+                    case Qt.Key_Down:
+                        // Open app drawer
+                        folio.HomeScreenState.openAppDrawer();
+                        event.accepted = true;
+                        break;
+                    case Qt.Key_Left:
+                        if (folio.HomeScreenState.favoritesBarLocation === Folio.HomeScreenState.Left) {
+                            // Go to left page if mounted on the left
+                            folio.HomeScreenState.goToPage(folio.HomeScreenState.currentPage - 1, false);
+                            event.accepted = true;
+                        }
+                        break;
+                    case Qt.Key_Right:
+                        if (folio.HomeScreenState.favoritesBarLocation === Folio.HomeScreenState.Right) {
+                            // Go to right page if mounted on the right
+                            folio.HomeScreenState.goToPage(folio.HomeScreenState.currentPage + 1, false);
+                            event.accepted = true;
+                        }
+                        break;
+                    default:
+                        break;
+                    }
+                }
 
                 states: [
                     State {
@@ -499,13 +594,11 @@ Item {
                 function onSearchWidgetOpenProgressChanged() {
                     if (homeScreenState.searchWidgetOpenProgress === 1.0) {
                         searchWidget.requestFocus();
-                    } else if (!root.activeFocus) {
-                        root.forceActiveFocus();
                     }
                 }
             }
 
-            onRequestedClose: {
+            onRequestedClose: (triggeredByKeyEvent) => {
                 homeScreenState.closeSearchWidget();
             }
 

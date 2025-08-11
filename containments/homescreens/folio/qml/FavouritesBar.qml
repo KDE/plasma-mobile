@@ -34,6 +34,17 @@ MouseArea {
         }
     }
 
+    onActiveFocusChanged: {
+        if (activeFocus) {
+            // Focus on first delegate when favorites bar focused
+            let firstDelegate = repeater.itemAt(0);
+            if (!firstDelegate) {
+                return;
+            }
+            firstDelegate.keyboardFocus();
+        }
+    }
+
     MobileShell.HapticsEffect {
         id: haptics
     }
@@ -54,11 +65,11 @@ MouseArea {
 
             readonly property var dragState: folio.HomeScreenState.dragState
             readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Favourites &&
-            dragState.candidateDropPosition.favouritesPosition === delegate.index
+                dragState.candidateDropPosition.favouritesPosition === delegate.index
             readonly property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-            dragState.dropDelegate &&
-            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
-            isDropPositionThis
+                dragState.dropDelegate &&
+                dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
+                isDropPositionThis
 
             readonly property bool isLocationBottom: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
 
@@ -79,7 +90,56 @@ MouseArea {
             width: folio.HomeScreenState.pageCellWidth
             height: folio.HomeScreenState.pageCellHeight
 
+            // Keyboard navigation to other delegates
+            Keys.onPressed: (event) => {
+                switch (event.key) {
+                case Qt.Key_Up:
+                    if (!isLocationBottom) {
+                        let nextDelegate = repeater.itemAt(delegate.index - 1);
+                        if (nextDelegate) {
+                            nextDelegate.keyboardFocus();
+                            event.accepted = true;
+                        }
+                    }
+                    break;
+                case Qt.Key_Down:
+                    if (!isLocationBottom) {
+                        let nextDelegate = repeater.itemAt(delegate.index + 1);
+                        if (nextDelegate) {
+                            nextDelegate.keyboardFocus();
+                            event.accepted = true;
+                        }
+                    }
+                    break;
+                case Qt.Key_Left:
+                    if (isLocationBottom) {
+                        let nextDelegate = repeater.itemAt(delegate.index - 1);
+                        if (nextDelegate) {
+                            nextDelegate.keyboardFocus();
+                            event.accepted = true;
+                        }
+                    }
+                    break;
+                case Qt.Key_Right:
+                    if (isLocationBottom) {
+                        let nextDelegate = repeater.itemAt(delegate.index + 1);
+                        if (nextDelegate) {
+                            nextDelegate.keyboardFocus();
+                            event.accepted = true;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            function keyboardFocus() {
+                if (loader.item) {
+                    loader.item.keyboardFocus();
+                }
+            }
+
             Loader {
+                id: loader
                 anchors.fill: parent
 
                 sourceComponent: {

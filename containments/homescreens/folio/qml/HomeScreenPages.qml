@@ -31,6 +31,20 @@ MouseArea {
         }
     }
 
+    onActiveFocusChanged: {
+        if (activeFocus) {
+            // When this component is focused, move focus to current page (keyboard navigation)
+            focusCurrentPageForKeyboardNav();
+        }
+    }
+
+    function focusCurrentPageForKeyboardNav() {
+        const currentPage = pageRepeater.itemAt(folio.HomeScreenState.currentPage);
+        if (currentPage) {
+            currentPage.forceActiveFocus();
+        }
+    }
+
     MobileShell.HapticsEffect {
         id: haptics
     }
@@ -40,6 +54,7 @@ MouseArea {
     }
 
     Repeater {
+        id: pageRepeater
         model: folio.PageListModel
 
         delegate: HomeScreenPage {
