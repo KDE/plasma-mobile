@@ -20,7 +20,7 @@ import org.kde.kirigami 2.19 as Kirigami
 
 MouseArea {
     id: root
-    onClicked: root.requestedClose()
+    onClicked: root.requestedClose(false)
 
     function requestFocus() {
         queryField.forceActiveFocus();
@@ -30,11 +30,11 @@ MouseArea {
         queryField.text = "";
     }
 
-    signal requestedClose()
+    signal requestedClose(triggeredByKeyEvent: bool)
 
     Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Escape) {
-            root.requestedClose();
+            root.requestedClose(true);
             event.accepted = true;
         }
     }
@@ -77,7 +77,7 @@ MouseArea {
                 if (event.key === Qt.Key_Down) {
                     if (listView.count === 0) {
                         // Close if listview has no elements
-                        root.requestedClose();
+                        root.requestedClose(true);
                     } else {
                         // Focus on listview if there are elements
                         listView.forceActiveFocus();
@@ -111,7 +111,7 @@ MouseArea {
                 }
 
                 onActivated: {
-                    root.requestedClose();
+                    root.requestedClose(false);
                 }
                 onUpdateQueryString: {
                     queryField.text = text
@@ -153,7 +153,7 @@ MouseArea {
                     // Close search view if we press down with last item selected
                     Keys.onPressed: (event) => {
                         if (event.key === Qt.Key_Down && (model.index === listView.count - 1)) {
-                            root.requestedClose();
+                            root.requestedClose(true);
                             event.accepted = true;
                         }
                     }
@@ -169,7 +169,7 @@ MouseArea {
                         listView.currentIndex = model.index;
                         listView.runCurrentIndex();
 
-                        root.requestedClose();
+                        root.requestedClose(false);
                     }
                     hoverEnabled: true
 

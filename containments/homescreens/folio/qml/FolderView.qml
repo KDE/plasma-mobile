@@ -36,12 +36,36 @@ Folio.DelegateTouchArea {
         folio.HomeScreenState.closeFolder();
     }
 
+    Keys.onPressed: (event) => {
+        switch (event.key) {
+        case Qt.Key_Escape:
+        case Qt.Key_Back:
+            // Close view
+            root.close();
+            event.accepted = true;
+            break;
+        case Qt.Key_Up:
+        case Qt.Key_Down:
+        case Qt.Key_Left:
+        case Qt.Key_Right:
+            // Keyboard focus on first item
+            if (delegateRepeater.count > 0) {
+                delegateRepeater.itemAt(0).keyboardFocus();
+                event.accepted = true;
+            }
+            break;
+        }
+    }
+
     Connections {
         target: folio.HomeScreenState
 
         function onFolderAboutToOpen(x, y) {
             root.folderPositionX = x - folio.HomeScreenState.viewLeftPadding;
-            root.folderPositionY = y - folio.HomeScreenState.viewRightPadding;
+            root.folderPositionY = y - folio.HomeScreenState.viewTopPadding;
+
+            // Focus view when opened
+            root.forceActiveFocus();
         }
     }
 
@@ -168,6 +192,7 @@ Folio.DelegateTouchArea {
                 x: folio.HomeScreenState.folderViewX
 
                 Repeater {
+                    id: delegateRepeater
                     model: root.folder ? root.folder.applications : []
 
                     delegate: Item {
@@ -187,7 +212,7 @@ Folio.DelegateTouchArea {
 
                         readonly property var dragState: folio.HomeScreenState.dragState
                         readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Folder &&
-                        dragState.candidateDropPosition.folderPosition === index
+                            dragState.candidateDropPosition.folderPosition === index
 
                         // get the index position value so we can animate them
                         property double columnValue: model.columnIndex
@@ -214,6 +239,59 @@ Folio.DelegateTouchArea {
                         implicitHeight: cellHeight
                         width: cellWidth
                         height: cellHeight
+
+                        Keys.onPressed: (event) => {
+                            // Implement keyboard arrow navigation
+                            let dx = 0;
+                            let dy = 0;
+                            switch (event.key) {
+                            case Qt.Key_Up:
+                                dy = -1;
+                                event.accepted = true;
+                                break;
+                            case Qt.Key_Down:
+                                dy = 1;
+                                event.accepted = true;
+                                break;
+                            case Qt.Key_Left:
+                                dx = -1;
+                                event.accepted = true;
+                                break;
+                            case Qt.Key_Right:
+                                dx = 1;
+                                event.accepted = true;
+                                break;
+                            default:
+                                return;
+                            }
+
+                            let x = columnValue + dx;
+                            let y = rowValue + dy;
+
+                            // Loop in direction to find next delegate
+                            while (x >= 0 && x < folio.HomeScreenState.folderGridLength && y >= 0 && y < folio.HomeScreenState.folderGridLength) {
+                                // Find delegate at x, y
+                                for (let i = 0; i < delegateRepeater.count; ++i) {
+                                    let cDelegate = delegateRepeater.itemAt(i);
+                                    if (cDelegate.columnValue === x && cDelegate.rowValue === y && cDelegate.pageValue === delegate.pageValue) {
+                                        // Delegate matches, focus on it
+                                        cDelegate.keyboardFocus();
+                                        return;
+                                    }
+                                }
+
+                                x += dx;
+                                y += dy;
+                            }
+
+                            // TODO: go to next page if none found
+                        }
+
+                        function keyboardFocus() {
+                            if (delegateLoader.item) {
+                                delegateLoader.item.keyboardFocus();
+                            }
+                        }
 
                         Loader {
                             id: delegateLoader
