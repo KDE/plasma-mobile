@@ -25,6 +25,80 @@ Item {
     property var pageModel
     property var homeScreen
 
+    onActiveFocusChanged: {
+        if (activeFocus) {
+            // Focus on first delegate when this page is focused
+            let firstDelegate = findFirstDelegate();
+            if (!firstDelegate) {
+                return;
+            }
+            firstDelegate.keyboardFocus();
+        }
+    }
+
+    // Returns the first delegate on the page, or null if none exist
+    function findFirstDelegate() {
+        let firstDelegate = delegateRepeater.itemAt(0);
+        if (!firstDelegate) {
+            return null;
+        }
+
+        for (let i = 0; i < delegateRepeater.count; ++i) {
+            let delegate = delegateRepeater.itemAt(i);
+
+            const isAppOrFolder = delegate.pageDelegate.type === Folio.FolioDelegate.Application || delegate.pageDelegate.type === Folio.FolioDelegate.Folder;
+
+            // If it's on an earlier row, or on the same row but earlier column
+            if (isAppOrFolder
+                && (delegate.row < firstDelegate.row
+                    || (delegate.column < firstDelegate.column
+                        && delegate.row === firstDelegate.row))) {
+                firstDelegate = delegate;
+            }
+        }
+        return firstDelegate;
+    }
+
+    // Returns the next application/folder delegate on the page from the given delegate
+    // in a certain direction, or null if none exist.
+    function findNextAppDelegate(delegate, direction: MobileShell.Direction) {
+        let dx = 0;
+        let dy = 0;
+        switch (direction) {
+        case MobileShell.Direction.Up:
+            dy = -1;
+            break;
+        case MobileShell.Direction.Down:
+            dy = 1;
+            break;
+        case MobileShell.Direction.Left:
+            dx = -1;
+            break;
+        case MobileShell.Direction.Right:
+            dx = 1;
+            break;
+        }
+
+        let x = delegate.column + dx;
+        let y = delegate.row + dy;
+
+        // Loop in direction to find delegate
+        while (x >= 0 && x < folio.HomeScreenState.pageColumns && y >= 0 && y < folio.HomeScreenState.pageRows) {
+            for (let i = 0; i < delegateRepeater.count; ++i) {
+                let delegate = delegateRepeater.itemAt(i);
+
+                if (delegate.row === y && delegate.column === x
+                    && (delegate.pageDelegate.type === Folio.FolioDelegate.Application
+                        || delegate.pageDelegate.type === Folio.FolioDelegate.Folder)) {
+                    return delegate;
+                }
+            }
+            x += dx;
+            y += dy;
+        }
+        return null;
+    }
+
     MobileShell.HapticsEffect {
         id: haptics
     }
@@ -72,10 +146,10 @@ Item {
 
         // only show if the widget can be placed here
         visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-        dropPosition.location === Folio.DelegateDragPosition.Pages &&
-        dropPosition.page === root.pageNum &&
-        dropDelegateIsWidget &&
-        pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
+            dropPosition.location === Folio.DelegateDragPosition.Pages &&
+            dropPosition.page === root.pageNum &&
+            dropDelegateIsWidget &&
+            pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
 
         radius: Kirigami.Units.cornerRadius
         color: Qt.rgba(255, 255, 255, 0.3)
@@ -89,6 +163,7 @@ Item {
 
     // repeater of all delegates in the page
     Repeater {
+        id: delegateRepeater
         model: root.pageModel
 
         delegate: Item {
@@ -101,14 +176,14 @@ Item {
             property var dragState: folio.HomeScreenState.dragState
 
             property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Pages &&
-            dragState.candidateDropPosition.page === root.pageNum &&
-            dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
-            dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
+                dragState.candidateDropPosition.page === root.pageNum &&
+                dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
+                dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
 
             property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-            dragState.dropDelegate &&
-            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
-            isDropPositionThis
+                dragState.dropDelegate &&
+                dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
+                isDropPositionThis
 
             implicitWidth: loader.item ? loader.item.implicitWidth : 0
             implicitHeight: loader.item ? loader.item.implicitHeight : 0
@@ -130,6 +205,39 @@ Item {
                 // // delete empty pages at the end, and snap position to page that exists
                 // folio.PageListModel.deleteEmptyPagesAtEnd();
                 // folio.HomeScreenState.snapPage();
+            }
+
+            // Keyboard navigation between delegates
+            Keys.onPressed: (event) => {
+                let direction = MobileShell.Direction.Up;
+                switch (event.key) {
+                case Qt.Key_Up:
+                    direction = MobileShell.Direction.Up;
+                    break;
+                case Qt.Key_Down:
+                    direction = MobileShell.Direction.Down;
+                    break;
+                case Qt.Key_Left:
+                    direction = MobileShell.Direction.Left;
+                    break;
+                case Qt.Key_Right:
+                    direction = MobileShell.Direction.Right;
+                    break;
+                default:
+                    return;
+                }
+
+                let nextDelegate = root.findNextAppDelegate(delegate, direction);
+                if (nextDelegate) {
+                    nextDelegate.keyboardFocus();
+                    event.accepted = true;
+                }
+            }
+
+            function keyboardFocus() {
+                if (loader.item) {
+                    loader.item.keyboardFocus();
+                }
             }
 
             Loader {
@@ -251,8 +359,8 @@ Item {
 
                     // do not show if the drop animation is running to this delegate, and the drop delegate is a folder
                     visible: !(root.homeScreen.dropAnimationRunning &&
-                    delegate.isDropPositionThis &&
-                    delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
+                        delegate.isDropPositionThis &&
+                        delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
 
                     // don't show label in drag and drop mode
                     labelOpacity: delegate.opacity

@@ -29,9 +29,6 @@ ContainmentItem {
         folio.FolioSettings.load();
         folio.FavouritesModel.load();
         folio.PageListModel.load();
-
-        // ensure the gestures work immediately on load
-        forceActiveFocus();
     }
 
     property MobileShell.MaskManager maskManager: MobileShell.MaskManager {
@@ -166,6 +163,9 @@ ContainmentItem {
                 bottomMargin: homeScreen.bottomMargin
                 leftMargin: homeScreen.leftMargin
                 rightMargin: homeScreen.rightMargin
+
+                // Ensure is the focused item at start
+                Component.onCompleted: forceActiveFocus()
 
                 onWallpaperSelectorTriggered: wallpaperSelectorLoader.active = true
             }
