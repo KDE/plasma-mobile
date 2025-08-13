@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-12 00:44+0000\n"
+"POT-Creation-Date: 2025-08-13 00:44+0000\n"
 "PO-Revision-Date: 2025-01-11 11:24+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -147,6 +147,7 @@ msgid "Edit"
 msgstr "Edytuj"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Usuń"
@@ -248,6 +249,23 @@ msgstr "24 godzinny zapis czasu"
 #, kde-format
 msgid "Invalid input."
 msgstr "Nieprawidłowe wejście."
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Connect"
+msgstr "Połącz z"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Disconnect"
+msgstr "Połącz z"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr ""
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format

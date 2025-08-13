@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-12 00:44+0000\n"
+"POT-Creation-Date: 2025-08-13 00:44+0000\n"
 "PO-Revision-Date: 2025-03-08 06:03+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -148,6 +148,7 @@ msgid "Edit"
 msgstr "ჩასწორება"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
@@ -251,6 +252,23 @@ msgstr "24-საათიანი ფორმატი"
 #, kde-format
 msgid "Invalid input."
 msgstr "არასწორი შეყვანა."
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Connect"
+msgstr "დაკავშირება"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Disconnect"
+msgstr "დაკავშირება"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr ""
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format

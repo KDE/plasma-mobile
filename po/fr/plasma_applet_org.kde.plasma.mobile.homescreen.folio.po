@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 00:43+0000\n"
+"POT-Creation-Date: 2025-08-13 00:44+0000\n"
 "PO-Revision-Date: 2025-07-10 08:46+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -32,13 +32,60 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Rechercher des applications..."
 
+#: qml/delegate/WidgetDelegate.qml:119
+#, kde-format
+msgid "This widget was not found."
+msgstr ""
+
+#: qml/delegate/WidgetDelegate.qml:137
+#, kde-format
+msgid "Configure…"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:195
+#, kde-format
+msgid "Options"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:209
+#, fuzzy, kde-format
+#| msgid "Widgets"
+msgid "Widget Options"
+msgstr "Composants graphiques"
+
+#: qml/delegate/WidgetDelegateConfig.qml:249
+#, fuzzy, kde-format
+#| msgid "Remove"
+msgid "Remove widget"
+msgstr "Supprimer"
+
+#: qml/delegate/WidgetDelegateConfig.qml:256
+#, kde-format
+msgid "Configure widget"
+msgstr ""
+
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
 #, kde-format
 msgid "Remove"
 msgstr "Supprimer"
 
-#: qml/settings/AppletListViewer.qml:75
+#: qml/HomeScreenPage.qml:377
+#, kde-format
+msgid "Release to configure, drag to move"
+msgstr ""
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
+#, kde-format
+msgid "Confirm Folder Deletion"
+msgstr ""
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
+#, kde-format
+msgid "Are you sure you want to delete this folder?"
+msgstr ""
+
+#: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
 msgid "Widgets"
 msgstr "Composants graphiques"
@@ -55,6 +102,18 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "Obtenir de nouveaux composants graphiques..."
 
+#: qml/settings/SettingsComponent.qml:82
+#, fuzzy, kde-format
+#| msgctxt "@title:group settings group"
+#| msgid "Wallpaper"
+msgid "Wallpapers"
+msgstr "Fond d'écran"
+
+#: qml/settings/SettingsComponent.qml:110
+#, kde-format
+msgid "Settings"
+msgstr ""
+
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
@@ -64,6 +123,13 @@ msgstr "Configuration de l'écran d'accueil"
 #, kde-format
 msgid "Icons"
 msgstr "Icônes"
+
+#: qml/settings/SettingsWindow.qml:105
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Search applications…"
+msgid "Application"
+msgstr "Rechercher des applications..."
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -145,6 +211,11 @@ msgstr "Tapotez deux fois pour verrouiller le périphérique"
 msgid "Favorites Bar"
 msgstr "Barre des signets"
 
+#: qml/settings/SettingsWindow.qml:257
+#, kde-format
+msgid "Show background"
+msgstr ""
+
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
 msgctxt "@title:group settings group"
@@ -185,6 +256,18 @@ msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
 "Basculer entre les options pour écrans d'accueil et plus de fond d'écran"
+
+#: qml/settings/SettingsWindow.qml:310
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Export layout"
+msgstr "Exporter une disposition vers"
+
+#: qml/settings/SettingsWindow.qml:319
+#, fuzzy, kde-format
+#| msgid "Import layout from"
+msgid "Import layout"
+msgstr "Importer une disposition à partir de"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format

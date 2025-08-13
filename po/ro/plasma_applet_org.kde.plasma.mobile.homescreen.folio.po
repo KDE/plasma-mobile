@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 00:43+0000\n"
+"POT-Creation-Date: 2025-08-13 00:44+0000\n"
 "PO-Revision-Date: 2020-09-19 10:02+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -29,13 +29,59 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr ""
 
+#: qml/delegate/WidgetDelegate.qml:119
+#, kde-format
+msgid "This widget was not found."
+msgstr ""
+
+#: qml/delegate/WidgetDelegate.qml:137
+#, kde-format
+msgid "Configure…"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:195
+#, kde-format
+msgid "Options"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:209
+#, kde-format
+msgid "Widget Options"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:249
+#, fuzzy, kde-format
+#| msgid "Remove"
+msgid "Remove widget"
+msgstr "Elimină"
+
+#: qml/delegate/WidgetDelegateConfig.qml:256
+#, kde-format
+msgid "Configure widget"
+msgstr ""
+
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
 #, kde-format
 msgid "Remove"
 msgstr "Elimină"
 
-#: qml/settings/AppletListViewer.qml:75
+#: qml/HomeScreenPage.qml:377
+#, kde-format
+msgid "Release to configure, drag to move"
+msgstr ""
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
+#, kde-format
+msgid "Confirm Folder Deletion"
+msgstr ""
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
+#, kde-format
+msgid "Are you sure you want to delete this folder?"
+msgstr ""
+
+#: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
 msgid "Widgets"
 msgstr ""
@@ -52,6 +98,16 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr ""
 
+#: qml/settings/SettingsComponent.qml:82
+#, kde-format
+msgid "Wallpapers"
+msgstr ""
+
+#: qml/settings/SettingsComponent.qml:110
+#, kde-format
+msgid "Settings"
+msgstr ""
+
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
@@ -60,6 +116,11 @@ msgstr ""
 #: qml/settings/SettingsWindow.qml:89
 #, kde-format
 msgid "Icons"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:105
+#, kde-format
+msgid "Application"
 msgstr ""
 
 #: qml/settings/SettingsWindow.qml:121
@@ -142,6 +203,11 @@ msgstr ""
 msgid "Favorites Bar"
 msgstr ""
 
+#: qml/settings/SettingsWindow.qml:257
+#, kde-format
+msgid "Show background"
+msgstr ""
+
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
 msgctxt "@title:group settings group"
@@ -180,6 +246,16 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:310
+#, kde-format
+msgid "Export layout"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:319
+#, kde-format
+msgid "Import layout"
 msgstr ""
 
 #: qml/settings/SettingsWindow.qml:328
