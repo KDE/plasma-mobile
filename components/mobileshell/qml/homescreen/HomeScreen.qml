@@ -103,6 +103,11 @@ Item {
                 itemContainer.zoomIn();
             }
         }
+
+        Component.onCompleted: {
+            // Set initial item container state
+            onIsTaskSwitcherVisibleChanged();
+        }
     }
 
     //END API implementation
