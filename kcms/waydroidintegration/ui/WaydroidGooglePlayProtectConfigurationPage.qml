@@ -33,6 +33,25 @@ KCM.SimpleKCM {
         text: i18n("We fetching your Android ID.\nIt can take a few seconds.")
     }
 
+    Connections {
+        target: AIP.WaydroidDBusClient
+
+        function onActionFailed(error: string): void {
+            inlineMessage.text = error
+            inlineMessage.visible = true
+            inlineMessage.type = Kirigami.MessageType.Error
+        }
+    }
+
+    Kirigami.InlineMessage {
+        id: inlineMessage
+
+        Layout.fillWidth: true
+
+        visible: false
+        showCloseButton: true
+    }
+
     ColumnLayout {
         visible: AIP.WaydroidDBusClient.androidId !== ""
         anchors.verticalCenter: parent.verticalCenter

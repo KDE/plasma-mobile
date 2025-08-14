@@ -453,6 +453,10 @@ void WaydroidDBusObject::refreshAndroidId()
         KAuth::ExecuteJob *executeJob = dynamic_cast<KAuth::ExecuteJob *>(job);
         if (executeJob->error() == 0) {
             m_androidId = executeJob->data()["android_id"].toString();
+
+            if (m_androidId.isEmpty()) {
+                Q_EMIT actionFailed(i18n("Android ID not found"));
+            }
         } else {
             m_androidId = "";
             qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "KAuth returned an error code:" << executeJob->error();
