@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-08-03 16:07+0300\n"
+"PO-Revision-Date: 2025-08-13 21:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -110,7 +110,7 @@ msgstr "IP-адреса"
 #: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Копіювати"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format

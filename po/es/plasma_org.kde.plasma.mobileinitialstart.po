@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-05-26 01:08+0100\n"
+"PO-Revision-Date: 2025-08-13 18:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -258,21 +258,19 @@ msgid "Invalid input."
 msgstr "Entrada no válida."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Connect"
-msgstr "Conectarse a"
+msgstr "Conectar"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Disconnect"
-msgstr "Conectarse a"
+msgstr "Desconectar"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Configurar"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format

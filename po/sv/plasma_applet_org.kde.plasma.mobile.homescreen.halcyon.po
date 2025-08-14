@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-06-28 20:13+0200\n"
+"PO-Revision-Date: 2025-08-13 08:22+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -51,12 +51,12 @@ msgstr "Applikationer"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Skrivbordsunderlägg"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format

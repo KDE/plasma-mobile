@@ -250,16 +250,14 @@ msgid "Invalid input."
 msgstr "输入的内容无效。"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Connect"
-msgstr "连接到"
+msgstr ""
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Disconnect"
-msgstr "连接到"
+msgstr ""
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format

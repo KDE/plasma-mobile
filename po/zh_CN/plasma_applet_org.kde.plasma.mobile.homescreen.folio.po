@@ -45,16 +45,14 @@ msgid "Options"
 msgstr ""
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "挂件"
+msgstr ""
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "移除"
+msgstr ""
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
@@ -100,11 +98,9 @@ msgid "Get New Widgets…"
 msgstr "获取新挂件…"
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "壁纸"
+msgstr ""
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
@@ -122,11 +118,9 @@ msgid "Icons"
 msgstr "图标"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "搜索应用程序…"
+msgstr ""
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -254,16 +248,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "切换主屏幕和更多壁纸选项"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "导出布局到"
+msgstr ""
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "导入布局来源"
+msgstr ""
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format

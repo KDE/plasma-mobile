@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.halcyon\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-06-28 23:47+0100\n"
+"PO-Revision-Date: 2025-08-13 18:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -53,12 +53,12 @@ msgstr "Aplicaciones"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Fondos de escritorio"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Preferencias"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format

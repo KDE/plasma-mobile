@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-08-03 10:36-0300\n"
+"PO-Revision-Date: 2025-08-13 14:35-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -52,12 +52,12 @@ msgstr "Aplicativos"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Papéis de parede"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Configurações"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format

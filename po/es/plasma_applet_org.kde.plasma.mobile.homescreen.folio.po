@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-09 04:06+0100\n"
+"PO-Revision-Date: 2025-08-13 18:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -33,34 +33,32 @@ msgstr "Buscar aplicaciones…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "No se ha encontrado este elemento gráfico."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Configurar…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Elementos gráficos"
+msgstr "Opciones del elemento gráfico"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Eliminar"
+msgstr "Eliminar elemento gráfico"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Configurar elemento gráfico"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -71,17 +69,17 @@ msgstr "Eliminar"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Suelte para configura o arrastre para mover"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Confirmar borrado de carpeta"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "¿Seguro que quiere borrar esta carpeta?"
 
 #: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -101,16 +99,14 @@ msgid "Get New Widgets…"
 msgstr "Obtener nuevos elementos gráficos…"
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Fondo de escritorio"
+msgstr "Fondos de escritorio"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Preferencias"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -123,11 +119,9 @@ msgid "Icons"
 msgstr "Iconos"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Buscar aplicaciones…"
+msgstr "Aplicación"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -214,7 +208,7 @@ msgstr "Barra de favoritos"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Mostrar el fondo"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -257,16 +251,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "Cambiar pantallas de inicio y más opciones del fondo de escritorio"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Exportar diseño a"
+msgstr "Exportar diseño"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Importar diseño de"
+msgstr "Importar diseño"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format

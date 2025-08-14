@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-09 15:36+0300\n"
+"PO-Revision-Date: 2025-08-13 13:55+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -32,34 +32,32 @@ msgstr "חיפוש יישומים…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "הווידג׳ט לא נמצא."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "הגדרה…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "אפשרויות"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "וידג׳טים"
+msgstr "אפשרויות וידג׳ט"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "הסרה"
+msgstr "הסרת וידג׳ט"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "הגדרת וידג׳ט"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -70,17 +68,17 @@ msgstr "הסרה"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "שחרור להגדרה, גרירה להזזה"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "אישור מחיקת תיקייה"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "למחוק את התיקייה הזאת?"
 
 #: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -100,16 +98,14 @@ msgid "Get New Widgets…"
 msgstr "הורדת וידג׳טים חדשים…"
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
 msgstr "תמונת רקע"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "הגדרות"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -122,11 +118,9 @@ msgid "Icons"
 msgstr "סמלים"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "חיפוש יישומים…"
+msgstr "יישום"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -211,7 +205,7 @@ msgstr "סרגל מועדפים"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "הצגת רקע"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -254,16 +248,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "להחליף בין מסכי הבית ועוד אפשרויות תמונות רקע"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "ייצוא הפריסה אל"
+msgstr "ייצוא פריסה"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "ייבוא פריסה מתוך"
+msgstr "ייבוא פריסה"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
