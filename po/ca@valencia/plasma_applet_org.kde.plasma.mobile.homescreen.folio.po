@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2023, 2024, 2025.
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-09 09:30+0200\n"
+"PO-Revision-Date: 2025-08-13 09:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -33,34 +33,32 @@ msgstr "Busca aplicacions…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "No s'ha trobat este giny."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Configura…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Opcions"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Ginys"
+msgstr "Opcions del giny"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Elimina"
+msgstr "Elimina el giny"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Configura el giny"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -71,17 +69,17 @@ msgstr "Elimina"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Deixeu anar per a configurar, arrossegueu per a moure"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Confirmeu la supressió de la carpeta"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Segur que voleu suprimir esta carpeta?"
 
 #: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -101,16 +99,14 @@ msgid "Get New Widgets…"
 msgstr "Obtín ginys nous…"
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
 msgstr "Fons de pantalla"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Configuració"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -123,11 +119,9 @@ msgid "Icons"
 msgstr "Icones"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Busca aplicacions…"
+msgstr "Aplicació"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -212,7 +206,7 @@ msgstr "Barra de preferits"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Mostra el fons"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -255,16 +249,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Exporta la disposició a"
+msgstr "Exporta la disposició"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Exporta la disposició des de"
+msgstr "Importa una disposició"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format

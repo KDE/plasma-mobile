@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-25 14:34+0200\n"
+"PO-Revision-Date: 2025-08-14 10:38+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -54,12 +54,12 @@ msgstr "Aplikazioak"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Horma-paperak"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Ezarpenak"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format

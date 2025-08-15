@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-25 14:34+0200\n"
+"PO-Revision-Date: 2025-08-14 10:42+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -34,34 +34,32 @@ msgstr "Bilatu aplikazioak…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Ez du trepeta aurkitu."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Konfiguratu..."
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Aukerak"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Trepetak"
+msgstr "Trepetaren aukerak"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Kendu"
+msgstr "Kendu trepeta"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Konfiguratu trepeta"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -72,17 +70,17 @@ msgstr "Kendu"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Askatu konfiguratzeko, arrastatu mugitzeko"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Baieztatu karpeta ezabatzea"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Ziur zaude karpeta hau ezabatu nahi duzula?"
 
 #: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -102,16 +100,14 @@ msgid "Get New Widgets…"
 msgstr "Lortu trepeta berriak…"
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Horma-papera"
+msgstr "Horma-paperak"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Ezarpenak"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -124,11 +120,9 @@ msgid "Icons"
 msgstr "Ikonoak"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Bilatu aplikazioak…"
+msgstr "Aplikazioa"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -214,7 +208,7 @@ msgstr "Gogokoen barra"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Erakutsi atzeko planoa"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -257,16 +251,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "Aldatu pantaila-nagusien eta horma-paperen aukera gehiagoren artean"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Esportatu antolaera hona,"
+msgstr "Esportatu antolaera"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Inportatu antolaera hemendik,"
+msgstr "Inportatu antolaera"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
