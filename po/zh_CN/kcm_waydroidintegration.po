@@ -110,7 +110,7 @@ msgstr "IP 地址"
 #: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format

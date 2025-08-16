@@ -252,17 +252,17 @@ msgstr "输入的内容无效。"
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
 #, kde-format
 msgid "Connect"
-msgstr ""
+msgstr "连接"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
 #, kde-format
 msgid "Disconnect"
-msgstr ""
+msgstr "断开连接"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "配置"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format

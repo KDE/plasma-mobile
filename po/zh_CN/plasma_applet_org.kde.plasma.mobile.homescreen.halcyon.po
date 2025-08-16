@@ -52,12 +52,12 @@ msgstr "应用程序"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "壁纸"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format
