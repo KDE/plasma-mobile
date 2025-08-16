@@ -283,6 +283,8 @@ void WaydroidDBusClient::updateStatus()
             m_status = status;
             Q_EMIT statusChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -299,6 +301,8 @@ void WaydroidDBusClient::updateSessionStatus()
             m_sessionStatus = sessionStatus;
             Q_EMIT sessionStatusChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -315,6 +319,8 @@ void WaydroidDBusClient::updateSystemType()
             m_systemType = systemType;
             Q_EMIT systemTypeChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -331,6 +337,8 @@ void WaydroidDBusClient::updateIpAddress()
             m_ipAddress = ipAddress;
             Q_EMIT ipAddressChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -347,6 +355,8 @@ void WaydroidDBusClient::updateAndroidId()
             m_androidId = androidId;
             Q_EMIT androidIdChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -363,6 +373,8 @@ void WaydroidDBusClient::updateMultiWindows()
             m_multiWindows = multiWindows;
             Q_EMIT multiWindowsChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -379,6 +391,8 @@ void WaydroidDBusClient::updateSuspend()
             m_suspend = suspend;
             Q_EMIT suspendChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -395,6 +409,8 @@ void WaydroidDBusClient::updateUevent()
             m_uevent = uevent;
             Q_EMIT ueventChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 

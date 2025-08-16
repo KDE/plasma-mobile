@@ -79,6 +79,8 @@ void WaydroidApplicationDBusClient::updateName()
             m_name = name;
             Q_EMIT nameChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -99,5 +101,7 @@ void WaydroidApplicationDBusClient::updatePackageName()
             m_packageName = packageName;
             Q_EMIT packageNameChanged();
         }
+
+        watcher->deleteLater();
     });
 }
