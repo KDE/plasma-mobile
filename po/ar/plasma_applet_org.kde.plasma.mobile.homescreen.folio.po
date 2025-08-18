@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-14 20:32+0400\n"
+"PO-Revision-Date: 2025-08-17 22:08+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -32,34 +32,32 @@ msgstr "ابحث في التطبيقات…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "الودجة غير موجودة."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "اضبط…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "خيارات"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "عناصر سطح المكتب"
+msgstr "خيارات الودجات"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "أزل"
+msgstr "أزِل ودجة"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "اضبط الودجة"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -70,17 +68,17 @@ msgstr "أزل"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "حرر لتضبط، واسحب لتحرك"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "أكد حذف المجلد"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "هل أنت متأكد من رغبتك في حذف هذا المجلد؟"
 
 #: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -100,16 +98,14 @@ msgid "Get New Widgets…"
 msgstr "اجلب ودجات جديدة..."
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "صورة الخلفية"
+msgstr "الخلفيات"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "إعدادات"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -122,11 +118,9 @@ msgid "Icons"
 msgstr "الأيقونات"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "ابحث في التطبيقات…"
+msgstr "التطبيق"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -211,7 +205,7 @@ msgstr "شريط المفضّلة"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "أظهر الخلفيّة"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -254,16 +248,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "التبديل بين الشاشات الرئيسة والمزيد من خيارات صور الخلفيات"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "صدّر التخطيط إلى"
+msgstr "صدّر التخطيط"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "استورد تخطيط من"
+msgstr "استورد تخطيط"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
