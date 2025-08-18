@@ -175,6 +175,8 @@ void ShellDBusClient::updatePanelState()
             m_panelState = panelState;
             Q_EMIT panelStateChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -191,6 +193,8 @@ void ShellDBusClient::updateDoNotDisturb()
             m_doNotDisturb = doNotDisturb;
             Q_EMIT doNotDisturbChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -207,6 +211,8 @@ void ShellDBusClient::updateIsActionDrawerOpen()
             m_isActionDrawerOpen = isActionDrawerOpen;
             Q_EMIT isActionDrawerOpenChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -223,6 +229,8 @@ void ShellDBusClient::updateIsVolumeOSDOpen()
             m_isVolumeOSDOpen = isVolumeOSDOpen;
             Q_EMIT isVolumeOSDOpenChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -239,6 +247,8 @@ void ShellDBusClient::updateIsNotificationPopupDrawerOpen()
             m_isNotificationPopupDrawerOpen = isNotificationPopupDrawerOpen;
             Q_EMIT isNotificationPopupDrawerOpenChanged();
         }
+
+        watcher->deleteLater();
     });
 }
 
@@ -255,5 +265,7 @@ void ShellDBusClient::updateIsTaskSwitcherVisible()
             m_isTaskSwitcherVisible = isTaskSwitcherVisible;
             Q_EMIT isTaskSwitcherVisibleChanged();
         }
+
+        watcher->deleteLater();
     });
 }
