@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.kirigami 2.20 as Kirigami
@@ -28,7 +29,7 @@ Item {
 
     required property QS.QuickSettingsModel quickSettingsModel
 
-    readonly property real columns: Math.round(Math.min(6, Math.max(3, width / intendedColumnWidth)))
+    readonly property real columns: Math.round(Math.min(6, Math.max(ShellSettings.Settings.quickSettingsColumns, width / intendedColumnWidth)))
     readonly property real columnWidth: Math.floor(width / columns)
     readonly property int minimizedColumns: Math.round(Math.min(8, Math.max(5, width / intendedMinimizedColumnWidth)))
     readonly property real minimizedColumnWidth: Math.floor(width / minimizedColumns)
