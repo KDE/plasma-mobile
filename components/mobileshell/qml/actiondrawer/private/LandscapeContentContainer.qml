@@ -12,6 +12,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 /**
@@ -54,7 +55,8 @@ Item {
             height: quickSettingsPanel.contentImplicitHeight + quickSettingsPanel.topPadding + quickSettingsPanel.bottomPadding
             width: intendedWidth
 
-            readonly property real intendedWidth: 360
+            readonly property real columnWidth: 6 * Kirigami.Units.gridUnit
+            readonly property real intendedWidth: (columnWidth * ShellSettings.Settings.quickSettingsColumns) + Kirigami.Units.gridUnit
 
             property real offsetRatio: quickSettingsPanel.height / root.height
             anchors.topMargin: Math.min(root.actionDrawer.offsetResistance * offsetRatio - quickSettingsPanel.height, 0)
