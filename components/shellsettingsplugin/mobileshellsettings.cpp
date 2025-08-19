@@ -19,6 +19,7 @@
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
 const QString LOCKSCREEN_CONFIG_GROUP = QStringLiteral("Lockscreen");
+const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
 
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
@@ -47,6 +48,9 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
         if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
             Q_EMIT lockscreenLeftButtonActionChanged();
             Q_EMIT lockscreenRightButtonActionChanged();
+        }
+        if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
+            Q_EMIT quickSettingsColumnsChanged();
         }
     });
 }
@@ -167,6 +171,19 @@ void MobileShellSettings::setActionDrawerTopLeftMode(ActionDrawerMode actionDraw
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("actionDrawerTopLeftMode", (int)actionDrawerMode, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+int MobileShellSettings::quickSettingsColumns() const
+{
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
+    return group.readEntry("quickSettingsColumns", 3);
+}
+
+void MobileShellSettings::setQuickSettingsColumns(int columns)
+{
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
+    group.writeEntry("quickSettingsColumns", columns, KConfigGroup::Notify);
     m_config->sync();
 }
 
