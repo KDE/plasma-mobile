@@ -42,6 +42,9 @@ class MobileShellSettings : public QObject
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
     Q_PROPERTY(ActionDrawerMode actionDrawerTopRightMode READ actionDrawerTopRightMode WRITE setActionDrawerTopRightMode NOTIFY actionDrawerTopRightModeChanged)
 
+    // quicksettings
+    Q_PROPERTY(int quickSettingsColumns READ quickSettingsColumns WRITE setQuickSettingsColumns NOTIFY quickSettingsColumnsChanged)
+
     // convergence mode
     Q_PROPERTY(bool convergenceModeEnabled READ convergenceModeEnabled WRITE setConvergenceModeEnabled NOTIFY convergenceModeEnabledChanged)
 
@@ -211,6 +214,18 @@ public:
     void setActionDrawerTopRightMode(ActionDrawerMode actionDrawerMode);
 
     /**
+     * The number of columns to use for the QuickSettings drawer.
+     */
+    int quickSettingsColumns() const;
+
+    /**
+     * Set the number of columns to use for the QuickSettings drawer.
+     *
+     * @param columns The number of columns to use.
+     */
+    void setQuickSettingsColumns(int columns);
+
+    /**
      * Whether convergence/docked mode is enabled.
      */
     bool convergenceModeEnabled() const;
@@ -276,6 +291,7 @@ Q_SIGNALS:
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
+    void quickSettingsColumnsChanged();
     void convergenceModeEnabledChanged();
     void autoHidePanelsEnabledChanged();
     void allowLogoutChanged();

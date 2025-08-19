@@ -11,6 +11,7 @@ import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 FormCard.FormCardPage {
     id: root
@@ -70,6 +71,23 @@ FormCard.FormCardPage {
     FormCard.FormHeader {
         title: i18n("Quick Settings")
         visible: enabledRepeater.count > 0
+    }
+
+    FormCard.FormCard {
+        FormCard.FormComboBoxDelegate {
+            id: statusBarScaleFactorDelegate
+
+            text: i18n("Quick Settings Columns")
+            description: i18n("Maximum number of columns in landscape orientation.")
+
+            model: [3, 4, 5, 6]
+
+            Component.onCompleted: {
+                currentIndex = indexOfValue(ShellSettings.Settings.quickSettingsColumns);
+                dialog.parent = root;
+            }
+            onCurrentValueChanged: ShellSettings.Settings.quickSettingsColumns = currentValue
+        }
     }
 
     FormCard.FormSectionText {
