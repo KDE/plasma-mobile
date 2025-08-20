@@ -40,8 +40,7 @@
         "Description[zh_TW]": "時區、日期顯示",
         "FormFactors": [
             "handset",
-            "tablet",
-            "mediacenter"
+            "tablet"
         ],
         "Icon": "preferences-system-time",
         "Name": "Time and Date",

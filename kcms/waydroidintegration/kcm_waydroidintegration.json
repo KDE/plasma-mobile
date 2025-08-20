@@ -50,8 +50,7 @@
         "FormFactors": [
             "desktop",
             "handset",
-            "tablet",
-            "mediacenter"
+            "tablet"
         ],
         "Icon": "folder-android-symbolic",
         "License": "GPL",

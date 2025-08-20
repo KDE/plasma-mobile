@@ -85,8 +85,7 @@
         "FormFactors": [
             "desktop",
             "handset",
-            "tablet",
-            "mediacenter"
+            "tablet"
         ],
         "Icon": "preferences-desktop-plasma",
         "License": "GPL",
