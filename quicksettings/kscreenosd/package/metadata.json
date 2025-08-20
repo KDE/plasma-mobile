@@ -4,14 +4,17 @@
         "Authors": [
             {
                 "Email": "sebas@kde.org",
-                "Name": "Sebastian Kügler"
+                "Name": "Sebastian Kügler",
+                "Name[x-test]": "xxSebastian Küglerxx"
             }
         ],
         "Description": "Screen setup OSD quick setting for Plasma Mobile",
+        "Description[x-test]": "xxScreen setup OSD quick setting for Plasma Mobilexx",
         "Icon": "osd-duplicate",
         "Id": "org.kde.plasma.quicksetting.kscreenosd",
         "License": "GPL-2.0+",
         "Name": "Screen OSD",
+        "Name[x-test]": "xxScreen OSDxx",
         "Website": "https://kde.org"
     }
 }
