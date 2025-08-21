@@ -69,7 +69,6 @@ MouseArea {
         }
 
         PC3.Label {
-            id: heading
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
             text: i18n("Widgets")
