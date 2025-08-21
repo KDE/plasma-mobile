@@ -1,30 +1,32 @@
+# Translation for plasma_org.kde.plasma.quicksetting.kscreenosd.po to Euskara/Basque (eu).
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
 #
-# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+# Translators:
+# SPDX-FileCopyrightText: 2025 Iñigo Salvador Azurmendi <xalba@ni.eus>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-19 00:44+0000\n"
-"PO-Revision-Date: 2025-08-19 13:00+0300\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
-"Language: he\n"
+"PO-Revision-Date: 2025-08-20 14:58+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
-"n % 10 == 0) ? 2 : 3));\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.08.0\n"
 
 #: package/contents/ui/main.qml:11
 #, kde-format
 msgid "Display Config"
-msgstr "הגדרות תצוגה"
+msgstr "Bistaratzailearen konfigurazioa"
 
 #: package/contents/ui/main.qml:14
 #, kde-format
 msgctxt "kscreen osd quicksetting"
 msgid "Tap to set up"
-msgstr "נא לגעת להגדרה"
+msgstr "Egin tak ezartzeko"
