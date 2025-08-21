@@ -39,7 +39,8 @@
         "Description[zh_CN]": "软件版本",
         "Description[zh_TW]": "軟體版本",
         "FormFactors": [
-            "handset", "tablet"
+            "handset",
+            "tablet"
         ],
         "Icon": "dialog-information",
         "Name": "Information",
