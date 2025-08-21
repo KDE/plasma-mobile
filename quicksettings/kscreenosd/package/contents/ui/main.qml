@@ -13,7 +13,12 @@ QS.QuickSetting {
     settingsCommand: "plasma-open-settings kcm_kscreen"
     status: i18nc("kscreen osd quicksetting", "Tap to set up")
     enabled: false
-    available: true
+    available: KScreenOSDUtil.outputs > 1
+
+    Connections {
+        target: KScreenOSDUtil
+        onOutputsChanged: kscreenosd_qs.available = (KScreenOSDUtil.outputs > 1)
+    }
 
     function toggle() {
         console.log("Showing KScreen OSD");
