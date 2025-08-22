@@ -21,10 +21,10 @@ msgstr ""
 #: package/contents/ui/main.qml:11
 #, kde-format
 msgid "Display Config"
-msgstr ""
+msgstr "显示设置"
 
 #: package/contents/ui/main.qml:14
 #, kde-format
 msgctxt "kscreen osd quicksetting"
 msgid "Tap to set up"
-msgstr ""
+msgstr "点按以进行设置"
