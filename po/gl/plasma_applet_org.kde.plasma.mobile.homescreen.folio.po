@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-08-23 00:44+0000\n"
 "PO-Revision-Date: 2025-05-03 07:00+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -82,18 +82,18 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
 #, kde-format
 msgid "Widgets"
 msgstr "Trebellos"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:85
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-08-23 00:44+0000\n"
 "PO-Revision-Date: 2025-07-13 18:01+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -81,18 +81,18 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:75 qml/settings/SettingsComponent.qml:139
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
 #, kde-format
 msgid "Widgets"
 msgstr "Sovelmat"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr "Hae uusia sovelmia…"
 
-#: qml/settings/AppletListViewer.qml:85
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
