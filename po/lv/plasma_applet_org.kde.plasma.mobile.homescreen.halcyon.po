@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2024-04-22 17:16+0300\n"
+"PO-Revision-Date: 2025-08-22 16:18+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -27,12 +27,12 @@ msgstr "Mape"
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
-msgstr "Noņemt no iecienītajām"
+msgstr "Noņemt no izlases"
 
 #: qml/FavoritesGrid.qml:294
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr "Pievienojiet programmas jūsu iecienītajām, lai tās te parādītos."
+msgstr "Pievienojiet programmas, ko te parādīt, izlasei."
 
 #: qml/FolderGrid.qml:194
 #, kde-format
@@ -42,7 +42,7 @@ msgstr "Izņemt no mapes"
 #: qml/GridAppDelegate.qml:65
 #, kde-format
 msgid "Add to favourites"
-msgstr "Pievienot iecienītajām"
+msgstr "Pievienot izlasei"
 
 #: qml/GridAppList.qml:68
 #, kde-format
@@ -52,53 +52,53 @@ msgstr "Programmas"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Ekrāntapetes"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Iestatījumi"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Mājas ekrāna iestatījumi"
 
 #: qml/settings/SettingsWindow.qml:86
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Mājas ekrānam"
 
 #: qml/settings/SettingsWindow.qml:92
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "Ekrāntapetes izpludināšanas efekts"
 
 #: qml/settings/SettingsWindow.qml:95
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Nav"
 
 #: qml/settings/SettingsWindow.qml:96
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Vienkāršs"
 
 #: qml/settings/SettingsWindow.qml:97
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Pilns"
 
 #: qml/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Slēgt ierīci ar dubultu uzsitienu"
 
 #: qml/settings/SettingsWindow.qml:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Pārslēgšanās starp mājas ekrāniem un papildu ekrāntapešu opcijas"

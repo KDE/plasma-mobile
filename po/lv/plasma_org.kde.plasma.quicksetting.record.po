@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-15 00:44+0000\n"
-"PO-Revision-Date: 2024-04-22 17:31+0300\n"
+"PO-Revision-Date: 2025-08-22 16:20+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: recordutil.cpp:51
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "Nav pieejami kodētāji ierakstīšanai"
 
 #: recordutil.cpp:74
 #, kde-format
@@ -34,25 +34,22 @@ msgid "New Screen Recording saved in %1"
 msgstr "Jaunais ekrāna ieraksts ir saglabāts „%1“"
 
 #: recordutil.cpp:121
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Ierakstīt ekrānu"
 
 #: recordutil.cpp:130
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
-msgstr "Ieraksta..."
+msgstr "Ieraksta…"
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
-msgstr "Raksta..."
+msgstr "Raksta…"
 
 #: recordutil.cpp:146
 #, kde-format
@@ -62,9 +59,9 @@ msgstr "Spiediet, lai sākt ierakstīšanu"
 #: recordutil.cpp:156
 #, kde-format
 msgid "Screen is being captured…"
-msgstr "Notiek ekrāna ierakstīšana..."
+msgstr "Notiek ekrāna ierakstīšana…"
 
 #: recordutil.cpp:159
 #, kde-format
 msgid "Please wait…"
-msgstr "Uzgaidiet..."
+msgstr "Uzgaidiet…"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:44+0000\n"
-"PO-Revision-Date: 2025-05-29 16:55+0300\n"
+"PO-Revision-Date: 2025-08-22 16:19+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -32,34 +32,32 @@ msgstr "Meklēt programmas…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Šī logdaļa nav atrasta."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Konfigurēt…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Opcijas"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Logdaļas"
+msgstr "Logdaļas opcijas"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Noņemt"
+msgstr "Noņemt logdaļu"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Konfigurēt logdaļu"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -70,17 +68,17 @@ msgstr "Noņemt"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Atlaidiet, lai konfigurētu, velciet, lai pārvietotu"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Apstipriniet mapes dzēšanu"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Vai tiešām vēlaties dzēst šo mapi?"
 
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -91,30 +89,28 @@ msgstr "Logdaļas"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Iegūt jaunas logdaļas…"
 
 #: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Iegūt jaunas logdaļas…"
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Ekrāntapete"
+msgstr "Ekrāntapetes"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Iestatījumi"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
-msgstr "Māju ekrāna iestatījumi"
+msgstr "Mājas ekrāna iestatījumi"
 
 #: qml/settings/SettingsWindow.qml:89
 #, kde-format
@@ -122,11 +118,9 @@ msgid "Icons"
 msgstr "Ikonas"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Meklēt programmas…"
+msgstr "Lietotnes"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -141,7 +135,7 @@ msgstr "Kolonnu skaits"
 #: qml/settings/SettingsWindow.qml:126
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr "Ikonu izmērs māju ekrānā"
+msgstr "Ikonu izmērs mājas ekrānā"
 
 #: qml/settings/SettingsWindow.qml:165
 #, kde-format
@@ -151,17 +145,17 @@ msgstr "Rindas un kolonnas mainīsies vietām, pagriežot ekrānu."
 #: qml/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Homescreen"
-msgstr "Māju ekrāns"
+msgstr "Mājas ekrāns"
 
 #: qml/settings/SettingsWindow.qml:175
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr "Rādīt etiķetes māju ekrānā"
+msgstr "Rādīt etiķetes mājas ekrānā"
 
 #: qml/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr "Rādīt etiķetes iecienītāko joslā"
+msgstr "Rādīt etiķetes izlases joslā"
 
 #: qml/settings/SettingsWindow.qml:201
 #, kde-format
@@ -201,17 +195,17 @@ msgstr "Pagriešana"
 #: qml/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Slēgt ierīci ar dubultu uzsitienu"
 
 #: qml/settings/SettingsWindow.qml:252
 #, kde-format
 msgid "Favorites Bar"
-msgstr "Iecienītāko josla"
+msgstr "Izlases josla"
 
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Rādīt fonu"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -220,29 +214,27 @@ msgid "Wallpaper"
 msgstr "Ekrāntapete"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Rādīt ekrāntapetes izpludināšanas efektu"
+msgstr "Ekrāntapetes izpludināšanas efekts"
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Nav"
 
 #: qml/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Vienkāršs"
 
 #: qml/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Pilns"
 
 #: qml/settings/SettingsWindow.qml:294
 #, kde-format
@@ -253,19 +245,17 @@ msgstr "Pamata"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr "Pārslēgties starp māju ekrāniem un vairāk ekrāntapešu opcijas"
+msgstr "Pārslēgties starp mājas ekrāniem un vairāk ekrāntapešu opcijas"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Eksportēt izkārtojumu uz"
+msgstr "Eksportēt izkārtojumu"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Importēt izkārtojumu no"
+msgstr "Importēt izkārtojumu"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
@@ -290,7 +280,7 @@ msgstr "Neizdevās eksportēt uz „%1“"
 #: qml/settings/SettingsWindow.qml:365
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr "Māju ekrāna izkārtojums ir eksportēts uz „%1“"
+msgstr "Mājas ekrāna izkārtojums ir eksportēts uz „%1“"
 
 #: qml/settings/SettingsWindow.qml:371
 #, kde-format
@@ -300,4 +290,4 @@ msgstr "Apstiprināt importu"
 #: qml/settings/SettingsWindow.qml:372
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr "Šī darbība pārrakstīs pastāvošo māju ekrāna izkārtojumu!"
+msgstr "Šī darbība pārrakstīs pastāvošo mājas ekrāna izkārtojumu!"
