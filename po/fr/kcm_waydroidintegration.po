@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-07-16 09:40+0200\n"
+"PO-Revision-Date: 2025-08-14 09:04+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.07.80\n"
+"X-Generator: Lokalize 25.07.90\n"
 
 #: ui/main.qml:19
 #, kde-format
@@ -30,27 +30,21 @@ msgid "Check installation"
 msgstr "Vérifier l'installation"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Waydroid est en cours d'initialisation.\n"
+"Téléchargement en cours des images Android et fournisseur.\n"
 "Cela peut prendre quelques minutes."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"La session avec Waydroid est en cours de démarrage.\n"
+"La session de Waydroid est en cours de réinitialisation.\n"
 "Cela peut prendre quelques secondes."
 
 #: ui/main.qml:76
@@ -78,27 +72,26 @@ msgid "Go back"
 msgstr "Revenir en arrière"
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Propriétés de Waydroid"
+msgstr "Applications sous Waydroid"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "Installer APK"
 
 #: ui/WaydroidApplicationsPage.qml:59
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "Vous devez sélectionner un fichier local."
 
 #: ui/WaydroidApplicationsPage.qml:99
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "Supprimer l'application"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -113,7 +106,7 @@ msgstr "Adresse IP"
 #: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
@@ -138,20 +131,18 @@ msgstr "Certifier mon périphérique pour Google Play Protect"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "Applications installées"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Configurer Waydroid"
+msgstr "Réinitialiser Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Configurer Waydroid"
+msgstr "Confirmer la réinitialisation de Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -159,6 +150,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Voulez-vous vraiment réinitialiser Waydroid ? Il s'agit d'une action "
+"destructrice qui effacera toutes les données utilisateur."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
@@ -208,17 +201,17 @@ msgstr "Autoriser l'accès direct à Android aux périphériques branchés à ch
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "Téléchargement en cours à la vitesse de %3, %1 Mo / %2 Mo"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1Mb / s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1 Kb / s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

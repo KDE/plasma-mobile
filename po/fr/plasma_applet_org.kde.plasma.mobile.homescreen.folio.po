@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-23 00:44+0000\n"
-"PO-Revision-Date: 2025-07-10 08:46+0200\n"
+"PO-Revision-Date: 2025-08-14 09:07+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.07.90\n"
 "X-Text-Markup: kde4\n"
 
 #: dragstate.cpp:14
@@ -35,34 +35,32 @@ msgstr "Rechercher des applications..."
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Il est impossible de trouver ce composant graphique."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Configurer…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Composants graphiques"
+msgstr "Option de composants graphiques"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Supprimer"
+msgstr "Supprimer le composant graphique"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Configurer un composant graphique"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -73,17 +71,17 @@ msgstr "Supprimer"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Relâchez pour configurer, faites glisser pour déplacer"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Confirmer la suppression du dossier"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer ce dossier ? "
 
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
 #, kde-format
@@ -103,16 +101,14 @@ msgid "Get New Widgets…"
 msgstr "Obtenir de nouveaux composants graphiques..."
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Fond d'écran"
+msgstr "Fonds d'écran"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Configuration"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -125,11 +121,9 @@ msgid "Icons"
 msgstr "Icônes"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Rechercher des applications..."
+msgstr "Application"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -214,7 +208,7 @@ msgstr "Barre des signets"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Afficher l'arrière-plan"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -258,16 +252,14 @@ msgstr ""
 "Basculer entre les options pour écrans d'accueil et plus de fond d'écran"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Exporter une disposition vers"
+msgstr "Exporter une disposition"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Importer une disposition à partir de"
+msgstr "Importer une disposition"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
