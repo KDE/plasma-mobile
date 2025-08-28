@@ -1,0 +1,31 @@
+# Translation of plasma_org.kde.plasma.quicksetting.kscreenosd.po to Catalan (Valencian)
+# Copyright (C) 2025 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# SPDX-FileCopyrightText: 2025 Josep M. Ferrer <txemaq@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-08-19 00:44+0000\n"
+"PO-Revision-Date: 2025-08-19 10:02+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca@valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.08.0\n"
+
+#: package/contents/ui/main.qml:11
+#, kde-format
+msgid "Display Config"
+msgstr "Configureu la visualització"
+
+#: package/contents/ui/main.qml:14
+#, kde-format
+msgctxt "kscreen osd quicksetting"
+msgid "Tap to set up"
+msgstr "Toqueu per a configurar"

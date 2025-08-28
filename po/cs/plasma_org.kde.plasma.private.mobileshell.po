@@ -410,6 +410,3 @@ msgstr "Zobrazit méně"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Zobrazit další %1"
-
-#~ msgid "Search…"
-#~ msgstr "Hledat…"

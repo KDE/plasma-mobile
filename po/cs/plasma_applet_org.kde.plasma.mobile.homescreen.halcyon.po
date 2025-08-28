@@ -51,12 +51,12 @@ msgstr "Aplikace"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Tapety"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: qml/settings/SettingsWindow.qml:76
 #, kde-format

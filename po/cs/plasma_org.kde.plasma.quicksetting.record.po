@@ -33,25 +33,22 @@ msgid "New Screen Recording saved in %1"
 msgstr ""
 
 #: recordutil.cpp:121
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
-msgstr "Nahrávat obrazovku"
+msgstr ""
 
 #: recordutil.cpp:130
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
-msgstr "Nahrávání..."
+msgstr ""
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
-msgstr "Zápis…"
+msgstr ""
 
 #: recordutil.cpp:146
 #, kde-format

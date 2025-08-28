@@ -37,24 +37,22 @@ msgstr ""
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Nastavit…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Možnosti"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Widgety"
+msgstr ""
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Odstranit"
+msgstr ""
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
@@ -100,16 +98,14 @@ msgid "Get New Widgets…"
 msgstr ""
 
 #: qml/settings/SettingsComponent.qml:82
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Tapeta"
+msgstr "Tapety"
 
 #: qml/settings/SettingsComponent.qml:110
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -122,11 +118,9 @@ msgid "Icons"
 msgstr "Ikony"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Hledat aplikace…"
+msgstr "Aplikace"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -211,7 +205,7 @@ msgstr "Lišta Oblíbené"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Zobrazovat pozadí"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -220,11 +214,9 @@ msgid "Wallpaper"
 msgstr "Tapeta"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Zobrazit efekt rozmazání tapety"
+msgstr ""
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
@@ -256,16 +248,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Exportovat rozvržení do"
+msgstr ""
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Importovat rozvržení z"
+msgstr ""
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format

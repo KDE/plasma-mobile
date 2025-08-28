@@ -249,21 +249,19 @@ msgid "Invalid input."
 msgstr "Neplatný vstup."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Connect"
-msgstr "Připojit se k"
+msgstr "Připojit se"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Disconnect"
-msgstr "Připojit se k"
+msgstr "Odpojit"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Nastavit"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
