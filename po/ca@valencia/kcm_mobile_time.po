@@ -2964,12 +2964,12 @@ msgstr "Data del sistema"
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
-msgstr "Seleccioneu la zona horària"
+msgstr "Trieu la zona horària"
 
 #: ui/main.qml:178
 #, kde-format
 msgid "Pick System Time"
-msgstr "Seleccioneu l'hora del sistema"
+msgstr "Trieu l'hora del sistema"
 
 #: ui/TimePicker.qml:95
 #, kde-format
