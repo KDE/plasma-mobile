@@ -245,7 +245,7 @@ msgstr "Hora i data"
 #: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr "Seleccioneu la zona horària i el format de l'hora."
+msgstr "Trieu la zona horària i el format de l'hora."
 
 #: modules/time/package/contents/ui/main.qml:50
 #, kde-format
