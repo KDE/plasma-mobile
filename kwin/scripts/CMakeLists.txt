@@ -9,5 +9,7 @@ function(add_kwin_script name source)
     file(COPY ${source}/contents ${source}/metadata.json DESTINATION ${CMAKE_BINARY_DIR}/bin/kwin/scripts/${name})
 endfunction()
 
-add_kwin_script(convergentwindows convergentwindows)
+add_kwin_script(mobilewindows mobilewindows)
+add_kwin_script(dockedwindows dockedwindows)
+
 

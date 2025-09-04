@@ -215,10 +215,28 @@ void Settings::reloadKWinConfig(KSharedConfig::Ptr kwinrc)
         QDBusConnection::sessionBus().send(message);
     }
 
+    auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
+    bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
+
+    // previously used, disabled now due to deprecation
+    for (const auto &script : KWIN_SCRIPTS_DISABLED) {
+        pluginsGroup.writeEntry(script + u"Enabled"_s, false);
+    }
+
+    // enabled when in mobile / non-docked mode
+    for (const auto &script : KWIN_SCRIPTS_MOBILE) {
+        pluginsGroup.writeEntry(script + u"Enabled"_s, !convergenceModeEnabled);
+    }
+
+    // enabled when in docked mode
+    for (const auto &script : KWIN_SCRIPTS_DOCKED) {
+        pluginsGroup.writeEntry(script + u"Enabled"_s, convergenceModeEnabled);
+    }
+
     // Unload KWin scripts that are now disabled.
     for (const auto &script : KWIN_SCRIPTS) {
         // Read from the config whether the effect is enabled (settings are suffixed with "Enabled", ex. blurEnabled)
-        bool status = pluginsGroup.readEntry(script + u"Enabled"_s, false);
+        bool status = pluginsGroup.readEntry(script + u"Enabled"_s, !convergenceModeEnabled);
 
         if (!status) {
             QDBusMessage message = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Scripting"_s, u"org.kde.kwin.Scripting"_s, u"unloadScript"_s);

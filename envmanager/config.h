@@ -45,16 +45,9 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
     auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
     bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
 
-    return {{"Windows",
-             {
-                 {"BorderlessMaximizedWindows", !convergenceModeEnabled}, // turn off window decorations when not in convergence mode
-                 {"Placement", convergenceModeEnabled ? "Centered" : "Maximizing"}, // maximize all windows by default if we aren't in convergence mode
-                 {"InteractiveWindowMoveEnabled", convergenceModeEnabled} // only allow window moving in convergence mode
-             }},
-            {"Plugins",
+    return {{"Plugins",
              {
                  {"blurEnabled", false}, // disable blur for performance reasons, we could reconsider in the future for more powerful devices
-                 {"convergentwindowsEnabled", true}, // enable our convergent window plugin
                  {"mobiletaskswitcherEnabled", true}, // ensure the mobile task switcher plugin is enabled
                  {"screenedgeEnabled", false} // disable the blue highlighting of screen edge effects. TODO would be nice if we could only deactivate it on
                                               // touchscreen gestures and not mouse as well
@@ -77,7 +70,10 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 // Have a separate list here because we need to trigger DBus calls to load/unload each effect/script.
 // Make sure that the effect/script is added to the kwinrc "Plugins" section above!
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
-const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
+const QList<QString> KWIN_SCRIPTS = {"convergentwindows", "mobilewindows", "dockedwindows"};
+const QList<QString> KWIN_SCRIPTS_DISABLED = {"convergentwindows"};
+const QList<QString> KWIN_SCRIPTS_MOBILE = {"mobilewindows"};
+const QList<QString> KWIN_SCRIPTS_DOCKED = {"dockedwindows"};
 
 // .config/plasma-mobile/ksmserver - immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};

@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Name": "Docked Windows",
+        "Description": "Docked Window Management for Plasma Mobile",
+        "Icon": "preferences-system-windows",
+
+        "Authors": [
+            {
+                "Email": "sebas@kde.org",
+                "Name": "Sebastian Kügler"
+            }
+        ],
+        "Id": "dockedwindows",
+        "Version": "1.0",
+        "License": "GPLv3",
+        "Website": "https://kde.org"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}
