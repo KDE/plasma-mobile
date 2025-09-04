@@ -12,9 +12,11 @@ Loader {
     property var currentWindow
 
     function run(window) {
+        console.debug("kwin_scripting convergentwindows culled for now.");
+        return;
         // HACK: don't maximize xwaylandvideobridge
         // see: https://invent.kde.org/plasma/plasma-mobile/-/issues/324
-        if (window.resourceClass === 'xwaylandvideobridge') {
+        if (!window && window.resourceClass === 'xwaylandvideobridge') {
             return;
         }
 
@@ -97,7 +99,7 @@ Loader {
         }
 
         function onWindowActivated(window) {
-            if (window.normalWindow) {
+            if (window && window.normalWindow) {
                 currentWindow = window;
                 window.interactiveMoveResizeFinished.connect((window) => {
                     root.run(window);

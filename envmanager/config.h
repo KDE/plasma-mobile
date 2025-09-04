@@ -45,10 +45,14 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
     auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
     bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
 
+    qDebug() << "convergenceModeEnabled:" << convergenceModeEnabled;
+
     return {{"Windows",
              {
                  {"BorderlessMaximizedWindows", !convergenceModeEnabled}, // turn off window decorations when not in convergence mode
-                 {"Placement", convergenceModeEnabled ? "Centered" : "Maximizing"}, // maximize all windows by default if we aren't in convergence mode
+                 //{"Placement", convergenceModeEnabled ? "Centered" : "Maximizing"}, // maximize all windows by default if we aren't in convergence mode
+                 {"Placement", "Centered"}, // maximize all windows by default if we aren't in convergence mode
+
                  {"InteractiveWindowMoveEnabled", convergenceModeEnabled} // only allow window moving in convergence mode
              }},
             {"Plugins",
@@ -77,7 +81,9 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 // Have a separate list here because we need to trigger DBus calls to load/unload each effect/script.
 // Make sure that the effect/script is added to the kwinrc "Plugins" section above!
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
-const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
+const QList<QString> KWIN_SCRIPTS = {"convergentwindows", "mobilewindows"};
+const QList<QString> KWIN_SCRIPTS_DISABLED = {"convergentwindows"};
+const QList<QString> KWIN_SCRIPTS_MOBILE = {"mobilewindows"};
 
 // .config/plasma-mobile/ksmserver - immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};

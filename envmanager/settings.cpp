@@ -241,15 +241,33 @@ void Settings::reloadKWinConfig()
         QDBusConnection::sessionBus().send(message);
     }
 
+    auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
+    bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
+
+    // previously used, disabled now due to deprecation
+    for (const auto &script : KWIN_SCRIPTS_DISABLED) {
+        pluginsGroup.writeEntry(script + u"Enabled"_s, false);
+        qCDebug(LOGGING_CATEGORY) << " disabled script in kwinrc:" << script;
+    }
+    for (const auto &script : KWIN_SCRIPTS_MOBILE) {
+        pluginsGroup.writeEntry(script + u"Enabled"_s, !convergenceModeEnabled);
+        qCDebug(LOGGING_CATEGORY) << " mobile script in kwinrc:" << script << "(convergenceModeEnabled ==" << convergenceModeEnabled << ")";
+    }
+
     // Unload KWin scripts that are now disabled.
     for (const auto &script : KWIN_SCRIPTS) {
         // Read from the config whether the effect is enabled (settings are suffixed with "Enabled", ex. blurEnabled)
-        bool status = pluginsGroup.readEntry(script + u"Enabled"_s, false);
-
+        bool status = pluginsGroup.readEntry(script + u"Enabled"_s, !convergenceModeEnabled);
+        qCDebug(LOGGING_CATEGORY) << "unloading disabled script:" << script << "mobile mode?" << (!convergenceModeEnabled);
+        // bool status = pluginsGroup.readEntry(script + u"Enabled"_s, false);
+        qCDebug(LOGGING_CATEGORY) << "unloading disabled script:" << script;
         if (!status) {
+            qCDebug(LOGGING_CATEGORY) << "unloading disabled script:" << script;
             QDBusMessage message = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Scripting"_s, u"org.kde.kwin.Scripting"_s, u"unloadScript"_s);
             message.setArguments({script});
             QDBusConnection::sessionBus().send(message);
+        } else {
+            qCDebug(LOGGING_CATEGORY) << "enabled script:" << script << "(will reload)";
         }
     }
 
