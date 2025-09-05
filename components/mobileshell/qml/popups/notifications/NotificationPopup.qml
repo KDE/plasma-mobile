@@ -133,7 +133,7 @@ Item {
         easing.type: Easing.OutExpo
     }
 
-    // if the popup height ever changes, update the notification below wiht new height
+    // if the popup height ever changes, update the notification below with new height
     // also update the allowed touch area for the main window
     onPopupHeightChanged: {
         let abovePopup = popupNotifications.objectAt(popupIndex + 1)
@@ -145,14 +145,14 @@ Item {
         }
     }
 
-    // if the offset position need in the expanded drawer changes, update the notification below wiht new offset
+    // if the offset position need in the expanded drawer changes, update the notification below with new offset
     onFullOpenOffsetChanged: {
         let abovePopup = popupNotifications.objectAt(popupIndex + 1)
         if (popupIndex + 1 < popupCount && abovePopup) {
             abovePopup.aboveNotificationFullOffset = fullOpenOffset;
         }
     }
-    // if the notification is being draged and is the current one
+    // if the notification is being dragged and is the current one
     // update 'currentDragOffset' so all notifications can easily access this value
     onDragOffsetChanged: {
         let abovePopup = popupNotifications.objectAt(popupIndex + 1)
@@ -564,14 +564,14 @@ Item {
             notificationPopup.preventDismissTimeout = true;
             if (!active && !(notificationItem.state == "closeWithScale" || notificationItem.state == "closeWithMove")) {
                 if ((lastOffset - notificationPopup.dragOffset > 1.0 && notificationPopup.dragOffset < 0) || (-(notificationPopup.openOffset - notificationPopup.closedOffset) / 4 > notificationPopup.dragOffset)) {
-                    // this code is called when the notifition is swiped or draged to the top.
+                    // this code is called when the notification is swiped or dragged to the top.
                     notificationPopup.closedWithSwipe = true;
                     notificationPopup.closePopup(popupIndex);
                     return;
                 }
                 dragOffsetAn.running = true;
                 if (notificationPopup.dragOffset - lastOffset > 1.0 || Kirigami.Units.gridUnit * 3 < notificationPopup.dragOffset) {
-                    // this code is called when the notifition is swiped or draged down.
+                    // this code is called when the notification is swiped or dragged down.
                 }
                 notificationPopup.preventDismissTimeout = (keyboardInteractivity == LayerShell.Window.KeyboardInteractivityOnDemand);
             } else {

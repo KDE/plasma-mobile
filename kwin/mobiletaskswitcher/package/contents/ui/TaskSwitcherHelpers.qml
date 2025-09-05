@@ -84,7 +84,7 @@ QtObject {
     // we don't want to continuously send haptics, just once is enough
     property bool hasVibrated: false
 
-    // The current gesture state to decide what will happpen when it is completed
+    // The current gesture state to decide what will happen when it is completed
     enum GestureStates {
         Undecided,
         HorizontalSwipe,

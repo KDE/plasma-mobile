@@ -72,7 +72,7 @@ FocusScope {
             hide();
         } else if (tasksCount < oldTasksCount) {
             if (state.currentTaskIndex < 0) {
-                // if the user is on the frist task, and it is closed, scroll right
+                // if the user is on the first task, and it is closed, scroll right
                 taskSwitcherHelpers.animateGoToTaskIndex(0, Kirigami.Units.longDuration);
             } else if (state.currentTaskIndex >= tasksCount) {
                 // if the user is on the last task, and it is closed, scroll left
@@ -273,7 +273,7 @@ FocusScope {
                     if (root.taskSwitcherHelpers.gestureState < TaskSwitcherHelpers.GestureStates.TaskSwitcher) {
                         root.setTaskDrawerState(TaskSwitcherHelpers.GestureStates.Home)
                     }
-                    // if the touch is above heightThreshold, it will retrun home
+                    // if the touch is above heightThreshold, it will return home
                     if (unmodifiedYposition > root.taskSwitcherHelpers.heightThreshold) {
                         root.taskSwitcherHelpers.hasVibrated = true;
                         if (root.taskSwitcherHelpers.notHomeScreenState) {
@@ -420,7 +420,7 @@ FocusScope {
         }
     }
 
-    // kind of a hack, but this prevents the gesture from immediately activting the task switcher when it is not supposed to
+    // kind of a hack, but this prevents the gesture from immediately activating the task switcher when it is not supposed to
     Timer {
         id: taskSwitchCanLaunchTimer
         interval: 1; running: true; repeat: false

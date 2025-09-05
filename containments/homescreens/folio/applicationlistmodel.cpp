@@ -113,7 +113,7 @@ void ApplicationListModel::load()
 
     std::sort(toRemove.begin(), toRemove.end());
 
-    // Remove indices first, from end to start to avoid indicies changing
+    // Remove indices first, from end to start to avoid indices changing
     for (int i = toRemove.size() - 1; i >= 0; --i) {
         int ind = toRemove[i];
 

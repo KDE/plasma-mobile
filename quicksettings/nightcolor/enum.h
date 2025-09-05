@@ -31,7 +31,7 @@ enum NightColorMode {
      */
     Timings,
     /**
-     * Color temperature is constant thoughout the day.
+     * Color temperature is constant throughout the day.
      */
     Constant,
 };

@@ -49,7 +49,7 @@ Item {
     }
 
     // notification list widget
-    // margin adjusted to fit and postion into the action drawer
+    // margin adjusted to fit and position into the action drawer
     MobileShell.NotificationsWidget {
         id: notificationWidget
         anchors.fill: parent
@@ -74,7 +74,7 @@ Item {
             }
         }
 
-        // the first swipe when at the top of the notification list is handeled using a MouseArea, not the flickable
+        // the first swipe when at the top of the notification list is handled using a MouseArea, not the flickable
         // this is so one can swipe down from the top of the notification drawer to expand the action drawer
         DragHandler {
             id: dragHandler

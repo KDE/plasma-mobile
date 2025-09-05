@@ -68,7 +68,7 @@ ColumnLayout {
 
     }
 
-    // Some informations as IP address can take time to be set by Waydroid
+    // Some information such as IP address can take time to be set by Waydroid
     Timer {
         id: autoRefreshSessionTimer
         interval: 2000

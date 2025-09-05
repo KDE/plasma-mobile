@@ -67,7 +67,7 @@ void WaydroidApplicationListModel::loadApplications(const QList<WaydroidApplicat
 
     std::sort(toRemove.begin(), toRemove.end());
 
-    // Remove indices first, from end to start to avoid indicies changing
+    // Remove indices first, from end to start to avoid indices changing
     for (int i = toRemove.size() - 1; i >= 0; --i) {
         int ind = toRemove[i];
 
@@ -171,7 +171,7 @@ void WaydroidApplicationListModel::installApk(const QString apkFile)
             Q_EMIT actionFinished(i18n("Application has been installed"));
         } else {
             Q_EMIT errorOccurred(i18n("Installation Failed"));
-            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Error occured during installation of " << apkFile << ": " << process->readAllStandardError();
+            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Error occurred during installation of " << apkFile << ": " << process->readAllStandardError();
         }
     });
 }
@@ -194,7 +194,7 @@ void WaydroidApplicationListModel::deleteApplication(const QString appId)
             Q_EMIT actionFinished(i18n("Application has been deleted"));
         } else {
             Q_EMIT errorOccurred(i18n("Application uninstall failed"));
-            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Error occured during uninstallation of " << appId << ": " << errorLog;
+            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Error occurred during uninstallation of " << appId << ": " << errorLog;
         }
     });
 }

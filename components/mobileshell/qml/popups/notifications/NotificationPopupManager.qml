@@ -88,7 +88,7 @@ Window {
         if (popupDrawerOpened) {
             ShellUtil.setInputRegion(notificationPopupManager, Qt.rect(0, 0, 0, 0));
         } else {
-            // get the height of the popup directly to ensure we get the lastest version
+            // get the height of the popup directly to ensure we get the latest version
             let popupHeight = Kirigami.Units.gridUnit * 6;
             let currentPopup = notifications.objectAt(notifications.currentPopupIndex);
             if (currentPopup) {

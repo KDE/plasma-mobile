@@ -29,7 +29,7 @@ Item {
                                             panelType === PanelBackground.PanelType.Drawer ||
                                             panelType === PanelBackground.PanelType.Popup ||
                                             panelType === PanelBackground.PanelType.Wallpaper
-    // whether to use the complex shadow effect - note that this uses more perfomance
+    // whether to use the complex shadow effect - note that this uses more performance
     readonly property bool complexShadow:   shadow &&
                                             (panelType === PanelBackground.PanelType.Base ||
                                             panelType === PanelBackground.PanelType.Drawer ||

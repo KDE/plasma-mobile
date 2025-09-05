@@ -56,7 +56,7 @@ void PinnedModel::addApp(const QString &storageId, int row)
 
         beginInsertRows(QModelIndex(), row, row);
         m_applications.insert(row, app);
-        m_folders.insert(row, nullptr); // maintain indicies
+        m_folders.insert(row, nullptr); // maintain indices
         endInsertRows();
 
         save();

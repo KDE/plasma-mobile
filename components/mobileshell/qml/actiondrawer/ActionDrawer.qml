@@ -22,10 +22,10 @@ Item {
     id: root
 
     /*
-     * The intended visiblity of the action drawer.
+     * The intended visibility of the action drawer.
      *
      * This is separate from "visible" in order to avoid having to set
-     * item visiblity when its on its own window (wasteful since the window itself can be shown/hidden).
+     * item visibility when it's on its own window (wasteful since the window itself can be shown/hidden).
      */
     property bool intendedToBeVisible: false
 

@@ -82,7 +82,7 @@ MouseArea {
         }
     }
 
-    // the postition offset value for non-active tasks in the task drawer
+    // the position offset value for non-active tasks in the task drawer
     // this value is normalized and is usually set to 0, 1, or 2 (larger the number, the further they are from the active task)
     property real baseTaskOffset: 0
 

@@ -126,7 +126,7 @@ Item {
 
             SwipeView {
                 id: swipeView
-                // we need to clip this view here to prevent the other quick settings pages from being visable
+                // we need to clip this view here to prevent the other quick settings pages from being visible
                 // when fullViewProgress is not less then 1 and the base view is no longer being clipped
                 clip: true
 
