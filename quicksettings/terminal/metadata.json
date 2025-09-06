@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "seshan@sineware.ca",
+                "Name": "Seshan Ravikumar"
+            }
+        ],
+        "Description": "Quick setting to open a terminal window",
+        "Icon": "utilities-terminal-symbolic",
+        "Id": "org.kde.plasma.quicksetting.terminal",
+        "License": "LGPL",
+        "Name": "Terminal",
+        "Website": "https://kde.org"
+    }
+}

@@ -60,7 +60,9 @@ void QuickSettingsConfig::setEnabledQuickSettings(QList<QString> &list)
 QList<QString> QuickSettingsConfig::disabledQuickSettings() const
 {
     auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
-    return group.readEntry("disabledQuickSettings", QList<QString>{});
+    return group.readEntry("disabledQuickSettings", QList<QString>{
+        QStringLiteral("org.kde.plasma.quicksetting.terminal"),
+    });
 }
 
 void QuickSettingsConfig::setDisabledQuickSettings(QList<QString> &list)

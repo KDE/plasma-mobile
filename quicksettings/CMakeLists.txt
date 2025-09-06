@@ -16,6 +16,7 @@ plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quick
 plasma_install_package(waydroid org.kde.plasma.quicksetting.waydroid quicksettings)
 plasma_install_package(wifi org.kde.plasma.quicksetting.wifi quicksettings)
 plasma_install_package(hotspot org.kde.plasma.quicksetting.hotspot quicksettings)
+plasma_install_package(terminal org.kde.plasma.quicksetting.terminal quicksettings)
 add_subdirectory(flashlight)
 add_subdirectory(kscreenosd)
 add_subdirectory(nightcolor)
