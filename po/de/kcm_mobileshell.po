@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:07+0000\n"
+"POT-Creation-Date: 2025-09-06 00:44+0000\n"
 "PO-Revision-Date: 2025-04-26 22:35+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -136,105 +136,77 @@ msgstr ""
 
 #: ui/main.qml:140
 #, kde-format
-msgid "Navigation Panel"
-msgstr "Navigationsbereich"
-
-#: ui/main.qml:146
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr ""
-
-#: ui/main.qml:147
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr ""
-
-#: ui/main.qml:161
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "Umschalter für die Tastatur immer anzeigen"
-
-#: ui/main.qml:162
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr ""
-"Gibt an, ob der Umschalter für die Tastatur immer in der Navigationsleiste "
-"angezeigt wird."
-
-#: ui/main.qml:173
-#, kde-format
 msgid "Action Drawer"
 msgstr "Aktionsleiste"
 
-#: ui/main.qml:179
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Reduzierter Modus"
 
-#: ui/main.qml:180
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Erweiterter Modus"
 
-#: ui/main.qml:184 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Schnelleinstellungen"
 
-#: ui/main.qml:192
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Linke obere Aktionsleiste"
 
-#: ui/main.qml:193
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Darstellung beim Öffnen von links oben."
 
-#: ui/main.qml:214
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Rechte obere Aktionsleiste"
 
-#: ui/main.qml:215
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Darstellung beim Öffnen von rechts oben."
 
-#: ui/main.qml:234
+#: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 
-#: ui/main.qml:239
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr ""
 
-#: ui/main.qml:240
+#: ui/main.qml:207
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr ""
 
-#: ui/main.qml:241
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr ""
 
-#: ui/main.qml:245
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr ""
 
-#: ui/main.qml:267
+#: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -310,6 +282,18 @@ msgid ""
 "module."
 msgstr ""
 "Vibration der Tastatur wird im Modul Bildschirmtastatur separat eingestellt."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "Navigationsbereich"
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "Umschalter für die Tastatur immer anzeigen"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr ""
+#~ "Gibt an, ob der Umschalter für die Tastatur immer in der "
+#~ "Navigationsleiste angezeigt wird."
 
 #~ msgctxt "Low intensity"
 #~ msgid "Low"

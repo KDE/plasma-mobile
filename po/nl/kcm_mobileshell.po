@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:07+0000\n"
+"POT-Creation-Date: 2025-09-06 00:44+0000\n"
 "PO-Revision-Date: 2025-07-03 13:51+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -139,105 +139,77 @@ msgstr "Erg groot"
 
 #: ui/main.qml:140
 #, kde-format
-msgid "Navigation Panel"
-msgstr "Navigatiepaneel"
-
-#: ui/main.qml:146
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Modus Alleen gebaren"
-
-#: ui/main.qml:147
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Of het navigatiepaneel wordt verborgen."
-
-#: ui/main.qml:161
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "Toetsenbord omschakelen altijd tonen"
-
-#: ui/main.qml:162
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr ""
-"Of de omschakelknop van het toetsenbord altijd wordt getoond op het "
-"navigatiepaneel."
-
-#: ui/main.qml:173
-#, kde-format
 msgid "Action Drawer"
 msgstr "Actieschuiflade"
 
-#: ui/main.qml:179
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Modus Vastgepind"
 
-#: ui/main.qml:180
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modus Uitgevouwen"
 
-#: ui/main.qml:184 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Snelle instellingen"
 
-#: ui/main.qml:192
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Modus Schuiflade linksboven "
 
-#: ui/main.qml:193
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Modus bij openen vanaf linksboven."
 
-#: ui/main.qml:214
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Modus Schuiflade rechtsboven "
 
-#: ui/main.qml:215
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modus bij openen vanaf rechtsboven."
 
-#: ui/main.qml:234
+#: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Sneltoetsen voor scherm vergrendelen"
 
-#: ui/main.qml:239
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Geen"
 
-#: ui/main.qml:240
+#: ui/main.qml:207
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Zaklamp"
 
-#: ui/main.qml:241
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Camera"
 
-#: ui/main.qml:245
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Linker muisknop"
 
-#: ui/main.qml:267
+#: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -313,6 +285,24 @@ msgid ""
 msgstr ""
 "Trillingen van het toetsenbord worden apart bestuurd in de module "
 "toetsenbordinstellingen."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "Navigatiepaneel"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Modus Alleen gebaren"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Of het navigatiepaneel wordt verborgen."
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "Toetsenbord omschakelen altijd tonen"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr ""
+#~ "Of de omschakelknop van het toetsenbord altijd wordt getoond op het "
+#~ "navigatiepaneel."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Intensiteit van trillingen"

@@ -2172,7 +2172,7 @@ msgstr "Seul"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Shanghai"
-msgstr "Şangay"
+msgstr "Şanhay"
 
 #: timezonesi18n.cpp:402
 #, kde-format

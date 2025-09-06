@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:07+0000\n"
+"POT-Creation-Date: 2025-09-06 00:44+0000\n"
 "PO-Revision-Date: 2025-07-02 14:14+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -136,103 +136,77 @@ msgstr "גדול מאוד"
 
 #: ui/main.qml:140
 #, kde-format
-msgid "Navigation Panel"
-msgstr "לוח ניווט"
-
-#: ui/main.qml:146
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "מצב מחוות בלבד"
-
-#: ui/main.qml:147
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "האם להסתיר את לוח הניווט."
-
-#: ui/main.qml:161
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "תמיד להציג את מתג המקלדת"
-
-#: ui/main.qml:162
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "האם תמיד להציג את כפתור מתג המקלדת בלוח הניווט."
-
-#: ui/main.qml:173
-#, kde-format
 msgid "Action Drawer"
 msgstr "מגירת פעולות"
 
-#: ui/main.qml:179
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "מצב נעוץ"
 
-#: ui/main.qml:180
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "מצב מורחב"
 
-#: ui/main.qml:184 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "הגדרות מהירות"
 
-#: ui/main.qml:192
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "מצב מגירה שמאלית עליונה"
 
-#: ui/main.qml:193
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "מצב בעת פתיחה מהפינה השמאלית העליונה."
 
-#: ui/main.qml:214
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "מצב מגירה ימנית עליונה"
 
-#: ui/main.qml:215
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "מצב בעת פתיחה מהפינה הימנית העליונה."
 
-#: ui/main.qml:234
+#: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "קיצורי מסך נעילה"
 
-#: ui/main.qml:239
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "אין"
 
-#: ui/main.qml:240
+#: ui/main.qml:207
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "פנס"
 
-#: ui/main.qml:241
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "מצלמה"
 
-#: ui/main.qml:245
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "כפתור שמאלי"
 
-#: ui/main.qml:267
+#: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -305,3 +279,19 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "הרטט במקלדת נשלט בנפרד דרך מודול הגדרות המקלדת."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "לוח ניווט"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "מצב מחוות בלבד"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "האם להסתיר את לוח הניווט."
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "תמיד להציג את מתג המקלדת"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr "האם תמיד להציג את כפתור מתג המקלדת בלוח הניווט."

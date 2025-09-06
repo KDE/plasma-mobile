@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-02 07:07+0000\n"
+"POT-Creation-Date: 2025-09-06 00:44+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -133,103 +133,77 @@ msgstr "अतीव विशालः"
 
 #: ui/main.qml:140
 #, kde-format
-msgid "Navigation Panel"
-msgstr "नेविगेशन पैनल"
-
-#: ui/main.qml:146
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "इशारा-मात्र-मोड"
-
-#: ui/main.qml:147
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "नेविगेशनपटलं गोपनीयं वा।"
-
-#: ui/main.qml:161
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "सर्वदा कीबोर्ड टॉगलं दर्शयन्तु"
-
-#: ui/main.qml:162
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "किं सर्वदा नेविगेशन-पटले कीबोर्ड-टॉग्ल्-बटनं दर्शयितव्यम् इति ।"
-
-#: ui/main.qml:173
-#, kde-format
 msgid "Action Drawer"
 msgstr "क्रिया दराज"
 
-#: ui/main.qml:179
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "पिन मोड"
 
-#: ui/main.qml:180
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "विस्तारितः मोडः"
 
-#: ui/main.qml:184 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "त्वरित सेटिंग्स्"
 
-#: ui/main.qml:192
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "उपरि वामदराज मोड"
 
-#: ui/main.qml:193
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "उपरि वामतः उद्घाटने मोड्।"
 
-#: ui/main.qml:214
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "शीर्ष दक्षिण दराज मोड"
 
-#: ui/main.qml:215
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "उपरि दक्षिणतः उद्घाटने मोड्।"
 
-#: ui/main.qml:234
+#: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 
-#: ui/main.qml:239
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr ""
 
-#: ui/main.qml:240
+#: ui/main.qml:207
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr ""
 
-#: ui/main.qml:241
+#: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr ""
 
-#: ui/main.qml:245
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr ""
 
-#: ui/main.qml:267
+#: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -302,3 +276,19 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "कीबोर्ड-कम्पनानि कीबोर्ड-सेटिंग्स्-मॉड्यूल्-मध्ये पृथक् पृथक् नियन्त्रितानि भवन्ति ।"
+
+#~ msgid "Navigation Panel"
+#~ msgstr "नेविगेशन पैनल"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "इशारा-मात्र-मोड"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "नेविगेशनपटलं गोपनीयं वा।"
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "सर्वदा कीबोर्ड टॉगलं दर्शयन्तु"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr "किं सर्वदा नेविगेशन-पटले कीबोर्ड-टॉग्ल्-बटनं दर्शयितव्यम् इति ।"
