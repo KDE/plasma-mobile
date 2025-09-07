@@ -281,21 +281,3 @@ msgid ""
 "module."
 msgstr ""
 "Tastaturvibrasjonar vert kontrollerte for seg, i modulen for tastaturoppsett."
-
-#~ msgid "Navigation Panel"
-#~ msgstr "Navigasjonspanel"
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "«Berre fingerrørsler»-modus"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Om navigasjonspanelet skal gøymast."
-
-#~ msgid "Always show keyboard toggle"
-#~ msgstr "Vis alltid tastatur-knapp"
-
-#~ msgid ""
-#~ "Whether to always show the keyboard toggle button on the navigation panel."
-#~ msgstr ""
-#~ "Om knappen for å visa/gøyma skjerm­tastaturet alltid skal visast på "
-#~ "navigasjonspanelet."
