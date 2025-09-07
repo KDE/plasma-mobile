@@ -3,11 +3,13 @@
         "Authors": [
             {
                 "Email": "luis.buechi@kdemail.net",
-                "Name": "Luis Büchi"
+                "Name": "Luis Büchi",
+                "Name[x-test]": "xxLuis Büchixx"
             }
         ],
         "Category": "System Information",
         "Description": "Configure System Navigation",
+        "Description[x-test]": "xxConfigure System Navigationxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -18,8 +20,10 @@
         "Icon": "preferences-desktop-gestures-touch",
         "License": "GPL",
         "Name": "Navigation",
+        "Name[x-test]": "xxNavigationxx",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "system,shell,panel,navigation,gesture",
+    "X-KDE-Keywords[x-test]": "xxsystemxx,xxshellxx,xxpanelxx,xxnavigationxx,xxgesturexx",
     "X-KDE-System-Settings-Parent-Category": "personalization"
 }
