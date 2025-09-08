@@ -39,7 +39,6 @@ Name[sl]=Plasma
 Name[sv]=Plasma
 Name[tr]=Plasma
 Name[uk]=Плазма
-Name[x-test]=xxPlasmaxx
 Name[zh_CN]=Plasma
 
 [Event/captured]
@@ -79,7 +78,6 @@ Name[sl]=Zajeto
 Name[sv]=Lagrad
 Name[tr]=Yakalanan
 Name[uk]=Захоплено
-Name[x-test]=xxCapturedxx
 Name[zh_CN]=已捕获
 Comment=Captured
 Comment[ar]=الملتقط
@@ -117,6 +115,5 @@ Comment[sl]=Zajeto
 Comment[sv]=Lagrad
 Comment[tr]=Yakalanan
 Comment[uk]=Захоплено
-Comment[x-test]=xxCapturedxx
 Comment[zh_CN]=已捕获
 Action=Popup
