@@ -72,6 +72,7 @@ MouseArea {
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
             text: i18n("Widgets")
+            wrapMode: Text.Wrap
             font.weight: Font.Bold
             font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
             Layout.fillWidth: true
