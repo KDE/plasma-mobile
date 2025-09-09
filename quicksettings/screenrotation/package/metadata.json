@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av skärmrotation för Plasma mobil",
         "Description[tr]": "Plasma Cep ekran döndürme tez ayarı",
         "Description[uk]": "Швидке встановлення обертання екрана для Мобільної Плазми",
-        "Description[x-test]": "xxScreen rotation quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕旋转快捷设置",
         "Description[zh_TW]": "Plasma 行動的螢幕旋轉快速設定",
         "Icon": "rotation-allowed",
@@ -120,7 +118,6 @@
         "Name[ta]": "திரை சழற்சி",
         "Name[tr]": "Ekran Döndürme",
         "Name[uk]": "Реалізовано обертання зображення на екрані",
-        "Name[x-test]": "xxScreen rotationxx",
         "Name[zh_CN]": "屏幕旋转",
         "Name[zh_TW]": "螢幕旋轉",
         "Website": "https://kde.org"

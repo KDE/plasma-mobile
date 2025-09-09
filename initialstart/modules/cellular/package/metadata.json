@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -76,7 +75,6 @@
         "Description[sv]": "Mobil förstagångsstart för Plasma mobil",
         "Description[tr]": "Plasma Cep için hücresel ayar başlangıç modülü",
         "Description[uk]": "Модуль стільникової мережі початкового запуску для мобільної Плазми",
-        "Description[x-test]": "xxCellular initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma 移动设备的蜂窝初始化模块",
         "Description[zh_TW]": "Plasma 行動的行動電話初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.cellular",
@@ -114,7 +112,6 @@
         "Name[sv]": "Mobil",
         "Name[tr]": "Hücresel",
         "Name[uk]": "Стільниковий",
-        "Name[x-test]": "xxCellularxx",
         "Name[zh_CN]": "蜂窝数据",
         "Name[zh_TW]": "行動電話",
         "Website": "https://kde.org"

@@ -37,7 +37,6 @@
                 "Name[sv]": "Plata Hill",
                 "Name[tr]": "Plata Hill",
                 "Name[uk]": "Plata Hill",
-                "Name[x-test]": "xxPlata Hillxx",
                 "Name[zh_CN]": "Plata Hill",
                 "Name[zh_TW]": "Plata Hill"
             }
@@ -74,7 +73,6 @@
         "Description[sv]": "Tar bort fönsterdekorationer och maximerar fönster bara på den första skärmen.",
         "Description[tr]": "Pencere dekorasyonlarını kaldırır ve pencereleri yalnızca ilk ekranda kaplatır.",
         "Description[uk]": "Вилучає оздоблення вікон та максимізує вікна лише на першому екрані.",
-        "Description[x-test]": "xxRemoves window decorations and maximizes windows on the first screen only.xx",
         "Description[zh_CN]": "删除窗口装饰并最大化第一个屏幕上的窗口。",
         "Description[zh_TW]": "在第一個螢幕上移除視窗裝飾並讓視窗最大化。",
         "Icon": "preferences-system-windows",
@@ -111,7 +109,6 @@
         "Name[sv]": "Konvergerande fönster",
         "Name[tr]": "Yakınsak Pencereler",
         "Name[uk]": "Збіжні вікна",
-        "Name[x-test]": "xxConvergent Windowsxx",
         "Name[zh_CN]": "聚合窗口",
         "Name[zh_TW]": "響應式視窗",
         "Website": "https://invent.kde.org/plasma/plasma-mobile"

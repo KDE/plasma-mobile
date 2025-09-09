@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av batteri för Plasma mobil",
         "Description[tr]": "Plasma Cep pil tez ayarı",
         "Description[uk]": "Швидке налаштовування акумулятора для Мобільної Плазми",
-        "Description[x-test]": "xxBattery quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的电池快捷设置",
         "Description[zh_TW]": "Plasma 行動的電池快速設定",
         "Icon": "battery-full",
@@ -120,7 +118,6 @@
         "Name[ta]": "மின்கலம்",
         "Name[tr]": "Pil",
         "Name[uk]": "Акумулятор",
-        "Name[x-test]": "xxBatteryxx",
         "Name[zh_CN]": "电池",
         "Name[zh_TW]": "電池",
         "Website": "https://kde.org"

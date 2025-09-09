@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning för att avsluta systemvila för Plasma mobil",
         "Description[tr]": "Plasma Cep sistem uykusunu askıya alma tez ayarı",
         "Description[uk]": "Швидке налаштовування призупинення роботи системи для Мобільної Плазми",
-        "Description[x-test]": "xxQuick setting to suspend system sleep for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的暂停息屏快捷设置",
         "Description[zh_TW]": "Plasma 行動的阻擋系統睡眠快速設定",
         "Icon": "system-suspend-hibernate",
@@ -120,7 +118,6 @@
         "Name[sv]": "Koffein",
         "Name[tr]": "Caffeine",
         "Name[uk]": "Кофеїн",
-        "Name[x-test]": "xxCaffeinexx",
         "Name[zh_CN]": "保持亮屏",
         "Name[zh_TW]": "咖啡因",
         "Website": "https://kde.org"

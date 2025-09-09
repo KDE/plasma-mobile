@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -80,7 +79,6 @@
         "Description[ta]": "எளிதில் பயன்படுத்தக்கக்கூடிய திறன்பேசி முகப்பு",
         "Description[tr]": "Yalınlığa ve kullanım kolaylığına odaklanmış, taşınabilir bir ana ekran.",
         "Description[uk]": "Домашній екран для мобільних пристроїв із акцентом на простоті та зручності.",
-        "Description[x-test]": "xxA mobile homescreen focused on simplicity and ease-of-use.xx",
         "Description[zh_CN]": "简约易用的手机主屏幕方案。",
         "Description[zh_TW]": "著重於簡潔與易用性的手機主畫面。",
         "Id": "org.kde.plasma.mobile.homescreen.halcyon",
@@ -119,7 +117,6 @@
         "Name[sv]": "Halcyon",
         "Name[tr]": "Halikon",
         "Name[uk]": "Альціон",
-        "Name[x-test]": "xxHalcyonxx",
         "Name[zh_CN]": "Halcyon",
         "Name[zh_TW]": "Halcyon",
         "Website": "https://plasma-mobile.org"

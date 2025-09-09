@@ -37,7 +37,6 @@
                 "Name[sv]": "KDE:s visuella designgrupp",
                 "Name[tr]": "KDE Görsel Tasarım Grubu",
                 "Name[uk]": "Група з візуального дизайну KDE",
-                "Name[x-test]": "xxKDE Visual Design Groupxx",
                 "Name[zh_CN]": "KDE 视觉设计团队",
                 "Name[zh_TW]": "KDE VDG 視覺設計組"
             }
@@ -77,7 +76,6 @@
         "Description[ta]": "கைபேசிகளுக்கான பிளாஸ்மா",
         "Description[tr]": "Taşınabilir aygıtlar için Plasma",
         "Description[uk]": "Плазма для мобільних пристроїв",
-        "Description[x-test]": "xxPlasma for mobile devicesxx",
         "Description[zh_CN]": "针对手机设备设计的 Plasma 环境",
         "Description[zh_TW]": "適用於行動裝置的 Plasma",
         "Id": "org.kde.breeze.mobile",
@@ -115,7 +113,6 @@
         "Name[sv]": "Plasma mobil Breeze",
         "Name[tr]": "Plasma Cep Esinti",
         "Name[uk]": "Breeze для мобільної Плазми",
-        "Name[x-test]": "xxPlasma Mobile Breezexx",
         "Name[zh_CN]": "Plasma Mobile Breeze 微风",
         "Name[zh_TW]": "Plasma 行動 Breeze",
         "Website": "https://www.kde.org"

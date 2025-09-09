@@ -32,7 +32,6 @@
         "Description[sv]": "Utför initieringsuppgifter för Plasma mobil under sessionsstart",
         "Description[tr]": "Oturum başlangıcı sırasında Plasma Cep başlangıç görevlerini çalıştırın",
         "Description[uk]": "Запуск початкових завдань для Plasma Mobile під час запуску сеансу",
-        "Description[x-test]": "xxRun initial tasks for Plasma Mobile during session startupxx",
         "Description[zh_CN]": "会话启动时为 Plasma Mobile 运行初始任务",
         "Description[zh_TW]": "在工作階段啟動時為 Plasma 行動執行初始工作",
         "Name": "Plasma Mobile Start",
@@ -68,7 +67,6 @@
         "Name[sv]": "Plasma mobil start",
         "Name[tr]": "Plasma Cep Başlangıç",
         "Name[uk]": "Запуск Plasma Mobile",
-        "Name[x-test]": "xxPlasma Mobile Startxx",
         "Name[zh_CN]": "Plasma Mobile 启动程序",
         "Name[zh_TW]": "Plasma 行動起始畫面"
     },

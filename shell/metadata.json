@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -79,7 +78,6 @@
         "Description[sv]": "Plasma skal för mobilapparater",
         "Description[tr]": "Taşınabilir aygıtlar için Plasma kabuğu",
         "Description[uk]": "Оболонка Плазми для мобільних пристроїв",
-        "Description[x-test]": "xxPlasma shell for mobile devicesxx",
         "Description[zh_CN]": "针对手机设备设计的 Plasma 外壳程序",
         "Description[zh_TW]": "適用於行動裝置的 Plasma 殼層",
         "Id": "org.kde.plasma.mobileshell",
@@ -120,7 +118,6 @@
         "Name[ta]": "பிளாஸ்மா கைபேசி",
         "Name[tr]": "Plasma Cep",
         "Name[uk]": "Мобільна Плазма",
-        "Name[x-test]": "xxPlasma Mobilexx",
         "Name[zh_CN]": "Plasma Mobile",
         "Name[zh_TW]": "Plasma 行動",
         "Website": "https://plasma-mobile.org"

@@ -29,7 +29,6 @@
         "Description[sv]": "Detektera automatiskt mobilaccesspunkter i Plasma mobil",
         "Description[tr]": "Plasma Cep’teki erişim noktası adlarını kendiliğinden algılayın",
         "Description[uk]": "Автоматично виявляти стільникові точки доступу у Мобільній Плазмі",
-        "Description[x-test]": "xxAutodetect cellular APNs in Plasma Mobilexx",
         "Description[zh_CN]": "在 Plasma Mobile 中自动检测蜂窝网络 APN",
         "Description[zh_TW]": "在 Plasma 行動中自動偵測行動 APN",
         "Name": "Plasma Mobile Autodetect APNs",
@@ -62,7 +61,6 @@
         "Name[sv]": "Plasma mobil automatiskt detekterade åtkomstpunkter",
         "Name[tr]": "Plasma Cep Erişim Noktası Adlarını Kendiliğinden Algıla",
         "Name[uk]": "Автоматичне виявлення точок доступу у Мобільній Плазмі",
-        "Name[x-test]": "xxPlasma Mobile Autodetect APNsxx",
         "Name[zh_CN]": "Plasma Mobile 自动检测 APN",
         "Name[zh_TW]": "Plasma 行動自動偵測 APN"
     },

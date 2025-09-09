@@ -40,7 +40,6 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -80,7 +79,6 @@
         "Description[ta]": "பிளாஸ்மா கைபேசிக்கான உலாவல் பலகை",
         "Description[tr]": "Plasma Cep için dolaşım paneli",
         "Description[uk]": "Панель навігації для мобільної Плазми",
-        "Description[x-test]": "xxNavigation panel for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma 移动版导航面板",
         "Description[zh_TW]": "Plasma 行動的導覽面板",
         "Id": "org.kde.plasma.mobile.taskpanel",
@@ -126,7 +124,6 @@
         "Name[ta]": "திறன்பேசி பணிப்பலகை",
         "Name[tr]": "Telefon Görev Panosu",
         "Name[uk]": "Панель завдань телефону",
-        "Name[x-test]": "xxPhone Task panelxx",
         "Name[zh_CN]": "手机任务面板",
         "Name[zh_TW]": "手機工作面板",
         "Website": "https://plasma-mobile.org"

@@ -40,7 +40,6 @@
                 "Name[sv]": "Bhushan Shah",
                 "Name[tr]": "Buşan Şah",
                 "Name[uk]": "Bhushan Shah",
-                "Name[x-test]": "xxBhushan Shahxx",
                 "Name[zh_CN]": "Bhushan Shah",
                 "Name[zh_TW]": "Bhushan Shah"
             }
@@ -79,7 +78,6 @@
         "Description[ta]": "பிளாஸ்மா கைபேசிக்கான விமானப் பயன்முறை நிலைமாற்றி",
         "Description[tr]": "Plasma Cep uçak kipi tez ayarı",
         "Description[uk]": "Швидке встановлення режиму польоту для Мобільної Плазми",
-        "Description[x-test]": "xxAirplane mode quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的飞行模式快捷设置",
         "Description[zh_TW]": "Plasma 行動的 Airplane mode 快速設定",
         "Icon": "network-flightmode-on",
@@ -124,7 +122,6 @@
         "Name[ta]": "விமான பயன்முறை",
         "Name[tr]": "Uçak Kipi",
         "Name[uk]": "Режим польоту",
-        "Name[x-test]": "xxAirplane Modexx",
         "Name[zh_CN]": "飞行模式",
         "Name[zh_TW]": "飛航模式",
         "Website": "https://kde.org"

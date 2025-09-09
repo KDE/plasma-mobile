@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -76,7 +75,6 @@
         "Description[sv]": "Förbered förstagångsstart för Plasma mobil",
         "Description[tr]": "Plasma Cep için başlangıç ayarları modülünü hazırla",
         "Description[uk]": "Модуль приготування початкового запуску для мобільної Плазми",
-        "Description[x-test]": "xxPrepare initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "准备 Plasma Mobile 的模块初始化",
         "Description[zh_TW]": "Plasma 行動的預先準備初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.prepare",
@@ -115,7 +113,6 @@
         "Name[ta]": "தயாராகிறது",
         "Name[tr]": "Hazırlan",
         "Name[uk]": "Приготування",
-        "Name[x-test]": "xxPreparexx",
         "Name[zh_CN]": "准备",
         "Name[zh_TW]": "準備",
         "Website": "https://kde.org"

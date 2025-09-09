@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av effektmeny för Plasma mobil",
         "Description[tr]": "Plasma Cep güç menüsü tez ayarı",
         "Description[uk]": "Швидке налаштовування меню живлення для Мобільної Плазми",
-        "Description[x-test]": "xxPower menu quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的电源菜单快捷设置",
         "Description[zh_TW]": "Plasma 行動的電源選單快速設定",
         "Icon": "system-shutdown-symbolic",
@@ -120,7 +118,6 @@
         "Name[ta]": "ஆற்றல் பட்டி",
         "Name[tr]": "Güç Menüsü",
         "Name[uk]": "Меню живлення",
-        "Name[x-test]": "xxPower Menuxx",
         "Name[zh_CN]": "电源菜单",
         "Name[zh_TW]": "電源選單",
         "Website": "https://kde.org"

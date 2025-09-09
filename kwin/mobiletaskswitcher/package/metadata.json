@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Låter dig byta mellan att köra aktiviteter med ett mobilgränssnitt.",
         "Description[tr]": "Bir taşınabilir arayüzden çalışan görevler arasında geçiş yapmanıza izin verir.",
         "Description[uk]": "Надає вам змогу перемикати запущені завдання за допомогою інтерфейсу для мобільних пристроїв.",
-        "Description[x-test]": "xxAllows you to switch between running tasks with a mobile interface.xx",
         "Description[zh_CN]": "允许您使用移动界面在正在运行的任务之间切换。",
         "Description[zh_TW]": "讓您用手機介面在執行中的工作項目之間切換。",
         "EnabledByDefault": false,
@@ -117,7 +115,6 @@
         "Name[ta]": "திறன்பேசி பணி மாற்றி",
         "Name[tr]": "Taşınabilir Görev Değiştiricisi",
         "Name[uk]": "Мобільний перемикач завдань",
-        "Name[x-test]": "xxMobile Task Switcherxx",
         "Name[zh_CN]": "移动任务切换",
         "Name[zh_TW]": "行動工作切換器"
     },

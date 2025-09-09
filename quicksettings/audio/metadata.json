@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av ljud för Plasma mobil",
         "Description[tr]": "Plasma Cep ses tez ayarı",
         "Description[uk]": "Швидке налаштовування звуку для Мобільної Плазми",
-        "Description[x-test]": "xxAudio quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的声音快捷设置",
         "Description[zh_TW]": "Plasma 行動的音效快速設定",
         "Icon": "audio-speakers-symbolic",
@@ -120,7 +118,6 @@
         "Name[ta]": "ஒலி",
         "Name[tr]": "Ses",
         "Name[uk]": "Звук",
-        "Name[x-test]": "xxAudioxx",
         "Name[zh_CN]": "声音",
         "Name[zh_TW]": "音效",
         "Website": "https://kde.org"
