@@ -59,59 +59,22 @@ Item {
         GridLayout {
             id: settingsOptions
             flow: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? GridLayout.LeftToRight : GridLayout.TopToBottom
+            uniformCellWidths: true
 
             anchors.centerIn: parent
 
-            PC3.ToolButton {
-                opacity: 0.9
-                implicitHeight: Kirigami.Units.gridUnit * 4
-                implicitWidth: Kirigami.Units.gridUnit * 5
-
-                contentItem: ColumnLayout {
-                    spacing: Kirigami.Units.largeSpacing
-
-                    Kirigami.Icon {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        source: 'edit-image'
-                    }
-
-                    QQC2.Label {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n("Wallpapers")
-                        font.bold: true
-                    }
-                }
-
+            SettingsButton {
+                iconName: 'edit-image'
+                textLabel: i18n("Wallpapers")
                 onClicked: {
                     homeScreen.wallpaperSelectorTriggered();
                     folio.HomeScreenState.closeSettingsView();
                 }
             }
 
-            PC3.ToolButton {
-                opacity: 0.9
-                implicitHeight: Kirigami.Units.gridUnit * 4
-                implicitWidth: Kirigami.Units.gridUnit * 5
-
-                contentItem: ColumnLayout {
-                    spacing: Kirigami.Units.largeSpacing
-
-                    Kirigami.Icon {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        source: 'settings-configure'
-                    }
-
-                    QQC2.Label {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n("Settings")
-                        font.bold: true
-                    }
-                }
-
+            SettingsButton {
+                iconName: 'settings-configure'
+                textLabel: i18n("Settings")
                 onClicked: {
                     // ensure that if the window is already opened, it gets raised to the top
                     settingsWindow.hide();
@@ -119,28 +82,9 @@ Item {
                 }
             }
 
-            PC3.ToolButton {
-                opacity: 0.9
-                implicitHeight: Kirigami.Units.gridUnit * 4
-                implicitWidth: Kirigami.Units.gridUnit * 5
-
-                contentItem: ColumnLayout {
-                    spacing: Kirigami.Units.largeSpacing
-
-                    Kirigami.Icon {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        source: 'widget-alternatives'
-                    }
-
-                    QQC2.Label {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n("Widgets")
-                        font.bold: true
-                    }
-                }
-
+            SettingsButton {
+                iconName: 'widget-alternatives'
+                textLabel: i18n("Widgets")
                 onClicked: {
                     appletListViewerLoader.active = true;
                 }

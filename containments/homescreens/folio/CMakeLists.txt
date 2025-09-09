@@ -65,6 +65,7 @@ ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
 
 ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
     qml/settings/AppletListViewer.qml
+    qml/settings/SettingsButton.qml
     qml/settings/SettingsComponent.qml
     qml/settings/SettingsWindow.qml
     PATH settings
