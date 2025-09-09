@@ -36,7 +36,6 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin"
             }
         ],
@@ -72,7 +71,6 @@
         "Description[sv]": "Överpanel för Plasma mobil",
         "Description[tr]": "Plasma Mobile için üst panel",
         "Description[uk]": "Верхня панель для мобільної Плазми",
-        "Description[x-test]": "xxTop panel for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的顶部面板",
         "Id": "org.kde.phone.panel",
         "License": "GPLv2+",
@@ -115,7 +113,6 @@
         "Name[sv]": "Telefonpanel",
         "Name[tr]": "Telefon Paneli",
         "Name[uk]": "Панель телефону",
-        "Name[x-test]": "xxPhone Panelxx",
         "Name[zh_CN]": "手机面板",
         "Name[zh_TW]": "手機面板",
         "ServiceTypes": [

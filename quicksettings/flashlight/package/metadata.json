@@ -36,7 +36,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
@@ -70,7 +69,6 @@
         "Description[sv]": "Snabbinställning av ficklampa för Plasma mobil",
         "Description[tr]": "Plasma Mobile el feneri tez ayarı",
         "Description[uk]": "Швидке налаштовування спалаху для Мобільної Плазми",
-        "Description[x-test]": "xxFlashlight quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的手电筒快捷设置",
         "Icon": "flashlight-on",
         "Id": "org.kde.plasma.quicksetting.flashlight",
@@ -109,7 +107,6 @@
         "Name[sv]": "Ficklampa",
         "Name[tr]": "El Feneri",
         "Name[uk]": "Спалах",
-        "Name[x-test]": "xxFlashlightxx",
         "Name[zh_CN]": "手电筒",
         "ServiceTypes": [
             "KPackage/GenericQML"

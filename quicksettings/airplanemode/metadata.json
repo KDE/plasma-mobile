@@ -36,7 +36,6 @@
                 "Name[sv]": "Bhushan Shah",
                 "Name[tr]": "Buşan Şah",
                 "Name[uk]": "Bhushan Shah",
-                "Name[x-test]": "xxBhushan Shahxx",
                 "Name[zh_CN]": "Bhushan Shah"
             }
         ],
@@ -70,7 +69,6 @@
         "Description[sv]": "Snabbinställning av flygplansläge för Plasma mobil",
         "Description[tr]": "Plasma Mobile uçak kipi tez ayarı",
         "Description[uk]": "Швидке встановлення режиму польоту для Мобільної Плазми",
-        "Description[x-test]": "xxAirplane mode quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的飞行模式快捷设置",
         "Icon": "network-flightmode-on",
         "Id": "org.kde.plasma.quicksetting.airplanemode",
@@ -111,7 +109,6 @@
         "Name[sv]": "Flygplansläge",
         "Name[tr]": "Uçak Kipi",
         "Name[uk]": "Режим польоту",
-        "Name[x-test]": "xxAirplane Modexx",
         "Name[zh_CN]": "飞行模式",
         "ServiceTypes": [
             "KPackage/GenericQML"

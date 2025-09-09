@@ -36,7 +36,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
@@ -73,7 +72,6 @@
         "Description[sv]": "Anpassa systemskalet",
         "Description[tr]": "Sistem kabuğunu yapılandır",
         "Description[uk]": "Налаштувати командну оболонку системи",
-        "Description[x-test]": "xxConfigure the system shellxx",
         "Description[zh_CN]": "配置系统外壳程序",
         "EnabledByDefault": true,
         "FormFactors": [
@@ -119,7 +117,6 @@
         "Name[sv]": "Skal",
         "Name[tr]": "Kabuk",
         "Name[uk]": "Оболонка",
-        "Name[x-test]": "xxShellxx",
         "Name[zh_CN]": "外壳程序",
         "ServiceTypes": [
             "KCModule"
@@ -155,7 +152,6 @@
     "X-KDE-Keywords[sv]": "system,skal,panel",
     "X-KDE-Keywords[tr]": "sistem,kabuk,panel",
     "X-KDE-Keywords[uk]": "system,shell,panel,система,оболонка,панель",
-    "X-KDE-Keywords[x-test]": "xxsystemxx,xxshellxx,xxpanelxx",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-System-Settings-Parent-Category": "personalization",
     "X-Plasma-MainScript": "ui/main.qml"

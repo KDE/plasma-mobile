@@ -35,7 +35,6 @@
                 "Name[sv]": "Aleix Pol i Gonzalez",
                 "Name[tr]": "Aleix Pol i Gonzalez",
                 "Name[uk]": "Aleix Pol i Gonzalez",
-                "Name[x-test]": "xxAleix Pol i Gonzalezxx",
                 "Name[zh_CN]": "Aleix Pol i Gonzalez"
             }
         ],
@@ -69,7 +68,6 @@
         "Description[sv]": "Snabbinställning av skärminspelning för Plasma mobil",
         "Description[tr]": "Plasma Mobile ekran kaydetme tez ayarı",
         "Description[uk]": "Швидке налаштовування запису з екрана для Мобільної Плазми",
-        "Description[x-test]": "xxScreen recording quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕录像快捷设置",
         "Icon": "media-record",
         "Id": "org.kde.plasma.quicksetting.record",
@@ -105,7 +103,6 @@
         "Name[sv]": "Spela in bildskärm",
         "Name[tr]": "Ekranı Kaydet",
         "Name[uk]": "Запис з екрана",
-        "Name[x-test]": "xxRecord Screenxx",
         "Name[zh_CN]": "屏幕录像",
         "ServiceTypes": [
             "KPackage/GenericQML"

@@ -36,7 +36,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
@@ -70,7 +69,6 @@
         "Description[sv]": "Snabbinställning av effektmeny för Plasma mobil",
         "Description[tr]": "Plasma Mobile güç menüsü tez ayarı",
         "Description[uk]": "Швидке налаштовування меню живлення для Мобільної Плазми",
-        "Description[x-test]": "xxPower menu quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的电源菜单快捷设置",
         "Icon": "system-shutdown-symbolic",
         "Id": "org.kde.plasma.quicksetting.powermenu",
@@ -109,7 +107,6 @@
         "Name[sv]": "Strömmeny",
         "Name[tr]": "Güç Menüsü",
         "Name[uk]": "Меню живлення",
-        "Name[x-test]": "xxPower Menuxx",
         "Name[zh_CN]": "电源菜单",
         "ServiceTypes": [
             "KPackage/GenericQML"

@@ -36,7 +36,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
@@ -70,7 +69,6 @@
         "Description[sv]": "Snabbinställning av plats för Plasma mobil",
         "Description[tr]": "Plasma Mobile konum tez ayarı",
         "Description[uk]": "Швидке налаштовування розташування для Мобільної Плазми",
-        "Description[x-test]": "xxLocation quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的位置信息快捷设置",
         "Icon": "network-modem",
         "Id": "org.kde.plasma.quicksetting.mobiledata",
@@ -109,7 +107,6 @@
         "Name[sv]": "Mobildata",
         "Name[tr]": "Taşınabilir Veri",
         "Name[uk]": "Мобільні дані",
-        "Name[x-test]": "xxMobile Dataxx",
         "Name[zh_CN]": "移动数据",
         "ServiceTypes": [
             "KPackage/GenericQML"

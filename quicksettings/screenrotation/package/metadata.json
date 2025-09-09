@@ -36,7 +36,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
@@ -70,7 +69,6 @@
         "Description[sv]": "Snabbinställning av skärmrotation för Plasma mobil",
         "Description[tr]": "Plasma Mobile ekran döndürme tez ayarı",
         "Description[uk]": "Швидке встановлення обертання екрана для Мобільної Плазми",
-        "Description[x-test]": "xxScreen rotation quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕旋转快捷设置",
         "Icon": "rotation-allowed",
         "Id": "org.kde.plasma.quicksetting.screenrotation",
@@ -109,7 +107,6 @@
         "Name[sv]": "Skärmrotation",
         "Name[tr]": "Ekran Döndürme",
         "Name[uk]": "Реалізовано обертання зображення на екрані",
-        "Name[x-test]": "xxScreen rotationxx",
         "Name[zh_CN]": "屏幕旋转",
         "ServiceTypes": [
             "KPackage/GenericQML"

@@ -36,7 +36,6 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin"
             }
         ],
@@ -72,7 +71,6 @@
         "Description[sv]": "Hemskärm för mobiler fokuserad på anpassningsbarhet.",
         "Description[tr]": "Özelleştirilebilirlik odaklı taşınabilir ana ekran.",
         "Description[uk]": "Домашня сторінка для мобільних пристроїв із акцентом на можливості налаштовування.",
-        "Description[x-test]": "xxMobile homescreen with a focus on customizability.xx",
         "Description[zh_CN]": "高可定制性的手机主屏幕方案。",
         "Id": "org.kde.phone.homescreen",
         "License": "GPLv2+",
@@ -106,7 +104,6 @@
         "Name[sv]": "Folio",
         "Name[tr]": "Folyo",
         "Name[uk]": "Фоліо",
-        "Name[x-test]": "xxFolioxx",
         "Name[zh_CN]": "Folio",
         "ServiceTypes": [
             "Plasma/Applet",

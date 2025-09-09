@@ -36,7 +36,6 @@
                 "Name[sv]": "Aleix Pol",
                 "Name[tr]": "Aleix Pol",
                 "Name[uk]": "Aleix Pol",
-                "Name[x-test]": "xxAleix Polxx",
                 "Name[zh_CN]": "Aleix Pol"
             }
         ],
@@ -70,7 +69,6 @@
         "Description[sv]": "Snabbinställning av nattfärg för Plasma mobil",
         "Description[tr]": "Plasma Mobile gece rengi tez ayarı",
         "Description[uk]": "Швидке налаштовування нічних кольорів для Мобільної Плазми",
-        "Description[x-test]": "xxNight color quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的夜间颜色快捷设置",
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.quicksetting.nightcolor",
@@ -111,7 +109,6 @@
         "Name[sv]": "Nattfärg",
         "Name[tr]": "Gece Rengi",
         "Name[uk]": "Нічні кольори",
-        "Name[x-test]": "xxNight Colorxx",
         "Name[zh_CN]": "夜间颜色",
         "ServiceTypes": [
             "KPackage/GenericQML"
