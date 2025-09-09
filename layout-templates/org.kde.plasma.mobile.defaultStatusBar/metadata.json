@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -75,7 +74,6 @@
         "Description[ta]": "கைபேசிக்கான இயல்பிருப்பு நிலைப்பட்டை",
         "Description[tr]": "Cep için öntanımlı durum çubuğu",
         "Description[uk]": "Типова смужка стану для мобільних",
-        "Description[x-test]": "xxDefault status bar for mobilexx",
         "Description[zh_CN]": "手机的默认状态栏",
         "Description[zh_TW]": "手機用的預設狀態列",
         "EnabledByDefault": true,
@@ -110,7 +108,6 @@
         "Name[sv]": "Mobil standardstatusrad",
         "Name[tr]": "Öntanımlı Taşınabilir Durum Çubuğu",
         "Name[uk]": "Типова смужка стану для мобільних",
-        "Name[x-test]": "xxDefault Mobile Status Barxx",
         "Name[zh_CN]": "默认手机状态栏",
         "Name[zh_TW]": "預設手機狀態列",
         "Website": "https://www.kde.org/plasma-desktop"

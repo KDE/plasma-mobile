@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av skärmbild för Plasma mobil",
         "Description[tr]": "Plasma Cep ekran görüntüsü tez ayarı",
         "Description[uk]": "Швидке встановлення знімка вікна для Мобільної Плазми",
-        "Description[x-test]": "xxScreenshot quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕截图快捷设置",
         "Description[zh_TW]": "Plasma 行動的螢幕截圖快速設定",
         "Icon": "spectacle",
@@ -120,7 +118,6 @@
         "Name[ta]": "திரைப்பிடிப்பு",
         "Name[tr]": "Ekran Görüntüsü",
         "Name[uk]": "Знімок вікна",
-        "Name[x-test]": "xxScreenshotxx",
         "Name[zh_CN]": "屏幕截图",
         "Name[zh_TW]": "螢幕截圖",
         "Website": "https://kde.org"

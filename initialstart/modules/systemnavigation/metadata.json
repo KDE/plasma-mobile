@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -70,7 +69,6 @@
         "Description[sv]": "Systemnavigeringens förstagångsstart för Plasma mobil",
         "Description[tr]": "Plasma Cep için sistem dolaşımı başlangıcı modülü",
         "Description[uk]": "Модуль навігації початкового запуску для мобільної Плазми",
-        "Description[x-test]": "xxSystem navigation initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的系统导航初始化模块",
         "Id": "org.kde.plasma.mobileinitialstart.systemnavigation",
         "License": "GPL-2.0+",
@@ -99,7 +97,6 @@
         "Name[sv]": "Systemnavigering",
         "Name[tr]": "Sistem Dolaşımı",
         "Name[uk]": "Навігація системою",
-        "Name[x-test]": "xxSystem Navigationxx",
         "Name[zh_CN]": "系统导航",
         "Website": "https://kde.org"
     }

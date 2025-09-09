@@ -38,7 +38,6 @@
                 "Name[sv]": "Bhushan Shah",
                 "Name[tr]": "Buşan Şah",
                 "Name[uk]": "Bhushan Shah",
-                "Name[x-test]": "xxBhushan Shahxx",
                 "Name[zh_CN]": "Bhushan Shah",
                 "Name[zh_TW]": "Bhushan Shah"
             }
@@ -77,7 +76,6 @@
         "Description[ta]": "மெய்நிகர் விசைப்பலகை அமைப்புகள்",
         "Description[tr]": "Ekran Klavyesi yapılandırması",
         "Description[uk]": "Налаштування екранної клавіатури",
-        "Description[x-test]": "xxOn-Screen Keyboard configurationxx",
         "Description[zh_CN]": "屏幕键盘配置",
         "Description[zh_TW]": "螢幕上的虛擬鍵盤設定",
         "FormFactors": [
@@ -120,7 +118,6 @@
         "Name[ta]": "திரை விசைப்பலகை",
         "Name[tr]": "Ekran Klavyesi",
         "Name[uk]": "Екранна клавіатура",
-        "Name[x-test]": "xxOn-Screen Keyboardxx",
         "Name[zh_CN]": "屏幕键盘",
         "Name[zh_TW]": "螢幕上的虛擬鍵盤",
         "Website": "https://plasma-mobile.org"
@@ -155,7 +152,6 @@
     "X-KDE-Keywords[sv]": "på skärmen,virtuellt tangentbord,tangentbord",
     "X-KDE-Keywords[tr]": "ekran üzeri,ekran,osk,osd,sanal klavye,klavye,düğme",
     "X-KDE-Keywords[uk]": "onscreen,osk,virtualkeyboard,keyboard,екранна,екран,клавіатура",
-    "X-KDE-Keywords[x-test]": "xxonscreenxx,xxoskxx,xxvirtualkeyboardxx,xxkeyboardxx",
     "X-KDE-Keywords[zh_CN]": "onscreen,osk,virtualkeyboard,keyboard,pingmujianpan,pingmujianpan,pingshangjianpan,xunijianpan,jianpan,屏幕键盘,屏幕显示,屏上键盘,虚拟键盘,键盘",
     "X-KDE-Keywords[zh_TW]": "螢幕上,虛擬鍵盤,小鍵盤",
     "X-KDE-System-Settings-Parent-Category": "input-devices"

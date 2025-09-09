@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av ficklampa för Plasma mobil",
         "Description[tr]": "Plasma Cep el feneri tez ayarı",
         "Description[uk]": "Швидке налаштовування спалаху для Мобільної Плазми",
-        "Description[x-test]": "xxFlashlight quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的手电筒快捷设置",
         "Description[zh_TW]": "Plasma 行動的手電筒快速設定",
         "Icon": "flashlight-on",
@@ -120,7 +118,6 @@
         "Name[ta]": "கைவிளக்கு",
         "Name[tr]": "El Feneri",
         "Name[uk]": "Спалах",
-        "Name[x-test]": "xxFlashlightxx",
         "Name[zh_CN]": "手电筒",
         "Name[zh_TW]": "手電筒",
         "Website": "https://kde.org"

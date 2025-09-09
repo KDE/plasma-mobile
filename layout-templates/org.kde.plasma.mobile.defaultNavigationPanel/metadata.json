@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -75,7 +74,6 @@
         "Description[ta]": "கைபேசிக்கான இயல்பிருப்பு உலாவல் பட்டை",
         "Description[tr]": "Cep için öntanımlı dolaşım paneli",
         "Description[uk]": "Типова панель навігації для мобільних",
-        "Description[x-test]": "xxDefault navigation panel for mobilexx",
         "Description[zh_CN]": "手机的默认导航面板",
         "Description[zh_TW]": "手機用的預設導覽面板",
         "EnabledByDefault": true,
@@ -110,7 +108,6 @@
         "Name[sv]": "Mobil standardnavigeringspanel",
         "Name[tr]": "Öntanımlı Taşınabilir Dolaşım Paneli",
         "Name[uk]": "Типова панель навігації для мобільних",
-        "Name[x-test]": "xxDefault Mobile Navigation Panelxx",
         "Name[zh_CN]": "默认手机导航面板",
         "Name[zh_TW]": "預設手機導覽面板",
         "Website": "https://www.kde.org/plasma-desktop"

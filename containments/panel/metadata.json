@@ -39,7 +39,6 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -79,7 +78,6 @@
         "Description[ta]": "பிளாஸ்மா கைபேசிக்கான மேலோரப் பலகை",
         "Description[tr]": "Plasma Cep için üst panel",
         "Description[uk]": "Верхня панель для мобільної Плазми",
-        "Description[x-test]": "xxTop panel for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的顶部面板",
         "Description[zh_TW]": "Plasma 行動的頂部面板",
         "License": "GPLv2+",
@@ -125,7 +123,6 @@
         "Name[ta]": "திறன்பேசி பலகை",
         "Name[tr]": "Telefon Paneli",
         "Name[uk]": "Панель телефону",
-        "Name[x-test]": "xxPhone Panelxx",
         "Name[zh_CN]": "手机面板",
         "Name[zh_TW]": "手機面板",
         "Website": "https://plasma-mobile.org"

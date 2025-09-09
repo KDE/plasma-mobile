@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av plats för Plasma mobil",
         "Description[tr]": "Plasma Cep konum tez ayarı",
         "Description[uk]": "Швидке налаштовування розташування для Мобільної Плазми",
-        "Description[x-test]": "xxLocation quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的位置信息快捷设置",
         "Description[zh_TW]": "Plasma 行動的地理位置快速設定",
         "Icon": "network-modem",
@@ -120,7 +118,6 @@
         "Name[ta]": "கைபேசி தரவு",
         "Name[tr]": "Taşınabilir Veri",
         "Name[uk]": "Мобільні дані",
-        "Name[x-test]": "xxMobile Dataxx",
         "Name[zh_CN]": "移动数据",
         "Name[zh_TW]": "行動資料",
         "Website": "https://kde.org"

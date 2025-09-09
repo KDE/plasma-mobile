@@ -36,7 +36,6 @@
                 "Name[sv]": "Yari Polla",
                 "Name[tr]": "Yari Polla",
                 "Name[uk]": "Yari Polla",
-                "Name[x-test]": "xxYari Pollaxx",
                 "Name[zh_CN]": "Yari Polla",
                 "Name[zh_TW]": "Yari Polla"
             }
@@ -74,7 +73,6 @@
         "Description[sv]": "Snabbinställning av accesspunkt för Plasma mobil",
         "Description[tr]": "Plasm Mobile erişim noktası tez ayarı",
         "Description[uk]": "Швидке налаштовування точки доступу для Мобільної Плазми",
-        "Description[x-test]": "xxHotspot quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的热点快捷设置",
         "Description[zh_TW]": "Plasma 行動的熱點快速設定",
         "Icon": "network-wireless-hotspot",
@@ -114,7 +112,6 @@
         "Name[ta]": "ஹாட்ஸ்பாட்",
         "Name[tr]": "Erişim Noktası",
         "Name[uk]": "Точка доступу",
-        "Name[x-test]": "xxHotspotxx",
         "Name[zh_CN]": "无线热点",
         "Name[zh_TW]": "熱點",
         "Website": "https://kde.org"

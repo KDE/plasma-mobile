@@ -38,7 +38,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -78,7 +77,6 @@
         "Description[sv]": "Anpassa systemskalet",
         "Description[tr]": "Sistem kabuğunu yapılandırın",
         "Description[uk]": "Налаштувати командну оболонку системи",
-        "Description[x-test]": "xxConfigure the system shellxx",
         "Description[zh_CN]": "配置系统外壳程序",
         "Description[zh_TW]": "設定系統殼層介面",
         "EnabledByDefault": true,
@@ -128,7 +126,6 @@
         "Name[ta]": "முனையம்",
         "Name[tr]": "Kabuk",
         "Name[uk]": "Оболонка",
-        "Name[x-test]": "xxShellxx",
         "Name[zh_CN]": "外壳程序",
         "Name[zh_TW]": "殼層",
         "Website": "https://plasma-mobile.org/"
@@ -167,7 +164,6 @@
     "X-KDE-Keywords[sv]": "system,skal,panel",
     "X-KDE-Keywords[tr]": "sistem,kabuk,panel",
     "X-KDE-Keywords[uk]": "system,shell,panel,система,оболонка,панель",
-    "X-KDE-Keywords[x-test]": "xxsystemxx,xxshellxx,xxpanelxx",
     "X-KDE-Keywords[zh_CN]": "system,shell,panel,xitong,waike,mianban,系统,外壳,系统外壳,外壳程序,系统外壳程序,面板,",
     "X-KDE-Keywords[zh_TW]": "系統,殼,啟動器,面板",
     "X-KDE-System-Settings-Parent-Category": "personalization"

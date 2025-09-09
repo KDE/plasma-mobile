@@ -24,7 +24,6 @@
                 "Name[sv]": "Florian RICHER",
                 "Name[tr]": "Florian RICHER",
                 "Name[uk]": "Florian RICHER",
-                "Name[x-test]": "xxFlorian RICHERxx",
                 "Name[zh_CN]": "Florian RICHER"
             }
         ],
@@ -48,7 +47,6 @@
         "Description[sv]": "Snabbinställning av Waydroid för Plasma mobil",
         "Description[tr]": "Plasma Cep Waydroid tez ayarı",
         "Description[uk]": "Швидке налаштовування Waydroid для Мобільної Плазми",
-        "Description[x-test]": "xxWaydroid quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的 Waydroid 快捷设置",
         "Icon": "folder-android-symbolic",
         "Id": "org.kde.plasma.quicksetting.waydroid",
@@ -73,7 +71,6 @@
         "Name[sv]": "Waydroid",
         "Name[tr]": "Waydroid",
         "Name[uk]": "Waydroid",
-        "Name[x-test]": "xxWaydroidxx",
         "Name[zh_CN]": "Waydroid",
         "Website": "https://kde.org"
     }

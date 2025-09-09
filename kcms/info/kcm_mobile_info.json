@@ -35,7 +35,6 @@
         "Description[ta]": "மென்பொருள் பதிப்புகள்",
         "Description[tr]": "Yazılım Sürümleri",
         "Description[uk]": "Версії програмного забезпечення",
-        "Description[x-test]": "xxSoftware Versionsxx",
         "Description[zh_CN]": "软件版本",
         "Description[zh_TW]": "軟體版本",
         "FormFactors": [
@@ -78,7 +77,6 @@
         "Name[ta]": "விவரங்கள்",
         "Name[tr]": "Bilgi",
         "Name[uk]": "Інформація",
-        "Name[x-test]": "xxInformationxx",
         "Name[zh_CN]": "信息",
         "Name[zh_TW]": "通知"
     },
@@ -113,7 +111,6 @@
     "X-KDE-Keywords[sv]": "information, distribution, system",
     "X-KDE-Keywords[tr]": "bilgi,dağıtım,distro,sistem",
     "X-KDE-Keywords[uk]": "info, distro, system, інфо, відомості, дистрибутив, система",
-    "X-KDE-Keywords[x-test]": "xxinfoxx,xx distroxx,xx systemxx",
     "X-KDE-Keywords[zh_CN]": "info, distro, system, xinxi, faxingban, xitong, 信息, 发行版, 系统",
     "X-KDE-Keywords[zh_TW]": "資訊,系統,發行版",
     "X-KDE-System-Settings-Parent-Category": "system-administration"

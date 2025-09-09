@@ -23,7 +23,6 @@
                 "Name[sv]": "Florian RICHER",
                 "Name[tr]": "Florian RICHER",
                 "Name[uk]": "Florian RICHER",
-                "Name[x-test]": "xxFlorian RICHERxx",
                 "Name[zh_CN]": "Florian RICHER"
             }
         ],
@@ -48,7 +47,6 @@
         "Description[sv]": "Inställning av Waydroid",
         "Description[tr]": "Waydroid yapılandırması",
         "Description[uk]": "Налаштовування Waydroid",
-        "Description[x-test]": "xxWaydroid configurationxx",
         "Description[zh_CN]": "Waydroid 配置",
         "EnabledByDefault": true,
         "FormFactors": [
@@ -78,7 +76,6 @@
         "Name[sv]": "Integrering av Waydroid",
         "Name[tr]": "Waydroid Tümleştirmesi",
         "Name[uk]": "Інтеграція з Waydroid",
-        "Name[x-test]": "xxWaydroid Integrationxx",
         "Name[zh_CN]": "Waydroid 集成",
         "Website": "https://plasma-mobile.org/"
     },
@@ -102,7 +99,6 @@
     "X-KDE-Keywords[sv]": "waydroid",
     "X-KDE-Keywords[tr]": "waydroid",
     "X-KDE-Keywords[uk]": "waydroid",
-    "X-KDE-Keywords[x-test]": "xxwaydroidxx",
     "X-KDE-Keywords[zh_CN]": "waydroid",
     "X-KDE-System-Settings-Parent-Category": "system-administration"
 }

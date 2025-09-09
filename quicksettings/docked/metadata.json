@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -76,7 +75,6 @@
         "Description[sv]": "Snabbinställning för att ändra dockat läge för Plasma mobil",
         "Description[tr]": "Plasma Cep için rıhtımlanmış kip aç/kapat tez ayarı",
         "Description[uk]": "Швидке встановлення швартованого режиму для Мобільної Плазми",
-        "Description[x-test]": "xxQuick setting to toggle docked mode for Plasma Mobilexx",
         "Description[zh_CN]": "快速设置以切换 Plasma Mobile 的停靠模式",
         "Description[zh_TW]": "Plasma 行動的基座模式切換快速設定",
         "Icon": "preferences-desktop-display-randr",
@@ -115,7 +113,6 @@
         "Name[sv]": "Dockat läge",
         "Name[tr]": "Rıhtımlanmış Kip",
         "Name[uk]": "Швартований режим",
-        "Name[x-test]": "xxDocked Modexx",
         "Name[zh_CN]": "停靠模式",
         "Name[zh_TW]": "基座模式",
         "Website": "https://kde.org"

@@ -39,7 +39,6 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx",
                 "Name[zh_CN]": "Devin Lin",
                 "Name[zh_TW]": "Devin Lin"
             }
@@ -76,7 +75,6 @@
         "Description[sv]": "WIFI förstagångsstart för Plasma mobil",
         "Description[tr]": "Plasma Cep için Wi-Fi başlangıç modülü",
         "Description[uk]": "Модуль WiFi початкового запуску для мобільної Плазми",
-        "Description[x-test]": "xxWiFi initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的 WiFi 模块初始化",
         "Description[zh_TW]": "Plasma 行動的 WiFi 初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.wifi",
@@ -116,7 +114,6 @@
         "Name[ta]": "அருகலை",
         "Name[tr]": "Wi-Fi",
         "Name[uk]": "WiFi",
-        "Name[x-test]": "xxWiFixx",
         "Name[zh_CN]": "WiFi",
         "Name[zh_TW]": "WiFi",
         "Website": "https://kde.org"

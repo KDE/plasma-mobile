@@ -23,7 +23,6 @@
                 "Name[sv]": "Sebastian Kügler",
                 "Name[tr]": "Sebastian Kügler",
                 "Name[uk]": "Sebastian Kügler",
-                "Name[x-test]": "xxSebastian Küglerxx",
                 "Name[zh_CN]": "Sebastian Kügler"
             }
         ],
@@ -45,7 +44,6 @@
         "Description[sv]": "Snabbinställning av meddelanden på bildskärm för Plasma mobil",
         "Description[tr]": "Plasma Cep ekran ayarları için tez ayar",
         "Description[uk]": "Параметри швидкого налаштовування екрана за допомогою панелі для Мобільної Плазми",
-        "Description[x-test]": "xxScreen setup OSD quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕设置 OSD 快捷设置",
         "Icon": "osd-duplicate",
         "Id": "org.kde.plasma.quicksetting.kscreenosd",
@@ -68,7 +66,6 @@
         "Name[sv]": "Meddelanden på bildskärm",
         "Name[tr]": "Ekran EÜG’si",
         "Name[uk]": "Екранна панель",
-        "Name[x-test]": "xxScreen OSDxx",
         "Name[zh_CN]": "屏幕 OSD",
         "Website": "https://kde.org"
     }

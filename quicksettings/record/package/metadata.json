@@ -39,7 +39,6 @@
                 "Name[sv]": "Aleix Pol i Gonzalez",
                 "Name[tr]": "Aleix Pol i Gonzalez",
                 "Name[uk]": "Aleix Pol i Gonzalez",
-                "Name[x-test]": "xxAleix Pol i Gonzalezxx",
                 "Name[zh_CN]": "Aleix Pol i Gonzalez",
                 "Name[zh_TW]": "Aleix Pol i Gonzalez"
             }
@@ -77,7 +76,6 @@
         "Description[sv]": "Snabbinställning av skärminspelning för Plasma mobil",
         "Description[tr]": "Plasma Cep ekran kaydetme tez ayarı",
         "Description[uk]": "Швидке налаштовування запису з екрана для Мобільної Плазми",
-        "Description[x-test]": "xxScreen recording quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕录像快捷设置",
         "Description[zh_TW]": "Plasma 行動的螢幕錄製快速設定",
         "Icon": "media-record",
@@ -118,7 +116,6 @@
         "Name[ta]": "திரையை பதிவு செய்வது",
         "Name[tr]": "Ekranı Kaydet",
         "Name[uk]": "Запис з екрана",
-        "Name[x-test]": "xxRecord Screenxx",
         "Name[zh_CN]": "屏幕录像",
         "Name[zh_TW]": "錄製螢幕",
         "Website": "https://kde.org"
