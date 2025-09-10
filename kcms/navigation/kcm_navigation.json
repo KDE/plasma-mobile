@@ -14,6 +14,7 @@
                 "Name[nl]": "Luis Büchi",
                 "Name[pt_BR]": "Luis Büchi",
                 "Name[sl]": "Luis Büchi",
+                "Name[sv]": "Luis Büchi",
                 "Name[tr]": "Luis Büchi",
                 "Name[uk]": "Luis Büchi"
             }
@@ -30,6 +31,7 @@
         "Description[nl]": "Systeemnavigatie configureren",
         "Description[pt_BR]": "Configurar sistema de navegação",
         "Description[sl]": "Konfiguriraj sistemsko navigacijo",
+        "Description[sv]": "Anpassa systemnavigering",
         "Description[tr]": "Sistem dolaşımını yapılandırın",
         "Description[uk]": "Налаштовування навігації системою",
         "EnabledByDefault": true,
@@ -52,6 +54,7 @@
         "Name[nl]": "Navigatie",
         "Name[pt_BR]": "Navegação",
         "Name[sl]": "Navigacija",
+        "Name[sv]": "Navigering",
         "Name[tr]": "Dolaşım",
         "Name[uk]": "Навігація",
         "Website": "https://plasma-mobile.org/"
@@ -67,6 +70,7 @@
     "X-KDE-Keywords[nl]": "systeem,shell,paneel,navigatie,gebaar",
     "X-KDE-Keywords[pt_BR]": "sistema,shell,painel,navegação,gestos",
     "X-KDE-Keywords[sl]": "sistem,shell,kontrolna plošča,navigacija,gesta",
+    "X-KDE-Keywords[sv]": "system,skal,panel,navigering,gest",
     "X-KDE-Keywords[tr]": "sistem,kabuk,panel,dolaşım,gezinme,dolaşma,hareket",
     "X-KDE-Keywords[uk]": "system,shell,panel,navigation,gesture,система,оболонка,панель,навігація,жест",
     "X-KDE-System-Settings-Parent-Category": "personalization"
