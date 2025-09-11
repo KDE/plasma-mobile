@@ -108,7 +108,7 @@ Item {
             property alias passwordBar: keypad.passwordBar
 
             // Speed up animation when passwordless
-            animationDuration: root.lockScreenState.canBeUnlocked ? 400 : 800
+            animationDuration: Kirigami.Units.veryLongDuration
 
             // Distance to swipe to fully open keypad
             keypadHeight: Kirigami.Units.gridUnit * 20

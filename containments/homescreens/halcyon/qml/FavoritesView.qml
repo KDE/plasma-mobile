@@ -155,7 +155,7 @@ Item {
         target: favoritesGrid
         properties: 'contentY'
         to: favoritesGrid.originY
-        duration: 200
+        duration: Kirigami.Units.longDuration
         easing.type: Easing.InOutQuad
     }
 
@@ -166,7 +166,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'openFolderProgress'
-                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
                 to: 1
                 easing.type: Easing.InOutQuad
             }
@@ -176,7 +176,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'openProgress'
-                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
                 to: 1
                 easing.type: Easing.InOutQuad
             }
@@ -190,7 +190,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'openProgress'
-                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
                 to: 0
                 easing.type: Easing.InOutQuad
             }
@@ -200,7 +200,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'openFolderProgress'
-                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
                 to: 0
                 easing.type: Easing.InOutQuad
             }

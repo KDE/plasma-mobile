@@ -220,7 +220,7 @@ Item {
                 property real zoomScale: control.pressed ? 0.95 : 1
                 Behavior on zoomScale {
                     NumberAnimation {
-                        duration: 200
+                        duration: Kirigami.Units.longDuration
                         easing.type: Easing.OutExpo
                     }
                 }

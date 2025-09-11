@@ -202,7 +202,7 @@ MobileShell.GridView {
                     id: folderAnim
                     target: appDelegate
                     properties: "dragFolderAnimationProgress"
-                    duration: 100
+                    duration: Kirigami.Units.shortDuration
                 }
             }
 

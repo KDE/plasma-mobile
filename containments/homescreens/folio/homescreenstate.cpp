@@ -37,10 +37,9 @@ HomeScreenState::HomeScreenState(HomeScreen *parent)
 
 void HomeScreenState::init()
 {
-    const int expoDuration = 800;
-    const int cubicDuration = 400;
+    const int animDuration = 400; // Kirigami.Units.veryLongDuration
 
-    m_openAppDrawerAnim = setupAnimation("appDrawerY", expoDuration, QEasingCurve::OutExpo, 0);
+    m_openAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutExpo, 0);
 
     connect(m_openAppDrawerAnim, &QPropertyAnimation::valueChanged, this, [this]() {
         // the animation runs too long to connect to QPropertyAnimation::finished
@@ -51,7 +50,7 @@ void HomeScreenState::init()
         }
     });
 
-    m_closeAppDrawerAnim = setupAnimation("appDrawerY", expoDuration, QEasingCurve::OutExpo, APP_DRAWER_OPEN_DIST);
+    m_closeAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutExpo, APP_DRAWER_OPEN_DIST);
 
     connect(m_closeAppDrawerAnim, &QPropertyAnimation::valueChanged, this, [this]() {
         // the animation runs too long to connect to QPropertyAnimation::finished
@@ -65,27 +64,27 @@ void HomeScreenState::init()
         }
     });
 
-    m_openSearchWidgetAnim = setupAnimation("searchWidgetY", cubicDuration, QEasingCurve::OutCubic, 0);
+    m_openSearchWidgetAnim = setupAnimation("searchWidgetY", animDuration, QEasingCurve::OutExpo, 0);
 
     connect(m_openSearchWidgetAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::SearchWidgetView);
     });
 
-    m_closeSearchWidgetAnim = setupAnimation("searchWidgetY", cubicDuration, QEasingCurve::OutCubic, SEARCH_WIDGET_OPEN_DIST);
+    m_closeSearchWidgetAnim = setupAnimation("searchWidgetY", animDuration, QEasingCurve::OutExpo, SEARCH_WIDGET_OPEN_DIST);
 
     connect(m_closeSearchWidgetAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::PageView);
     });
 
-    m_pageAnim = setupAnimation("pageViewX", cubicDuration, QEasingCurve::OutCubic, 0);
+    m_pageAnim = setupAnimation("pageViewX", animDuration, QEasingCurve::OutExpo, 0);
 
-    m_openFolderAnim = setupAnimation("folderOpenProgress", cubicDuration, QEasingCurve::OutCubic, 1.0);
+    m_openFolderAnim = setupAnimation("folderOpenProgress", animDuration, QEasingCurve::OutExpo, 1.0);
 
     connect(m_openFolderAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::FolderView);
     });
 
-    m_closeFolderAnim = setupAnimation("folderOpenProgress", cubicDuration, QEasingCurve::OutCubic, 0.0);
+    m_closeFolderAnim = setupAnimation("folderOpenProgress", animDuration, QEasingCurve::OutExpo, 0.0);
 
     connect(m_closeFolderAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::PageView);
@@ -97,15 +96,15 @@ void HomeScreenState::init()
         Q_EMIT leftCurrentFolder();
     });
 
-    m_folderPageAnim = setupAnimation("folderViewX", cubicDuration, QEasingCurve::OutCubic, 0);
+    m_folderPageAnim = setupAnimation("folderViewX", animDuration, QEasingCurve::OutExpo, 0);
 
-    m_openSettingsAnim = setupAnimation("settingsOpenProgress", cubicDuration, QEasingCurve::OutExpo, 1.0);
+    m_openSettingsAnim = setupAnimation("settingsOpenProgress", animDuration, QEasingCurve::OutExpo, 1.0);
 
     connect(m_openSettingsAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::SettingsView);
     });
 
-    m_closeSettingsAnim = setupAnimation("settingsOpenProgress", cubicDuration, QEasingCurve::InOutExpo, 0.0);
+    m_closeSettingsAnim = setupAnimation("settingsOpenProgress", animDuration, QEasingCurve::InOutExpo, 0.0);
 
     connect(m_closeSettingsAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::PageView);

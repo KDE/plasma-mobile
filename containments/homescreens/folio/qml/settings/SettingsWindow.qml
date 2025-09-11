@@ -46,7 +46,7 @@ Window {
 
         NumberAnimation on opacity {
             id: opacityAnim
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.OutCubic
             onFinished: {
                 if (applicationItem.opacity === 0) {

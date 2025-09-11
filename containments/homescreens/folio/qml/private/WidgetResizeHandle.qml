@@ -3,6 +3,8 @@
 
 import QtQuick
 
+import org.kde.kirigami as Kirigami
+
 import '../delegate'
 
 MouseArea {
@@ -84,7 +86,7 @@ MouseArea {
             property real scaleFactor: root.pressed ? 1.2 : 1.0
 
             Behavior on scaleFactor {
-                NumberAnimation { duration: 400; easing.type: Easing.OutExpo }
+                NumberAnimation { duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutExpo }
             }
 
             xScale: scaleFactor

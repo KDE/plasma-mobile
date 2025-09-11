@@ -17,7 +17,7 @@ Item {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 300
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }

@@ -37,7 +37,7 @@ Item {
     signal wallpaperSelectorTriggered()
 
     Behavior on settingsOpenFactor {
-        NumberAnimation { duration: 200 }
+        NumberAnimation { duration: Kirigami.Units.longDuration }
     }
 
     function triggerHomescreen() {

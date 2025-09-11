@@ -144,25 +144,25 @@ Item {
 
         NumberAnimation on width {
             id: widthAnim
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
 
         NumberAnimation on height {
             id: heightAnim
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
 
         NumberAnimation on x {
             id: xAnim
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
 
         NumberAnimation on y {
             id: yAnim
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }

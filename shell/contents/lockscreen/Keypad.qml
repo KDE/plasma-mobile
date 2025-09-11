@@ -126,7 +126,7 @@ Item {
             Layout.topMargin: keypadVerticalContainer.visible ? Kirigami.Units.gridUnit * 3 : 0
 
             Behavior on opacity {
-                NumberAnimation { duration: 200 }
+                NumberAnimation { duration: Kirigami.Units.shortDuration }
             }
         }
 

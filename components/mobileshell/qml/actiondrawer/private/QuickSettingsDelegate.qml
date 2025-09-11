@@ -45,7 +45,7 @@ MobileShell.BaseItem {
     property real zoomScale: 1
     Behavior on zoomScale {
         NumberAnimation {
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.OutExpo
         }
     }

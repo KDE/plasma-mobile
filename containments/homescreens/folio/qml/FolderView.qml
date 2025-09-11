@@ -194,13 +194,13 @@ Folio.DelegateTouchArea {
                         property double rowValue: model.rowIndex
                         property double pageValue: model.pageIndex
                         Behavior on columnValue {
-                            NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
+                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
                         }
                         Behavior on rowValue {
-                            NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
+                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
                         }
                         Behavior on pageValue {
-                            NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
+                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
                         }
 
                         // multiply the index values by the cell size to get the actual position

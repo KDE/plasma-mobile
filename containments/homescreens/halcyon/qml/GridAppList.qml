@@ -49,7 +49,7 @@ MobileShell.GridView {
     NumberAnimation on contentY {
         id: goToBeginningAnim
         to: gridView.originY
-        duration: 200
+        duration: Kirigami.Units.longDuration
         easing.type: Easing.InOutQuad
     }
 

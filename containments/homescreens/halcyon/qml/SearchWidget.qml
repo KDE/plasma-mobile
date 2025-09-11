@@ -112,7 +112,7 @@ Item {
 
         NumberAnimation on contentY {
             id: anim
-            duration: Kirigami.Units.longDuration * 2
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.OutQuad
             running: false
             onFinished: {

@@ -592,7 +592,7 @@ FocusScope {
             id: closeAnim
             running: false
             to: 0
-            duration: 200
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
 
             onFinished: {
@@ -609,7 +609,7 @@ FocusScope {
                 let baseOpacity = ((root.tasksCount === 0 && !root.taskSwitcherHelpers.currentlyBeingClosed) ? 0.9 : 0);
                 return root.taskSwitcherHelpers.gestureState == TaskSwitcherHelpers.GestureStates.TaskSwitcher ? baseOpacity : 0;
             }
-            Behavior on opacity { NumberAnimation { duration: 500 } }
+            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.veryLongDuration } }
 
             anchors.centerIn: container
 

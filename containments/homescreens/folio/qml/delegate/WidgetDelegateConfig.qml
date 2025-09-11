@@ -69,7 +69,7 @@ Item {
         // in case this gets stuck open over the homescreen, just close on tap
         onClicked: close()
 
-        NumberAnimation on opacity { id: configOverlayOpacityAnim; duration: 200 }
+        NumberAnimation on opacity { id: configOverlayOpacityAnim; duration: Kirigami.Units.longDuration }
 
         function open() {
             configOverlayOpacityAnim.to = 1;
@@ -135,7 +135,7 @@ Item {
         QQC2.Overlay.modal: Item {}
 
         exit: Transition {
-            NumberAnimation { property: "opacity"; duration: 200; from: 1.0; to: 0.0 }
+            NumberAnimation { property: "opacity"; duration: Kirigami.Units.longDuration; from: 1.0; to: 0.0 }
         }
 
         Connections {

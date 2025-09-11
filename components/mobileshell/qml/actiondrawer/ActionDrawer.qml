@@ -264,7 +264,9 @@ Item {
         SequentialAnimation {
             PropertyAnimation {
                 id: drawerAnimation
-                properties: "offset"; easing.type: Easing.OutExpo; duration: root.state != "" ? Kirigami.Units.veryLongDuration : 0
+                properties: "offset"
+                easing.type: Easing.OutExpo
+                duration: root.state != "" ? Kirigami.Units.veryLongDuration : 0
             }
             ScriptAction {
                 script: {

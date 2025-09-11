@@ -65,7 +65,7 @@ MouseArea {
             // get the normalized index position value from the center so we can animate it
             property double fromCenterValue: model.index - (repeater.count / 2)
             Behavior on fromCenterValue {
-                NumberAnimation { duration: 250; easing.type: Easing.InOutQuad; }
+                NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; }
             }
 
             // multiply the 'fromCenterValue' by the cell size to get the actual position

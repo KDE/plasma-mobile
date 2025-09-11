@@ -73,12 +73,12 @@ Item {
                 SequentialAnimation {
                     id: openAnimComplex
 
-                    // slight pause to give slower devices time to catch up when the item becomes visible
-                    PauseAnimation { duration: 20 }
+                    // pause for background color to catch up
+                    PauseAnimation { duration: 1 }
 
                     ParallelAnimation {
                         id: parallelAnim
-                        property real animationDuration: Kirigami.Units.longDuration + Kirigami.Units.shortDuration
+                        property real animationDuration: Kirigami.Units.longDuration
 
                         ScaleAnimator {
                             target: background
