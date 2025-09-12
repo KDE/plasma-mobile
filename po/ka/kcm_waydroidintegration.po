@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 06:15+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -70,11 +70,6 @@ msgstr ""
 "მიმდინარეობს Waydroid-ის სესიის გაშვება.\n"
 "ამას რამდენიმე წამი შეიძლება, დასჭირდეს."
 
-#: ui/main.qml:121
-#, kde-format
-msgid "Go back"
-msgstr "უკან გადასვლა"
-
 #: ui/WaydroidApplicationsPage.qml:25
 #, kde-format
 msgid "Waydroid applications"
@@ -86,12 +81,12 @@ msgctxt "@action:button"
 msgid "Install APK"
 msgstr "APK-ის დაყენება"
 
-#: ui/WaydroidApplicationsPage.qml:59
+#: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must selected local file"
 msgstr "უნდა აირჩიოთ ლოკალური ფაილი"
 
-#: ui/WaydroidApplicationsPage.qml:99
+#: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
@@ -231,7 +226,7 @@ msgstr ""
 "მიმდინარეობს თქვენი Android ID-ის მიღება.\n"
 "ამას რამდენიმე წამი შეიძლება, დასჭირდეს."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
 msgid ""
 "When launching waydroid with GAPPS for the first time you will be notified "
@@ -245,7 +240,7 @@ msgstr ""
 "მიეცით Google-ის სერვისებს რამდენიმე წუთი, რომ ცვლილებები აისახოს და "
 "გადატვირთეთ Waydroid."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
@@ -265,3 +260,6 @@ msgstr "სისტემის ტიპი"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "Waydroid-ის მორგება"
+
+#~ msgid "Go back"
+#~ msgstr "უკან გადასვლა"

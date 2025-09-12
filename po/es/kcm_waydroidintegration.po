@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 18:25+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -71,11 +71,6 @@ msgstr ""
 "La sesión de Waydroid se está iniciando.\n"
 "Puede tardar unos segundos."
 
-#: ui/main.qml:121
-#, kde-format
-msgid "Go back"
-msgstr "Volver"
-
 #: ui/WaydroidApplicationsPage.qml:25
 #, kde-format
 msgid "Waydroid applications"
@@ -87,12 +82,12 @@ msgctxt "@action:button"
 msgid "Install APK"
 msgstr "Instalar APK"
 
-#: ui/WaydroidApplicationsPage.qml:59
+#: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must selected local file"
 msgstr "Debe seleccionar un archivo local"
 
-#: ui/WaydroidApplicationsPage.qml:99
+#: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
@@ -232,7 +227,7 @@ msgstr ""
 "Extrayendo su ID de Android.\n"
 "Puede tardar unos segundos."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
 msgid ""
 "When launching waydroid with GAPPS for the first time you will be notified "
@@ -246,7 +241,7 @@ msgstr ""
 "sitio web. A continuación, espere unos minutos para que los servicios de "
 "Google reflejen el cambio y reinicie Waydroid."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
@@ -266,3 +261,6 @@ msgstr "Tipo de sistema"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "Configurar Waydroid"
+
+#~ msgid "Go back"
+#~ msgstr "Volver"

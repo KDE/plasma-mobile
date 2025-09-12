@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 13:55+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -80,29 +80,29 @@ msgstr "אישור מחיקת תיקייה"
 msgid "Are you sure you want to delete this folder?"
 msgstr "למחוק את התיקייה הזאת?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "וידג׳טים"
 
-#: qml/settings/AppletListViewer.qml:83
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr "הורדת וידג׳טים חדשים…"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "הורדת וידג׳טים חדשים…"
 
-#: qml/settings/SettingsComponent.qml:82
+#: qml/settings/SettingsComponent.qml:68
 #, kde-format
 msgid "Wallpapers"
 msgstr "תמונת רקע"
 
-#: qml/settings/SettingsComponent.qml:110
+#: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
 msgstr "הגדרות"

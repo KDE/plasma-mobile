@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-04-17 15:56+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -82,31 +82,31 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "Græjur"
 
-#: qml/settings/AppletListViewer.qml:83
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr ""
 
-#: qml/settings/SettingsComponent.qml:82
+#: qml/settings/SettingsComponent.qml:68
 #, fuzzy, kde-format
 #| msgctxt "@title:group settings group"
 #| msgid "Wallpaper"
 msgid "Wallpapers"
 msgstr "Veggfóður"
 
-#: qml/settings/SettingsComponent.qml:110
+#: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
 msgstr ""

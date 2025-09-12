@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -70,11 +70,6 @@ msgstr ""
 "Waydroid 会话正在启动。\n"
 "可能需要几秒钟。"
 
-#: ui/main.qml:121
-#, kde-format
-msgid "Go back"
-msgstr "返回"
-
 #: ui/WaydroidApplicationsPage.qml:25
 #, kde-format
 msgid "Waydroid applications"
@@ -86,12 +81,12 @@ msgctxt "@action:button"
 msgid "Install APK"
 msgstr "安装 APK"
 
-#: ui/WaydroidApplicationsPage.qml:59
+#: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must selected local file"
 msgstr "您必须选择本地文件"
 
-#: ui/WaydroidApplicationsPage.qml:99
+#: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
@@ -226,7 +221,7 @@ msgstr ""
 "我们正在获取您的 Android ID。\n"
 "可能需要几秒钟。"
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
 msgid ""
 "When launching waydroid with GAPPS for the first time you will be notified "
@@ -238,7 +233,7 @@ msgstr ""
 "Protect 认证。要自行认证设备，请将 Android ID 粘贴到网站中的相应输入框。然"
 "后，给 Google 服务几分钟时间来反映更改，并重新启动 Waydroid。"
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
@@ -258,3 +253,6 @@ msgstr "系统类型"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "配置 waydroid"
+
+#~ msgid "Go back"
+#~ msgstr "返回"

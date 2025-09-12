@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-20 20:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -70,11 +70,6 @@ msgstr ""
 "جلسة ويدرويد تعمل.\n"
 "قد تأخذ بعض الوقت."
 
-#: ui/main.qml:121
-#, kde-format
-msgid "Go back"
-msgstr "عُد"
-
 #: ui/WaydroidApplicationsPage.qml:25
 #, kde-format
 msgid "Waydroid applications"
@@ -86,12 +81,12 @@ msgctxt "@action:button"
 msgid "Install APK"
 msgstr "ثبّت APK"
 
-#: ui/WaydroidApplicationsPage.qml:59
+#: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must selected local file"
 msgstr "يجب عليك تحديد ملف محلي"
 
-#: ui/WaydroidApplicationsPage.qml:99
+#: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
@@ -228,7 +223,7 @@ msgstr ""
 "نقوم بجلب معرف الأندرويد الخاص بك.\n"
 "قد يستغرق الأمر بضع ثوانٍ."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
 msgid ""
 "When launching waydroid with GAPPS for the first time you will be notified "
@@ -241,7 +236,7 @@ msgstr ""
 "الموقع الإلكتروني. بعد ذلك، امنح خدمات غوغل بعض الدقائق لتعكس التغيير وأعد "
 "تشغيل ويدرويد."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
@@ -261,3 +256,6 @@ msgstr "نوع النظام"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "اضبط ويدرويد"
+
+#~ msgid "Go back"
+#~ msgstr "عُد"

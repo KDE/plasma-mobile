@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-23 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 06:16+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -80,29 +80,29 @@ msgstr "დაადასტურეთ საქაღალდის წა�
 msgid "Are you sure you want to delete this folder?"
 msgstr "მართლა გნებავთ, წაშალოთ ეს საქაღალდე?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:139
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "ვიჯეტები"
 
-#: qml/settings/AppletListViewer.qml:83
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr "ახალი ვიჯეტების მიღება…"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "ახალი ვიჯეტების მიღება…"
 
-#: qml/settings/SettingsComponent.qml:82
+#: qml/settings/SettingsComponent.qml:68
 #, kde-format
 msgid "Wallpapers"
 msgstr "ფონის სურათები"
 
-#: qml/settings/SettingsComponent.qml:110
+#: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
 msgstr "მორგება"

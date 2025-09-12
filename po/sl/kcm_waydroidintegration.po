@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 07:03+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -67,11 +67,6 @@ msgstr ""
 "Seja Waydroid se začenja.\n"
 "Lahko traja nekaj sekund."
 
-#: ui/main.qml:121
-#, kde-format
-msgid "Go back"
-msgstr "Pojdi nazaj"
-
 #: ui/WaydroidApplicationsPage.qml:25
 #, kde-format
 msgid "Waydroid applications"
@@ -83,12 +78,12 @@ msgctxt "@action:button"
 msgid "Install APK"
 msgstr "Namesti APK"
 
-#: ui/WaydroidApplicationsPage.qml:59
+#: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must selected local file"
 msgstr "Izbrati morate lokalno datoteko"
 
-#: ui/WaydroidApplicationsPage.qml:99
+#: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
@@ -228,7 +223,7 @@ msgstr ""
 "Pridobivamo vaš Androidov ID.\n"
 "To lahko traja nekaj sekund."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:46
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
 msgid ""
 "When launching waydroid with GAPPS for the first time you will be notified "
@@ -242,7 +237,7 @@ msgstr ""
 "počakajte nekaj minut, da Googlove storitve upoštevajo spremembo, in znova "
 "zaženite waydroid."
 
-#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:51
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
@@ -262,3 +257,6 @@ msgstr "Vrsta sistema"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "Konfiguriraj Waydroid"
+
+#~ msgid "Go back"
+#~ msgstr "Pojdi nazaj"

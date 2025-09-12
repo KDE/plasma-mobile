@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.waydroid\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-07-14 01:38+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -25,13 +25,19 @@ msgctxt "@action:button"
 msgid "Waydroid"
 msgstr "Waydroid"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:37
+#, kde-format
+msgctxt "@info:status"
+msgid "Not initialized"
+msgstr ""
+
+#: contents/ui/main.qml:39
 #, kde-format
 msgctxt "@info:status"
 msgid "Running"
 msgstr "En ejecución"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:41
 #, kde-format
 msgctxt "@info:status"
 msgid "Stopped"

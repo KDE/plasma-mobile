@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-13 00:44+0000\n"
+"POT-Creation-Date: 2025-09-12 00:45+0000\n"
 "PO-Revision-Date: 2025-07-21 01:16+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -23,13 +23,19 @@ msgctxt "@action:button"
 msgid "Waydroid"
 msgstr "Waydroid"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:37
+#, kde-format
+msgctxt "@info:status"
+msgid "Not initialized"
+msgstr ""
+
+#: contents/ui/main.qml:39
 #, kde-format
 msgctxt "@info:status"
 msgid "Running"
 msgstr "실행 중"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:41
 #, kde-format
 msgctxt "@info:status"
 msgid "Stopped"
