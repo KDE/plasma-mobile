@@ -19,14 +19,14 @@ import org.kde.plasma.private.mobileshell as MobileShell
 QtObject {
     id: component
 
-    function showVolumeOverlay() {
-        if (!osd.visible) {
-            vcp.showOverlay();
-        }
-    }
+    property var osdListener: Connections {
+        target: MobileShellState.VolumeOSDListener
 
-    Component.onCompleted: {
-        MobileShell.AudioInfo.volumeChanged.connect(showVolumeOverlay);
+        function onShowOSD(icon, volume, maxVolume) {
+            if (!osd.visible) {
+                vcp.showOverlay();
+            }
+        }
     }
 
     property var apiListener: Connections {

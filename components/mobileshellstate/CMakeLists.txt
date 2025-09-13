@@ -7,6 +7,7 @@ set(mobileshellstateplugin_SRCS
     lockscreendbusclient.cpp
     startupfeedbackmodel.cpp
     windowlistener.cpp
+    volumeosdlistener.cpp
 )
 
 qt_generate_dbus_interface(

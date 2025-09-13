@@ -6,6 +6,7 @@ pragma Singleton
 import QtQuick
 
 import org.kde.plasma.private.volume
+import org.kde.plasma.private.mobileshell as MobileShell
 
 QtObject {
     id: root
@@ -100,21 +101,16 @@ QtObject {
         return icon;
     }
 
-    // emitted when the volume changed, but not due to sink switching
-    signal volumeChanged()
-
     property var updateVolume: Connections {
         target: root.paSinkModel ? (PreferredDevice.sink ? PreferredDevice.sink : null) : null
         enabled: target !== null
 
         function onVolumeChanged() {
             root.volumeValue = root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
-            root.volumeChanged();
         }
 
         function onMutedChanged() {
             root.volumeValue = PreferredDevice.sink.muted ? 0 : root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
-            root.volumeChanged();
         }
     }
 
