@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-12 00:45+0000\n"
-"PO-Revision-Date: 2025-08-20 17:34+0300\n"
+"PO-Revision-Date: 2025-09-03 18:31+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -38,18 +38,17 @@ msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
+"Ladataan Android- ja valmistajakuvia.\n"
+"Voi kestää joitakin minuutteja."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid-istunto käynnistyy.\n"
-"Tämä voi kestää pari sekuntia."
+"Waydroidia palautetaan.\n"
+"Voi kestää joitakin sekunteja."
 
 #: ui/main.qml:76
 #, kde-format
@@ -105,7 +104,7 @@ msgstr "IP-osoite"
 #: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopioi"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
@@ -133,17 +132,15 @@ msgid "Installed applications"
 msgstr "Asennetut sovellukset"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Waydroidin asetukset"
+msgstr "Palauta Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Waydroidin asetukset"
+msgstr "Vahvista Waydroidin palauttaminen"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -151,6 +148,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Haluatko varmasti palauttaa Waydroidin alkutilaan? Toimenpide poistaa kaikki "
+"käyttäjätiedot."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
@@ -199,17 +198,17 @@ msgstr "Salli Androidin suora pääsy ajonaikaiskytkettyihin laitteisiin"
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "Ladataan %1 Mt/%2 Mt  Nopeus %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1 Mt/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1 kt/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

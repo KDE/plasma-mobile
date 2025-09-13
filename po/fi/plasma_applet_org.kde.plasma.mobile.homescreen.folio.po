@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-12 00:45+0000\n"
-"PO-Revision-Date: 2025-07-13 18:01+0300\n"
+"PO-Revision-Date: 2025-09-03 18:32+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -31,34 +31,32 @@ msgstr "Etsi sovelluksia…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Tätä sovelmaa ei löytynyt."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Asetukset…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Valinnat"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Sovelmat"
+msgstr "Sovelman valinnat"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Poista"
+msgstr "Poista sovelma"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Sovelman asetukset"
 
 #: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
 #: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
@@ -69,17 +67,17 @@ msgstr "Poista"
 #: qml/HomeScreenPage.qml:377
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Aseta vapauttamalla, siirrä vetämällä"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Vahvista kansion poistaminen"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa tämän kansion?"
 
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
 #, kde-format
@@ -99,16 +97,14 @@ msgid "Get New Widgets…"
 msgstr "Hae uusia sovelmia…"
 
 #: qml/settings/SettingsComponent.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Taustakuva"
+msgstr "Taustakuvat"
 
 #: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Asetukset"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -121,11 +117,9 @@ msgid "Icons"
 msgstr "Kuvakkeet"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Etsi sovelluksia…"
+msgstr "Sovellus"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -210,7 +204,7 @@ msgstr "Suosikkirivi"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Näytä tausta"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -253,14 +247,12 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "Kotinäyttövaihto ja lisää taustakuvavalintoja"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
 msgstr "Vie asettelu"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
 msgstr "Tuo asettelu"
 

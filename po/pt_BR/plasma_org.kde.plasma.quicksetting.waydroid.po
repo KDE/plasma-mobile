@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-12 00:45+0000\n"
-"PO-Revision-Date: 2025-08-03 10:26-0300\n"
+"PO-Revision-Date: 2025-09-12 06:51-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
@@ -27,7 +27,7 @@ msgstr "Waydroid"
 #, kde-format
 msgctxt "@info:status"
 msgid "Not initialized"
-msgstr ""
+msgstr "Não inicializado"
 
 #: contents/ui/main.qml:39
 #, kde-format
