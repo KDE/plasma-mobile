@@ -18,6 +18,7 @@ target_link_libraries(hapticsplugin PRIVATE
     KF6::CoreAddons
     KF6::I18n
     QCoro::DBus
+    QCoro::Qml
 )
 
 ecm_finalize_qml_module(hapticsplugin)

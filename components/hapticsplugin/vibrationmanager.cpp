@@ -10,7 +10,7 @@ VibrationManager::VibrationManager(QObject *parent)
     qDBusRegisterMetaType<VibrationEventList>();
 }
 
-QCoro::Task<void> VibrationManager::vibrate(int durationMs)
+QCoro::Task<void> VibrationManager::vibrateTask(int durationMs)
 {
     // Only create interface when needed.
     if (!m_interface) {
@@ -26,4 +26,9 @@ QCoro::Task<void> VibrationManager::vibrate(int durationMs)
     if (!reply.isValid() || !reply.value()) {
         qWarning() << "feedbackd vibration failed";
     }
+}
+
+QCoro::QmlTask VibrationManager::vibrate(int durationMs)
+{
+    return vibrateTask(durationMs);
 }
