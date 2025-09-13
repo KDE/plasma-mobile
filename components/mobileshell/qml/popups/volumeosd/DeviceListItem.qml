@@ -11,25 +11,24 @@ import org.kde.plasma.private.volume 0.1
 
 // adapted from https://invent.kde.org/plasma/plasma-pa/-/blob/master/applet/contents/ui/DeviceListItem.qml
 ListItemBase {
-    readonly property var currentPort: Ports[ActivePortIndex]
-    readonly property var currentActivePortIndex: ActivePortIndex
-    readonly property var currentMuted: Muted
-    readonly property var activePortIndex: ActivePortIndex
-    property bool onlyone: false
+    readonly property var currentPort: model.Ports[model.ActivePortIndex]
+    readonly property var currentActivePortIndex: model.ActivePortIndex
+    readonly property var currentMuted: model.Muted
+    readonly property var activePortIndex: model.ActivePortIndex
 
     label: {
         if (currentPort && currentPort.description) {
-            if (onlyone || !Description) {
+            if (onlyOne || !model.Description) {
                 return currentPort.description;
             } else {
-                return i18nc("label of device items", "%1 (%2)", currentPort.description, Description);
+                return i18nc("label of device items", "%1 (%2)", currentPort.description, model.Description);
             }
         }
-        if (Description) {
-            return Description;
+        if (model.Description) {
+            return model.Description;
         }
-        if (Name) {
-            return Name;
+        if (model.Name) {
+            return model.Name;
         }
         return i18n("Device name not found");
     }

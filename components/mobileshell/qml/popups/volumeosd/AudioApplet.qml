@@ -27,53 +27,68 @@ ColumnLayout {
 
     property real scale: 1.0
 
-    PulseObjectFilterModel {
-        id: paSinkFilterModel
-        sortRoleName: "SortByDefault"
-        sortOrder: Qt.DescendingOrder
-        filterOutInactiveDevices: true
-        sourceModel: MobileShell.AudioInfo.paSinkModel
-    }
+    // Input devices
+    readonly property SourceModel paSourceModel: SourceModel { id: paSourceModel }
 
-    SourceModel {
-        id: paSourceModel
-    }
+    // Output devices
+    readonly property SinkModel paSinkModel: SinkModel { id: paSinkModel }
 
-    PulseObjectFilterModel {
+    // Confusingly, Sink Input is what PulseAudio calls streams that send audio to an output device
+    readonly property SinkInputModel paSinkInputModel: SinkInputModel { id: paSinkInputModel }
+
+    // Confusingly, Source Output is what PulseAudio calls streams that take audio from an input device
+    readonly property SourceOutputModel paSourceOutputModel: SourceOutputModel { id: paSourceOutputModel }
+
+    // Active input devices
+    readonly property PulseObjectFilterModel paSourceFilterModel: PulseObjectFilterModel {
         id: paSourceFilterModel
-        sortRoleName: "SortByDefault"
-        sortOrder: Qt.DescendingOrder
         filterOutInactiveDevices: true
+        filterVirtualDevices: true
         sourceModel: paSourceModel
     }
 
-    CardModel {
-        id: paCardModel
+    // Active output devices
+    readonly property PulseObjectFilterModel paSinkFilterModel: PulseObjectFilterModel {
+        id: paSinkFilterModel
+        filterOutInactiveDevices: true
+        filterVirtualDevices: true
+        sourceModel: paSinkModel
     }
 
-    // ui elements
+    // non-virtual streams going to output devices
+    readonly property PulseObjectFilterModel paSinkInputFilterModel: PulseObjectFilterModel {
+        id: paSinkInputFilterModel
+        filters: [
+            { role: "VirtualStream", value: false },
+            { role: "Client", value: (client) => client.name !== "libcanberra" },
+        ]
+        sourceModel: paSinkInputModel
+    }
+
+    // non-virtual streams coming from input devices
+    readonly property PulseObjectFilterModel paSourceOutputFilterModel: PulseObjectFilterModel {
+        id: paSourceOutputFilterModel
+        filters: [ { role: "VirtualStream", value: false } ]
+        sourceModel: paSourceOutputModel
+    }
+
+    readonly property CardModel paCardModel: CardModel { id: paCardModel }
+
+    // UI elements
 
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
-
-        transform: Scale {
-            origin.x: Math.round(implicitWidth / 2)
-            origin.y: Math.round(height / 2)
-            xScale: audioApplet.scale
-            yScale: audioApplet.scale
-        }
+        scaleFactor: audioApplet.scale
 
         contentItem: ColumnLayout {
-            anchors.rightMargin: Kirigami.Units.smallSpacing
-            anchors.leftMargin: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             Kirigami.Heading {
                 level: 2
-                text: i18n("Outputs")
+                text: i18n("Output Devices")
+                wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
 
             Repeater {
@@ -83,9 +98,8 @@ ColumnLayout {
                 model: paSinkFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.smallSpacing
                     type: "sink"
-                    onlyone: sinkView.count === 1
+                    onlyOne: sinkView.count === 1
                 }
             }
         }
@@ -94,24 +108,16 @@ ColumnLayout {
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
-
-        transform: Scale {
-            origin.x: Math.round(implicitWidth / 2)
-            origin.y: Math.round(height / 2)
-            xScale: audioApplet.scale
-            yScale: audioApplet.scale
-        }
+        scaleFactor: audioApplet.scale
 
         contentItem: ColumnLayout {
-            anchors.rightMargin: Kirigami.Units.smallSpacing
-            anchors.leftMargin: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             Kirigami.Heading {
                 level: 2
-                text: i18n("Inputs")
+                text: i18n("Input Devices")
+                wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
 
             Repeater {
@@ -121,38 +127,30 @@ ColumnLayout {
                 model: paSourceFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.smallSpacing
                     type: "source"
-                    onlyone: sinkView.count === 1
+                    onlyOne: sourceView.count === 1
                 }
             }
         }
     }
 
     PopupCard {
-        visible: sourceInputView.model.count + sourceMediaInputView.model.count !== 0
+        visible: (sourceMediaInputView.count + sourceInputView.count) > 0
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
-
-        transform: Scale {
-            origin.x: Math.round(implicitWidth / 2)
-            origin.y: Math.round(height / 2)
-            xScale: audioApplet.scale
-            yScale: audioApplet.scale
-        }
+        scaleFactor: audioApplet.scale
 
         contentItem: ColumnLayout {
-            anchors.rightMargin: Kirigami.Units.smallSpacing
-            anchors.leftMargin: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             Kirigami.Heading {
                 level: 2
                 text: i18n("Playback Streams")
+                wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
 
+            // "Grouped" media sources (ex. Notifications)
             Repeater {
                 id: sourceMediaInputView
                 Layout.fillWidth: true
@@ -166,25 +164,22 @@ ColumnLayout {
                     Layout.margins: Kirigami.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "sink-input"
-                    devicesModel: sourceView.model
+                    devicesModel: paSinkFilterModel
                 }
             }
 
+            // Regular playback streams
             Repeater {
                 id: sourceInputView
                 Layout.fillWidth: true
 
-                model: PulseObjectFilterModel {
-                    filters: [ { role: "VirtualStream", value: false } ]
-                    sourceModel: SinkInputModel {}
-                }
+                model: paSinkInputFilterModel
 
                 delegate: StreamListItem {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "sink-input"
-                    devicesModel: sourceView.model
+                    devicesModel: paSinkFilterModel
                 }
             }
         }
@@ -194,40 +189,29 @@ ColumnLayout {
         visible: sourceOutputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
-
-        transform: Scale {
-            origin.x: Math.round(implicitWidth / 2)
-            origin.y: Math.round(height / 2)
-            xScale: audioApplet.scale
-            yScale: audioApplet.scale
-        }
+        scaleFactor: audioApplet.scale
 
         contentItem: ColumnLayout {
-            anchors.rightMargin: Kirigami.Units.smallSpacing
-            anchors.leftMargin: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             Kirigami.Heading {
                 level: 2
                 text: i18n("Recording Streams")
+                wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
 
             Repeater {
                 id: sourceOutputView
                 Layout.fillWidth: true
 
-                model: PulseObjectFilterModel {
-                    filters: [ { role: "VirtualStream", value: false } ]
-                    sourceModel: SourceOutputModel {}
-                }
+                model: paSourceOutputFilterModel
+
                 delegate: StreamListItem {
                     Layout.fillWidth: true
-                    Layout.margins: Kirigami.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "source-output"
-                    devicesModel: sourceView.model
+                    devicesModel: paSourceFilterModel
                 }
             }
         }

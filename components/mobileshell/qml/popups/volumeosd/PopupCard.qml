@@ -18,13 +18,21 @@ import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 
-// capture presses on the audio applet so it doesn't close the overlay
 Controls.Control {
     id: content
-    implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, Screen.width - Kirigami.Units.gridUnit * 2)
-    padding: Kirigami.Units.smallSpacing * 2
 
     property bool popupBackground: false
+    property real scaleFactor: 1.0
+
+    implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, Screen.width - Kirigami.Units.gridUnit * 2)
+    padding: Kirigami.Units.largeSpacing
+
+    transform: Scale {
+        origin.x: Math.round(implicitWidth / 2)
+        origin.y: Math.round(height / 2)
+        xScale: scaleFactor
+        yScale: scaleFactor
+    }
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false

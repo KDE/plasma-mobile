@@ -44,7 +44,7 @@ Window {
         if (cards.state == "closed") {
             hideTimer.stop();
             window.open();
-        } else if (!volumeSlider.isPressed) {
+        } else if (!volumeSlider.pressed) {
             hideTimer.restart();
         }
     }
@@ -154,81 +154,41 @@ Window {
                 property int volumePercent: PreferredDevice.sink.volume / PulseAudio.NormalVolume * 100.0
 
                 PlasmaComponents.ToolButton {
-                    icon.name: !PreferredDevice.sink || PreferredDevice.sink.muted ? "audio-volume-muted" : MobileShell.AudioInfo.icon
-                    text: !PreferredDevice.sink || PreferredDevice.sink.muted ? i18n("Unmute") : i18n("Mute")
+                    icon.name: !PreferredDevice.sink || (PreferredDevice.sink.muted ? "audio-volume-muted" : MobileShell.AudioInfo.icon)
+                    text: !PreferredDevice.sink || (PreferredDevice.sink.muted ? i18n("Unmute") : i18n("Mute"))
                     display: Controls.AbstractButton.IconOnly
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: Kirigami.Units.iconSizes.medium
                     Layout.preferredHeight: Kirigami.Units.iconSizes.medium
                     Layout.rightMargin: Kirigami.Units.smallSpacing
+
                     onClicked: {
                         hideTimer.restart();
                         PreferredDevice.sink.muted = !PreferredDevice.sink.muted;
                     }
                 }
 
-                PlasmaComponents.Slider {
+                VolumeSlider {
                     id: volumeSlider
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.alignment: Qt.AlignVCenter
                     Layout.rightMargin: Kirigami.Units.smallSpacing * 2
 
-                    property real volume: PreferredDevice.sink.volume
-                    property bool muted: PreferredDevice.sink.muted
-                    property bool ignoreValueChange: false
-                    property bool isPressed: false
-
                     from: PulseAudio.MinimalVolume
                     to: PulseAudio.NormalVolume
                     stepSize: to / (to / PulseAudio.NormalVolume * 100.0)
-                    opacity: muted ? 0.5 : 1.0
 
-                    Component.onCompleted: {
-                        ignoreValueChange = false;
+                    volumeObject: PreferredDevice.sink
+                    muted: PreferredDevice.sink.muted
+                    value: PreferredDevice.sink.volume
+
+                    onMoved: {
+                        PreferredDevice.sink.volume = value;
+                        PreferredDevice.sink.muted = value === 0;
                     }
-
-                    onVolumeChanged: {
-                        if (!window.visible) {
-                            return;
-                        }
-                        var oldIgnoreValueChange = ignoreValueChange;
-                        ignoreValueChange = true;
-                        value = muted ? 0 : PreferredDevice.sink.volume;
-                        ignoreValueChange = oldIgnoreValueChange;
-                        if (volumeSlider.isPressed) {
-                            return;
-                        }
-                        window.open();
-                        hideTimer.restart();
-                    }
-
-                    onMutedChanged: {
-                        var oldIgnoreValueChange = ignoreValueChange;
-                        ignoreValueChange = true;
-                        value = muted ? 0 : PreferredDevice.sink.volume;
-                        ignoreValueChange = oldIgnoreValueChange;
-                        if (!window.visible || volumeSlider.isPressed) {
-                            return;
-                        }
-                        window.open();
-                        hideTimer.restart();
-                    }
-
-                    onValueChanged: {
-                        if (!ignoreValueChange) {
-                            PreferredDevice.sink.muted = false;
-                            PreferredDevice.sink.volume = value;
-                            if (!volumeSlider.isPressed) {
-                                updateTimer.restart();
-                            }
-                        }
-                    }
-
                     onPressedChanged: {
-                        volumeSlider.isPressed = pressed;
                         if (pressed) {
-                            window.open();
                             hideTimer.stop();
                         } else {
                             // Make sure to sync the volume once the button was
@@ -236,15 +196,9 @@ Window {
                             // Otherwise it might be that the slider is at v10
                             // whereas PA rejected the volume change and is
                             // still at v15 (e.g.).
+                            value = Qt.binding(() => PreferredDevice.sink.volume);
                             hideTimer.restart();
-                            updateTimer.restart();
                         }
-                    }
-
-                    Timer {
-                        id: updateTimer
-                        interval: 200
-                        onTriggered: volumeSlider.value = PreferredDevice.sink.volume
                     }
                 }
 

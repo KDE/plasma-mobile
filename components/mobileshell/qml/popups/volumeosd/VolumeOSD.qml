@@ -177,44 +177,32 @@ Window {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    transform: Scale {
-                        origin.x: Math.round(implicitWidth / 2)
-                        origin.y: Math.round(height / 2)
-                        xScale: flickable.scale
-                        yScale: flickable.scale
-                    }
+                    scaleFactor: flickable.scale
 
-                    contentItem: RowLayout {
+                    contentItem: PlasmaComponents.ToolButton {
+                        id: audioSettingsButton
 
-                        PlasmaComponents.ToolButton {
-                            property int addedPadding: Kirigami.Units.smallSpacing * 2
-                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                            Layout.preferredWidth: parent.width - addedPadding * 2
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
-                            Layout.margins: addedPadding
-
-                            contentItem: Item {
-                                anchors.fill: parent
-                                RowLayout {
-                                    spacing: Kirigami.Units.largeSpacing
-                                    anchors.centerIn: parent
-                                    Kirigami.Icon {
-                                        Layout.alignment: Qt.AlignVCenter
-                                        Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
-                                        Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
-                                        source:  "settings-configure"
-                                    }
-                                    PlasmaComponents.Label {
-                                        text: i18n("Open audio settings")
-                                        anchors.verticalCenter: parent.verticalCenter
-                                    }
+                        contentItem: Item {
+                            anchors.fill: parent
+                            RowLayout {
+                                spacing: Kirigami.Units.largeSpacing
+                                anchors.centerIn: parent
+                                Kirigami.Icon {
+                                    Layout.alignment: Qt.AlignVCenter
+                                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                                    source:  "settings-configure"
+                                }
+                                PlasmaComponents.Label {
+                                    text: i18n("Open audio settings")
+                                    anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
+                        }
 
-                            onClicked: {
-                                MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_pulseaudio");
-                                window.close();
-                            }
+                        onClicked: {
+                            MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_pulseaudio");
+                            window.close();
                         }
                     }
                 }

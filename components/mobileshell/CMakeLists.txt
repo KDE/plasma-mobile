@@ -91,6 +91,7 @@ ecm_target_qml_sources(mobileshellplugin SOURCES
     qml/popups/volumeosd/VolumeChangedPopup.qml
     qml/popups/volumeosd/VolumeOSD.qml
     qml/popups/volumeosd/VolumeOSDProvider.qml
+    qml/popups/volumeosd/VolumeSlider.qml
     qml/popups/PopupProviderLoader.qml
 
     qml/statusbar/indicators/BatteryIndicator.qml
