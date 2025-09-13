@@ -32,55 +32,11 @@ QtObject {
     // the maximum volume amount
     readonly property int maxVolumeValue: maxVolumePercent * PulseAudio.NormalVolume / 100
 
-    // step that increments when adjusting the volume
-    readonly property int volumeStep: Math.round(5 * PulseAudio.NormalVolume / 100.0)
-
     // The current audio volume (updated by connecting to sinks)
-    property int volumeValue
+    readonly property int volumeValue: PreferredDevice.sink ? (PreferredDevice.sink.volume / PulseAudio.NormalVolume) * 100 : 0
 
     function isDummyOutput(output) {
         return output && output.name === dummyOutputName;
-    }
-
-    function boundVolume(volume) {
-        return Math.max(PulseAudio.MinimalVolume, Math.min(volume, maxVolumeValue));
-    }
-
-    function volumePercent(volume, max){
-        if (!max) {
-            max = PulseAudio.NormalVolume;
-        }
-        return Math.round(volume / max * maxVolumePercent);
-    }
-
-    function increaseVolume() {
-        if (!PreferredDevice.sink || isDummyOutput(PreferredDevice.sink)) {
-            return;
-        }
-
-        var volume = boundVolume(PreferredDevice.sink.volume + volumeStep);
-        var percent = volumePercent(volume, maxVolumeValue);
-        PreferredDevice.sink.muted = percent == 0;
-        PreferredDevice.sink.volume = volume;
-    }
-
-    function decreaseVolume() {
-        if (!PreferredDevice.sink || isDummyOutput(PreferredDevice.sink)) {
-            return;
-        }
-
-        var volume = boundVolume(PreferredDevice.sink.volume - volumeStep);
-        var percent = volumePercent(volume, maxVolumeValue);
-        PreferredDevice.sink.muted = percent == 0;
-        PreferredDevice.sink.volume = volume;
-    }
-
-    function muteVolume() {
-        if (!PreferredDevice.sink || isDummyOutput(PreferredDevice.sink)) {
-            return;
-        }
-
-        PreferredDevice.sink.muted = !PreferredDevice.sink.muted;
     }
 
     function iconName(volume, muted, prefix) {
@@ -99,29 +55,5 @@ QtObject {
             icon = prefix + "-high";
         }
         return icon;
-    }
-
-    property var updateVolume: Connections {
-        target: root.paSinkModel ? (PreferredDevice.sink ? PreferredDevice.sink : null) : null
-        enabled: target !== null
-
-        function onVolumeChanged() {
-            root.volumeValue = root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
-        }
-
-        function onMutedChanged() {
-            root.volumeValue = PreferredDevice.sink.muted ? 0 : root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
-        }
-    }
-
-    property var updateVolumeOnSinkChange: Connections {
-        target: root.paSinkModel ? root.paSinkModel : null
-        enabled: target !== null
-
-        function onPreferredSinkChanged() {
-            if (PreferredDevice.sink) {
-                root.volumeValue = root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
-            }
-        }
     }
 }
