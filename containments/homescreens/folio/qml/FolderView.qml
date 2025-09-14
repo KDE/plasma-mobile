@@ -41,7 +41,7 @@ Folio.DelegateTouchArea {
 
         function onFolderAboutToOpen(x, y) {
             root.folderPositionX = x - folio.HomeScreenState.viewLeftPadding;
-            root.folderPositionY = y - folio.HomeScreenState.viewRightPadding;
+            root.folderPositionY = y - folio.HomeScreenState.viewTopPadding;
         }
     }
 
