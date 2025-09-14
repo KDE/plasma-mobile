@@ -53,7 +53,7 @@ KCM.SimpleKCM {
             FormCard.FormSwitchDelegate {
                 id: autoHidePanels
                 text: i18n("Auto Hide Panels")
-                description: i18n("When active, status and navigation panels will auto hide, allowing applications to fill the entire screen space.")
+                description: i18n("Auto-hide the status and navigation panels to allow applications to always be in fullscreen.")
                 checked: ShellSettings.Settings.autoHidePanelsEnabled
                 onCheckedChanged: {
                     if (checked != ShellSettings.Settings.autoHidePanelsEnabled) {
@@ -67,7 +67,7 @@ KCM.SimpleKCM {
             FormCard.FormSwitchDelegate {
                 id: doubleTapWakeup
                 text: i18n("Double Tap to Wakeup")
-                description: i18n("When active, it allow to wakeup the device just with double tap when the screen is off.")
+                description: i18n("When the screen is off, double tap to wakeup the device.")
                 checked: ShellSettings.KWinSettings.doubleTapWakeup
                 onCheckedChanged: {
                     if (checked != ShellSettings.KWinSettings.doubleTapWakeup) {
