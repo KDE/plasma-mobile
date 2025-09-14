@@ -39,7 +39,7 @@ void HomeScreenState::init()
 {
     const int animDuration = 400; // Kirigami.Units.veryLongDuration
 
-    m_openAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutExpo, 0);
+    m_openAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutCubic, 0);
 
     connect(m_openAppDrawerAnim, &QPropertyAnimation::valueChanged, this, [this]() {
         // the animation runs too long to connect to QPropertyAnimation::finished
@@ -50,7 +50,7 @@ void HomeScreenState::init()
         }
     });
 
-    m_closeAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutExpo, APP_DRAWER_OPEN_DIST);
+    m_closeAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutCubic, APP_DRAWER_OPEN_DIST);
 
     connect(m_closeAppDrawerAnim, &QPropertyAnimation::valueChanged, this, [this]() {
         // the animation runs too long to connect to QPropertyAnimation::finished

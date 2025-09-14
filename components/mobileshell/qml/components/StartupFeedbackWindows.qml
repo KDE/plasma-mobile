@@ -85,28 +85,28 @@ Item {
                             from: background.scale
                             to: 1
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.OutCubic
+                            easing.type: Easing.InOutQuad
                         }
                         ScaleAnimator {
                             target: iconParent
                             from: iconParent.scale
                             to: 1
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.OutCubic
+                            easing.type: Easing.InOutQuad
                         }
                         XAnimator {
                             target: backgroundParent
                             from: backgroundParent.x
                             to: 0
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.OutCubic
+                            easing.type: Easing.InOutQuad
                         }
                         YAnimator {
                             target: backgroundParent
                             from: backgroundParent.y
                             to: 0
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.OutCubic
+                            easing.type: Easing.InOutQuad
                         }
                     }
 
