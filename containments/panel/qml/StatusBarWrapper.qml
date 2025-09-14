@@ -37,7 +37,7 @@ Item {
         showSecondRow: false
         showTime: !MobileShellState.LockscreenDBusClient.lockscreenActive // Don't show time on the lockscreen, since we already have a massive clock
 
-        showDropShadow: root.transparentBackground
+        showDropShadow: false
         backgroundColor: root.transparentBackground ? "transparent" : Kirigami.Theme.backgroundColor
 
         transform: [

@@ -53,9 +53,6 @@ MobileShell.BaseItem {
             font.weight: Font.Bold
             font.pointSize: 18
 
-            layer.enabled: true
-            layer.effect: MobileShell.TextDropShadow {}
-
             onTextChanged: {
                 if (text.includes('\n')) {
                     // exit text edit mode when new line is entered
@@ -85,9 +82,6 @@ MobileShell.BaseItem {
 
             font.weight: Font.Bold
             font.pointSize: 18
-
-            layer.enabled: true
-            layer.effect: MobileShell.TextDropShadow {}
 
             MouseArea {
                 anchors.fill: parent

@@ -45,7 +45,6 @@ ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
     qml/delegate/DelegateFolderIcon.qml
     qml/delegate/DelegateIconLoader.qml
     qml/delegate/DelegateLabel.qml
-    qml/delegate/DelegateShadow.qml
     qml/delegate/KeyboardHighlight.qml
     qml/delegate/WidgetDelegate.qml
     qml/delegate/WidgetDelegateConfig.qml

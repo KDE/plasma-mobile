@@ -101,9 +101,6 @@ Folio.DelegateTouchArea {
             anchors.fill: parent
             spacing: 0
 
-            layer.enabled: root.shadow
-            layer.effect: DelegateShadow {}
-
             // transform is not on delegateWrapper because when it's zoomed in, it apparently
             // affects the delegate's x and y position, which messes up the starting drag and drop
             // position (for mapFromItem in HomeScreen.qml)

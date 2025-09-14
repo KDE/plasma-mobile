@@ -74,7 +74,7 @@ Item {
             placeholderTextColor: Qt.rgba(255, 255, 255, 0.8)
             color: 'white'
 
-            font.weight: Font.Bold
+            font.weight: Font.Medium
 
             Connections {
                 target: folio.HomeScreenState

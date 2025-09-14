@@ -70,7 +70,7 @@ MouseArea {
             color: 'white'
             inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text
 
-            font.weight: Font.Bold
+            font.weight: Font.Medium
 
             // Keyboard navigation
             Keys.onPressed: (event) => {

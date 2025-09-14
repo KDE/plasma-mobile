@@ -167,9 +167,6 @@ Item {
             Layout.preferredHeight: Layout.minimumHeight
 
             delegate: root.delegate
-
-            layer.enabled: true
-            layer.effect: DelegateShadow {}
         }
 
         // simulate the delegate label for positioning purposes

@@ -31,8 +31,6 @@ Item {
             Layout.minimumWidth: folio.FolioSettings.delegateIconSize
             Layout.minimumHeight: folio.FolioSettings.delegateIconSize
             Layout.preferredHeight: Layout.minimumHeight
-            layer.enabled: true
-            layer.effect: DelegateShadow {}
         }
 
         // simulate a delegate's label for positioning purposes

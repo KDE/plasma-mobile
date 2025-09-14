@@ -82,9 +82,6 @@ Item {
 
         x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth
         y: dropPosition.pageRow * folio.HomeScreenState.pageCellHeight
-
-        layer.enabled: true
-        layer.effect: DelegateShadow {}
     }
 
     // repeater of all delegates in the page

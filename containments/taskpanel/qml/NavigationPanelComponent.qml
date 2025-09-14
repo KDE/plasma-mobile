@@ -28,7 +28,7 @@ MobileShell.NavigationPanel {
     // - transparent if on the homescreen
     backgroundColor: opaqueBar ? Kirigami.Theme.backgroundColor : "transparent"
     foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
-    shadow: !opaqueBar
+    shadow: false
 
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo

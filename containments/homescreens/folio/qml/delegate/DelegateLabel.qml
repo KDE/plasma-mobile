@@ -18,5 +18,5 @@ PC3.Label {
     elide: Text.ElideRight
 
     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.8
-    font.weight: Font.Bold
+    font.weight: Font.Medium
 }
