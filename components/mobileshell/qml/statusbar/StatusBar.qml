@@ -50,8 +50,6 @@ Item {
      */
     property bool disableSystemTray: false
 
-    property color colorScopeColor: Kirigami.Theme.backgroundColor
-
     readonly property real textPixelSize: Math.round(11 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real smallerTextPixelSize: Math.round(9 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real elementSpacing: Math.round(Kirigami.Units.smallSpacing * 1.5)

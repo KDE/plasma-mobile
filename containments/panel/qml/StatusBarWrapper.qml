@@ -38,17 +38,7 @@ Item {
         showTime: !MobileShellState.LockscreenDBusClient.lockscreenActive // Don't show time on the lockscreen, since we already have a massive clock
 
         showDropShadow: root.transparentBackground
-        backgroundColor: {
-            if (root.transparentBackground) {
-                return "transparent";
-            }
-
-            if (state == "default") {
-                return Kirigami.Theme.backgroundColor;
-            } else {
-                return Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95);
-            }
-        }
+        backgroundColor: root.transparentBackground ? "transparent" : Kirigami.Theme.backgroundColor
 
         transform: [
             Translate {

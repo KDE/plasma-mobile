@@ -137,7 +137,12 @@ ContainmentItem {
 
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && startupFeedbackColorAnimation.visible && windowMaximizedTracker.windowCount === 1
-    readonly property bool opaqueBar: (windowMaximizedTracker.showingWindow || isCurrentWindowFullscreen) && !showingStartupFeedback
+    readonly property bool opaqueBar: {
+        if (Keyboards.KWinVirtualKeyboard.visible) {
+            return true;
+        }
+        return (windowMaximizedTracker.showingWindow || isCurrentWindowFullscreen) && !showingStartupFeedback
+    }
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
     readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.autoHidePanelsEnabled && opaqueBar)
 
@@ -165,14 +170,9 @@ ContainmentItem {
         visible: !root.fullscreen
     }
 
-    Rectangle {
+    Item {
         id: navigationPanel
         anchors.fill: parent
-        // contrasting colour
-        Kirigami.Theme.colorSet: root.opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
-        Kirigami.Theme.inherit: false
-
-        color: navigationPanel.state == "default" && (Keyboards.KWinVirtualKeyboard.visible || root.opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent"
 
         property real offset: 0
 
@@ -181,7 +181,6 @@ ContainmentItem {
             anchors.fill: parent
             opaqueBar: root.opaqueBar
             isVertical: root.inLandscape
-            navbarState: navigationPanel.state
 
             transform: [
                 Translate {
@@ -223,7 +222,9 @@ ContainmentItem {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: navigationPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
+                        properties: "offset"
+                        easing.type: navigationPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo
+                        duration: Kirigami.Units.longDuration
                     }
                 }
                 ScriptAction {
