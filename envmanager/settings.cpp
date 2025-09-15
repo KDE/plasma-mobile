@@ -22,12 +22,12 @@ const QString SAVED_CONFIG_GROUP = u"SavedConfig"_s;
 const QString MOBILE_KWINRC_FILE = u"plasma-mobile/kwinrc"_s;
 const QString MOBILE_KSMSERVERRC_FILE = u"plasma-mobile/ksmserverrc"_s;
 const QString MOBILE_KDEGLOBALS_FILE = u"plasma-mobile/kdeglobals"_s;
+const QString MOBILE_APPLICATIONS_BLACKLIST_FILE = u"plasma-mobile/applications-blacklistrc"_s;
 
 Settings::Settings(QObject *parent)
     : QObject{parent}
     , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(u"phone"_s)}
     , m_mobileConfig{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
-    , m_appBlacklistConfig{KSharedConfig::openConfig(u"applications-blacklistrc"_s, KConfig::SimpleConfig)}
 {
 }
 
@@ -41,7 +41,6 @@ void Settings::applyConfiguration()
 {
     if (!m_isMobilePlatform) {
         qCDebug(LOGGING_CATEGORY) << "Configuration will not be applied, as the session is not Plasma Mobile.";
-        qCDebug(LOGGING_CATEGORY) << "Restoring any previously saved configuration...";
         loadSavedConfiguration();
         return;
     }
@@ -57,10 +56,6 @@ void Settings::loadSavedConfiguration()
     loadKeys(u"kwinrc"_s, originalKwinrcConfig, getKwinrcSettings(m_mobileConfig));
     originalKwinrcConfig->sync();
     reloadKWinConfig();
-
-    // applications-blacklistrc
-    loadKeys(u"applications-blacklistrc"_s, m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS);
-    m_appBlacklistConfig->sync();
 
     // kdeglobals (legacy, we only write in the plasma-mobile/kdeglobals file now)
     auto originalKdeglobalsConfig = KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig);
@@ -89,11 +84,10 @@ void Settings::applyMobileConfiguration()
 
     // applications-blacklistrc
     {
-        writeKeysAndSave(u"applications-blacklistrc"_s,
-                         m_appBlacklistConfig,
-                         APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS,
-                         true); // only write entries if they are not already defined in the config
-        m_appBlacklistConfig->sync();
+        // We don't set these options as immutable
+        auto appBlacklistConfig = KSharedConfig::openConfig(MOBILE_APPLICATIONS_BLACKLIST_FILE, KConfig::SimpleConfig);
+        writeKeys(MOBILE_APPLICATIONS_BLACKLIST_FILE, appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS);
+        appBlacklistConfig->sync();
     }
 
     // kdeglobals
@@ -132,28 +126,6 @@ void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, co
         const auto keys = settings[groupName].keys();
         for (const auto &key : keys) {
             group.writeEntry(key, settings[groupName][key], KConfigGroup::Notify);
-        }
-    }
-}
-
-void Settings::writeKeysAndSave(const QString &fileName,
-                                KSharedConfig::Ptr &config,
-                                const QMap<QString, QMap<QString, QVariant>> &settings,
-                                bool overwriteOnlyIfEmpty)
-{
-    const auto groupNames = settings.keys();
-    for (const auto &groupName : groupNames) {
-        auto group = KConfigGroup{config, groupName};
-
-        const auto keys = settings[groupName].keys();
-        for (const auto &key : keys) {
-            if (!group.hasKey(key) || !overwriteOnlyIfEmpty) {
-                // save key
-                saveConfigSetting(fileName, groupName, key, group.readEntry(key));
-
-                // overwrite with mobile setting
-                group.writeEntry(key, settings[groupName][key], KConfigGroup::Notify);
-            }
         }
     }
 }

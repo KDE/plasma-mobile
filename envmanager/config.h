@@ -13,7 +13,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 
-// .config/applications-blacklistrc
+// .config/plasma-mobile/applications-blacklistrc
 // NOTE: we only write these entries if they are not already defined in the config
 const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS = {
     {"Applications",
