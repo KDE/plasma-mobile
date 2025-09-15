@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2025-07-03 09:54+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -49,10 +49,13 @@ msgid "Auto Hide Panels"
 msgstr "إخفاء اللوحات آليًّا"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr ""
 "عندما تنشط، ستخفي لوحات الحالة والتنقل آليًّا، مما يسمح للتطبيقات بملء مساحة "
 "الشاشة بأكملها."
@@ -64,10 +67,8 @@ msgstr "طرق مزدوج للاستيقاظ"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
-msgstr "عند تنشيطه، يسمح بإيقاظ الجهاز بطرق مزدوج فقط عندما تكون الشاشة مغلقة."
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
 
 #: ui/main.qml:81
 #, kde-format
@@ -280,6 +281,12 @@ msgid ""
 "module."
 msgstr ""
 "يُتحكم في اهتزازات لوحة المفاتيح بشكل منفصل في وحدة إعدادات لوحة المفاتيح."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "عند تنشيطه، يسمح بإيقاظ الجهاز بطرق مزدوج فقط عندما تكون الشاشة مغلقة."
 
 #~ msgid "Navigation Panel"
 #~ msgstr "لوحة التنقل"

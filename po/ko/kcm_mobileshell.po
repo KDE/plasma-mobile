@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2025-07-21 01:15+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -48,10 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "패널 자동 숨기기"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr ""
 "이 옵션을 사용하면 상태와 탐색 패널을 자동으로 숨겨서 앱에서 전체 화면을 사용"
 "할 수 있습니다."
@@ -63,11 +66,8 @@ msgstr "두 번 탭하여 깨우기"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
+msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
-"이 옵션을 사용하면 장치 화면이 꺼져 있을 때 두 번 탭하여 장치를 깨웁니다."
 
 #: ui/main.qml:81
 #, kde-format
@@ -279,6 +279,12 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "키보드 진동은 키보드 설정 모듈에서 별도로 관리됩니다."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "이 옵션을 사용하면 장치 화면이 꺼져 있을 때 두 번 탭하여 장치를 깨웁니다."
 
 #~ msgid "Navigation Panel"
 #~ msgstr "탐색 패널"

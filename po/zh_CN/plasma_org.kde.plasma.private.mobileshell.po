@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-10 00:45+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -70,67 +70,51 @@ msgstr "关"
 msgid "SIM Locked"
 msgstr "SIM 卡已锁定"
 
-#: qml/popups/volumeosd/AudioApplet.qml:73
-#, kde-format
-msgid "Outputs"
+#: qml/popups/volumeosd/AudioApplet.qml:89
+#, fuzzy, kde-format
+#| msgid "Outputs"
+msgid "Output Devices"
 msgstr "输出"
 
-#: qml/popups/volumeosd/AudioApplet.qml:111
-#, kde-format
-msgid "Inputs"
+#: qml/popups/volumeosd/AudioApplet.qml:118
+#, fuzzy, kde-format
+#| msgid "Inputs"
+msgid "Input Devices"
 msgstr "输入"
 
-#: qml/popups/volumeosd/AudioApplet.qml:150
+#: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
 msgid "Playback Streams"
 msgstr "播放流"
 
-#: qml/popups/volumeosd/AudioApplet.qml:211
+#: qml/popups/volumeosd/AudioApplet.qml:199
 #, kde-format
 msgid "Recording Streams"
 msgstr "录制流"
 
-#: qml/popups/volumeosd/DeviceListItem.qml:25
+#: qml/popups/volumeosd/DeviceListItem.qml:24
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/popups/volumeosd/DeviceListItem.qml:34
+#: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
 msgid "Device name not found"
 msgstr "未发现设备名称"
 
-#: qml/popups/volumeosd/ListItemBase.qml:101
+#: qml/popups/volumeosd/ListItemBase.qml:125
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "显示 %1 的附加选项"
 
-#: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
-#, kde-format
-msgid "Unmute"
-msgstr "取消静音"
-
-#: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
-#, kde-format
-msgid "Mute"
-msgstr "静音"
-
-#: qml/popups/volumeosd/ListItemBase.qml:169
-#, kde-format
-msgctxt "Accessibility data on volume slider"
-msgid "Adjust volume for %1"
-msgstr "调整 %1 的音量"
-
-#: qml/popups/volumeosd/ListItemBase.qml:247
+#: qml/popups/volumeosd/ListItemBase.qml:217
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/popups/volumeosd/ListItemBase.qml:262
+#: qml/popups/volumeosd/ListItemBase.qml:232
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -152,12 +136,22 @@ msgstr "%1：%2"
 msgid "Stream name not found"
 msgstr "未发现流名称"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#, kde-format
+msgid "Unmute"
+msgstr "取消静音"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#, kde-format
+msgid "Mute"
+msgstr "静音"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:207
 #, kde-format
 msgid "configure audio streams"
 msgstr "配置音频流"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:208
+#: qml/popups/volumeosd/VolumeOSD.qml:197
 #, kde-format
 msgid "Open audio settings"
 msgstr "打开音频设置"
@@ -399,3 +393,7 @@ msgstr "显示更少"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "显示其他 %1 条"
+
+#~ msgctxt "Accessibility data on volume slider"
+#~ msgid "Adjust volume for %1"
+#~ msgstr "调整 %1 的音量"

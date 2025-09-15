@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2025-08-22 16:01+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -49,10 +49,13 @@ msgid "Auto Hide Panels"
 msgstr "Automātiski slēpt paneļus"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr ""
 "Ja aktīvs, sistēma automātiski slēps statusa un navigācijas paneļus, ļaujot "
 "programmām aizpildīt visu ekrānu"
@@ -64,12 +67,8 @@ msgstr "Pamodināt ar diviem uzsitieniem"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
+msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
-"Kad ieslēgts, varat pamodināt ierīci ar izslēgtu ekrānu, veicot divus "
-"uzsitienus."
 
 #: ui/main.qml:81
 #, kde-format
@@ -284,6 +283,13 @@ msgid ""
 "module."
 msgstr ""
 "Tastatūras vibrāciju pārvaldība ir atrodama tastatūras iestatījumu modulī."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Kad ieslēgts, varat pamodināt ierīci ar izslēgtu ekrānu, veicot divus "
+#~ "uzsitienus."
 
 #~ msgid "Navigation Panel"
 #~ msgstr "Navigācijas panelis"

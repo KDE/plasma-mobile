@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2025-07-13 08:34+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -48,10 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "Nascondi automaticamente i pannelli"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr ""
 "Quando è attiva i pannelli di stato e di navigazione verranno nascosti "
 "automaticamente, per permettere alle applicazioni di riempire tutto lo "
@@ -64,12 +67,8 @@ msgstr "Doppio tocco per risvegliare"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
+msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
-"Quando è attiva, permette di risvegliare il dispositivo semplicemente con un "
-"doppio tocco a schermo spento."
 
 #: ui/main.qml:81
 #, kde-format
@@ -287,6 +286,13 @@ msgid ""
 msgstr ""
 "La vibrazione della tastiera è controllata separatamente nel modulo delle "
 "impostazioni della tastiera."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Quando è attiva, permette di risvegliare il dispositivo semplicemente con "
+#~ "un doppio tocco a schermo spento."
 
 #~ msgid "Navigation Panel"
 #~ msgstr "Pannello di navigazione"

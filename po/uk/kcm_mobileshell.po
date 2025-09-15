@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2025-07-03 08:27+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -49,10 +49,13 @@ msgid "Auto Hide Panels"
 msgstr "Автоматично ховати панелі"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr ""
 "Якщо позначено, програма автоматично ховатиме панелі стану і навігації, "
 "надаючи самій програмі усе місце на екрані."
@@ -64,12 +67,8 @@ msgstr "Подвійне торкання для пробудження"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
+msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
-"Якщо увімкнено, пристрій можна буде пробудити подвійним торканням до екрана, "
-"якщо його вимкнено."
 
 #: ui/main.qml:81
 #, kde-format
@@ -286,6 +285,13 @@ msgid ""
 msgstr ""
 "Керування вібраціями клавіатури виконується окремо у модулі параметрів "
 "клавіатури."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Якщо увімкнено, пристрій можна буде пробудити подвійним торканням до "
+#~ "екрана, якщо його вимкнено."
 
 #~ msgid "Navigation Panel"
 #~ msgstr "Панель навігації"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-10 00:45+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2024-11-14 09:43+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -69,67 +69,51 @@ msgstr "De-Activate (Off)"
 msgid "SIM Locked"
 msgstr "Sim blocate"
 
-#: qml/popups/volumeosd/AudioApplet.qml:73
-#, kde-format
-msgid "Outputs"
+#: qml/popups/volumeosd/AudioApplet.qml:89
+#, fuzzy, kde-format
+#| msgid "Outputs"
+msgid "Output Devices"
 msgstr "Egressos"
 
-#: qml/popups/volumeosd/AudioApplet.qml:111
-#, kde-format
-msgid "Inputs"
+#: qml/popups/volumeosd/AudioApplet.qml:118
+#, fuzzy, kde-format
+#| msgid "Inputs"
+msgid "Input Devices"
 msgstr "Ingressos"
 
-#: qml/popups/volumeosd/AudioApplet.qml:150
+#: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
 msgid "Playback Streams"
 msgstr "Playback Streams (Fluxos de reproduction)"
 
-#: qml/popups/volumeosd/AudioApplet.qml:211
+#: qml/popups/volumeosd/AudioApplet.qml:199
 #, kde-format
 msgid "Recording Streams"
 msgstr "registrante fluxos (Streams)"
 
-#: qml/popups/volumeosd/DeviceListItem.qml:25
+#: qml/popups/volumeosd/DeviceListItem.qml:24
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/popups/volumeosd/DeviceListItem.qml:34
+#: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
 msgid "Device name not found"
 msgstr "Nomine de dispositivo non trovate"
 
-#: qml/popups/volumeosd/ListItemBase.qml:101
+#: qml/popups/volumeosd/ListItemBase.qml:125
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Monstra optiones additional per %1 "
 
-#: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
-#, kde-format
-msgid "Unmute"
-msgstr "Non silente"
-
-#: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
-#, kde-format
-msgid "Mute"
-msgstr "Mute"
-
-#: qml/popups/volumeosd/ListItemBase.qml:169
-#, kde-format
-msgctxt "Accessibility data on volume slider"
-msgid "Adjust volume for %1"
-msgstr "Adjusta volumine per %1"
-
-#: qml/popups/volumeosd/ListItemBase.qml:247
+#: qml/popups/volumeosd/ListItemBase.qml:217
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/popups/volumeosd/ListItemBase.qml:262
+#: qml/popups/volumeosd/ListItemBase.qml:232
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -151,12 +135,22 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Nomine de fluxo (stream) non trovate"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:253
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#, kde-format
+msgid "Unmute"
+msgstr "Non silente"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#, kde-format
+msgid "Mute"
+msgstr "Mute"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:207
 #, kde-format
 msgid "configure audio streams"
 msgstr "Configura fluxo audio"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:208
+#: qml/popups/volumeosd/VolumeOSD.qml:197
 #, kde-format
 msgid "Open audio settings"
 msgstr "Aperi preferentias de audio"
@@ -404,6 +398,10 @@ msgstr "Monstra minus"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Monstra %1 plus"
+
+#~ msgctxt "Accessibility data on volume slider"
+#~ msgid "Adjust volume for %1"
+#~ msgstr "Adjusta volumine per %1"
 
 #~ msgid "Search…"
 #~ msgstr "Cerca…"

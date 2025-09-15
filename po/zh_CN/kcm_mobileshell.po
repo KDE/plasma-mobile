@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -48,10 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "自动隐藏面板"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr "当激活时，状态和导航面板将自动隐藏，允许应用程序填满整个屏幕空间。"
 
 #: ui/main.qml:69
@@ -61,10 +64,8 @@ msgstr "双击唤醒"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
-msgstr "启用后，当屏幕关闭时，只需双击即可唤醒设备。"
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
 
 #: ui/main.qml:81
 #, kde-format
@@ -276,6 +277,11 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "键盘振动由键盘设置模块独立控制。"
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr "启用后，当屏幕关闭时，只需双击即可唤醒设备。"
 
 #~ msgid "Navigation Panel"
 #~ msgstr "导航面板"

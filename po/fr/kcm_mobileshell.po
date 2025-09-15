@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-06 00:44+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2025-07-03 11:03+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -48,10 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "Masquer automatiquement les panneaux"
 
 #: ui/main.qml:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
 msgid ""
-"When active, status and navigation panels will auto hide, allowing "
-"applications to fill the entire screen space."
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 msgstr ""
 "Lorsqu'ils sont actifs, les panneaux d'état et de navigation se masqueront "
 "automatiquement, permettant ainsi le remplissage de la totalité de l'écran "
@@ -64,12 +67,8 @@ msgstr "Appuyez deux fois pour se réveiller"
 
 #: ui/main.qml:70
 #, kde-format
-msgid ""
-"When active, it allow to wakeup the device just with double tap when the "
-"screen is off."
+msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
-"Lorsqu'il est actif, il permet de réveiller le périphérique en appuyant deux "
-"fois lorsque l'écran est éteint."
 
 #: ui/main.qml:81
 #, kde-format
@@ -287,6 +286,13 @@ msgid ""
 msgstr ""
 "Les vibrations du clavier sont contrôlées séparément dans le module de "
 "configuration du clavier."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Lorsqu'il est actif, il permet de réveiller le périphérique en appuyant "
+#~ "deux fois lorsque l'écran est éteint."
 
 #~ msgid "Navigation Panel"
 #~ msgstr "Panneau de navigation"

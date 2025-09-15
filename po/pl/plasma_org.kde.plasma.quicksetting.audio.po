@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
+"POT-Creation-Date: 2025-09-15 00:44+0000\n"
 "PO-Revision-Date: 2023-04-10 10:56+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -22,7 +22,12 @@ msgstr ""
 msgid "Sound"
 msgstr "Dźwięk"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "No audio devices"
+msgstr ""
+
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
