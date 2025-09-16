@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.audio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-15 00:44+0000\n"
-"PO-Revision-Date: 2025-05-26 01:08+0100\n"
+"PO-Revision-Date: 2025-09-15 14:58+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
@@ -27,9 +27,9 @@ msgstr "Sonido"
 #: contents/ui/main.qml:15
 #, kde-format
 msgid "No audio devices"
-msgstr ""
+msgstr "No hay dispositivos de sonido"
 
 #: contents/ui/main.qml:17
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"

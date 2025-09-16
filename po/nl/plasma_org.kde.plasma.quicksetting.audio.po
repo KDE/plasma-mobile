@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-15 00:44+0000\n"
-"PO-Revision-Date: 2022-12-20 10:43+0100\n"
+"PO-Revision-Date: 2025-09-15 10:03+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
@@ -25,7 +25,7 @@ msgstr "Geluid"
 #: contents/ui/main.qml:15
 #, kde-format
 msgid "No audio devices"
-msgstr ""
+msgstr "Geen audio-apparaten"
 
 #: contents/ui/main.qml:17
 #, kde-format

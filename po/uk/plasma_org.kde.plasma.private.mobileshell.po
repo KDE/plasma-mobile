@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Fracture dept <yurchor@ukr.net>, 2022, 2024.
+# Fracture dept <yurchor@ukr.net>, 2022, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-15 00:44+0000\n"
-"PO-Revision-Date: 2024-11-13 16:48+0200\n"
+"PO-Revision-Date: 2025-09-15 08:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -71,14 +71,12 @@ msgid "SIM Locked"
 msgstr "SIM-картку заблоковано"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Виходи"
+msgstr "Пристрої виведення"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
 msgstr "Пристрої введення"
 

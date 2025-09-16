@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-15 00:44+0000\n"
-"PO-Revision-Date: 2025-07-02 17:24+0200\n"
+"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"PO-Revision-Date: 2025-09-15 03:58+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -49,16 +49,13 @@ msgid "Auto Hide Panels"
 msgstr "პანელების ავტომატური დამალვა"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"როცა აქტიურია, სტატუსის და ნავიგაციის პანელები ავტომატურად დაიმალება, რაც "
-"აპლიკაციებს ეკრანზე ადგილის სრულად დაკავების შესაძლებლობას მისცემს."
+"სტატუსის და ნავიგაციის პანელების ავტოდამალვა აპლიკაციებისთვის ყოველთვის "
+"სრულეკრანიან რეჟიმში ყოფნის უფლების მისაცემად."
 
 #: ui/main.qml:69
 #, kde-format
@@ -68,7 +65,7 @@ msgstr "ორმაგი დატყაპუნება გასაღვ�
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "როცა ეკრანი გამორთულია, დაატყაპუნეთ ორჯერ მოწყობილობის გასაღვიძებლად."
 
 #: ui/main.qml:81
 #, kde-format
@@ -152,7 +149,7 @@ msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "გაფართოებული რეჟიმი"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "სწრაფი მორგება"
@@ -213,19 +210,30 @@ msgctxt "@label:listbox"
 msgid "Right button"
 msgstr "მარჯვენა ღილაკი"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "დამალვა"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "ჩვენება"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Quick Settings Columns"
+msgstr "სწრაფი მორგება"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
@@ -233,12 +241,12 @@ msgstr ""
 "ჩამოსაწევ პანელში ნაჩვენები სწრაფი პარამეტრების მიმდევრობის მორგება და "
 "დამალვა."
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "სწრაფი პარამეტრები გამორთულია"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "ადრე გამორთული სწრაფი პარამეტრების თავიდან ჩართვა."

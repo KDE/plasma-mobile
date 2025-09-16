@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-12 00:45+0000\n"
+"POT-Creation-Date: 2025-09-16 00:43+0000\n"
 "PO-Revision-Date: 2025-04-17 15:56+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -61,13 +61,13 @@ msgstr "Fjarlægja"
 msgid "Configure widget"
 msgstr ""
 
-#: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
-#: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
+#: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
+#: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
 #, kde-format
 msgid "Remove"
 msgstr "Fjarlægja"
 
-#: qml/HomeScreenPage.qml:377
+#: qml/HomeScreenPage.qml:485
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr ""

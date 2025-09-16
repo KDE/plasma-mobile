@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-15 00:44+0000\n"
-"PO-Revision-Date: 2025-07-03 13:51+0200\n"
+"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"PO-Revision-Date: 2025-09-15 10:03+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -48,17 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "Panelen automatisch verbergen"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Indien actief, zullen de status en navigatiepanelen automatisch worden "
-"verborgen, waarmee toepassingen geboden wordt de gehele schermruimte te "
-"vullen."
+"De status en navigatiepanelen automatisch verbergen om toepassingen het "
+"altijd in volledig scherm te tonen."
 
 #: ui/main.qml:69
 #, kde-format
@@ -69,6 +65,7 @@ msgstr "Dubbel tikken om te wekken"
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
+"Wanneer het scherm uit is, tik dubbel om het apparaat te laten ontwaken."
 
 #: ui/main.qml:81
 #, kde-format
@@ -153,7 +150,7 @@ msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modus Uitgevouwen"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "Snelle instellingen"
@@ -214,31 +211,42 @@ msgctxt "@label:listbox"
 msgid "Right button"
 msgstr "Rechter knop"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Verbergen"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Tonen"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Quick Settings Columns"
+msgstr "Snelle instellingen"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
 "Pas de volgorde van snelle instellingen in het afrolpaneel aan en verberg ze."
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Snelle instellingen uitschakelen"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Eerder uitgeschakelde snelle instellingen opnieuw inschakelen."

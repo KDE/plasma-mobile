@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-12 00:45+0000\n"
+"POT-Creation-Date: 2025-09-16 00:43+0000\n"
 "PO-Revision-Date: 2025-08-13 18:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -60,13 +60,13 @@ msgstr "Eliminar elemento gráfico"
 msgid "Configure widget"
 msgstr "Configurar elemento gráfico"
 
-#: qml/FavouritesBar.qml:174 qml/FavouritesBar.qml:251 qml/FolderView.qml:298
-#: qml/HomeScreenPage.qml:228 qml/HomeScreenPage.qml:314
+#: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
+#: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
 #, kde-format
 msgid "Remove"
 msgstr "Eliminar"
 
-#: qml/HomeScreenPage.qml:377
+#: qml/HomeScreenPage.qml:485
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "Suelte para configura o arrastre para mover"

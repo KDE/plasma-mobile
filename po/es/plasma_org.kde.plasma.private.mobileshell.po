@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-15 00:44+0000\n"
-"PO-Revision-Date: 2025-05-26 01:08+0100\n"
+"PO-Revision-Date: 2025-09-15 14:58+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -72,16 +72,14 @@ msgid "SIM Locked"
 msgstr "SIM bloqueada"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Salidas"
+msgstr "Dispositivos de salida"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Entradas"
+msgstr "Dispositivos de entrada"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
@@ -113,13 +111,13 @@ msgstr "Mostrar opciones adicionales de %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/popups/volumeosd/ListItemBase.qml:232
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -160,7 +158,7 @@ msgstr "Abrir las preferencias de sonido"
 #: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
@@ -400,10 +398,3 @@ msgstr "Mostrar menos"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Mostrar %1 más"
-
-#~ msgctxt "Accessibility data on volume slider"
-#~ msgid "Adjust volume for %1"
-#~ msgstr "Ajustar el volumen de %1"
-
-#~ msgid "Search…"
-#~ msgstr "Buscar…"
