@@ -83,6 +83,10 @@ Window {
 
     ColumnLayout {
         id: cards
+
+        // Ensure children get visibility state of window so that they don't update while closed
+        visible: window.visible
+
         width: parent.width
         anchors.left: parent.left
         anchors.right: parent.right

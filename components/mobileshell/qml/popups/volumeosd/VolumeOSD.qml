@@ -77,6 +77,9 @@ Window {
         contentHeight: cards.implicitHeight
         boundsBehavior: Flickable.DragAndOvershootBounds
 
+        // Ensure children get visibility state of window so that they don't update while closed
+        visible: window.visible
+
         pressDelay: 50
 
         property real offset: -Kirigami.Units.gridUnit
