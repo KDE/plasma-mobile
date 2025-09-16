@@ -27,4 +27,4 @@ msgstr "Batería"
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"

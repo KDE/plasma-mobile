@@ -129,13 +129,13 @@ msgstr "Ajustar el volumen de %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/popups/volumeosd/ListItemBase.qml:261
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -166,7 +166,7 @@ msgstr "Abrir las preferencias de sonido"
 #: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
