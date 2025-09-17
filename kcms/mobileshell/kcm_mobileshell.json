@@ -81,7 +81,6 @@
         "Description[zh_TW]": "設定系統殼層介面",
         "EnabledByDefault": true,
         "FormFactors": [
-            "desktop",
             "handset",
             "tablet"
         ],

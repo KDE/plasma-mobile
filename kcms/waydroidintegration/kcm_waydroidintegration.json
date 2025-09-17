@@ -50,7 +50,6 @@
         "Description[zh_CN]": "Waydroid 配置",
         "EnabledByDefault": true,
         "FormFactors": [
-            "desktop",
             "handset",
             "tablet"
         ],

@@ -40,10 +40,8 @@
         "Description[uk]": "Налаштовування навігації системою",
         "EnabledByDefault": true,
         "FormFactors": [
-            "desktop",
             "handset",
-            "tablet",
-            "mediacenter"
+            "tablet"
         ],
         "Icon": "preferences-desktop-gestures-touch",
         "License": "GPL",
