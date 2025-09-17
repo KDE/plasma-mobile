@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-03 09:54+0400\n"
+"PO-Revision-Date: 2025-09-16 19:02+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -226,10 +226,9 @@ msgid "Show"
 msgstr "أظهر"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "إعدادات سريعة"
+msgstr "أعمدة إعدادات سريعة"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
