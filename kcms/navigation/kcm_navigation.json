@@ -4,6 +4,7 @@
             {
                 "Email": "luis.buechi@kdemail.net",
                 "Name": "Luis Büchi",
+                "Name[ar]": "لويس بوشي",
                 "Name[ca@valencia]": "Luis Büchi",
                 "Name[ca]": "Luis Büchi",
                 "Name[es]": "Luis Büchi",
@@ -22,6 +23,7 @@
         ],
         "Category": "System Information",
         "Description": "Configure System Navigation",
+        "Description[ar]": "اضبط التنقل في النظام",
         "Description[ca@valencia]": "Configura la navegació del sistema",
         "Description[ca]": "Configura la navegació del sistema",
         "Description[es]": "Configurar la navegación del sistema",
@@ -46,6 +48,7 @@
         "Icon": "preferences-desktop-gestures-touch",
         "License": "GPL",
         "Name": "Navigation",
+        "Name[ar]": "التّنقّل",
         "Name[ca@valencia]": "Navegueu",
         "Name[ca]": "Navegació",
         "Name[es]": "Navegación",
@@ -63,6 +66,7 @@
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "system,shell,panel,navigation,gesture",
+    "X-KDE-Keywords[ar]": "نظام,صدفة,لوحة,التنقل,تنقل,إيماء",
     "X-KDE-Keywords[ca@valencia]": "sistema,intèrpret d'ordres,quadro,navegació,gest",
     "X-KDE-Keywords[ca]": "sistema,intèrpret d'ordres,plafó,navegació,gest",
     "X-KDE-Keywords[es]": "sistema,intérprete,intérprete de órdenes,panel,navegación,gestos",
