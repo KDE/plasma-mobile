@@ -41,9 +41,6 @@ Item {
         interval: 60 * 1000
     }
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
-
     MobileShell.VelocityCalculator {
         id: velocityCalculator
     }
@@ -65,6 +62,8 @@ Item {
         topPadding: root.topPadding
         showHeader: actionDrawer.mode != MobileShell.ActionDrawer.Portrait
         listView.interactive: !actionDrawer.dragging && root.listOverflowing
+
+        cardColorScheme: Kirigami.Theme.View
 
         Connections {
             target: actionDrawer

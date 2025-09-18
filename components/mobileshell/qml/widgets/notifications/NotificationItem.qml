@@ -27,6 +27,8 @@ BaseNotificationItem {
     property bool inLockScreen: false
     property int panelType: MobileShell.PanelBackground.PanelType.Drawer
 
+    property var cardColorScheme: Kirigami.Theme.View
+
     signal dragStart()
     signal dragEnd()
     signal takeFocus()
@@ -37,11 +39,6 @@ BaseNotificationItem {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-
-        inLockScreen: notificationItem.inLockScreen
-
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
 
         visible: !notificationItem.inGroup
         height: visible ? implicitHeight : 0
@@ -68,6 +65,9 @@ BaseNotificationItem {
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: notificationItem.cardColorScheme
 
         ColumnLayout {
             id: column

@@ -41,6 +41,7 @@ QuickSettingsDelegate {
         Rectangle {
             anchors.fill: parent
             radius: Kirigami.Units.cornerRadius
+            border.pixelAligned: false
             border.width: 1
             border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
             color: {

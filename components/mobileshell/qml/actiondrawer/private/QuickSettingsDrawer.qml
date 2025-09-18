@@ -57,6 +57,9 @@ MobileShell.BaseItem {
     rightPadding: Kirigami.Units.smallSpacing
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+
     background: Item {
         opacity: brightnessPressedValue
 
@@ -66,6 +69,9 @@ MobileShell.BaseItem {
             anchors.bottomMargin: shadow.height
             panelType: MobileShell.PanelBackground.PanelType.Flat
             radius: 0
+
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Window
         }
 
         Rectangle {

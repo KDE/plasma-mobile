@@ -39,6 +39,11 @@ Item {
     property int panelType: MobileShell.PanelBackground.PanelType.Drawer
 
     /**
+     * The color scheme of the foreground cards (but not notification headers, which are outside of it).
+     */
+    property var cardColorScheme: Kirigami.Theme.View
+
+    /**
      * The notification model for the widget.
      */
     property var historyModel
@@ -375,6 +380,7 @@ Item {
 
                         inLockScreen: root.inLockScreen
                         panelType: root.panelType
+                        cardColorScheme: root.cardColorScheme
 
                         model: delegateLoader.model
                         modelIndex: delegateLoader.index
