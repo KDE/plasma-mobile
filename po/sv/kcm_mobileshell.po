@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-03 15:55+0200\n"
+"PO-Revision-Date: 2025-09-17 21:53+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -48,16 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "Dölj paneler automatiskt"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"När det är aktivt,  döljs status- och navigeringspanelerna automatiskt, "
-"vilket gör att program kan fylla hela skärmen."
+"Dölj status- och navigeringspanelerna automatiskt för att tillåta program "
+"att alltid använda fullskärmsläge."
 
 #: ui/main.qml:69
 #, kde-format
@@ -67,7 +64,7 @@ msgstr "Dubbeltryck för att vakna"
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "När skärmen är av, dubbeltryck för att väcka apparaten."
 
 #: ui/main.qml:81
 #, kde-format
@@ -225,15 +222,14 @@ msgid "Show"
 msgstr "Visa"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Snabbinställningar"
+msgstr "Snabbinställningskolumner"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Maximalt antal kolumner i liggande orientering."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format

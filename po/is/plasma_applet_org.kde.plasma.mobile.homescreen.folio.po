@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-04-17 15:56+0000\n"
+"PO-Revision-Date: 2025-09-17 00:00+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -32,34 +32,32 @@ msgstr "Leita að forritum…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Þessi græja fannst ekki."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Grunnstilla…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Valkostir"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Græjur"
+msgstr "Valkostir græju"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Fjarlægja"
+msgstr "Fjarlægja græju"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Grunnstilla græju"
 
 #: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
 #: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
@@ -70,17 +68,17 @@ msgstr "Fjarlægja"
 #: qml/HomeScreenPage.qml:485
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Losa til að grunnstilla, draga til að færa"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Staðfesta eyðingu möppu"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Viltu örugglega eyða þessari möppu?"
 
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
 #, kde-format
@@ -91,25 +89,23 @@ msgstr "Græjur"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Sækja nýjar græjur…"
 
 #: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Sækja nýjar græjur…"
 
 #: qml/settings/SettingsComponent.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
 msgstr "Veggfóður"
 
 #: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Stillingar"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -122,11 +118,9 @@ msgid "Icons"
 msgstr "Tákn"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Leita að forritum…"
+msgstr "Forrit"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -166,7 +160,7 @@ msgstr "Sýna merki á eftirlætastiku"
 #: qml/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "Læsa framsetningu"
 
 #: qml/settings/SettingsWindow.qml:214
 #, kde-format
@@ -201,7 +195,7 @@ msgstr "Snúningur"
 #: qml/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Tvípikka til að læsa tæki"
 
 #: qml/settings/SettingsWindow.qml:252
 #, kde-format
@@ -211,7 +205,7 @@ msgstr "Eftirlætastika"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Sýna bakgrunn"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -220,29 +214,27 @@ msgid "Wallpaper"
 msgstr "Veggfóður"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Sýna móðuáhrif á veggfóðri"
+msgstr "Móðuáhrif á veggfóðri"
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Engin"
 
 #: qml/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Einföld"
 
 #: qml/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Full"
 
 #: qml/settings/SettingsWindow.qml:294
 #, kde-format
@@ -256,16 +248,14 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "Skipta á milli heimaskjáa og fleiri veggfóðursvalkosta"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Flytja út framsetningu í"
+msgstr "Flytja út framsetningu"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Flytja inn framsetningu frá"
+msgstr "Flytja inn framsetningu"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format

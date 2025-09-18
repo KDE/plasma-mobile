@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-02 14:14+0300\n"
+"PO-Revision-Date: 2025-09-17 11:44+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -49,16 +49,12 @@ msgid "Auto Hide Panels"
 msgstr "הסתרת לוחות אוטומטית"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"כשהאפשרות פעילה, לוחות המצב והניווט תוסתרנה אוטומטית, מה שיאפשר ליישומים "
-"אחרים למלא את כל שטח המסך."
+"להסתיר את לוחות המצב והניווט אוטומטית כדי לאפשר ליישומים תמיד למלא את המסך."
 
 #: ui/main.qml:69
 #, kde-format
@@ -68,7 +64,7 @@ msgstr "נגיעה כפולה תעיר"
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "כשהמסך כבוי, יש להקיש עליו פעמיים כדי להעיר את המכשיר."
 
 #: ui/main.qml:81
 #, kde-format
@@ -226,15 +222,14 @@ msgid "Show"
 msgstr "הצגה"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "הגדרות מהירות"
+msgstr "עמודות הגדרות מהירות"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "מספר העמודות המרבי בכיוון אופקי."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
