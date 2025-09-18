@@ -89,6 +89,8 @@ Loader {
                 bottomPadding: Kirigami.Units.gridUnit
                 listView.interactive: !root.scrollLock && listView.listOverflowing
 
+                cardColorScheme: Kirigami.Theme.Window
+
                 property bool requestNotificationAction: false
 
                 onUnlockRequested: {

@@ -41,6 +41,9 @@ Item {
 
         panelType: MobileShell.PanelBackground.PanelType.Base
         flatten:  root.brightnessPressedValue
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
     }
 
     RowLayout {

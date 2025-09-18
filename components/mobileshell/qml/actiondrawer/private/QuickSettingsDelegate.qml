@@ -34,12 +34,23 @@ MobileShell.BaseItem {
     // set by children
     property var iconItem
 
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Button
+
     readonly property color enabledButtonBorderColor: Qt.darker(Kirigami.Theme.highlightColor, 1.25)
-    readonly property color disabledButtonBorderColor: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.textColor, Kirigami.Theme.backgroundColor, 0.75)
+    readonly property color disabledButtonBorderColor: separatorColorHelper(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.2)
     readonly property color enabledButtonColor: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.highlightColor, Kirigami.Theme.backgroundColor, 0.6)
     readonly property color enabledButtonPressedColor: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.highlightColor, Kirigami.Theme.backgroundColor, 0.4);
     readonly property color disabledButtonColor: Kirigami.Theme.backgroundColor
     readonly property color disabledButtonPressedColor: Qt.darker(disabledButtonColor, 1.1)
+
+    function separatorColorHelper(bg, fg, baseRatio) {
+        if (Kirigami.ColorUtils.brightnessForColor(bg) === Kirigami.ColorUtils.Light) {
+            return Kirigami.ColorUtils.linearInterpolation(bg, fg, baseRatio);
+        } else {
+            return Kirigami.ColorUtils.linearInterpolation(bg, fg, baseRatio / 2);
+        }
+    }
 
     // scale animation on press
     property real zoomScale: 1

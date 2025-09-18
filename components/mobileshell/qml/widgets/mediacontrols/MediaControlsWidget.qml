@@ -138,7 +138,6 @@ Item {
                         padding: root.padding
 
                         contentItem: ColumnLayout {
-                            Kirigami.Theme.inherit: true
                             width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
                             spacing: Kirigami.Units.largeSpacing
 

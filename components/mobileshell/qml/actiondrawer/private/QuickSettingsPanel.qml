@@ -44,11 +44,17 @@ MobileShell.BaseItem {
     rightPadding: Kirigami.Units.smallSpacing * 4
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+
     background: MobileShell.PanelBackground {
         anchors.fill: parent
         anchors.margins: Kirigami.Units.largeSpacing
         panelType: MobileShell.PanelBackground.PanelType.Base
         opacity: brightnessPressedValue
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
     }
 
     contentItem: Item {
