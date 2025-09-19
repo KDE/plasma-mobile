@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-15 00:44+0000\n"
+"POT-Creation-Date: 2025-09-19 00:44+0000\n"
 "PO-Revision-Date: 2025-05-03 09:53+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -57,12 +57,12 @@ msgstr "Eigenschaften"
 msgid "Clear All Notifications"
 msgstr "Alle Benachrichtigungen löschen"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "Ein"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "Aus"
@@ -138,22 +138,22 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Name des Streams nicht gefunden"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
 #, kde-format
 msgid "Unmute"
 msgstr "Stummschaltung aufheben"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
 #, kde-format
 msgid "Mute"
 msgstr "Stummschalten"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:207
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
 #, kde-format
 msgid "configure audio streams"
 msgstr "Audio-Streams konfigurieren"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:197
+#: qml/popups/volumeosd/VolumeOSD.qml:200
 #, kde-format
 msgid "Open audio settings"
 msgstr "Audioeinstellungen öffnen"
@@ -169,22 +169,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Suchen ..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
 #, kde-format
 msgid "No media playing"
 msgstr "Es werden keine Medien wiedergegeben"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
 msgstr "Vorheriges Stück"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Medien wiedergeben oder anhalten"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
 msgstr "Nächstes Stück"
@@ -380,23 +380,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 h verbleiben"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:257
+#: qml/widgets/notifications/NotificationsWidget.qml:262
 #, kde-format
 msgid "Notification service not available"
 msgstr "Benachrichtigungsdienst nicht verfügbar"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:266
+#: qml/widgets/notifications/NotificationsWidget.qml:271
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Benachrichtigungen werden derzeit von „%1 %2“ bereitgestellt"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:427
+#: qml/widgets/notifications/NotificationsWidget.qml:433
 #, kde-format
 msgid "Show Fewer"
 msgstr "Weniger anzeigen"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:429
+#: qml/widgets/notifications/NotificationsWidget.qml:435
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-15 00:44+0000\n"
+"POT-Creation-Date: 2025-09-19 00:44+0000\n"
 "PO-Revision-Date: 2024-11-29 00:12+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -54,12 +54,12 @@ msgstr "속성"
 msgid "Clear All Notifications"
 msgstr "모든 알림 지우기"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "켬"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "끔"
@@ -135,22 +135,22 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "스트림 이름을 찾을 수 없음"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
 #, kde-format
 msgid "Unmute"
 msgstr "음소거 해제"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
 #, kde-format
 msgid "Mute"
 msgstr "음소거"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:207
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
 #, kde-format
 msgid "configure audio streams"
 msgstr "오디오 스트림 설정"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:197
+#: qml/popups/volumeosd/VolumeOSD.qml:200
 #, kde-format
 msgid "Open audio settings"
 msgstr "오디오 설정 열기"
@@ -166,22 +166,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "검색…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
 #, kde-format
 msgid "No media playing"
 msgstr "재생 중인 미디어 없음"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
 msgstr "이전 트랙"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
 msgid "Play or Pause media"
 msgstr "미디어 재생/일시 정지"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
 msgstr "다음 트랙"
@@ -371,23 +371,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1시간 남음"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:257
+#: qml/widgets/notifications/NotificationsWidget.qml:262
 #, kde-format
 msgid "Notification service not available"
 msgstr "알림 서비스를 사용할 수 없음"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:266
+#: qml/widgets/notifications/NotificationsWidget.qml:271
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "'%1 %2'에서 알림 서비스 제공 중"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:427
+#: qml/widgets/notifications/NotificationsWidget.qml:433
 #, kde-format
 msgid "Show Fewer"
 msgstr "적게 표시"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:429
+#: qml/widgets/notifications/NotificationsWidget.qml:435
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"

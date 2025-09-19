@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-15 00:44+0000\n"
+"POT-Creation-Date: 2025-09-19 00:44+0000\n"
 "PO-Revision-Date: 2024-11-13 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -56,12 +56,12 @@ msgstr "Propietats"
 msgid "Clear All Notifications"
 msgstr "Neteja totes les notificacions"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "Actiu"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "Inactiu"
@@ -137,22 +137,22 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "No s'ha trobat el nom del flux"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
 #, kde-format
 msgid "Unmute"
 msgstr "Activa el so"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:158
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
 #, kde-format
 msgid "Mute"
 msgstr "Silenci"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:207
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
 #, kde-format
 msgid "configure audio streams"
 msgstr "configuració dels fluxos d'àudio"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:197
+#: qml/popups/volumeosd/VolumeOSD.qml:200
 #, kde-format
 msgid "Open audio settings"
 msgstr "Obri la configuració d'àudio"
@@ -168,22 +168,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Busca…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:173
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
 #, kde-format
 msgid "No media playing"
 msgstr "No s'està reproduint cap fitxer multimèdia"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:201
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
 msgstr "Peça anterior"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:212
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Reproduïx o fa pausa del fitxer multimèdia"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:225
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
 msgstr "Peça següent"
@@ -379,23 +379,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Resten %1 h"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:257
+#: qml/widgets/notifications/NotificationsWidget.qml:262
 #, kde-format
 msgid "Notification service not available"
 msgstr "El servei de notificació no està disponible"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:266
+#: qml/widgets/notifications/NotificationsWidget.qml:271
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Actualment les notificacions són proporcionades per «%1 %2»"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:427
+#: qml/widgets/notifications/NotificationsWidget.qml:433
 #, kde-format
 msgid "Show Fewer"
 msgstr "Mostra'n menys"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:429
+#: qml/widgets/notifications/NotificationsWidget.qml:435
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
