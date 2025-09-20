@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-03 11:03+0200\n"
+"PO-Revision-Date: 2025-09-17 08:45+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -48,17 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "Masquer automatiquement les panneaux"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Lorsqu'ils sont actifs, les panneaux d'état et de navigation se masqueront "
-"automatiquement, permettant ainsi le remplissage de la totalité de l'écran "
-"par les applications."
+"Masquer automatiquement les panneaux d'état et de navigation permettant aux "
+"applications d'être toujours en mode plein écran."
 
 #: ui/main.qml:69
 #, kde-format
@@ -69,6 +65,8 @@ msgstr "Appuyez deux fois pour se réveiller"
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
+"Lorsque l'écran est éteint, veuillez tapoter deux fois pour réveiller le "
+"périphérique."
 
 #: ui/main.qml:81
 #, kde-format
@@ -228,15 +226,14 @@ msgid "Show"
 msgstr "Afficher"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Configuration rapide"
+msgstr "Colonnes de configuration rapide"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Nombre maximum de colonnes dans l'orientation en paysage."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
