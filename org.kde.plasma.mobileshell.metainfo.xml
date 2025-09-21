@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ - SPDX-FileCopyrightText: 2025 Marco Mattiolo <marco.mattiolo@hotmail.it>
+ - SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<component>
+  <id>org.kde.plasma.mobileshell</id>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>KDE Plasma Mobile Shell</name>
+  <summary>KDE's Plasma shell for mobile form-factor devices</summary>
+  <url type="homepage">https://plasma-mobile.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=plasma-mobile</url>
+  <url type="vcs-browser">https://invent.kde.org/plasma/plasma-mobile</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>plasma.mobileshell</binary>
+  </provides>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Plasma Mobile shell being used on mobile form-factor screen</caption>
+      <image type="source">https://plasma-mobile.org/img/plasmaphone.png</image>
+    </screenshot>
+  </screenshots>
+  <compulsory_for_desktop>KDE</compulsory_for_desktop>
+  <releases>
+    <release version="6.4.5" date="2025-09-09"/>
+  </releases>
+</component>

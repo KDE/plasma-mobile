@@ -146,6 +146,7 @@ add_subdirectory(layout-templates)
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
+install(FILES org.kde.plasma.mobileshell.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES
