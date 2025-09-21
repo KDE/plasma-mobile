@@ -1,15 +1,15 @@
 # Spanish translations for plasma_org.kde.plasma.private.mobileshell.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+#
+# SPDX-FileCopyrightText: 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2022-12-24 21:09+0100\n"
+"PO-Revision-Date: 2025-09-20 20:38+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: notifications/notificationfilemenu.cpp:109
 #, kde-format
@@ -121,13 +121,13 @@ msgstr "Ajustar el volumen de %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/osd/volume/ListItemBase.qml:257
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/osd/volume/StreamListItem.qml:21
 #, kde-format
@@ -153,13 +153,13 @@ msgstr "Reanudar el sonido"
 #: qml/osd/volume/VolumeOSD.qml:132
 #, kde-format
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/osd/volume/VolumeOSD.qml:142
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/osd/volume/VolumeOSD.qml:162
 #, kde-format
@@ -179,12 +179,12 @@ msgstr "Conmutar la visualización de emisiones de sonido"
 #: qml/statusbar/indicators/BatteryIndicator.qml:36
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
 msgid "Search…"
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
 #, kde-format
@@ -216,7 +216,7 @@ msgstr "Responder"
 #, kde-format
 msgctxt "Text field placeholder"
 msgid "Type a reply…"
-msgstr "Escriba una respuesta..."
+msgstr "Escriba una respuesta…"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:55
 #, kde-format
@@ -254,7 +254,7 @@ msgstr "Borrar todas las notificaciones"
 #: qml/widgets/notifications/ThumbnailStrip.qml:132
 #, kde-format
 msgid "More Options…"
-msgstr "Más opciones..."
+msgstr "Más opciones…"
 
 #: qml/widgets/notifications/util.js:14
 #, kde-format
