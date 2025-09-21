@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-13 00:44+0000\n"
-"PO-Revision-Date: 2025-08-22 16:18+0300\n"
-"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2025-08-30 17:03+0300\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Noņemt no izlases"
 #: qml/FavoritesGrid.qml:294
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr "Pievienojiet programmas, ko te parādīt, izlasei."
+msgstr "Pievienojiet programmas izlasei, lai tās te redzētu."
 
 #: qml/FolderGrid.qml:194
 #, kde-format
@@ -95,7 +95,7 @@ msgstr "Pilns"
 #: qml/settings/SettingsWindow.qml:114
 #, kde-format
 msgid "Double tap to lock device"
-msgstr "Slēgt ierīci ar dubultu uzsitienu"
+msgstr "Slēgt ierīci ar diviem pieskārieniem"
 
 #: qml/settings/SettingsWindow.qml:130
 #, kde-format
