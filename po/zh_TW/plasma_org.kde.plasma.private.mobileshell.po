@@ -1,0 +1,307 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2025-09-22 06:46+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 25.07.70\n"
+
+#: notifications/notificationfilemenu.cpp:109
+#, kde-format
+msgid "Open Containing Folder"
+msgstr "開啟包含資料夾"
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr "複製(&C)"
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr "複製位置"
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr "屬性"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#, kde-format
+msgid "On"
+msgstr "開啟"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#, kde-format
+msgid "Off"
+msgstr "關閉"
+
+#: qml/dataproviders/AudioProvider.qml:171
+#, kde-format
+msgid "Audio"
+msgstr "音效"
+
+#: qml/dataproviders/AudioProvider.qml:175
+#, kde-format
+msgid "Increase Volume"
+msgstr "提高音量"
+
+#: qml/dataproviders/AudioProvider.qml:182
+#, kde-format
+msgid "Decrease Volume"
+msgstr "降低音量"
+
+#: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
+#, kde-format
+msgid "Mute"
+msgstr "靜音"
+
+#: qml/dataproviders/SignalStrengthInfo.qml:15
+#, kde-format
+msgid "SIM Locked"
+msgstr "SIM 卡已鎖定"
+
+#: qml/osd/volume/AudioApplet.qml:73
+#, kde-format
+msgid "Outputs"
+msgstr "輸出"
+
+#: qml/osd/volume/AudioApplet.qml:103
+#, kde-format
+msgid "Inputs"
+msgstr "輸入"
+
+#: qml/osd/volume/AudioApplet.qml:134
+#, kde-format
+msgid "Playback Streams"
+msgstr "播放串流"
+
+#: qml/osd/volume/AudioApplet.qml:187
+#, kde-format
+msgid "Recording Streams"
+msgstr "錄音串流"
+
+#: qml/osd/volume/DeviceListItem.qml:25
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/osd/volume/DeviceListItem.qml:34
+#, kde-format
+msgid "Device name not found"
+msgstr "找不到裝置名稱"
+
+#: qml/osd/volume/ListItemBase.qml:104
+#, kde-format
+msgid "Show additional options for %1"
+msgstr "顯示 %1 的額外設定"
+
+#: qml/osd/volume/ListItemBase.qml:160
+#, kde-format
+msgctxt "Accessibility data on volume slider"
+msgid "Adjust volume for %1"
+msgstr "調整 %1 的音量"
+
+#: qml/osd/volume/ListItemBase.qml:242
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/osd/volume/ListItemBase.qml:257
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr "100%"
+
+#: qml/osd/volume/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr "通知音效"
+
+#: qml/osd/volume/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/osd/volume/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr "找不到串流名稱"
+
+#: qml/osd/volume/VolumeOSD.qml:108
+#, kde-format
+msgid "Unmute"
+msgstr "取消靜音"
+
+#: qml/osd/volume/VolumeOSD.qml:132
+#, kde-format
+msgid "100%"
+msgstr "100%"
+
+#: qml/osd/volume/VolumeOSD.qml:142
+#, kde-format
+msgctxt "Percentage value"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/osd/volume/VolumeOSD.qml:162
+#, kde-format
+msgid "Open audio settings"
+msgstr "開啟音效設定"
+
+#: qml/osd/volume/VolumeOSD.qml:175
+#, kde-format
+msgid "Audio Settings"
+msgstr "音效設定"
+
+#: qml/osd/volume/VolumeOSD.qml:182
+#, kde-format
+msgid "Toggle showing audio streams"
+msgstr "切換是否顯示音效串流"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:175
+#, kde-format
+msgid "Search…"
+msgstr "搜尋…"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
+#, kde-format
+msgid "No media playing"
+msgstr "沒有播放任何媒體"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
+#, kde-format
+msgid "Previous track"
+msgstr "上一個音軌"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
+#, kde-format
+msgid "Play or Pause media"
+msgstr "播放或暫停媒體"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
+#, kde-format
+msgid "Next track"
+msgstr "下一個音軌"
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:55
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr "回覆"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr "輸入回覆…"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr "傳送"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:176
+#, kde-format
+msgid "Notification service not available"
+msgstr "無法使用通知服務"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:185
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr "目前通知由「%1 %2」提供"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:321
+#, kde-format
+msgid "Show Fewer"
+msgstr "顯示較少通知"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:323
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr "顯示更多 %1 則訊息"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:382
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "清除所有通知"
+
+#: qml/widgets/notifications/ThumbnailStrip.qml:132
+#, kde-format
+msgid "More Options…"
+msgstr "更多選項…"
+
+#: qml/widgets/notifications/util.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr "%1（已暫停）"
+
+#: qml/widgets/notifications/util.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr "%1（失敗）"
+
+#: qml/widgets/notifications/util.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr "工作已失敗"
+
+#: qml/widgets/notifications/util.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr "%1（完成）"
+
+#: qml/widgets/notifications/util.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr "工作已完成"
+
+#: qml/widgets/notifications/util.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr "%1 分鐘前"
+
+#: qml/widgets/notifications/util.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr "剩餘 %1 秒"
+
+#: qml/widgets/notifications/util.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr "剩餘 %1 分鐘"
+
+#: qml/widgets/notifications/util.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr "剩餘 %1 小時"

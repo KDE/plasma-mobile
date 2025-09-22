@@ -1,16 +1,13 @@
-# Chinese translations for plasma-mobile package
-# plasma-mobile 套件的正體中文翻譯.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Automatically generated, 2022.
 #
 # SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-28 01:02+0000\n"
-"PO-Revision-Date: 2025-09-22 06:45+0900\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2025-09-22 06:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -20,12 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 25.07.70\n"
 
-#: package/contents/ui/appdrawer/AppDrawerHeader.qml:37
+#: contents/ui/main.qml:12
 #, kde-format
-msgid "Applications"
-msgstr "應用程式"
+msgid "Virtual Keyboard"
+msgstr "虛擬鍵盤"
 
-#: package/contents/ui/private/ConfigOverlay.qml:98
+#: contents/ui/main.qml:14
 #, kde-format
-msgid "Remove"
-msgstr "移除"
+msgid "On"
+msgstr "開啟"
+
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "Off"
+msgstr "關閉"
+
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "Tap to open settings"
+msgstr "輕點以開啟設定"

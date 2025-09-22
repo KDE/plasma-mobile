@@ -1,0 +1,48 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2025-09-22 06:47+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 25.07.70\n"
+
+#: contents/ui/main.qml:10
+#, kde-format
+msgid "Mobile Data"
+msgstr "行動資料"
+
+#: contents/ui/main.qml:14 contents/ui/main.qml:22
+#, kde-format
+msgid "Not Available"
+msgstr "無法使用"
+
+#: contents/ui/main.qml:16
+#, kde-format
+msgid "APN needs to be configured in the settings"
+msgstr "需要在設定裡設定 APN"
+
+#: contents/ui/main.qml:18
+#, kde-format
+msgid "On"
+msgstr "開啟"
+
+#: contents/ui/main.qml:18
+#, kde-format
+msgid "Off"
+msgstr "關閉"
+
+#: contents/ui/main.qml:20
+#, kde-format
+msgid "No SIM inserted"
+msgstr "未插入 SIM 卡"

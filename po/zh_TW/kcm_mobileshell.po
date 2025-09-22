@@ -1,0 +1,191 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"PO-Revision-Date: 2025-09-22 06:46+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 25.07.70\n"
+
+#: package/contents/ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr "殼層"
+
+#: package/contents/ui/main.qml:36
+#, kde-format
+msgid "General"
+msgstr "一般"
+
+#: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
+#: package/contents/ui/VibrationForm.qml:35
+#, kde-format
+msgid "Shell Vibrations"
+msgstr "殼層震動"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Animations"
+msgstr "動畫"
+
+#: package/contents/ui/main.qml:50
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr "停用此選項時，會儘量關閉動畫效果。"
+
+#: package/contents/ui/main.qml:69
+#, kde-format
+msgid "Navigation Panel"
+msgstr "導覽面板"
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Gesture-only Mode"
+msgstr "純手勢模式"
+
+#: package/contents/ui/main.qml:75
+#, kde-format
+msgid "Whether to hide the navigation panel."
+msgstr "是否要隱藏導覽面板。"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Task Switcher"
+msgstr "工作切換器"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "Show Application Previews"
+msgstr "顯示應用程式預覽"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgid "Turning this off may help improve performance."
+msgstr "關閉此功能可能會改善效能。"
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Action Drawer"
+msgstr "動作抽屜"
+
+#: package/contents/ui/main.qml:124
+#: package/contents/ui/QuickSettingsForm.qml:17
+#: package/contents/ui/QuickSettingsForm.qml:34
+#, kde-format
+msgid "Quick Settings"
+msgstr "快速設定"
+
+#: package/contents/ui/main.qml:130
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr "釘選模式"
+
+#: package/contents/ui/main.qml:131
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr "展開模式"
+
+#: package/contents/ui/main.qml:135
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr "左上抽屜模式"
+
+#: package/contents/ui/main.qml:136
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr "從左上開啟時的模式。"
+
+#: package/contents/ui/main.qml:161
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr "右上抽屜模式"
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr "從右上開啟時的模式。"
+
+#: package/contents/ui/QuickSettingsForm.qml:35
+#, kde-format
+msgid "Customize the order of quick settings in the pull-down panel."
+msgstr "自訂下拉面板中快速設定的順序。"
+
+#: package/contents/ui/VibrationForm.qml:36
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr "殼層中是否要啟用震動。"
+
+#: package/contents/ui/VibrationForm.qml:49
+#, kde-format
+msgid "Vibration Intensity"
+msgstr "震動強度"
+
+#: package/contents/ui/VibrationForm.qml:50
+#, kde-format
+msgid "How intense shell vibrations should be."
+msgstr "殼層震動應該要多強。"
+
+#: package/contents/ui/VibrationForm.qml:52
+#, kde-format
+msgctxt "Low intensity"
+msgid "Low"
+msgstr "低"
+
+#: package/contents/ui/VibrationForm.qml:53
+#, kde-format
+msgctxt "Medium intensity"
+msgid "Medium"
+msgstr "中"
+
+#: package/contents/ui/VibrationForm.qml:54
+#, kde-format
+msgctxt "High intensity"
+msgid "High"
+msgstr "高"
+
+#: package/contents/ui/VibrationForm.qml:80
+#, kde-format
+msgid "Vibration Duration"
+msgstr "震動時間"
+
+#: package/contents/ui/VibrationForm.qml:81
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr "殼層震動應該要多長。"
+
+#: package/contents/ui/VibrationForm.qml:83
+#, kde-format
+msgctxt "Long duration"
+msgid "Long"
+msgstr "長"
+
+#: package/contents/ui/VibrationForm.qml:84
+#, kde-format
+msgctxt "Medium duration"
+msgid "Medium"
+msgstr "中"
+
+#: package/contents/ui/VibrationForm.qml:85
+#, kde-format
+msgctxt "Short duration"
+msgid "Short"
+msgstr "短"
+
+#: package/contents/ui/VibrationForm.qml:110
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr "鍵盤震動在鍵盤設定模組中有獨立設定。"
