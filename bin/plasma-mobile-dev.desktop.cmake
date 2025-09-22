@@ -37,6 +37,7 @@ Name[sv]=Plasma mobil (utvecklingsversion)
 Name[tr]=Plasma Mobile (Geliştirme)
 Name[uk]=Мобільна Плазма (версія у розробці)
 Name[zh_CN]=Plasma Mobile (开发)
+Name[zh_TW]=Plasma 行動（開發）
 Comment=Plasma Mobile by KDE
 Comment[ar]=بلازما الجوال من كيدي
 Comment[az]=KDE Plasma Mobil

@@ -40,6 +40,7 @@ Name[sv]=Plasma
 Name[tr]=Plasma
 Name[uk]=Плазма
 Name[zh_CN]=Plasma
+Name[zh_TW]=Plasma
 
 [Event/captured]
 Name=Captured
@@ -79,6 +80,7 @@ Name[sv]=Lagrad
 Name[tr]=Yakalanan
 Name[uk]=Захоплено
 Name[zh_CN]=已捕获
+Name[zh_TW]=已擷取
 Comment=Captured
 Comment[ar]=الملتقط
 Comment[az]=Şəkli çəkildi
@@ -116,4 +118,5 @@ Comment[sv]=Lagrad
 Comment[tr]=Yakalanan
 Comment[uk]=Захоплено
 Comment[zh_CN]=已捕获
+Comment[zh_TW]=已擷取
 Action=Popup
