@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Screenshot quick setting for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile ekran görüntüsü tez ayarı",
         "Description[uk]": "Швидке встановлення знімка вікна для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的屏幕截图快捷设置",
+        "Description[zh_TW]": "Plasma 行動的螢幕截圖快速設定",
         "Icon": "spectacle",
         "Id": "org.kde.plasma.quicksetting.screenshot",
         "License": "GPL-2.0+",
@@ -108,6 +110,7 @@
         "Name[tr]": "Ekran Görüntüsü",
         "Name[uk]": "Знімок вікна",
         "Name[zh_CN]": "屏幕截图",
+        "Name[zh_TW]": "螢幕截圖",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

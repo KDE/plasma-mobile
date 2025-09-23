@@ -36,7 +36,8 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[zh_CN]": "Marco Martin"
+                "Name[zh_CN]": "Marco Martin",
+                "Name[zh_TW]": "Marco Martin"
             }
         ],
         "Category": "Containments",
@@ -72,6 +73,7 @@
         "Description[tr]": "Plasma Mobile için dolaşım paneli",
         "Description[uk]": "Панель навігації для мобільної Плазми",
         "Description[zh_CN]": "Plasma 移动版导航面板",
+        "Description[zh_TW]": "Plasma 行動的導覽面板",
         "Id": "org.kde.phone.taskpanel",
         "License": "GPLv2+",
         "Name": "Phone Task panel",

@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Battery quick setting for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile pil tez ayarı",
         "Description[uk]": "Швидке налаштовування акумулятора для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的电池快捷设置",
+        "Description[zh_TW]": "Plasma 行動的電池快速設定",
         "Icon": "battery-full",
         "Id": "org.kde.plasma.quicksetting.battery",
         "License": "GPL-2.0+",
@@ -108,6 +110,7 @@
         "Name[tr]": "Pil",
         "Name[uk]": "Акумулятор",
         "Name[zh_CN]": "电池",
+        "Name[zh_TW]": "電池",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

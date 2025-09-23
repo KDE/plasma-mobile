@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Quick setting to toggle do not disturb mode for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile rahatsız etme kipini aç/kapat tez ayarı",
         "Description[uk]": "Швидке встановлення режиму «не турбувати» для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的勿扰模式快捷设置",
+        "Description[zh_TW]": "Plasma 行動的勿擾模式切換快速設定",
         "Icon": "notifications",
         "Id": "org.kde.plasma.quicksetting.donotdisturb",
         "License": "GPL",
@@ -106,6 +108,7 @@
         "Name[tr]": "Rahatsız Etme",
         "Name[uk]": "Не турбувати",
         "Name[zh_CN]": "勿扰模式",
+        "Name[zh_TW]": "請勿打擾",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

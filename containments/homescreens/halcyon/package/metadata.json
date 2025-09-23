@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Category": "Containments",
@@ -73,6 +74,7 @@
         "Description[tr]": "Yalınlığa ve kullanım kolaylığına odaklanmış, taşınabilir bir ana ekran.",
         "Description[uk]": "Домашній екран для мобільних пристроїв із акцентом на простоті та зручності.",
         "Description[zh_CN]": "简约易用的手机主屏幕方案。",
+        "Description[zh_TW]": "著重於簡潔與易用性的手機主畫面。",
         "Id": "org.kde.phone.homescreen.halcyon",
         "License": "GPLv2+",
         "Name": "Halcyon",
@@ -108,6 +110,7 @@
         "Name[tr]": "Halikon",
         "Name[uk]": "Альціон",
         "Name[zh_CN]": "Halcyon",
+        "Name[zh_TW]": "Halcyon",
         "ServiceTypes": [
             "Plasma/Applet",
             "Plasma/Containment"

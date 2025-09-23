@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Audio quick setting for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile ses tez ayarı",
         "Description[uk]": "Швидке налаштовування звуку для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的声音快捷设置",
+        "Description[zh_TW]": "Plasma 行動的音效快速設定",
         "Icon": "audio-speakers-symbolic",
         "Id": "org.kde.plasma.quicksetting.audio",
         "License": "GPL-2.0+",
@@ -108,6 +110,7 @@
         "Name[tr]": "Ses",
         "Name[uk]": "Звук",
         "Name[zh_CN]": "声音",
+        "Name[zh_TW]": "音效",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

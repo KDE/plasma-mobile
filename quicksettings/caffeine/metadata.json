@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Quick setting to suspend system sleep for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile sistem uykusunu askıya alma tez ayarı",
         "Description[uk]": "Швидке налаштовування призупинення роботи системи для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的暂停息屏快捷设置",
+        "Description[zh_TW]": "Plasma 行動的阻擋系統睡眠快速設定",
         "Icon": "system-suspend-hibernate",
         "Id": "org.kde.plasma.quicksetting.caffeine",
         "License": "GPL",
@@ -109,6 +111,7 @@
         "Name[tr]": "Caffeine",
         "Name[uk]": "Кофеїн",
         "Name[zh_CN]": "保持亮屏",
+        "Name[zh_TW]": "咖啡因",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

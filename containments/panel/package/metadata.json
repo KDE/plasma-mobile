@@ -36,7 +36,8 @@
                 "Name[sv]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[zh_CN]": "Marco Martin"
+                "Name[zh_CN]": "Marco Martin",
+                "Name[zh_TW]": "Marco Martin"
             }
         ],
         "Category": "Containments",
@@ -72,6 +73,7 @@
         "Description[tr]": "Plasma Mobile için üst panel",
         "Description[uk]": "Верхня панель для мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的顶部面板",
+        "Description[zh_TW]": "Plasma 行動的頂部面板",
         "Id": "org.kde.phone.panel",
         "License": "GPLv2+",
         "Name": "Phone Panel",

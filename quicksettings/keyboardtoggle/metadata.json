@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Quick setting for keyboard toggle for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile klavye aç/kapat tez ayarı",
         "Description[uk]": "Швидке налаштовування перемикання розкладки клавіатури для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的虚拟键盘快捷设置",
+        "Description[zh_TW]": "Plasma 行動的鍵盤切換快速設定",
         "Icon": "input-keyboard-virtual",
         "Id": "org.kde.plasma.quicksetting.keyboardtoggle",
         "License": "GPL",
@@ -107,6 +109,7 @@
         "Name[tr]": "Sanal Klavye Aç/Kapat",
         "Name[uk]": "Перемикання віртуальної клавіатури",
         "Name[zh_CN]": "虚拟键盘开关",
+        "Name[zh_TW]": "虛擬鍵盤切換",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

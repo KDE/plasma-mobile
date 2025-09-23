@@ -36,7 +36,8 @@
                 "Name[sv]": "Bhushan Shah",
                 "Name[tr]": "Buşan Şah",
                 "Name[uk]": "Bhushan Shah",
-                "Name[zh_CN]": "Bhushan Shah"
+                "Name[zh_CN]": "Bhushan Shah",
+                "Name[zh_TW]": "Bhushan Shah"
             }
         ],
         "Description": "Airplane mode quick setting for Plasma Mobile",
@@ -70,6 +71,7 @@
         "Description[tr]": "Plasma Mobile uçak kipi tez ayarı",
         "Description[uk]": "Швидке встановлення режиму польоту для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的飞行模式快捷设置",
+        "Description[zh_TW]": "Plasma 行動的 Airplane mode 快速設定",
         "Icon": "network-flightmode-on",
         "Id": "org.kde.plasma.quicksetting.airplanemode",
         "License": "GPL-2.0+",
@@ -110,6 +112,7 @@
         "Name[tr]": "Uçak Kipi",
         "Name[uk]": "Режим польоту",
         "Name[zh_CN]": "飞行模式",
+        "Name[zh_TW]": "飛航模式",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

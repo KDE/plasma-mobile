@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Category": "",
@@ -72,6 +73,7 @@
         "Description[tr]": "Taşınabilir aygıtlar için Plasma kabuğus",
         "Description[uk]": "Оболонка Плазми для мобільних пристроїв",
         "Description[zh_CN]": "针对手机设备设计的 Plasma 外壳程序",
+        "Description[zh_TW]": "適用於行動裝置的 Plasma 殼層",
         "Id": "org.kde.plasma.phoneshell",
         "License": "GPLv2+",
         "Name": "Plasma Mobile",
@@ -106,6 +108,7 @@
         "Name[tr]": "Plasma Mobile",
         "Name[uk]": "Мобільна Плазма",
         "Name[zh_CN]": "Plasma Mobile",
+        "Name[zh_TW]": "Plasma 行動",
         "ServiceTypes": [
             "Plasma/Shell"
         ],

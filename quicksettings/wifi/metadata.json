@@ -36,7 +36,8 @@
                 "Name[sv]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Wi-Fi quick setting for Plasma Mobile",
@@ -71,6 +72,7 @@
         "Description[tr]": "Plasma Mobile Wi-Fi tez ayarı",
         "Description[uk]": "Швидке налаштовування Wi-Fi для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的 Wi-Fi 快捷设置",
+        "Description[zh_TW]": "Plasma 行動的 Wi-Fi 快速設定",
         "Icon": "network-wireless-signal",
         "Id": "org.kde.plasma.quicksetting.wifi",
         "License": "GPL-2.0+",
@@ -109,6 +111,7 @@
         "Name[tr]": "Wi-Fi",
         "Name[uk]": "Wi-Fi",
         "Name[zh_CN]": "Wi-Fi",
+        "Name[zh_TW]": "Wi-Fi",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],
