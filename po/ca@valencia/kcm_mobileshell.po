@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-02 11:45+0200\n"
+"PO-Revision-Date: 2025-09-16 10:55+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -51,26 +51,23 @@ msgid "Auto Hide Panels"
 msgstr "Oculta automàticament els quadros"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Quan està actiu, els quadros d'estat i navegació s'ocultaran automàticament, "
-"i açò permet que les aplicacions òmpliguen tot l'espai de la pantalla."
+"Oculta automàticament els quadros d'estat i navegació per a permetre que les "
+"aplicacions estiguen sempre en pantalla completa."
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr "Toc doble per a despertar"
+msgstr "Toc doble per a activar"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "Quan la pantalla està apagada, toc doble per a activar el dispositiu."
 
 #: ui/main.qml:81
 #, kde-format
@@ -230,15 +227,14 @@ msgid "Show"
 msgstr "Mostra"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Opcions ràpides"
+msgstr "Columnes d'opcions ràpides"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Nombre màxim de columnes en l'orientació apaïsada."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
@@ -299,28 +295,3 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla per separat en el mòdul de configuració "
 "del teclat."
-
-#~ msgid ""
-#~ "When active, it allow to wakeup the device just with double tap when the "
-#~ "screen is off."
-#~ msgstr ""
-#~ "Quan està actiu, permet despertar el dispositiu només toc doble quan la "
-#~ "pantalla està apagada."
-
-#~ msgid "Navigation Panel"
-#~ msgstr "Quadro de navegació"
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Mode de només gestos"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Si s'ha d'ocultar el quadro de navegació."
-
-#~ msgid "Always show keyboard toggle"
-#~ msgstr "Mostra sempre el canvi del teclat"
-
-#~ msgid ""
-#~ "Whether to always show the keyboard toggle button on the navigation panel."
-#~ msgstr ""
-#~ "Si sempre s'ha de mostrar el botó de commutació del teclat en el quadro "
-#~ "de navegació."

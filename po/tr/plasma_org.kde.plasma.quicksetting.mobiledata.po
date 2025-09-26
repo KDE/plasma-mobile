@@ -20,7 +20,7 @@ msgstr ""
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Mobile Data"
-msgstr "Taşınabilir Veri"
+msgstr "Hücresel Veri"
 
 #: contents/ui/main.qml:15 contents/ui/main.qml:23
 #, kde-format
@@ -30,7 +30,7 @@ msgstr "Kullanılamıyor"
 #: contents/ui/main.qml:17
 #, kde-format
 msgid "APN needs to be configured in the settings"
-msgstr "Ayarlarda erişim noktası adının yapılandırılması gerekiyor"
+msgstr "Ayarlardan erişim noktanızın yapılandırılması gerekiyor"
 
 #: contents/ui/main.qml:19
 #, kde-format

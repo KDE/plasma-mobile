@@ -118,13 +118,13 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
-"Taşınabilir veri için erişim noktası adınızı yapılandırın; bununla ilgili "
-"bilgi hizmet sağlayıcınızda vardır."
+"Hücresel veri için erişim noktanızı yapılandırın; bununla ilgili bilgi, "
+"hizmet sağlayıcınızda bulunur."
 
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
-msgstr "Taşınabilir ağa bağlısınız."
+msgstr "Hücresel ağa bağlısınız."
 
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
@@ -139,7 +139,7 @@ msgstr "Aygıtınızda kullanılabilir bir modem yok."
 #: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
-msgstr "Taşınabilir Veri"
+msgstr "Hücresel Veri"
 
 #: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
