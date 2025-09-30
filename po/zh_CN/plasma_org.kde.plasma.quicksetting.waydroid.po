@@ -28,7 +28,7 @@ msgstr "Waydroid"
 #, kde-format
 msgctxt "@info:status"
 msgid "Not initialized"
-msgstr ""
+msgstr "没有初始化"
 
 #: contents/ui/main.qml:39
 #, kde-format

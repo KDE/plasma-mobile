@@ -26,7 +26,7 @@ msgstr "声音"
 #: contents/ui/main.qml:15
 #, kde-format
 msgid "No audio devices"
-msgstr ""
+msgstr "没有音频设备"
 
 #: contents/ui/main.qml:17
 #, kde-format

@@ -253,6 +253,3 @@ msgstr "系统类型"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "配置 waydroid"
-
-#~ msgid "Go back"
-#~ msgstr "返回"

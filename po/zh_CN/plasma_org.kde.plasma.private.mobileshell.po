@@ -71,16 +71,14 @@ msgid "SIM Locked"
 msgstr "SIM 卡已锁定"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "输出"
+msgstr "输出设备"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "输入"
+msgstr "输入设备"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
@@ -393,7 +391,3 @@ msgstr "显示更少"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "显示其他 %1 条"
-
-#~ msgctxt "Accessibility data on volume slider"
-#~ msgid "Adjust volume for %1"
-#~ msgstr "调整 %1 的音量"
