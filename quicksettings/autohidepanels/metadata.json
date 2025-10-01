@@ -29,7 +29,8 @@
                 "Name[sv]": "Micah Stanley",
                 "Name[tr]": "Micah Stanley",
                 "Name[uk]": "Micah Stanley",
-                "Name[zh_CN]": "Micah Stanley"
+                "Name[zh_CN]": "Micah Stanley",
+                "Name[zh_TW]": "Micah Stanley"
             }
         ],
         "Description": "Auto Hide Panels quick setting for Plasma Mobile",
@@ -58,6 +59,7 @@
         "Description[tr]": "Plasma Cep panelleri kendiliğinden gizleme tez ayarı",
         "Description[uk]": "Пункт швидкого приховування панелей для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的自动隐藏面板快速设置",
+        "Description[zh_TW]": "Plasma 行動的面板自動隱藏快速設定",
         "Icon": "view-fullscreen",
         "Id": "org.kde.plasma.quicksetting.autohidepanels",
         "License": "GPL-2.0+",
@@ -87,6 +89,7 @@
         "Name[tr]": "Panelleri Kendiliğinden Gizle",
         "Name[uk]": "Автоматично ховати панелі",
         "Name[zh_CN]": "自动隐藏面板",
+        "Name[zh_TW]": "自動隱藏面板",
         "Website": "https://kde.org"
     }
 }

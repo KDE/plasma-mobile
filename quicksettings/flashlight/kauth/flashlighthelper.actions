@@ -24,6 +24,7 @@ Name[sv]=Hantering av Waydroid
 Name[tr]=Waydroid Yönetimi
 Name[uk]=Керування Waydroid
 Name[zh_CN]=Waydroid 管理
+Name[zh_TW]=Waydroid 管理
 Icon=color
 
 [org.kde.plasma.mobileshell.flashlighthelper.setbrightness]
@@ -48,6 +49,7 @@ Name[sv]=Ställ in ficklampans ljusstyrka
 Name[tr]=Fener Parlaklığını Ayarla
 Name[uk]=Встановлення яскравості спалаху
 Name[zh_CN]=设置手电筒亮度
+Name[zh_TW]=設定手電筒亮度
 Description=Allow set brightness on led device
 Description[ar]=تسمح بضبط السطوع على جهاز led
 Description[ca]=Permet establir la lluminositat del dispositiu LED
@@ -69,6 +71,7 @@ Description[sv]=Tillåt inställning av ljusstyrka för LED-lampor
 Description[tr]=LED aygıt parlaklığını ayarlamaya olanak tanıyın
 Description[uk]=Надає змогу налаштувати яскравість на світлодіодному пристрої
 Description[zh_CN]=设置 LED 闪光灯的亮度
+Description[zh_TW]=允許設定 LED 裝置的亮度
 Policy=yes
 PolicyInactive=yes
 Persistence=session
