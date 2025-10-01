@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-04-09 17:50+0900\n"
+"PO-Revision-Date: 2025-09-30 21:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -45,24 +45,24 @@ msgstr "停用此選項時，會儘量關閉動畫效果。"
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "自動隱藏面板"
 
 #: ui/main.qml:56
 #, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
-msgstr ""
+msgstr "自動隱藏狀態列與導覽列，讓應用程式總是全螢幕顯示。"
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "點兩下喚醒"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "螢幕關閉時輕點螢幕兩下來喚醒裝置。"
 
 #: ui/main.qml:81
 #, kde-format
@@ -220,15 +220,14 @@ msgid "Show"
 msgstr "顯示"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "快速設定"
+msgstr "快速設定欄位數"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "橫向顯示時的最大欄數。"
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
