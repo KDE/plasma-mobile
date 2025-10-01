@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2024-07-27 13:00+0900\n"
+"PO-Revision-Date: 2025-09-30 21:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -34,34 +34,32 @@ msgstr "搜尋應用程式…"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "這個元件找不到。"
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "設定…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "元件"
+msgstr "元件選項"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "移除"
+msgstr "移除元件"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "設定元件"
 
 #: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
 #: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
@@ -72,17 +70,17 @@ msgstr "移除"
 #: qml/HomeScreenPage.qml:485
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "放開來設定，拖曳來移動"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "確認刪除資料夾"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "您確定要刪除這個資料夾嗎？"
 
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
 #, kde-format
@@ -93,25 +91,23 @@ msgstr "元件"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "取得新元件…"
 
 #: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "取得新元件…"
 
 #: qml/settings/SettingsComponent.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
 msgstr "桌布"
 
 #: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: qml/settings/SettingsWindow.qml:80
 #, kde-format
@@ -124,11 +120,9 @@ msgid "Icons"
 msgstr "圖示"
 
 #: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "搜尋應用程式…"
+msgstr "應用程式"
 
 #: qml/settings/SettingsWindow.qml:121
 #, kde-format
@@ -168,7 +162,7 @@ msgstr "在最愛列中顯示標題"
 #: qml/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "鎖定佈局"
 
 #: qml/settings/SettingsWindow.qml:214
 #, kde-format
@@ -203,7 +197,7 @@ msgstr "旋轉"
 #: qml/settings/SettingsWindow.qml:241
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "點兩下鎖定裝置"
 
 #: qml/settings/SettingsWindow.qml:252
 #, kde-format
@@ -213,7 +207,7 @@ msgstr "最愛列"
 #: qml/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "顯示背景"
 
 #: qml/settings/SettingsWindow.qml:268
 #, kde-format
@@ -222,29 +216,27 @@ msgid "Wallpaper"
 msgstr "桌布"
 
 #: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "顯示桌布模糊效果"
+msgstr "桌布模糊效果"
 
 #: qml/settings/SettingsWindow.qml:277
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: qml/settings/SettingsWindow.qml:278
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "簡單"
 
 #: qml/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "完全"
 
 #: qml/settings/SettingsWindow.qml:294
 #, kde-format
@@ -258,26 +250,24 @@ msgid "Switch between homescreens and more wallpaper options"
 msgstr "在主畫面與更多桌布選項之間切換"
 
 #: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "匯出佈局至"
+msgstr "匯出佈局"
 
 #: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
 msgstr "匯入佈局"
 
 #: qml/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export layout to"
-msgstr "匯出佈局至"
+msgstr "匯出佈局到"
 
 #: qml/settings/SettingsWindow.qml:346
 #, kde-format
 msgid "Import layout from"
-msgstr "匯入佈局"
+msgstr "匯入佈局自"
 
 #: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
 #, kde-format
