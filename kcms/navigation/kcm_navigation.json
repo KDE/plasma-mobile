@@ -21,7 +21,8 @@
                 "Name[sv]": "Luis Büchi",
                 "Name[tr]": "Luis Büchi",
                 "Name[uk]": "Luis Büchi",
-                "Name[zh_CN]": "Luis Büchi"
+                "Name[zh_CN]": "Luis Büchi",
+                "Name[zh_TW]": "Luis Büchi"
             }
         ],
         "Category": "System Information",
@@ -44,6 +45,7 @@
         "Description[tr]": "Sistem dolaşımını yapılandırın",
         "Description[uk]": "Налаштовування навігації системою",
         "Description[zh_CN]": "配置系统导航",
+        "Description[zh_TW]": "設定系統導覽",
         "EnabledByDefault": true,
         "FormFactors": [
             "handset",
@@ -70,6 +72,7 @@
         "Name[tr]": "Dolaşım",
         "Name[uk]": "Навігація",
         "Name[zh_CN]": "导航",
+        "Name[zh_TW]": "導覽",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "system,shell,panel,navigation,gesture",
@@ -91,5 +94,6 @@
     "X-KDE-Keywords[tr]": "sistem,kabuk,panel,dolaşım,gezinme,dolaşma,hareket",
     "X-KDE-Keywords[uk]": "system,shell,panel,navigation,gesture,система,оболонка,панель,навігація,жест",
     "X-KDE-Keywords[zh_CN]": "system,shell,panel,navigation,gesture,xitong,waikechengxu,mianban,daohang,shoushi,系统,外壳程序,面板,导航,手势",
+    "X-KDE-Keywords[zh_TW]": "系統,殼,啟動器,面板,瀏覽,手勢",
     "X-KDE-System-Settings-Parent-Category": "personalization"
 }

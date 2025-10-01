@@ -70,6 +70,7 @@
         "Description[tr]": "Plasma Cep için sistem dolaşımı başlangıcı modülü",
         "Description[uk]": "Модуль навігації початкового запуску для мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的系统导航初始化模块",
+        "Description[zh_TW]": "Plasma 行動的系統導覽初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.systemnavigation",
         "License": "GPL-2.0+",
         "Name": "System Navigation",
@@ -98,6 +99,7 @@
         "Name[tr]": "Sistem Dolaşımı",
         "Name[uk]": "Навігація системою",
         "Name[zh_CN]": "系统导航",
+        "Name[zh_TW]": "系統導覽方式",
         "Website": "https://kde.org"
     }
 }
