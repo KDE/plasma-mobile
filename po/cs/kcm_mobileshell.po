@@ -221,10 +221,9 @@ msgid "Show"
 msgstr "Zobrazit"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Rychlé nastavení"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
@@ -286,6 +285,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
-
-#~ msgid "Always show keyboard toggle"
-#~ msgstr "Vždy zobrazovat přepínač klávesnice"

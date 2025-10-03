@@ -70,16 +70,14 @@ msgid "SIM Locked"
 msgstr "SIM je uzamčena"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Výstupy"
+msgstr ""
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Vstupy"
+msgstr "Vstupní zařízení"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
@@ -404,7 +402,3 @@ msgstr "Zobrazit méně"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Zobrazit další %1"
-
-#~ msgctxt "Accessibility data on volume slider"
-#~ msgid "Adjust volume for %1"
-#~ msgstr "Upravit hlasitost pro %1"
