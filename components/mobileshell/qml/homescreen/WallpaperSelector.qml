@@ -9,7 +9,6 @@ import QtQuick.Controls as Controls
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
-import org.kde.kquickcontrolsaddons 2.0 as Addons
 import org.kde.plasma.private.mobileshell.wallpaperimageplugin as WallpaperImagePlugin
 import org.kde.plasma.private.mobileshell as MobileShell
 
@@ -133,12 +132,13 @@ Controls.Drawer {
                     visible: !walliePreview.visible
                 }
 
-                Addons.QPixmapItem {
+                Image {
                     id: walliePreview
-                    visible: model.screenshot != null
                     anchors.fill: parent
-                    smooth: true
-                    pixmap: model.screenshot
+                    visible: model.preview != null
+                    asynchronous: true
+                    cache: false
+                    source: model.preview
                     fillMode: Image.PreserveAspectCrop
                 }
             }
