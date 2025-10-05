@@ -11,7 +11,7 @@ const QString INITIAL_START_CONFIG_GROUP = QStringLiteral("InitialStart");
 
 Settings::Settings(QObject *parent)
     : QObject{parent}
-    , m_mobileConfig{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
+    , m_mobileConfig{KSharedConfig::openConfig(CONFIG_FILE)}
     , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(QStringLiteral("phone"))}
 {
 }
