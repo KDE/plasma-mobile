@@ -16,11 +16,13 @@ Kirigami.Page {
     signal settingValueChanged()
     onSettingValueChanged: saveConfig(); // we save config immediately on mobile
 
-    title: kcm.name
+    title: internalPage.title ? internalPage.title : kcm.name
+
     topPadding: 0
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
+
     flickable: internalPage.flickable
     actions: [
         internalPage.actions.main,
@@ -38,7 +40,7 @@ Kirigami.Page {
     }
 
     Component.onCompleted: {
-        kcm.load()
+        kcm.load();
     }
 
     function saveConfig() {
@@ -48,14 +50,21 @@ Kirigami.Page {
     data: [
         Connections {
             target: kcm
-            onPagePushed: {
+            function onPagePushed() {
                 app.pageStack.push(configurationKcmPageComponent.createObject(app.pageStack, {"kcm": kcm, "internalPage": page}));
             }
-            onPageRemoved: app.pageStack.pop();
+            function onPageRemoved() {
+                app.pageStack.pop();
+            }
+            function onNeedsSaveChanged() {
+                if (kcm.needsSave) {
+                    container.settingValueChanged()
+                }
+            }
         },
         Connections {
             target: app.pageStack
-            onPageRemoved: {
+            function onPageRemoved() {
                 if (kcm.needsSave) {
                     kcm.save()
                 }
@@ -65,12 +74,4 @@ Kirigami.Page {
             }
         }
     ]
-    Connections {
-        target: kcm
-        function onNeedsSaveChanged() {
-            if (kcm.needsSave) {
-                container.settingValueChanged()
-            }
-        }
-    }
 }

@@ -1,8 +1,6 @@
-/*
- *  SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
+// SPDX-FileCopyrightText: 2025 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.15
 import org.kde.plasma.configuration 2.0
@@ -19,7 +17,6 @@ ColumnLayout {
     spacing: 0
 
     property string currentWallpaper: ""
-    property string containmentPlugin: configDialog.containmentPlugin
     signal configurationChanged
 
 //BEGIN functions
@@ -34,59 +31,17 @@ ColumnLayout {
         }
         configDialog.currentWallpaper = root.currentWallpaper;
         configDialog.applyWallpaper()
-        configDialog.containmentPlugin = root.containmentPlugin
     }
 //END functions
-
-    Kirigami.InlineMessage {
-        Layout.alignment: Qt.AlignTop
-        visible: Plasmoid.immutable || animating
-        text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes have been restricted by the system administrator")
-        showCloseButton: true
-        Layout.fillWidth: true
-        Layout.leftMargin: Kirigami.Units.smallSpacing
-        Layout.rightMargin: Kirigami.Units.smallSpacing
-        Layout.bottomMargin: Kirigami.Units.smallSpacing * 2 // we need this because ColumnLayout's spacing is 0
-    }
 
     ColumnLayout {
         id: generalConfig
         spacing: 0
-        Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
-
-        FormCard.FormHeader {
-            title: i18n("General")
-        }
+        Layout.topMargin: Kirigami.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.largeSpacing
 
         FormCard.FormCard {
-            FormCard.FormComboBoxDelegate {
-                id: layoutSelectComboBox
-                enabled: !Plasmoid.immutable
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Homescreen Layout")
-                description: i18n("The homescreen layout to use.")
-                visible: model.count > 1 // only show if there are multiple plugins
-
-                model: configDialog.containmentPluginsConfigModel
-                textRole: "name"
-                valueRole: "pluginName"
-                currentIndex: determineCurrentIndex()
-                onCurrentIndexChanged: {
-                    root.containmentPlugin = configDialog.containmentPluginsConfigModel.get(currentIndex).pluginName;
-                }
-
-                function determineCurrentIndex() {
-                    for (var i = 0; i < configDialog.containmentPluginsConfigModel.count; ++i) {
-                        var data = configDialog.containmentPluginsConfigModel.get(i);
-                        if (configDialog.containmentPlugin === data.pluginName) {
-                            return i;
-                        }
-                    }
-                    return -1;
-                }
-            }
-
-            FormCard.FormDelegateSeparator { above: layoutSelectComboBox; below: wallpaperPluginSelectComboBox }
 
             FormCard.FormComboBoxDelegate {
                 id: wallpaperPluginSelectComboBox
@@ -138,30 +93,6 @@ ColumnLayout {
         }
     }
 
-    ColumnLayout {
-        id: switchContainmentWarning
-        Layout.alignment: Qt.AlignTop
-        Layout.fillWidth: true
-        visible: configDialog.containmentPlugin !== root.containmentPlugin
-        QQC2.Label {
-            Layout.fillWidth: true
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes must be applied before other changes can be made")
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-        }
-        QQC2.Button {
-            Layout.alignment: Qt.AlignHCenter
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply now")
-            onClicked: saveConfig()
-        }
-    }
-
-    Item {
-        Layout.alignment: Qt.AlignTop
-        Layout.fillHeight: switchContainmentWarning.visible
-        visible: switchContainmentWarning.visible
-    }
-
     Item {
         id: emptyConfig
         Layout.alignment: Qt.AlignTop
@@ -172,10 +103,8 @@ ColumnLayout {
 
         Layout.alignment: Qt.AlignTop
         Layout.fillHeight: true
-        Layout.maximumHeight: root.height - generalConfig.height - 70 // HACK: wallpaper configs seem to go over the provisioned height
+        Layout.maximumHeight: root.height - generalConfig.height - Kirigami.Units.smallSpacing // HACK: wallpaper configs seem to go over the provisioned height
         Layout.fillWidth: true
-
-        visible: !switchContainmentWarning.visible
 
         // Bug 360862: if wallpaper has no config, sourceFile will be ""
         // so we wouldn't load emptyConfig and break all over the place

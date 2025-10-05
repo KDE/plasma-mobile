@@ -13,17 +13,13 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.configuration 2.0
 import org.kde.ksvg 1.0 as KSvg
 
+/**
+ * This component is loaded by libplasma when the "configuration window" is requested for a containment.
+ */
 AppletConfiguration {
     id: root
     isContainment: true
     loadApp: true
-
-    readonly property bool horizontal: root.width > root.height
-
-    onAppLoaded: {
-        app.width = root.width < root.height ? root.width : Math.min(root.width, Math.max(app.implicitWidth, Kirigami.Units.gridUnit * 45));
-        app.height = Math.min(root.height, Math.max(app.implicitHeight, Kirigami.Units.gridUnit * 29));
-    }
 
 //BEGIN model
     globalConfigModel: globalContainmentConfigModel
@@ -31,9 +27,15 @@ AppletConfiguration {
     ConfigModel {
         id: globalContainmentConfigModel
         ConfigCategory {
-            name: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper")
-            icon: "preferences-desktop-wallpaper"
-            source: "ConfigurationContainmentAppearance.qml"
+            name: i18n("Wallpaper")
+            icon: "viewimage-symbolic"
+            source: "ChangeWallpaperModule.qml" // This is a relative path from inside private (since loading is invoked from there)
+        }
+        ConfigCategory {
+            name: i18n("Change Homescreen")
+            icon: "exchange-positions"
+            source: "ChangeContainmentModule.qml" // This is a relative path from inside private (since loading is invoked from there)
+            visible: configDialog.containmentPluginsConfigModel.count > 1
         }
     }
 //END model
