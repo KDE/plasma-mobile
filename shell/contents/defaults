@@ -6,5 +6,11 @@
 [Desktop]
 Containment=org.kde.plasma.mobile.homescreen.folio
 ToolBox=org.kde.plasma.nano.desktoptoolbox
+RuntimePlatform=phone:handset
 
 [Desktop][ContainmentActions]
+RightButton;NoModifier=org.kde.contextmenu
+MiddleButton;NoModifier=org.kde.paste
+
+[Panel][ContainmentActions]
+RightButton;NoModifier=org.kde.contextmenu
