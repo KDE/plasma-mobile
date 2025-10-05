@@ -29,9 +29,10 @@
 
 #define FORMAT24H "HH:mm:ss"
 
-
-ShellUtil::ShellUtil(QObject *parent) : QObject{parent}, m_localeConfig {
-    KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig) } {
+ShellUtil::ShellUtil(QObject *parent)
+    : QObject{parent}
+    , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"))}
+{
 }
 
 void ShellUtil::stackItemBefore(QQuickItem *item1, QQuickItem *item2)
@@ -119,7 +120,7 @@ void ShellUtil::setInputRegion(QWindow *window, const QRect &region) {
         qWarning() << "Failed to retrieve Wayland window handle.";
         return;
     }
-    
+
     auto waylandDisplay = dynamic_cast<QtWaylandClient::QWaylandDisplay *>(waylandWindow->display());
     if (!waylandDisplay) {
         qWarning() << "Failed to retrieve Wayland display.";

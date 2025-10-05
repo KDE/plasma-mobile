@@ -29,11 +29,14 @@ Item {
     property NavigationPanelAction leftCornerAction
     property NavigationPanelAction rightCornerAction
 
+    property real leftPadding: 0
+    property real rightPadding: 0
+
     property bool isVertical: false
 
     // drop shadow for icons
     MultiEffect {
-        anchors.fill: root
+        anchors.fill: icons
         visible: shadow
         source: icons
         blurMax: 16
@@ -42,17 +45,17 @@ Item {
         shadowOpacity: 0.8
     }
 
+    // background colour
+    Rectangle {
+        anchors.fill: parent
+        color: root.backgroundColor
+    }
+
     Item {
         id: icons
         anchors.fill: parent
 
         property real buttonLength: 0
-
-        // background colour
-        Rectangle {
-            anchors.fill: parent
-            color: root.backgroundColor
-        }
 
         NavigationPanelButton {
             id: leftCornerButton
@@ -60,7 +63,7 @@ Item {
             Kirigami.Theme.colorSet: root.foregroundColorGroup
             Kirigami.Theme.inherit: false
             enabled: root.leftCornerAction.enabled
-            iconSizeFactor: root.leftCornerAction.iconSizeFactor
+            shrinkSize: root.leftCornerAction.shrinkSize
             iconSource: root.leftCornerAction.iconSource
             onClicked: {
                 if (enabled) {
@@ -76,7 +79,7 @@ Item {
             Kirigami.Theme.colorSet: root.foregroundColorGroup
             Kirigami.Theme.inherit: false
             enabled: root.leftAction.enabled
-            iconSizeFactor: root.leftAction.iconSizeFactor
+            shrinkSize: root.leftAction.shrinkSize
             iconSource: root.leftAction.iconSource
             onClicked: {
                 if (enabled) {
@@ -92,7 +95,7 @@ Item {
             Kirigami.Theme.colorSet: root.foregroundColorGroup
             Kirigami.Theme.inherit: false
             enabled: root.middleAction.enabled
-            iconSizeFactor: root.middleAction.iconSizeFactor
+            shrinkSize: root.middleAction.shrinkSize
             iconSource: root.middleAction.iconSource
             onClicked: {
                 if (enabled) {
@@ -107,7 +110,7 @@ Item {
             Kirigami.Theme.colorSet: root.foregroundColorGroup
             Kirigami.Theme.inherit: false
             enabled: root.rightAction.enabled
-            iconSizeFactor: root.rightAction.iconSizeFactor
+            shrinkSize: root.rightAction.shrinkSize
             iconSource: root.rightAction.iconSource
             onClicked: {
                 if (enabled) {
@@ -122,7 +125,7 @@ Item {
             Kirigami.Theme.colorSet: root.foregroundColorGroup
             Kirigami.Theme.inherit: false
             enabled: root.rightCornerAction.enabled
-            iconSizeFactor: root.rightCornerAction.iconSizeFactor
+            shrinkSize: root.rightCornerAction.shrinkSize
             iconSource: root.rightCornerAction.iconSource
             onClicked: {
                 if (enabled) {
@@ -138,6 +141,10 @@ Item {
             when: root.isVertical
             PropertyChanges {
                 target: icons
+                anchors {
+                    topMargin: root.leftPadding
+                    bottomMargin: root.rightPadding
+                }
                 buttonLength: Math.min(Kirigami.Units.gridUnit * 10, icons.height * 0.7 / 3)
             }
             AnchorChanges {
@@ -198,6 +205,10 @@ Item {
             when: !root.isVertical
             PropertyChanges {
                 target: icons
+                anchors {
+                    leftMargin: root.leftPadding
+                    rightMargin: root.rightPadding
+                }
                 buttonLength: Math.min(Kirigami.Units.gridUnit * 8, icons.width * 0.7 / 3)
             }
             AnchorChanges {
