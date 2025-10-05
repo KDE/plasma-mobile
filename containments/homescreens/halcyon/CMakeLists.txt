@@ -15,6 +15,7 @@ plasma_add_applet(org.kde.plasma.mobile.homescreen.halcyon
         qml/HomeScreen.qml
         qml/main.qml
         qml/SearchWidget.qml
+        qml/config.qml
     CPP_SOURCES
         application.cpp
         applicationfolder.cpp
@@ -27,7 +28,7 @@ plasma_add_applet(org.kde.plasma.mobile.homescreen.halcyon
 
 ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.halcyon SOURCES
     qml/settings/SettingsScreen.qml
-    qml/settings/SettingsWindow.qml
+    qml/settings/ConfigGeneral.qml
     PATH settings
 )
 

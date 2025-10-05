@@ -18,6 +18,7 @@ plasma_add_applet(org.kde.plasma.mobile.homescreen.folio
         qml/main.qml
         qml/PlaceholderDelegate.qml
         qml/WidgetDragItem.qml
+        qml/config.qml
     CPP_SOURCES
         applicationlistmodel.cpp
         delegatetoucharea.cpp
@@ -67,7 +68,7 @@ ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
     qml/settings/AppletListViewer.qml
     qml/settings/SettingsButton.qml
     qml/settings/SettingsComponent.qml
-    qml/settings/SettingsWindow.qml
+    qml/settings/ConfigGeneral.qml
     PATH settings
 )
 

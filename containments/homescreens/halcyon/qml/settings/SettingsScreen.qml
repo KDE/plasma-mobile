@@ -103,35 +103,8 @@ Item {
 
                 onClicked: {
                     root.homeScreen.settingsOpen = false;
-
-                    if (settingsWindowLoader.active) {
-                        // Ensure that if the window is already opened, it gets raised to the top
-                        settingsWindowLoader.item.hide();
-                        settingsWindowLoader.item.showMaximized();
-                    } else {
-                        settingsWindowLoader.active = true;
-                    }
+                    root.homeScreen.openContainmentSettings();
                 }
-            }
-        }
-    }
-
-    // Only load settings window when visible
-    Loader {
-        id: settingsWindowLoader
-        asynchronous: true
-        active: false
-
-        onLoaded: item.showMaximized();
-
-        sourceComponent: SettingsWindow {
-            onVisibleChanged: {
-                if (!visible) {
-                    settingsWindowLoader.active = false;
-                }
-            }
-            onRequestConfigureMenu: {
-                root.homeScreen.openContainmentSettings();
             }
         }
     }

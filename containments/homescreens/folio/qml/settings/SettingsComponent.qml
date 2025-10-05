@@ -67,7 +67,7 @@ Item {
                 iconName: 'edit-image'
                 textLabel: i18n("Wallpapers")
                 onClicked: {
-                    homeScreen.wallpaperSelectorTriggered();
+                    root.homeScreen.wallpaperSelectorTriggered();
                     folio.HomeScreenState.closeSettingsView();
                 }
             }
@@ -76,9 +76,7 @@ Item {
                 iconName: 'settings-configure'
                 textLabel: i18n("Settings")
                 onClicked: {
-                    // ensure that if the window is already opened, it gets raised to the top
-                    settingsWindow.hide();
-                    settingsWindow.showMaximized();
+                    root.homeScreen.openConfigure()
                 }
             }
 
@@ -203,15 +201,5 @@ Item {
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-    }
-
-    SettingsWindow {
-        id: settingsWindow
-        folio: root.folio
-        visible: false
-
-        onRequestConfigureMenu: {
-            homeScreen.openConfigure()
-        }
     }
 }
