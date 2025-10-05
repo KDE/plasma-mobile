@@ -4,6 +4,7 @@
 
 #include "settings.h"
 #include "config.h"
+#include "devicepresets.h"
 #include "utils.h"
 
 #include <KRuntimePlatform>
@@ -115,8 +116,12 @@ void Settings::applyMobileConfiguration()
         setOptionsImmutable(true, MOBILE_KSMSERVERRC_FILE, KSMSERVER_SETTINGS);
     }
 
-    // save our changes
+    // Save our changes
     m_mobileConfig->sync();
+
+    // Setup device configs
+    DevicePresets devicePresets;
+    devicePresets.initialize();
 }
 
 void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings)

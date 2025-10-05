@@ -13,7 +13,7 @@ const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
 
 QuickSettingsConfig::QuickSettingsConfig(QObject *parent)
     : QObject{parent}
-    , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
+    , m_config{KSharedConfig::openConfig(CONFIG_FILE)}
 {
     m_configWatcher = KConfigWatcher::create(m_config);
 

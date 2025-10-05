@@ -64,11 +64,18 @@ ContainmentItem {
         }
     }
 
+    readonly property real panelHeight: MobileShell.Constants.topPanelHeight
+    onPanelHeightChanged: setWindowProperties()
+
     function setWindowProperties() {
         if (root.panel) {
             root.panel.floating = false;
             root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
-            root.panel.thickness = MobileShell.Constants.topPanelHeight;
+
+            // HACK: set thickness twice, sometimes it doesn't set the first time??
+            root.panel.thickness = root.panelHeight;
+            root.panel.thickness = root.panelHeight;
+
             root.panel.visibilityMode = ShellSettings.Settings.autoHidePanelsEnabled ? 3 : 0;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay)
             root.updateTouchArea();
@@ -86,16 +93,19 @@ ContainmentItem {
         }
     }
 
+    Connections {
+        target: root.panel
+
+        function onThicknessChanged() {
+            if (root.panel.thickness !== root.panelHeight) {
+                root.panel.thickness = root.panelHeight;
+            }
+        }
+    }
+
     // Overlay the panel over the lockscreen when brought up
     LockscreenOverlay {
         window: root.Window.window
-    }
-
-    // Enforce thickness of panel
-    Binding {
-        target: panel // assumed to be plasma-workspace "PanelView" component
-        property: "thickness"
-        value: MobileShell.Constants.topPanelHeight
     }
 
     Connections {

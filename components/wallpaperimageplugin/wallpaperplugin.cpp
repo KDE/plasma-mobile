@@ -23,8 +23,8 @@ WallpaperPlugin::WallpaperPlugin(QObject *parent)
     : QObject{parent}
     , m_homescreenConfig{new QQmlPropertyMap{this}}
     , m_lockscreenConfig{new QQmlPropertyMap{this}}
-    , m_homescreenConfigFile{KSharedConfig::openConfig("plasma-org.kde.plasma.mobileshell-appletsrc", KConfig::SimpleConfig)}
-    , m_lockscreenConfigFile{KSharedConfig::openConfig("kscreenlockerrc", KConfig::SimpleConfig)}
+    , m_homescreenConfigFile{KSharedConfig::openConfig("plasma-org.kde.plasma.mobileshell-appletsrc")}
+    , m_lockscreenConfigFile{KSharedConfig::openConfig("kscreenlockerrc")}
 {
     m_lockscreenConfigWatcher = KConfigWatcher::create(m_lockscreenConfigFile);
 

@@ -21,6 +21,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Item {
     id: root
@@ -70,6 +71,11 @@ Item {
         sourceComponent: SystemTray.StatusNotifierModel { }
     }
 
+    MobileShellState.PanelSettingsDBusClient {
+        id: panelSettings
+        screenName: Screen.name
+    }
+
     // drop shadow for icons
     MultiEffect {
         anchors.fill: control
@@ -87,8 +93,8 @@ Item {
         z: 1
         topPadding: Kirigami.Units.smallSpacing
         bottomPadding: Kirigami.Units.smallSpacing
-        rightPadding: Kirigami.Units.smallSpacing * 3
-        leftPadding: Kirigami.Units.smallSpacing * 3
+        rightPadding: Kirigami.Units.smallSpacing * 3 + panelSettings.statusBarLeftPadding
+        leftPadding: Kirigami.Units.smallSpacing * 3 + + panelSettings.statusBarRightPadding
 
         anchors.fill: parent
         background: Rectangle {
@@ -101,9 +107,10 @@ Item {
 
             RowLayout {
                 id: mainRow
-                readonly property real rowHeight: MobileShell.Constants.topPanelHeight - Kirigami.Units.smallSpacing * 2
+                readonly property real rowHeight: MobileShell.Constants.defaultTopPanelHeight - Kirigami.Units.smallSpacing * 2
 
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
                 Layout.preferredHeight: rowHeight
 
                 spacing: 0

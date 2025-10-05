@@ -30,6 +30,14 @@ MobileShell.NavigationPanel {
     foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
     shadow: !opaqueBar
 
+    MobileShellState.PanelSettingsDBusClient {
+        id: panelSettings
+        screenName: Screen.name
+    }
+
+    leftPadding: panelSettings.navigationPanelLeftPadding
+    rightPadding: panelSettings.navigationPanelRightPadding
+
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo
     }
@@ -61,7 +69,7 @@ MobileShell.NavigationPanel {
 
         enabled: true
         iconSource: "mobile-task-switcher"
-        iconSizeFactor: 0.75
+        shrinkSize: 4
 
         onTriggered: {
             Plasmoid.triggerTaskSwitcher();
@@ -74,7 +82,6 @@ MobileShell.NavigationPanel {
 
         enabled: true
         iconSource: "start-here-kde"
-        iconSizeFactor: 1
 
         onTriggered: {
             MobileShellState.ShellDBusClient.openHomeScreen();
@@ -88,7 +95,7 @@ MobileShell.NavigationPanel {
         enabled: Keyboards.KWinVirtualKeyboard.visible || WindowPlugin.WindowUtil.hasCloseableActiveWindow
         iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have fewer margins than icons from breeze-icons
-        iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
+        shrinkSize: Keyboards.KWinVirtualKeyboard.visible ? 0 : 4
 
         onTriggered: {
             if (Keyboards.KWinVirtualKeyboard.visible) {
@@ -108,7 +115,7 @@ MobileShell.NavigationPanel {
         visible: RotationPlugin.RotationUtil.showRotationButton
         enabled: true
         iconSource: "rotation-allowed-symbolic"
-        iconSizeFactor: 0.75
+        shrinkSize: 4
 
         onTriggered: {
             RotationPlugin.RotationUtil.rotateToSuggestedRotation();
@@ -121,7 +128,7 @@ MobileShell.NavigationPanel {
                  (Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput)
         enabled: true
         iconSource: "input-keyboard-virtual-symbolic"
-        iconSizeFactor: 0.75
+        shrinkSize: 4
 
         onTriggered: {
             if (Keyboards.KWinVirtualKeyboard.active) {

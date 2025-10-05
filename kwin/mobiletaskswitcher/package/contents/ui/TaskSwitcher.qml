@@ -493,10 +493,18 @@ FocusScope {
 
         isVertical: MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
 
+        MobileShellState.PanelSettingsDBusClient {
+            id: panelSettings
+            screenName: Screen.name
+        }
+
+        leftPadding: panelSettings.navigationPanelLeftPadding
+        rightPadding: panelSettings.navigationPanelRightPadding
+
         leftAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "mobile-task-switcher"
-            iconSizeFactor: 0.75
+            shrinkSize: 4
 
             onTriggered: {
                 if (taskList.count === 0) {
@@ -519,7 +527,6 @@ FocusScope {
         middleAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "start-here-kde"
-            iconSizeFactor: 1
             onTriggered: root.hide()
         }
 
@@ -527,7 +534,7 @@ FocusScope {
         rightAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "mobile-close-app"
-            iconSizeFactor: 0.75
+            shrinkSize: 4
 
             onTriggered: {
                 taskList.getTaskAt(root.state.currentTaskIndex).closeApp();

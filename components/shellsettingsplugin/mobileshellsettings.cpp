@@ -23,7 +23,7 @@ const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
 
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
-    , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
+    , m_config{KSharedConfig::openConfig(CONFIG_FILE)}
 {
     m_configWatcher = KConfigWatcher::create(m_config);
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
