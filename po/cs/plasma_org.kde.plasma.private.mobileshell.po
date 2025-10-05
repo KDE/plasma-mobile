@@ -76,10 +76,9 @@ msgid "Output Devices"
 msgstr "Výstupy"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Vstupy"
+msgstr "Vstupní zařízení"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
