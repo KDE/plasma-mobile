@@ -15,12 +15,23 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 QtObject {
     id: component
 
+    property bool initialConvergenceMode: false
+
     property var apiListener: Connections {
         target: KScreenOSDUtil
         function onOutputsChanged() {
-            console.log("KScreenOSDProvider convergenceModeEnabled: "
-                        + (KScreenOSDUtil.outputs > 1 ? "true" : "false"));
-            ShellSettings.Settings.convergenceModeEnabled = KScreenOSDUtil.outputs > 1;
+            if (KScreenOSDUtil.outputs > 1) {
+                initialConvergenceMode = ShellSettings.Settings.convergenceModeEnabled;
+            }
+-            console.log("KScreenOSDProvider convergenceModeEnabled: "
+-                        + (KScreenOSDUtil.outputs > 1 ? "true" : (initialConvergenceMode ? "TRUE" : "FALSE")));
+            ShellSettings.Settings.convergenceModeEnabled = KScreenOSDUtil.outputs > 1 ? true : initialConvergenceMode;
+        }
+    }
+
+    Component.onCompleted: {
+        if (KScreenOSDUtil.outputs < 2) {
+            initialConvergenceMode = ShellSettings.Settings.convergenceModeEnabled;
         }
     }
 }
