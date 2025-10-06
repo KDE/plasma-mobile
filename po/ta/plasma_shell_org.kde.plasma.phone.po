@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-03-16 14:13+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -29,49 +29,56 @@ msgstr "சிக்கலின் விவரங்களை காட்ட�
 msgid "Open %1"
 msgstr "%1-ஐ திற"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "தளவமைப்பு மாற்றங்களை கைபேசியின் நிர்வாகி தடைசெய்துள்ளார்"
+#: contents/configuration/AppletConfiguration.qml:90
+#, fuzzy
+#| msgid "Configure"
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "அமை"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "பொதுவானவை"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "பின்புலப்படம்"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "முகப்பின் தளவமைப்பு"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
 msgstr "முகப்புத்திரையில் பயன்படுத்த வேண்டிய தளவமைப்பு"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "பின்புலப்பட செருகுநிரல்"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "பயன்படுத்தவேண்டிய பின்புலப்பட செருகுநிரல்"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "பின்புலப்பட செருகுநிரல்கள்"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "புதிய செருகுநிரல்களை பதிவிறக்கு…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "தளவமைப்பை மாற்றியதை செயல்படுத்திய பின்னரே மற்ற மாற்றங்களை நீங்கள் செய்யலாம்"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "இப்போது செயல்படுத்து"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "பின்புலப்படம்"
+#: contents/configuration/private/ConfigListPage.qml:45
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "தளவமைப்பு மாற்றங்களை கைபேசியின் நிர்வாகி தடைசெய்துள்ளார்"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -84,6 +91,18 @@ msgstr "தவறான கடவெண்"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "பலகைக் குவியக்காட்டி"
+
+#~ msgid "General"
+#~ msgstr "பொதுவானவை"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "முகப்பின் தளவமைப்பு"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "தளவமைப்பை மாற்றியதை செயல்படுத்திய பின்னரே மற்ற மாற்றங்களை நீங்கள் செய்யலாம்"
+
+#~ msgid "Apply now"
+#~ msgstr "இப்போது செயல்படுத்து"
 
 #~ msgctxt "@action:button"
 #~ msgid "Turn flashlight on"
@@ -98,6 +117,3 @@ msgstr "பலகைக் குவியக்காட்டி"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "பின்புலப்படத்தை மாற்று"
-
-#~ msgid "Configure"
-#~ msgstr "அமை"

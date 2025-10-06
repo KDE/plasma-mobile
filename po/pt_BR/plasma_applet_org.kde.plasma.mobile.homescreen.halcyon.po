@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-13 14:35-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -23,6 +23,11 @@ msgstr ""
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "Pasta"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr ""
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -49,6 +54,44 @@ msgstr "Adicionar aos favoritos"
 msgid "Applications"
 msgstr "Aplicativos"
 
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "Configurações da tela inicial"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "Tela inicial"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Efeito de desfoque do papel de parede"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Nenhum"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Simples"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Completo"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Toque duplo para travar o dispositivo"
+
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
@@ -59,46 +102,6 @@ msgstr "Papéis de parede"
 msgid "Settings"
 msgstr "Configurações"
 
-#: qml/settings/SettingsWindow.qml:76
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Configurações da tela inicial"
-
-#: qml/settings/SettingsWindow.qml:86
-#, kde-format
-msgid "Homescreen"
-msgstr "Tela inicial"
-
-#: qml/settings/SettingsWindow.qml:92
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "Efeito de desfoque do papel de parede"
-
-#: qml/settings/SettingsWindow.qml:95
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "Nenhum"
-
-#: qml/settings/SettingsWindow.qml:96
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "Simples"
-
-#: qml/settings/SettingsWindow.qml:97
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "Completo"
-
-#: qml/settings/SettingsWindow.qml:114
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "Toque duplo para travar o dispositivo"
-
-#: qml/settings/SettingsWindow.qml:130
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "Alterne entre telas iniciais e mais opções de papel de parede"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "Alterne entre telas iniciais e mais opções de papel de parede"

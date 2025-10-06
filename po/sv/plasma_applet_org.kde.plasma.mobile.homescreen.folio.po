@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-13 08:21+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -27,6 +27,11 @@ msgstr "Katalog"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Sök efter program…"
+
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "Allmänt"
 
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
@@ -79,7 +84,7 @@ msgstr "Bekräfta katalogborttagning"
 msgid "Are you sure you want to delete this folder?"
 msgstr "Är du säker på att du vill ta bort katalogen?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
 msgstr "Grafiska komponenter"
@@ -96,6 +101,175 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "Hämta nya grafiska komponenter…"
 
+#: qml/settings/ConfigGeneral.qml:31
+#, kde-format
+msgid "Icons"
+msgstr "Ikoner"
+
+#: qml/settings/ConfigGeneral.qml:47
+#, kde-format
+msgid "Application"
+msgstr "Program"
+
+#: qml/settings/ConfigGeneral.qml:63
+#, kde-format
+msgid "Number of rows"
+msgstr "Antal rader"
+
+#: qml/settings/ConfigGeneral.qml:64
+#, kde-format
+msgid "Number of columns"
+msgstr "Antal kolumner"
+
+#: qml/settings/ConfigGeneral.qml:68
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr "Storlek på hemskärmens ikoner"
+
+#: qml/settings/ConfigGeneral.qml:107
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr "Raderna och kolumnerna byter plats beroende på skärmrotation."
+
+#: qml/settings/ConfigGeneral.qml:111
+#, kde-format
+msgid "Homescreen"
+msgstr "Hemskärm"
+
+#: qml/settings/ConfigGeneral.qml:117
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr "Visa beteckningar på hemskärm"
+
+#: qml/settings/ConfigGeneral.qml:130
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr "Visa beteckningar på favoritraden"
+
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "Lås layout"
+
+#: qml/settings/ConfigGeneral.qml:156
+#, kde-format
+msgid "Page transition effect"
+msgstr "Sidövergångseffekt"
+
+#: qml/settings/ConfigGeneral.qml:162
+#, kde-format
+msgid "Slide"
+msgstr "Glid"
+
+#: qml/settings/ConfigGeneral.qml:163
+#, kde-format
+msgid "Cube"
+msgstr "Kub"
+
+#: qml/settings/ConfigGeneral.qml:164
+#, kde-format
+msgid "Fade"
+msgstr "Tona"
+
+#: qml/settings/ConfigGeneral.qml:165
+#, kde-format
+msgid "Stack"
+msgstr "Stapla"
+
+#: qml/settings/ConfigGeneral.qml:166
+#, kde-format
+msgid "Rotation"
+msgstr "Rotation"
+
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Dubbeltryck för att låsa apparaten"
+
+#: qml/settings/ConfigGeneral.qml:194
+#, kde-format
+msgid "Favorites Bar"
+msgstr "Favoritrad"
+
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr "Visa bakgrund"
+
+#: qml/settings/ConfigGeneral.qml:210
+#, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr "Skrivbordsunderlägg"
+
+#: qml/settings/ConfigGeneral.qml:216
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Suddighetseffekt för skrivbordsunderlägg"
+
+#: qml/settings/ConfigGeneral.qml:219
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Ingen"
+
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Enkel"
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Fullständig"
+
+#: qml/settings/ConfigGeneral.qml:243
+#, kde-format
+msgid "Export layout"
+msgstr "Exportera layout"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, kde-format
+msgid "Import layout"
+msgstr "Importera layout"
+
+#: qml/settings/ConfigGeneral.qml:262
+#, kde-format
+msgid "Export layout to"
+msgstr "Exportera layout till"
+
+#: qml/settings/ConfigGeneral.qml:281
+#, kde-format
+msgid "Import layout from"
+msgstr "Importera layout från"
+
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
+#, kde-format
+msgid "Export Status"
+msgstr "Exportstatus"
+
+#: qml/settings/ConfigGeneral.qml:293
+#, kde-format
+msgid "Failed to export to %1"
+msgstr "Misslyckades exportera till %1"
+
+#: qml/settings/ConfigGeneral.qml:300
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr "Hemskärmens layout exporterad med lyckad resultat till %1"
+
+#: qml/settings/ConfigGeneral.qml:306
+#, kde-format
+msgid "Confirm Import"
+msgstr "Bekräfta import"
+
+#: qml/settings/ConfigGeneral.qml:307
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr "Det här skriver över hemskärmens befintliga layout."
+
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
 msgid "Wallpapers"
@@ -106,187 +280,9 @@ msgstr "Skrivbordsunderlägg"
 msgid "Settings"
 msgstr "Inställningar"
 
-#: qml/settings/SettingsWindow.qml:80
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Hemskärmsinställningar"
+#~ msgid "Homescreen Settings"
+#~ msgstr "Hemskärmsinställningar"
 
-#: qml/settings/SettingsWindow.qml:89
-#, kde-format
-msgid "Icons"
-msgstr "Ikoner"
-
-#: qml/settings/SettingsWindow.qml:105
-#, kde-format
-msgid "Application"
-msgstr "Program"
-
-#: qml/settings/SettingsWindow.qml:121
-#, kde-format
-msgid "Number of rows"
-msgstr "Antal rader"
-
-#: qml/settings/SettingsWindow.qml:122
-#, kde-format
-msgid "Number of columns"
-msgstr "Antal kolumner"
-
-#: qml/settings/SettingsWindow.qml:126
-#, kde-format
-msgid "Size of icons on homescreen"
-msgstr "Storlek på hemskärmens ikoner"
-
-#: qml/settings/SettingsWindow.qml:165
-#, kde-format
-msgid "The rows and columns will swap depending on the screen rotation."
-msgstr "Raderna och kolumnerna byter plats beroende på skärmrotation."
-
-#: qml/settings/SettingsWindow.qml:169
-#, kde-format
-msgid "Homescreen"
-msgstr "Hemskärm"
-
-#: qml/settings/SettingsWindow.qml:175
-#, kde-format
-msgid "Show labels on homescreen"
-msgstr "Visa beteckningar på hemskärm"
-
-#: qml/settings/SettingsWindow.qml:188
-#, kde-format
-msgid "Show labels in favorites bar"
-msgstr "Visa beteckningar på favoritraden"
-
-#: qml/settings/SettingsWindow.qml:201
-#, kde-format
-msgid "Lock layout"
-msgstr "Lås layout"
-
-#: qml/settings/SettingsWindow.qml:214
-#, kde-format
-msgid "Page transition effect"
-msgstr "Sidövergångseffekt"
-
-#: qml/settings/SettingsWindow.qml:220
-#, kde-format
-msgid "Slide"
-msgstr "Glid"
-
-#: qml/settings/SettingsWindow.qml:221
-#, kde-format
-msgid "Cube"
-msgstr "Kub"
-
-#: qml/settings/SettingsWindow.qml:222
-#, kde-format
-msgid "Fade"
-msgstr "Tona"
-
-#: qml/settings/SettingsWindow.qml:223
-#, kde-format
-msgid "Stack"
-msgstr "Stapla"
-
-#: qml/settings/SettingsWindow.qml:224
-#, kde-format
-msgid "Rotation"
-msgstr "Rotation"
-
-#: qml/settings/SettingsWindow.qml:241
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "Dubbeltryck för att låsa apparaten"
-
-#: qml/settings/SettingsWindow.qml:252
-#, kde-format
-msgid "Favorites Bar"
-msgstr "Favoritrad"
-
-#: qml/settings/SettingsWindow.qml:257
-#, kde-format
-msgid "Show background"
-msgstr "Visa bakgrund"
-
-#: qml/settings/SettingsWindow.qml:268
-#, kde-format
-msgctxt "@title:group settings group"
-msgid "Wallpaper"
-msgstr "Skrivbordsunderlägg"
-
-#: qml/settings/SettingsWindow.qml:274
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "Suddighetseffekt för skrivbordsunderlägg"
-
-#: qml/settings/SettingsWindow.qml:277
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "Ingen"
-
-#: qml/settings/SettingsWindow.qml:278
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "Enkel"
-
-#: qml/settings/SettingsWindow.qml:279
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "Fullständig"
-
-#: qml/settings/SettingsWindow.qml:294
-#, kde-format
-msgid "General"
-msgstr "Allmänt"
-
-#: qml/settings/SettingsWindow.qml:301
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "Byt mellan hemskärmar och fler skrivbordsunderläggsalternativ"
-
-#: qml/settings/SettingsWindow.qml:310
-#, kde-format
-msgid "Export layout"
-msgstr "Exportera layout"
-
-#: qml/settings/SettingsWindow.qml:319
-#, kde-format
-msgid "Import layout"
-msgstr "Importera layout"
-
-#: qml/settings/SettingsWindow.qml:328
-#, kde-format
-msgid "Export layout to"
-msgstr "Exportera layout till"
-
-#: qml/settings/SettingsWindow.qml:346
-#, kde-format
-msgid "Import layout from"
-msgstr "Importera layout från"
-
-#: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
-#, kde-format
-msgid "Export Status"
-msgstr "Exportstatus"
-
-#: qml/settings/SettingsWindow.qml:358
-#, kde-format
-msgid "Failed to export to %1"
-msgstr "Misslyckades exportera till %1"
-
-#: qml/settings/SettingsWindow.qml:365
-#, kde-format
-msgid "Homescreen layout exported successfully to %1"
-msgstr "Hemskärmens layout exporterad med lyckad resultat till %1"
-
-#: qml/settings/SettingsWindow.qml:371
-#, kde-format
-msgid "Confirm Import"
-msgstr "Bekräfta import"
-
-#: qml/settings/SettingsWindow.qml:372
-#, kde-format
-msgid "This will overwrite your existing homescreen layout!"
-msgstr "Det här skriver över hemskärmens befintliga layout."
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "Byt mellan hemskärmar och fler skrivbordsunderläggsalternativ"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-03-14 13:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -30,49 +30,56 @@ msgstr "Переглянути подробиці щодо помилки…"
 msgid "Open %1"
 msgstr "Відкрити %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "Можливість зміни компонування було обмежено адміністратором системи"
+#: contents/configuration/AppletConfiguration.qml:90
+#, fuzzy
+#| msgid "Configure"
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Налаштувати"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Загальне"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Зображення тла"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Компонування домашнього екрана"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
 msgstr "Компонування домашнього екрана, яке слід використати."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "Додаток зображення тла"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "Додаток зображення тла, який слід використати."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "Додатки зображень тла"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "Отримати нові додатки…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "Перш ніж вносити інші зміни, слід застосувати зміни у компонуванні"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Застосувати зараз"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Зображення тла"
+#: contents/configuration/private/ConfigListPage.qml:45
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Можливість зміни компонування було обмежено адміністратором системи"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -85,6 +92,18 @@ msgstr "Помилковий код"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Індикатор фокусування панелі"
+
+#~ msgid "General"
+#~ msgstr "Загальне"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Компонування домашнього екрана"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "Перш ніж вносити інші зміни, слід застосувати зміни у компонуванні"
+
+#~ msgid "Apply now"
+#~ msgstr "Застосувати зараз"
 
 #~ msgctxt "@action:button"
 #~ msgid "Turn flashlight on"
@@ -99,9 +118,6 @@ msgstr "Індикатор фокусування панелі"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Змінити зображення тла"
-
-#~ msgid "Configure"
-#~ msgstr "Налаштувати"
 
 #~ msgid "Layout:"
 #~ msgstr "Компонування:"

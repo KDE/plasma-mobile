@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-14 09:05+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -19,6 +19,11 @@ msgstr ""
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "Dossier"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr ""
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -46,6 +51,44 @@ msgstr "Ajouter aux préférés"
 msgid "Applications"
 msgstr "Applications"
 
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "Paramètres de l'écran d'accueil"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "Écran d'accueil"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Effet de flou sur le fond d'écran"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Aucun"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Simple"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Complet"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Tapotez deux fois pour verrouiller le périphérique"
+
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
@@ -56,47 +99,7 @@ msgstr "Fonds d'écran"
 msgid "Settings"
 msgstr "Configuration"
 
-#: qml/settings/SettingsWindow.qml:76
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Paramètres de l'écran d'accueil"
-
-#: qml/settings/SettingsWindow.qml:86
-#, kde-format
-msgid "Homescreen"
-msgstr "Écran d'accueil"
-
-#: qml/settings/SettingsWindow.qml:92
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "Effet de flou sur le fond d'écran"
-
-#: qml/settings/SettingsWindow.qml:95
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "Aucun"
-
-#: qml/settings/SettingsWindow.qml:96
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "Simple"
-
-#: qml/settings/SettingsWindow.qml:97
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "Complet"
-
-#: qml/settings/SettingsWindow.qml:114
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "Tapotez deux fois pour verrouiller le périphérique"
-
-#: qml/settings/SettingsWindow.qml:130
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
-"Basculer entre les écrans d'accueil et plus d'options pour le fond d'écran"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr ""
+#~ "Basculer entre les écrans d'accueil et plus d'options pour le fond d'écran"

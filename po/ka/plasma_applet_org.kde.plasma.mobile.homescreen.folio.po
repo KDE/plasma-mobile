@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-13 06:16+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -28,6 +28,11 @@ msgstr "საქაღალდე"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "აპლიკაციების ძებნა…"
+
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "ზოგადი"
 
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
@@ -80,7 +85,7 @@ msgstr "დაადასტურეთ საქაღალდის წა�
 msgid "Are you sure you want to delete this folder?"
 msgstr "მართლა გნებავთ, წაშალოთ ეს საქაღალდე?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
 msgstr "ვიჯეტები"
@@ -97,6 +102,176 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "ახალი ვიჯეტების მიღება…"
 
+#: qml/settings/ConfigGeneral.qml:31
+#, kde-format
+msgid "Icons"
+msgstr "ხატულები"
+
+#: qml/settings/ConfigGeneral.qml:47
+#, kde-format
+msgid "Application"
+msgstr "პროგრამა"
+
+#: qml/settings/ConfigGeneral.qml:63
+#, kde-format
+msgid "Number of rows"
+msgstr "მწკრივების რიცხვი"
+
+#: qml/settings/ConfigGeneral.qml:64
+#, kde-format
+msgid "Number of columns"
+msgstr "სვეტების რაოდენობა"
+
+#: qml/settings/ConfigGeneral.qml:68
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr "ხატულების ზომა საწყის ეკრანზე"
+
+#: qml/settings/ConfigGeneral.qml:107
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr ""
+"მწკრივები და სვეტები ადგილს გაცვლიან, ეკრანის შემობრუნებაზე დამოკიდებულებით."
+
+#: qml/settings/ConfigGeneral.qml:111
+#, kde-format
+msgid "Homescreen"
+msgstr "საწყისი ეკრანი"
+
+#: qml/settings/ConfigGeneral.qml:117
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr "ჭდეების ჩვენება საწყის ეკრანზე"
+
+#: qml/settings/ConfigGeneral.qml:130
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr "ჭდეების ჩვენება სანიშნეების პანელზე"
+
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "განლაგების ჩაკეტვა"
+
+#: qml/settings/ConfigGeneral.qml:156
+#, kde-format
+msgid "Page transition effect"
+msgstr "გვერდის გადასვლის ეფექტი"
+
+#: qml/settings/ConfigGeneral.qml:162
+#, kde-format
+msgid "Slide"
+msgstr "სლაიდი"
+
+#: qml/settings/ConfigGeneral.qml:163
+#, kde-format
+msgid "Cube"
+msgstr "კუბი"
+
+#: qml/settings/ConfigGeneral.qml:164
+#, kde-format
+msgid "Fade"
+msgstr "მინავლება"
+
+#: qml/settings/ConfigGeneral.qml:165
+#, kde-format
+msgid "Stack"
+msgstr "დასტა"
+
+#: qml/settings/ConfigGeneral.qml:166
+#, kde-format
+msgid "Rotation"
+msgstr "შემობრუნება"
+
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "დაატყაპუნეთ ორჯერ მოწყობილობის დასაბლოკად"
+
+#: qml/settings/ConfigGeneral.qml:194
+#, kde-format
+msgid "Favorites Bar"
+msgstr "სანიშნეების პანელი"
+
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr "ფონის ჩვენება"
+
+#: qml/settings/ConfigGeneral.qml:210
+#, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr "ფონური სურათი"
+
+#: qml/settings/ConfigGeneral.qml:216
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "ფონის სურათის გაბუნდოვნების ეფექტი"
+
+#: qml/settings/ConfigGeneral.qml:219
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "არცერთი"
+
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "მარტივი"
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "სრული"
+
+#: qml/settings/ConfigGeneral.qml:243
+#, kde-format
+msgid "Export layout"
+msgstr "განლაგების გატანა"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, kde-format
+msgid "Import layout"
+msgstr "განლაგების შემოტანა"
+
+#: qml/settings/ConfigGeneral.qml:262
+#, kde-format
+msgid "Export layout to"
+msgstr "განლაგების გატანა"
+
+#: qml/settings/ConfigGeneral.qml:281
+#, kde-format
+msgid "Import layout from"
+msgstr "განლაგების შემოტანა"
+
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
+#, kde-format
+msgid "Export Status"
+msgstr "გატანის სტატუსი"
+
+#: qml/settings/ConfigGeneral.qml:293
+#, kde-format
+msgid "Failed to export to %1"
+msgstr "%1-ზე გატანა ჩავარდა"
+
+#: qml/settings/ConfigGeneral.qml:300
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr "საწყისი ეკრანის განლაგების %1-ზე გადატანა წარმატებით დასრულდა"
+
+#: qml/settings/ConfigGeneral.qml:306
+#, kde-format
+msgid "Confirm Import"
+msgstr "გატანის დადასტურება"
+
+#: qml/settings/ConfigGeneral.qml:307
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr "ეს თქვენს არსებულ საწყისი ეკრანის განლაგებას თავზე გადააწერს!"
+
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
 msgid "Wallpapers"
@@ -107,188 +282,9 @@ msgstr "ფონის სურათები"
 msgid "Settings"
 msgstr "მორგება"
 
-#: qml/settings/SettingsWindow.qml:80
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "საწყის ეკრანის მორგება"
+#~ msgid "Homescreen Settings"
+#~ msgstr "საწყის ეკრანის მორგება"
 
-#: qml/settings/SettingsWindow.qml:89
-#, kde-format
-msgid "Icons"
-msgstr "ხატულები"
-
-#: qml/settings/SettingsWindow.qml:105
-#, kde-format
-msgid "Application"
-msgstr "პროგრამა"
-
-#: qml/settings/SettingsWindow.qml:121
-#, kde-format
-msgid "Number of rows"
-msgstr "მწკრივების რიცხვი"
-
-#: qml/settings/SettingsWindow.qml:122
-#, kde-format
-msgid "Number of columns"
-msgstr "სვეტების რაოდენობა"
-
-#: qml/settings/SettingsWindow.qml:126
-#, kde-format
-msgid "Size of icons on homescreen"
-msgstr "ხატულების ზომა საწყის ეკრანზე"
-
-#: qml/settings/SettingsWindow.qml:165
-#, kde-format
-msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
-"მწკრივები და სვეტები ადგილს გაცვლიან, ეკრანის შემობრუნებაზე დამოკიდებულებით."
-
-#: qml/settings/SettingsWindow.qml:169
-#, kde-format
-msgid "Homescreen"
-msgstr "საწყისი ეკრანი"
-
-#: qml/settings/SettingsWindow.qml:175
-#, kde-format
-msgid "Show labels on homescreen"
-msgstr "ჭდეების ჩვენება საწყის ეკრანზე"
-
-#: qml/settings/SettingsWindow.qml:188
-#, kde-format
-msgid "Show labels in favorites bar"
-msgstr "ჭდეების ჩვენება სანიშნეების პანელზე"
-
-#: qml/settings/SettingsWindow.qml:201
-#, kde-format
-msgid "Lock layout"
-msgstr "განლაგების ჩაკეტვა"
-
-#: qml/settings/SettingsWindow.qml:214
-#, kde-format
-msgid "Page transition effect"
-msgstr "გვერდის გადასვლის ეფექტი"
-
-#: qml/settings/SettingsWindow.qml:220
-#, kde-format
-msgid "Slide"
-msgstr "სლაიდი"
-
-#: qml/settings/SettingsWindow.qml:221
-#, kde-format
-msgid "Cube"
-msgstr "კუბი"
-
-#: qml/settings/SettingsWindow.qml:222
-#, kde-format
-msgid "Fade"
-msgstr "მინავლება"
-
-#: qml/settings/SettingsWindow.qml:223
-#, kde-format
-msgid "Stack"
-msgstr "დასტა"
-
-#: qml/settings/SettingsWindow.qml:224
-#, kde-format
-msgid "Rotation"
-msgstr "შემობრუნება"
-
-#: qml/settings/SettingsWindow.qml:241
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "დაატყაპუნეთ ორჯერ მოწყობილობის დასაბლოკად"
-
-#: qml/settings/SettingsWindow.qml:252
-#, kde-format
-msgid "Favorites Bar"
-msgstr "სანიშნეების პანელი"
-
-#: qml/settings/SettingsWindow.qml:257
-#, kde-format
-msgid "Show background"
-msgstr "ფონის ჩვენება"
-
-#: qml/settings/SettingsWindow.qml:268
-#, kde-format
-msgctxt "@title:group settings group"
-msgid "Wallpaper"
-msgstr "ფონური სურათი"
-
-#: qml/settings/SettingsWindow.qml:274
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "ფონის სურათის გაბუნდოვნების ეფექტი"
-
-#: qml/settings/SettingsWindow.qml:277
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "არცერთი"
-
-#: qml/settings/SettingsWindow.qml:278
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "მარტივი"
-
-#: qml/settings/SettingsWindow.qml:279
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "სრული"
-
-#: qml/settings/SettingsWindow.qml:294
-#, kde-format
-msgid "General"
-msgstr "ზოგადი"
-
-#: qml/settings/SettingsWindow.qml:301
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "გადართვა საწყის ეკრანებსა და მეტ ფონის სურათის პარამეტრებს შორის"
-
-#: qml/settings/SettingsWindow.qml:310
-#, kde-format
-msgid "Export layout"
-msgstr "განლაგების გატანა"
-
-#: qml/settings/SettingsWindow.qml:319
-#, kde-format
-msgid "Import layout"
-msgstr "განლაგების შემოტანა"
-
-#: qml/settings/SettingsWindow.qml:328
-#, kde-format
-msgid "Export layout to"
-msgstr "განლაგების გატანა"
-
-#: qml/settings/SettingsWindow.qml:346
-#, kde-format
-msgid "Import layout from"
-msgstr "განლაგების შემოტანა"
-
-#: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
-#, kde-format
-msgid "Export Status"
-msgstr "გატანის სტატუსი"
-
-#: qml/settings/SettingsWindow.qml:358
-#, kde-format
-msgid "Failed to export to %1"
-msgstr "%1-ზე გატანა ჩავარდა"
-
-#: qml/settings/SettingsWindow.qml:365
-#, kde-format
-msgid "Homescreen layout exported successfully to %1"
-msgstr "საწყისი ეკრანის განლაგების %1-ზე გადატანა წარმატებით დასრულდა"
-
-#: qml/settings/SettingsWindow.qml:371
-#, kde-format
-msgid "Confirm Import"
-msgstr "გატანის დადასტურება"
-
-#: qml/settings/SettingsWindow.qml:372
-#, kde-format
-msgid "This will overwrite your existing homescreen layout!"
-msgstr "ეს თქვენს არსებულ საწყისი ეკრანის განლაგებას თავზე გადააწერს!"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "გადართვა საწყის ეკრანებსა და მეტ ფონის სურათის პარამეტრებს შორის"

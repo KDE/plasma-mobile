@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-13 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-13 16:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -22,6 +22,11 @@ msgstr ""
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "Klasör"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr ""
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -48,6 +53,44 @@ msgstr "Sık kullanılanlara ekle"
 msgid "Applications"
 msgstr "Uygulamalar"
 
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "Ana Ekran Ayarları"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "Ana Ekran"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Duvar kâğıdı bulanıklık efekti"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Yok"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Basit"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Tam"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Aygıtı kilitlemek için çift dokun"
+
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
@@ -58,46 +101,6 @@ msgstr "Duvar Kâğıtları"
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: qml/settings/SettingsWindow.qml:76
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Ana Ekran Ayarları"
-
-#: qml/settings/SettingsWindow.qml:86
-#, kde-format
-msgid "Homescreen"
-msgstr "Ana Ekran"
-
-#: qml/settings/SettingsWindow.qml:92
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "Duvar kâğıdı bulanıklık efekti"
-
-#: qml/settings/SettingsWindow.qml:95
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "Yok"
-
-#: qml/settings/SettingsWindow.qml:96
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "Basit"
-
-#: qml/settings/SettingsWindow.qml:97
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "Tam"
-
-#: qml/settings/SettingsWindow.qml:114
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "Aygıtı kilitlemek için çift dokun"
-
-#: qml/settings/SettingsWindow.qml:130
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "Ana Ekran/Duvar Kâğıdı Seçenekleri Arasında Geçiş Yap"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "Ana Ekran/Duvar Kâğıdı Seçenekleri Arasında Geçiş Yap"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-14 09:07+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -31,6 +31,11 @@ msgstr "Dossier"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Rechercher des applications..."
+
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "Général"
 
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
@@ -83,7 +88,7 @@ msgstr "Confirmer la suppression du dossier"
 msgid "Are you sure you want to delete this folder?"
 msgstr "Êtes-vous sûr de vouloir supprimer ce dossier ? "
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
 msgstr "Composants graphiques"
@@ -100,6 +105,175 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "Obtenir de nouveaux composants graphiques..."
 
+#: qml/settings/ConfigGeneral.qml:31
+#, kde-format
+msgid "Icons"
+msgstr "Icônes"
+
+#: qml/settings/ConfigGeneral.qml:47
+#, kde-format
+msgid "Application"
+msgstr "Application"
+
+#: qml/settings/ConfigGeneral.qml:63
+#, kde-format
+msgid "Number of rows"
+msgstr "Nombre de lignes"
+
+#: qml/settings/ConfigGeneral.qml:64
+#, kde-format
+msgid "Number of columns"
+msgstr "Nombre de colonnes"
+
+#: qml/settings/ConfigGeneral.qml:68
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr "Taille des icônes pour l'écran d'accueil"
+
+#: qml/settings/ConfigGeneral.qml:107
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr "Les lignes et colonnes seront inversées selon la rotation de l'écran."
+
+#: qml/settings/ConfigGeneral.qml:111
+#, kde-format
+msgid "Homescreen"
+msgstr "Écran d'accueil"
+
+#: qml/settings/ConfigGeneral.qml:117
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr "Afficher les étiquettes sur l'écran d'accueil"
+
+#: qml/settings/ConfigGeneral.qml:130
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr "Afficher les étiquettes dans la barre des signets"
+
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "Verrouiller la disposition"
+
+#: qml/settings/ConfigGeneral.qml:156
+#, kde-format
+msgid "Page transition effect"
+msgstr "Effet de transition de pages"
+
+#: qml/settings/ConfigGeneral.qml:162
+#, kde-format
+msgid "Slide"
+msgstr "Diapositive"
+
+#: qml/settings/ConfigGeneral.qml:163
+#, kde-format
+msgid "Cube"
+msgstr "Cube"
+
+#: qml/settings/ConfigGeneral.qml:164
+#, kde-format
+msgid "Fade"
+msgstr "Faire un fondu"
+
+#: qml/settings/ConfigGeneral.qml:165
+#, kde-format
+msgid "Stack"
+msgstr "Empiler"
+
+#: qml/settings/ConfigGeneral.qml:166
+#, kde-format
+msgid "Rotation"
+msgstr "Rotation"
+
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Tapotez deux fois pour verrouiller le périphérique"
+
+#: qml/settings/ConfigGeneral.qml:194
+#, kde-format
+msgid "Favorites Bar"
+msgstr "Barre des signets"
+
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr "Afficher l'arrière-plan"
+
+#: qml/settings/ConfigGeneral.qml:210
+#, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr "Fond d'écran"
+
+#: qml/settings/ConfigGeneral.qml:216
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Effet de flou sur le fond d'écran"
+
+#: qml/settings/ConfigGeneral.qml:219
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Aucun"
+
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Simple"
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Complet"
+
+#: qml/settings/ConfigGeneral.qml:243
+#, kde-format
+msgid "Export layout"
+msgstr "Exporter une disposition"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, kde-format
+msgid "Import layout"
+msgstr "Importer une disposition"
+
+#: qml/settings/ConfigGeneral.qml:262
+#, kde-format
+msgid "Export layout to"
+msgstr "Exporter une disposition vers"
+
+#: qml/settings/ConfigGeneral.qml:281
+#, kde-format
+msgid "Import layout from"
+msgstr "Importer une disposition à partir de"
+
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
+#, kde-format
+msgid "Export Status"
+msgstr "Exporter un état"
+
+#: qml/settings/ConfigGeneral.qml:293
+#, kde-format
+msgid "Failed to export to %1"
+msgstr "Impossible d'exporter vers %1"
+
+#: qml/settings/ConfigGeneral.qml:300
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr "La disposition de l'écran d'accueil a été exportée avec succès vers %1"
+
+#: qml/settings/ConfigGeneral.qml:306
+#, kde-format
+msgid "Confirm Import"
+msgstr "Importation de colonnes"
+
+#: qml/settings/ConfigGeneral.qml:307
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr "Ceci écrasera votre disposition existante de votre écran d'accueil"
+
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
 msgid "Wallpapers"
@@ -110,188 +284,10 @@ msgstr "Fonds d'écran"
 msgid "Settings"
 msgstr "Configuration"
 
-#: qml/settings/SettingsWindow.qml:80
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Configuration de l'écran d'accueil"
+#~ msgid "Homescreen Settings"
+#~ msgstr "Configuration de l'écran d'accueil"
 
-#: qml/settings/SettingsWindow.qml:89
-#, kde-format
-msgid "Icons"
-msgstr "Icônes"
-
-#: qml/settings/SettingsWindow.qml:105
-#, kde-format
-msgid "Application"
-msgstr "Application"
-
-#: qml/settings/SettingsWindow.qml:121
-#, kde-format
-msgid "Number of rows"
-msgstr "Nombre de lignes"
-
-#: qml/settings/SettingsWindow.qml:122
-#, kde-format
-msgid "Number of columns"
-msgstr "Nombre de colonnes"
-
-#: qml/settings/SettingsWindow.qml:126
-#, kde-format
-msgid "Size of icons on homescreen"
-msgstr "Taille des icônes pour l'écran d'accueil"
-
-#: qml/settings/SettingsWindow.qml:165
-#, kde-format
-msgid "The rows and columns will swap depending on the screen rotation."
-msgstr "Les lignes et colonnes seront inversées selon la rotation de l'écran."
-
-#: qml/settings/SettingsWindow.qml:169
-#, kde-format
-msgid "Homescreen"
-msgstr "Écran d'accueil"
-
-#: qml/settings/SettingsWindow.qml:175
-#, kde-format
-msgid "Show labels on homescreen"
-msgstr "Afficher les étiquettes sur l'écran d'accueil"
-
-#: qml/settings/SettingsWindow.qml:188
-#, kde-format
-msgid "Show labels in favorites bar"
-msgstr "Afficher les étiquettes dans la barre des signets"
-
-#: qml/settings/SettingsWindow.qml:201
-#, kde-format
-msgid "Lock layout"
-msgstr "Verrouiller la disposition"
-
-#: qml/settings/SettingsWindow.qml:214
-#, kde-format
-msgid "Page transition effect"
-msgstr "Effet de transition de pages"
-
-#: qml/settings/SettingsWindow.qml:220
-#, kde-format
-msgid "Slide"
-msgstr "Diapositive"
-
-#: qml/settings/SettingsWindow.qml:221
-#, kde-format
-msgid "Cube"
-msgstr "Cube"
-
-#: qml/settings/SettingsWindow.qml:222
-#, kde-format
-msgid "Fade"
-msgstr "Faire un fondu"
-
-#: qml/settings/SettingsWindow.qml:223
-#, kde-format
-msgid "Stack"
-msgstr "Empiler"
-
-#: qml/settings/SettingsWindow.qml:224
-#, kde-format
-msgid "Rotation"
-msgstr "Rotation"
-
-#: qml/settings/SettingsWindow.qml:241
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "Tapotez deux fois pour verrouiller le périphérique"
-
-#: qml/settings/SettingsWindow.qml:252
-#, kde-format
-msgid "Favorites Bar"
-msgstr "Barre des signets"
-
-#: qml/settings/SettingsWindow.qml:257
-#, kde-format
-msgid "Show background"
-msgstr "Afficher l'arrière-plan"
-
-#: qml/settings/SettingsWindow.qml:268
-#, kde-format
-msgctxt "@title:group settings group"
-msgid "Wallpaper"
-msgstr "Fond d'écran"
-
-#: qml/settings/SettingsWindow.qml:274
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "Effet de flou sur le fond d'écran"
-
-#: qml/settings/SettingsWindow.qml:277
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "Aucun"
-
-#: qml/settings/SettingsWindow.qml:278
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "Simple"
-
-#: qml/settings/SettingsWindow.qml:279
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "Complet"
-
-#: qml/settings/SettingsWindow.qml:294
-#, kde-format
-msgid "General"
-msgstr "Général"
-
-#: qml/settings/SettingsWindow.qml:301
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
-"Basculer entre les options pour écrans d'accueil et plus de fond d'écran"
-
-#: qml/settings/SettingsWindow.qml:310
-#, kde-format
-msgid "Export layout"
-msgstr "Exporter une disposition"
-
-#: qml/settings/SettingsWindow.qml:319
-#, kde-format
-msgid "Import layout"
-msgstr "Importer une disposition"
-
-#: qml/settings/SettingsWindow.qml:328
-#, kde-format
-msgid "Export layout to"
-msgstr "Exporter une disposition vers"
-
-#: qml/settings/SettingsWindow.qml:346
-#, kde-format
-msgid "Import layout from"
-msgstr "Importer une disposition à partir de"
-
-#: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
-#, kde-format
-msgid "Export Status"
-msgstr "Exporter un état"
-
-#: qml/settings/SettingsWindow.qml:358
-#, kde-format
-msgid "Failed to export to %1"
-msgstr "Impossible d'exporter vers %1"
-
-#: qml/settings/SettingsWindow.qml:365
-#, kde-format
-msgid "Homescreen layout exported successfully to %1"
-msgstr "La disposition de l'écran d'accueil a été exportée avec succès vers %1"
-
-#: qml/settings/SettingsWindow.qml:371
-#, kde-format
-msgid "Confirm Import"
-msgstr "Importation de colonnes"
-
-#: qml/settings/SettingsWindow.qml:372
-#, kde-format
-msgid "This will overwrite your existing homescreen layout!"
-msgstr "Ceci écrasera votre disposition existante de votre écran d'accueil"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr ""
+#~ "Basculer entre les options pour écrans d'accueil et plus de fond d'écran"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-03-14 07:14+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -30,49 +30,56 @@ msgstr "Poglej podrobnosti napake…"
 msgid "Open %1"
 msgstr "Odpri %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "Spremembe postavitev je omejil skrbnik sistema"
+#: contents/configuration/AppletConfiguration.qml:90
+#, fuzzy
+#| msgid "Configure"
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Konfiguriraj"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Splošno"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Tapeta"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Postavitev domačega zaslona"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
 msgstr "Domači zaslon za uporabo."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "Vtičnik tapete"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "Vtičnik tapete za uporabo."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "Vtičniki tapet"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "Pridobi nove vtičnike…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "Spremembe postavitve morajo biti uveljavljene pred drugimi spremembami"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Uveljavi zdaj"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Tapeta"
+#: contents/configuration/private/ConfigListPage.qml:45
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Spremembe postavitev je omejil skrbnik sistema"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -85,6 +92,19 @@ msgstr "Napačen PIN"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indikator fokusa plošče"
+
+#~ msgid "General"
+#~ msgstr "Splošno"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Postavitev domačega zaslona"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr ""
+#~ "Spremembe postavitve morajo biti uveljavljene pred drugimi spremembami"
+
+#~ msgid "Apply now"
+#~ msgstr "Uveljavi zdaj"
 
 #~ msgctxt "@action:button"
 #~ msgid "Turn flashlight on"
@@ -99,6 +119,3 @@ msgstr "Indikator fokusa plošče"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Spremeni tapeto"
-
-#~ msgid "Configure"
-#~ msgstr "Konfiguriraj"

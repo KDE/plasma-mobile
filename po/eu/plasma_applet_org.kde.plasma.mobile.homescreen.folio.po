@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-08-14 10:42+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -30,6 +30,11 @@ msgstr "Karpeta"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Bilatu aplikazioak…"
+
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "Orokorra"
 
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
@@ -82,7 +87,7 @@ msgstr "Baieztatu karpeta ezabatzea"
 msgid "Are you sure you want to delete this folder?"
 msgstr "Ziur zaude karpeta hau ezabatu nahi duzula?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
 msgstr "Trepetak"
@@ -99,6 +104,176 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr "Lortu trepeta berriak…"
 
+#: qml/settings/ConfigGeneral.qml:31
+#, kde-format
+msgid "Icons"
+msgstr "Ikonoak"
+
+#: qml/settings/ConfigGeneral.qml:47
+#, kde-format
+msgid "Application"
+msgstr "Aplikazioa"
+
+#: qml/settings/ConfigGeneral.qml:63
+#, kde-format
+msgid "Number of rows"
+msgstr "Errenkada-kopurua"
+
+#: qml/settings/ConfigGeneral.qml:64
+#, kde-format
+msgid "Number of columns"
+msgstr "Zutabe-kopurua"
+
+#: qml/settings/ConfigGeneral.qml:68
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr "Pantaila nagusiko ikonoen neurria"
+
+#: qml/settings/ConfigGeneral.qml:107
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr ""
+"Errenkadak eta zutabeak trukatu egingo dira pantaila biraketaren arabera."
+
+#: qml/settings/ConfigGeneral.qml:111
+#, kde-format
+msgid "Homescreen"
+msgstr "Pantaila nagusia"
+
+#: qml/settings/ConfigGeneral.qml:117
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr "Erakutsi etiketak pantaila nagusian"
+
+#: qml/settings/ConfigGeneral.qml:130
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr "Erakutsi etiketak gogokoen barran"
+
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "Giltzatu antolamendua"
+
+#: qml/settings/ConfigGeneral.qml:156
+#, kde-format
+msgid "Page transition effect"
+msgstr "Orrialde trantsizio efektua"
+
+#: qml/settings/ConfigGeneral.qml:162
+#, kde-format
+msgid "Slide"
+msgstr "Irristada"
+
+#: qml/settings/ConfigGeneral.qml:163
+#, kde-format
+msgid "Cube"
+msgstr "Kuboa"
+
+#: qml/settings/ConfigGeneral.qml:164
+#, kde-format
+msgid "Fade"
+msgstr "Margultzea"
+
+#: qml/settings/ConfigGeneral.qml:165
+#, kde-format
+msgid "Stack"
+msgstr "Pila"
+
+#: qml/settings/ConfigGeneral.qml:166
+#, kde-format
+msgid "Rotation"
+msgstr "Biraketa"
+
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Ttak bikoitza gailua giltzatzeko"
+
+#: qml/settings/ConfigGeneral.qml:194
+#, kde-format
+msgid "Favorites Bar"
+msgstr "Gogokoen barra"
+
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr "Erakutsi atzeko planoa"
+
+#: qml/settings/ConfigGeneral.qml:210
+#, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr "Horma-papera"
+
+#: qml/settings/ConfigGeneral.qml:216
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Horma-paper lauso efektua"
+
+#: qml/settings/ConfigGeneral.qml:219
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Bat ere ez"
+
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Sinplea"
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Osoa"
+
+#: qml/settings/ConfigGeneral.qml:243
+#, kde-format
+msgid "Export layout"
+msgstr "Esportatu antolaera"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, kde-format
+msgid "Import layout"
+msgstr "Inportatu antolaera"
+
+#: qml/settings/ConfigGeneral.qml:262
+#, kde-format
+msgid "Export layout to"
+msgstr "Esportatu antolaera hona,"
+
+#: qml/settings/ConfigGeneral.qml:281
+#, kde-format
+msgid "Import layout from"
+msgstr "Inportatu antolaera hemendik,"
+
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
+#, kde-format
+msgid "Export Status"
+msgstr "Esportatu egoera"
+
+#: qml/settings/ConfigGeneral.qml:293
+#, kde-format
+msgid "Failed to export to %1"
+msgstr "%1(e)ra esportatzea huts egin du"
+
+#: qml/settings/ConfigGeneral.qml:300
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr "Pantaila nagusiaren antolaera ondo esportatu da %1(e)ra"
+
+#: qml/settings/ConfigGeneral.qml:306
+#, kde-format
+msgid "Confirm Import"
+msgstr "Baieztatu inportatzea"
+
+#: qml/settings/ConfigGeneral.qml:307
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr "Horrek zure pantaila nagusiaren antolaera gainidatziko du!"
+
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
 msgid "Wallpapers"
@@ -109,188 +284,9 @@ msgstr "Horma-paperak"
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: qml/settings/SettingsWindow.qml:80
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Pantaila nagusiaren ezarpenak"
+#~ msgid "Homescreen Settings"
+#~ msgstr "Pantaila nagusiaren ezarpenak"
 
-#: qml/settings/SettingsWindow.qml:89
-#, kde-format
-msgid "Icons"
-msgstr "Ikonoak"
-
-#: qml/settings/SettingsWindow.qml:105
-#, kde-format
-msgid "Application"
-msgstr "Aplikazioa"
-
-#: qml/settings/SettingsWindow.qml:121
-#, kde-format
-msgid "Number of rows"
-msgstr "Errenkada-kopurua"
-
-#: qml/settings/SettingsWindow.qml:122
-#, kde-format
-msgid "Number of columns"
-msgstr "Zutabe-kopurua"
-
-#: qml/settings/SettingsWindow.qml:126
-#, kde-format
-msgid "Size of icons on homescreen"
-msgstr "Pantaila nagusiko ikonoen neurria"
-
-#: qml/settings/SettingsWindow.qml:165
-#, kde-format
-msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
-"Errenkadak eta zutabeak trukatu egingo dira pantaila biraketaren arabera."
-
-#: qml/settings/SettingsWindow.qml:169
-#, kde-format
-msgid "Homescreen"
-msgstr "Pantaila nagusia"
-
-#: qml/settings/SettingsWindow.qml:175
-#, kde-format
-msgid "Show labels on homescreen"
-msgstr "Erakutsi etiketak pantaila nagusian"
-
-#: qml/settings/SettingsWindow.qml:188
-#, kde-format
-msgid "Show labels in favorites bar"
-msgstr "Erakutsi etiketak gogokoen barran"
-
-#: qml/settings/SettingsWindow.qml:201
-#, kde-format
-msgid "Lock layout"
-msgstr "Giltzatu antolamendua"
-
-#: qml/settings/SettingsWindow.qml:214
-#, kde-format
-msgid "Page transition effect"
-msgstr "Orrialde trantsizio efektua"
-
-#: qml/settings/SettingsWindow.qml:220
-#, kde-format
-msgid "Slide"
-msgstr "Irristada"
-
-#: qml/settings/SettingsWindow.qml:221
-#, kde-format
-msgid "Cube"
-msgstr "Kuboa"
-
-#: qml/settings/SettingsWindow.qml:222
-#, kde-format
-msgid "Fade"
-msgstr "Margultzea"
-
-#: qml/settings/SettingsWindow.qml:223
-#, kde-format
-msgid "Stack"
-msgstr "Pila"
-
-#: qml/settings/SettingsWindow.qml:224
-#, kde-format
-msgid "Rotation"
-msgstr "Biraketa"
-
-#: qml/settings/SettingsWindow.qml:241
-#, kde-format
-msgid "Double tap to lock device"
-msgstr "Ttak bikoitza gailua giltzatzeko"
-
-#: qml/settings/SettingsWindow.qml:252
-#, kde-format
-msgid "Favorites Bar"
-msgstr "Gogokoen barra"
-
-#: qml/settings/SettingsWindow.qml:257
-#, kde-format
-msgid "Show background"
-msgstr "Erakutsi atzeko planoa"
-
-#: qml/settings/SettingsWindow.qml:268
-#, kde-format
-msgctxt "@title:group settings group"
-msgid "Wallpaper"
-msgstr "Horma-papera"
-
-#: qml/settings/SettingsWindow.qml:274
-#, kde-format
-msgid "Wallpaper blur effect"
-msgstr "Horma-paper lauso efektua"
-
-#: qml/settings/SettingsWindow.qml:277
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr "Bat ere ez"
-
-#: qml/settings/SettingsWindow.qml:278
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr "Sinplea"
-
-#: qml/settings/SettingsWindow.qml:279
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr "Osoa"
-
-#: qml/settings/SettingsWindow.qml:294
-#, kde-format
-msgid "General"
-msgstr "Orokorra"
-
-#: qml/settings/SettingsWindow.qml:301
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "Aldatu pantaila-nagusien eta horma-paperen aukera gehiagoren artean"
-
-#: qml/settings/SettingsWindow.qml:310
-#, kde-format
-msgid "Export layout"
-msgstr "Esportatu antolaera"
-
-#: qml/settings/SettingsWindow.qml:319
-#, kde-format
-msgid "Import layout"
-msgstr "Inportatu antolaera"
-
-#: qml/settings/SettingsWindow.qml:328
-#, kde-format
-msgid "Export layout to"
-msgstr "Esportatu antolaera hona,"
-
-#: qml/settings/SettingsWindow.qml:346
-#, kde-format
-msgid "Import layout from"
-msgstr "Inportatu antolaera hemendik,"
-
-#: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
-#, kde-format
-msgid "Export Status"
-msgstr "Esportatu egoera"
-
-#: qml/settings/SettingsWindow.qml:358
-#, kde-format
-msgid "Failed to export to %1"
-msgstr "%1(e)ra esportatzea huts egin du"
-
-#: qml/settings/SettingsWindow.qml:365
-#, kde-format
-msgid "Homescreen layout exported successfully to %1"
-msgstr "Pantaila nagusiaren antolaera ondo esportatu da %1(e)ra"
-
-#: qml/settings/SettingsWindow.qml:371
-#, kde-format
-msgid "Confirm Import"
-msgstr "Baieztatu inportatzea"
-
-#: qml/settings/SettingsWindow.qml:372
-#, kde-format
-msgid "This will overwrite your existing homescreen layout!"
-msgstr "Horrek zure pantaila nagusiaren antolaera gainidatziko du!"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "Aldatu pantaila-nagusien eta horma-paperen aukera gehiagoren artean"

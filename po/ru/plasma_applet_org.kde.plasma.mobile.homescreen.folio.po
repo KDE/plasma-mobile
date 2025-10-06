@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-06-24 12:34+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -29,6 +29,11 @@ msgstr "Папка"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Поиск приложений…"
+
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "Общие"
 
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
@@ -83,7 +88,7 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
 msgstr "Виджеты"
@@ -100,6 +105,181 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr ""
 
+#: qml/settings/ConfigGeneral.qml:31
+#, kde-format
+msgid "Icons"
+msgstr "Значки"
+
+#: qml/settings/ConfigGeneral.qml:47
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Search applications…"
+msgid "Application"
+msgstr "Поиск приложений…"
+
+#: qml/settings/ConfigGeneral.qml:63
+#, kde-format
+msgid "Number of rows"
+msgstr "Количество строк"
+
+#: qml/settings/ConfigGeneral.qml:64
+#, kde-format
+msgid "Number of columns"
+msgstr "Количество столбцов"
+
+#: qml/settings/ConfigGeneral.qml:68
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr "Размер значков главного экрана"
+
+#: qml/settings/ConfigGeneral.qml:107
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr "При повороте экрана строки и столбцы будут меняться местами."
+
+#: qml/settings/ConfigGeneral.qml:111
+#, kde-format
+msgid "Homescreen"
+msgstr "Главный экран"
+
+#: qml/settings/ConfigGeneral.qml:117
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr "Показывать подписи на главном экране"
+
+#: qml/settings/ConfigGeneral.qml:130
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr "Показывать подписи на панели избранного"
+
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "Заблокировать компоновку"
+
+#: qml/settings/ConfigGeneral.qml:156
+#, kde-format
+msgid "Page transition effect"
+msgstr "Эффект перехода"
+
+#: qml/settings/ConfigGeneral.qml:162
+#, kde-format
+msgid "Slide"
+msgstr "Слайды"
+
+#: qml/settings/ConfigGeneral.qml:163
+#, kde-format
+msgid "Cube"
+msgstr "Куб"
+
+#: qml/settings/ConfigGeneral.qml:164
+#, kde-format
+msgid "Fade"
+msgstr "Постепенное исчезание"
+
+#: qml/settings/ConfigGeneral.qml:165
+#, kde-format
+msgid "Stack"
+msgstr "Стопки"
+
+#: qml/settings/ConfigGeneral.qml:166
+#, kde-format
+msgid "Rotation"
+msgstr "Поворот"
+
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:194
+#, kde-format
+msgid "Favorites Bar"
+msgstr "Панель избранного"
+
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:210
+#, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr "Обои"
+
+#: qml/settings/ConfigGeneral.qml:216
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
+msgstr "Показывать эффект размытия обоев"
+
+#: qml/settings/ConfigGeneral.qml:219
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:243
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Export layout"
+msgstr "Экспорт компоновки"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, fuzzy, kde-format
+#| msgid "Import layout from"
+msgid "Import layout"
+msgstr "Импорт компоновки"
+
+#: qml/settings/ConfigGeneral.qml:262
+#, kde-format
+msgid "Export layout to"
+msgstr "Экспорт компоновки"
+
+#: qml/settings/ConfigGeneral.qml:281
+#, kde-format
+msgid "Import layout from"
+msgstr "Импорт компоновки"
+
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
+#, kde-format
+msgid "Export Status"
+msgstr "Состояние экспорта"
+
+#: qml/settings/ConfigGeneral.qml:293
+#, kde-format
+msgid "Failed to export to %1"
+msgstr "Не удалось выполнить экспорт в %1"
+
+#: qml/settings/ConfigGeneral.qml:300
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr "Экспорт компоновки главного экрана в %1 успешно завершён"
+
+#: qml/settings/ConfigGeneral.qml:306
+#, kde-format
+msgid "Confirm Import"
+msgstr "Подтверждение импорта"
+
+#: qml/settings/ConfigGeneral.qml:307
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr "Текущая компоновка главного экрана будет перезаписана!"
+
 #: qml/settings/SettingsComponent.qml:68
 #, fuzzy, kde-format
 #| msgctxt "@title:group settings group"
@@ -112,193 +292,10 @@ msgstr "Обои"
 msgid "Settings"
 msgstr ""
 
-#: qml/settings/SettingsWindow.qml:80
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "Параметры главного экрана"
+#~ msgid "Homescreen Settings"
+#~ msgstr "Параметры главного экрана"
 
-#: qml/settings/SettingsWindow.qml:89
-#, kde-format
-msgid "Icons"
-msgstr "Значки"
-
-#: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
-msgid "Application"
-msgstr "Поиск приложений…"
-
-#: qml/settings/SettingsWindow.qml:121
-#, kde-format
-msgid "Number of rows"
-msgstr "Количество строк"
-
-#: qml/settings/SettingsWindow.qml:122
-#, kde-format
-msgid "Number of columns"
-msgstr "Количество столбцов"
-
-#: qml/settings/SettingsWindow.qml:126
-#, kde-format
-msgid "Size of icons on homescreen"
-msgstr "Размер значков главного экрана"
-
-#: qml/settings/SettingsWindow.qml:165
-#, kde-format
-msgid "The rows and columns will swap depending on the screen rotation."
-msgstr "При повороте экрана строки и столбцы будут меняться местами."
-
-#: qml/settings/SettingsWindow.qml:169
-#, kde-format
-msgid "Homescreen"
-msgstr "Главный экран"
-
-#: qml/settings/SettingsWindow.qml:175
-#, kde-format
-msgid "Show labels on homescreen"
-msgstr "Показывать подписи на главном экране"
-
-#: qml/settings/SettingsWindow.qml:188
-#, kde-format
-msgid "Show labels in favorites bar"
-msgstr "Показывать подписи на панели избранного"
-
-#: qml/settings/SettingsWindow.qml:201
-#, kde-format
-msgid "Lock layout"
-msgstr "Заблокировать компоновку"
-
-#: qml/settings/SettingsWindow.qml:214
-#, kde-format
-msgid "Page transition effect"
-msgstr "Эффект перехода"
-
-#: qml/settings/SettingsWindow.qml:220
-#, kde-format
-msgid "Slide"
-msgstr "Слайды"
-
-#: qml/settings/SettingsWindow.qml:221
-#, kde-format
-msgid "Cube"
-msgstr "Куб"
-
-#: qml/settings/SettingsWindow.qml:222
-#, kde-format
-msgid "Fade"
-msgstr "Постепенное исчезание"
-
-#: qml/settings/SettingsWindow.qml:223
-#, kde-format
-msgid "Stack"
-msgstr "Стопки"
-
-#: qml/settings/SettingsWindow.qml:224
-#, kde-format
-msgid "Rotation"
-msgstr "Поворот"
-
-#: qml/settings/SettingsWindow.qml:241
-#, kde-format
-msgid "Double tap to lock device"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:252
-#, kde-format
-msgid "Favorites Bar"
-msgstr "Панель избранного"
-
-#: qml/settings/SettingsWindow.qml:257
-#, kde-format
-msgid "Show background"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:268
-#, kde-format
-msgctxt "@title:group settings group"
-msgid "Wallpaper"
-msgstr "Обои"
-
-#: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
-msgid "Wallpaper blur effect"
-msgstr "Показывать эффект размытия обоев"
-
-#: qml/settings/SettingsWindow.qml:277
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:278
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:279
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:294
-#, kde-format
-msgid "General"
-msgstr "Общие"
-
-#: qml/settings/SettingsWindow.qml:301
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "Переключение между главными экранами и дополнительные варианты обоев"
-
-#: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
-msgid "Export layout"
-msgstr "Экспорт компоновки"
-
-#: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
-msgid "Import layout"
-msgstr "Импорт компоновки"
-
-#: qml/settings/SettingsWindow.qml:328
-#, kde-format
-msgid "Export layout to"
-msgstr "Экспорт компоновки"
-
-#: qml/settings/SettingsWindow.qml:346
-#, kde-format
-msgid "Import layout from"
-msgstr "Импорт компоновки"
-
-#: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
-#, kde-format
-msgid "Export Status"
-msgstr "Состояние экспорта"
-
-#: qml/settings/SettingsWindow.qml:358
-#, kde-format
-msgid "Failed to export to %1"
-msgstr "Не удалось выполнить экспорт в %1"
-
-#: qml/settings/SettingsWindow.qml:365
-#, kde-format
-msgid "Homescreen layout exported successfully to %1"
-msgstr "Экспорт компоновки главного экрана в %1 успешно завершён"
-
-#: qml/settings/SettingsWindow.qml:371
-#, kde-format
-msgid "Confirm Import"
-msgstr "Подтверждение импорта"
-
-#: qml/settings/SettingsWindow.qml:372
-#, kde-format
-msgid "This will overwrite your existing homescreen layout!"
-msgstr "Текущая компоновка главного экрана будет перезаписана!"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr ""
+#~ "Переключение между главными экранами и дополнительные варианты обоев"

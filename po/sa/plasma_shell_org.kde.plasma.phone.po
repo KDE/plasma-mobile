@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -29,49 +29,54 @@ msgstr "त्रुटिविवरणं पश्यन्तु..."
 msgid "Open %1"
 msgstr "%1 उद्घाटयन्तु"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "विन्यासपरिवर्तनं प्रणालीप्रशासकेन प्रतिबन्धितम् अस्ति"
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "सामान्य"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "वॉलपेपर"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "होमस्क्रीन् लेआउट"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
 msgstr "उपयोक्तुं होमस्क्रीन् विन्यासः ।"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "वॉलपेपर प्लगइन"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "उपयोक्तुं वॉलपेपरप्लगिन्।"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "वॉलपेपर प्लगइन"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "नवीन प्लगिन् प्राप्त करें..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "अन्यपरिवर्तनानि कर्तुं पूर्वं विन्यासपरिवर्तनं प्रयोक्तव्यम्"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "अधुना आवेदनं कुर्वन्तु"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "वॉलपेपर"
+#: contents/configuration/private/ConfigListPage.qml:45
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "विन्यासपरिवर्तनं प्रणालीप्रशासकेन प्रतिबन्धितम् अस्ति"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -84,3 +89,15 @@ msgstr "गलत पिन"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "फलक फोकस सूचक"
+
+#~ msgid "General"
+#~ msgstr "सामान्य"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "होमस्क्रीन् लेआउट"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "अन्यपरिवर्तनानि कर्तुं पूर्वं विन्यासपरिवर्तनं प्रयोक्तव्यम्"
+
+#~ msgid "Apply now"
+#~ msgstr "अधुना आवेदनं कुर्वन्तु"

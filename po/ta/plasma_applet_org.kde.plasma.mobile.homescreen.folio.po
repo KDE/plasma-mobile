@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:43+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2024-07-06 21:34+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -27,6 +27,11 @@ msgstr "அடைவு"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "செயலியை கண்டுபிடி…"
+
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "பொதுவானவை"
 
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
@@ -81,7 +86,7 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
 msgstr "பிளாஸ்மாய்டுகள்"
@@ -98,6 +103,181 @@ msgctxt "@action:button"
 msgid "Get New Widgets…"
 msgstr ""
 
+#: qml/settings/ConfigGeneral.qml:31
+#, kde-format
+msgid "Icons"
+msgstr "சின்னங்கள்"
+
+#: qml/settings/ConfigGeneral.qml:47
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Search applications…"
+msgid "Application"
+msgstr "செயலியை கண்டுபிடி…"
+
+#: qml/settings/ConfigGeneral.qml:63
+#, kde-format
+msgid "Number of rows"
+msgstr "வரிசைகளின் &எண்ணிக்கை"
+
+#: qml/settings/ConfigGeneral.qml:64
+#, kde-format
+msgid "Number of columns"
+msgstr "நெடுவரிசைகளின் எண்ணிக்கை"
+
+#: qml/settings/ConfigGeneral.qml:68
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr "முகப்பிலுள்ள சின்னங்களின் அளவு"
+
+#: qml/settings/ConfigGeneral.qml:107
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr "திரையின் நோக்குநிலையைப் பொறுத்து வரிகளும் நெடுவரிகளும் இடமாறும்."
+
+#: qml/settings/ConfigGeneral.qml:111
+#, kde-format
+msgid "Homescreen"
+msgstr "முகப்பு"
+
+#: qml/settings/ConfigGeneral.qml:117
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr "முகப்பில் பெயர்களைக் காட்டு"
+
+#: qml/settings/ConfigGeneral.qml:130
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr "பிடித்தவை பட்டையில் பெயர்களைக் காட்டு"
+
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:156
+#, kde-format
+msgid "Page transition effect"
+msgstr "பக்கமாற்ற அசைவூட்டம்"
+
+#: qml/settings/ConfigGeneral.qml:162
+#, kde-format
+msgid "Slide"
+msgstr "நழுவுவது"
+
+#: qml/settings/ConfigGeneral.qml:163
+#, kde-format
+msgid "Cube"
+msgstr "கனசதுரம்"
+
+#: qml/settings/ConfigGeneral.qml:164
+#, kde-format
+msgid "Fade"
+msgstr "மங்குவது"
+
+#: qml/settings/ConfigGeneral.qml:165
+#, kde-format
+msgid "Stack"
+msgstr "அடுக்கு"
+
+#: qml/settings/ConfigGeneral.qml:166
+#, kde-format
+msgid "Rotation"
+msgstr "சுழற்சி"
+
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:194
+#, kde-format
+msgid "Favorites Bar"
+msgstr "பிடித்தவை பட்டை"
+
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:210
+#, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr "பின்புலப்படம்"
+
+#: qml/settings/ConfigGeneral.qml:216
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
+msgstr "பின்புலப்படத்தை மங்கலாக்கு"
+
+#: qml/settings/ConfigGeneral.qml:219
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:243
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Export layout"
+msgstr "தளவமைப்பு ஏற்றுமதி செய்"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, fuzzy, kde-format
+#| msgid "Import layout from"
+msgid "Import layout"
+msgstr "தளவமைப்பு இறக்குமதி செய்"
+
+#: qml/settings/ConfigGeneral.qml:262
+#, kde-format
+msgid "Export layout to"
+msgstr "தளவமைப்பு ஏற்றுமதி செய்"
+
+#: qml/settings/ConfigGeneral.qml:281
+#, kde-format
+msgid "Import layout from"
+msgstr "தளவமைப்பு இறக்குமதி செய்"
+
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
+#, kde-format
+msgid "Export Status"
+msgstr "ஏற்றுமதி நிலை"
+
+#: qml/settings/ConfigGeneral.qml:293
+#, kde-format
+msgid "Failed to export to %1"
+msgstr "%1 என்பதற்கு ஏற்றுமதி செய்ய முடியவில்லை"
+
+#: qml/settings/ConfigGeneral.qml:300
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr "முகப்பின் தளவமைப்பு வெற்றிகரமாக %1 என்பதற்கு ஏற்றுமதி செய்யப்பட்டுள்ளது"
+
+#: qml/settings/ConfigGeneral.qml:306
+#, kde-format
+msgid "Confirm Import"
+msgstr "இறக்குமதியை உறுதிசெய்யவும்"
+
+#: qml/settings/ConfigGeneral.qml:307
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr "தற்போதைய முகப்பின் தளவமைப்பை இது மேலெழுதும்!"
+
 #: qml/settings/SettingsComponent.qml:68
 #, fuzzy, kde-format
 #| msgctxt "@title:group settings group"
@@ -110,193 +290,9 @@ msgstr "பின்புலப்படம்"
 msgid "Settings"
 msgstr ""
 
-#: qml/settings/SettingsWindow.qml:80
-#, kde-format
-msgid "Homescreen Settings"
-msgstr "முகப்பிற்கான அமைப்புகள்"
+#~ msgid "Homescreen Settings"
+#~ msgstr "முகப்பிற்கான அமைப்புகள்"
 
-#: qml/settings/SettingsWindow.qml:89
-#, kde-format
-msgid "Icons"
-msgstr "சின்னங்கள்"
-
-#: qml/settings/SettingsWindow.qml:105
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
-msgid "Application"
-msgstr "செயலியை கண்டுபிடி…"
-
-#: qml/settings/SettingsWindow.qml:121
-#, kde-format
-msgid "Number of rows"
-msgstr "வரிசைகளின் &எண்ணிக்கை"
-
-#: qml/settings/SettingsWindow.qml:122
-#, kde-format
-msgid "Number of columns"
-msgstr "நெடுவரிசைகளின் எண்ணிக்கை"
-
-#: qml/settings/SettingsWindow.qml:126
-#, kde-format
-msgid "Size of icons on homescreen"
-msgstr "முகப்பிலுள்ள சின்னங்களின் அளவு"
-
-#: qml/settings/SettingsWindow.qml:165
-#, kde-format
-msgid "The rows and columns will swap depending on the screen rotation."
-msgstr "திரையின் நோக்குநிலையைப் பொறுத்து வரிகளும் நெடுவரிகளும் இடமாறும்."
-
-#: qml/settings/SettingsWindow.qml:169
-#, kde-format
-msgid "Homescreen"
-msgstr "முகப்பு"
-
-#: qml/settings/SettingsWindow.qml:175
-#, kde-format
-msgid "Show labels on homescreen"
-msgstr "முகப்பில் பெயர்களைக் காட்டு"
-
-#: qml/settings/SettingsWindow.qml:188
-#, kde-format
-msgid "Show labels in favorites bar"
-msgstr "பிடித்தவை பட்டையில் பெயர்களைக் காட்டு"
-
-#: qml/settings/SettingsWindow.qml:201
-#, kde-format
-msgid "Lock layout"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:214
-#, kde-format
-msgid "Page transition effect"
-msgstr "பக்கமாற்ற அசைவூட்டம்"
-
-#: qml/settings/SettingsWindow.qml:220
-#, kde-format
-msgid "Slide"
-msgstr "நழுவுவது"
-
-#: qml/settings/SettingsWindow.qml:221
-#, kde-format
-msgid "Cube"
-msgstr "கனசதுரம்"
-
-#: qml/settings/SettingsWindow.qml:222
-#, kde-format
-msgid "Fade"
-msgstr "மங்குவது"
-
-#: qml/settings/SettingsWindow.qml:223
-#, kde-format
-msgid "Stack"
-msgstr "அடுக்கு"
-
-#: qml/settings/SettingsWindow.qml:224
-#, kde-format
-msgid "Rotation"
-msgstr "சுழற்சி"
-
-#: qml/settings/SettingsWindow.qml:241
-#, kde-format
-msgid "Double tap to lock device"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:252
-#, kde-format
-msgid "Favorites Bar"
-msgstr "பிடித்தவை பட்டை"
-
-#: qml/settings/SettingsWindow.qml:257
-#, kde-format
-msgid "Show background"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:268
-#, kde-format
-msgctxt "@title:group settings group"
-msgid "Wallpaper"
-msgstr "பின்புலப்படம்"
-
-#: qml/settings/SettingsWindow.qml:274
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
-msgid "Wallpaper blur effect"
-msgstr "பின்புலப்படத்தை மங்கலாக்கு"
-
-#: qml/settings/SettingsWindow.qml:277
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "None"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:278
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Simple"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:279
-#, kde-format
-msgctxt "Wallpaper blur effect"
-msgid "Full"
-msgstr ""
-
-#: qml/settings/SettingsWindow.qml:294
-#, kde-format
-msgid "General"
-msgstr "பொதுவானவை"
-
-#: qml/settings/SettingsWindow.qml:301
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "முகப்புப்பக்க மற்றும் மேம்பட்ட பின்புல அமைப்புகள்"
-
-#: qml/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
-msgid "Export layout"
-msgstr "தளவமைப்பு ஏற்றுமதி செய்"
-
-#: qml/settings/SettingsWindow.qml:319
-#, fuzzy, kde-format
-#| msgid "Import layout from"
-msgid "Import layout"
-msgstr "தளவமைப்பு இறக்குமதி செய்"
-
-#: qml/settings/SettingsWindow.qml:328
-#, kde-format
-msgid "Export layout to"
-msgstr "தளவமைப்பு ஏற்றுமதி செய்"
-
-#: qml/settings/SettingsWindow.qml:346
-#, kde-format
-msgid "Import layout from"
-msgstr "தளவமைப்பு இறக்குமதி செய்"
-
-#: qml/settings/SettingsWindow.qml:357 qml/settings/SettingsWindow.qml:364
-#, kde-format
-msgid "Export Status"
-msgstr "ஏற்றுமதி நிலை"
-
-#: qml/settings/SettingsWindow.qml:358
-#, kde-format
-msgid "Failed to export to %1"
-msgstr "%1 என்பதற்கு ஏற்றுமதி செய்ய முடியவில்லை"
-
-#: qml/settings/SettingsWindow.qml:365
-#, kde-format
-msgid "Homescreen layout exported successfully to %1"
-msgstr "முகப்பின் தளவமைப்பு வெற்றிகரமாக %1 என்பதற்கு ஏற்றுமதி செய்யப்பட்டுள்ளது"
-
-#: qml/settings/SettingsWindow.qml:371
-#, kde-format
-msgid "Confirm Import"
-msgstr "இறக்குமதியை உறுதிசெய்யவும்"
-
-#: qml/settings/SettingsWindow.qml:372
-#, kde-format
-msgid "This will overwrite your existing homescreen layout!"
-msgstr "தற்போதைய முகப்பின் தளவமைப்பை இது மேலெழுதும்!"
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "முகப்புப்பக்க மற்றும் மேம்பட்ட பின்புல அமைப்புகள்"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-29 00:44+0000\n"
+"POT-Creation-Date: 2025-10-06 00:44+0000\n"
 "PO-Revision-Date: 2025-04-21 20:05+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -30,49 +30,56 @@ msgstr "استعرض تفاصيل الخطأ…"
 msgid "Open %1"
 msgstr "افتح %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "قُيد تغييرات التخطيط من قبل مسؤول النظام "
+#: contents/configuration/AppletConfiguration.qml:90
+#, fuzzy
+#| msgid "Configure"
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "اضبط"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "عامّ"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "الخلفيّة"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "تخطيط الشاشة الرئيسة"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
 msgstr "تخطيط الشاشة الرئيسة الذي سيستعمل."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "محلق الخلفيات"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "محلقة الخلفيات في الاستعمال."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "محلق خلفية"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "احصل على ملحقات جديدة..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "يجب تطبيق تغييرات التخطيط قبل إجراء تغييرات أخرى"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "طبّق الآن"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "الخلفيّة"
+#: contents/configuration/private/ConfigListPage.qml:45
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "قُيد تغييرات التخطيط من قبل مسؤول النظام "
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -86,8 +93,17 @@ msgstr "رقم التعريف الشخصي خاطئ"
 msgid "Panel Focus Indicator"
 msgstr "مؤشر التركيز على اللوحة"
 
+#~ msgid "General"
+#~ msgstr "عامّ"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "تخطيط الشاشة الرئيسة"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "يجب تطبيق تغييرات التخطيط قبل إجراء تغييرات أخرى"
+
+#~ msgid "Apply now"
+#~ msgstr "طبّق الآن"
+
 #~ msgid "Change Wallpaper"
 #~ msgstr "غير خلفية الشاشة"
-
-#~ msgid "Configure"
-#~ msgstr "اضبط"
