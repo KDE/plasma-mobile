@@ -46,7 +46,7 @@ Controls.AbstractButton {
 
     background: Rectangle {
         radius: Kirigami.Units.cornerRadius
-        color: ((baseItem.selected || baseItem.down) && !baseItem.onlyOne)
+        color: (baseItem.down)
                     ? Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.3)
                     : 'transparent'
     }
