@@ -290,10 +290,3 @@ msgstr "Bakgrunnsbilete"
 #, kde-format
 msgid "Settings"
 msgstr ""
-
-#~ msgid "Homescreen Settings"
-#~ msgstr "Val for heimeskjerm"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "Byt mellom heimeskjerm og fleire val for bakgrunnsbilete"

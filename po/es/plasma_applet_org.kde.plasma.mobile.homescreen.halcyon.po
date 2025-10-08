@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.halcyon\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-06 00:44+0000\n"
-"PO-Revision-Date: 2025-08-13 18:28+0100\n"
+"PO-Revision-Date: 2025-10-07 04:27+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -28,7 +28,7 @@ msgstr "Carpeta"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -102,7 +102,3 @@ msgstr "Fondos de escritorio"
 #, kde-format
 msgid "Settings"
 msgstr "Preferencias"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "Cambiar pantallas de inicio y más opciones del fondo de escritorio"

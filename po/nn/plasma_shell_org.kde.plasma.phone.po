@@ -90,16 +90,3 @@ msgstr "Feil PIN"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Panelfokus-markør"
-
-#~ msgid "General"
-#~ msgstr "Generelt"
-
-#~ msgid "Homescreen Layout"
-#~ msgstr "Heimeskjerm-utforming"
-
-#~ msgid "Layout changes must be applied before other changes can be made"
-#~ msgstr ""
-#~ "Du må ta i bruk utformings­endringane før du kan gjera andre endringar."
-
-#~ msgid "Apply now"
-#~ msgstr "Bruk no"
