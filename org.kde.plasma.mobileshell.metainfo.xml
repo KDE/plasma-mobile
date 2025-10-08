@@ -11,7 +11,25 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>KDE Plasma Mobile Shell</name>
+  <name xml:lang="ca">Espai de treball del Plasma Mobile de KDE</name>
+  <name xml:lang="es">Entorno KDE Plasma Móvil</name>
+  <name xml:lang="he">מעטפת לניידים של פלזמה מבית KDE</name>
+  <name xml:lang="nl">KDE Plasma Mobiel-shell</name>
+  <name xml:lang="pt-BR">Shell do KDE Plasma Mobile</name>
+  <name xml:lang="sl">KDE Plasma Mobile Shell</name>
+  <name xml:lang="sv">KDE Plasma mobilskal</name>
+  <name xml:lang="tr">KDE Plasma Cep Kabuğu</name>
+  <name xml:lang="uk">Оболонка Мобільної Плазми KDE</name>
   <summary>KDE's Plasma shell for mobile form-factor devices</summary>
+  <summary xml:lang="ca">Espai de treball del Plasma de KDE per a dispositius de factor de forma mòbil</summary>
+  <summary xml:lang="es">Entorno de Plasma de KDE para dispositivos con factor de forma móvil</summary>
+  <summary xml:lang="he">מעטפת פלזמה מבית KDE למכשירים בתצורת ניוד</summary>
+  <summary xml:lang="nl">Plasma-shell van KDE voor apparaten met mobiele vormfactor</summary>
+  <summary xml:lang="pt-BR">Shell do Plasma do KDE para dispositivos móveis</summary>
+  <summary xml:lang="sl">KDE's Plasma shell za mobilne naprave</summary>
+  <summary xml:lang="sv">KDE:s Plasma skal för mobilapparater</summary>
+  <summary xml:lang="tr">Taşınabilir biçimdeki aygıtlar için KDE’nin Plasma kabuğu</summary>
+  <summary xml:lang="uk">Оболонка Плазми KDE для пристроїв мобільного форм-фактора</summary>
   <url type="homepage">https://plasma-mobile.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=plasma-mobile</url>
   <url type="vcs-browser">https://invent.kde.org/plasma/plasma-mobile</url>
@@ -22,6 +40,15 @@
   <screenshots>
     <screenshot type="default">
       <caption>Plasma Mobile shell being used on mobile form-factor screen</caption>
+      <caption xml:lang="ca">Espai de treball del Plasma Mobile que es fa servir en una pantalla de factor de forma mòbil</caption>
+      <caption xml:lang="es">El entorno Plasma Mobile en uso en una pantalla con factor de forma móvil</caption>
+      <caption xml:lang="he">המעטפת של פלזמה לניידים מיועדת למסכים של מכשירים שמיועדים לניוד</caption>
+      <caption xml:lang="nl">Plasma Mobiel-shell wordt gebruikt op schermen met een mobiele vormfactor</caption>
+      <caption xml:lang="pt-BR">O shell do Plasma Mobile está sendo usado em telas de fator de formato móvel</caption>
+      <caption xml:lang="sl">Plasma Mobile shell uporabljen za zaslon oblikovan za mobilno napravo</caption>
+      <caption xml:lang="sv">Plasma mobilskal använt på mobilskärm</caption>
+      <caption xml:lang="tr">Plasma Cep kabuğu, taşınabilir biçimli bir aygıtta kullanılırken</caption>
+      <caption xml:lang="uk">Оболонка Мобільної Плазми, яку використовують для екранів мобільного форм-фактора</caption>
       <image type="source">https://plasma-mobile.org/img/plasmaphone.png</image>
     </screenshot>
   </screenshots>
