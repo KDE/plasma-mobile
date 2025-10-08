@@ -15,11 +15,18 @@ KScreenOSDUtil::KScreenOSDUtil(QObject *parent)
     : QObject{parent}
 {
     connect(KScreen::ConfigMonitor::instance(), &KScreen::ConfigMonitor::configurationChanged, this, [this]() {
+        if (!m_config) {
+            return;
+        }
         setOutputs(m_config->outputs().size());
     });
 
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
+        if (!m_config) {
+            qDebug() << "kscreenosdutil: Unable to obtain kscreen config";
+            return;
+        }
         KScreen::ConfigMonitor::instance()->addConfig(m_config);
         setOutputs(m_config->outputs().size());
     });
