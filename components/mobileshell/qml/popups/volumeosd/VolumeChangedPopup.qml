@@ -140,7 +140,6 @@ Window {
             id: osd
             Layout.alignment: Qt.AlignHCenter
             implicitWidth: Math.min(Kirigami.Units.gridUnit * 15, Screen.width - Kirigami.Units.gridUnit * 2)
-            popupBackground: true
 
             transform: [
                 Translate {
