@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 02:42+0000\n"
+"POT-Creation-Date: 2025-10-09 11:39+0000\n"
 "PO-Revision-Date: 2023-01-05 12:05+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -134,17 +134,17 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Název proudu nenalezen"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Unmute"
 msgstr "Povolit zvuk"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Mute"
 msgstr "Ztlumit"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
 msgstr ""

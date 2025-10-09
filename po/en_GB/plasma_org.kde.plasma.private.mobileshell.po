@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 02:42+0000\n"
+"POT-Creation-Date: 2025-10-09 11:39+0000\n"
 "PO-Revision-Date: 2024-11-16 12:57+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -135,17 +135,17 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Stream name not found"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Unmute"
 msgstr "Unmute"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Mute"
 msgstr "Mute"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
 msgstr "configure audio streams"
