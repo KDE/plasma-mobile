@@ -78,35 +78,35 @@ Item {
 
                     ParallelAnimation {
                         id: parallelAnim
-                        property real animationDuration: Kirigami.Units.longDuration
+                        property real animationDuration: Kirigami.Units.longDuration + Kirigami.Units.shortDuration
 
                         ScaleAnimator {
                             target: background
                             from: background.scale
                             to: 1
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.InOutQuad
+                            easing.type: Easing.OutCubic
                         }
                         ScaleAnimator {
                             target: iconParent
                             from: iconParent.scale
                             to: 1
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.InOutQuad
+                            easing.type: Easing.OutCubic
                         }
                         XAnimator {
                             target: backgroundParent
                             from: backgroundParent.x
                             to: 0
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.InOutQuad
+                            easing.type: Easing.OutCubic
                         }
                         YAnimator {
                             target: backgroundParent
                             from: backgroundParent.y
                             to: 0
                             duration: parallelAnim.animationDuration
-                            easing.type: Easing.InOutQuad
+                            easing.type: Easing.OutCubic
                         }
                     }
 
