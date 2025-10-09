@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 00:44+0000\n"
+"POT-Creation-Date: 2025-10-09 09:55+0000\n"
 "PO-Revision-Date: 2025-09-15 22:54+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -136,17 +136,17 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Korronte-izena ez da aurkitu"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Unmute"
 msgstr "Ozendu"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Mute"
 msgstr "Isilarazi"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
 msgstr "konfiguratu audio-korronteak"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 00:44+0000\n"
+"POT-Creation-Date: 2025-10-09 09:55+0000\n"
 "PO-Revision-Date: 2025-10-09 01:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -133,17 +133,17 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "스트림 이름을 찾을 수 없음"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Unmute"
 msgstr "음소거 해제"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:162
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
 msgid "Mute"
 msgstr "음소거"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:211
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
 msgstr "오디오 스트림 설정"
