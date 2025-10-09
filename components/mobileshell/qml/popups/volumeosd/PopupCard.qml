@@ -21,7 +21,6 @@ import org.kde.plasma.private.mobileshell as MobileShell
 Controls.Control {
     id: content
 
-    property bool popupBackground: false
     property real scaleFactor: 1.0
 
     implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, Screen.width - Kirigami.Units.gridUnit * 2)
@@ -39,8 +38,6 @@ Controls.Control {
 
     MobileShell.PanelBackground {
         anchors.fill: parent
-        panelType: content.popupBackground ?
-            MobileShell.PanelBackground.PanelType.Popup :
-            MobileShell.PanelBackground.PanelType.Drawer
+        panelType: MobileShell.PanelBackground.PanelType.Popup
     }
 }

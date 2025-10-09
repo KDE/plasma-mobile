@@ -37,7 +37,8 @@ Item {
                                             panelType === PanelBackground.PanelType.Wallpaper)
     // whether the panel should have a border when using a dark theme
     readonly property bool border:          panelType === PanelBackground.PanelType.Base ||
-                                            panelType === PanelBackground.PanelType.Stacked
+                                            panelType === PanelBackground.PanelType.Stacked ||
+                                            panelType === PanelBackground.PanelType.Popup
     // whether to force the panel to have a border even when using a light theme
     readonly property bool forceBorder:     border &&
                                             (panelType === PanelBackground.PanelType.Stacked)
@@ -70,7 +71,7 @@ Item {
     // corner radius of the panel
     property int radius: Kirigami.Units.cornerRadius
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.colorSet: panelType === PanelBackground.PanelType.Popup ? Kirigami.Theme.Window : Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
     // very simple shadow for performance
