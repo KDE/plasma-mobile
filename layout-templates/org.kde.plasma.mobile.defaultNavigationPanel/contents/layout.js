@@ -3,4 +3,3 @@
 
 const bottomPanel = new Panel("org.kde.plasma.mobile.taskpanel")
 bottomPanel.location = "bottom";
-bottomPanel.height = 2 * gridUnit;

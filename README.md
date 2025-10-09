@@ -61,6 +61,10 @@ Useful options:
 QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.mobileshell" --output-count 2 --width 360 --height 720
 ```
 
+### Device specific configuration
+
+See [/devices/README.md] for more details on setting device specific configuration (ex. notches, screen curves).
+
 ---
 
 <img src="https://invent.kde.org/plasma/plasma-mobile/-/wikis/uploads/19a607bb68faa76bbc9f888e33a3aa9a/konqi-calling.png" width=200px>

@@ -5,6 +5,7 @@ set(plasma-mobile-envmanager_SRCS
     main.cpp
     settings.cpp
     utils.cpp
+    devicepresets.cpp
     config.h
 )
 

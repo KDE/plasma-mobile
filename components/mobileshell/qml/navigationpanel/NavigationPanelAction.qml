@@ -10,7 +10,7 @@ QtObject {
     property bool enabled
     property bool visible: true
     property string iconSource
-    property real iconSizeFactor
+    property real shrinkSize
 
     signal triggered()
 }

@@ -33,6 +33,7 @@ Rectangle {
 
         // HACK: we need to initialize the DBus server somewhere in plasmashell, it might as well be here...
         MobileShellState.ShellDBusObject.registerObject();
+        MobileShellState.PanelSettingsDBusObjectManager.registerObjects();
 
         // Initialize the volume osd, and volume keys.
         // Initialize notification popups.
