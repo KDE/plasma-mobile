@@ -1,12 +1,12 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2025 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-15 00:44+0000\n"
+"POT-Creation-Date: 2025-08-19 00:44+0000\n"
 "PO-Revision-Date: 2025-10-09 01:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,17 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 24.12.3\n"
 
-#: contents/ui/main.qml:11
+#: package/contents/ui/main.qml:11
 #, kde-format
-msgid "Sound"
-msgstr "소리"
+msgid "Display Config"
+msgstr "디스플레이 설정"
 
-#: contents/ui/main.qml:15
+#: package/contents/ui/main.qml:14
 #, kde-format
-msgid "No audio devices"
-msgstr "오디오 장치 없음"
-
-#: contents/ui/main.qml:17
-#, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgctxt "kscreen osd quicksetting"
+msgid "Tap to set up"
+msgstr "탭하여 설정"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-21 01:15+0200\n"
+"PO-Revision-Date: 2025-10-09 01:54+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -48,16 +48,13 @@ msgid "Auto Hide Panels"
 msgstr "패널 자동 숨기기"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"이 옵션을 사용하면 상태와 탐색 패널을 자동으로 숨겨서 앱에서 전체 화면을 사용"
-"할 수 있습니다."
+"이 옵션을 사용하면 상태와 탐색 패널을 자동으로 숨겨서 앱에서 항상 전체 화면"
+"을 사용할 수 있습니다."
 
 #: ui/main.qml:69
 #, kde-format
@@ -67,7 +64,7 @@ msgstr "두 번 탭하여 깨우기"
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "화면이 꺼져 있을 때 두 번 탭하여 장치를 깨웁니다."
 
 #: ui/main.qml:81
 #, kde-format
@@ -225,15 +222,14 @@ msgid "Show"
 msgstr "표시"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "빠른 설정"
+msgstr "빠른 설정 열"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "가로 모드에서 표시할 최대 열 개수입니다."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format

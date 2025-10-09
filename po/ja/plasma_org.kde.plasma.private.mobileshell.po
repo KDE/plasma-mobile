@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-19 00:44+0000\n"
+"POT-Creation-Date: 2025-10-09 00:44+0000\n"
 "PO-Revision-Date: 2022-12-20 22:48-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -97,18 +97,18 @@ msgstr ""
 msgid "Device name not found"
 msgstr ""
 
-#: qml/popups/volumeosd/ListItemBase.qml:125
+#: qml/popups/volumeosd/ListItemBase.qml:123
 #, kde-format
 msgid "Show additional options for %1"
 msgstr ""
 
-#: qml/popups/volumeosd/ListItemBase.qml:217
+#: qml/popups/volumeosd/ListItemBase.qml:215
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr ""
 
-#: qml/popups/volumeosd/ListItemBase.qml:232
+#: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"

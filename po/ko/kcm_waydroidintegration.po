@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-12 00:45+0000\n"
-"PO-Revision-Date: 2025-07-21 01:35+0200\n"
+"PO-Revision-Date: 2025-10-09 01:56+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -33,27 +33,21 @@ msgid "Check installation"
 msgstr "설치 상태를 확인하십시오"
 
 #: ui/main.qml:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid is initializing.\n"
-#| "It can take a few minutes."
+#, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Waydroid가 초기화 중입니다.\n"
+"Android와 제조사 이미지를 다운로드하는 중입니다.\n"
 "몇 분 정도 걸릴 수 있습니다."
 
 #: ui/main.qml:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "Waydroid session is starting.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid 세션이 시작 중입니다.\n"
+"Waydroid가 초기화 중입니다.\n"
 "몇 초 정도 걸릴 수 있습니다."
 
 #: ui/main.qml:76
@@ -76,27 +70,26 @@ msgstr ""
 "몇 초 정도 걸릴 수 있습니다."
 
 #: ui/WaydroidApplicationsPage.qml:25
-#, fuzzy, kde-format
-#| msgid "Waydroid properties"
+#, kde-format
 msgid "Waydroid applications"
-msgstr "Waydroid 속성"
+msgstr "Waydroid 앱"
 
 #: ui/WaydroidApplicationsPage.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "APK 설치"
 
 #: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must selected local file"
-msgstr ""
+msgstr "로컬 파일을 선택해야 함"
 
 #: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "앱 삭제"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -111,7 +104,7 @@ msgstr "IP 주소"
 #: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
@@ -136,20 +129,18 @@ msgstr "내 장치를 Google Play Protect에 인증"
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "설치된 앱"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Reset waydroid"
-msgstr "Waydroid 설정"
+msgstr "Waydroid 초기화"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Waydroid 설정"
+msgstr "Waydroid 초기화 확인"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -157,6 +148,8 @@ msgid ""
 "Are you sure you want to reset Waydroid ? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
+"Waydroid를 초기화하시겠습니까? 모든 사용자 데이터를 삭제하며 취소할 수 없습니"
+"다."
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
@@ -205,17 +198,17 @@ msgstr "안드로이드에서 핫플러그된 장치에 직접 접근 허용"
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "다운로드 중: %1 MB/%2 MB, 속도: %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1Mb/s"
-msgstr ""
+msgstr "%1 MB/초"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1Kb/s"
-msgstr ""
+msgstr "%1 KB/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format

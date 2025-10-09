@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-06 00:44+0000\n"
-"PO-Revision-Date: 2025-07-21 01:15+0200\n"
+"PO-Revision-Date: 2025-10-09 01:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -36,34 +36,32 @@ msgstr "일반"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "이 위젯을 찾을 수 없습니다."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "설정…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:195
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "옵션"
 
 #: qml/delegate/WidgetDelegateConfig.qml:209
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "위젯"
+msgstr "위젯 옵션"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "삭제"
+msgstr "위젯 삭제"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "위젯 설정"
 
 #: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
 #: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
@@ -74,17 +72,17 @@ msgstr "삭제"
 #: qml/HomeScreenPage.qml:485
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "놓아서 설정, 드래그해서 이동"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "폴더 삭제 확인"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "이 폴더를 삭제하시겠습니까?"
 
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
@@ -109,11 +107,9 @@ msgid "Icons"
 msgstr "아이콘"
 
 #: qml/settings/ConfigGeneral.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "앱 검색…"
+msgstr "앱"
 
 #: qml/settings/ConfigGeneral.qml:63
 #, kde-format
@@ -198,7 +194,7 @@ msgstr "책갈피 표시줄"
 #: qml/settings/ConfigGeneral.qml:199
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "배경 표시"
 
 #: qml/settings/ConfigGeneral.qml:210
 #, kde-format
@@ -230,14 +226,12 @@ msgid "Full"
 msgstr "전체"
 
 #: qml/settings/ConfigGeneral.qml:243
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
 msgstr "레이아웃 내보내기"
 
 #: qml/settings/ConfigGeneral.qml:252
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
 msgstr "레이아웃 가져오기"
 
@@ -277,16 +271,14 @@ msgid "This will overwrite your existing homescreen layout!"
 msgstr "현재 홈 화면 레이아웃을 덮어씁니다!"
 
 #: qml/settings/SettingsComponent.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
 msgstr "배경 그림"
 
 #: qml/settings/SettingsComponent.qml:77
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #~ msgid "Homescreen Settings"
 #~ msgstr "홈 화면 설정"

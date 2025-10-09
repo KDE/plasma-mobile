@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-06 00:44+0000\n"
-"PO-Revision-Date: 2025-03-14 09:16+0100\n"
+"PO-Revision-Date: 2025-10-06 12:21+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -34,7 +34,7 @@ msgstr "Obri %1"
 #: contents/configuration/AppletConfiguration.qml:90
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr ""
+msgstr "Configura %1"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -42,23 +42,23 @@ msgstr "Fons de pantalla"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "Canvi de la pantalla d'inici"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "Trieu la pantalla d'inici"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
-#, fuzzy
-#| msgid "The homescreen layout to use."
 msgid "Change homescreen to %1?"
-msgstr "La disposició de la pantalla d'inici que s'utilitzarà."
+msgstr "Voleu canviar la pantalla d'inici a %1?"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
 msgstr ""
+"La configuració de la pantalla d'inici actual s'ha guardat i es restaurarà "
+"si retrocediu."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
@@ -91,16 +91,3 @@ msgstr "PIN erroni"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicador de focus del quadro"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Homescreen Layout"
-#~ msgstr "Disposició de la pantalla d'inici"
-
-#~ msgid "Layout changes must be applied before other changes can be made"
-#~ msgstr ""
-#~ "Cal aplicar els canvis de disposició abans de poder fer altres canvis"
-
-#~ msgid "Apply now"
-#~ msgstr "Aplica ara"

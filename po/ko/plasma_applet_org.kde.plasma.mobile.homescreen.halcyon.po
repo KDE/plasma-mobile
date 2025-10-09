@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-06 00:44+0000\n"
-"PO-Revision-Date: 2025-07-21 01:16+0200\n"
+"PO-Revision-Date: 2025-10-09 01:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -26,7 +26,7 @@ msgstr "폴더"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "일반"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -94,12 +94,12 @@ msgstr "두 번 탭하여 장치 잠금"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "배경 그림"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #~ msgctxt "@action:button"
 #~ msgid "Switch between homescreens and more wallpaper options"
