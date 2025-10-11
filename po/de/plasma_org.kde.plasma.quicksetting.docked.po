@@ -1,9 +1,7 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
-#
-# Automatically generated, 2023.
+# SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.docked\n"
