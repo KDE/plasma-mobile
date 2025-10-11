@@ -1,9 +1,7 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Alois Spitzbart <spitz234@hotmail.com>, 2023.
-#
-# Automatically generated, 2023.
+# SPDX-FileCopyrightText: 2023 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.wifi\n"
