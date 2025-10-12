@@ -16,6 +16,7 @@
   <name xml:lang="ca-valencia">Espai de treball Plasma Mobile de KDE</name>
   <name xml:lang="es">Entorno KDE Plasma Móvil</name>
   <name xml:lang="he">מעטפת לניידים של פלזמה מבית KDE</name>
+  <name xml:lang="it">Shell Plasma Mobile di KDE</name>
   <name xml:lang="ka">KDE Plasma Mobile-ის გარსი</name>
   <name xml:lang="ko">KDE Plasma 모바일 셸</name>
   <name xml:lang="nl">KDE Plasma Mobiel-shell</name>
@@ -30,6 +31,7 @@
   <summary xml:lang="ca-valencia">Espai de treball Plasma de KDE per a dispositius de factor de forma mòbil</summary>
   <summary xml:lang="es">Entorno de Plasma de KDE para dispositivos con factor de forma móvil</summary>
   <summary xml:lang="he">מעטפת פלזמה מבית KDE למכשירים בתצורת ניוד</summary>
+  <summary xml:lang="it">Shell Plasma di KDE per dispositivi mobili</summary>
   <summary xml:lang="ka">KDE's Plasma-ის გარსი მობილური ფორმფაქტორის მქონე მოწყობილობებისთვის</summary>
   <summary xml:lang="ko">KDE의 모바일 장치를 위한 Plasma 셸</summary>
   <summary xml:lang="nl">Plasma-shell van KDE voor apparaten met mobiele vormfactor</summary>
@@ -53,6 +55,7 @@
       <caption xml:lang="ca-valencia">Espai de treball Plasma Mobile que s'utilitza en una pantalla de factor de forma mòbil</caption>
       <caption xml:lang="es">El entorno Plasma Mobile en uso en una pantalla con factor de forma móvil</caption>
       <caption xml:lang="he">המעטפת של פלזמה לניידים מיועדת למסכים של מכשירים שמיועדים לניוד</caption>
+      <caption xml:lang="it">Shell di Plasma Mobile utilizzata su schermi per dispositivi mobili</caption>
       <caption xml:lang="ka">Plasma Mobile-ის გარსი გამოიყენება მობილური ფორმფაქტორის მქონე ეკრანზე</caption>
       <caption xml:lang="ko">모바일 화면에서 사용 중인 Plasma 모바일 셸</caption>
       <caption xml:lang="nl">Plasma Mobiel-shell wordt gebruikt op schermen met een mobiele vormfactor</caption>
