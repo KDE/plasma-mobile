@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-09 09:55+0000\n"
-"PO-Revision-Date: 2024-12-01 15:00+0200\n"
+"PO-Revision-Date: 2025-10-12 17:41+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -70,16 +70,14 @@ msgid "SIM Locked"
 msgstr "SIM lukittu"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Ulostulot"
+msgstr "Tuloslaitteet"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Sisäänmenot"
+msgstr "Syötelaitteet"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
