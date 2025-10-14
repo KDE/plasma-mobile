@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-07-13 17:57+0300\n"
+"PO-Revision-Date: 2025-10-12 17:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -50,16 +50,13 @@ msgid "Auto Hide Panels"
 msgstr "Piilota paneelit automaattisesti"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Kun on aktiivinen, tila- ja navigointipaneelit piilotetaan automaattisesti, "
-"jolloin sovellukset saavat koko näytön käyttöönsä."
+"Piilota tila- ja navigointipaneelit automaattisesti, jotta sovellukset "
+"voivat aina olla koko näytöllä."
 
 #: ui/main.qml:69
 #, kde-format
@@ -69,7 +66,7 @@ msgstr "Herätä kaksoisnapautuksella"
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "Näytön ollessa poissa käytöstä herätä laite kaksoisnapautuksella."
 
 #: ui/main.qml:81
 #, kde-format
@@ -227,15 +224,14 @@ msgid "Show"
 msgstr "Näytä"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Pika-asetukset"
+msgstr "Pika-asetussarakkeet"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Sarakkeiden enimmäismäärä vaaka-asennossa."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
