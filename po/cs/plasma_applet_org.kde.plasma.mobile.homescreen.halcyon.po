@@ -26,7 +26,7 @@ msgstr "Složka"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
