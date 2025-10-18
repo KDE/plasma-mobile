@@ -87,15 +87,3 @@ msgstr "Špatný PIN"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr ""
-
-#~ msgid "General"
-#~ msgstr "Obecné"
-
-#~ msgid "Homescreen Layout"
-#~ msgstr "Rozvržení domácí obrazovky"
-
-#~ msgid "Layout changes must be applied before other changes can be made"
-#~ msgstr "Změny rozvržení musí být aplikovány před ostatními změnami"
-
-#~ msgid "Apply now"
-#~ msgstr "Aplikovat nyní"

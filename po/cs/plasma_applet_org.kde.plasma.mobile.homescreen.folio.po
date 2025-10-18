@@ -280,6 +280,3 @@ msgstr "Tapety"
 #, kde-format
 msgid "Settings"
 msgstr "Nastavení"
-
-#~ msgid "Homescreen Settings"
-#~ msgstr "Nastavení domácí obrazovky"
