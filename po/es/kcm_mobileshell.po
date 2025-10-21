@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-09-16 14:42+0100\n"
+"PO-Revision-Date: 2025-10-20 20:21+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -157,7 +157,7 @@ msgstr "Modo expandido"
 #: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
-msgstr "Preferencias rápidas"
+msgstr "Ajustes rápidos"
 
 #: ui/main.qml:159
 #, kde-format
@@ -230,7 +230,7 @@ msgstr "Mostrar"
 #: ui/QuickSettingsForm.qml:80
 #, kde-format
 msgid "Quick Settings Columns"
-msgstr "Columnas de preferencias rápidas"
+msgstr "Columnas de ajustes rápidos"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
@@ -248,12 +248,12 @@ msgstr ""
 #: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Preferencias rápidas desactivadas"
+msgstr "Ajustes rápidos desactivados"
 
 #: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr "Volver a activar las preferencias rápidas anteriormente desactivadas."
+msgstr "Volver a activar los ajustes rápidos desactivados anteriormente."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
