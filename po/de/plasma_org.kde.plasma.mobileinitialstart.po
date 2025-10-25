@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Öffnet den Startassistenten, ohne die Konfiguration zu ändern"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "Copyright © 2023 KDE-Gemeinschaft"
+msgstr "© 2024 KDE-Gemeinschaft"
 
 #: main.cpp:37
 #, kde-format
