@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-16 00:43+0000\n"
-"PO-Revision-Date: 2025-08-30 08:30+0200\n"
+"PO-Revision-Date: 2025-10-25 09:31+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -49,16 +49,13 @@ msgid "Auto Hide Panels"
 msgstr "Samoukrywające się paski"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Po włączeniu, paski stanu i przemieszczania się będą się same ukrywać, "
-"umożliwiając aplikacjom wypełnienie całej powierzchni ekranu."
+"Sam ukryj paski stanu i przemieszczania się, aby umożliwiając aplikacjom "
+"wypełnienie całej powierzchni ekranu."
 
 #: ui/main.qml:69
 #, kde-format
@@ -69,6 +66,7 @@ msgstr "Stuknij dwukrotnie, aby wybudzić"
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
+"Gdy ekran jest wyłączony, stuknij na nim dwukrotnie, aby wybudzić urządzenie."
 
 #: ui/main.qml:81
 #, kde-format
@@ -226,15 +224,14 @@ msgid "Show"
 msgstr "Pokaż"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Szybkie ustawienia"
+msgstr "Kolumny szybkich ustawień"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Graniczna liczba kolumn w ustawieniu poziomym."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
