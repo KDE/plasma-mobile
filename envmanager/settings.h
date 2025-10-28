@@ -34,8 +34,7 @@ private:
     void saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value);
     const QString loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write = true);
 
-    KSharedConfig::Ptr kwinrcConfig() const;
-    void reloadKWinConfig();
+    void reloadKWinConfig(KSharedConfig::Ptr kwinrc);
 
     // whether this is Plasma Mobile
     bool m_isMobilePlatform;

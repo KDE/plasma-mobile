@@ -24,6 +24,8 @@ const QString MOBILE_KSMSERVERRC_FILE = u"plasma-mobile/ksmserverrc"_s;
 const QString MOBILE_KDEGLOBALS_FILE = u"plasma-mobile/kdeglobals"_s;
 const QString MOBILE_APPLICATIONS_BLACKLIST_FILE = u"plasma-mobile/applications-blacklistrc"_s;
 
+const QString DESKTOP_KWINRC_FILE = u"kwinrc"_s;
+
 Settings::Settings(QObject *parent)
     : QObject{parent}
     , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(u"phone"_s)}
@@ -52,10 +54,10 @@ void Settings::applyConfiguration()
 void Settings::loadSavedConfiguration()
 {
     // kwinrc (legacy, we only write in the plasma-mobile/kwinrc file now)
-    auto originalKwinrcConfig = KSharedConfig::openConfig(u"kwinrc"_s, KConfig::SimpleConfig);
-    loadKeys(u"kwinrc"_s, originalKwinrcConfig, getKwinrcSettings(m_mobileConfig));
+    auto originalKwinrcConfig = KSharedConfig::openConfig(DESKTOP_KWINRC_FILE, KConfig::SimpleConfig);
+    loadKeys(DESKTOP_KWINRC_FILE, originalKwinrcConfig, getKwinrcSettings(m_mobileConfig));
     originalKwinrcConfig->sync();
-    reloadKWinConfig();
+    reloadKWinConfig(originalKwinrcConfig);
 
     // kdeglobals (legacy, we only write in the plasma-mobile/kdeglobals file now)
     auto originalKdeglobalsConfig = KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig);
@@ -73,11 +75,11 @@ void Settings::applyMobileConfiguration()
         auto kwinSettings = getKwinrcSettings(m_mobileConfig);
         setOptionsImmutable(false, MOBILE_KWINRC_FILE, kwinSettings);
 
-        auto kwinrc = kwinrcConfig();
+        auto kwinrc = KSharedConfig::openConfig(MOBILE_KWINRC_FILE, KConfig::SimpleConfig);
         writeKeys(MOBILE_KWINRC_FILE, kwinrc, kwinSettings);
         writeKeys(MOBILE_KWINRC_FILE, kwinrc, KWINRC_DEFAULT_SETTINGS); // only write, don't make immutable
         kwinrc->sync();
-        reloadKWinConfig();
+        reloadKWinConfig(kwinrc);
 
         setOptionsImmutable(true, MOBILE_KWINRC_FILE, kwinSettings);
     }
@@ -188,12 +190,7 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
     return value;
 }
 
-KSharedConfig::Ptr Settings::kwinrcConfig() const
-{
-    return KSharedConfig::openConfig(MOBILE_KWINRC_FILE, KConfig::SimpleConfig);
-}
-
-void Settings::reloadKWinConfig()
+void Settings::reloadKWinConfig(KSharedConfig::Ptr kwinrc)
 {
     // Reload config
     QDBusMessage reloadMessage = QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
@@ -201,7 +198,7 @@ void Settings::reloadKWinConfig()
 
     // Effects need to manually be loaded/unloaded in a live KWin session.
 
-    KConfigGroup pluginsGroup{kwinrcConfig(), QStringLiteral("Plugins")};
+    KConfigGroup pluginsGroup{kwinrc, QStringLiteral("Plugins")};
 
     for (const auto &effect : KWIN_EFFECTS) {
         // Read from the config whether the effect is enabled (settings are suffixed with "Enabled", ex. blurEnabled)
