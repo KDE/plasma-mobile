@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.24)
 
 project(plasma-mobile)
-set(PROJECT_VERSION "6.5.1")
+set(PROJECT_VERSION "6.5.2")
 
 set(PROJECT_DEP_VERSION "6.5.1")
 set(QT_MIN_VERSION "6.9.0")
