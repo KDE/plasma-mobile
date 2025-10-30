@@ -31,6 +31,9 @@ bool RecordUtil::startRecording(int nodeId)
         return false;
     }
 
+    // Set an encoder from what's available
+    m_pipeWireRecord->setEncoder(m_pipeWireRecord->suggestedEncoders().value(0, PipeWireRecord::NoEncoder));
+
     switch (m_pipeWireRecord->encoder()) {
     case PipeWireRecord::H264Main:
     case PipeWireRecord::H264Baseline:
