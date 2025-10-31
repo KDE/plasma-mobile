@@ -37,7 +37,7 @@ void LockscreenDBusClient::lockScreen()
                                                           QStringLiteral("/ScreenSaver"),
                                                           QStringLiteral("org.freedesktop.ScreenSaver"),
                                                           QStringLiteral("Lock"));
-    QDBusConnection::sessionBus().call(request);
+    QDBusConnection::sessionBus().asyncCall(request);
 }
 
 void LockscreenDBusClient::slotLockscreenActiveChanged(bool active)
