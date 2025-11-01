@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-15 00:44+0000\n"
+"POT-Creation-Date: 2025-11-01 00:48+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,50 +18,50 @@ msgstr ""
 "quicksetting.record.pot\n"
 "X-Crowdin-File-ID: 42399\n"
 
-#: recordutil.cpp:51
+#: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
 msgstr "没有编码器可供录制使用"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "新建屏幕录像"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "新屏幕录像已保存到 %1"
 
-#: recordutil.cpp:121
+#: recordutil.cpp:124
 #, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "屏幕录像"
 
-#: recordutil.cpp:130
+#: recordutil.cpp:133
 #, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "正在录屏…"
 
-#: recordutil.cpp:133
+#: recordutil.cpp:136
 #, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "正在写入…"
 
-#: recordutil.cpp:146
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "点击开始录屏"
 
-#: recordutil.cpp:156
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "正在捕获屏幕内容…"
 
-#: recordutil.cpp:159
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "请稍候…"

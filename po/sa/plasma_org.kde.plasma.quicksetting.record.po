@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-15 00:44+0000\n"
+"POT-Creation-Date: 2025-11-01 00:48+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -17,53 +17,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 
-#: recordutil.cpp:51
+#: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
 msgstr ""
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "नवीन स्क्रीन रिकॉर्डिंग"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "नूतनं Screen Recording %1 मध्ये रक्षितम्"
 
-#: recordutil.cpp:121
+#: recordutil.cpp:124
 #, fuzzy, kde-format
 #| msgid "Record Screen"
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "रिकार्ड स्क्रीन"
 
-#: recordutil.cpp:130
+#: recordutil.cpp:133
 #, fuzzy, kde-format
 #| msgid "Recording…"
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "रिकार्डिङ्ग..."
 
-#: recordutil.cpp:133
+#: recordutil.cpp:136
 #, fuzzy, kde-format
 #| msgid "Writing…"
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "लेखन…"
 
-#: recordutil.cpp:146
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "रिकार्डिङ्ग् आरभ्य ट्याप् कुर्वन्तु"
 
-#: recordutil.cpp:156
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "स्क्रीनः गृहीतः भवति..."
 
-#: recordutil.cpp:159
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "कृपया प्रतीक्ष्यताम्..."

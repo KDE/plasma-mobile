@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-15 00:44+0000\n"
+"POT-Creation-Date: 2025-11-01 00:48+0000\n"
 "PO-Revision-Date: 2025-08-30 08:54+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -18,50 +18,50 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 25.08.0\n"
 
-#: recordutil.cpp:51
+#: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
 msgstr "Nie ma żadnych enkoderów do nagrywania"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Nowe nagranie ekranu"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Nowe nagranie ekranu zapisano w %1"
 
-#: recordutil.cpp:121
+#: recordutil.cpp:124
 #, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Nagraj ekran"
 
-#: recordutil.cpp:130
+#: recordutil.cpp:133
 #, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "Nagrywanie…"
 
-#: recordutil.cpp:133
+#: recordutil.cpp:136
 #, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "Zapisywanie…"
 
-#: recordutil.cpp:146
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "Stuknij, aby rozpocząć nagrywanie"
 
-#: recordutil.cpp:156
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "Ekran jest obecnie nagrywany…"
 
-#: recordutil.cpp:159
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "Proszę czekać…"

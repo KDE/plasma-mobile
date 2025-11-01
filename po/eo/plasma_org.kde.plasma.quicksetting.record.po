@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-15 00:44+0000\n"
+"POT-Creation-Date: 2025-11-01 00:48+0000\n"
 "PO-Revision-Date: 2023-04-18 09:30+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,53 +18,53 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: recordutil.cpp:51
+#: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
 msgstr ""
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Nova ekranregistrado"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Nova ekranregistraĵo konserviĝis en %1"
 
-#: recordutil.cpp:121
+#: recordutil.cpp:124
 #, fuzzy, kde-format
 #| msgid "Record Screen"
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Registri Ekranon"
 
-#: recordutil.cpp:130
+#: recordutil.cpp:133
 #, fuzzy, kde-format
 #| msgid "Recording…"
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "Registrante…"
 
-#: recordutil.cpp:133
+#: recordutil.cpp:136
 #, fuzzy, kde-format
 #| msgid "Writing…"
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "Skribante…"
 
-#: recordutil.cpp:146
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "Frapeti por ekigi registradon"
 
-#: recordutil.cpp:156
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "Ekrano estantas kaptata…"
 
-#: recordutil.cpp:159
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "Bonvolu atendi…"

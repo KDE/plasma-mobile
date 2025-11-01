@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-15 00:44+0000\n"
+"POT-Creation-Date: 2025-11-01 00:48+0000\n"
 "PO-Revision-Date: 2025-06-15 04:12+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,50 +18,50 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#: recordutil.cpp:51
+#: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
 msgstr "ჩაწერისთვის ენკოდერები ხელმისაწვდომი არაა"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "ახალი ეკრანის ჩაწერა"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "ახალი ეკრანის ჩანაწერი შენახულია %1-ში"
 
-#: recordutil.cpp:121
+#: recordutil.cpp:124
 #, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "ეკრანის ჩაწერა"
 
-#: recordutil.cpp:130
+#: recordutil.cpp:133
 #, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "მიმდინარეობს ჩაწერა…"
 
-#: recordutil.cpp:133
+#: recordutil.cpp:136
 #, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "მიმდინარეობს ჩაწერა…"
 
-#: recordutil.cpp:146
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "ჩაჭერის დასაწყებად დაატყაპუნეთ"
 
-#: recordutil.cpp:156
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "მიმდინარეობს ეკრანის ჩაწერა…"
 
-#: recordutil.cpp:159
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "გთხოვთ, მოითმინოთ…"
