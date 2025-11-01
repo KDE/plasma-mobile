@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-15 00:44+0000\n"
+"POT-Creation-Date: 2025-11-01 02:41+0000\n"
 "PO-Revision-Date: 2025-06-16 22:22+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,50 +17,50 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.04.1\n"
 
-#: recordutil.cpp:51
+#: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
 msgstr "Inga kodare tillgängliga för inspelning"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Ny skärminspelning"
 
-#: recordutil.cpp:74
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Ny skärminspelning sparad i %1"
 
-#: recordutil.cpp:121
+#: recordutil.cpp:124
 #, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Spela in bildskärm"
 
-#: recordutil.cpp:130
+#: recordutil.cpp:133
 #, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "Spelar in…"
 
-#: recordutil.cpp:133
+#: recordutil.cpp:136
 #, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "Skriver…"
 
-#: recordutil.cpp:146
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "Tryck för att starta inspelning"
 
-#: recordutil.cpp:156
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "Skärmen lagras…"
 
-#: recordutil.cpp:159
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "Vänta…"
