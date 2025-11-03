@@ -485,7 +485,7 @@ FocusScope {
     // navigation panel
     MobileShell.NavigationPanel {
         id: navigationPanel
-        z: root.taskSwitcherHelpers.taskDrawerOpened && !root.taskSwitcherHelpers.currentlyBeingClosed ? 1 : 0
+        z: !root.taskSwitcherHelpers.currentlyBeingClosed ? 1 : 0
         visible: ShellSettings.Settings.navigationPanelEnabled
         backgroundColor: Qt.rgba(0, 0, 0, 0.1)
         foregroundColorGroup: Kirigami.Theme.Complementary
