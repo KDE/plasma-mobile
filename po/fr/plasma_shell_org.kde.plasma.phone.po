@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-06 00:44+0000\n"
-"PO-Revision-Date: 2025-03-15 09:24+0100\n"
+"PO-Revision-Date: 2025-10-07 07:56+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -27,11 +27,9 @@ msgid "Open %1"
 msgstr "Ouvrir %1"
 
 #: contents/configuration/AppletConfiguration.qml:90
-#, fuzzy
-#| msgid "Configure"
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr "Configurer"
+msgstr "Configurer %1"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -39,23 +37,23 @@ msgstr "Fond d'écran"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "Modifier l'écran d'accueil"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "Sélectionner l'écran d'accueil"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
-#, fuzzy
-#| msgid "The homescreen layout to use."
 msgid "Change homescreen to %1?"
-msgstr "La disposition de l'écran d'accueil à utiliser."
+msgstr "Modifier l'écran d'accueil à %1 ?"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
 msgstr ""
+"La configuration de votre écran d'accueil courant a été enregistrée. Elle "
+"sera restaurée si vous revenez en arrière."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
