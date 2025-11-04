@@ -101,7 +101,7 @@ void ScreenRotationUtil::actuallySetAutoScreenRotationEnabled(bool value)
     }
 
     auto setop = new KScreen::SetConfigOperation(m_config, this);
-    setop->exec();
-
-    Q_EMIT autoScreenRotationEnabledChanged();
+    connect(setop, &KScreen::SetConfigOperation::finished, this, [this]() {
+        Q_EMIT autoScreenRotationEnabledChanged();
+    });
 }
