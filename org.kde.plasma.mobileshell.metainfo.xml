@@ -17,6 +17,7 @@
   <name xml:lang="es">Entorno KDE Plasma Móvil</name>
   <name xml:lang="eu">KDE Plasma Mugikor Oskola</name>
   <name xml:lang="fi">KDE Plasma Mobile -käyttöliittymä</name>
+  <name xml:lang="fr">Shell pour KDE Plasma Mobile</name>
   <name xml:lang="he">מעטפת לניידים של פלזמה מבית KDE</name>
   <name xml:lang="it">Shell Plasma Mobile di KDE</name>
   <name xml:lang="ka">KDE Plasma Mobile-ის გარსი</name>
@@ -34,6 +35,7 @@
   <summary xml:lang="es">Entorno de Plasma de KDE para dispositivos con factor de forma móvil</summary>
   <summary xml:lang="eu">Mugikor forma faktorea duten gailuetarako KDEren Plasma Oskola</summary>
   <summary xml:lang="fi">KDE Plasman käyttöliittymä mobiililaitteille</summary>
+  <summary xml:lang="fr">Shell pour KDE Plasma pour les périphériques de format mobile</summary>
   <summary xml:lang="he">מעטפת פלזמה מבית KDE למכשירים בתצורת ניוד</summary>
   <summary xml:lang="it">Shell Plasma di KDE per dispositivi mobili</summary>
   <summary xml:lang="ka">KDE's Plasma-ის გარსი მობილური ფორმფაქტორის მქონე მოწყობილობებისთვის</summary>
@@ -60,6 +62,7 @@
       <caption xml:lang="es">El entorno Plasma Mobile en uso en una pantalla con factor de forma móvil</caption>
       <caption xml:lang="eu">Mugikor forma faktoreko pantaila batean Plasma Mugikor oskola erabiltzen</caption>
       <caption xml:lang="fi">Plasma Mobilen käyttöliittymä käytössä mobiilinäytöllä</caption>
+      <caption xml:lang="fr">Shell pour Plasma Mobile utilisée sur un écran de périphérique de format mobile</caption>
       <caption xml:lang="he">המעטפת של פלזמה לניידים מיועדת למסכים של מכשירים שמיועדים לניוד</caption>
       <caption xml:lang="it">Shell di Plasma Mobile utilizzata su schermi per dispositivi mobili</caption>
       <caption xml:lang="ka">Plasma Mobile-ის გარსი გამოიყენება მობილური ფორმფაქტორის მქონე ეკრანზე</caption>
