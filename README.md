@@ -63,7 +63,7 @@ QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p
 
 ### Device specific configuration
 
-See [/devices/README.md] for more details on setting device specific configuration (ex. notches, screen curves).
+See [/devices/README.md](/devices/README.md) for more details on setting device specific configuration (ex. notches, screen curves).
 
 ---
 
