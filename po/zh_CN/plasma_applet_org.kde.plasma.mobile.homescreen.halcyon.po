@@ -27,7 +27,7 @@ msgstr "文件夹"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "常规"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -101,7 +101,3 @@ msgstr "壁纸"
 #, kde-format
 msgid "Settings"
 msgstr "设置"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "切换主屏幕和更多壁纸选项"

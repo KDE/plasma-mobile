@@ -280,10 +280,3 @@ msgstr "壁纸"
 #, kde-format
 msgid "Settings"
 msgstr "设置"
-
-#~ msgid "Homescreen Settings"
-#~ msgstr "主屏幕设置"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "切换主屏幕和更多壁纸选项"

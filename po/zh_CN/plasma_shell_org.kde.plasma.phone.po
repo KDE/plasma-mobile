@@ -33,7 +33,7 @@ msgstr "打开 %1"
 #: contents/configuration/AppletConfiguration.qml:90
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr ""
+msgstr "配置 %1"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -41,23 +41,21 @@ msgstr "壁纸"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "更改主屏"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "选择主屏"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
-#, fuzzy
-#| msgid "The homescreen layout to use."
 msgid "Change homescreen to %1?"
-msgstr "要使用的主屏幕布局。"
+msgstr "更改主屏为 %1 吗？"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
-msgstr ""
+msgstr "您当前的主屏设置已保存，如果您切换回去，这些设置将会恢复。"
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
@@ -90,15 +88,3 @@ msgstr "PIN 码错误"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "面板焦点指示器"
-
-#~ msgid "General"
-#~ msgstr "常规"
-
-#~ msgid "Homescreen Layout"
-#~ msgstr "主屏幕布局"
-
-#~ msgid "Layout changes must be applied before other changes can be made"
-#~ msgstr "必须先应用布局更改才能更改其他选项"
-
-#~ msgid "Apply now"
-#~ msgstr "立即应用"
