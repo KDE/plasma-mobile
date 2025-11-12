@@ -8,7 +8,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kirigami 2.20 as Kirigami
@@ -34,11 +34,8 @@ Item {
     height: Math.min(actionDrawer.height - toolButtons.height, notificationWidget.listView.contentHeight + 10 + topMargin)
 
     // time source for the time and date whenin landscape mode
-    P5Support.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60 * 1000
+    Clock {
+        id: clockSource
     }
 
     MobileShell.VelocityCalculator {
@@ -167,7 +164,7 @@ Item {
 
         PlasmaComponents.Label {
             id: clock
-            text: Qt.formatTime(timeSource.data.Local.DateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
+            text: Qt.formatTime(clockSource.dateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
             verticalAlignment: Qt.AlignVCenter
 
             anchors {
@@ -183,7 +180,7 @@ Item {
 
         PlasmaComponents.Label {
             id: date
-            text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
+            text: Qt.formatDate(clockSource.dateTime, "ddd MMMM d")
             verticalAlignment: Qt.AlignTop
             color: Kirigami.Theme.disabledTextColor
 

@@ -9,7 +9,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Window
 
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import org.kde.notificationmanager as NotificationManager
@@ -35,7 +35,7 @@ Item {
     property var model
     property int modelIndex
 
-    property P5Support.DataSource timeSource
+    property Clock clockSource
 
     readonly property int notificationType: model.type
 

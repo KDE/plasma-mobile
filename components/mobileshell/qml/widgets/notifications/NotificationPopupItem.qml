@@ -113,7 +113,7 @@ BaseNotificationItem {
                     jobDetails: notificationItem.jobDetails
 
                     time: notificationItem.time
-                    timeSource: notificationItem.timeSource
+                    clockSource: notificationItem.clockSource
                 }
             }
 

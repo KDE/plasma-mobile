@@ -15,7 +15,7 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.layershell 1.0 as LayerShell
 
 import org.kde.notificationmanager as NotificationManager
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 
 import QtQuick.Controls as Controls
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -46,7 +46,7 @@ Window {
     property QtObject notificationSettings
     property QtObject popupNotificationsModel
     property QtObject tasksModel
-    property QtObject timeSource
+    property Clock clockSource
     property bool inhibited
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
@@ -209,7 +209,7 @@ Window {
                     popupModel: model
                     notificationsModel: popupNotificationsModel
                     notificationsModelType: notificationModelType
-                    timeDataSource: timeSource
+                    timeDataSource: clockSource
 
                     timeout: model.timeout
 

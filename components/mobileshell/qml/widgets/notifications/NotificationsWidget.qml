@@ -12,7 +12,7 @@ import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.12 as Kirigami
 
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
@@ -176,12 +176,8 @@ Item {
         }
     }
 
-    P5Support.DataSource {
-        id: timeDataSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60000 // 1 min
-        intervalAlignment: P5Support.Types.AlignToMinute
+    Clock {
+        id: clockSource
     }
 
     ListView {
@@ -386,7 +382,7 @@ Item {
                         modelIndex: delegateLoader.index
                         notificationsModel: root.historyModel
                         notificationsModelType: root.historyModelType
-                        timeSource: timeDataSource
+                        clockSource: clockSource
 
                         requestToInvoke: root.actionsRequireUnlock
                         onRunActionRequested: {

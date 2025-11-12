@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.layershell 1.0 as LayerShell
 
 import org.kde.notificationmanager as NotificationManager
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 
 Item {
     id: notificationPopup
@@ -323,7 +323,7 @@ Item {
         modelIndex: notificationPopup.popupIndex
         notificationsModel: notificationPopup.notificationsModel
         notificationsModelType: notificationPopup.notificationsModelType
-        timeSource: notificationPopup.timeDataSource
+        clockSource: notificationPopup.timeDataSource
         panelType:  notificationPopup.popupDrawerOpened ?
                     MobileShell.PanelBackground.PanelType.Drawer :
                     MobileShell.PanelBackground.PanelType.Popup

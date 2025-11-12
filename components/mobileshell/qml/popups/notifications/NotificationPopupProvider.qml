@@ -12,7 +12,7 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.notificationmanager as NotificationManager
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 
 import org.kde.taskmanager 0.1 as TaskManager
 
@@ -126,13 +126,9 @@ QtObject {
         groupInline: false
     }
 
-
-    property QtObject timeSource: P5Support.DataSource {
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60000 // 1 min
-        intervalAlignment: P5Support.Types.AlignToMinute
-        onDataChanged: {
+    property Clock clockSource: Clock {
+        id: clockSource
+        onTimeChanged: {
             checkInhibition();
             npm.timeChanged();
         }
@@ -142,7 +138,7 @@ QtObject {
         notificationModelType: notificationProvider.notificationModelType
         notificationSettings: notificationProvider.notificationSettings
         popupNotificationsModel: notificationProvider.popupNotificationsModel
-        timeSource: notificationProvider.timeSource
+        clockSource: notificationProvider.clockSource
         inhibited: notificationProvider.inhibited
         tasksModel: notificationProvider.tasksModel
     }

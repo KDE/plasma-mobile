@@ -15,7 +15,7 @@ import QtQml.Models
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.plasma.private.systemtray as SystemTray
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
@@ -55,12 +55,8 @@ Item {
     readonly property real smallerTextPixelSize: Math.round(9 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real elementSpacing: Math.round(Kirigami.Units.smallSpacing * 1.5)
 
-    P5Support.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 1000
-        intervalAlignment: P5Support.Types.AlignToMinute
+    Clock {
+        id: clockSource
     }
 
     property alias statusNotifierSource: statusNotifierSourceLoader.item
@@ -120,7 +116,7 @@ Item {
                     visible: root.showTime
                     Layout.fillHeight: true
                     fontPixelSize: textPixelSize
-                    source: timeSource
+                    clockSource: clockSource
                 }
 
                 MobileShell.SignalStrengthIndicator {
@@ -190,7 +186,7 @@ Item {
                 Layout.fillWidth: true
 
                 PlasmaComponents.Label {
-                    text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd. MMMM d")
+                    text: Qt.formatDate(clockSource.dateTime, "ddd. MMMM d")
                     color: Kirigami.Theme.disabledTextColor
                     font.pixelSize: root.smallerTextPixelSize
                 }
