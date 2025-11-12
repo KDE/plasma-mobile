@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
@@ -19,7 +19,7 @@ ColumnLayout {
     spacing: 0
 
     Label {
-        text: Qt.formatTime(timeSource.data["Local"]["DateTime"], root.is24HourTime ? "h:mm" : "h:mm ap")
+        text: Qt.formatTime(clockSource.dateTime, root.is24HourTime ? "h:mm" : "h:mm ap")
         color: "white"
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter
@@ -40,7 +40,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         horizontalAlignment: Text.AlignLeft
-        text: Qt.formatDate(timeSource.data["Local"]["DateTime"], "ddd, MMM d")
+        text: Qt.formatDate(clockSource.dateTime, "ddd, MMM d")
         color: "white"
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter
@@ -51,12 +51,8 @@ ColumnLayout {
         layer.effect: MobileShell.TextDropShadow {}
     }
 
-    P5Support.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60000
-        intervalAlignment: P5Support.Types.AlignToMinute
+    Clock {
+        id: clockSource
     }
 
 }
