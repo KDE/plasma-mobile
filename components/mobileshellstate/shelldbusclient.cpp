@@ -169,6 +169,12 @@ void ShellDBusClient::updatePanelState()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QString> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "ShellDBusClient: Failed to fetch updatePanelState:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         QString panelState = reply.argumentAt<0>();
 
         if (panelState != m_panelState) {
@@ -187,6 +193,12 @@ void ShellDBusClient::updateDoNotDisturb()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "ShellDBusClient: Failed to fetch updateDoNotDisturb:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         bool doNotDisturb = reply.argumentAt<0>();
 
         if (doNotDisturb != m_doNotDisturb) {
@@ -205,6 +217,12 @@ void ShellDBusClient::updateIsActionDrawerOpen()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "ShellDBusClient: Failed to fetch updateIsActionDrawerOpen:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         bool isActionDrawerOpen = reply.argumentAt<0>();
 
         if (isActionDrawerOpen != m_isActionDrawerOpen) {
@@ -223,6 +241,12 @@ void ShellDBusClient::updateIsVolumeOSDOpen()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "ShellDBusClient: Failed to fetch updateIsVolumeOSDOpen:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         bool isVolumeOSDOpen = reply.argumentAt<0>();
 
         if (isVolumeOSDOpen != m_isVolumeOSDOpen) {
@@ -241,7 +265,13 @@ void ShellDBusClient::updateIsNotificationPopupDrawerOpen()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
-        bool isNotificationPopupDrawerOpen = reply.argumentAt<0>();
+        if (!reply.isValid()) {
+            qDebug() << "ShellDBusClient: Failed to fetch updateIsNotificationPopupDrawerOpen:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
+         bool isNotificationPopupDrawerOpen = reply.argumentAt<0>();
 
         if (isNotificationPopupDrawerOpen != m_isNotificationPopupDrawerOpen) {
             m_isNotificationPopupDrawerOpen = isNotificationPopupDrawerOpen;
@@ -259,6 +289,12 @@ void ShellDBusClient::updateIsTaskSwitcherVisible()
 
     QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "ShellDBusClient: Failed to fetch updateIsTaskSwitcherVisible:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         bool isTaskSwitcherVisible = reply.argumentAt<0>();
 
         if (isTaskSwitcherVisible != m_isTaskSwitcherVisible) {
