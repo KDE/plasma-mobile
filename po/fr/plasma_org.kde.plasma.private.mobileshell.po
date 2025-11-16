@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-09 09:55+0000\n"
+"POT-Creation-Date: 2025-11-16 00:43+0000\n"
 "PO-Revision-Date: 2025-09-16 08:57+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -372,23 +372,23 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 h restantes"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:262
+#: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
 msgid "Notification service not available"
 msgstr "Le service de notifications est non disponible."
 
-#: qml/widgets/notifications/NotificationsWidget.qml:271
+#: qml/widgets/notifications/NotificationsWidget.qml:267
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Les notifications sont actuellement fournies par « %1 %2 »."
 
-#: qml/widgets/notifications/NotificationsWidget.qml:433
+#: qml/widgets/notifications/NotificationsWidget.qml:429
 #, kde-format
 msgid "Show Fewer"
 msgstr "En afficher moins"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:435
+#: qml/widgets/notifications/NotificationsWidget.qml:431
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
