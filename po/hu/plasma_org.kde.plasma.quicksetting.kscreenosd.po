@@ -1,7 +1,7 @@
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
@@ -17,17 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 25.08.3\n"
 
-#: contents/ui/main.qml:11
+#: package/contents/ui/main.qml:11
 #, kde-format
-msgid "Sound"
-msgstr "Hang"
+msgid "Display Config"
+msgstr "Képernyőbeállítás"
 
-#: contents/ui/main.qml:15
+#: package/contents/ui/main.qml:14
 #, kde-format
-msgid "No audio devices"
-msgstr "Nincsenek hangeszközök"
-
-#: contents/ui/main.qml:17
-#, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgctxt "kscreen osd quicksetting"
+msgid "Tap to set up"
+msgstr "Koppintson a beállításhoz"

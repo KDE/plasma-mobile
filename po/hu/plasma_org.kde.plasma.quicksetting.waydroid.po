@@ -1,7 +1,7 @@
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
@@ -19,15 +19,24 @@ msgstr ""
 
 #: contents/ui/main.qml:11
 #, kde-format
-msgid "Sound"
-msgstr "Hang"
+msgctxt "@action:button"
+msgid "Waydroid"
+msgstr "Waydroid"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:37
 #, kde-format
-msgid "No audio devices"
-msgstr "Nincsenek hangeszközök"
+msgctxt "@info:status"
+msgid "Not initialized"
+msgstr "Nincs előkészítve"
 
-#: contents/ui/main.qml:17
+#: contents/ui/main.qml:39
 #, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgctxt "@info:status"
+msgid "Running"
+msgstr "Fut"
+
+#: contents/ui/main.qml:41
+#, kde-format
+msgctxt "@info:status"
+msgid "Stopped"
+msgstr "Leállítva"
