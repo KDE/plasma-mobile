@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-06-06 22:58+0200\n"
+"PO-Revision-Date: 2025-11-21 21:27+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -255,21 +255,19 @@ msgid "Invalid input."
 msgstr "Érvénytelen bemenet."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Connect"
-msgstr "Kapcsolódás ehhez:"
+msgstr "Kapcsolódás"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Disconnect"
-msgstr "Kapcsolódás ehhez:"
+msgstr "Kapcsolat bontása"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Beállítás"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format

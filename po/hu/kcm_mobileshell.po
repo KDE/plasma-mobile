@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-06-06 22:40+0200\n"
+"PO-Revision-Date: 2025-11-21 19:49+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -48,26 +48,24 @@ msgid "Auto Hide Panels"
 msgstr "Panelek automatikus elrejtése"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Ha aktív, az állapotsáv és a navigációs panel automatikusan elrejtődik, "
-"lehetővé téve az alkalmazásoknak a teljes képernyőterület kitöltését."
+"A státusz- és navigációs panelek automatikus elrejtése, hogy az alkalmazások "
+"mindig teljes képernyőben jelenhessenek meg."
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "Dupla koppintás az ébredéshez"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
+"Ha a képernyő ki van kapcsolva, koppintson duplán az eszköz felébresztéséhez."
 
 #: ui/main.qml:81
 #, kde-format
@@ -226,15 +224,14 @@ msgid "Show"
 msgstr "Megjelenítés"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Gyorsbeállítások"
+msgstr "Gyorsbeállítások oszlopai"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Oszlopok maximális száma fekvő tájolásban."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format

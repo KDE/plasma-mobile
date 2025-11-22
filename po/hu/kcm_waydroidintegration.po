@@ -1,0 +1,261 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"PO-Revision-Date: 2025-11-21 21:02+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.08.3\n"
+
+#: ui/main.qml:19
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Waydroid integráció"
+
+#: ui/main.qml:32
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "A Waydroid nincs telepítve"
+
+#: ui/main.qml:39
+#, kde-format
+msgid "Check installation"
+msgstr "Telepítés ellenőrzése"
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"Android és gyártói képek letöltése.\n"
+"Ez eltarthat néhány percig."
+
+#: ui/main.qml:67
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid visszaállítása.\n"
+"Ez eltarthat néhány másodpercig."
+
+#: ui/main.qml:76
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "A Waydroid munkamenet nem fut."
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Start the session"
+msgstr "Munkamenet indítása"
+
+#: ui/main.qml:90
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"A Waydroid munkamenet indul.\n"
+"Ez eltarthat néhány másodpercig."
+
+#: ui/WaydroidApplicationsPage.qml:25
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Waydroid alkalmazások"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "APK telepítése"
+
+#: ui/WaydroidApplicationsPage.qml:67
+#, kde-format
+msgid "You must selected local file"
+msgstr "Válasszon ki egy helyi fájlt"
+
+#: ui/WaydroidApplicationsPage.qml:107
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "Alkalmazás törlése"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "Általános információk"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "IP-cím"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "Másolás"
+
+#: ui/WaydroidConfigurationForm.qml:35
+#, kde-format
+msgid "Waydroid status"
+msgstr "Waydroid állapota"
+
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "Fut"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stop session"
+msgstr "Munkamenet leállítása"
+
+#: ui/WaydroidConfigurationForm.qml:46
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "Eszköz tanúsítása a Google Play Protect számára"
+
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr "Telepített alkalmazások"
+
+#: ui/WaydroidConfigurationForm.qml:56
+#, kde-format
+msgid "Reset waydroid"
+msgstr "Waydroid visszaállítása"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Waydroid visszaállítás megerősítése"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid ? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+"Biztosan vissza szeretné állítani a Waydroidot? Ez egy visszafordíthatatlan "
+"művelet, és minden felhasználói adat törlődni fog."
+
+#: ui/WaydroidConfigurationForm.qml:81
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Waydroid tulajdonságai"
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, kde-format
+msgid "May require restarting the waydroid session to apply"
+msgstr "A Waydroid munkamenet újraindítására lehet szükség az alkalmazáshoz"
+
+#: ui/WaydroidConfigurationForm.qml:109
+#, kde-format
+msgid "Multi Windows"
+msgstr "Több ablak"
+
+#: ui/WaydroidConfigurationForm.qml:110
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "Ablakok és az asztal integrációjának bekapcsolása/kikapcsolása"
+
+#: ui/WaydroidConfigurationForm.qml:122
+#, kde-format
+msgid "Suspend"
+msgstr "Felfüggesztés"
+
+#: ui/WaydroidConfigurationForm.qml:123
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr ""
+"Engedélyezze, hogy a Waydroid konténer alvó módba lépjen (a képernyő "
+"időkorlátja után), ha nincs aktív alkalmazás"
+
+#: ui/WaydroidConfigurationForm.qml:135
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:136
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr ""
+"Engedélyezi az Android közvetlen hozzáférését a csatlakoztatott eszközökhöz"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "Letöltés %1MB/%2MB Sebesség %3"
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1Mb/s"
+msgstr "%1Mb/s"
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1Kb/s"
+msgstr "%1Kb/s"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Google Play Protect beállítása"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, kde-format
+msgid ""
+"We fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"Android azonosító lekérése folyamatban.\n"
+"Ez néhány másodpercet igénybe vehet."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, kde-format
+msgid ""
+"When launching waydroid with GAPPS for the first time you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID on the field in the website. Then, give "
+"the Google services some minutes to reflect the change and restart waydroid."
+msgstr ""
+"Ha először indítja a Waydroidot GAPPS-sel, értesítést kap arról, hogy az "
+"eszköz nincs tanúsítva a Google Play Protect számára. A saját eszköze "
+"tanúsításához illessze be az Android azonosítót a weboldalon található "
+"mezőbe. Ezután várjon néhány percet, hogy a Google szolgáltatások frissítsék "
+"az állapotot, majd indítsa újra a Waydroidot."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "Android azonosító másolása és a weboldal megnyitása"
+
+#: ui/WaydroidInitialConfigurationForm.qml:16
+#, kde-format
+msgid "Initial configuration"
+msgstr "Kezdeti beállítás"
+
+#: ui/WaydroidInitialConfigurationForm.qml:22
+#, kde-format
+msgid "System type"
+msgstr "Rendszer típusa"
+
+#: ui/WaydroidInitialConfigurationForm.qml:35
+#, kde-format
+msgid "Configure waydroid"
+msgstr "Waydroid beállítása"

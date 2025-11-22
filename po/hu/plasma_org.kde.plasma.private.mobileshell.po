@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2024-11-19 20:10+0100\n"
+"PO-Revision-Date: 2025-11-21 21:27+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -70,16 +70,14 @@ msgid "SIM Locked"
 msgstr "A SIM zárolt"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Kimenetek"
+msgstr "Kimeneti eszközök"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Bemenetek"
+msgstr "Beviteli eszközök"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
