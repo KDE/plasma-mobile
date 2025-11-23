@@ -37,7 +37,7 @@ msgstr "常规"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr "找不到此挂件。"
+msgstr "找不到此小部件。"
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
@@ -52,17 +52,17 @@ msgstr "选项"
 #: qml/delegate/WidgetDelegateConfig.qml:209
 #, kde-format
 msgid "Widget Options"
-msgstr "挂件选项"
+msgstr "小部件选项"
 
 #: qml/delegate/WidgetDelegateConfig.qml:249
 #, kde-format
 msgid "Remove widget"
-msgstr "移除挂件"
+msgstr "移除小部件"
 
 #: qml/delegate/WidgetDelegateConfig.qml:256
 #, kde-format
 msgid "Configure widget"
-msgstr "配置挂件"
+msgstr "配置小部件"
 
 #: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
 #: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
@@ -88,19 +88,19 @@ msgstr "您确定要删除此文件夹吗？"
 #: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
 #, kde-format
 msgid "Widgets"
-msgstr "挂件"
+msgstr "小部件"
 
 #: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr "获取新挂件…"
+msgstr "获取新小部件…"
 
 #: qml/settings/AppletListViewer.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr "获取新挂件…"
+msgstr "获取新小部件…"
 
 #: qml/settings/ConfigGeneral.qml:31
 #, kde-format
