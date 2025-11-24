@@ -34,7 +34,7 @@ PlasmaComponents.Label {
     Connections {
         target: clockSource
         // clock time changed
-        function timeChanged() {
+        function onTimeChanged() {
             ageLabel.updateAgoText()
         }
     }

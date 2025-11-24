@@ -177,7 +177,7 @@ Item {
     }
 
     Clock {
-        id: clockSource
+        id: clock
     }
 
     ListView {
@@ -382,7 +382,7 @@ Item {
                         modelIndex: delegateLoader.index
                         notificationsModel: root.historyModel
                         notificationsModelType: root.historyModelType
-                        clockSource: clockSource
+                        clockSource: clock
 
                         requestToInvoke: root.actionsRequireUnlock
                         onRunActionRequested: {
