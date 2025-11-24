@@ -375,14 +375,14 @@ Item {
                         event.accepted = true;
                         break;
                     case Qt.Key_Left:
-                        if (folio.HomeScreenState.favoritesBarLocation === Folio.HomeScreenState.Left) {
+                        if (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left) {
                             // Go to left page if mounted on the left
                             folio.HomeScreenState.goToPage(folio.HomeScreenState.currentPage - 1, false);
                             event.accepted = true;
                         }
                         break;
                     case Qt.Key_Right:
-                        if (folio.HomeScreenState.favoritesBarLocation === Folio.HomeScreenState.Right) {
+                        if (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right) {
                             // Go to right page if mounted on the right
                             folio.HomeScreenState.goToPage(folio.HomeScreenState.currentPage + 1, false);
                             event.accepted = true;
