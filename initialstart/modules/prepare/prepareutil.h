@@ -33,6 +33,9 @@ Q_SIGNALS:
     void usingDarkThemeChanged();
 
 private:
+    void initKScreen(std::function<void()> callback);
+    void setScalingInternal(int scaling);
+
     int m_scaling;
     bool m_usingDarkTheme;
 
