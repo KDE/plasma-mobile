@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-07-27 13:00+0900\n"
+"PO-Revision-Date: 2025-11-24 19:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -33,11 +33,9 @@ msgid "Open %1"
 msgstr "開啟 %1"
 
 #: contents/configuration/AppletConfiguration.qml:90
-#, fuzzy
-#| msgid "Configure"
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr "設定"
+msgstr "設定 %1"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -45,23 +43,21 @@ msgstr "桌布"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "變更主畫面"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "選取主畫面"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
-#, fuzzy
-#| msgid "The homescreen layout to use."
 msgid "Change homescreen to %1?"
-msgstr "要使用的主畫面佈局。"
+msgstr "要將主畫面變更為 %1 嗎？"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
-msgstr ""
+msgstr "您目前主畫面的設定已儲存，切換回來的時候會復原。"
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
