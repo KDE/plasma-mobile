@@ -16,18 +16,30 @@ PrepareUtil::PrepareUtil(QObject *parent)
     : QObject{parent}
     , m_colorsSettings{new ColorsSettings(this)}
 {
-    connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
+    initKScreen([]() { });
+
+    // set property initially
+    m_usingDarkTheme = m_colorsSettings->colorScheme() == "BreezeDark";
+}
+
+void PrepareUtil::initKScreen(std::function<void()> callback)
+{
+    connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this, callback](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
 
         if (!m_config) {
             return;
         }
+        KScreen::ConfigMonitor::instance()->addConfig(m_config);
 
         int scaling = 100;
 
-        // to determine the scaling value:
-        // try to take the primary display's scaling, otherwise use the scaling of any of the displays
+        // To determine the scaling value:
+        // Try to take the primary display's scaling, otherwise use the scaling of any of the displays
         for (KScreen::OutputPtr output : m_config->outputs()) {
+            if (!output) {
+                continue;
+            }
             scaling = output->scale() * 100;
             m_output = output->id();
             if (output->isPrimary()) {
@@ -37,10 +49,9 @@ PrepareUtil::PrepareUtil(QObject *parent)
 
         m_scaling = scaling;
         Q_EMIT scalingChanged();
-    });
 
-    // set property initially
-    m_usingDarkTheme = m_colorsSettings->colorScheme() == "BreezeDark";
+        callback();
+    });
 }
 
 int PrepareUtil::scaling() const
@@ -51,13 +62,24 @@ int PrepareUtil::scaling() const
 void PrepareUtil::setScaling(int scaling)
 {
     if (!m_config) {
+        initKScreen([this, scaling]() {
+            setScalingInternal(scaling);
+        });
         return;
     }
 
+    setScalingInternal(scaling);
+}
+
+void PrepareUtil::setScalingInternal(int scaling)
+{
     const auto outputs = m_config->outputs();
     qreal scalingNum = ((double)scaling) / 100;
 
     for (KScreen::OutputPtr output : outputs) {
+        if (!output) {
+            continue;
+        }
         if (output->id() == m_output) {
             output->setScale(scalingNum);
         }
