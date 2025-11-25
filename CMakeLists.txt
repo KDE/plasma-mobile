@@ -169,6 +169,6 @@ ki18n_install(po)
 if (INSTALL_SYSTEMD_SERVICE)
     install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/plasma-mobile.service
-        DESTINATION ${KDE_INSTALL_SYSTEMDUNITDIR}
+        DESTINATION ${KDE_INSTALL_SYSTEMDUNITDIR}/system
     )
 endif()
