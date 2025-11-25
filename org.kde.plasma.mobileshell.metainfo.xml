@@ -29,6 +29,7 @@
   <name xml:lang="tr">KDE Plasma Cep Kabuğu</name>
   <name xml:lang="uk">Оболонка Мобільної Плазми KDE</name>
   <name xml:lang="zh-CN">KDE Plasma Mobile Shell</name>
+  <name xml:lang="zh-TW">KDE Plasma 行動殼層</name>
   <summary>KDE's Plasma shell for mobile form-factor devices</summary>
   <summary xml:lang="ar">صدفة بلازما كيدي للأجهزة المحمولة</summary>
   <summary xml:lang="ca">Espai de treball del Plasma de KDE per a dispositius de factor de forma mòbil</summary>
@@ -48,6 +49,7 @@
   <summary xml:lang="tr">Taşınabilir biçimdeki aygıtlar için KDE’nin Plasma kabuğu</summary>
   <summary xml:lang="uk">Оболонка Плазми KDE для пристроїв мобільного форм-фактора</summary>
   <summary xml:lang="zh-CN">KDE Plasma 的手机形态设备外壳程序</summary>
+  <summary xml:lang="zh-TW">行動裝置用的 KDE Plasma 殼層</summary>
   <url type="homepage">https://plasma-mobile.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=plasma-mobile</url>
   <url type="vcs-browser">https://invent.kde.org/plasma/plasma-mobile</url>
@@ -76,6 +78,7 @@
       <caption xml:lang="tr">Plasma Cep kabuğu, taşınabilir biçimli bir aygıtta kullanılırken</caption>
       <caption xml:lang="uk">Оболонка Мобільної Плазми, яку використовують для екранів мобільного форм-фактора</caption>
       <caption xml:lang="zh-CN">Plasma Mobile 的手机形态设备外壳程序</caption>
+      <caption xml:lang="zh-TW">Plasma 行動殼層在行動螢幕上使用</caption>
       <image type="source">https://plasma-mobile.org/img/plasmaphone.png</image>
     </screenshot>
   </screenshots>
