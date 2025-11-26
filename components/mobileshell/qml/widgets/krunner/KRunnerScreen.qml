@@ -98,7 +98,7 @@ MouseArea {
             Layout.rightMargin: Kirigami.Units.gridUnit
             Layout.alignment: Qt.AlignHCenter
 
-            Milou.ResultsListView {
+            Milou.ResultsView {
                 id: listView
                 queryString: queryField.text
                 clip: true
@@ -158,7 +158,7 @@ MouseArea {
                         }
                     }
 
-                    // Used by ResultsListView to determine next tab action
+                    // Used by ResultsView to determine next tab action
                     function activateNextAction() {
                         queryField.forceActiveFocus();
                         queryField.selectAll();
