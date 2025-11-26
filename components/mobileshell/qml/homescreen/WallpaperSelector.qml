@@ -135,11 +135,12 @@ Controls.Drawer {
                 Image {
                     id: walliePreview
                     anchors.fill: parent
-                    visible: model.preview != null
+                    visible: model.path != null
                     asynchronous: true
                     cache: false
-                    source: model.preview
                     fillMode: Image.PreserveAspectCrop
+                    // HACK: for some reason the wallpaper preview doesn't load, just load the full image
+                    source: model.path
                 }
             }
             onClicked: {
