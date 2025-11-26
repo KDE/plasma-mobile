@@ -95,26 +95,37 @@ void ShellUtil::launchApp(const QString &storageId)
     job->start();
 }
 
-void ShellUtil::setInputTransparent(QQuickWindow *window, bool transparent) {
-    if (window) {
-        Qt::WindowFlags flags = window->flags();
-        if (transparent) {
-            flags |= Qt::WindowTransparentForInput;
-        } else {
-            flags &= ~Qt::WindowTransparentForInput;
-        }
-        window->setFlags(flags);
+void ShellUtil::setInputTransparent(QQuickWindow *window, bool transparent)
+{
+    if (!window) {
+        return;
     }
+
+    Qt::WindowFlags flags = window->flags();
+    if (transparent) {
+        flags |= Qt::WindowTransparentForInput;
+    } else {
+        flags &= ~Qt::WindowTransparentForInput;
+    }
+    window->setFlags(flags);
 }
 
-void ShellUtil::setWindowLayer(QQuickWindow *window, LayerShellQt::Window::Layer layer) {
-    if (window) {
-        auto layerShellWindow = LayerShellQt::Window::get(window);
-        layerShellWindow->setLayer(layer);
+void ShellUtil::setWindowLayer(QQuickWindow *window, LayerShellQt::Window::Layer layer)
+{
+    if (!window) {
+        return;
     }
+
+    auto layerShellWindow = LayerShellQt::Window::get(window);
+    layerShellWindow->setLayer(layer);
 }
 
-void ShellUtil::setInputRegion(QWindow *window, const QRect &region) {
+void ShellUtil::setInputRegion(QWindow *window, const QRect &region)
+{
+    if (!window) {
+        return;
+    }
+
     auto waylandWindow = dynamic_cast<QtWaylandClient::QWaylandWindow *>(window->handle());
     if (!waylandWindow) {
         qWarning() << "Failed to retrieve Wayland window handle.";
@@ -152,6 +163,7 @@ void ShellUtil::setInputRegion(QWindow *window, const QRect &region) {
     wl_surface_commit(surface);
 }
 
-QString ShellUtil::toPlainText(QString htmlString) {
+QString ShellUtil::toPlainText(QString htmlString)
+{
     return QTextDocumentFragment::fromHtml(htmlString).toPlainText();
 }
