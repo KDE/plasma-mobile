@@ -43,7 +43,7 @@ Q_SIGNALS:
 
 private:
     TaskModel *m_taskModel = nullptr;
-    QPointer<Output> m_output;
+    QPointer<LogicalOutput> m_output;
 };
 
 } // namespace KWin
