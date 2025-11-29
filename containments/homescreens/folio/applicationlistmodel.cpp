@@ -181,6 +181,7 @@ ApplicationListSearchModel::ApplicationListSearchModel(HomeScreen *parent, Appli
 
     setSortRole(ApplicationListModel::NameRole);
     setSortCaseSensitivity(Qt::CaseInsensitive);
+    setSortLocaleAware(true);
 
     sort(0, Qt::AscendingOrder);
 }
