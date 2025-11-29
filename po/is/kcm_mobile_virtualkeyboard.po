@@ -1,0 +1,100 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-11-28 14:38+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: ui/languages.qml:19
+#, kde-format
+msgid "Languages"
+msgstr "Tungumál"
+
+#: ui/languages.qml:44
+#, kde-format
+msgid "Apply"
+msgstr "Virkja"
+
+#: ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr "Skjályklaborð"
+
+#: ui/main.qml:33
+#, kde-format
+msgid "Type anything here…"
+msgstr "Skrifaðu hvaðeina hér…"
+
+#: ui/main.qml:38
+#, kde-format
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "Svörun"
+
+#: ui/main.qml:44
+#, kde-format
+msgid "Sound"
+msgstr "Hljóð"
+
+#: ui/main.qml:45
+#, kde-format
+msgid "Whether to emit a sound on keypress."
+msgstr "Hvort eigi að gefa hljóð þegar ýtt er á lykil."
+
+#: ui/main.qml:54
+#, kde-format
+msgid "Vibration"
+msgstr "Titringur"
+
+#: ui/main.qml:55
+#, kde-format
+msgid "Whether to vibrate on keypress."
+msgstr "Hvort eigi að titra þegar ýtt er á lykil."
+
+#: ui/main.qml:62
+#, kde-format
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "Leiðréttingar texta"
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr "Yfirfara stafsetningu innsetts texta"
+
+#: ui/main.qml:78
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr "Setja hástaf á fyrsta staf í hverri setningu"
+
+#: ui/main.qml:87
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr "Klára fyrirliggjandi orð með fyrstu tillögu þegar ýtt er á bilslá"
+
+#: ui/main.qml:96
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr "Stinga upp á mögulegum orðum í orðaborða"
+
+#: ui/main.qml:107
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr "Setja inn punkt og bil þegar ýtt er tvisvar á bilslá"
+
+#: ui/main.qml:118
+#, kde-format
+msgid "Configure Languages"
+msgstr "Stilla tungumál"
