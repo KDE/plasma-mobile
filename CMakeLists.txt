@@ -76,6 +76,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KCMUtils
     Package
     JobWidgets
+    WindowSystem
 )
 
 find_package(Plasma CONFIG REQUIRED)
