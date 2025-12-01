@@ -1,0 +1,398 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-11-30 17:45+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: notifications/notificationfileinfo.cpp:169
+#, kde-format
+msgid "Open with %1"
+msgstr "Opna með %1"
+
+#: notifications/notificationfileinfo.cpp:173
+#, kde-format
+msgid "Open with…"
+msgstr "Opna með…"
+
+#: notifications/notificationfilemenu.cpp:109
+#: qml/widgets/notifications/NotificationJobItem.qml:217
+#, kde-format
+msgid "Open Containing Folder"
+msgstr "Opna umlykjandi möppu"
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr "&Afrita"
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr "Afrita staðsetningu"
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr "Eiginleikar"
+
+#: qml/actiondrawer/private/ContentContainer.qml:151
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Hreinsa allar tilkynningar"
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
+#, kde-format
+msgid "On"
+msgstr "Á"
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
+#, kde-format
+msgid "Off"
+msgstr "Af"
+
+#: qml/dataproviders/SignalStrengthInfo.qml:17
+#, kde-format
+msgid "SIM Locked"
+msgstr "SIM-kort læst"
+
+#: qml/popups/volumeosd/AudioApplet.qml:89
+#, kde-format
+msgid "Output Devices"
+msgstr "Úttakstæki"
+
+#: qml/popups/volumeosd/AudioApplet.qml:118
+#, kde-format
+msgid "Input Devices"
+msgstr "Inntakstæki"
+
+#: qml/popups/volumeosd/AudioApplet.qml:148
+#, kde-format
+msgid "Playback Streams"
+msgstr "Afspilunarstraumar"
+
+#: qml/popups/volumeosd/AudioApplet.qml:199
+#, kde-format
+msgid "Recording Streams"
+msgstr "Upptökustraumar"
+
+#: qml/popups/volumeosd/DeviceListItem.qml:24
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/popups/volumeosd/DeviceListItem.qml:33
+#, kde-format
+msgid "Device name not found"
+msgstr "Heiti tækis fannst ekki"
+
+#: qml/popups/volumeosd/ListItemBase.qml:123
+#, kde-format
+msgid "Show additional options for %1"
+msgstr "Sýna viðbótarvalkosti fyrir %1"
+
+#: qml/popups/volumeosd/ListItemBase.qml:215
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/popups/volumeosd/ListItemBase.qml:230
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr "100%"
+
+#: qml/popups/volumeosd/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr "Tilkynningahljóð"
+
+#: qml/popups/volumeosd/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/popups/volumeosd/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr "Heiti streymis fannst ekki"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Unmute"
+msgstr "Afþagga"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Mute"
+msgstr "Þagga"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
+#, kde-format
+msgid "configure audio streams"
+msgstr "grunnstilla hljóðstreymi"
+
+#: qml/popups/volumeosd/VolumeOSD.qml:200
+#, kde-format
+msgid "Open audio settings"
+msgstr "Opna hljóðstillingar"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/widgets/krunner/KRunnerScreen.qml:68
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search…"
+msgstr "Leita…"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#, kde-format
+msgid "No media playing"
+msgstr "Ekkert efni í spilun"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#, kde-format
+msgid "Previous track"
+msgstr ""
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#, kde-format
+msgid "Play or Pause media"
+msgstr "Spila eða setja á pásu"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#, kde-format
+msgid "Next track"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:44
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:61
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Select All"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:58
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr "Svara"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:31
+#, kde-format
+msgctxt "Row description, e.g. Source"
+msgid "%1:"
+msgstr "%1:"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:102
+#, kde-format
+msgctxt "How many bytes have been copied"
+msgid "%2 of %1"
+msgstr "%2 af %1"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:106
+#, kde-format
+msgctxt "How many files have been copied"
+msgid "%2 of %1 file"
+msgid_plural "%2 of %1 files"
+msgstr[0] "%2 af %1 skrá"
+msgstr[1] "%2 af %1 skrám"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:109
+#, kde-format
+msgctxt "How many dirs have been copied"
+msgid "%2 of %1 folder"
+msgid_plural "%2 of %1 folders"
+msgstr[0] "%2 af 1 möppu"
+msgstr[1] "%2 af %1 möppum"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:112
+#, kde-format
+msgctxt "How many items (that includes files and dirs) have been copied"
+msgid "%2 of %1 item"
+msgid_plural "%2 of %1 items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:120
+#, kde-format
+msgid "%1 file"
+msgid_plural "%1 files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:122
+#, kde-format
+msgid "%1 folder"
+msgid_plural "%1 folders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:124
+#, kde-format
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:141
+#, kde-format
+msgctxt "Bytes per second"
+msgid "%1/s"
+msgstr "%1/s"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:115
+#, kde-format
+msgctxt "Percentage of a job"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:130
+#, kde-format
+msgctxt "Hides/expands item details"
+msgid "Details"
+msgstr "Nánar"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:141
+#, kde-format
+msgctxt "Pause running job"
+msgid "Pause"
+msgstr "Bíða"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:150
+#, kde-format
+msgctxt "Cancel running job"
+msgid "Cancel"
+msgstr "Hætta við"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:181
+#: qml/widgets/notifications/ThumbnailStrip.qml:134
+#, kde-format
+msgid "More Options…"
+msgstr "Fleiri valkostir…"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:209
+#, kde-format
+msgid "Open"
+msgstr "Opna"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr "Skrifaðu svar…"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr "Senda"
+
+#: qml/widgets/notifications/NotificationsUtils.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:44
+#, kde-format
+msgid "now"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsWidget.qml:258
+#, kde-format
+msgid "Notification service not available"
+msgstr "Tilkynningaþjónusta ekki tiltæk"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:267
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr "Tilkynningar eru núna meðhöndlaðar af '%1 %2'"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:429
+#, kde-format
+msgid "Show Fewer"
+msgstr "Birta færri"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:431
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr "Birta %1 til viðbótar"
