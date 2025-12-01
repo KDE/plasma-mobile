@@ -86,11 +86,3 @@ msgstr "PIN erroni"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicador de focus del plafó"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "Activa la llum de flaix"
-
-#~ msgctxt "@action:button"
-#~ msgid "Open camera"
-#~ msgstr "Obre la càmera"

@@ -261,6 +261,3 @@ msgstr "Tipus de sistema"
 #, kde-format
 msgid "Configure waydroid"
 msgstr "Configura el Waydroid"
-
-#~ msgid "Go back"
-#~ msgstr "Retrocedeix"
