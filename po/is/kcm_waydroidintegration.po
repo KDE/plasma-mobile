@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-28 14:52+0000\n"
+"PO-Revision-Date: 2025-12-03 17:50+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -182,6 +182,8 @@ msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
 "are active"
 msgstr ""
+"Láta Waydroid-gáminn svæfast (eftir að skjárinn fer í hvíld) þegar engin "
+"forrit eru virk"
 
 #: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
