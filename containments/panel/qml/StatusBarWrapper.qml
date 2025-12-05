@@ -21,11 +21,13 @@ Item {
     // Whether the background should be transparent, with content using a complementary theme on top.
     required property bool transparentBackground
 
+    // Whether the content should be forced to be white with a drop shadow
+    required property bool forcedComplementary
+
     // Request the panel itself to reapply settings (ex. for updating touch area).
     signal updatePanelPropertiesRequested()
 
-
-    Kirigami.Theme.colorSet: transparentBackground ? Kirigami.Theme.Complementary : Kirigami.Theme.Header
+    Kirigami.Theme.colorSet: forcedComplementary ? Kirigami.Theme.Complementary : Kirigami.Theme.Header
     Kirigami.Theme.inherit: false
 
     property real offset: 0
@@ -37,7 +39,7 @@ Item {
         showSecondRow: false
         showTime: !MobileShellState.LockscreenDBusClient.lockscreenActive // Don't show time on the lockscreen, since we already have a massive clock
 
-        showDropShadow: root.transparentBackground
+        showDropShadow: root.forcedComplementary
         backgroundColor: root.transparentBackground ? "transparent" : Kirigami.Theme.backgroundColor
 
         transform: [

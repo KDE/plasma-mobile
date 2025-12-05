@@ -179,8 +179,10 @@ ContainmentItem {
         // load appropriate system navigation component
         NavigationPanelComponent {
             anchors.fill: parent
-            opaqueBar: root.opaqueBar
+
             isVertical: root.inLandscape
+            opaqueBar: root.opaqueBar
+            forcedComplementary: !opaqueBar && !startupFeedbackColorAnimation.isShowing
 
             transform: [
                 Translate {

@@ -77,6 +77,14 @@ Item {
 
             return !containmentItem.showingApp && !containmentItem.fullscreen;
         }
+        forcedComplementary: {
+            if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
+                return true;
+            }
+
+            // Force complementary colors (white) unless the startup feedback is showing
+            return transparentBackground && !startupFeedbackColorAnimation.isShowing
+        }
 
         state: {
             // If we are on the lockscreen, always show the status panel.
