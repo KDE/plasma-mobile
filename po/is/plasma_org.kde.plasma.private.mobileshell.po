@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-30 17:45+0000\n"
+"PO-Revision-Date: 2025-12-04 09:31+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -172,7 +172,7 @@ msgstr "Ekkert efni í spilun"
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
-msgstr ""
+msgstr "Fyrra lag"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
@@ -182,25 +182,25 @@ msgstr "Spila eða setja á pásu"
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
-msgstr ""
+msgstr "Næsta lag"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:32
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "Afrita vistfang tengils"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr ""
+msgstr "Afrita"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
-msgstr ""
+msgstr "Velja allt"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:58
 #, kde-format
@@ -241,29 +241,29 @@ msgstr[1] "%2 af %1 möppum"
 msgctxt "How many items (that includes files and dirs) have been copied"
 msgid "%2 of %1 item"
 msgid_plural "%2 of %1 items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 af %1 atriði"
+msgstr[1] "%2 af %1 atriðum"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:120
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 skrá"
+msgstr[1] "%1 skrár"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
 msgid "%1 folder"
 msgid_plural "%1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 mappa"
+msgstr[1] "%1 möppur"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:124
 #, kde-format
 msgid "%1 item"
 msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 atriði"
+msgstr[1] "%1 atriði"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:141
 #, kde-format
@@ -322,58 +322,58 @@ msgstr "Senda"
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
-msgstr ""
+msgstr "%1 (sett í bið)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:19
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr ""
+msgstr "%1 (mistókst)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:21
 #, kde-format
 msgid "Job Failed"
-msgstr ""
+msgstr "Verk mistókst"
 
 #: qml/widgets/notifications/NotificationsUtils.js:24
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
-msgstr ""
+msgstr "%1 (lokið)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:26
 #, kde-format
 msgid "Job Finished"
-msgstr ""
+msgstr "Verki lokið"
 
 #: qml/widgets/notifications/NotificationsUtils.js:44
 #, kde-format
 msgid "now"
-msgstr ""
+msgstr "núna"
 
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr ""
+msgstr "fyrir %1 mín. síðan"
 
 #: qml/widgets/notifications/NotificationsUtils.js:81
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr ""
+msgstr "%1 sek. eftir"
 
 #: qml/widgets/notifications/NotificationsUtils.js:84
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr ""
+msgstr "%1 mín. eftir"
 
 #: qml/widgets/notifications/NotificationsUtils.js:87
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr ""
+msgstr "%1 klst. eftir"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
