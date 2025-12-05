@@ -73,7 +73,9 @@ void HomeScreenState::init()
     m_closeSearchWidgetAnim = setupAnimation("searchWidgetY", animDuration, QEasingCurve::OutExpo, SEARCH_WIDGET_OPEN_DIST);
 
     connect(m_closeSearchWidgetAnim, &QPropertyAnimation::finished, this, [this]() {
-        setViewState(ViewState::PageView);
+        if (m_viewState == ViewState::SearchWidgetView) {
+            setViewState(ViewState::PageView);
+        }
     });
 
     m_pageAnim = setupAnimation("pageViewX", animDuration, QEasingCurve::OutExpo, 0);
@@ -87,7 +89,9 @@ void HomeScreenState::init()
     m_closeFolderAnim = setupAnimation("folderOpenProgress", animDuration, QEasingCurve::OutExpo, 0.0);
 
     connect(m_closeFolderAnim, &QPropertyAnimation::finished, this, [this]() {
-        setViewState(ViewState::PageView);
+        if (m_viewState == ViewState::FolderView) {
+            setViewState(ViewState::PageView);
+        }
         setCurrentFolder(nullptr);
         setFolderViewX(0); // reset to first page
         m_folderPageNum = 0;
@@ -107,7 +111,9 @@ void HomeScreenState::init()
     m_closeSettingsAnim = setupAnimation("settingsOpenProgress", animDuration, QEasingCurve::InOutExpo, 0.0);
 
     connect(m_closeSettingsAnim, &QPropertyAnimation::finished, this, [this]() {
-        setViewState(ViewState::PageView);
+        if (m_viewState == ViewState::SettingsView) {
+            setViewState(ViewState::PageView);
+        }
     });
 
     connect(this, &HomeScreenState::viewWidthChanged, this, [this]() {

@@ -124,7 +124,9 @@ Item {
 
         interactive: root.interactive &&
             settingsLoader.homeScreenInteractive &&
-            (appDrawer.flickable.contentY <= 10 || // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
+            (appDrawer.flickable.atYBeginning || // there are cases where contentY > 0 but atYBeginning is true
+            appDrawer.flickable.contentY <= 10 ||
+            // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
             folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
             folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
             folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
