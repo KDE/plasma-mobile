@@ -1,0 +1,287 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"PO-Revision-Date: 2025-12-04 10:21+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr "Skel"
+
+#: ui/main.qml:27
+#, kde-format
+msgid "General"
+msgstr "Almennt"
+
+#: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
+#, kde-format
+msgid "Shell Vibrations"
+msgstr "Titringur í skel"
+
+#: ui/main.qml:41
+#, kde-format
+msgid "Animations"
+msgstr "Myndhreyfingar"
+
+#: ui/main.qml:42
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr ""
+"Ef þetta er óvirkt verður dregið eins mikið og auðið er úr myndhreyfingum."
+
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Fela spjöld sjálfvirkt"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "Tvípikka til að vekja"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Status Bar"
+msgstr "Stöðustika"
+
+#: ui/main.qml:87
+#, kde-format
+msgid "Date in status bar"
+msgstr "Dagsetning í stöðustiku"
+
+#: ui/main.qml:88
+#, kde-format
+msgid "If on, date will be shown next to the clock in the status bar."
+msgstr "Ef þetta er virkt mun dagsetning birtast við hlið klukku á stöðustiku."
+
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr "Rafhlöðuprósenta"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "Sýna rafhlöðuprósentu í stöðustiku."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "Stærð stöðustiku"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Stærð efstu stikunnar (krefst endurræsingar)."
+
+#: ui/main.qml:120
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr "Örsmá"
+
+#: ui/main.qml:121
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr "Lítil"
+
+#: ui/main.qml:122
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr "Venjuleg"
+
+#: ui/main.qml:123
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr "Stór"
+
+#: ui/main.qml:124
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr "Mjög stór"
+
+#: ui/main.qml:140
+#, kde-format
+msgid "Action Drawer"
+msgstr "Aðgerðaskúffa"
+
+#: ui/main.qml:146
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr ""
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr ""
+
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#, kde-format
+msgid "Quick Settings"
+msgstr "Flýtistillingar"
+
+#: ui/main.qml:159
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr ""
+
+#: ui/main.qml:160
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr ""
+
+#: ui/main.qml:181
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr ""
+
+#: ui/main.qml:182
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr ""
+
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr ""
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "Ekkert"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "Vasaljós"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "Myndavél"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Vinstri hnappur"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Hægri hnappur"
+
+#: ui/QuickSettingsForm.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide"
+msgstr "Fela"
+
+#: ui/QuickSettingsForm.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr "Birta"
+
+#: ui/QuickSettingsForm.qml:80
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "Dálkar í flýtistillingum"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "Hámarksfjöldi dálka í láréttri stöðu."
+
+#: ui/QuickSettingsForm.qml:94
+#, kde-format
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:117
+#, kde-format
+msgid "Disabled Quick Settings"
+msgstr "Flýtistillingar óvirkar"
+
+#: ui/QuickSettingsForm.qml:122
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr ""
+
+#: ui/VibrationForm.qml:26
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr "Hvort titringur sé virkjaður í skelinni."
+
+#: ui/VibrationForm.qml:39
+#, kde-format
+msgid "Vibration Duration"
+msgstr "Tímalengd titrings"
+
+#: ui/VibrationForm.qml:40
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr "Hve lengi titringur ætti að standa."
+
+#: ui/VibrationForm.qml:43
+#, kde-format
+msgctxt "Long duration"
+msgid "Long"
+msgstr "Lengi"
+
+#: ui/VibrationForm.qml:44
+#, kde-format
+msgctxt "Medium duration"
+msgid "Medium"
+msgstr "Miðlungs"
+
+#: ui/VibrationForm.qml:45
+#, kde-format
+msgctxt "Short duration"
+msgid "Short"
+msgstr "Stutt"
+
+#: ui/VibrationForm.qml:60
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr "Titringi lyklaborðs er stýrt sérstaklega í lyklaborðsstillingunum."
