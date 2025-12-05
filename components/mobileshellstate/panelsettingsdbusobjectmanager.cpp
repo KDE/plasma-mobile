@@ -58,14 +58,16 @@ void PanelSettingsDBusObjectManager::registerObjects()
         return;
     }
 
-    m_initialized = true;
-
     // Fetch kscreen config
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_kscreenConfig = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
         if (!m_kscreenConfig) {
+            qDebug() << "PanelSettingsDBusObjectManager: Failed to get kscreen config, attempting again";
+            registerObjects();
             return;
         }
+
+        m_initialized = true;
 
         KScreen::ConfigMonitor::instance()->addConfig(m_kscreenConfig);
 

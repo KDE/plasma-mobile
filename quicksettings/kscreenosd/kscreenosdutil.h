@@ -23,6 +23,8 @@ Q_SIGNALS:
     void outputsChanged();
 
 private:
+    void retrieveKScreen();
+
     KScreen::ConfigPtr m_config{nullptr};
     int m_outputs{0};
 

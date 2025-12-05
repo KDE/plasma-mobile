@@ -54,9 +54,19 @@ RotationUtil::RotationUtil(QObject *parent)
     : QObject{parent}
     , m_sensor{new QOrientationSensor(this)}
 {
+    retrieveKScreen();
+
+    connect(m_sensor, &QOrientationSensor::readingChanged, this, &RotationUtil::updateShowRotationButton);
+    m_sensor->start();
+}
+
+void RotationUtil::retrieveKScreen()
+{
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
         if (!m_config) {
+            qDebug() << "RotationUtil: Failed to get kscreen config, attempting again";
+            retrieveKScreen();
             return;
         }
         KScreen::ConfigMonitor::instance()->addConfig(m_config);
@@ -71,9 +81,6 @@ RotationUtil::RotationUtil(QObject *parent)
             connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &RotationUtil::updateShowRotationButton);
         });
     });
-
-    connect(m_sensor, &QOrientationSensor::readingChanged, this, &RotationUtil::updateShowRotationButton);
-    m_sensor->start();
 }
 
 void RotationUtil::rotateToSuggestedRotation()

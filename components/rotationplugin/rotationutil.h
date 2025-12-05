@@ -47,6 +47,8 @@ private Q_SLOTS:
     void updateShowRotationButton();
 
 private:
+    void retrieveKScreen();
+
     bool m_showRotationButton{false};
     KScreen::Output::Rotation m_rotateTo;
     Rotation m_deviceRotation;
