@@ -20,11 +20,15 @@ KScreenOSDUtil::KScreenOSDUtil(QObject *parent)
         }
         setOutputs(m_config->outputs().size());
     });
+}
 
+void KScreenOSDUtil::retrieveKScreen()
+{
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
         if (!m_config) {
-            qDebug() << "kscreenosdutil: Unable to obtain kscreen config";
+            qDebug() << "kscreenosdutil: Unable to obtain kscreen config, attempting again";
+            retrieveKScreen();
             return;
         }
         KScreen::ConfigMonitor::instance()->addConfig(m_config);

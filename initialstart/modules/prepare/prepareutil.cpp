@@ -26,10 +26,12 @@ void PrepareUtil::initKScreen(std::function<void()> callback)
 {
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this, callback](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
-
         if (!m_config) {
+            qDebug() << "PrepareUtil: Failed to get kscreen config, attempting again";
+            initKScreen(callback);
             return;
         }
+
         KScreen::ConfigMonitor::instance()->addConfig(m_config);
 
         int scaling = 100;
