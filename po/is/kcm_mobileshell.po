@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-12-04 10:21+0000\n"
+"PO-Revision-Date: 2025-12-05 17:13+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
 #: ui/main.qml:18
@@ -63,7 +63,7 @@ msgstr "Tvípikka til að vekja"
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "Þegar slökkt er á skjánum skaltu tvípikka til að vekja tækið."
 
 #: ui/main.qml:81
 #, kde-format
@@ -139,13 +139,13 @@ msgstr "Aðgerðaskúffa"
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "Festur hamur"
 
 #: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "Útliðaður hamur"
 
 #: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
@@ -176,7 +176,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Flýtileiðir á læsiskjá"
 
 #: ui/main.qml:206
 #, kde-format

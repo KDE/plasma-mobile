@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-12-04 09:17+0000\n"
+"PO-Revision-Date: 2025-12-05 17:04+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
 #: ui/main.qml:19
@@ -232,6 +232,11 @@ msgid ""
 "your device, paste the Android ID on the field in the website. Then, give "
 "the Google services some minutes to reflect the change and restart waydroid."
 msgstr ""
+"Þegar Waydroid er ræst með GAPPS í fyrsta skipti, færð þú að vita að tækið "
+"sé ekki vottað fyrir Google Play Protect. Til að sjálf-votta tækið þitt "
+"skaltu líma inn Android ID auðkennið úr reitnum á vefsvæðinu. Síðan skaltu "
+"gefa Google-þjónustunum nokkrar mínútur til að dreifa breytingunum og "
+"endurræsa þá Waydroid."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
