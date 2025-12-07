@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-12-05 17:13+0000\n"
+"PO-Revision-Date: 2025-12-06 07:51+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -54,6 +54,8 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
+"Fela sjálfvirkt stöðu- og leiðsagnarstikur til að gerir forritum kleift að "
+"vera alltaf í skjáfylliham."
 
 #: ui/main.qml:69
 #, kde-format
@@ -155,22 +157,22 @@ msgstr "Flýtistillingar"
 #: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Aðgerðaskúffa efst til vinstri"
 
 #: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Hamur þegar opnað er að ofan til vinstri."
 
 #: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Aðgerðaskúffa efst til hægri"
 
 #: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Hamur þegar opnað er að ofan til hægri."
 
 #: ui/main.qml:201
 #, kde-format
@@ -234,7 +236,7 @@ msgstr "Hámarksfjöldi dálka í láréttri stöðu."
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr ""
+msgstr "Sérsníða röðun flýtistillinga í fellispjaldi og fela þær."
 
 #: ui/QuickSettingsForm.qml:117
 #, kde-format
@@ -245,6 +247,7 @@ msgstr "Flýtistillingar óvirkar"
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr ""
+"Gera aftur virkar þær flýtistillingar sem áður hafa verið gerðar óvirkar."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
