@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-22 12:23+0000\n"
+"PO-Revision-Date: 2025-12-06 09:10+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -36,7 +36,7 @@ msgstr "Tókst ekki að stilla tímabelti"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Abidjan"
-msgstr ""
+msgstr "Abídjan"
 
 #: timezonesi18n.cpp:46
 #, kde-format
@@ -72,7 +72,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Algiers"
-msgstr ""
+msgstr "Algiersborg"
 
 #: timezonesi18n.cpp:52
 #, kde-format
@@ -126,7 +126,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Antigua"
-msgstr ""
+msgstr "Antigúa"
 
 #: timezonesi18n.cpp:61
 #, kde-format
@@ -150,13 +150,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Araguaina"
-msgstr ""
+msgstr "Araguaina"
 
 #: timezonesi18n.cpp:65
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Aruba"
-msgstr ""
+msgstr "Arúba"
 
 #: timezonesi18n.cpp:66
 #, kde-format
@@ -210,13 +210,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Azores"
-msgstr ""
+msgstr "Asoreyjar"
 
 #: timezonesi18n.cpp:75
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Baghdad"
-msgstr ""
+msgstr "Bagdad"
 
 #: timezonesi18n.cpp:76
 #, kde-format
@@ -234,13 +234,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Bahrain"
-msgstr ""
+msgstr "Barein"
 
 #: timezonesi18n.cpp:79
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Baku"
-msgstr ""
+msgstr "Bakú"
 
 #: timezonesi18n.cpp:80
 #, kde-format
@@ -282,7 +282,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Beirut"
-msgstr ""
+msgstr "Beirút"
 
 #: timezonesi18n.cpp:87
 #, kde-format
@@ -294,25 +294,25 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Belgrade"
-msgstr ""
+msgstr "Belgrad"
 
 #: timezonesi18n.cpp:89
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Belize"
-msgstr ""
+msgstr "Belís"
 
 #: timezonesi18n.cpp:90
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Berlin"
-msgstr ""
+msgstr "Berlín"
 
 #: timezonesi18n.cpp:91
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermúda"
 
 #: timezonesi18n.cpp:92
 #, kde-format
@@ -396,25 +396,25 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Brunei"
-msgstr ""
+msgstr "Brúnei"
 
 #: timezonesi18n.cpp:106
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Brussels"
-msgstr ""
+msgstr "Brussel"
 
 #: timezonesi18n.cpp:107
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Bucharest"
-msgstr ""
+msgstr "Búkarest"
 
 #: timezonesi18n.cpp:108
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Budapest"
-msgstr ""
+msgstr "Búdapest"
 
 #: timezonesi18n.cpp:109
 #, kde-format
@@ -438,7 +438,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Cairo"
-msgstr ""
+msgstr "Kaíró"
 
 #: timezonesi18n.cpp:113
 #, kde-format
@@ -468,7 +468,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Cape Verde"
-msgstr ""
+msgstr "Grænhöfðaeyjar"
 
 #: timezonesi18n.cpp:118
 #, kde-format
@@ -606,7 +606,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Copenhagen"
-msgstr ""
+msgstr "Kaupmannahöfn"
 
 #: timezonesi18n.cpp:141
 #, kde-format
@@ -618,7 +618,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kosta Ríka"
 
 #: timezonesi18n.cpp:143
 #, kde-format
@@ -654,7 +654,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Damascus"
-msgstr ""
+msgstr "Damaskus"
 
 #: timezonesi18n.cpp:149
 #, kde-format
@@ -720,7 +720,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Djibouti"
-msgstr ""
+msgstr "Djíbútí"
 
 #: timezonesi18n.cpp:160
 #, kde-format
@@ -762,7 +762,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Easter"
-msgstr ""
+msgstr "Páskaeyja"
 
 #: timezonesi18n.cpp:167
 #, kde-format
@@ -822,13 +822,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Faroe"
-msgstr ""
+msgstr "Færeyjar"
 
 #: timezonesi18n.cpp:177
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Fiji"
-msgstr ""
+msgstr "Fídjieyjar"
 
 #: timezonesi18n.cpp:178
 #, kde-format
@@ -882,7 +882,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gíbraltar"
 
 #: timezonesi18n.cpp:187
 #, kde-format
@@ -924,19 +924,19 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Gvadalúp"
 
 #: timezonesi18n.cpp:194
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Guam"
-msgstr ""
+msgstr "Gvam"
 
 #: timezonesi18n.cpp:195
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Guatemala"
-msgstr ""
+msgstr "Gvatemala"
 
 #: timezonesi18n.cpp:196
 #, kde-format
@@ -954,7 +954,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Guyana"
-msgstr ""
+msgstr "Gvæjana"
 
 #: timezonesi18n.cpp:199
 #, kde-format
@@ -1020,7 +1020,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Honolulu"
-msgstr ""
+msgstr "Honolúlú"
 
 #: timezonesi18n.cpp:210
 #, kde-format
@@ -1056,19 +1056,19 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Isle of Man"
-msgstr ""
+msgstr "Eyjan Mön"
 
 #: timezonesi18n.cpp:216
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Istanbul"
-msgstr ""
+msgstr "Istanbúl"
 
 #: timezonesi18n.cpp:217
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Jakarta"
-msgstr ""
+msgstr "Djakarta"
 
 #: timezonesi18n.cpp:218
 #, kde-format
@@ -1092,13 +1092,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Jerusalem"
-msgstr ""
+msgstr "Jerúsalem"
 
 #: timezonesi18n.cpp:222
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Johannesburg"
-msgstr ""
+msgstr "Jóhannesarborg"
 
 #: timezonesi18n.cpp:223
 #, kde-format
@@ -1128,13 +1128,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kabul"
-msgstr ""
+msgstr "Kabúl"
 
 #: timezonesi18n.cpp:228
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kaliningrad"
-msgstr ""
+msgstr "Kalíngrad"
 
 #: timezonesi18n.cpp:229
 #, kde-format
@@ -1164,7 +1164,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kathmandu"
-msgstr ""
+msgstr "Katmandú"
 
 #: timezonesi18n.cpp:234
 #, kde-format
@@ -1182,19 +1182,19 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Khartoum"
-msgstr ""
+msgstr "Katrúm"
 
 #: timezonesi18n.cpp:237
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kyiv"
-msgstr ""
+msgstr "Kíev"
 
 #: timezonesi18n.cpp:238
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kigali"
-msgstr ""
+msgstr "Kígalí"
 
 #: timezonesi18n.cpp:239
 #, kde-format
@@ -1224,7 +1224,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kolkata"
-msgstr ""
+msgstr "Kalkútta"
 
 #: timezonesi18n.cpp:244
 #, kde-format
@@ -1248,7 +1248,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kuala Lumpur"
-msgstr ""
+msgstr "Kúala Lúmpúr"
 
 #: timezonesi18n.cpp:248
 #, kde-format
@@ -1260,7 +1260,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kuwait"
-msgstr ""
+msgstr "Kúveit"
 
 #: timezonesi18n.cpp:250
 #, kde-format
@@ -1296,7 +1296,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Lima"
-msgstr ""
+msgstr "Líma"
 
 #: timezonesi18n.cpp:256
 #, kde-format
@@ -1308,13 +1308,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Lisbon"
-msgstr ""
+msgstr "Lissabon"
 
 #: timezonesi18n.cpp:258
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Ljubljana"
-msgstr ""
+msgstr "Ljúblíana"
 
 #: timezonesi18n.cpp:259
 #, kde-format
@@ -1362,7 +1362,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Luanda"
-msgstr ""
+msgstr "Lúanda"
 
 #: timezonesi18n.cpp:267
 #, kde-format
@@ -1380,7 +1380,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Luxembourg"
-msgstr ""
+msgstr "Lúxemborg"
 
 #: timezonesi18n.cpp:270
 #, kde-format
@@ -1410,7 +1410,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Madrid"
-msgstr ""
+msgstr "Madríd"
 
 #: timezonesi18n.cpp:275
 #, kde-format
@@ -1446,7 +1446,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Maldives"
-msgstr ""
+msgstr "Maldíveyjar"
 
 #: timezonesi18n.cpp:281
 #, kde-format
@@ -1470,7 +1470,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Manila"
-msgstr ""
+msgstr "Maníla"
 
 #: timezonesi18n.cpp:285
 #, kde-format
@@ -1500,13 +1500,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Marquesas"
-msgstr ""
+msgstr "Marquesaseyjar"
 
 #: timezonesi18n.cpp:290
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Martinique"
-msgstr ""
+msgstr "Martiník"
 
 #: timezonesi18n.cpp:291
 #, kde-format
@@ -1524,7 +1524,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Mauritius"
-msgstr ""
+msgstr "Máritus"
 
 #: timezonesi18n.cpp:294
 #, kde-format
@@ -1590,7 +1590,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Mexico City"
-msgstr ""
+msgstr "Mexíkóborg"
 
 #: timezonesi18n.cpp:305
 #, kde-format
@@ -1620,7 +1620,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Monaco"
-msgstr ""
+msgstr "Mónakó"
 
 #: timezonesi18n.cpp:310
 #, kde-format
@@ -1662,31 +1662,31 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Moscow"
-msgstr ""
+msgstr "Moskva"
 
 #: timezonesi18n.cpp:317
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Muscat"
-msgstr ""
+msgstr "Múskat"
 
 #: timezonesi18n.cpp:318
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Nairobi"
-msgstr ""
+msgstr "Naíróbí"
 
 #: timezonesi18n.cpp:319
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Nassau"
-msgstr ""
+msgstr "Nassá"
 
 #: timezonesi18n.cpp:320
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Nauru"
-msgstr ""
+msgstr "Nárú"
 
 #: timezonesi18n.cpp:321
 #, kde-format
@@ -1716,7 +1716,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Nicosia"
-msgstr ""
+msgstr "Nikósía"
 
 #: timezonesi18n.cpp:326
 #, kde-format
@@ -1800,7 +1800,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Oslo"
-msgstr ""
+msgstr "Osló"
 
 #: timezonesi18n.cpp:340
 #, kde-format
@@ -1848,7 +1848,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Paris"
-msgstr ""
+msgstr "París"
 
 #: timezonesi18n.cpp:348
 #, kde-format
@@ -1878,7 +1878,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitkairn-eyja"
 
 #: timezonesi18n.cpp:353
 #, kde-format
@@ -1932,13 +1932,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Prague"
-msgstr ""
+msgstr "Prag"
 
 #: timezonesi18n.cpp:362
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Púertó Ríkó"
 
 #: timezonesi18n.cpp:363
 #, kde-format
@@ -2028,7 +2028,7 @@ msgstr "Reykjavík"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Riga"
-msgstr ""
+msgstr "Ríga"
 
 #: timezonesi18n.cpp:378
 #, kde-format
@@ -2052,7 +2052,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Rome"
-msgstr ""
+msgstr "Róm"
 
 #: timezonesi18n.cpp:382
 #, kde-format
@@ -2124,7 +2124,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Santiago"
-msgstr ""
+msgstr "Santíago"
 
 #: timezonesi18n.cpp:394
 #, kde-format
@@ -2148,7 +2148,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Sarajevo"
-msgstr ""
+msgstr "Sarajevó"
 
 #: timezonesi18n.cpp:398
 #, kde-format
@@ -2166,7 +2166,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Seoul"
-msgstr ""
+msgstr "Seúl"
 
 #: timezonesi18n.cpp:401
 #, kde-format
@@ -2202,13 +2202,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Sofia"
-msgstr ""
+msgstr "Sófía"
 
 #: timezonesi18n.cpp:407
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "South Georgia"
-msgstr ""
+msgstr "Suður-Georgía"
 
 #: timezonesi18n.cpp:408
 #, kde-format
@@ -2268,7 +2268,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Stockholm"
-msgstr ""
+msgstr "Stokkhólmur"
 
 #: timezonesi18n.cpp:418
 #, kde-format
@@ -2292,19 +2292,19 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tahiti"
-msgstr ""
+msgstr "Tahítí"
 
 #: timezonesi18n.cpp:422
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Taipei"
-msgstr ""
+msgstr "Taípei"
 
 #: timezonesi18n.cpp:423
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tallinn"
-msgstr ""
+msgstr "Tallínn"
 
 #: timezonesi18n.cpp:424
 #, kde-format
@@ -2322,7 +2322,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tbilisi"
-msgstr ""
+msgstr "Tíbilisí"
 
 #: timezonesi18n.cpp:427
 #, kde-format
@@ -2376,7 +2376,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tokyo"
-msgstr ""
+msgstr "Tókýó"
 
 #: timezonesi18n.cpp:436
 #, kde-format
@@ -2400,13 +2400,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tortola"
-msgstr ""
+msgstr "Tortóla"
 
 #: timezonesi18n.cpp:440
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tripoli"
-msgstr ""
+msgstr "Trípólí"
 
 #: timezonesi18n.cpp:441
 #, kde-format
@@ -2424,13 +2424,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tunis"
-msgstr ""
+msgstr "Túnis"
 
 #: timezonesi18n.cpp:444
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Ulaanbaatar"
-msgstr ""
+msgstr "Úlan Bator"
 
 #: timezonesi18n.cpp:445
 #, kde-format
@@ -2460,235 +2460,235 @@ msgstr ""
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+00:00"
-msgstr ""
+msgstr "UTC+00:00"
 
 #: timezonesi18n.cpp:450
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+01:00"
-msgstr ""
+msgstr "UTC+01:00"
 
 #: timezonesi18n.cpp:451
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+02:00"
-msgstr ""
+msgstr "UTC+02:00"
 
 #: timezonesi18n.cpp:452
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+03:00"
-msgstr ""
+msgstr "UTC+03:00"
 
 #: timezonesi18n.cpp:453
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+03:30"
-msgstr ""
+msgstr "UTC+03:30"
 
 #: timezonesi18n.cpp:454
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+04:00"
-msgstr ""
+msgstr "UTC+04:00"
 
 #: timezonesi18n.cpp:455
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+04:30"
-msgstr ""
+msgstr "UTC+04:30"
 
 #: timezonesi18n.cpp:456
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+05:00"
-msgstr ""
+msgstr "UTC+05:00"
 
 #: timezonesi18n.cpp:457
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+05:30"
-msgstr ""
+msgstr "UTC+05:30"
 
 #: timezonesi18n.cpp:458
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+05:45"
-msgstr ""
+msgstr "UTC+05:45"
 
 #: timezonesi18n.cpp:459
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+06:00"
-msgstr ""
+msgstr "UTC+06:00"
 
 #: timezonesi18n.cpp:460
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+06:30"
-msgstr ""
+msgstr "UTC+06:30"
 
 #: timezonesi18n.cpp:461
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+07:00"
-msgstr ""
+msgstr "UTC+07:00"
 
 #: timezonesi18n.cpp:462
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+08:00"
-msgstr ""
+msgstr "UTC+08:00"
 
 #: timezonesi18n.cpp:463
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+09:00"
-msgstr ""
+msgstr "UTC+09:00"
 
 #: timezonesi18n.cpp:464
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+09:30"
-msgstr ""
+msgstr "UTC+09:30"
 
 #: timezonesi18n.cpp:465
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+10:00"
-msgstr ""
+msgstr "UTC+10:00"
 
 #: timezonesi18n.cpp:466
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+11:00"
-msgstr ""
+msgstr "UTC+11:00"
 
 #: timezonesi18n.cpp:467
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+12:00"
-msgstr ""
+msgstr "UTC+12:00"
 
 #: timezonesi18n.cpp:468
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+13:00"
-msgstr ""
+msgstr "UTC+13:00"
 
 #: timezonesi18n.cpp:469
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+14:00"
-msgstr ""
+msgstr "UTC+14:00"
 
 #: timezonesi18n.cpp:470
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-00:00"
-msgstr ""
+msgstr "UTC-00:00"
 
 #: timezonesi18n.cpp:471
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-01:00"
-msgstr ""
+msgstr "UTC-01:00"
 
 #: timezonesi18n.cpp:472
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-02:00"
-msgstr ""
+msgstr "UTC-02:00"
 
 #: timezonesi18n.cpp:473
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-03:00"
-msgstr ""
+msgstr "UTC-03:00"
 
 #: timezonesi18n.cpp:474
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-03:30"
-msgstr ""
+msgstr "UTC-03:30"
 
 #: timezonesi18n.cpp:475
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-04:00"
-msgstr ""
+msgstr "UTC-04:00"
 
 #: timezonesi18n.cpp:476
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-04:30"
-msgstr ""
+msgstr "UTC-04:30"
 
 #: timezonesi18n.cpp:477
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-05:00"
-msgstr ""
+msgstr "UTC-05:00"
 
 #: timezonesi18n.cpp:478
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-06:00"
-msgstr ""
+msgstr "UTC-06:00"
 
 #: timezonesi18n.cpp:479
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-07:00"
-msgstr ""
+msgstr "UTC-07:00"
 
 #: timezonesi18n.cpp:480
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-08:00"
-msgstr ""
+msgstr "UTC-08:00"
 
 #: timezonesi18n.cpp:481
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-09:00"
-msgstr ""
+msgstr "UTC-09:00"
 
 #: timezonesi18n.cpp:482
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-10:00"
-msgstr ""
+msgstr "UTC-10:00"
 
 #: timezonesi18n.cpp:483
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-11:00"
-msgstr ""
+msgstr "UTC-11:00"
 
 #: timezonesi18n.cpp:484
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-12:00"
-msgstr ""
+msgstr "UTC-12:00"
 
 #: timezonesi18n.cpp:485
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-13:00"
-msgstr ""
+msgstr "UTC-13:00"
 
 #: timezonesi18n.cpp:486
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-14:00"
-msgstr ""
+msgstr "UTC-14:00"
 
 #: timezonesi18n.cpp:487
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC"
-msgstr ""
+msgstr "UTC"
 
 #: timezonesi18n.cpp:488
 #, kde-format
@@ -2712,7 +2712,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Vatican"
-msgstr ""
+msgstr "Vatíkanið"
 
 #: timezonesi18n.cpp:492
 #, kde-format
@@ -2724,7 +2724,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Vienna"
-msgstr ""
+msgstr "Vínarborg"
 
 #: timezonesi18n.cpp:494
 #, kde-format
@@ -2736,7 +2736,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Vilnius"
-msgstr ""
+msgstr "Vilníus"
 
 #: timezonesi18n.cpp:496
 #, kde-format
@@ -2778,7 +2778,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Warsaw"
-msgstr ""
+msgstr "Varsjá"
 
 #: timezonesi18n.cpp:503
 #, kde-format
@@ -2838,13 +2838,13 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Yerevan"
-msgstr ""
+msgstr "Jerevan"
 
 #: timezonesi18n.cpp:513
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Zagreb"
-msgstr ""
+msgstr "Sagreb"
 
 #: timezonesi18n.cpp:514
 #, kde-format
