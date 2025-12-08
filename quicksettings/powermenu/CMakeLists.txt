@@ -1,21 +1,20 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+# SPDX-FileCopyrightText: 2026 Florian Richer <florian.richer@protonmail.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 find_package(LibKWorkspace)
 
-ecm_add_qml_module(powermenuplugin URI "org.kde.plasma.quicksetting.powermenu" GENERATE_PLUGIN_SOURCE)
+add_quicksetting(org.kde.plasma.quicksetting.powermenu
+    CPP_SOURCES
+        powermenuutil.cpp
+    QML_SOURCES
+        qml/main.qml
+)
 
-target_sources(powermenuplugin PRIVATE powermenuutil.cpp)
-
-target_link_libraries(powermenuplugin PRIVATE
+target_link_libraries(org.kde.plasma.quicksetting.powermenu PRIVATE
     Qt::Core
     Qt::Qml
     Qt::Quick
     KF6::CoreAddons
     PW::KWorkspace
 )
-
-ecm_finalize_qml_module(powermenuplugin)
-
-plasma_install_package(package org.kde.plasma.quicksetting.powermenu quicksettings)
-

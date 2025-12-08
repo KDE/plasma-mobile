@@ -8,12 +8,14 @@
 
 #include <QObject>
 #include <QVariantMap>
+#include <qqmlintegration.h>
 
 #include "screenshot2interface.h"
 
 class ScreenShotUtil : public QObject
 {
     Q_OBJECT
+    QML_SINGLETON
 
 public:
     ScreenShotUtil(QObject *parent = nullptr);

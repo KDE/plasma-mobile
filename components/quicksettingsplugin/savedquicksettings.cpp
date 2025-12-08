@@ -3,8 +3,6 @@
 
 #include "savedquicksettings.h"
 
-#include <KPackage/PackageLoader>
-
 #include <QFileInfo>
 
 SavedQuickSettings::SavedQuickSettings(QObject *parent)
@@ -30,11 +28,10 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
     });
 
     // load quicksettings packages
-    auto packages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KPackage/GenericQML"), "plasma/quicksettings");
+    auto packages = KPluginMetaData::findPlugins("plasma/mobile/quicksettings");
     for (auto &metaData : packages) {
-        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
-        if (!package.isValid()) {
-            qWarning() << "Quick setting package invalid:" << metaData.fileName();
+        if (!metaData.isValid()) {
+            qWarning() << "Quick setting metadata invalid:" << metaData.fileName();
             continue;
         }
         m_validPackages.push_back(metaData);

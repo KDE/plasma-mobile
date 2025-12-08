@@ -7,12 +7,13 @@
 
 #include "quicksettingsmodel.h"
 
-#include <KPackage/PackageLoader>
-
 #include <KLocalizedContext>
+#include <KPluginFactory>
 #include <QFileInfo>
 #include <QQmlContext>
 #include <QQmlEngine>
+
+using namespace Qt::Literals::StringLiterals;
 
 QuickSettingsModel::QuickSettingsModel(QObject *parent)
     : QAbstractListModel{parent}
@@ -84,11 +85,7 @@ QVariant QuickSettingsModel::data(const QModelIndex &index, int role) const
 
 QuickSetting *QuickSettingsModel::loadQuickSettingComponent(KPluginMetaData metaData)
 {
-    // Load KPackage
-    const KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
-    if (!package.isValid()) {
-        return nullptr;
-    }
+    KPluginFactory::instantiatePlugin<QObject>(metaData);
 
     // Create translation context
     QQmlEngine *engine = qmlEngine(this);
@@ -97,7 +94,8 @@ QuickSetting *QuickSettingsModel::loadQuickSettingComponent(KPluginMetaData meta
     engine->rootContext()->setContextObject(i18nContext);
 
     // Create component synchronously
-    QQmlComponent component(engine, package.fileUrl("mainscript"));
+    QQmlComponent component(qmlEngine(this));
+    component.loadUrl(QUrl(u"qrc:/qt/qml/plasma/mobile/quicksettings/"_s + metaData.pluginId().replace(".", "/") + u"/main.qml"_s));
     if (component.isError()) {
         qWarning() << "Unable to load quick setting element:" << metaData.pluginId();
         for (auto error : component.errors()) {

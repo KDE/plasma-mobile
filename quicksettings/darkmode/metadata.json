@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -66,7 +65,6 @@
         "Description[zh_CN]": "Plasma Mobile 的 深色模式快捷设置",
         "Description[zh_TW]": "Plasma 行動的深色模式快速設定",
         "Icon": "lighttable",
-        "Id": "org.kde.plasma.quicksetting.darkmode",
         "License": "GPL-2.0+",
         "Name": "Dark Mode",
         "Name[ar]": "الوضع المظلم",
