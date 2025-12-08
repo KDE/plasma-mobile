@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -80,7 +79,6 @@
         "Description[zh_CN]": "Plasma Mobile 的虚拟键盘快捷设置",
         "Description[zh_TW]": "Plasma 行動的鍵盤切換快速設定",
         "Icon": "input-keyboard-virtual",
-        "Id": "org.kde.plasma.quicksetting.keyboardtoggle",
         "License": "GPL",
         "Name": "Virtual Keyboard Toggle",
         "Name[ar]": "تبديل لوحة المفاتيح الافتراضية",

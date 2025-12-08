@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -80,7 +79,6 @@
         "Description[zh_CN]": "Plasma Mobile 的 Wi-Fi 快捷设置",
         "Description[zh_TW]": "Plasma 行動的 Wi-Fi 快速設定",
         "Icon": "network-wireless-signal",
-        "Id": "org.kde.plasma.quicksetting.wifi",
         "License": "GPL-2.0+",
         "Name": "Wi-Fi",
         "Name[ar]": "واي فاي",

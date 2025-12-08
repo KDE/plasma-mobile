@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -80,7 +79,6 @@
         "Description[zh_CN]": "Plasma Mobile 的设置页面快捷设置",
         "Description[zh_TW]": "Plasma 行動的設定應用程式快速設定",
         "Icon": "settings-configure",
-        "Id": "org.kde.plasma.quicksetting.settingsapp",
         "License": "GPL-2.0+",
         "Name": "Settings",
         "Name[ar]": "إعدادات",

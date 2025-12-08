@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -79,7 +78,6 @@
         "Description[zh_CN]": "快速设置以切换 Plasma Mobile 的停靠模式",
         "Description[zh_TW]": "Plasma 行動的基座模式切換快速設定",
         "Icon": "preferences-desktop-display-randr",
-        "Id": "org.kde.plasma.quicksetting.docked",
         "License": "GPL",
         "Name": "Docked Mode",
         "Name[ar]": "وضع الإرساء",

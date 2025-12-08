@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -51,7 +50,6 @@
         "Description[uk]": "Швидке налаштовування темного режиму для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的 深色模式快捷设置",
         "Icon": "lighttable",
-        "Id": "org.kde.plasma.quicksetting.darkmode",
         "License": "GPL-2.0+",
         "Name": "Dark Mode",
         "Name[ca@valencia]": "Mode fosc",

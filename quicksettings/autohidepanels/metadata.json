@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -67,7 +66,6 @@
         "Description[zh_CN]": "Plasma Mobile 的自动隐藏面板快速设置",
         "Description[zh_TW]": "Plasma 行動的面板自動隱藏快速設定",
         "Icon": "view-fullscreen",
-        "Id": "org.kde.plasma.quicksetting.autohidepanels",
         "License": "GPL-2.0+",
         "Name": "Auto Hide Panels",
         "Name[ar]": "إخفاء اللوحات آليًّا",

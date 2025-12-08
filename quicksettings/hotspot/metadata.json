@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -76,7 +75,6 @@
         "Description[zh_CN]": "Plasma Mobile 的热点快捷设置",
         "Description[zh_TW]": "Plasma 行動的熱點快速設定",
         "Icon": "network-wireless-hotspot",
-        "Id": "org.kde.plasma.quicksetting.hotspot",
         "License": "GPL-2.0+",
         "Name": "Hotspot",
         "Name[ar]": "نقطة اتصال",

@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -80,7 +79,6 @@
         "Description[zh_CN]": "Plasma Mobile 的位置信息快捷设置",
         "Description[zh_TW]": "Plasma 行動的地理位置快速設定",
         "Icon": "network-modem",
-        "Id": "org.kde.plasma.quicksetting.mobiledata",
         "License": "GPL-2.0+",
         "Name": "Mobile Data",
         "Name[ar]": "بيانات المحمول",

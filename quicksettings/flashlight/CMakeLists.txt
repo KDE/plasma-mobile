@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-ecm_add_qml_module(flashlightplugin
-    URI "org.kde.plasma.quicksetting.flashlight"
-    GENERATE_PLUGIN_SOURCE
+add_quicksetting(org.kde.plasma.quicksetting.flashlight
+    CPP_SOURCES
+        flashlightutil.cpp
+    QML_SOURCES
+        qml/main.qml
 )
 
-target_sources(flashlightplugin PRIVATE flashlightutil.cpp)
-
-target_link_libraries(flashlightplugin PRIVATE
+target_link_libraries(org.kde.plasma.quicksetting.flashlight PRIVATE
     Qt::Core
     Qt::Qml
     Qt::Quick
@@ -21,9 +21,5 @@ target_link_libraries(flashlightplugin PRIVATE
     KF6::Notifications
     udev
 )
-
-ecm_finalize_qml_module(flashlightplugin)
-
-plasma_install_package(package org.kde.plasma.quicksetting.flashlight quicksettings)
 
 add_subdirectory(kauth)

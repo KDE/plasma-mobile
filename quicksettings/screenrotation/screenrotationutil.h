@@ -4,6 +4,7 @@
 #pragma once
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 #include <kscreen/config.h>
 
@@ -12,6 +13,7 @@ class SensorProxy;
 class ScreenRotationUtil : public QObject
 {
     Q_OBJECT
+    QML_SINGLETON
     Q_PROPERTY(bool autoScreenRotationEnabled READ autoScreenRotationEnabled WRITE setAutoScreenRotationEnabled NOTIFY autoScreenRotationEnabledChanged);
     Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged);
 

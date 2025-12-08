@@ -5,10 +5,12 @@
 
 #include <QObject>
 #include <kscreen/config.h>
+#include <qqmlregistration.h>
 
 class KScreenOSDUtil : public QObject
 {
     Q_OBJECT
+    QML_SINGLETON
     Q_PROPERTY(int outputs READ outputs WRITE setOutputs NOTIFY outputsChanged);
 
 public:
