@@ -56,6 +56,7 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Gui
     Sensors
     WaylandClient
+    QmlPrivate
 )
 
 if(Qt6WaylandClient_VERSION VERSION_GREATER_EQUAL "6.10.0")

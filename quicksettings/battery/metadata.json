@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -79,7 +78,6 @@
         "Description[zh_CN]": "Plasma Mobile 的电池快捷设置",
         "Description[zh_TW]": "Plasma 行動的電池快速設定",
         "Icon": "battery-full",
-        "Id": "org.kde.plasma.quicksetting.battery",
         "License": "GPL-2.0+",
         "Name": "Battery",
         "Name[ar]": "البطارية",

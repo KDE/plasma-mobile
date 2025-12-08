@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "KPackage/GenericQML",
     "KPlugin": {
         "Authors": [
             {
@@ -81,7 +80,6 @@
         "Description[zh_CN]": "Plasma Mobile 的飞行模式快捷设置",
         "Description[zh_TW]": "Plasma 行動的 Airplane mode 快速設定",
         "Icon": "network-flightmode-on",
-        "Id": "org.kde.plasma.quicksetting.airplanemode",
         "License": "GPL-2.0+",
         "Name": "Airplane Mode",
         "Name[ar]": "خارج نطاق التغطية",

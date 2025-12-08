@@ -1,9 +1,53 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-plasma_install_package(airplanemode org.kde.plasma.quicksetting.airplanemode quicksettings)
-plasma_install_package(audio org.kde.plasma.quicksetting.audio quicksettings)
-plasma_install_package(battery org.kde.plasma.quicksetting.battery quicksettings)
+function(add_quicksetting id)
+      set(oneValueArgs)
+      set(multiValueArgs QML_SOURCES CPP_SOURCES RESOURCES QML_ARGS)
+      cmake_parse_arguments(ARGS "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+      # not using MODULE because of https://bugreports.qt.io/browse/QTBUG-117159
+      add_library(${id} SHARED)
+
+      set_target_properties(${id} PROPERTIES PREFIX "")
+
+      include(ECMQmlModule)
+      ecm_add_qml_module(${id} URI "plasma.mobile.quicksettings.${id}" QT_NO_PLUGIN ${ARGS_QML_ARGS})
+
+      ecm_target_qml_sources(${id} SOURCES ${ARGS_QML_SOURCES} RESOURCES ${ARGS_RESOURCES})
+
+      set_target_properties(${id} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/plasma/mobile/quicksettings")
+
+      string(REPLACE "." "_" CLASS_NAME ${id})
+      string(REPLACE "-" "_" CLASS_NAME ${CLASS_NAME})
+
+      set(PLUGIN_SRC
+"
+#include <KPluginFactory>
+#include <QObject>
+
+class ${CLASS_NAME}_Plugin : public QObject {
+   Q_OBJECT
+public:
+   ${CLASS_NAME}_Plugin(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+      : QObject(parent) {}
+}\;
+
+K_PLUGIN_CLASS_WITH_JSON(${CLASS_NAME}_Plugin, \"metadata.json\")
+
+#include \"${id}.moc\"
+")
+      file(GENERATE OUTPUT ${id}.cpp CONTENT ${PLUGIN_SRC})
+      target_sources(${id} PRIVATE ${id}.cpp)
+      target_link_libraries(${id} PRIVATE KF6::CoreAddons)
+      target_sources(${id} PRIVATE ${ARGS_CPP_SOURCES})
+      install(TARGETS ${id} DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/mobile/quicksettings)
+endfunction()
+
+add_subdirectory(airplanemode)
+add_subdirectory(audio)
+add_subdirectory(battery)
+
 plasma_install_package(bluetooth org.kde.plasma.quicksetting.bluetooth quicksettings)
 plasma_install_package(caffeine org.kde.plasma.quicksetting.caffeine quicksettings)
 plasma_install_package(docked org.kde.plasma.quicksetting.docked quicksettings)
