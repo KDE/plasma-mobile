@@ -123,7 +123,7 @@ Item {
         anchors.fill: parent
 
         interactive: root.interactive &&
-            settingsLoader.homeScreenInteractive &&
+            settings.homeScreenInteractive &&
             (appDrawer.flickable.atYBeginning || // there are cases where contentY > 0 but atYBeginning is true
             appDrawer.flickable.contentY <= 10 ||
             // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
