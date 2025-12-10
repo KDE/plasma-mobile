@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"POT-Creation-Date: 2025-12-10 02:48+0000\n"
 "PO-Revision-Date: 2024-07-17 17:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -82,22 +82,10 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:62 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "Skjermelement"
-
-#: qml/settings/AppletListViewer.qml:84
-#, kde-format
-msgctxt "@action:button The word 'new' refers to widgets"
-msgid "Get New Widgets…"
-msgstr ""
-
-#: qml/settings/AppletListViewer.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Widgets…"
-msgstr ""
 
 #: qml/settings/SettingsComponent.qml:68
 #, fuzzy, kde-format

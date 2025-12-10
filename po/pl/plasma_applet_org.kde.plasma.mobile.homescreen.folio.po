@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"POT-Creation-Date: 2025-12-10 02:48+0000\n"
 "PO-Revision-Date: 2025-08-30 08:50+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -80,22 +80,10 @@ msgstr "Potwierdź usunięcie katalogu"
 msgid "Are you sure you want to delete this folder?"
 msgstr "Czy na pewno usunąć ten katalog?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:62 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "Elementy interfejsu"
-
-#: qml/settings/AppletListViewer.qml:84
-#, kde-format
-msgctxt "@action:button The word 'new' refers to widgets"
-msgid "Get New Widgets…"
-msgstr "Pobierz nowe elementy interfejsu…"
-
-#: qml/settings/AppletListViewer.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Widgets…"
-msgstr "Pobierz nowe elementy interfejsu…"
 
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
@@ -292,3 +280,11 @@ msgstr "Potwierdź import"
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "To zastąpi twój istniejący układ ekranu domowego!"
+
+#~ msgctxt "@action:button The word 'new' refers to widgets"
+#~ msgid "Get New Widgets…"
+#~ msgstr "Pobierz nowe elementy interfejsu…"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Widgets…"
+#~ msgstr "Pobierz nowe elementy interfejsu…"

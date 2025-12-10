@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"POT-Creation-Date: 2025-12-10 02:48+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -80,22 +80,10 @@ msgstr "确认删除文件夹"
 msgid "Are you sure you want to delete this folder?"
 msgstr "您确定要删除此文件夹吗？"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:62 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "小部件"
-
-#: qml/settings/AppletListViewer.qml:84
-#, kde-format
-msgctxt "@action:button The word 'new' refers to widgets"
-msgid "Get New Widgets…"
-msgstr "获取新小部件…"
-
-#: qml/settings/AppletListViewer.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Widgets…"
-msgstr "获取新小部件…"
 
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
@@ -291,3 +279,11 @@ msgstr "确认导入"
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "这将覆盖您现有的主屏幕布局！"
+
+#~ msgctxt "@action:button The word 'new' refers to widgets"
+#~ msgid "Get New Widgets…"
+#~ msgstr "获取新小部件…"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Widgets…"
+#~ msgstr "获取新小部件…"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"POT-Creation-Date: 2025-12-10 02:48+0000\n"
 "PO-Revision-Date: 2025-08-13 09:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -81,22 +81,10 @@ msgstr "Confirmació de la supressió de carpeta"
 msgid "Are you sure you want to delete this folder?"
 msgstr "Segur que voleu suprimir aquesta carpeta?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:87
+#: qml/settings/AppletListViewer.qml:62 qml/settings/SettingsComponent.qml:87
 #, kde-format
 msgid "Widgets"
 msgstr "Ginys"
-
-#: qml/settings/AppletListViewer.qml:84
-#, kde-format
-msgctxt "@action:button The word 'new' refers to widgets"
-msgid "Get New Widgets…"
-msgstr "Obtén ginys nous…"
-
-#: qml/settings/AppletListViewer.qml:85
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Widgets…"
-msgstr "Obtén ginys nous…"
 
 #: qml/settings/SettingsComponent.qml:68
 #, kde-format
@@ -293,3 +281,11 @@ msgstr "Confirmació de la importació"
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""
 "Això sobreescriurà la vostra disposició existent de la pantalla d'inici!"
+
+#~ msgctxt "@action:button The word 'new' refers to widgets"
+#~ msgid "Get New Widgets…"
+#~ msgstr "Obtén ginys nous…"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Widgets…"
+#~ msgstr "Obtén ginys nous…"
