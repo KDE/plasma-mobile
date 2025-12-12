@@ -326,7 +326,7 @@ Folio.DelegateTouchArea {
                             anchors.fill: parent
 
                             sourceComponent: {
-                                if (delegate.delegateModel.type === Folio.FolioDelegate.Application) {
+                                if (delegate.delegateModel && delegate.delegateModel.type === Folio.FolioDelegate.Application) {
                                     return appComponent;
                                 } else {
                                     return noneComponent;
@@ -391,10 +391,8 @@ Folio.DelegateTouchArea {
                                     Connections {
                                         target: folio.HomeScreenState
 
-                                        function onSwipeStateChanged() {
-                                            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
-                                                contextMenu.close();
-                                            }
+                                        function onDelegateDragStarted() {
+                                            contextMenu.close();
                                         }
                                     }
 

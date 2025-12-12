@@ -195,6 +195,7 @@ void HomeScreenState::setSwipeState(SwipeState swipeState)
     if (swipeState != m_swipeState) {
         m_swipeState = swipeState;
         Q_EMIT swipeStateChanged();
+        Q_EMIT isDraggingDelegateChanged();
     }
 }
 
@@ -692,6 +693,11 @@ int HomeScreenState::currentFolderPage()
     return m_folderPageNum;
 }
 
+bool HomeScreenState::isDraggingDelegate()
+{
+    return m_dragDropActive || m_swipeState == SwipeState::DraggingDelegate;
+}
+
 FolioDelegate *HomeScreenState::getPageDelegateAt(int page, int row, int column)
 {
     PageModel *pageModel = m_homeScreen->pageListModel()->getPage(page);
@@ -905,6 +911,7 @@ void HomeScreenState::startDelegateAppDrawerDrag(qreal startX, qreal startY, qre
     // we start dragging the delegate immediately from the app drawer, because we don't have a context menu to deal with!
     // NOTE: this has to happen after delegateDragFromAppDrawerStarted, because slots for that expect SwipeState::AwaitingDraggingDelegate
     setSwipeState(SwipeState::DraggingDelegate);
+    Q_EMIT delegateDragStarted();
 }
 
 void HomeScreenState::startDelegateFolderDrag(qreal startX,
@@ -922,10 +929,6 @@ void HomeScreenState::startDelegateWidgetListDrag(qreal startX, qreal startY, qr
 {
     startDelegateDrag(startX, startY, pointerOffsetX, pointerOffsetY);
     Q_EMIT delegateDragFromWidgetListStarted(appletPluginId);
-
-    // we start dragging the delegate immediately from the app drawer, because we don't have a context menu to deal with!
-    // NOTE: this has to happen after delegateDragFromAppDrawerStarted, because slots for that expect SwipeState::AwaitingDraggingDelegate
-    setSwipeState(SwipeState::DraggingDelegate);
 }
 
 void HomeScreenState::cancelDelegateDrag()
@@ -991,7 +994,7 @@ void HomeScreenState::swipeEnded()
         break;
     }
     case SwipeState::DraggingDelegate:
-        Q_EMIT delegateDragEnded();
+        Q_EMIT delegateDragDropped();
         break;
     case SwipeState::AwaitingDraggingDelegate:
     case SwipeState::DeterminingSwipeType:
@@ -1001,6 +1004,45 @@ void HomeScreenState::swipeEnded()
     }
 
     setSwipeState(SwipeState::None);
+}
+
+void HomeScreenState::dragStart()
+{
+    // Cancel AwaitingDraggingDelegate
+    swipeEnded();
+
+    m_dragDropActive = true;
+    Q_EMIT delegateDragStarted();
+    Q_EMIT isDraggingDelegateChanged();
+}
+
+void HomeScreenState::dragMove(qreal deltaX, qreal deltaY)
+{
+    if (!m_dragDropActive) {
+        return;
+    }
+    setDelegateDragX(m_delegateDragX + deltaX);
+    setDelegateDragY(m_delegateDragY + deltaY);
+}
+
+void HomeScreenState::dragDrop()
+{
+    if (!m_dragDropActive) {
+        return;
+    }
+    m_dragDropActive = false;
+    Q_EMIT delegateDragDropped();
+    Q_EMIT isDraggingDelegateChanged();
+}
+
+void HomeScreenState::dragCancel()
+{
+    if (!m_dragDropActive) {
+        return;
+    }
+    m_dragDropActive = false;
+    Q_EMIT delegateDragCancelled();
+    Q_EMIT isDraggingDelegateChanged();
 }
 
 void HomeScreenState::swipeCancelled()
@@ -1038,6 +1080,7 @@ void HomeScreenState::swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal del
         break;
     case SwipeState::AwaitingDraggingDelegate:
         setSwipeState(SwipeState::DraggingDelegate);
+        Q_EMIT delegateDragStarted();
         break;
     case SwipeState::DraggingDelegate:
         setDelegateDragX(m_delegateDragX + deltaX);

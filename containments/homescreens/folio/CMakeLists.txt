@@ -9,6 +9,7 @@ plasma_add_applet(org.kde.plasma.mobile.homescreen.folio
         qml/AppDrawerGrid.qml
         qml/AppDrawerHeader.qml
         qml/DelegateDragItem.qml
+        qml/DelegateDropArea.qml
         qml/FavouritesBar.qml
         qml/FolderView.qml
         qml/FolderViewTitle.qml
@@ -65,6 +66,7 @@ ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
 )
 
 ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
+    qml/settings/AppletListDelegate.qml
     qml/settings/AppletListViewer.qml
     qml/settings/SettingsButton.qml
     qml/settings/SettingsComponent.qml

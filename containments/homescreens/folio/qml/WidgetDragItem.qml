@@ -16,6 +16,8 @@ import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 import './delegate'
 import './private'
 
+// Placeholder item that the user sees as they drag widgets around.
+// See DelegateDragItem for the equivalent for app delegates.
 Item {
     id: root
     property Folio.HomeScreen folio
@@ -25,7 +27,9 @@ Item {
 
     property Folio.FolioWidget widget
 
-    readonly property bool isWidgetDelegate: folio.HomeScreenState.dragState.dropDelegate && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
+    readonly property bool isWidgetDelegate: folio.HomeScreenState.dragState.dropDelegate
+        && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
+        && folio.HomeScreenState.dragState.dropDelegate.widget.visualApplet
     readonly property bool dropAnimationRunning: dragXAnim.running || dragYAnim.running
 
     visible: false
@@ -74,13 +78,12 @@ Item {
         id: stateWatcher
         target: folio.HomeScreenState
 
-        function onSwipeStateChanged() {
-            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                folio.HomeScreenState.dragState.dropDelegate &&
-                folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget) {
-
-                root.startDrag(folio.HomeScreenState.dragState.dropDelegate.widget);
+        function onDelegateDragStarted() {
+            if (!root.isWidgetDelegate) {
+                return;
             }
+
+            root.startDrag(folio.HomeScreenState.dragState.dropDelegate.widget);
         }
     }
 

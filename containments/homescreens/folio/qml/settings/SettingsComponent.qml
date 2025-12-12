@@ -21,22 +21,11 @@ Item {
     property var homeScreen
     property real settingsModeHomeScreenScale
 
-    readonly property bool homeScreenInteractive: !appletListViewerLoader.active
+    readonly property bool homeScreenInteractive: !appletListViewer.active
 
     property real bottomMargin: 0
     property real leftMargin: 0
     property real rightMargin: 0
-
-    Connections {
-        target: folio.HomeScreenState
-
-        // Close applet viewer when settings view closes
-        function onViewStateChanged() {
-            if (folio.HomeScreenState.viewState !== Folio.HomeScreenState.SettingsView) {
-                appletListViewerLoader.requestClose();
-            }
-        }
-    }
 
     MouseArea {
         id: closeSettings
@@ -84,7 +73,7 @@ Item {
                 iconName: 'widget-alternatives'
                 textLabel: i18n("Widgets")
                 onClicked: {
-                    appletListViewerLoader.active = true;
+                    appletListViewer.active = true;
                 }
             }
         }
@@ -157,49 +146,13 @@ Item {
         }
     ]
 
-    Loader {
-        id: appletListViewerLoader
-        asynchronous: true
-        active: false
-
-        signal requestClose()
-        onRequestClose: item?.requestClose()
+    AppletListViewer {
+        id: appletListViewer
 
         width: parent.width
         height: parent.height
 
-        opacity: status == Loader.Ready ? 1 : 0
-        // move the settings out of the way if it is not visible
-        // NOTE: we do this instead of setting visible to false, because
-        //       it doesn't mess with widget drag and drop
-        y: (opacity > 0) ? 0 : parent.height
-
-        Behavior on opacity {
-            NumberAnimation { duration: Kirigami.Units.shortDuration }
-        }
-
-        sourceComponent: AppletListViewer {
-            id: appletListViewer
-            folio: root.folio
-
-            width: parent.width
-            height: parent.height
-
-            onRequestClose: parent.active = false
-
-            homeScreen: root.homeScreen
-        }
-    }
-
-    PC3.BusyIndicator {
-        id: appletListLoadingIndicator
-        anchors.centerIn: parent
-        visible: appletListViewerLoader.status === Loader.Loading
-
-        implicitHeight: Kirigami.Units.iconSizes.huge
-        implicitWidth: Kirigami.Units.iconSizes.huge
-
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+        folio: root.folio
+        homeScreen: root.homeScreen
     }
 }

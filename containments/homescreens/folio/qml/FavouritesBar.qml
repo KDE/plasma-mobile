@@ -66,7 +66,7 @@ MouseArea {
             readonly property var dragState: folio.HomeScreenState.dragState
             readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Favourites &&
                 dragState.candidateDropPosition.favouritesPosition === delegate.index
-            readonly property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+            readonly property bool isAppHoveredOver: folio.HomeScreenState.isDraggingDelegate &&
                 dragState.dropDelegate &&
                 dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
                 isDropPositionThis
@@ -178,7 +178,7 @@ MouseArea {
                     shadow: true
 
                     turnToFolder: delegate.isAppHoveredOver
-                    turnToFolderAnimEnabled: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate
+                    turnToFolderAnimEnabled: folio.HomeScreenState.isDraggingDelegate
 
                     // do not show if the drop animation is running to this delegate
                     visible: !(root.homeScreen.dropAnimationRunning && delegate.isDropPositionThis)
@@ -221,10 +221,8 @@ MouseArea {
                         Connections {
                             target: folio.HomeScreenState
 
-                            function onSwipeStateChanged() {
-                                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
-                                    contextMenu.close();
-                                }
+                            function onDelegateDragStarted() {
+                                contextMenu.close();
                             }
                         }
 
@@ -298,10 +296,8 @@ MouseArea {
                         Connections {
                             target: folio.HomeScreenState
 
-                            function onSwipeStateChanged() {
-                                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
-                                    contextMenu.close();
-                                }
+                            function onDelegateDragStarted() {
+                                contextMenu.close();
                             }
                         }
 

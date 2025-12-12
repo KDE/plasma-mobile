@@ -118,6 +118,7 @@ private Q_SLOTS:
     void onDelegateDragFromFolderStarted(FolioApplicationFolder *folder, int position);
     void onDelegateDragFromWidgetListStarted(QString appletPluginId);
     void onDelegateDropped();
+    void onDelegateDraggingCancelled();
 
     void onLeaveCurrentFolder();
 
@@ -129,6 +130,9 @@ private Q_SLOTS:
     void onFavouritesInsertBetweenTimerFinished();
 
 private:
+    // Cleanup after a drag event (stop timers etc.)
+    void dragStopCleanup();
+
     // deletes the delegate at m_startPosition
     void deleteStartPositionDelegate();
 

@@ -175,12 +175,9 @@ DragState::DragState(HomeScreenState *state, HomeScreen *parent)
     connect(m_state, &HomeScreenState::delegateDragFromFavouritesStarted, this, &DragState::onDelegateDragFromFavouritesStarted);
     connect(m_state, &HomeScreenState::delegateDragFromFolderStarted, this, &DragState::onDelegateDragFromFolderStarted);
     connect(m_state, &HomeScreenState::delegateDragFromWidgetListStarted, this, &DragState::onDelegateDragFromWidgetListStarted);
-    connect(m_state, &HomeScreenState::swipeStateChanged, this, [this]() {
-        if (m_state->swipeState() == HomeScreenState::DraggingDelegate) {
-            onDelegateDraggingStarted();
-        }
-    });
-    connect(m_state, &HomeScreenState::delegateDragEnded, this, &DragState::onDelegateDropped);
+    connect(m_state, &HomeScreenState::delegateDragStarted, this, &DragState::onDelegateDraggingStarted);
+    connect(m_state, &HomeScreenState::delegateDragDropped, this, &DragState::onDelegateDropped);
+    connect(m_state, &HomeScreenState::delegateDragCancelled, this, &DragState::onDelegateDraggingCancelled);
 
     connect(m_state, &HomeScreenState::pageNumChanged, this, [this]() {
         m_candidateDropPosition->setPageRow(m_state->currentPage());
@@ -546,19 +543,8 @@ void DragState::onDelegateDropped()
     // add dropped delegate
     bool success = createDropPositionDelegate();
 
-    // delete empty pages at the end if they exist
-    // (it can be created if user drags app to new page, but doesn't place it there)
-    m_homeScreen->pageListModel()->deleteEmptyPagesAtEnd();
-
-    // clear ghost position if there is one
-    m_homeScreen->favouritesModel()->deleteGhostEntry();
-
-    // reset timers
-    m_folderInsertBetweenTimer->stop();
-    m_changeFolderPageTimer->stop();
-    m_leaveFolderTimer->stop();
-    m_changePageTimer->stop();
-    m_favouritesInsertBetweenTimer->stop();
+    // Cleanup timers and state
+    dragStopCleanup();
 
     // emit corresponding signal
     // -> if we couldn't drop a new delegate at a spot, emit newDelegateDropAbandoned()
@@ -568,6 +554,41 @@ void DragState::onDelegateDropped()
     } else {
         Q_EMIT delegateDroppedAndPlaced();
     }
+}
+
+void DragState::onDelegateDraggingCancelled()
+{
+    if (!m_dropDelegate) {
+        return;
+    }
+
+    // Cleanup timers and state
+    dragStopCleanup();
+
+    if (m_startPosition->location() == DelegateDragPosition::WidgetList || m_startPosition->location() == DelegateDragPosition::AppDrawer) {
+        // If this is a new delegate, it's abandoned
+        Q_EMIT newDelegateDropAbandoned();
+    } else {
+        // If it's an existing delegate, it simply goes back to its original position
+        Q_EMIT delegateDroppedAndPlaced();
+    }
+}
+
+void DragState::dragStopCleanup()
+{
+    // Delete empty pages at the end if they exist
+    // (it can be created if user drags app to new page, but doesn't place it there)
+    m_homeScreen->pageListModel()->deleteEmptyPagesAtEnd();
+
+    // Clear ghost position if there is one
+    m_homeScreen->favouritesModel()->deleteGhostEntry();
+
+    // Reset timers
+    m_folderInsertBetweenTimer->stop();
+    m_changeFolderPageTimer->stop();
+    m_leaveFolderTimer->stop();
+    m_changePageTimer->stop();
+    m_favouritesInsertBetweenTimer->stop();
 }
 
 void DragState::onLeaveCurrentFolder()
@@ -589,7 +610,7 @@ void DragState::onLeaveCurrentFolder()
 
 void DragState::onChangePageTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate)) {
+    if (!m_state || !m_state->isDraggingDelegate()) {
         return;
     }
 
@@ -624,7 +645,7 @@ void DragState::onChangePageTimerFinished()
 
 void DragState::onOpenFolderTimerFinished()
 {
-    if (!m_state || m_state->swipeState() != HomeScreenState::DraggingDelegate || m_state->viewState() != HomeScreenState::PageView
+    if (!m_state || !m_state->isDraggingDelegate() || m_state->viewState() != HomeScreenState::PageView
         || (m_candidateDropPosition->location() != DelegateDragPosition::Pages && m_candidateDropPosition->location() != DelegateDragPosition::Favourites)) {
         return;
     }
@@ -672,7 +693,7 @@ void DragState::onOpenFolderTimerFinished()
 
 void DragState::onLeaveFolderTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate) || !m_state->currentFolder()) {
+    if (!m_state || !m_state->isDraggingDelegate() || !m_state->currentFolder()) {
         return;
     }
 
@@ -684,7 +705,7 @@ void DragState::onLeaveFolderTimerFinished()
 
 void DragState::onChangeFolderPageTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate) || !m_state->currentFolder()) {
+    if (!m_state || !m_state->isDraggingDelegate() || !m_state->currentFolder()) {
         return;
     }
 
@@ -720,7 +741,7 @@ void DragState::onChangeFolderPageTimerFinished()
 
 void DragState::onFolderInsertBetweenTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate) || !m_state->currentFolder()) {
+    if (!m_state || !m_state->isDraggingDelegate() || !m_state->currentFolder()) {
         return;
     }
 
