@@ -91,11 +91,9 @@ Item {
             target: folio.HomeScreenState
 
             // if we are starting drag-and-drop, close the menu immediately
-            function onSwipeStateChanged() {
-                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
-                    configOverlay.animClose();
-                    root.closed();
-                }
+            function onDelegateDragStarted() {
+                configOverlay.animClose();
+                root.closed();
             }
         }
 

@@ -80,6 +80,8 @@ class HomeScreenState : public QObject
     Q_PROPERTY(int currentPage READ currentPage NOTIFY pageNumChanged)
     Q_PROPERTY(int currentFolderPage READ currentFolderPage NOTIFY folderPageNumChanged)
 
+    Q_PROPERTY(bool isDraggingDelegate READ isDraggingDelegate NOTIFY isDraggingDelegateChanged)
+
 public:
     enum SwipeState {
         None,
@@ -258,6 +260,9 @@ public:
 
     int currentFolderPage();
 
+    // Whether something is being dragged (either from SwipeArea or Drag & Drop)
+    bool isDraggingDelegate();
+
     // QML helpers
     Q_INVOKABLE FolioDelegate *getPageDelegateAt(int page, int row, int column);
     Q_INVOKABLE FolioDelegate *getFavouritesDelegateAt(int position);
@@ -305,6 +310,7 @@ Q_SIGNALS:
     void searchWidgetYChanged();
     void delegateDragXChanged();
     void delegateDragYChanged();
+    void delegateDragStarted();
     void delegateDragEnded();
     void delegateDragFromPageStarted(int page, int row, int column);
     void delegateDragFromFavouritesStarted(int position);
@@ -313,6 +319,7 @@ Q_SIGNALS:
     void delegateDragFromWidgetListStarted(QString appletPluginId);
     void pageNumChanged();
     void folderPageNumChanged();
+    void isDraggingDelegateChanged();
 
     void leftCurrentFolder();
     void folderAboutToOpen(qreal x, qreal y); // the position on the screen where the delegate is at, for animations
@@ -346,6 +353,11 @@ public Q_SLOTS:
     void swipeEnded();
     void swipeCancelled();
     void swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
+
+    // from DropArea
+    void dragStart();
+    void dragMove(qreal deltaX, qreal deltaY);
+    void dragStop();
 
 private:
     void setViewState(ViewState viewState);
@@ -410,6 +422,7 @@ private:
     qreal m_delegateDragY{0};
     qreal m_delegateDragPointerOffsetX{0};
     qreal m_delegateDragPointerOffsetY{0};
+    bool m_dragDropActive{false};
 
     int m_pageNum{0};
     int m_folderPageNum{0};

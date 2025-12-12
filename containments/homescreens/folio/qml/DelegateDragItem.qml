@@ -10,6 +10,8 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 import "./delegate"
 
+// Placeholder item that the user sees as they drag app/folder delegates around.
+// See WidgetDragItem for the equivalent for widgets.
 Item {
     id: root
     property Folio.HomeScreen folio
@@ -75,11 +77,12 @@ Item {
         property var delegateDroppedOn: null
 
         // reset and show drag item
-        function onSwipeStateChanged() {
-            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate && !isWidgetDrag) {
-                root.scale = 1.0;
-                root.visible = true;
+        function onDelegateDragStarted() {
+            if (isWidgetDrag) {
+                return;
             }
+            root.scale = 1.0;
+            root.visible = true;
         }
 
         // save the existing delegate at the spot (this is called before the delegate is dropped)
@@ -142,7 +145,7 @@ Item {
 
                 // scale animation if we are creating, or inserting into a folder
                 scaleAnim.restart();
-                }
+            }
         }
 
         // if the drop has been abandoned, just hide

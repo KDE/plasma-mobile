@@ -19,231 +19,123 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import '../delegate'
 import '../private'
 
-MouseArea {
+Loader {
     id: root
     property Folio.HomeScreen folio
 
     property var homeScreen
 
-    signal requestClose()
-    onClicked: root.requestClose()
+    active: false
+
+    function requestClose() {
+        active = false;
+    }
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
-    MobileShell.HapticsEffect {
-        id: haptics
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.7)
-    }
-
-
-    PlasmaExtras.ModelContextMenu {
-        id: getWidgetsDialog
-        visualParent: getWidgetsButton
-        placement: PlasmaExtras.Menu.TopPosedLeftAlignedPopup
-        // model set on first invocation
-        onClicked: model.trigger()
-    }
-
-    RowLayout {
-        id: header
-        spacing: Kirigami.Units.largeSpacing
-        anchors.left: parent.left
-        anchors.leftMargin: Kirigami.Units.gridUnit
-        anchors.top: parent.top
-        anchors.topMargin: Kirigami.Units.gridUnit * 3 + root.homeScreen.topMargin
-        anchors.right: parent.right
-        anchors.rightMargin: Kirigami.Units.gridUnit
-
-        PC3.ToolButton {
-            Layout.alignment: Qt.AlignVCenter
-            icon.name: 'go-previous'
-            implicitWidth: Kirigami.Units.gridUnit * 2
-            implicitHeight: Kirigami.Units.gridUnit * 2
-            padding: Kirigami.Units.smallSpacing
-            onClicked: root.requestClose()
-        }
-
-        PC3.Label {
-            Kirigami.Theme.inherit: false
-            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-            text: i18n("Widgets")
-            wrapMode: Text.Wrap
-            font.weight: Font.Bold
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-            Layout.fillWidth: true
-        }
-
-        PC3.ToolButton {
-            id: getWidgetsButton
-            icon.name: "get-hot-new-stuff"
-            text: i18ndc("plasma_shell_org.kde.plasma.mobile", "@action:button The word 'new' refers to widgets", "Get New Widgets…")
-            Accessible.name: i18ndc("plasma_shell_org.kde.plasma.mobile", "@action:button", "Get New Widgets…")
-
-            onClicked: {
-                getWidgetsDialog.model = widgetExplorer.widgetsMenuActions
-                getWidgetsDialog.openRelative()
-            }
-        }
-    }
-
-    GridView {
-        id: gridView
-        clip: true
-        reuseItems: true
-
-        opacity: 0 // we display with the opacity gradient below
-
-        anchors.top: header.bottom
-        anchors.topMargin: Kirigami.Units.gridUnit
-        anchors.left: parent.left
-        anchors.leftMargin: root.homeScreen.leftMargin
-        anchors.right: parent.right
-        anchors.rightMargin: root.homeScreen.rightMargin
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: root.homeScreen.bottomMargin
-
-        model: widgetExplorer.widgetsModel
-
-        readonly property real maxCellWidth: Kirigami.Units.gridUnit * 20
-        readonly property real intendedCellWidth: Kirigami.Units.gridUnit * 8
-        readonly property int columns: Math.min(5, (width - leftMargin - rightMargin) / intendedCellWidth)
-
-        cellWidth: (width - leftMargin - rightMargin) / columns
-        cellHeight: cellWidth + Kirigami.Units.gridUnit * 3
-
-        readonly property real horizontalMargin: Math.round(width * 0.05)
-        leftMargin: horizontalMargin
-        rightMargin: horizontalMargin
-
-        MouseArea {
-            z: -1
+    sourceComponent: Item {
+        Rectangle {
             anchors.fill: parent
-            onClicked: root.requestClose()
+            color: Qt.rgba(0, 0, 0, 0.7)
         }
 
-        delegate: MouseArea {
-            id: delegate
-            width: gridView.cellWidth
-            height: gridView.cellHeight
+        PlasmaExtras.ModelContextMenu {
+            id: getWidgetsDialog
+            visualParent: getWidgetsButton
+            placement: PlasmaExtras.Menu.TopPosedLeftAlignedPopup
+            // model set on first invocation
+            onClicked: model.trigger()
+        }
 
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
+        RowLayout {
+            id: header
+            spacing: Kirigami.Units.largeSpacing
+            anchors.left: parent.left
+            anchors.leftMargin: Kirigami.Units.gridUnit
+            anchors.top: parent.top
+            anchors.topMargin: Kirigami.Units.gridUnit * 3 + root.homeScreen.topMargin
+            anchors.right: parent.right
+            anchors.rightMargin: Kirigami.Units.gridUnit
 
-            property real zoomScale: pressed ? 0.8 : 1
-            transform: Scale {
-                origin.x: delegate.width / 2;
-                origin.y: delegate.height / 2;
-                xScale: delegate.zoomScale
-                yScale: delegate.zoomScale
+            PC3.ToolButton {
+                Layout.alignment: Qt.AlignVCenter
+                icon.name: 'go-previous'
+                implicitWidth: Kirigami.Units.gridUnit * 2
+                implicitHeight: Kirigami.Units.gridUnit * 2
+                padding: Kirigami.Units.smallSpacing
+                onClicked: root.requestClose()
             }
 
-            Behavior on zoomScale { NumberAnimation { duration: 80 } }
-
-            readonly property string pluginName: model.pluginName
-
-            onPressAndHold: {
-                if (!model.isSupported) {
-                    return
-                }
-
-                root.requestClose();
-                folio.HomeScreenState.closeSettingsView();
-                haptics.buttonVibrate();
-
-                let mappedCoords = root.homeScreen.prepareStartDelegateDrag(null, delegate, true);
-                const widthOffset = folio.HomeScreenState.pageCellWidth / 2;
-                const heightOffset = folio.HomeScreenState.pageCellHeight / 2;
-
-                folio.HomeScreenState.startDelegateWidgetListDrag(
-                    mappedCoords.x + mouseX - widthOffset,
-                    mappedCoords.y + mouseY - heightOffset,
-                    widthOffset,
-                    heightOffset,
-                    pluginName
-                );
+            PC3.Label {
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+                text: i18n("Widgets")
+                wrapMode: Text.Wrap
+                font.weight: Font.Bold
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                Layout.fillWidth: true
             }
 
-            Rectangle {
-                id: background
-                color: Qt.rgba(255, 255, 255, 0.3)
-                visible: delegate.containsMouse
-                radius: Kirigami.Units.cornerRadius
-                anchors.fill: parent
-            }
+            PC3.ToolButton {
+                id: getWidgetsButton
+                icon.name: "get-hot-new-stuff"
+                text: i18ndc("plasma_shell_org.kde.plasma.mobile", "@action:button The word 'new' refers to widgets", "Get New Widgets…")
+                Accessible.name: i18ndc("plasma_shell_org.kde.plasma.mobile", "@action:button", "Get New Widgets…")
 
-            ColumnLayout {
-                anchors.fill: parent
-                anchors.margins: Kirigami.Units.largeSpacing
-
-                Item {
-                    id: iconWidget
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: delegate.width
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
-                    Layout.alignment: Qt.AlignBottom
-
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        source: model.decoration
-                        visible: model.screenshot == ""
-                        implicitWidth: Kirigami.Units.iconSizes.large
-                        implicitHeight: Kirigami.Units.iconSizes.large
-                    }
-                    Image {
-                        anchors.centerIn: parent
-                        fillMode: Image.PreserveAspectFit
-                        source: model.screenshot
-                        width: Kirigami.Units.iconSizes.large
-                        height: Kirigami.Units.iconSizes.large
-                    }
-                }
-
-                PC3.Label {
-                    id: heading
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: delegate.width
-                    Layout.alignment: Qt.AlignCenter
-                    text: model.name
-                    elide: Text.ElideRight
-                    wrapMode: Text.Wrap
-                    maximumLineCount: 2
-                    horizontalAlignment: Text.AlignHCenter
-                    font.weight: Font.Bold
-                }
-
-                PC3.Label {
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: delegate.width
-                    Layout.alignment: Qt.AlignTop
-                    // otherwise causes binding loop due to the way the Plasma sets the height
-                    height: implicitHeight
-                    text: model.isSupported ? model.description : model.unsupportedMessage
-                    font.pointSize: Kirigami.Theme.smallFont.pointSize
-                    wrapMode: Text.Wrap
-                    elide: Text.ElideRight
-                    maximumLineCount: heading.lineCount === 1 ? 3 : 2
-                    horizontalAlignment: Text.AlignHCenter
+                onClicked: {
+                    getWidgetsDialog.model = widgetExplorer.widgetsMenuActions
+                    getWidgetsDialog.openRelative()
                 }
             }
         }
-    }
 
-    // opacity gradient at grid edges
-    MobileShell.FlickableOpacityGradient {
-        anchors.fill: gridView
-        flickable: gridView
-    }
+        GridView {
+            id: gridView
+            clip: true
+            reuseItems: true
 
-    WidgetExplorer {
-        id: widgetExplorer
-        containment: Plasmoid
+            opacity: 0 // we display with the opacity gradient below
 
-        onShouldClose: root.requestClose()
+            anchors.top: header.bottom
+            anchors.topMargin: Kirigami.Units.gridUnit
+            anchors.left: parent.left
+            anchors.leftMargin: root.homeScreen.leftMargin
+            anchors.right: parent.right
+            anchors.rightMargin: root.homeScreen.rightMargin
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: root.homeScreen.bottomMargin
+
+            model: widgetExplorer.widgetsModel
+
+            readonly property real intendedCellWidth: Kirigami.Units.gridUnit * 8
+            readonly property int columns: Math.min(5, (width - leftMargin - rightMargin) / intendedCellWidth)
+
+            cellWidth: (width - leftMargin - rightMargin) / columns
+            cellHeight: cellWidth + Kirigami.Units.gridUnit * 3
+
+            readonly property real horizontalMargin: Math.round(width * 0.05)
+            leftMargin: horizontalMargin
+            rightMargin: horizontalMargin
+
+            delegate: AppletListDelegate {
+                folio: root.folio
+                width: gridView.cellWidth
+                height: gridView.cellHeight
+            }
+        }
+
+        // opacity gradient at grid edges
+        MobileShell.FlickableOpacityGradient {
+            anchors.fill: gridView
+            flickable: gridView
+        }
+
+        WidgetExplorer {
+            id: widgetExplorer
+            containment: Plasmoid
+
+            onShouldClose: root.requestClose()
+        }
     }
 }

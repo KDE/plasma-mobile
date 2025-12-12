@@ -175,11 +175,7 @@ DragState::DragState(HomeScreenState *state, HomeScreen *parent)
     connect(m_state, &HomeScreenState::delegateDragFromFavouritesStarted, this, &DragState::onDelegateDragFromFavouritesStarted);
     connect(m_state, &HomeScreenState::delegateDragFromFolderStarted, this, &DragState::onDelegateDragFromFolderStarted);
     connect(m_state, &HomeScreenState::delegateDragFromWidgetListStarted, this, &DragState::onDelegateDragFromWidgetListStarted);
-    connect(m_state, &HomeScreenState::swipeStateChanged, this, [this]() {
-        if (m_state->swipeState() == HomeScreenState::DraggingDelegate) {
-            onDelegateDraggingStarted();
-        }
-    });
+    connect(m_state, &HomeScreenState::delegateDragStarted, this, &DragState::onDelegateDraggingStarted);
     connect(m_state, &HomeScreenState::delegateDragEnded, this, &DragState::onDelegateDropped);
 
     connect(m_state, &HomeScreenState::pageNumChanged, this, [this]() {
@@ -589,7 +585,7 @@ void DragState::onLeaveCurrentFolder()
 
 void DragState::onChangePageTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate)) {
+    if (!m_state || !m_state->isDraggingDelegate()) {
         return;
     }
 
@@ -624,7 +620,7 @@ void DragState::onChangePageTimerFinished()
 
 void DragState::onOpenFolderTimerFinished()
 {
-    if (!m_state || m_state->swipeState() != HomeScreenState::DraggingDelegate || m_state->viewState() != HomeScreenState::PageView
+    if (!m_state || !m_state->isDraggingDelegate() || m_state->viewState() != HomeScreenState::PageView
         || (m_candidateDropPosition->location() != DelegateDragPosition::Pages && m_candidateDropPosition->location() != DelegateDragPosition::Favourites)) {
         return;
     }
@@ -672,7 +668,7 @@ void DragState::onOpenFolderTimerFinished()
 
 void DragState::onLeaveFolderTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate) || !m_state->currentFolder()) {
+    if (!m_state || !m_state->isDraggingDelegate() || !m_state->currentFolder()) {
         return;
     }
 
@@ -684,7 +680,7 @@ void DragState::onLeaveFolderTimerFinished()
 
 void DragState::onChangeFolderPageTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate) || !m_state->currentFolder()) {
+    if (!m_state || !m_state->isDraggingDelegate() || !m_state->currentFolder()) {
         return;
     }
 
@@ -720,7 +716,7 @@ void DragState::onChangeFolderPageTimerFinished()
 
 void DragState::onFolderInsertBetweenTimerFinished()
 {
-    if (!m_state || (m_state->swipeState() != HomeScreenState::DraggingDelegate) || !m_state->currentFolder()) {
+    if (!m_state || !m_state->isDraggingDelegate() || !m_state->currentFolder()) {
         return;
     }
 
