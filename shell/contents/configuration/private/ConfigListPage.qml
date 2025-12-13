@@ -23,7 +23,6 @@ Kirigami.ScrollablePage {
     titleDelegate: RowLayout {
         // Add close button
         QQC2.ToolButton {
-            Layout.leftMargin: -Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
             icon.name: "arrow-left"
             onClicked: root.Window.window.close()
         }
