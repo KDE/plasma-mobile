@@ -5,6 +5,7 @@
  */
 
 .import org.kde.notificationmanager as NotificationManager
+.import org.kde.coreaddons 1.0 as KCoreAddons
 .import QtQml as QtQml
 
 function determineNotificationHeadingText(notificationItem) {
