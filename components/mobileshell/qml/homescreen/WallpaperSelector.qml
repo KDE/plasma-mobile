@@ -135,16 +135,16 @@ Controls.Drawer {
                 Image {
                     id: walliePreview
                     anchors.fill: parent
-                    visible: model.path != null
+                    visible: model.source != null
                     asynchronous: true
                     cache: false
                     fillMode: Image.PreserveAspectCrop
-                    // HACK: for some reason the wallpaper preview doesn't load, just load the full image
-                    source: model.path
+                    source: model.preview
+                    sourceSize: Qt.size(width * 3, height * 3)
                 }
             }
             onClicked: {
-                WallpaperImagePlugin.WallpaperPlugin.setHomescreenWallpaper(model.path);
+                WallpaperImagePlugin.WallpaperPlugin.setHomescreenWallpaper(model.source);
             }
             Keys.onReturnPressed: {
                 clicked();
