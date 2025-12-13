@@ -279,11 +279,3 @@ msgstr "确认导入"
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "这将覆盖您现有的主屏幕布局！"
-
-#~ msgctxt "@action:button The word 'new' refers to widgets"
-#~ msgid "Get New Widgets…"
-#~ msgstr "获取新小部件…"
-
-#~ msgctxt "@action:button"
-#~ msgid "Get New Widgets…"
-#~ msgstr "获取新小部件…"
