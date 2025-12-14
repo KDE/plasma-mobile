@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"POT-Creation-Date: 2025-12-14 02:33+0000\n"
 "PO-Revision-Date: 2025-09-30 21:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -312,58 +312,58 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "傳送"
 
-#: qml/widgets/notifications/NotificationsUtils.js:14
+#: qml/widgets/notifications/NotificationsUtils.js:15
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
 msgstr "%1（已暫停）"
 
-#: qml/widgets/notifications/NotificationsUtils.js:19
+#: qml/widgets/notifications/NotificationsUtils.js:20
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
 msgstr "%1（失敗）"
 
-#: qml/widgets/notifications/NotificationsUtils.js:21
+#: qml/widgets/notifications/NotificationsUtils.js:22
 #, kde-format
 msgid "Job Failed"
 msgstr "工作已失敗"
 
-#: qml/widgets/notifications/NotificationsUtils.js:24
+#: qml/widgets/notifications/NotificationsUtils.js:25
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
 msgstr "%1（完成）"
 
-#: qml/widgets/notifications/NotificationsUtils.js:26
+#: qml/widgets/notifications/NotificationsUtils.js:27
 #, kde-format
 msgid "Job Finished"
 msgstr "工作已完成"
 
-#: qml/widgets/notifications/NotificationsUtils.js:44
+#: qml/widgets/notifications/NotificationsUtils.js:45
 #, kde-format
 msgid "now"
 msgstr "現在"
 
-#: qml/widgets/notifications/NotificationsUtils.js:49
+#: qml/widgets/notifications/NotificationsUtils.js:50
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
 msgstr "%1 分鐘前"
 
-#: qml/widgets/notifications/NotificationsUtils.js:81
+#: qml/widgets/notifications/NotificationsUtils.js:82
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
 msgstr "剩餘 %1 秒"
 
-#: qml/widgets/notifications/NotificationsUtils.js:84
+#: qml/widgets/notifications/NotificationsUtils.js:85
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
 msgstr "剩餘 %1 分鐘"
 
-#: qml/widgets/notifications/NotificationsUtils.js:87
+#: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
