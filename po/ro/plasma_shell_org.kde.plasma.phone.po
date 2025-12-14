@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
 "PO-Revision-Date: 2022-04-04 12:12+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Get New Plugins…"
 msgstr ""
 
-#: contents/configuration/private/ConfigListPage.qml:45
+#: contents/configuration/private/ConfigListPage.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 

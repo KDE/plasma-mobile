@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
 "PO-Revision-Date: 2025-10-25 09:30+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -75,7 +75,7 @@ msgstr "Wtyczki tapet"
 msgid "Get New Plugins…"
 msgstr "Pobierz nowe wtyczki…"
 
-#: contents/configuration/private/ConfigListPage.qml:45
+#: contents/configuration/private/ConfigListPage.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Zmiany układu zostały ograniczone przez administratora systemu"
 
