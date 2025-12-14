@@ -28,11 +28,13 @@ QtObject {
     }
 
     readonly property real defaultNavigationPanelThickness: Kirigami.Units.gridUnit * 2
+    readonly property real defaultGesturePanelThickness: Kirigami.Units.gridUnit
 
     readonly property real navigationPanelThickness: {
         if (!ShellSettings.Settings.navigationPanelEnabled) {
-            return 0;
-        } else if (root.panelSettings.navigationPanelHeight <= 0) {
+            return ShellSettings.Settings.gesturePanelEnabled ? defaultGesturePanelThickness : 0;
+        }
+        if (root.panelSettings.navigationPanelHeight <= 0) {
             return defaultNavigationPanelThickness;
         }
         return root.panelSettings.navigationPanelHeight;

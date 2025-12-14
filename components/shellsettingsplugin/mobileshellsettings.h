@@ -37,6 +37,7 @@ class MobileShellSettings : public QObject
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
     Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
+    Q_PROPERTY(bool gesturePanelEnabled READ gesturePanelEnabled WRITE setGesturePanelEnabled NOTIFY gesturePanelEnabledChanged)
 
     // action drawer
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
@@ -173,6 +174,20 @@ public:
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
     /**
+     * Whether the gesture panel is enabled.
+     *
+     * This is only applicable when navigationPanelEnabled() = false (gesture mode).
+     */
+    bool gesturePanelEnabled() const;
+
+    /**
+     * Set whether the gesture panel is enabled.
+     *
+     * @param gesturePanelEnabled Whether the gesture panel should be enabled.
+     */
+    void setGesturePanelEnabled(bool gesturePanelEnabled);
+
+    /**
      * Set whether the keyboard toggle button should always show on the navigation panel, regardless of
      * whether the app properly supports virtual keyboards.
      *
@@ -282,6 +297,7 @@ Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
+    void gesturePanelEnabledChanged();
     void alwaysShowKeyboardToggleOnNavigationPanelChanged();
     void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
@@ -299,7 +315,7 @@ Q_SIGNALS:
     void lockscreenRightButtonActionChanged();
 
 private:
-    void updateNavigationBarsInPlasma(bool navigationPanelEnabled);
+    void updateNavigationBarsInPlasma();
 
     KConfigWatcher::Ptr m_configWatcher;
     KSharedConfig::Ptr m_config;

@@ -67,6 +67,7 @@ ecm_target_qml_sources(mobileshellplugin SOURCES
     qml/homescreen/HomeScreen.qml
     qml/homescreen/WallpaperSelector.qml
 
+    qml/navigationpanel/GesturePanel.qml
     qml/navigationpanel/NavigationPanel.qml
     qml/navigationpanel/NavigationPanelAction.qml
     qml/navigationpanel/NavigationPanelButton.qml

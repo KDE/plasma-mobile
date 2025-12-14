@@ -177,20 +177,48 @@ ContainmentItem {
 
         property real offset: 0
 
+        Component {
+            id: navigationPanelComponent
+
+            NavigationPanelComponent {
+                isVertical: root.inLandscape
+                opaqueBar: root.opaqueBar
+                forcedComplementary: !opaqueBar && !startupFeedbackColorAnimation.isShowing
+
+                transform: [
+                    Translate {
+                        y: inLandscape ? 0 : navigationPanel.offset
+                        x: inLandscape ? navigationPanel.offset : 0
+                    }
+                ]
+            }
+        }
+
+        Component {
+            id: gesturePanelComponent
+
+            MobileShell.GesturePanel {
+                opaqueBar: root.opaqueBar
+
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: (!opaqueBar && !startupFeedbackColorAnimation.isShowing) ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
+
+                onHandlePressedAndHeld: MobileShellState.ShellDBusClient.openHomeScreen()
+                onHandleClicked: Plasmoid.triggerTaskSwitcher()
+
+                transform: [
+                    Translate {
+                        y: inLandscape ? 0 : navigationPanel.offset
+                        x: inLandscape ? navigationPanel.offset : 0
+                    }
+                ]
+            }
+        }
+
         // load appropriate system navigation component
-        NavigationPanelComponent {
+        Loader {
             anchors.fill: parent
-
-            isVertical: root.inLandscape
-            opaqueBar: root.opaqueBar
-            forcedComplementary: !opaqueBar && !startupFeedbackColorAnimation.isShowing
-
-            transform: [
-                Translate {
-                    y: inLandscape ? 0 : navigationPanel.offset
-                    x: inLandscape ? navigationPanel.offset : 0
-                }
-            ]
+            sourceComponent: ShellSettings.Settings.navigationPanelEnabled ? navigationPanelComponent : gesturePanelComponent
         }
 
         state: MobileShellState.ShellDBusClient.panelState

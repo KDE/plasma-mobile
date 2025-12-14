@@ -36,6 +36,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT statusBarScaleFactorChanged();
             Q_EMIT showBatteryPercentageChanged();
             Q_EMIT navigationPanelEnabledChanged();
+            Q_EMIT gesturePanelEnabledChanged();
             Q_EMIT alwaysShowKeyboardToggleOnNavigationPanelChanged();
             Q_EMIT keyboardButtonEnabledChanged();
             Q_EMIT taskSwitcherPreviewsEnabledChanged();
@@ -145,7 +146,22 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
     m_config->sync();
 
-    updateNavigationBarsInPlasma(navigationPanelEnabled);
+    updateNavigationBarsInPlasma();
+}
+
+bool MobileShellSettings::gesturePanelEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("gesturePanelEnabled", true);
+}
+
+void MobileShellSettings::setGesturePanelEnabled(bool gesturePanelEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("gesturePanelEnabled", gesturePanelEnabled, KConfigGroup::Notify);
+    m_config->sync();
+
+    updateNavigationBarsInPlasma();
 }
 
 bool MobileShellSettings::alwaysShowKeyboardToggleOnNavigationPanel() const
@@ -232,7 +248,7 @@ void MobileShellSettings::setAutoHidePanelsEnabled(bool enabled)
     m_config->sync();
 }
 
-void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabled)
+void MobileShellSettings::updateNavigationBarsInPlasma()
 {
     // Do not update panels when not in Plasma Mobile
     bool isMobilePlatform = KRuntimePlatform::runtimePlatform().contains("phone");
@@ -245,13 +261,22 @@ void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabl
                                                   QLatin1String("org.kde.PlasmaShell"),
                                                   QLatin1String("evaluateScript"));
 
-    if (navigationPanelEnabled) {
+    if (navigationPanelEnabled() || gesturePanelEnabled()) {
         QString createNavigationPanelScript = R"(
-            loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
+            let allPanels = panels();
+            let foundPanel = false;
+            for (var i = 0; i < allPanels.length; i++) {
+                if (allPanels[i].type === "org.kde.plasma.mobile.taskpanel") {
+                    foundPanel = true;
+                }
+            }
+
+            if (!foundPanel) {
+                loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
+            }
         )";
 
         message << createNavigationPanelScript;
-
     } else {
         QString deleteNavigationPanelScript = R"(
             let allPanels = panels();

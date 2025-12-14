@@ -482,31 +482,21 @@ FocusScope {
     //     anchors.right: parent.right
     // }
 
-    // navigation panel
-    MobileShell.NavigationPanel {
-        id: navigationPanel
-        z: !root.taskSwitcherHelpers.currentlyBeingClosed ? 1 : 0
-        visible: ShellSettings.Settings.navigationPanelEnabled
-        backgroundColor: Qt.rgba(0, 0, 0, 0.1)
-        foregroundColorGroup: Kirigami.Theme.Complementary
-        shadow: false
+    // Gesture panel
+    Component {
+        id: gesturePanelComponent
 
-        isVertical: MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
+        MobileShell.GesturePanel {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
 
-        MobileShellState.PanelSettingsDBusClient {
-            id: panelSettings
-            screenName: Screen.name
-        }
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+            opaqueBar: false
 
-        leftPadding: panelSettings.navigationPanelLeftPadding
-        rightPadding: panelSettings.navigationPanelRightPadding
-
-        leftAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "mobile-task-switcher"
-            shrinkSize: 4
-
-            onTriggered: {
+            // Trigger home action on tap
+            onHandleClicked: {
                 if (taskList.count === 0) {
                     root.hide();
                 } else {
@@ -522,27 +512,85 @@ FocusScope {
                 }
             }
         }
+    }
 
-        // home button
-        middleAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "start-here-kde"
-            onTriggered: root.hide()
-        }
+    // Navigation panel
+    Component {
+        id: navigationPanelComponent
 
-        // close app/keyboard button
-        rightAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "mobile-close-app"
-            shrinkSize: 4
+        MobileShell.NavigationPanel {
+            id: navigationPanel
+            backgroundColor: Qt.rgba(0, 0, 0, 0.1)
+            foregroundColorGroup: Kirigami.Theme.Complementary
+            shadow: false
 
-            onTriggered: {
-                taskList.getTaskAt(root.state.currentTaskIndex).closeApp();
+            isVertical: MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
+
+            MobileShellState.PanelSettingsDBusClient {
+                id: panelSettings
+                screenName: Screen.name
+            }
+
+            leftPadding: panelSettings.navigationPanelLeftPadding
+            rightPadding: panelSettings.navigationPanelRightPadding
+
+            leftAction: MobileShell.NavigationPanelAction {
+                enabled: true
+                iconSource: "mobile-task-switcher"
+                shrinkSize: 4
+
+                onTriggered: {
+                    if (taskList.count === 0) {
+                        root.hide();
+                    } else {
+                        if (taskList.count > 1 &&
+                            root.state.elapsedTimeSinceStart != -1 &&
+                            root.state.elapsedTimeSinceStart < root.state.doubleClickInterval) {
+                            root.taskSwitcherHelpers.openApp(1);
+                            return;
+                        }
+
+                        const currentIndex = root.state.currentTaskIndex;
+                        root.taskSwitcherHelpers.openApp(root.state.currentTaskIndex);
+                    }
+                }
+            }
+
+            // home button
+            middleAction: MobileShell.NavigationPanelAction {
+                enabled: true
+                iconSource: "start-here-kde"
+                onTriggered: root.hide()
+            }
+
+            // close app/keyboard button
+            rightAction: MobileShell.NavigationPanelAction {
+                enabled: true
+                iconSource: "mobile-close-app"
+                shrinkSize: 4
+
+                onTriggered: {
+                    taskList.getTaskAt(root.state.currentTaskIndex).closeApp();
+                }
+            }
+
+            rightCornerAction: MobileShell.NavigationPanelAction {
+                visible: false
             }
         }
+    }
 
-        rightCornerAction: MobileShell.NavigationPanelAction {
-            visible: false
+    Loader {
+        id: panelLoader
+        z: !root.taskSwitcherHelpers.currentlyBeingClosed ? 1 : 0
+        sourceComponent: {
+            if (ShellSettings.Settings.navigationPanelEnabled) {
+                return navigationPanelComponent;
+            } else if (ShellSettings.Settings.gesturePanelEnabled) {
+                return gesturePanelComponent;
+            } else {
+                return null;
+            }
         }
     }
 
@@ -551,7 +599,7 @@ FocusScope {
             name: "landscape"
             when: MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
             AnchorChanges {
-                target: navigationPanel
+                target: panelLoader
                 anchors {
                     right: root.right
                     top: root.top
@@ -560,7 +608,7 @@ FocusScope {
                 }
             }
             PropertyChanges {
-                target: navigationPanel
+                target: panelLoader
                 width: navRightMargin
                 anchors.topMargin: root.topMargin
             }
@@ -569,7 +617,7 @@ FocusScope {
             name: "portrait"
             when: !MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
             AnchorChanges {
-                target: navigationPanel
+                target: panelLoader
                 anchors {
                     top: undefined
                     right: root.right
@@ -578,7 +626,7 @@ FocusScope {
                 }
             }
             PropertyChanges {
-                target: navigationPanel
+                target: panelLoader
                 height: navBottomMargin
             }
         }

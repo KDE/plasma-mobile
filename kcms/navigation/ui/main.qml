@@ -239,6 +239,21 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { visible: gesturePanelToggleDelegate.visible }
+
+            FormCard.FormSwitchDelegate {
+                id: gesturePanelToggleDelegate
+                visible: !ShellSettings.Settings.navigationPanelEnabled
+                text: i18n("Show gesture handle")
+                description: i18n("Whether to add a panel on the bottom with a gesture handle.")
+                checked: ShellSettings.Settings.gesturePanelEnabled
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.gesturePanelEnabled) {
+                        ShellSettings.Settings.gesturePanelEnabled = checked;
+                    }
+                }
+            }
         }
     }
 }
