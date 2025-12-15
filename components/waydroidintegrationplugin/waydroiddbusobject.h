@@ -8,6 +8,7 @@
 
 #include "waydroidapplicationdbusobject.h"
 
+#include <QCoroTask>
 #include <QDBusObjectPath>
 #include <QList>
 #include <QObject>
@@ -145,7 +146,7 @@ private:
 
     void refreshSupportsInfo();
     void refreshInstallationInfo();
-    void refreshPropsInfo();
+    QCoro::Task<void> refreshPropsInfo();
 
     /**
      * @brief Executes the command to retrieve the current session status and related
@@ -153,7 +154,7 @@ private:
      *
      * @return A QString containing the output of the Waydroid session status command.
      */
-    QString fetchSessionInfo();
+    QCoro::Task<QString> fetchSessionInfo();
 
     /**
      * @brief Executes the command to retrieve the value of a specified property from the Waydroid container.
@@ -162,7 +163,7 @@ private:
      * @param defaultValue The default value to return if the property is not found or empty.
      * @return A QString containing the property value, or the defaultValue if not found.
      */
-    QString fetchPropValue(const QString key, const QString defaultValue);
+    QCoro::Task<QString> fetchPropValue(const QString key, const QString defaultValue);
 
     /**
      * @brief Executes the command to writes a value to a specified property in the Waydroid container.
@@ -171,7 +172,7 @@ private:
      * @param value The value to write to the property.
      * @return A boolean indicating whether the write operation was successful.
      */
-    bool writePropValue(const QString key, const QString value);
+    QCoro::Task<bool> writePropValue(const QString key, const QString value);
 
     /**
      * @brief Extracts text from a string using a regular expression pattern.
@@ -202,6 +203,6 @@ private:
     QString desktopFileDirectory();
     bool removeWaydroidApplications();
 
-    QString fetchApplicationsList();
+    QCoro::Task<QString> fetchApplicationsList();
     QList<WaydroidApplicationDBusObject::Ptr> m_applicationObjects;
 };

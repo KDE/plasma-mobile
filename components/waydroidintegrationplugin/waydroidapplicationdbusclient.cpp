@@ -73,6 +73,12 @@ void WaydroidApplicationDBusClient::updateName()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QString> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidApplicationDBusClient: Failed to fetch name:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto name = reply.argumentAt<0>();
 
         if (m_name != name) {
@@ -90,11 +96,17 @@ void WaydroidApplicationDBusClient::updatePackageName()
         return;
     }
 
-    auto reply = m_interface->name();
+    auto reply = m_interface->packageName();
     auto watcher = new QDBusPendingCallWatcher(reply, this);
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QString> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidApplicationDBusClient: Failed to fetch packageName:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto packageName = reply.argumentAt<0>();
 
         if (m_packageName != packageName) {

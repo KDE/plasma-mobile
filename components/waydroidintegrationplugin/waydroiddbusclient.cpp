@@ -83,6 +83,12 @@ void WaydroidDBusClient::initializeApplicationListModel()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QList<QDBusObjectPath>> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch applications:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto applications = reply.argumentAt<0>();
 
         m_applicationListModel->initializeApplications(applications);
@@ -90,6 +96,8 @@ void WaydroidDBusClient::initializeApplicationListModel()
         // Connect applicationListModel signals only when applications is synced
         connect(m_interface, &OrgKdePlasmashellWaydroidInterface::applicationAdded, m_applicationListModel, &WaydroidApplicationListModel::addApplication);
         connect(m_interface, &OrgKdePlasmashellWaydroidInterface::applicationRemoved, m_applicationListModel, &WaydroidApplicationListModel::removeApplication);
+
+        watcher->deleteLater();
     });
 }
 
@@ -161,9 +169,9 @@ QCoro::Task<void> WaydroidDBusClient::setUeventTask(const bool uevent)
     co_await pendingReply;
 }
 
-QCoro::QmlTask WaydroidDBusClient::setUevent(const bool multiWindows)
+QCoro::QmlTask WaydroidDBusClient::setUevent(const bool uevent)
 {
-    return setUeventTask(multiWindows);
+    return setUeventTask(uevent);
 }
 
 QCoro::Task<void> WaydroidDBusClient::refreshSessionInfoTask()
@@ -277,6 +285,12 @@ void WaydroidDBusClient::updateStatus()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<int> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch status:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto status = static_cast<Status>(reply.argumentAt<0>());
 
         if (m_status != status) {
@@ -295,6 +309,12 @@ void WaydroidDBusClient::updateSessionStatus()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<int> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch sessionStatus:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto sessionStatus = static_cast<SessionStatus>(reply.argumentAt<0>());
 
         if (m_sessionStatus != sessionStatus) {
@@ -313,6 +333,12 @@ void WaydroidDBusClient::updateSystemType()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<int> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch systemType:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto systemType = static_cast<SystemType>(reply.argumentAt<0>());
 
         if (m_systemType != systemType) {
@@ -331,6 +357,12 @@ void WaydroidDBusClient::updateIpAddress()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QString> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch ipAddress:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto ipAddress = reply.argumentAt<0>();
 
         if (m_ipAddress != ipAddress) {
@@ -349,6 +381,12 @@ void WaydroidDBusClient::updateAndroidId()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<QString> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch androidId:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto androidId = reply.argumentAt<0>();
 
         if (m_androidId != androidId) {
@@ -367,6 +405,12 @@ void WaydroidDBusClient::updateMultiWindows()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch multiWindows:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto multiWindows = reply.argumentAt<0>();
 
         if (m_multiWindows != multiWindows) {
@@ -385,6 +429,12 @@ void WaydroidDBusClient::updateSuspend()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch suspend:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto suspend = reply.argumentAt<0>();
 
         if (m_suspend != suspend) {
@@ -403,6 +453,12 @@ void WaydroidDBusClient::updateUevent()
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
         QDBusPendingReply<bool> reply = *watcher;
+        if (!reply.isValid()) {
+            qDebug() << "WaydroidDBusClient: Failed to fetch uevent:" << reply.error().message();
+            watcher->deleteLater();
+            return;
+        }
+
         const auto uevent = reply.argumentAt<0>();
 
         if (m_uevent != uevent) {
