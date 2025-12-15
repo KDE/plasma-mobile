@@ -10,9 +10,11 @@
 #include "waydroidintegrationplugin_debug.h"
 #include "waydroidshared.h"
 
+#include <QCoroProcess>
 #include <QDBusConnection>
 #include <QDir>
 #include <QLoggingCategory>
+#include <QPointer>
 #include <QProcess>
 #include <QRegularExpression>
 #include <QStandardPaths>
@@ -31,7 +33,7 @@ using namespace Qt::StringLiterals;
 #define UEVENT_PROP_KEY "persist.waydroid.uevent"
 
 static const QRegularExpression sessionRegExp(u"Session:\\s*(\\w+)"_s);
-static const QRegularExpression ipAdressRegExp(u"IP address:\\s*(\\d+\\.\\d+\\.\\d+\\.\\d+)"_s);
+static const QRegularExpression ipAddressRegExp(u"IP address:\\s*(\\d+\\.\\d+\\.\\d+\\.\\d+)"_s);
 static const QRegularExpression systemOtaRegExp(u"system_ota\\s*=\\s*(\\S+)"_s);
 
 WaydroidDBusObject::WaydroidDBusObject(QObject *parent)
@@ -41,19 +43,21 @@ WaydroidDBusObject::WaydroidDBusObject(QObject *parent)
 
 void WaydroidDBusObject::registerObject()
 {
-    if (!m_dbusInitialized) {
-        new WaydroidAdaptor{this};
-        QDBusConnection::sessionBus().registerObject(u"/Waydroid"_s, this);
-        m_dbusInitialized = true;
-
-        // Connect it-self to auto-refresh when required status has changed
-        connect(this, &WaydroidDBusObject::statusChanged, this, &WaydroidDBusObject::refreshSessionInfo);
-        connect(this, &WaydroidDBusObject::statusChanged, this, &WaydroidDBusObject::refreshInstallationInfo);
-        connect(this, &WaydroidDBusObject::sessionStatusChanged, this, &WaydroidDBusObject::refreshPropsInfo);
-        connect(this, &WaydroidDBusObject::sessionStatusChanged, this, &WaydroidDBusObject::refreshApplications);
-
-        refreshSupportsInfo();
+    if (m_dbusInitialized) {
+        return;
     }
+
+    new WaydroidAdaptor{this};
+    QDBusConnection::sessionBus().registerObject(u"/Waydroid"_s, this);
+    m_dbusInitialized = true;
+
+    // Connect it-self to auto-refresh when required status has changed
+    connect(this, &WaydroidDBusObject::statusChanged, this, &WaydroidDBusObject::refreshSessionInfo);
+    connect(this, &WaydroidDBusObject::statusChanged, this, &WaydroidDBusObject::refreshInstallationInfo);
+    connect(this, &WaydroidDBusObject::sessionStatusChanged, this, &WaydroidDBusObject::refreshPropsInfo);
+    connect(this, &WaydroidDBusObject::sessionStatusChanged, this, &WaydroidDBusObject::refreshApplications);
+
+    refreshSupportsInfo();
 }
 
 void WaydroidDBusObject::initialize(const int systemType, const int romType, const bool forced)
@@ -99,7 +103,6 @@ void WaydroidDBusObject::initialize(const int systemType, const int romType, con
     writeAction.setTimeout(3600000); // HACK: 1 hour to wait installation
 
     KAuth::ExecuteJob *job = writeAction.execute();
-    job->start();
 
     connect(job, &KAuth::ExecuteJob::newData, this, [this](const QVariantMap &data) {
         QString log = data.value("log", "").toString();
@@ -123,6 +126,8 @@ void WaydroidDBusObject::initialize(const int systemType, const int romType, con
 
         Q_EMIT statusChanged();
     });
+
+    job->start();
 }
 
 void WaydroidDBusObject::startSession()
@@ -137,10 +142,10 @@ void WaydroidDBusObject::startSession()
     const QStringList arguments{u"session"_s, u"start"_s};
 
     auto *process = new QProcess(this);
-    process->start(WAYDROID_COMMAND, arguments);
 
     connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
         Q_UNUSED(exitStatus);
+        process->deleteLater();
 
         if (exitCode == 0) {
             return;
@@ -157,6 +162,8 @@ void WaydroidDBusObject::startSession()
         qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to start the Waydroid session: " << errorString;
     });
 
+    process->start(WAYDROID_COMMAND, arguments);
+
     checkSessionStarting(10);
 }
 
@@ -168,16 +175,22 @@ void WaydroidDBusObject::stopSession()
 
     const QStringList arguments{u"session"_s, u"stop"_s};
 
-    QProcess *process = new QProcess(this);
-    process->start(WAYDROID_COMMAND, arguments);
-    process->waitForFinished();
+    auto *process = new QProcess(this);
 
-    if (process->exitCode() == 0) {
+    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
+        Q_UNUSED(exitStatus);
+        process->deleteLater();
+
+        if (exitCode == 0) {
+            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to stop the Waydroid session: " << process->readAllStandardError();
+            return;
+        }
+
         m_sessionStatus = SessionStopped;
         Q_EMIT sessionStatusChanged();
-    } else {
-        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to stop the Waydroid session: " << process->readAllStandardError();
-    }
+    });
+
+    process->start(WAYDROID_COMMAND, arguments);
 }
 
 void WaydroidDBusObject::resetWaydroid()
@@ -200,7 +213,6 @@ void WaydroidDBusObject::resetWaydroid()
     writeAction.setArguments(args);
 
     KAuth::ExecuteJob *job = writeAction.execute();
-    job->start();
 
     connect(job, &KAuth::ExecuteJob::finished, this, [this](KJob *job, auto) {
         removeWaydroidApplications();
@@ -216,6 +228,8 @@ void WaydroidDBusObject::resetWaydroid()
 
         Q_EMIT statusChanged();
     });
+
+    job->start();
 }
 
 void WaydroidDBusObject::installApk(const QString apkFile)
@@ -223,7 +237,6 @@ void WaydroidDBusObject::installApk(const QString apkFile)
     const QStringList arguments{u"app"_s, u"install"_s, apkFile};
 
     QProcess *process = new QProcess(this);
-    process->start(WAYDROID_COMMAND, arguments);
 
     connect(process, &QProcess::finished, this, [this, apkFile, process](int exitCode, QProcess::ExitStatus exitStatus) {
         if (exitCode == 0 && exitStatus == QProcess::NormalExit) {
@@ -233,6 +246,8 @@ void WaydroidDBusObject::installApk(const QString apkFile)
             qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Error occurred during installation of " << apkFile << ": " << process->readAllStandardError();
         }
     });
+
+    process->start(WAYDROID_COMMAND, arguments);
 }
 
 void WaydroidDBusObject::deleteApplication(const QString appId)
@@ -240,7 +255,6 @@ void WaydroidDBusObject::deleteApplication(const QString appId)
     const QStringList arguments{u"app"_s, u"remove"_s, appId};
 
     QProcess *process = new QProcess(this);
-    process->start(WAYDROID_COMMAND, arguments);
 
     connect(process, &QProcess::finished, this, [this, appId, process](int exitCode, QProcess::ExitStatus exitStatus) {
         Q_UNUSED(exitCode);
@@ -256,6 +270,8 @@ void WaydroidDBusObject::deleteApplication(const QString appId)
             qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Error occurred during uninstallation of " << appId << ": " << errorLog;
         }
     });
+
+    process->start(WAYDROID_COMMAND, arguments);
 }
 
 int WaydroidDBusObject::status() const
@@ -296,10 +312,17 @@ void WaydroidDBusObject::setMultiWindows(const bool multiWindows)
 
     const QString value = multiWindows ? "true" : "false";
 
-    if (writePropValue(MULTI_WINDOWS_PROP_KEY, value)) {
-        m_multiWindows = multiWindows;
-        Q_EMIT multiWindowsChanged();
-    }
+    // Run coroutine asynchronously with QPointer to safely handle 'this'
+    auto coro = [](WaydroidDBusObject *self, QString value, bool multiWindows) -> QCoro::Task<void> {
+        QPointer<WaydroidDBusObject> guard(self);
+        if (co_await self->writePropValue(MULTI_WINDOWS_PROP_KEY, value)) {
+            if (guard) {
+                self->m_multiWindows = multiWindows;
+                Q_EMIT self->multiWindowsChanged();
+            }
+        }
+    };
+    coro(this, value, multiWindows);
 }
 
 bool WaydroidDBusObject::suspend() const
@@ -315,10 +338,16 @@ void WaydroidDBusObject::setSuspend(const bool suspend)
 
     const QString value = suspend ? "true" : "false";
 
-    if (writePropValue(SUSPEND_PROP_KEY, value)) {
-        m_suspend = suspend;
-        Q_EMIT suspendChanged();
-    }
+    auto coro = [](WaydroidDBusObject *self, QString value, bool suspend) -> QCoro::Task<void> {
+        QPointer<WaydroidDBusObject> guard(self);
+        if (co_await self->writePropValue(SUSPEND_PROP_KEY, value)) {
+            if (guard) {
+                self->m_suspend = suspend;
+                Q_EMIT self->suspendChanged();
+            }
+        }
+    };
+    coro(this, value, suspend);
 }
 
 bool WaydroidDBusObject::uevent() const
@@ -334,10 +363,16 @@ void WaydroidDBusObject::setUevent(const bool uevent)
 
     const QString value = uevent ? "true" : "false";
 
-    if (writePropValue(UEVENT_PROP_KEY, value)) {
-        m_uevent = uevent;
-        Q_EMIT ueventChanged();
-    }
+    auto coro = [](WaydroidDBusObject *self, QString value, bool uevent) -> QCoro::Task<void> {
+        QPointer<WaydroidDBusObject> guard(self);
+        if (co_await self->writePropValue(UEVENT_PROP_KEY, value)) {
+            if (guard) {
+                self->m_uevent = uevent;
+                Q_EMIT self->ueventChanged();
+            }
+        }
+    };
+    coro(this, value, uevent);
 }
 
 QList<QDBusObjectPath> WaydroidDBusObject::applications() const
@@ -353,24 +388,30 @@ void WaydroidDBusObject::refreshSupportsInfo()
 {
     const QStringList arguments{u"-h"_s};
 
-    auto process = QProcess(this);
-    process.start(WAYDROID_COMMAND, arguments);
-    process.waitForFinished();
+    auto process = new QProcess(this);
+    process->start(WAYDROID_COMMAND, arguments);
 
-    const int exitCode = process.exitCode();
-    if (exitCode != 0) {
-        m_status = NotSupported;
-        Q_EMIT statusChanged();
-        return;
-    }
+    connect(process, &QProcess::finished, this, [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
+        Q_UNUSED(exitCode)
+        Q_UNUSED(exitStatus)
 
-    const QString output = fetchSessionInfo();
-    if (!output.contains("WayDroid is not initialized")) {
-        m_status = Initialized;
-    } else {
-        m_status = NotInitialized;
-    }
-    Q_EMIT statusChanged();
+        process->deleteLater();
+
+        if (process->exitCode() != 0) {
+            m_status = NotSupported;
+            Q_EMIT statusChanged();
+            return;
+        }
+
+        fetchSessionInfo().then([this](const QString &output) {
+            if (!output.contains("WayDroid is not initialized")) {
+                m_status = Initialized;
+            } else {
+                m_status = NotInitialized;
+            }
+            Q_EMIT statusChanged();
+        });
+    });
 }
 
 void WaydroidDBusObject::refreshInstallationInfo()
@@ -406,35 +447,49 @@ void WaydroidDBusObject::refreshSessionInfo()
         return;
     }
 
-    const QString output = fetchSessionInfo();
+    auto coro = [](WaydroidDBusObject *self) -> QCoro::Task<void> {
+        QPointer<WaydroidDBusObject> guard(self);
+        const QString output = co_await self->fetchSessionInfo();
 
-    const QString sessionMatchResult = extractRegExp(output, sessionRegExp);
-    SessionStatus newSessionStatus;
+        if (!guard) {
+            co_return;
+        }
 
-    if (!sessionMatchResult.isEmpty()) {
-        newSessionStatus = sessionMatchResult.contains("RUNNING") ? SessionRunning : SessionStopped;
-    } else {
-        newSessionStatus = SessionStopped;
-    }
+        const QString sessionMatchResult = self->extractRegExp(output, sessionRegExp);
+        SessionStatus newSessionStatus;
 
-    if (m_sessionStatus != newSessionStatus) {
-        m_sessionStatus = newSessionStatus;
-        Q_EMIT sessionStatusChanged();
-    }
+        if (!sessionMatchResult.isEmpty()) {
+            newSessionStatus = sessionMatchResult.contains("RUNNING") ? SessionRunning : SessionStopped;
+        } else {
+            newSessionStatus = SessionStopped;
+        }
 
-    m_ipAddress = extractRegExp(output, ipAdressRegExp);
-    Q_EMIT ipAddressChanged();
+        if (self->m_sessionStatus != newSessionStatus) {
+            self->m_sessionStatus = newSessionStatus;
+            Q_EMIT self->sessionStatusChanged();
+        }
+
+        const QString newIpAddress = self->extractRegExp(output, ipAddressRegExp);
+        if (self->m_ipAddress != newIpAddress) {
+            self->m_ipAddress = self->extractRegExp(output, ipAddressRegExp);
+            Q_EMIT self->ipAddressChanged();
+        }
+    };
+    coro(this);
 }
 
-QString WaydroidDBusObject::fetchSessionInfo()
+QCoro::Task<QString> WaydroidDBusObject::fetchSessionInfo()
 {
     const QStringList arguments{u"status"_s};
 
-    auto process = QProcess(this);
-    process.start(WAYDROID_COMMAND, arguments);
-    process.waitForFinished();
+    auto *basicProcess = new QProcess(this);
+    auto process = qCoro(basicProcess);
+    co_await process.start(WAYDROID_COMMAND, arguments);
+    co_await process.waitForFinished();
 
-    return process.readAllStandardOutput();
+    const QString output = basicProcess->readAllStandardOutput();
+    basicProcess->deleteLater();
+    co_return output;
 }
 
 void WaydroidDBusObject::refreshAndroidId()
@@ -447,7 +502,6 @@ void WaydroidDBusObject::refreshAndroidId()
     writeAction.setHelperId(u"org.kde.plasma.mobileshell.waydroidhelper"_s);
 
     KAuth::ExecuteJob *job = writeAction.execute();
-    job->start();
 
     connect(job, &KAuth::ExecuteJob::finished, this, [this](KJob *job, auto) {
         KAuth::ExecuteJob *executeJob = dynamic_cast<KAuth::ExecuteJob *>(job);
@@ -464,54 +518,61 @@ void WaydroidDBusObject::refreshAndroidId()
 
         Q_EMIT androidIdChanged();
     });
+
+    job->start();
 }
 
-void WaydroidDBusObject::refreshPropsInfo()
+QCoro::Task<void> WaydroidDBusObject::refreshPropsInfo()
 {
     if (m_sessionStatus != SessionRunning) {
-        return;
+        co_return;
     }
 
-    const QString multiWindowsPropValue = fetchPropValue(MULTI_WINDOWS_PROP_KEY, "false");
+    const QString multiWindowsPropValue = co_await fetchPropValue(MULTI_WINDOWS_PROP_KEY, "false");
     m_multiWindows = multiWindowsPropValue == "true";
     Q_EMIT multiWindowsChanged();
 
-    const QString suspendPropValue = fetchPropValue(SUSPEND_PROP_KEY, "true");
+    const QString suspendPropValue = co_await fetchPropValue(SUSPEND_PROP_KEY, "true");
     m_suspend = suspendPropValue == "true";
     Q_EMIT suspendChanged();
 
-    const QString ueventPropValue = fetchPropValue(UEVENT_PROP_KEY, "false");
+    const QString ueventPropValue = co_await fetchPropValue(UEVENT_PROP_KEY, "false");
     m_uevent = ueventPropValue == "true";
     Q_EMIT ueventChanged();
 }
 
-QString WaydroidDBusObject::fetchPropValue(const QString key, const QString defaultValue)
+QCoro::Task<QString> WaydroidDBusObject::fetchPropValue(const QString key, const QString defaultValue)
 {
     const QStringList arguments{u"prop"_s, u"get"_s, key};
 
-    QProcess *process = new QProcess(this);
-    process->start(WAYDROID_COMMAND, arguments);
-    process->waitForFinished();
+    auto *basicProcess = new QProcess(this);
+    auto process = qCoro(basicProcess);
+    co_await process.start(WAYDROID_COMMAND, arguments);
+    co_await process.waitForFinished();
 
-    const QString commandOutput = process->readAllStandardOutput();
+    const QString commandOutput = basicProcess->readAllStandardOutput();
+    basicProcess->deleteLater();
     const QString value = commandOutput.split("\n").first().trimmed();
 
     if (value.isEmpty()) {
-        return defaultValue;
+        co_return defaultValue;
     }
 
-    return value;
+    co_return value;
 }
 
-bool WaydroidDBusObject::writePropValue(const QString key, const QString value)
+QCoro::Task<bool> WaydroidDBusObject::writePropValue(const QString key, const QString value)
 {
     const QStringList arguments{u"prop"_s, u"set"_s, key, value};
 
-    auto process = QProcess(this);
-    process.start(WAYDROID_COMMAND, arguments);
-    process.waitForFinished();
+    auto *basicProcess = new QProcess(this);
+    auto process = qCoro(basicProcess);
+    co_await process.start(WAYDROID_COMMAND, arguments);
+    co_await process.waitForFinished();
 
-    return process.exitCode() == 0;
+    const bool success = basicProcess->exitCode() == 0;
+    basicProcess->deleteLater();
+    co_return success;
 }
 
 QString WaydroidDBusObject::extractRegExp(const QString text, const QRegularExpression regExp) const
@@ -531,21 +592,32 @@ void WaydroidDBusObject::checkSessionStarting(const int limit, const int tried)
         return;
     }
 
-    const QString output = fetchSessionInfo();
-    const QString sessionMatchResult = extractRegExp(output, sessionRegExp);
+    auto coro = [](WaydroidDBusObject *self, int limit, int tried) -> QCoro::Task<void> {
+        QPointer<WaydroidDBusObject> guard(self);
+        const QString output = co_await self->fetchSessionInfo();
 
-    if (sessionMatchResult.contains("RUNNING")) {
-        m_sessionStatus = SessionRunning;
-        Q_EMIT sessionStatusChanged();
-    } else if (tried == limit) {
-        m_sessionStatus = SessionStopped;
-        Q_EMIT sessionStatusChanged();
-        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to start the session after " << tried << " tries";
-    } else {
-        QTimer::singleShot(500, [this, tried, limit]() {
-            checkSessionStarting(limit, tried + 1);
-        });
-    }
+        if (!guard) {
+            co_return;
+        }
+
+        const QString sessionMatchResult = self->extractRegExp(output, sessionRegExp);
+
+        if (sessionMatchResult.contains("RUNNING")) {
+            self->m_sessionStatus = SessionRunning;
+            Q_EMIT self->sessionStatusChanged();
+        } else if (tried == limit) {
+            self->m_sessionStatus = SessionStopped;
+            Q_EMIT self->sessionStatusChanged();
+            qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to start the session after " << tried << " tries";
+        } else {
+            QTimer::singleShot(500, self, [self, tried, limit]() {
+                if (self) {
+                    self->checkSessionStarting(limit, tried + 1);
+                }
+            });
+        }
+    };
+    coro(this, limit, tried);
 }
 
 QString WaydroidDBusObject::desktopFileDirectory()
@@ -608,74 +680,87 @@ void WaydroidDBusObject::refreshApplications()
         return;
     }
 
-    const QString output = fetchApplicationsList();
-    if (output.isEmpty()) {
-        return;
-    }
+    auto coro = [](WaydroidDBusObject *self) -> QCoro::Task<void> {
+        QPointer<WaydroidDBusObject> guard(self);
+        const QString output = co_await self->fetchApplicationsList();
 
-    QTextStream inFile(const_cast<QString *>(&output), QIODevice::ReadOnly);
-    const auto newApplications = WaydroidApplicationDBusObject::parseApplicationsFromWaydroidLog(inFile);
+        if (!guard) {
+            co_return;
+        }
 
-    // Create a map of existing applications by package name for efficient lookup
-    QMap<QString, int> existingAppMap;
-    for (int i = 0; i < m_applicationObjects.size(); ++i) {
-        const auto &application = m_applicationObjects[i];
-        existingAppMap.insert(application->packageName(), i);
-    }
+        if (output.isEmpty()) {
+            co_return;
+        }
 
-    QList<WaydroidApplicationDBusObject::Ptr> toInsert;
+        QTextStream inFile(const_cast<QString *>(&output), QIODevice::ReadOnly);
+        const auto newApplications = WaydroidApplicationDBusObject::parseApplicationsFromWaydroidLog(inFile);
 
-    // Check which applications need to be added or are already present
-    for (const auto &application : newApplications) {
-        if (!application->name().isEmpty() && !application->packageName().isEmpty()) {
-            auto it = existingAppMap.find(application->packageName());
-            if (it != existingAppMap.end()) {
-                // Application already exists, remove from map to mark as kept
-                existingAppMap.erase(it);
-            } else {
-                // Application needs to be inserted
-                toInsert.append(application);
+        // Create a map of existing applications by package name for efficient lookup
+        QMap<QString, int> existingAppMap;
+        for (int i = 0; i < self->m_applicationObjects.size(); ++i) {
+            const auto &application = self->m_applicationObjects[i];
+            existingAppMap.insert(application->packageName(), i);
+        }
+
+        QList<WaydroidApplicationDBusObject::Ptr> toInsert;
+
+        // Check which applications need to be added or are already present
+        for (const auto &application : newApplications) {
+            if (!application->name().isEmpty() && !application->packageName().isEmpty()) {
+                auto it = existingAppMap.find(application->packageName());
+                if (it != existingAppMap.end()) {
+                    // Application already exists, remove from map to mark as kept
+                    existingAppMap.erase(it);
+                } else {
+                    // Application needs to be inserted
+                    toInsert.append(application);
+                }
             }
         }
-    }
 
-    // Remove applications that are no longer present
-    QList<int> toRemove;
-    for (const int index : existingAppMap.values()) {
-        toRemove.append(index);
-    }
+        // Remove applications that are no longer present
+        QList<int> toRemove;
+        for (const int index : existingAppMap.values()) {
+            toRemove.append(index);
+        }
 
-    std::sort(toRemove.begin(), toRemove.end());
+        std::sort(toRemove.begin(), toRemove.end());
 
-    // Remove indices from end to start to avoid index shifting
-    for (int i = toRemove.size() - 1; i >= 0; --i) {
-        int ind = toRemove[i];
-        const auto application = m_applicationObjects[ind];
-        m_applicationObjects.removeAt(ind);
-        Q_EMIT applicationRemoved(application->objectPath());
-        application->unregisterObject();
-    }
+        // Remove indices from end to start to avoid index shifting
+        for (int i = toRemove.size() - 1; i >= 0; --i) {
+            int ind = toRemove[i];
+            const auto application = self->m_applicationObjects[ind];
+            self->m_applicationObjects.removeAt(ind);
+            Q_EMIT self->applicationRemoved(application->objectPath());
+            application->unregisterObject();
+        }
 
-    // Add new applications and register them
-    for (const auto &application : toInsert) {
-        application->registerObject();
-        m_applicationObjects.append(application);
-        Q_EMIT applicationAdded(application->objectPath());
-    }
+        // Add new applications and register them
+        for (const auto &application : toInsert) {
+            application->registerObject();
+            self->m_applicationObjects.append(application);
+            Q_EMIT self->applicationAdded(application->objectPath());
+        }
+    };
+    coro(this);
 }
 
-QString WaydroidDBusObject::fetchApplicationsList()
+QCoro::Task<QString> WaydroidDBusObject::fetchApplicationsList()
 {
     const QStringList arguments{u"app"_s, u"list"_s};
 
-    auto process = QProcess(this);
-    process.start(WAYDROID_COMMAND, arguments);
-    process.waitForFinished();
+    auto *basicProcess = new QProcess(this);
+    auto process = qCoro(basicProcess);
+    co_await process.start(WAYDROID_COMMAND, arguments);
+    co_await process.waitForFinished();
 
-    if (process.exitCode() != 0) {
-        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to fetch applications list: " << process.readAllStandardError();
-        return QString{};
+    if (basicProcess->exitCode() != 0) {
+        qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to fetch applications list: " << basicProcess->readAllStandardError();
+        basicProcess->deleteLater();
+        co_return QString{};
     }
 
-    return process.readAllStandardOutput();
+    const QString output = basicProcess->readAllStandardOutput();
+    basicProcess->deleteLater();
+    co_return output;
 }
