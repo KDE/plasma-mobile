@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-15 00:44+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -45,35 +45,35 @@ msgstr ""
 msgid "Configure…"
 msgstr ""
 
-#: qml/delegate/WidgetDelegateConfig.qml:195
+#: qml/delegate/WidgetDelegateConfig.qml:193
 #, kde-format
 msgid "Options"
 msgstr ""
 
-#: qml/delegate/WidgetDelegateConfig.qml:209
+#: qml/delegate/WidgetDelegateConfig.qml:207
 #, fuzzy, kde-format
 #| msgid "Widgets"
 msgid "Widget Options"
 msgstr "विजेट्"
 
-#: qml/delegate/WidgetDelegateConfig.qml:249
+#: qml/delegate/WidgetDelegateConfig.qml:247
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgid "Remove widget"
 msgstr "अपाकरोति"
 
-#: qml/delegate/WidgetDelegateConfig.qml:256
+#: qml/delegate/WidgetDelegateConfig.qml:254
 #, kde-format
 msgid "Configure widget"
 msgstr ""
 
-#: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
-#: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:402
+#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
 msgstr "अपाकरोति"
 
-#: qml/HomeScreenPage.qml:485
+#: qml/HomeScreenPage.qml:481
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr ""
@@ -88,18 +88,18 @@ msgstr ""
 msgid "Are you sure you want to delete this folder?"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
+#: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
 msgid "Widgets"
 msgstr "विजेट्"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr ""
 
-#: qml/settings/AppletListViewer.qml:85
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
@@ -280,14 +280,14 @@ msgstr "आयातस्य पुष्टिं कुर्वन्तु"
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "एतेन भवतः विद्यमानं होमस्क्रीन् विन्यासः अधिलिखितः भविष्यति!"
 
-#: qml/settings/SettingsComponent.qml:68
+#: qml/settings/SettingsComponent.qml:57
 #, fuzzy, kde-format
 #| msgctxt "@title:group settings group"
 #| msgid "Wallpaper"
 msgid "Wallpapers"
 msgstr "वॉलपेपर"
 
-#: qml/settings/SettingsComponent.qml:77
+#: qml/settings/SettingsComponent.qml:66
 #, kde-format
 msgid "Settings"
 msgstr ""

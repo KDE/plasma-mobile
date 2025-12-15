@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-15 00:44+0000\n"
 "PO-Revision-Date: 2025-08-13 06:16+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -44,33 +44,33 @@ msgstr "ეს ვიჯეტი ვერ მოიძებნა."
 msgid "Configure…"
 msgstr "მორგება…"
 
-#: qml/delegate/WidgetDelegateConfig.qml:195
+#: qml/delegate/WidgetDelegateConfig.qml:193
 #, kde-format
 msgid "Options"
 msgstr "მორგება"
 
-#: qml/delegate/WidgetDelegateConfig.qml:209
+#: qml/delegate/WidgetDelegateConfig.qml:207
 #, kde-format
 msgid "Widget Options"
 msgstr "ვიჯეტის მორგება"
 
-#: qml/delegate/WidgetDelegateConfig.qml:249
+#: qml/delegate/WidgetDelegateConfig.qml:247
 #, kde-format
 msgid "Remove widget"
 msgstr "ვიჯეტის წაშლა"
 
-#: qml/delegate/WidgetDelegateConfig.qml:256
+#: qml/delegate/WidgetDelegateConfig.qml:254
 #, kde-format
 msgid "Configure widget"
 msgstr "ვიჯეტის მორგება"
 
-#: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
-#: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:402
+#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
 msgstr "წაშლა"
 
-#: qml/HomeScreenPage.qml:485
+#: qml/HomeScreenPage.qml:481
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "გაუშვით მოსარგებად, გადაათრიეთ გადასატანად"
@@ -85,18 +85,18 @@ msgstr "დაადასტურეთ საქაღალდის წა�
 msgid "Are you sure you want to delete this folder?"
 msgstr "მართლა გნებავთ, წაშალოთ ეს საქაღალდე?"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
+#: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
 msgid "Widgets"
 msgstr "ვიჯეტები"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr "ახალი ვიჯეტების მიღება…"
 
-#: qml/settings/AppletListViewer.qml:85
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
@@ -272,12 +272,12 @@ msgstr "გატანის დადასტურება"
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "ეს თქვენს არსებულ საწყისი ეკრანის განლაგებას თავზე გადააწერს!"
 
-#: qml/settings/SettingsComponent.qml:68
+#: qml/settings/SettingsComponent.qml:57
 #, kde-format
 msgid "Wallpapers"
 msgstr "ფონის სურათები"
 
-#: qml/settings/SettingsComponent.qml:77
+#: qml/settings/SettingsComponent.qml:66
 #, kde-format
 msgid "Settings"
 msgstr "მორგება"

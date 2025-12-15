@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-15 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -44,33 +44,33 @@ msgstr "找不到此小部件。"
 msgid "Configure…"
 msgstr "配置…"
 
-#: qml/delegate/WidgetDelegateConfig.qml:195
+#: qml/delegate/WidgetDelegateConfig.qml:193
 #, kde-format
 msgid "Options"
 msgstr "选项"
 
-#: qml/delegate/WidgetDelegateConfig.qml:209
+#: qml/delegate/WidgetDelegateConfig.qml:207
 #, kde-format
 msgid "Widget Options"
 msgstr "小部件选项"
 
-#: qml/delegate/WidgetDelegateConfig.qml:249
+#: qml/delegate/WidgetDelegateConfig.qml:247
 #, kde-format
 msgid "Remove widget"
 msgstr "移除小部件"
 
-#: qml/delegate/WidgetDelegateConfig.qml:256
+#: qml/delegate/WidgetDelegateConfig.qml:254
 #, kde-format
 msgid "Configure widget"
 msgstr "配置小部件"
 
-#: qml/FavouritesBar.qml:234 qml/FavouritesBar.qml:311 qml/FolderView.qml:404
-#: qml/HomeScreenPage.qml:336 qml/HomeScreenPage.qml:422
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:402
+#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
 msgstr "移除"
 
-#: qml/HomeScreenPage.qml:485
+#: qml/HomeScreenPage.qml:481
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "松开以配置，拖动以移动"
@@ -85,18 +85,18 @@ msgstr "确认删除文件夹"
 msgid "Are you sure you want to delete this folder?"
 msgstr "您确定要删除此文件夹吗？"
 
-#: qml/settings/AppletListViewer.qml:74 qml/settings/SettingsComponent.qml:85
+#: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
 msgid "Widgets"
 msgstr "小部件"
 
-#: qml/settings/AppletListViewer.qml:84
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
 msgstr "获取新小部件…"
 
-#: qml/settings/AppletListViewer.qml:85
+#: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
@@ -271,12 +271,12 @@ msgstr "确认导入"
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "这将覆盖您现有的主屏幕布局！"
 
-#: qml/settings/SettingsComponent.qml:68
+#: qml/settings/SettingsComponent.qml:57
 #, kde-format
 msgid "Wallpapers"
 msgstr "壁纸"
 
-#: qml/settings/SettingsComponent.qml:77
+#: qml/settings/SettingsComponent.qml:66
 #, kde-format
 msgid "Settings"
 msgstr "设置"
