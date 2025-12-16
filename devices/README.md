@@ -7,16 +7,28 @@ This folder is where device-specific information is set.
 
 ### Usage as a distro
 
-As a distribution, you can ship the device preset with the image by installing a file.
+As a distribution, you can ship the device preset with the image by installing a file if the device id isn't autodetected.
 
 In `/etc/xdg/plasmamobilerc`, write:
 
 ```toml
 [Device]
-device=oneplus-enchilada # replace with the device id
+device=oneplus,enchilada # replace with the device id
 ```
 
 This should be a file name that exists in `/usr/share/plasma-mobile-device-presets` (which are the files in the `configs` folder).
+
+### Auto-detecting device names
+
+Envmanager reads `/sys/firmware/devicetree/base/compatible` to try to autodetect the device id.
+
+Use this command to determine your device's id:
+
+```
+$ sed -z 's/$/\n/' /sys/firmware/devicetree/base/compatible
+oneplus,enchilada
+qcom,sdm845
+```
 
 ### Adding a new device config
 
@@ -28,5 +40,5 @@ In order to test your changes, install the file to `/usr/share/plasma-mobile-dev
 
 ```
 $ plasma-mobile-envmanager --apply-settings
-$ plasmashell --replace
+$ plasmashell -p org.kde.plasma.mobileshell --replace
 ```

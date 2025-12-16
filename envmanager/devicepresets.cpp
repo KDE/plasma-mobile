@@ -20,17 +20,6 @@ DevicePresets::DevicePresets(QObject *parent)
 {
 }
 
-void setKey(KConfigGroup &fallbackGroup, KConfigGroup &fromGroup, KConfigGroup &toGroup, QString fromKey, QString toKey)
-{
-    if (fromGroup.hasKey(fromKey)) {
-        toGroup.writeEntry(toKey, fromGroup.readEntry(fromKey), KConfigGroup::Notify);
-    } else if (fallbackGroup.hasKey(fromKey)) {
-        toGroup.writeEntry(toKey, fallbackGroup.readEntry(fromKey), KConfigGroup::Notify);
-    } else {
-        toGroup.deleteEntry(toKey, KConfigGroup::Notify);
-    }
-}
-
 void DevicePresets::initialize()
 {
     // Open mobile config to read from all locations (/etc/xdg/plasmamobilerc, ~/.config/plasmamobilerc, etc.)
@@ -40,20 +29,35 @@ void DevicePresets::initialize()
     // Read device id
     const QString device = deviceGroup.readEntry(u"device"_s, {});
 
-    QString presetFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, u"plasma-mobile-device-presets/"_s + device + ".conf");
-    if (!QFile{presetFile}.exists()) {
-        presetFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, u"plasma-mobile-device-presets/default.conf"_s);
-        if (!QFile{presetFile}.exists()) {
-            qWarning() << "Failed to find any device preset file";
-            return;
+    QString presetFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, u"plasma-mobile-device-presets/default.conf"_s);
+
+    // Loop over detected devices and see if file exists
+    QString candidatePresetFile;
+    for (const QString &detectedDevice : detectDeviceString()) {
+        candidatePresetFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, u"plasma-mobile-device-presets/"_s + detectedDevice + ".conf");
+        if (!candidatePresetFile.isEmpty()) {
+            presetFile = candidatePresetFile;
+            break;
         }
     }
 
-    // Open preset file /usr/share/plasma-mobile-device-presets/device.conf
-    auto presetConfig = KSharedConfig::openConfig(QFileInfo{presetFile}.absoluteFilePath(), KConfig::SimpleConfig);
-    if (!presetConfig) {
+    // Config-specified device has highest priority
+    candidatePresetFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, u"plasma-mobile-device-presets/"_s + device + ".conf");
+    if (!candidatePresetFile.isEmpty()) {
+        presetFile = candidatePresetFile;
+    } else if (!device.isEmpty()) {
+        qWarning() << "Failed to find device preset file for" << device << "as defined in config";
+    }
+
+    if (QFile{presetFile}.exists()) {
+        qDebug() << "Using device preset file at" << presetFile;
+    } else {
+        qDebug() << "No device preset file could be found.";
         return;
     }
+
+    // Open preset file /usr/share/plasma-mobile-device-presets/[device].conf
+    auto presetConfig = KSharedConfig::openConfig(QFileInfo{presetFile}.absoluteFilePath(), KConfig::SimpleConfig);
 
     // Write presets to ~/.config/plasma-mobile/plasmamobilerc
     // This is then read by components/mobileshellstate (PanelSettingsDBusObjectManager)
@@ -85,4 +89,42 @@ void DevicePresets::initialize()
     }
 
     m_mobileConfig->sync();
+}
+
+void DevicePresets::setKey(KConfigGroup &fallbackGroup, KConfigGroup &fromGroup, KConfigGroup &toGroup, const QString &fromKey, const QString &toKey)
+{
+    if (fromGroup.hasKey(fromKey)) {
+        toGroup.writeEntry(toKey, fromGroup.readEntry(fromKey), KConfigGroup::Notify);
+    } else if (fallbackGroup.hasKey(fromKey)) {
+        toGroup.writeEntry(toKey, fallbackGroup.readEntry(fromKey), KConfigGroup::Notify);
+    } else {
+        toGroup.deleteEntry(toKey, KConfigGroup::Notify);
+    }
+}
+
+QStringList DevicePresets::detectDeviceString()
+{
+    // On some systems, this file contains an identifier for the device
+    QFile deviceinfoFile{u"/sys/firmware/devicetree/base/compatible"_s};
+    if (!deviceinfoFile.exists()) {
+        return {};
+    }
+
+    if (!deviceinfoFile.open(QIODevice::ReadOnly)) {
+        return {};
+    }
+
+    QByteArray data = deviceinfoFile.readAll();
+    deviceinfoFile.close();
+
+    // Split by null bytes and convert to QStringList
+    QStringList result;
+    const QList<QByteArray> parts = data.split('\0');
+    for (const QByteArray &part : parts) {
+        if (!part.isEmpty()) {
+            result.append(QString::fromUtf8(part));
+        }
+    }
+
+    return result;
 }
