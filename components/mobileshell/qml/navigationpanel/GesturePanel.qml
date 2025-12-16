@@ -35,6 +35,19 @@ Rectangle {
         onClicked: root.handleClicked()
         onPressAndHold: root.handlePressedAndHeld()
 
+        property real startX
+        property real startY
+        onPressed: {
+            startX = mouseX;
+            startY = mouseY;
+        }
+        onPositionChanged: (mouse) => {
+            // Trigger gesture after threshold is crossed (root.height)
+            if (startY - mouse.y > root.height) {
+                root.handleClicked();
+            }
+        }
+
         Rectangle {
             anchors.centerIn: parent
             width: parent.width
