@@ -7,6 +7,7 @@ plasma_add_applet(org.kde.plasma.mobile.taskpanel
     QML_SOURCES
         qml/main.qml
         qml/NavigationPanelComponent.qml
+        qml/GesturePanelComponent.qml
     CPP_SOURCES
         taskpanel.cpp
 )

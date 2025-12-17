@@ -40,6 +40,13 @@ QtObject {
         return root.panelSettings.navigationPanelHeight;
     }
 
+    readonly property real screenEdgeTouchTarget: (ShellSettings.Settings.gesturePanelEnabled && !ShellSettings.Settings.navigationPanelEnabled) ? defaultGesturePanelThickness : 8
+    onScreenEdgeTouchTargetChanged: {
+        if (ShellSettings.KWinSettings.screenEdgeTouchTarget != screenEdgeTouchTarget) {
+            ShellSettings.KWinSettings.screenEdgeTouchTarget = screenEdgeTouchTarget;
+        }
+    }
+
     function navigationPanelOnSide(screenWidth: real, screenHeight: real): bool {
         // TODO: we have this disabled for now, we might consider just removing this feature entirely due to it causing several issues:
         //       (the feature being the navigation panel being moved to the right when the screen height is small)

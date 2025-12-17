@@ -197,14 +197,11 @@ ContainmentItem {
         Component {
             id: gesturePanelComponent
 
-            MobileShell.GesturePanel {
+            GesturePanelComponent {
                 opaqueBar: root.opaqueBar
 
                 Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: (!opaqueBar && !startupFeedbackColorAnimation.isShowing) ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
-
-                onHandlePressedAndHeld: MobileShellState.ShellDBusClient.openHomeScreen()
-                onHandleClicked: Plasmoid.triggerTaskSwitcher()
 
                 transform: [
                     Translate {

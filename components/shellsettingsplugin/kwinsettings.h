@@ -19,6 +19,7 @@ class KWinSettings : public QObject
     QML_SINGLETON
 
     Q_PROPERTY(bool doubleTapWakeup READ doubleTapWakeup WRITE setDoubleTapWakeup NOTIFY doubleTapWakeupChanged)
+    Q_PROPERTY(int screenEdgeTouchTarget READ screenEdgeTouchTarget WRITE setScreenEdgeTouchTarget NOTIFY screenEdgeTouchTargetChanged)
 
 public:
     KWinSettings(QObject *parent = nullptr);
@@ -35,10 +36,24 @@ public:
      */
     void setDoubleTapWakeup(bool enabled);
 
+    /**
+     * Get the screen edge touch target value.
+     */
+    int screenEdgeTouchTarget() const;
+
+    /**
+     * Set the screen edge touch target value.
+     *
+     * @param target
+     */
+    void setScreenEdgeTouchTarget(int target);
+
 Q_SIGNALS:
     void doubleTapWakeupChanged();
+    void screenEdgeTouchTargetChanged();
 
 private:
     KConfigWatcher::Ptr m_configWatcher;
     KSharedConfig::Ptr m_config;
+    KSharedConfig::Ptr m_overlayConfig;
 };
