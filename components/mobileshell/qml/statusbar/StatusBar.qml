@@ -90,7 +90,7 @@ Item {
         topPadding: Kirigami.Units.smallSpacing
         bottomPadding: Kirigami.Units.smallSpacing
         rightPadding: Kirigami.Units.smallSpacing * 3 + panelSettings.statusBarLeftPadding
-        leftPadding: Kirigami.Units.smallSpacing * 3 + + panelSettings.statusBarRightPadding
+        leftPadding: Kirigami.Units.smallSpacing * 3 + panelSettings.statusBarRightPadding
 
         anchors.fill: parent
         background: Rectangle {
