@@ -30,7 +30,7 @@ KCM.SimpleKCM {
 
     WaydroidLoader {
         visible: AIP.WaydroidDBusClient.androidId === ""
-        text: i18n("We fetching your Android ID.\nIt can take a few seconds.")
+        text: i18n("Fetching your Android ID.\nIt can take a few seconds.")
     }
 
     Connections {
@@ -62,7 +62,7 @@ KCM.SimpleKCM {
         spacing: Kirigami.Units.largeSpacing
 
         Kirigami.PlaceholderMessage {
-            explanation: i18n("When launching waydroid with GAPPS for the first time you will be notified that the device is not certified for Google Play Protect. To self certify your device, paste the Android ID on the field in the website. Then, give the Google services some minutes to reflect the change and restart waydroid.")
+            explanation: i18n("When launching Waydroid with GAPPS for the first time, you will be notified that the device is not certified for Google Play Protect. To self certify your device, paste the Android ID in the field on the website. Then, give the Google services some minutes to reflect the change and restart Waydroid.")
             Layout.fillWidth: true
         }
 

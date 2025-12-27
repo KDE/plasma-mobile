@@ -53,14 +53,14 @@ ColumnLayout {
         }
 
         FormCard.FormButtonDelegate {
-            text: i18n("Reset waydroid")
+            text: i18n("Reset Waydroid")
             onClicked: confirmDialog.open()
         }
 
         Kirigami.PromptDialog {
             id: confirmDialog
             title: i18nc("@title:window", "Confirm Waydroid Reset")
-            subtitle: i18n("Are you sure you want to reset Waydroid ? This is a destructive action, and will wipe all user data.")
+            subtitle: i18n("Are you sure you want to reset Waydroid? This is a destructive action, and will wipe all user data.")
             standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
             onAccepted: AIP.WaydroidDBusClient.resetWaydroid()
@@ -89,7 +89,7 @@ ColumnLayout {
         Kirigami.Theme.backgroundColor: root.Kirigami.Theme.neutralBackgroundColor
 
         FormCard.FormTextDelegate {
-            text: i18n("May require restarting the waydroid session to apply")
+            text: i18n("May require restarting the Waydroid session to apply")
             textItem.wrapMode: Text.WordWrap
             icon.name: "dialog-warning"
         }

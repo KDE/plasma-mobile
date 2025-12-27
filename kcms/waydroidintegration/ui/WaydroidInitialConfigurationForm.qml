@@ -32,7 +32,7 @@ ColumnLayout {
     }
 
     PC3.Button {
-        text: i18n("Configure waydroid")
+        text: i18n("Configure Waydroid")
         Layout.alignment: Qt.AlignHCenter
         enabled: systemType.currentValue !== undefined
 

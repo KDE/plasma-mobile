@@ -64,7 +64,7 @@ KCM.SimpleKCM {
         onAccepted: {
             const url = new URL(selectedFile)
             if (url.protocol !== "file:") {
-                inlineMessage.text = i18n("You must selected local file")
+                inlineMessage.text = i18n("You must select a local file")
                 inlineMessage.visible = true
                 inlineMessage.type = Kirigami.MessageType.Error
             } else {
