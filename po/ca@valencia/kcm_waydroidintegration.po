@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-28 00:44+0000\n"
 "PO-Revision-Date: 2025-08-13 09:56+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -84,8 +84,9 @@ msgid "Install APK"
 msgstr "Instal·la APK"
 
 #: ui/WaydroidApplicationsPage.qml:67
-#, kde-format
-msgid "You must selected local file"
+#, fuzzy, kde-format
+#| msgid "You must selected local file"
+msgid "You must select a local file"
 msgstr "Cal seleccionar un fitxer local"
 
 #: ui/WaydroidApplicationsPage.qml:107
@@ -135,8 +136,9 @@ msgid "Installed applications"
 msgstr "Aplicacions instal·lades"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, kde-format
-msgid "Reset waydroid"
+#, fuzzy, kde-format
+#| msgid "Reset waydroid"
+msgid "Reset Waydroid"
 msgstr "Reinicialitza Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
@@ -146,9 +148,12 @@ msgid "Confirm Waydroid Reset"
 msgstr "Confirmeu la reinicialització de Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:63
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
+#| "and will wipe all user data."
 msgid ""
-"Are you sure you want to reset Waydroid ? This is a destructive action, and "
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
 "Segur que voleu reinicialitzar Waydroid? Esta és una acció destructiva i "
@@ -160,8 +165,9 @@ msgid "Waydroid properties"
 msgstr "Propietats de Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:92
-#, kde-format
-msgid "May require restarting the waydroid session to apply"
+#, fuzzy, kde-format
+#| msgid "May require restarting the waydroid session to apply"
+msgid "May require restarting the Waydroid session to apply"
 msgstr "Pot requerir reiniciar la sessió de «waydroid» per a aplicar"
 
 #: ui/WaydroidConfigurationForm.qml:109
@@ -219,21 +225,30 @@ msgid "Google Play Protect configuration"
 msgstr "Configuració de Google Play Protect"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "We fetching your Android ID.\n"
+#| "It can take a few seconds."
 msgid ""
-"We fetching your Android ID.\n"
+"Fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
 "S'està recuperant l'ID d'Android.\n"
 "Pot tardar alguns segons."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When launching waydroid with GAPPS for the first time you will be "
+#| "notified that the device is not certified for Google Play Protect. To "
+#| "self certify your device, paste the Android ID on the field in the "
+#| "website. Then, give the Google services some minutes to reflect the "
+#| "change and restart waydroid."
 msgid ""
-"When launching waydroid with GAPPS for the first time you will be notified "
+"When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
-"your device, paste the Android ID on the field in the website. Then, give "
-"the Google services some minutes to reflect the change and restart waydroid."
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
 "En iniciar Waydroid amb GAPPS per primera vegada se vos notificarà que el "
 "dispositiu no està certificat per a Google Play Protect. Per a certificar el "
@@ -258,8 +273,9 @@ msgid "System type"
 msgstr "Tipus de sistema"
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
-#, kde-format
-msgid "Configure waydroid"
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgid "Configure Waydroid"
 msgstr "Configura Waydroid"
 
 #~ msgid "Go back"

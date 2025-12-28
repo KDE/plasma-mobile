@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2025-12-28 00:44+0000\n"
 "PO-Revision-Date: 2025-07-15 10:30+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
-msgid "You must selected local file"
+msgid "You must select a local file"
 msgstr ""
 
 #: ui/WaydroidApplicationsPage.qml:107
@@ -126,7 +126,7 @@ msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:56
 #, kde-format
-msgid "Reset waydroid"
+msgid "Reset Waydroid"
 msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:62
@@ -138,7 +138,7 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
 msgid ""
-"Are you sure you want to reset Waydroid ? This is a destructive action, and "
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
 
@@ -149,7 +149,7 @@ msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
-msgid "May require restarting the waydroid session to apply"
+msgid "May require restarting the Waydroid session to apply"
 msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:109
@@ -207,17 +207,17 @@ msgstr ""
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
 #, kde-format
 msgid ""
-"We fetching your Android ID.\n"
+"Fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
 msgid ""
-"When launching waydroid with GAPPS for the first time you will be notified "
+"When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
-"your device, paste the Android ID on the field in the website. Then, give "
-"the Google services some minutes to reflect the change and restart waydroid."
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
@@ -238,5 +238,5 @@ msgstr ""
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
 #, kde-format
-msgid "Configure waydroid"
+msgid "Configure Waydroid"
 msgstr ""
