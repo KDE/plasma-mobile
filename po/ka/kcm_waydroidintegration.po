@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-28 00:44+0000\n"
-"PO-Revision-Date: 2025-08-13 06:15+0200\n"
+"PO-Revision-Date: 2025-12-28 02:33+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: ui/main.qml:19
 #, kde-format
@@ -82,8 +82,7 @@ msgid "Install APK"
 msgstr "APK-ის დაყენება"
 
 #: ui/WaydroidApplicationsPage.qml:67
-#, fuzzy, kde-format
-#| msgid "You must selected local file"
+#, kde-format
 msgid "You must select a local file"
 msgstr "უნდა აირჩიოთ ლოკალური ფაილი"
 
@@ -134,8 +133,7 @@ msgid "Installed applications"
 msgstr "დაყენებული აპლიკაციები"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Reset waydroid"
+#, kde-format
 msgid "Reset Waydroid"
 msgstr "Waydroid-ის ჩამოყრა"
 
@@ -146,10 +144,7 @@ msgid "Confirm Waydroid Reset"
 msgstr "დაადასტურეთ Waydroid-ის ჩამოყრა"
 
 #: ui/WaydroidConfigurationForm.qml:63
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
-#| "and will wipe all user data."
+#, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
@@ -163,8 +158,7 @@ msgid "Waydroid properties"
 msgstr "Waydroid-ის თვისებები"
 
 #: ui/WaydroidConfigurationForm.qml:92
-#, fuzzy, kde-format
-#| msgid "May require restarting the waydroid session to apply"
+#, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "გამოსაყენებლად, შეიძლება, Waydroid-ის სესიის გადატვირთვა იყოს საჭირო"
 
@@ -224,10 +218,7 @@ msgid "Google Play Protect configuration"
 msgstr "Google Play Protect-ის მორგება"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "We fetching your Android ID.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
@@ -236,13 +227,7 @@ msgstr ""
 "ამას რამდენიმე წამი შეიძლება, დასჭირდეს."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "When launching waydroid with GAPPS for the first time you will be "
-#| "notified that the device is not certified for Google Play Protect. To "
-#| "self certify your device, paste the Android ID on the field in the "
-#| "website. Then, give the Google services some minutes to reflect the "
-#| "change and restart waydroid."
+#, kde-format
 msgid ""
 "When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
@@ -250,10 +235,9 @@ msgid ""
 "the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
 "როცა Waydroid-ს GAPPS-ით პირველად გაუშვებთ, გაგაფრთხილებთ, რომ მოწყობილობას "
-"არ გააჩნია სერტიფიკაცია Google Play Protect-სთვის. იმისათვის რომ "
-"სერტიფიკაცია თქვენით გაიაროთ, ჩასვით Android ID ვებგვერდის ველში. შემდეგ კი "
-"მიეცით Google-ის სერვისებს რამდენიმე წუთი, რომ ცვლილებები აისახოს და "
-"გადატვირთეთ Waydroid."
+"არ გააჩნია Google Play Protect-ის სერტიფიკაცია. იმისათვის რომ სერტიფიკაცია "
+"თქვენით გაიაროთ, ჩასვით Android ID ვებგვერდის ველში. შემდეგ კი მიეცით Google-"
+"ის სერვისებს რამდენიმე წუთი, რომ ცვლილებები აისახოს და გადატვირთეთ Waydroid."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
@@ -272,8 +256,7 @@ msgid "System type"
 msgstr "სისტემის ტიპი"
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Configure Waydroid"
 msgstr "Waydroid-ის მორგება"
 
