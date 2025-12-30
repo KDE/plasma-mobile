@@ -1,53 +1,51 @@
-# German translations for plasma-mobile package.
-# Copyright (C) 2023 This file is copyright:
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
-# SPDX-FileCopyrightText: 2024, 2025 Alois Spitzbart <spitz234@hotmail.com>
-# SPDX-FileCopyrightText: 2025 marctg <m@ghencea.net>
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: kcm_mobileshell\n"
+"Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-12-27 10:04+0200\n"
-"Last-Translator: marctg <m@ghencea.net>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
-"Language: de\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
 
 #: ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "Shell"
+msgstr ""
 
 #: ui/main.qml:27
 #, kde-format
 msgid "General"
-msgstr "Allgemein"
+msgstr ""
 
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
 msgid "Shell Vibrations"
-msgstr "Haptisches Feedback"
+msgstr ""
 
 #: ui/main.qml:41
 #, kde-format
 msgid "Animations"
-msgstr "Animationen"
+msgstr ""
 
 #: ui/main.qml:42
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr "Wenn dies aus ist, werden Animationen so weit wie möglich reduziert."
+msgstr ""
 
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr "Kontrollleisten automatisch ausblenden"
+msgstr ""
 
 #: ui/main.qml:56
 #, kde-format
@@ -55,8 +53,6 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Die Status- und Navigationsleiste automatisch ausblenden, damit Anwendungen "
-"immer im Vollbildmodus angezeigt werden."
 
 #: ui/main.qml:69
 #, kde-format
@@ -71,111 +67,109 @@ msgstr ""
 #: ui/main.qml:81
 #, kde-format
 msgid "Status Bar"
-msgstr "Statusleiste"
+msgstr ""
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
-msgstr "Datum in der Statusleiste"
+msgstr ""
 
 #: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
-"Ist dies aktiviert, wird das Datum in der Statusleiste neben der Uhr "
-"angezeigt."
 
 #: ui/main.qml:101
 #, kde-format
 msgid "Battery Percentage"
-msgstr "Akkuladestand"
+msgstr ""
 
 #: ui/main.qml:102
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr "Akkuladestand in Prozent in der Statusleiste anzeigen."
+msgstr ""
 
 #: ui/main.qml:116
 #, kde-format
 msgid "Status Bar Size"
-msgstr "Größe der Statusleiste"
+msgstr ""
 
 #: ui/main.qml:117
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr "Größe der oberen Kontrollleiste (erfordert einen Neustart)."
+msgstr ""
 
 #: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr "Sehr klein"
+msgstr ""
 
 #: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr "Klein"
+msgstr ""
 
 #: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 #: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr "Groß"
+msgstr ""
 
 #: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr "Sehr groß"
+msgstr ""
 
 #: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
-msgstr "Aktionsleiste"
+msgstr ""
 
 #: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr "Reduzierter Modus"
+msgstr ""
 
 #: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr "Erweiterter Modus"
+msgstr ""
 
 #: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
-msgstr "Schnelleinstellungen"
+msgstr ""
 
 #: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr "Linke obere Aktionsleiste"
+msgstr ""
 
 #: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr "Darstellung beim Öffnen von links oben."
+msgstr ""
 
 #: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr "Rechte obere Aktionsleiste"
+msgstr ""
 
 #: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr "Darstellung beim Öffnen von rechts oben."
+msgstr ""
 
 #: ui/main.qml:201
 #, kde-format
@@ -193,13 +187,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr "Taschenlampe"
+msgstr ""
 
 #: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr "Kamera"
+msgstr ""
 
 #: ui/main.qml:212
 #, kde-format
@@ -217,74 +211,72 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr "Ausblenden"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "Anzeigen"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Schnelleinstellungen"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr "Maximale Anzahl an Spalten im Querformat."
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
-"Schnelleinstellungen in der Kontrollleiste umsortieren oder ausblenden."
 
 #: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Ausgeblendete Schnelleinstellungen"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr "Zuvor deaktivierte Schnelleinstellungen wieder aktivieren."
+msgstr ""
 
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "Gibt an, ob Vibrationen in der Systemumgebung aktiviert sind."
+msgstr ""
 
 #: ui/VibrationForm.qml:39
 #, kde-format
 msgid "Vibration Duration"
-msgstr "Vibrationsdauer"
+msgstr ""
 
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr "Wie lange die Vibrationen in der Systemumgebung dauern sollen."
+msgstr ""
 
 #: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "Lang"
+msgstr ""
 
 #: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "Mittel"
+msgstr ""
 
 #: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "Kurz"
+msgstr ""
 
 #: ui/VibrationForm.qml:60
 #, kde-format
@@ -292,31 +284,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
-"Vibration der Tastatur wird im Modul Bildschirmtastatur separat eingestellt."
-
-#~ msgid "Navigation Panel"
-#~ msgstr "Navigationsbereich"
-
-#~ msgid "Always show keyboard toggle"
-#~ msgstr "Umschalter für die Tastatur immer anzeigen"
-
-#~ msgid ""
-#~ "Whether to always show the keyboard toggle button on the navigation panel."
-#~ msgstr ""
-#~ "Gibt an, ob der Umschalter für die Tastatur immer in der "
-#~ "Navigationsleiste angezeigt wird."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Niedrig"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Mittel"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Hoch"
-
-#~ msgid "Task Switcher"
-#~ msgstr "Anwendungsumschalter"

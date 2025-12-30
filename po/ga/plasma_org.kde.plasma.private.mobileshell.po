@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: notifications/notificationfileinfo.cpp:169
+#, kde-format
+msgid "Open with %1"
+msgstr ""
+
+#: notifications/notificationfileinfo.cpp:173
+#, kde-format
+msgid "Open with…"
+msgstr ""
+
+#: notifications/notificationfilemenu.cpp:109
+#: qml/widgets/notifications/NotificationJobItem.qml:217
+#, kde-format
+msgid "Open Containing Folder"
+msgstr ""
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr ""
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr ""
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr ""
+
+#: qml/actiondrawer/private/ContentContainer.qml:151
+#, kde-format
+msgid "Clear All Notifications"
+msgstr ""
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
+#, kde-format
+msgid "On"
+msgstr ""
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
+#, kde-format
+msgid "Off"
+msgstr ""
+
+#: qml/dataproviders/SignalStrengthInfo.qml:17
+#, kde-format
+msgid "SIM Locked"
+msgstr ""
+
+#: qml/popups/volumeosd/AudioApplet.qml:89
+#, kde-format
+msgid "Output Devices"
+msgstr ""
+
+#: qml/popups/volumeosd/AudioApplet.qml:118
+#, kde-format
+msgid "Input Devices"
+msgstr ""
+
+#: qml/popups/volumeosd/AudioApplet.qml:148
+#, kde-format
+msgid "Playback Streams"
+msgstr ""
+
+#: qml/popups/volumeosd/AudioApplet.qml:199
+#, kde-format
+msgid "Recording Streams"
+msgstr ""
+
+#: qml/popups/volumeosd/DeviceListItem.qml:24
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr ""
+
+#: qml/popups/volumeosd/DeviceListItem.qml:33
+#, kde-format
+msgid "Device name not found"
+msgstr ""
+
+#: qml/popups/volumeosd/ListItemBase.qml:123
+#, kde-format
+msgid "Show additional options for %1"
+msgstr ""
+
+#: qml/popups/volumeosd/ListItemBase.qml:215
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr ""
+
+#: qml/popups/volumeosd/ListItemBase.qml:230
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr ""
+
+#: qml/popups/volumeosd/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr ""
+
+#: qml/popups/volumeosd/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr ""
+
+#: qml/popups/volumeosd/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr ""
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Unmute"
+msgstr ""
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Mute"
+msgstr ""
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
+#, kde-format
+msgid "configure audio streams"
+msgstr ""
+
+#: qml/popups/volumeosd/VolumeOSD.qml:200
+#, kde-format
+msgid "Open audio settings"
+msgstr ""
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#, kde-format
+msgid "%1%"
+msgstr ""
+
+#: qml/widgets/krunner/KRunnerScreen.qml:68
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search…"
+msgstr ""
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#, kde-format
+msgid "No media playing"
+msgstr ""
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#, kde-format
+msgid "Previous track"
+msgstr ""
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#, kde-format
+msgid "Play or Pause media"
+msgstr ""
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#, kde-format
+msgid "Next track"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:44
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:61
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Select All"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:58
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:31
+#, kde-format
+msgctxt "Row description, e.g. Source"
+msgid "%1:"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:102
+#, kde-format
+msgctxt "How many bytes have been copied"
+msgid "%2 of %1"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:106
+#, kde-format
+msgctxt "How many files have been copied"
+msgid "%2 of %1 file"
+msgid_plural "%2 of %1 files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:109
+#, kde-format
+msgctxt "How many dirs have been copied"
+msgid "%2 of %1 folder"
+msgid_plural "%2 of %1 folders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:112
+#, kde-format
+msgctxt "How many items (that includes files and dirs) have been copied"
+msgid "%2 of %1 item"
+msgid_plural "%2 of %1 items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:120
+#, kde-format
+msgid "%1 file"
+msgid_plural "%1 files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:122
+#, kde-format
+msgid "%1 folder"
+msgid_plural "%1 folders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:124
+#, kde-format
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:141
+#, kde-format
+msgctxt "Bytes per second"
+msgid "%1/s"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobItem.qml:115
+#, kde-format
+msgctxt "Percentage of a job"
+msgid "%1%"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobItem.qml:130
+#, kde-format
+msgctxt "Hides/expands item details"
+msgid "Details"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobItem.qml:141
+#, kde-format
+msgctxt "Pause running job"
+msgid "Pause"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobItem.qml:150
+#, kde-format
+msgctxt "Cancel running job"
+msgid "Cancel"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobItem.qml:181
+#: qml/widgets/notifications/ThumbnailStrip.qml:134
+#, kde-format
+msgid "More Options…"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationJobItem.qml:209
+#, kde-format
+msgid "Open"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:15
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:20
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:22
+#, kde-format
+msgid "Job Failed"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:25
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:27
+#, kde-format
+msgid "Job Finished"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:45
+#, kde-format
+msgid "now"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:50
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:82
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:85
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:88
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsWidget.qml:258
+#, kde-format
+msgid "Notification service not available"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsWidget.qml:267
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsWidget.qml:429
+#, kde-format
+msgid "Show Fewer"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsWidget.qml:431
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr ""

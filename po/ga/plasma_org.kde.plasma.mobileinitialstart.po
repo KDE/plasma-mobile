@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: main.cpp:21
+#, kde-format
+msgid "Opens the initial start wizard without modifying configuration"
+msgstr ""
+
+#: main.cpp:36
+#, kde-format
+msgid "© 2024 KDE Community"
+msgstr ""
+
+#: main.cpp:37
+#, kde-format
+msgid "Devin Lin"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
+#, kde-format
+msgid "Name"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:43
+#, kde-format
+msgid "APN"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
+#, kde-format
+msgid "Username"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:53
+#, kde-format
+msgid "Password"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
+#, kde-format
+msgid "Network type"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "4G/3G/2G"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "3G/2G"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "2G"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 4G"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 3G"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 2G"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Any"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:15
+#, kde-format
+msgid "Cellular"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:55
+#, kde-format
+msgid ""
+"Please configure your APN below for mobile data, further information will be "
+"available with your carrier."
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:57
+#, kde-format
+msgid "You are connected to the mobile network."
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:59
+#, kde-format
+msgid "Please insert a SIM card into your device."
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:61
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:73
+#, kde-format
+msgid "Mobile Data"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:116
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: modules/cellular/package/contents/ui/main.qml:133
+#, kde-format
+msgid "Add APN"
+msgstr ""
+
+#: modules/finished/contents/ui/main.qml:13
+#, kde-format
+msgid "Complete!"
+msgstr ""
+
+#: modules/finished/contents/ui/main.qml:25
+#, kde-format
+msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
+msgstr ""
+
+#: modules/prepare/package/contents/ui/main.qml:17
+#, kde-format
+msgid "Before we get started…"
+msgstr ""
+
+#: modules/prepare/package/contents/ui/main.qml:49
+#, kde-format
+msgid ""
+"Adjust the screen brightness to be comfortable for the installation process."
+msgstr ""
+
+#: modules/prepare/package/contents/ui/main.qml:105
+#, kde-format
+msgid "Adjust the size of elements on the screen."
+msgstr ""
+
+#: modules/prepare/package/contents/ui/main.qml:116
+#, kde-format
+msgid "Display Scaling"
+msgstr ""
+
+#: modules/prepare/package/contents/ui/main.qml:136
+#, kde-format
+msgid "Dark Theme"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr ""
+
+#: modules/time/package/contents/ui/main.qml:15
+#, kde-format
+msgid "Time and Date"
+msgstr ""
+
+#: modules/time/package/contents/ui/main.qml:39
+#, kde-format
+msgid "Select your time zone and preferred time format."
+msgstr ""
+
+#: modules/time/package/contents/ui/main.qml:50
+#, kde-format
+msgid "24-Hour Format"
+msgstr ""
+
+#: modules/wifi/package/contents/ui/ConnectDialog.qml:57
+#, kde-format
+msgid "Invalid input."
+msgstr ""
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr ""
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr ""
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr ""
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
+#, kde-format
+msgid "Connect to"
+msgstr ""
+
+#: modules/wifi/package/contents/ui/main.qml:17
+#, kde-format
+msgid "Network"
+msgstr ""
+
+#: modules/wifi/package/contents/ui/main.qml:74
+#, kde-format
+msgid "Connect to a WiFi network for network access."
+msgstr ""
+
+#: modules/wifi/package/contents/ui/PasswordField.qml:10
+#, kde-format
+msgid "Password…"
+msgstr ""
+
+#: qml/LandingComponent.qml:105
+#, kde-format
+msgid "Welcome to<br/><b>Plasma Mobile</b>"
+msgstr ""
+
+#: qml/LandingComponent.qml:131
+#, kde-format
+msgid "Powered by<br/><b>%1</b>"
+msgstr ""
+
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
+#, kde-format
+msgid "Next"
+msgstr ""
+
+#: qml/Main.qml:19
+#, kde-format
+msgid "Initial Start"
+msgstr ""
+
+#: qml/Wizard.qml:284
+#, kde-format
+msgid "Back"
+msgstr ""
+
+#: qml/Wizard.qml:320
+#, kde-format
+msgid "Finish"
+msgstr ""
