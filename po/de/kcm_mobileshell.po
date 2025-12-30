@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the plasma-mobile package.
 # SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2024, 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2025 marctg <m@ghencea.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-04-26 22:35+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2025-12-27 10:04+0200\n"
+"Last-Translator: marctg <m@ghencea.net>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -46,7 +47,7 @@ msgstr "Wenn dies aus ist, werden Animationen so weit wie möglich reduziert."
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Kontrollleisten automatisch ausblenden"
 
 #: ui/main.qml:56
 #, kde-format
@@ -54,6 +55,8 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
+"Die Status- und Navigationsleiste automatisch ausblenden, damit Anwendungen "
+"immer im Vollbildmodus angezeigt werden."
 
 #: ui/main.qml:69
 #, kde-format
@@ -73,62 +76,64 @@ msgstr "Statusleiste"
 #: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "Datum in der Statusleiste"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
+"Ist dies aktiviert, wird das Datum in der Statusleiste neben der Uhr "
+"angezeigt."
 
 #: ui/main.qml:101
 #, kde-format
 msgid "Battery Percentage"
-msgstr "Sehr klein"
+msgstr "Akkuladestand"
 
 #: ui/main.qml:102
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr "Klein"
+msgstr "Akkuladestand in Prozent in der Statusleiste anzeigen."
 
 #: ui/main.qml:116
 #, kde-format
 msgid "Status Bar Size"
-msgstr "Normal"
+msgstr "Größe der Statusleiste"
 
 #: ui/main.qml:117
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr "Groß"
+msgstr "Größe der oberen Kontrollleiste (erfordert einen Neustart)."
 
 #: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr "Sehr groß"
+msgstr "Sehr klein"
 
 #: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 #: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr "Anwendungsvorschau anzeigen"
+msgstr "Groß"
 
 #: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Sehr groß"
 
 #: ui/main.qml:140
 #, kde-format
@@ -188,13 +193,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Taschenlampe"
 
 #: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ui/main.qml:212
 #, kde-format
@@ -229,15 +234,14 @@ msgstr "Schnelleinstellungen"
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Maximale Anzahl an Spalten im Querformat."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
-"Schnelleinstellungen in der oberen Kontrollleiste umsortieren oder "
-"ausblenden."
+"Schnelleinstellungen in der Kontrollleiste umsortieren oder ausblenden."
 
 #: ui/QuickSettingsForm.qml:117
 #, kde-format
@@ -247,7 +251,7 @@ msgstr "Ausgeblendete Schnelleinstellungen"
 #: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr "Einblenden von zuvor ausgeblendeter Schnelleinstellungen."
+msgstr "Zuvor deaktivierte Schnelleinstellungen wieder aktivieren."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
@@ -262,7 +266,7 @@ msgstr "Vibrationsdauer"
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr "Wie lange die Vibrationen in der Systemumgebung dauern sollten."
+msgstr "Wie lange die Vibrationen in der Systemumgebung dauern sollen."
 
 #: ui/VibrationForm.qml:43
 #, kde-format
