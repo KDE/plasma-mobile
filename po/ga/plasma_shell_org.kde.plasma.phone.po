@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 16:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+msgid "General"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+msgid "Homescreen Layout"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+msgid "The homescreen layout to use."
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+msgid "Wallpaper Plugin"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "The wallpaper plugin to use."
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Wallpaper Plugins"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+msgid "Get New Plugins…"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+msgid "Apply now"
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Wallpaper"
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:95
+msgid "Change Wallpaper"
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:113
+msgid "Configure"
+msgstr ""
