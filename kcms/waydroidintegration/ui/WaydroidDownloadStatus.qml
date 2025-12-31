@@ -45,9 +45,9 @@ ColumnLayout {
 
     function formatSpeed(): string {
         if (speed > 1024) {
-            return i18n("%1Mb/s", (speed / 1024).toFixed(0))
+            return i18n("%1MB/s", (speed / 1024).toFixed(0))
         } else {
-            return i18n("%1Kb/s", speed.toFixed(0))
+            return i18n("%1kB/s", speed.toFixed(0))
         }
     }
 }
