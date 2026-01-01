@@ -82,10 +82,9 @@ msgid "Install APK"
 msgstr "安装 APK"
 
 #: ui/WaydroidApplicationsPage.qml:67
-#, fuzzy, kde-format
-#| msgid "You must selected local file"
+#, kde-format
 msgid "You must select a local file"
-msgstr "您必须选择本地文件"
+msgstr ""
 
 #: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
@@ -134,10 +133,9 @@ msgid "Installed applications"
 msgstr "已安装的应用程序"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Reset waydroid"
+#, kde-format
 msgid "Reset Waydroid"
-msgstr "重置 Waydroid"
+msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
@@ -146,14 +144,11 @@ msgid "Confirm Waydroid Reset"
 msgstr "确认 Waydroid 重置"
 
 #: ui/WaydroidConfigurationForm.qml:63
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
-#| "and will wipe all user data."
+#, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
-msgstr "您确定要重置 Waydroid 吗？这是一个破坏性操作，将会清除所有用户数据。"
+msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
@@ -161,10 +156,9 @@ msgid "Waydroid properties"
 msgstr "Waydroid 属性"
 
 #: ui/WaydroidConfigurationForm.qml:92
-#, fuzzy, kde-format
-#| msgid "May require restarting the waydroid session to apply"
+#, kde-format
 msgid "May require restarting the Waydroid session to apply"
-msgstr "可能需要重启 waydroid 会话才能应用更改"
+msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
@@ -219,34 +213,20 @@ msgid "Google Play Protect configuration"
 msgstr "Google Play Protect 配置"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "We fetching your Android ID.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"我们正在获取您的 Android ID。\n"
-"可能需要几秒钟。"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "When launching waydroid with GAPPS for the first time you will be "
-#| "notified that the device is not certified for Google Play Protect. To "
-#| "self certify your device, paste the Android ID on the field in the "
-#| "website. Then, give the Google services some minutes to reflect the "
-#| "change and restart waydroid."
+#, kde-format
 msgid ""
 "When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
 "your device, paste the Android ID in the field on the website. Then, give "
 "the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
-"首次使用 GAPPS 启动 Waydroid 时，您会收到通知，提示设备未通过 Google Play "
-"Protect 认证。要自行认证设备，请将 Android ID 粘贴到网站中的相应输入框。然"
-"后，给 Google 服务几分钟时间来反映更改，并重新启动 Waydroid。"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
@@ -265,7 +245,6 @@ msgid "System type"
 msgstr "系统类型"
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Configure Waydroid"
-msgstr "配置 waydroid"
+msgstr ""
