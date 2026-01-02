@@ -84,7 +84,7 @@ msgstr "安装 APK"
 #: ui/WaydroidApplicationsPage.qml:67
 #, kde-format
 msgid "You must select a local file"
-msgstr ""
+msgstr "您必须选择一个本地文件"
 
 #: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
@@ -135,7 +135,7 @@ msgstr "已安装的应用程序"
 #: ui/WaydroidConfigurationForm.qml:56
 #, kde-format
 msgid "Reset Waydroid"
-msgstr ""
+msgstr "重置 Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
@@ -148,7 +148,7 @@ msgstr "确认 Waydroid 重置"
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
-msgstr ""
+msgstr "您确定要重置 Waydroid 吗？这是一个破坏性操作，将会清除所有用户数据。"
 
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
@@ -158,7 +158,7 @@ msgstr "Waydroid 属性"
 #: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
-msgstr ""
+msgstr "可能需要重启 Waydroid 会话才能应用更改"
 
 #: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
@@ -218,6 +218,8 @@ msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
+"正在获取您的 Android ID。\n"
+"可能需要几秒钟。"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
@@ -227,6 +229,9 @@ msgid ""
 "your device, paste the Android ID in the field on the website. Then, give "
 "the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
+"首次使用 GAPPS 启动 Waydroid 时，您会收到通知，提示设备未通过 Google Play "
+"Protect 认证。要自行认证设备，请将 Android ID 粘贴到该网站对应的输入框中。然"
+"后给 Google 服务几分钟时间来反映更改，并重新启动 Waydroid。"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
@@ -247,4 +252,4 @@ msgstr "系统类型"
 #: ui/WaydroidInitialConfigurationForm.qml:35
 #, kde-format
 msgid "Configure Waydroid"
-msgstr ""
+msgstr "配置 Waydroid"
