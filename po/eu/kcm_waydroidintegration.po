@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-28 00:44+0000\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
 "PO-Revision-Date: 2025-08-14 10:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -212,13 +212,13 @@ msgstr "%1MB/%2MB zama-jaisten abiadura %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
-msgid "%1Mb/s"
-msgstr "%1Mb/s"
+msgid "%1MB/s"
+msgstr ""
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
-msgid "%1Kb/s"
-msgstr "%1Kb/s"
+msgid "%1kB/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -277,6 +277,12 @@ msgstr "Sistema mota"
 #| msgid "Configure waydroid"
 msgid "Configure Waydroid"
 msgstr "Konfiguratu waydroid"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1Mb/s"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1Kb/s"
 
 #~ msgid "Go back"
 #~ msgstr "Joan atzera"

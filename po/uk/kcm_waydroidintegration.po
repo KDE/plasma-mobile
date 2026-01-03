@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-28 00:44+0000\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
 "PO-Revision-Date: 2025-12-28 14:12+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -204,13 +204,13 @@ msgstr "Отримуємо %1МБ з %2МБ, швидкість — %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
-msgid "%1Mb/s"
-msgstr "%1МБ/с"
+msgid "%1MB/s"
+msgstr ""
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
-msgid "%1Kb/s"
-msgstr "%1кБ/с"
+msgid "%1kB/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -260,6 +260,12 @@ msgstr "Тип системи"
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "Налаштувати Waydroid"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1МБ/с"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1кБ/с"
 
 #~ msgid "Go back"
 #~ msgstr "Назад"

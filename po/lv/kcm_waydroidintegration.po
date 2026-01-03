@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-28 00:44+0000\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
 "PO-Revision-Date: 2025-08-22 16:14+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -209,13 +209,13 @@ msgstr "Lejupielādē %1MB/%2MB Ātrums %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
-msgid "%1Mb/s"
-msgstr "%1 Mb/sek."
+msgid "%1MB/s"
+msgstr ""
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
-msgid "%1Kb/s"
-msgstr "%1 Kb/sek."
+msgid "%1kB/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -275,6 +275,12 @@ msgstr "Sistēmas tips"
 #| msgid "Configure waydroid"
 msgid "Configure Waydroid"
 msgstr "Konfigurēt „Waydroid“"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1 Mb/sek."
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1 Kb/sek."
 
 #~ msgid "Go back"
 #~ msgstr "Atgriezties"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-28 00:44+0000\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
 "PO-Revision-Date: 2025-12-29 00:29+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -205,13 +205,13 @@ msgstr "Descargando %1 MB/%2 MB, velocidad %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
-msgid "%1Mb/s"
-msgstr "%1 Mb/s"
+msgid "%1MB/s"
+msgstr ""
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
-msgid "%1Kb/s"
-msgstr "%1 Kb/s"
+msgid "%1kB/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -261,3 +261,9 @@ msgstr "Tipo de sistema"
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "Configurar Waydroid"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1 Mb/s"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1 Kb/s"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-28 00:44+0000\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
 "PO-Revision-Date: 2025-12-28 09:26+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -201,13 +201,13 @@ msgstr "מתבצע הורדה של %1 מ״ב/%2 מ״ב במהירות %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
-msgid "%1Mb/s"
-msgstr "%1 מסל״ש"
+msgid "%1MB/s"
+msgstr ""
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
-msgid "%1Kb/s"
-msgstr "%1 קסל״ש"
+msgid "%1kB/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -256,6 +256,12 @@ msgstr "סוג המערכת"
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "הגדרת Waydroid"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1 מסל״ש"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1 קסל״ש"
 
 #~ msgid "Go back"
 #~ msgstr "חזרה"
