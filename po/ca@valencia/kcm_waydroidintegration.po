@@ -1,16 +1,16 @@
 # Translation of kcm_waydroidintegration.po to Catalan (Valencian)
-# Copyright (C) 2025 This_file_is_part_of_KDE
+# Copyright (C) 2025-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2025 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:45+0000\n"
-"PO-Revision-Date: 2025-12-28 09:00+0100\n"
+"PO-Revision-Date: 2026-01-03 08:29+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -206,12 +206,12 @@ msgstr "S'està baixant %1MB/%2MB Velocitat %3"
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1MB/s"
-msgstr ""
+msgstr "%1MB/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1kB/s"
-msgstr ""
+msgstr "%1 kB/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -261,9 +261,3 @@ msgstr "Tipus de sistema"
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "Configura Waydroid"
-
-#~ msgid "%1Mb/s"
-#~ msgstr "%1Mb/s"
-
-#~ msgid "%1Kb/s"
-#~ msgstr "%1Kb/s"

@@ -1,15 +1,15 @@
 # Spanish translations for kcm_waydroidintegration.po package.
-# Copyright (C) 2025 This file is copyright:
+# Copyright (C) 2025-2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Automatically generated, 2025.
 #
-# SPDX-FileCopyrightText: 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2025, 2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_waydroidintegration\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:45+0000\n"
-"PO-Revision-Date: 2025-12-29 00:29+0100\n"
+"PO-Revision-Date: 2026-01-03 16:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -206,12 +206,12 @@ msgstr "Descargando %1 MB/%2 MB, velocidad %3"
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1MB/s"
-msgstr ""
+msgstr "%1 MB/s"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1kB/s"
-msgstr ""
+msgstr "%1 kB/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -261,9 +261,3 @@ msgstr "Tipo de sistema"
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "Configurar Waydroid"
-
-#~ msgid "%1Mb/s"
-#~ msgstr "%1 Mb/s"
-
-#~ msgid "%1Kb/s"
-#~ msgstr "%1 Kb/s"
