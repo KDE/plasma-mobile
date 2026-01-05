@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2025 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:42+0000\n"
-"PO-Revision-Date: 2025-08-14 14:58+0200\n"
+"PO-Revision-Date: 2026-01-04 14:31+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: ui/main.qml:19
 #, kde-format
 msgid "Waydroid Integration"
-msgstr "Waydroid Integration"
+msgstr "Waydroid-integratie"
 
 #: ui/main.qml:32
 #, kde-format
