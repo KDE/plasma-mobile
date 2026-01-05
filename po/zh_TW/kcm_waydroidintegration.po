@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2025, 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:45+0000\n"
-"PO-Revision-Date: 2025-09-30 21:35+0900\n"
+"PO-Revision-Date: 2026-01-05 03:01+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #: ui/main.qml:19
 #, kde-format
@@ -81,10 +81,9 @@ msgid "Install APK"
 msgstr "安裝 APK"
 
 #: ui/WaydroidApplicationsPage.qml:67
-#, fuzzy, kde-format
-#| msgid "You must selected local file"
+#, kde-format
 msgid "You must select a local file"
-msgstr "您必須選取本機檔案"
+msgstr "您必須選取一個本機檔案"
 
 #: ui/WaydroidApplicationsPage.qml:107
 #, kde-format
@@ -133,8 +132,7 @@ msgid "Installed applications"
 msgstr "已安裝的應用程式"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Reset waydroid"
+#, kde-format
 msgid "Reset Waydroid"
 msgstr "重設 Waydroid"
 
@@ -145,10 +143,7 @@ msgid "Confirm Waydroid Reset"
 msgstr "確認重設 Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:63
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
-#| "and will wipe all user data."
+#, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
@@ -160,8 +155,7 @@ msgid "Waydroid properties"
 msgstr "Waydroid 屬性"
 
 #: ui/WaydroidConfigurationForm.qml:92
-#, fuzzy, kde-format
-#| msgid "May require restarting the waydroid session to apply"
+#, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "可能需要重新啟動 Waydroid 工作階段才會生效"
 
@@ -205,12 +199,12 @@ msgstr "下載中 %1MB/%2MB 速度 %3"
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1MB/s"
-msgstr ""
+msgstr "%1MB/秒"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1kB/s"
-msgstr ""
+msgstr "%1kB/秒"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -218,25 +212,16 @@ msgid "Google Play Protect configuration"
 msgstr "Google Play Protect 配置"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "We fetching your Android ID.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"我們正在取得您的 Android ID。\n"
+"正在取得您的 Android ID。\n"
 "這可能需要幾秒鐘。"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "When launching waydroid with GAPPS for the first time you will be "
-#| "notified that the device is not certified for Google Play Protect. To "
-#| "self certify your device, paste the Android ID on the field in the "
-#| "website. Then, give the Google services some minutes to reflect the "
-#| "change and restart waydroid."
+#, kde-format
 msgid ""
 "When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
@@ -264,8 +249,7 @@ msgid "System type"
 msgstr "系統類型"
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Configure Waydroid"
 msgstr "設定 Waydroid"
 
