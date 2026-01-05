@@ -40,7 +40,7 @@ Window {
     color: "transparent"
 
     // set input to transparent when closing to prevent window from taking unwanted touch inputs
-    onStateChanged: ShellUtil.setInputTransparent(window, state == "close")
+    onStateChanged: MobileShell.ShellUtil.setInputTransparent(window, state === "close")
 
     onVisibleChanged: {
         if (visible) {
