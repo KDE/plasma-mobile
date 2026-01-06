@@ -253,9 +253,3 @@ msgstr "系统类型"
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "配置 Waydroid"
-
-#~ msgid "%1Mb/s"
-#~ msgstr "%1Mb/秒"
-
-#~ msgid "%1Kb/s"
-#~ msgstr "%1Kb/秒"
