@@ -9,6 +9,7 @@
 #include <NetworkManagerQt/Settings>
 #include <NetworkManagerQt/Utils>
 #include <QDBusReply>
+#include <QPointer>
 
 #include <KUser>
 
@@ -226,7 +227,13 @@ QCoro::Task<void> SignalIndicator::activateProfile(const QString &connectionUni)
 
     // activate connection manually
     // despite the documentation saying otherwise, activateConnection seems to need the DBus path, not uuid of the connection
+    QPointer<SignalIndicator> guard(this);
     QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::activateConnection(con->path(), m_nmModem->uni(), {});
+
+    if (!guard) {
+        co_return;
+    }
+
     if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error activating connection:") << reply.error().message();
         co_return;
@@ -255,7 +262,13 @@ QCoro::Task<void> SignalIndicator::addProfile(const QString &name, const QString
 
     gsmSetting->setInitialized(true);
 
+    QPointer<SignalIndicator> guard(this);
     QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), {});
+
+    if (!guard) {
+        co_return;
+    }
+
     if (!reply.isValid()) {
         qWarning() << "Error adding connection:" << reply.error().message();
     } else {
@@ -271,7 +284,13 @@ QCoro::Task<void> SignalIndicator::removeProfile(const QString &connectionUni)
         co_return;
     }
 
+    QPointer<SignalIndicator> guard(this);
     QDBusPendingReply reply = co_await con->remove();
+
+    if (!guard) {
+        co_return;
+    }
+
     if (!reply.isValid()) {
         qWarning() << "Error removing connection" << reply.error().message();
     }
@@ -307,7 +326,13 @@ QCoro::Task<void> SignalIndicator::updateProfile(const QString &connectionUni,
 
     gsmSetting->setInitialized(true);
 
+    QPointer<SignalIndicator> guard(this);
     QDBusPendingReply reply = co_await con->update(conSettings->toMap());
+
+    if (!guard) {
+        co_return;
+    }
+
     if (!reply.isValid()) {
         qWarning() << "Error updating connection settings for" << connectionUni << ":" << reply.error().message() << ".";
     } else {

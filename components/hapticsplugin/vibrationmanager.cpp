@@ -3,6 +3,8 @@
 
 #include "vibrationmanager.h"
 
+#include <QPointer>
+
 VibrationManager::VibrationManager(QObject *parent)
     : QObject{parent}
 {
@@ -21,7 +23,13 @@ QCoro::Task<void> VibrationManager::vibrateTask(int durationMs)
     const QString appId = QStringLiteral("org.kde.plasmashell");
     const VibrationEvent event{1.0, static_cast<quint32>(durationMs)};
     const VibrationEventList pattern = {event};
+
+    QPointer<VibrationManager> guard(this);
     QDBusPendingReply<bool> reply = co_await m_interface->Vibrate(appId, pattern);
+
+    if (!guard) {
+        co_return;
+    }
 
     if (!reply.isValid() || !reply.value()) {
         qWarning() << "feedbackd vibration failed";
