@@ -13,6 +13,7 @@
 #include <QDomElement>
 #include <QFile>
 #include <QLoggingCategory>
+#include <QPointer>
 #include <QStandardPaths>
 
 #include <NetworkManagerQt/CdmaSetting>
@@ -106,7 +107,13 @@ QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
             ipv6Setting->setInitialized(true);
         }
 
+        QPointer<AutoDetectAPN> guard(this);
         QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), nmModem->uni(), "");
+
+        if (!guard) {
+            co_return;
+        }
+
         if (!reply.isValid()) {
             qCWarning(LOGGING_CATEGORY) << "Error adding autodetected connection:" << reply.error().message();
         } else {

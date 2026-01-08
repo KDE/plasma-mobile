@@ -133,8 +133,7 @@ WaydroidApplicationListModel *WaydroidDBusClient::applicationListModel() const
 
 QCoro::Task<void> WaydroidDBusClient::setMultiWindowsTask(const bool multiWindows)
 {
-    auto pendingReply = m_interface->setMultiWindows(multiWindows);
-    co_await pendingReply;
+    co_await m_interface->setMultiWindows(multiWindows);
 }
 
 QCoro::QmlTask WaydroidDBusClient::setMultiWindows(const bool multiWindows)
@@ -149,8 +148,7 @@ bool WaydroidDBusClient::multiWindows() const
 
 QCoro::Task<void> WaydroidDBusClient::setSuspendTask(const bool suspend)
 {
-    auto pendingReply = m_interface->setSuspend(suspend);
-    co_await pendingReply;
+    co_await m_interface->setSuspend(suspend);
 }
 
 QCoro::QmlTask WaydroidDBusClient::setSuspend(const bool suspend)
@@ -165,8 +163,7 @@ bool WaydroidDBusClient::suspend() const
 
 QCoro::Task<void> WaydroidDBusClient::setUeventTask(const bool uevent)
 {
-    auto pendingReply = m_interface->setUevent(uevent);
-    co_await pendingReply;
+    co_await m_interface->setUevent(uevent);
 }
 
 QCoro::QmlTask WaydroidDBusClient::setUevent(const bool uevent)
@@ -176,8 +173,7 @@ QCoro::QmlTask WaydroidDBusClient::setUevent(const bool uevent)
 
 QCoro::Task<void> WaydroidDBusClient::refreshSessionInfoTask()
 {
-    auto pendingReply = m_interface->refreshSessionInfo();
-    co_await pendingReply;
+    co_await m_interface->refreshSessionInfo();
 }
 
 QCoro::QmlTask WaydroidDBusClient::refreshSessionInfo()
@@ -187,8 +183,7 @@ QCoro::QmlTask WaydroidDBusClient::refreshSessionInfo()
 
 QCoro::Task<void> WaydroidDBusClient::refreshAndroidIdTask()
 {
-    auto pendingReply = m_interface->refreshAndroidId();
-    co_await pendingReply;
+    co_await m_interface->refreshAndroidId();
 }
 
 QCoro::QmlTask WaydroidDBusClient::refreshAndroidId()
@@ -198,8 +193,7 @@ QCoro::QmlTask WaydroidDBusClient::refreshAndroidId()
 
 QCoro::Task<void> WaydroidDBusClient::refreshApplicationsTask()
 {
-    auto pendingReply = m_interface->refreshApplications();
-    co_await pendingReply;
+    co_await m_interface->refreshApplications();
 }
 
 QCoro::QmlTask WaydroidDBusClient::refreshApplications()
@@ -214,8 +208,7 @@ bool WaydroidDBusClient::uevent() const
 
 QCoro::Task<void> WaydroidDBusClient::initializeTask(const SystemType systemType, const RomType romType, const bool forced)
 {
-    auto pendingReply = m_interface->initialize(systemType, romType, forced);
-    co_await pendingReply;
+    co_await m_interface->initialize(systemType, romType, forced);
 }
 
 QCoro::QmlTask WaydroidDBusClient::initialize(const SystemType systemType, const RomType romType, const bool forced)
@@ -225,8 +218,7 @@ QCoro::QmlTask WaydroidDBusClient::initialize(const SystemType systemType, const
 
 QCoro::Task<void> WaydroidDBusClient::startSessionTask()
 {
-    auto pendingReply = m_interface->startSession();
-    co_await pendingReply;
+    co_await m_interface->startSession();
 }
 
 QCoro::QmlTask WaydroidDBusClient::startSession()
@@ -236,8 +228,7 @@ QCoro::QmlTask WaydroidDBusClient::startSession()
 
 QCoro::Task<void> WaydroidDBusClient::stopSessionTask()
 {
-    auto pendingReply = m_interface->stopSession();
-    co_await pendingReply;
+    co_await m_interface->stopSession();
 }
 
 QCoro::QmlTask WaydroidDBusClient::stopSession()
@@ -247,8 +238,7 @@ QCoro::QmlTask WaydroidDBusClient::stopSession()
 
 QCoro::Task<void> WaydroidDBusClient::resetWaydroidTask()
 {
-    auto pendingReply = m_interface->resetWaydroid();
-    co_await pendingReply;
+    co_await m_interface->resetWaydroid();
 }
 
 QCoro::QmlTask WaydroidDBusClient::resetWaydroid()
@@ -258,8 +248,7 @@ QCoro::QmlTask WaydroidDBusClient::resetWaydroid()
 
 QCoro::Task<void> WaydroidDBusClient::installApkTask(const QString apkFile)
 {
-    auto pendingReply = m_interface->installApk(apkFile);
-    co_await pendingReply;
+    co_await m_interface->installApk(apkFile);
 }
 
 QCoro::QmlTask WaydroidDBusClient::installApk(const QString apkFile)
@@ -269,8 +258,7 @@ QCoro::QmlTask WaydroidDBusClient::installApk(const QString apkFile)
 
 QCoro::Task<void> WaydroidDBusClient::deleteApplicationTask(const QString appId)
 {
-    auto pendingReply = m_interface->deleteApplication(appId);
-    co_await pendingReply;
+    co_await m_interface->deleteApplication(appId);
 }
 
 QCoro::QmlTask WaydroidDBusClient::deleteApplication(const QString appId)
