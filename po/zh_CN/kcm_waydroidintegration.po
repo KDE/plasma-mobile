@@ -200,12 +200,12 @@ msgstr "正在下载 %1MB/%2MB 速度 %3"
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1MB/s"
-msgstr ""
+msgstr "%1MB/秒"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1kB/s"
-msgstr ""
+msgstr "%1kB/秒"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
