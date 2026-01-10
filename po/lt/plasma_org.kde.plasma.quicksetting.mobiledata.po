@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2026-01-09 23:36+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,33 +17,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.8\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Mobile Data"
-msgstr ""
+msgstr "Mobilieji duomenys"
 
 #: contents/ui/main.qml:15 contents/ui/main.qml:23
 #, kde-format
 msgid "Not Available"
-msgstr ""
+msgstr "Neprieinama"
 
 #: contents/ui/main.qml:17
 #, kde-format
 msgid "APN needs to be configured in the settings"
-msgstr ""
+msgstr "Nuostatose turi būti sukonfigūruotas prieigos taško pavadinimas (APN)"
 
 #: contents/ui/main.qml:19
 #, kde-format
 msgid "On"
-msgstr ""
+msgstr "Įjungta"
 
 #: contents/ui/main.qml:19
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Išjungta"
 
 #: contents/ui/main.qml:21
 #, kde-format
 msgid "No SIM inserted"
-msgstr ""
+msgstr "Neįdėta SIM kortelė"
