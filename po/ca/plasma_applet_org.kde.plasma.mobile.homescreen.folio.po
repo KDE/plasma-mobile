@@ -281,11 +281,3 @@ msgstr "Confirmació de la importació"
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""
 "Això sobreescriurà la vostra disposició existent de la pantalla d'inici!"
-
-#~ msgctxt "@action:button The word 'new' refers to widgets"
-#~ msgid "Get New Widgets…"
-#~ msgstr "Obtén ginys nous…"
-
-#~ msgctxt "@action:button"
-#~ msgid "Get New Widgets…"
-#~ msgstr "Obtén ginys nous…"
