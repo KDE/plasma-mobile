@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pinnedmodel.cpp:146
+#, kde-format
+msgctxt "Default application folder name."
+msgid "Folder"
+msgstr ""
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr ""
+
+#: qml/FavoritesGrid.qml:294
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr ""
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr ""
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr ""
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr ""
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr ""
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:76
+#, kde-format
+msgid "Homescreen Settings"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:86
+#, kde-format
+msgid "Homescreen"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:92
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:95
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:96
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:97
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:114
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: qml/settings/SettingsWindow.qml:130
+#, kde-format
+msgctxt "@action:button"
+msgid "Switch between homescreens and more wallpaper options"
+msgstr ""

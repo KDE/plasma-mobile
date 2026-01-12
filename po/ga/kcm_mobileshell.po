@@ -1,0 +1,286 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 14:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr ""
+
+#: ui/main.qml:27
+#, kde-format
+msgid "General"
+msgstr ""
+
+#: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
+#, kde-format
+msgid "Shell Vibrations"
+msgstr ""
+
+#: ui/main.qml:41
+#, kde-format
+msgid "Animations"
+msgstr ""
+
+#: ui/main.qml:42
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr ""
+
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr ""
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr ""
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Status Bar"
+msgstr ""
+
+#: ui/main.qml:87
+#, kde-format
+msgid "Date in status bar"
+msgstr ""
+
+#: ui/main.qml:88
+#, kde-format
+msgid "If on, date will be shown next to the clock in the status bar."
+msgstr ""
+
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr ""
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr ""
+
+#: ui/main.qml:120
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr ""
+
+#: ui/main.qml:121
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr ""
+
+#: ui/main.qml:122
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr ""
+
+#: ui/main.qml:123
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr ""
+
+#: ui/main.qml:124
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr ""
+
+#: ui/main.qml:140
+#, kde-format
+msgid "Action Drawer"
+msgstr ""
+
+#: ui/main.qml:146
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr ""
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr ""
+
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#, kde-format
+msgid "Quick Settings"
+msgstr ""
+
+#: ui/main.qml:159
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr ""
+
+#: ui/main.qml:160
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr ""
+
+#: ui/main.qml:181
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr ""
+
+#: ui/main.qml:182
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr ""
+
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr ""
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr ""
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr ""
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr ""
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide"
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:80
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:94
+#, kde-format
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:117
+#, kde-format
+msgid "Disabled Quick Settings"
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:122
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr ""
+
+#: ui/VibrationForm.qml:26
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr ""
+
+#: ui/VibrationForm.qml:39
+#, kde-format
+msgid "Vibration Duration"
+msgstr ""
+
+#: ui/VibrationForm.qml:40
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr ""
+
+#: ui/VibrationForm.qml:43
+#, kde-format
+msgctxt "Long duration"
+msgid "Long"
+msgstr ""
+
+#: ui/VibrationForm.qml:44
+#, kde-format
+msgctxt "Medium duration"
+msgid "Medium"
+msgstr ""
+
+#: ui/VibrationForm.qml:45
+#, kde-format
+msgctxt "Short duration"
+msgid "Short"
+msgstr ""
+
+#: ui/VibrationForm.qml:60
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr ""
