@@ -255,7 +255,7 @@ msgstr "Estat de l'exportació"
 #: qml/settings/ConfigGeneral.qml:293
 #, kde-format
 msgid "Failed to export to %1"
-msgstr "No s'ha pogut exportar cap a %1"
+msgstr "Ha fallat mentre s'exportava a %1"
 
 #: qml/settings/ConfigGeneral.qml:300
 #, kde-format
@@ -281,10 +281,3 @@ msgstr "Fons de pantalla"
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
-
-#~ msgid "Homescreen Settings"
-#~ msgstr "Configureu la pàgina d'inici"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"

@@ -132,7 +132,7 @@ msgstr "Esteu connectat/da a la xarxa mòbil."
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr "Inseriu una targeta SIM en el vostre dispositiu."
+msgstr "Inseriu una targeta SIM a dins del vostre dispositiu."
 
 #: modules/cellular/package/contents/ui/main.qml:61
 #, kde-format
