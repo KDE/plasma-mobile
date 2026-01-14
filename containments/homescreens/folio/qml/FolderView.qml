@@ -265,13 +265,12 @@ Folio.DelegateTouchArea {
                         readonly property var delegateModel: model.delegate
                         readonly property int index: model.index
 
-                        readonly property int folderCellSize: folio.HomeScreenState.folderPageContentWidth / folderBackground.gridLength
-                        readonly property int cellWidth: folio.HomeScreenState.pageCellWidth
-                        readonly property int cellHeight: folio.HomeScreenState.pageCellHeight
+                        readonly property int cellWidth: folio.HomeScreenState.folderPageContentWidth / folderBackground.gridLength
+                        readonly property int cellHeight: folio.HomeScreenState.folderPageContentHeight / folderBackground.gridLength
 
                         readonly property bool outsideView: {
-                            const appPosition = x + (cellWidth - folderCellSize) / 2 + folio.HomeScreenState.folderViewX;
-                            return (appPosition <= -folderCellSize || appPosition >= folderBackground.width);
+                            const appPosition = x + folio.HomeScreenState.folderViewX;
+                            return (appPosition <= 0 || appPosition >= folderBackground.width);
                         }
 
                         readonly property var dragState: folio.HomeScreenState.dragState
@@ -288,11 +287,11 @@ Folio.DelegateTouchArea {
                         Behavior on pageValue { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
 
                         // multiply the index values by the cell size to get the actual position
-                        readonly property int positionColumn: folderCellSize * columnValue
-                        readonly property int positionRow: folderCellSize * rowValue
+                        readonly property int columnPosition: cellWidth * columnValue
+                        readonly property int rowPosition: cellHeight * rowValue
 
-                        x: (folderCellSize - cellWidth) / 2 + folderBackground.margin + pageValue * folderBackground.width + positionColumn
-                        y: (folderCellSize - cellHeight) / 2 + folderBackground.margin + positionRow
+                        x: folderBackground.margin + (pageValue * folderBackground.width) + columnPosition
+                        y: folderBackground.margin + rowPosition
 
                         implicitWidth: cellWidth
                         implicitHeight: cellHeight
