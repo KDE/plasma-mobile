@@ -407,12 +407,12 @@ void DragState::onDelegateDragPositionOverPageViewChanged()
 
     if (m_dropDelegate && m_dropDelegate->type() == FolioDelegate::Widget) {
         // for widgets, we use their top left position to determine where they are placed (since they are larger than one cell)
-        row = (delegateY - pageVerticalMargin) / m_state->pageCellHeight();
-        column = (delegateX - pageHorizontalMargin) / m_state->pageCellWidth();
+        row = (delegateY - pageVerticalMargin - m_state->viewTopPadding()) / m_state->pageCellHeight();
+        column = (delegateX - pageHorizontalMargin - m_state->viewLeftPadding()) / m_state->pageCellWidth();
     } else {
         // otherwise, we base it on the pointer position
-        row = (y - pageVerticalMargin) / m_state->pageCellHeight();
-        column = (x - pageHorizontalMargin) / m_state->pageCellWidth();
+        row = (y - pageVerticalMargin - m_state->viewTopPadding()) / m_state->pageCellHeight();
+        column = (x - pageHorizontalMargin - m_state->viewLeftPadding()) / m_state->pageCellWidth();
     }
 
     // ensure it's in bounds
