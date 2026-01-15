@@ -321,9 +321,3 @@ msgstr "Enrere"
 #, kde-format
 msgid "Finish"
 msgstr "Finalitza"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "La Wi-Fi està desactivada"
-
-#~ msgid "Enable"
-#~ msgstr "Activa"

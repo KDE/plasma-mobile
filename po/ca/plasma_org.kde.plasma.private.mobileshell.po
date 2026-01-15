@@ -398,29 +398,3 @@ msgstr "Mostra'n menys"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Mostra'n %1 més"
-
-#~ msgctxt "Accessibility data on volume slider"
-#~ msgid "Adjust volume for %1"
-#~ msgstr "Ajusta el volum de %1"
-
-#~ msgid "Search…"
-#~ msgstr "Cerca…"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"
-
-#~ msgid "Audio Settings"
-#~ msgstr "Configuració d'àudio"
-
-#~ msgid "Audio"
-#~ msgstr "Àudio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Apuja el volum"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Abaixa el volum"

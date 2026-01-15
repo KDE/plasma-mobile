@@ -282,10 +282,3 @@ msgstr "Fons de pantalla"
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
-
-#~ msgid "Homescreen Settings"
-#~ msgstr "Configuració de la pàgina d'inici"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"
