@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-15 00:44+0000\n"
+"POT-Creation-Date: 2026-01-16 03:02+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/plasma_applet_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/plasma_applet_org.kde."
 "plasma.mobile.homescreen.folio.pot\n"
-"X-Crowdin-File-ID: 48272\n"
+"X-Crowdin-File-ID: 51964\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -64,7 +64,7 @@ msgstr "移除小部件"
 msgid "Configure widget"
 msgstr "配置小部件"
 
-#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:402
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:401
 #: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
