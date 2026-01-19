@@ -59,7 +59,7 @@ QtObject {
     }
 
     property var graceLockTimer: Timer {
-        interval: 1000
+        interval: 3000
         onTriggered: {
             root.waitingForAuth = false;
             root.password = "";
