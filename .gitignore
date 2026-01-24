@@ -15,6 +15,7 @@ build
 /cmake-build*
 .cache
 .vscode/
+.qtcreator/
 
 .kdev4/
 *.kdev4

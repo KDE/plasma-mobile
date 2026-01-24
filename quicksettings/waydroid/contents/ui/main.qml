@@ -5,7 +5,7 @@ import QtQuick
 
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.plasma.private.mobileshell.waydroidintegrationplugin as AIP
+import org.kde.plasma.private.workspace.waydroidintegrationplugin as AIP
 
 QS.QuickSetting {
     text: i18nc("@action:button", "Waydroid")
