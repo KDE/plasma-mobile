@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2024, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-14 00:43+0000\n"
-"PO-Revision-Date: 2024-11-14 09:43+0100\n"
+"PO-Revision-Date: 2026-01-30 11:10+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -70,16 +70,14 @@ msgid "SIM Locked"
 msgstr "Sim blocate"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Egressos"
+msgstr "Dispositivos de egresso"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Ingressos"
+msgstr "Dispositivos de Ingresso"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format

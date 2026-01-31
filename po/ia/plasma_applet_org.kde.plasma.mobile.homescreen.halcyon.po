@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# giovanni <g.sora@tiscali.it>, 2023.
+# SPDX-FileCopyrightText: 2023, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2023-03-16 11:19+0100\n"
+"PO-Revision-Date: 2026-01-30 11:09+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -26,7 +26,7 @@ msgstr "Dossier"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -56,47 +56,47 @@ msgstr "Applicationes"
 #: qml/settings/ConfigGeneral.qml:17
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Preferentias de Schermo Initial"
 
 #: qml/settings/ConfigGeneral.qml:26
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Schermo Initial"
 
 #: qml/settings/ConfigGeneral.qml:32
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "Effecto velate (blur) de tepate de papiro"
 
 #: qml/settings/ConfigGeneral.qml:35
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Necun"
 
 #: qml/settings/ConfigGeneral.qml:36
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Simple"
 
 #: qml/settings/ConfigGeneral.qml:37
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Plen"
 
 #: qml/settings/ConfigGeneral.qml:54
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Duple colpa per blocar dispositivo"
 
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Tapetes de papiro"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Preferentias"
