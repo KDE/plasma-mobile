@@ -37,4 +37,4 @@ msgstr "点击以暂停息屏"
 #, kde-format
 msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
-msgstr "Plasma 已为系统全局启用了暂停息屏"
+msgstr "Plasma 已启用系统全局阻止电源管理"
