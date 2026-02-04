@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2025 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2025, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:45+0000\n"
-"PO-Revision-Date: 2025-10-09 01:56+0200\n"
+"PO-Revision-Date: 2026-02-03 22:05+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ui/main.qml:19
 #, kde-format
@@ -81,8 +81,7 @@ msgid "Install APK"
 msgstr "APK 설치"
 
 #: ui/WaydroidApplicationsPage.qml:67
-#, fuzzy, kde-format
-#| msgid "You must selected local file"
+#, kde-format
 msgid "You must select a local file"
 msgstr "로컬 파일을 선택해야 함"
 
@@ -133,8 +132,7 @@ msgid "Installed applications"
 msgstr "설치된 앱"
 
 #: ui/WaydroidConfigurationForm.qml:56
-#, fuzzy, kde-format
-#| msgid "Reset waydroid"
+#, kde-format
 msgid "Reset Waydroid"
 msgstr "Waydroid 초기화"
 
@@ -145,10 +143,7 @@ msgid "Confirm Waydroid Reset"
 msgstr "Waydroid 초기화 확인"
 
 #: ui/WaydroidConfigurationForm.qml:63
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
-#| "and will wipe all user data."
+#, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
@@ -162,8 +157,7 @@ msgid "Waydroid properties"
 msgstr "Waydroid 속성"
 
 #: ui/WaydroidConfigurationForm.qml:92
-#, fuzzy, kde-format
-#| msgid "May require restarting the waydroid session to apply"
+#, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "적용하려면 Waydroid 세션을 다시 시작해야 할 수도 있음"
 
@@ -209,12 +203,12 @@ msgstr "다운로드 중: %1 MB/%2 MB, 속도: %3"
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
 msgid "%1MB/s"
-msgstr ""
+msgstr "%1MB/초"
 
 #: ui/WaydroidDownloadStatus.qml:50
 #, kde-format
 msgid "%1kB/s"
-msgstr ""
+msgstr "%1kB/초"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -222,10 +216,7 @@ msgid "Google Play Protect configuration"
 msgstr "Google Play Protect 설정"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "We fetching your Android ID.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
@@ -234,13 +225,7 @@ msgstr ""
 "몇 초 정도 걸릴 수 있습니다."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "When launching waydroid with GAPPS for the first time you will be "
-#| "notified that the device is not certified for Google Play Protect. To "
-#| "self certify your device, paste the Android ID on the field in the "
-#| "website. Then, give the Google services some minutes to reflect the "
-#| "change and restart waydroid."
+#, kde-format
 msgid ""
 "When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
@@ -269,8 +254,7 @@ msgid "System type"
 msgstr "시스템 형식"
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Configure Waydroid"
 msgstr "Waydroid 설정"
 
