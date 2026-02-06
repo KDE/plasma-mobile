@@ -1,14 +1,14 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024, 2025 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 giovanni <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-16 03:02+0000\n"
-"PO-Revision-Date: 2025-04-22 12:25+0200\n"
+"PO-Revision-Date: 2026-02-05 16:43+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -37,34 +37,32 @@ msgstr "General"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Iste widget non esseva trovate."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Configura…"
 
 #: qml/delegate/WidgetDelegateConfig.qml:193
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Optiones"
 
 #: qml/delegate/WidgetDelegateConfig.qml:207
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Widgets"
+msgstr "Optiones de Widgets"
 
 #: qml/delegate/WidgetDelegateConfig.qml:247
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Remove"
+msgstr "Remove Widget"
 
 #: qml/delegate/WidgetDelegateConfig.qml:254
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Configura widget"
 
 #: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:401
 #: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
@@ -75,17 +73,17 @@ msgstr "Remove"
 #: qml/HomeScreenPage.qml:481
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Relaxa per configurar, trahe per mover"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Confirma deletion de Dossier"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Tu es secur que tu vole deler iste dossier?"
 
 #: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
@@ -96,13 +94,13 @@ msgstr "Widgets"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Obtene Nove widgets ..."
 
 #: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Obtene Nove widgets ..."
 
 #: qml/settings/ConfigGeneral.qml:31
 #, kde-format
@@ -110,11 +108,9 @@ msgid "Icons"
 msgstr "Icones"
 
 #: qml/settings/ConfigGeneral.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Cerca applicationes..."
+msgstr "Application"
 
 #: qml/settings/ConfigGeneral.qml:63
 #, kde-format
@@ -189,7 +185,7 @@ msgstr "Rotation"
 #: qml/settings/ConfigGeneral.qml:183
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Duple colpa per blocar dispositivo"
 
 #: qml/settings/ConfigGeneral.qml:194
 #, kde-format
@@ -199,7 +195,7 @@ msgstr "Barra de favoritos"
 #: qml/settings/ConfigGeneral.qml:199
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Monstra fundo"
 
 #: qml/settings/ConfigGeneral.qml:210
 #, kde-format
@@ -208,41 +204,37 @@ msgid "Wallpaper"
 msgstr "Tapete de papiro"
 
 #: qml/settings/ConfigGeneral.qml:216
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Monstra effecto velate (blur) de tepate de papiro"
+msgstr "Effecto velate (blur) de tepate de papiro"
 
 #: qml/settings/ConfigGeneral.qml:219
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Necun"
 
 #: qml/settings/ConfigGeneral.qml:220
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Simple"
 
 #: qml/settings/ConfigGeneral.qml:221
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Plen"
 
 #: qml/settings/ConfigGeneral.qml:243
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Exporta disposition a"
+msgstr "Exporta disposition "
 
 #: qml/settings/ConfigGeneral.qml:252
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Importa Disposition ab"
+msgstr "Importa Disposition"
 
 #: qml/settings/ConfigGeneral.qml:262
 #, kde-format
@@ -280,16 +272,14 @@ msgid "This will overwrite your existing homescreen layout!"
 msgstr "Isto superscribera tu disposition de schermo initial existente!"
 
 #: qml/settings/SettingsComponent.qml:57
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
-msgstr "Tapete de papiro"
+msgstr "Tapetes de papiro"
 
 #: qml/settings/SettingsComponent.qml:66
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Preferentias"
 
 #~ msgid "Homescreen Settings"
 #~ msgstr "Preferentias de schermo initial"

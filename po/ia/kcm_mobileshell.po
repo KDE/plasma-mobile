@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024, 2025 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 giovanni <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-04-22 12:24+0200\n"
+"PO-Revision-Date: 2026-02-05 16:42+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -51,26 +51,25 @@ msgid "Auto Hide Panels"
 msgstr "Auto-Cela Pannellos"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Quando active, pannellos de stato e de navigation auto-celara, permittente "
-"que applicationes reimple le integre spatio de schermo."
+"Auto-cela le pannellos de stato e navigation per permitter que le "
+"applicationes pote sempre esser in schermo integre"
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "Duple colpa per eveliar"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
+"Quando le schermo es deactivate (off), duplke colpa per eveliar le "
+"dispositivo."
 
 #: ui/main.qml:81
 #, kde-format
@@ -230,15 +229,14 @@ msgid "Show"
 msgstr "Monstra"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Preferentias rapide"
+msgstr "Columnas de Preferentias rapide"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "MAxime numero de columnas in orientation horizontal."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format

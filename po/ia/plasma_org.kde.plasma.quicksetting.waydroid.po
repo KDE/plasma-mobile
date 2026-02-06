@@ -1,7 +1,7 @@
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2026 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
@@ -19,15 +19,24 @@ msgstr ""
 
 #: contents/ui/main.qml:11
 #, kde-format
-msgid "Sound"
-msgstr "Sono"
+msgctxt "@action:button"
+msgid "Waydroid"
+msgstr "Waydroid"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:37
 #, kde-format
-msgid "No audio devices"
-msgstr "Nulle Dispositivos Audio"
+msgctxt "@info:status"
+msgid "Not initialized"
+msgstr "non initialisate"
 
-#: contents/ui/main.qml:17
+#: contents/ui/main.qml:39
 #, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgctxt "@info:status"
+msgid "Running"
+msgstr "Il es in execution"
+
+#: contents/ui/main.qml:41
+#, kde-format
+msgctxt "@info:status"
+msgid "Stopped"
+msgstr "Stoppate"
