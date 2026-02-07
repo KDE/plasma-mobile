@@ -102,7 +102,6 @@ ecm_target_qml_sources(mobileshellplugin SOURCES
     qml/statusbar/indicators/VolumeIndicator.qml
     qml/statusbar/ClockText.qml
     qml/statusbar/StatusBar.qml
-    qml/statusbar/TaskWidget.qml
 
     qml/widgets/krunner/KRunnerScreen.qml
     qml/widgets/mediacontrols/BlurredBackground.qml
