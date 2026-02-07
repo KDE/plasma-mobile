@@ -19,6 +19,7 @@
   <name xml:lang="fi">KDE Plasma Mobile -käyttöliittymä</name>
   <name xml:lang="fr">Shell pour KDE Plasma Mobile</name>
   <name xml:lang="he">מעטפת לניידים של פלזמה מבית KDE</name>
+  <name xml:lang="ia">KDE Plasma Mobile Shell (Shell de Plasma KDE Mobile)</name>
   <name xml:lang="it">Shell Plasma Mobile di KDE</name>
   <name xml:lang="ka">KDE Plasma Mobile-ის გარსი</name>
   <name xml:lang="ko">KDE Plasma 모바일 셸</name>
@@ -39,6 +40,7 @@
   <summary xml:lang="fi">KDE Plasman käyttöliittymä mobiililaitteille</summary>
   <summary xml:lang="fr">Shell pour KDE Plasma pour les périphériques de format mobile</summary>
   <summary xml:lang="he">מעטפת פלזמה מבית KDE למכשירים בתצורת ניוד</summary>
+  <summary xml:lang="ia">Shell  de Plasma per dispositivos de factor de forma mobile</summary>
   <summary xml:lang="it">Shell Plasma di KDE per dispositivi mobili</summary>
   <summary xml:lang="ka">KDE's Plasma-ის გარსი მობილური ფორმფაქტორის მქონე მოწყობილობებისთვის</summary>
   <summary xml:lang="ko">KDE의 모바일 장치를 위한 Plasma 셸</summary>
@@ -68,6 +70,7 @@
       <caption xml:lang="fi">Plasma Mobilen käyttöliittymä käytössä mobiilinäytöllä</caption>
       <caption xml:lang="fr">Shell pour Plasma Mobile utilisée sur un écran de périphérique de format mobile</caption>
       <caption xml:lang="he">המעטפת של פלזמה לניידים מיועדת למסכים של מכשירים שמיועדים לניוד</caption>
+      <caption xml:lang="ia">KDE Plasma Mobile Shell e usate sur schermo de factor de forma mobile</caption>
       <caption xml:lang="it">Shell di Plasma Mobile utilizzata su schermi per dispositivi mobili</caption>
       <caption xml:lang="ka">Plasma Mobile-ის გარსი გამოიყენება მობილური ფორმფაქტორის მქონე ეკრანზე</caption>
       <caption xml:lang="ko">모바일 화면에서 사용 중인 Plasma 모바일 셸</caption>
