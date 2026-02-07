@@ -269,9 +269,6 @@ Item {
         showDropShadow: false
         showTime: root.actionDrawer.mode == MobileShell.ActionDrawer.Portrait
 
-        // security reasons, system tray also doesn't work on lockscreen
-        disableSystemTray: root.actionDrawer.restrictedPermissions
-
         opacity: brightnessPressedValue
     }
 

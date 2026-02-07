@@ -46,25 +46,12 @@ Item {
      */
     property bool showTime: true
 
-    /**
-     * Disables showing system tray indicators, preventing SIGABRT when used on the lockscreen.
-     */
-    property bool disableSystemTray: false
-
     readonly property real textPixelSize: Math.round(11 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real smallerTextPixelSize: Math.round(9 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real elementSpacing: Math.round(Kirigami.Units.smallSpacing * 1.5)
 
     Clock {
         id: clockSource
-    }
-
-    property alias statusNotifierSource: statusNotifierSourceLoader.item
-
-    Loader {
-        id: statusNotifierSourceLoader
-        active: !disableSystemTray
-        sourceComponent: SystemTray.StatusNotifierModel { }
     }
 
     MobileShellState.PanelSettingsDBusClient {
@@ -129,16 +116,6 @@ Item {
                 // spacing in the middle
                 Item {
                     Layout.fillWidth: true
-                }
-
-                // system tray
-                Repeater {
-                    id: statusNotifierRepeater
-                    model: root.statusNotifierSource
-
-                    delegate: TaskWidget {
-                        Layout.leftMargin: root.elementSpacing
-                    }
                 }
 
                 // system indicators

@@ -87,7 +87,6 @@ ApplicationWindow {
         showSecondRow: false
         showDropShadow: true
         showTime: true
-        disableSystemTray: true // prevent SIGABRT, since loading the system tray leads to bad... things
     }
 
     MobileShell.ActionDrawerOpenSurface {
