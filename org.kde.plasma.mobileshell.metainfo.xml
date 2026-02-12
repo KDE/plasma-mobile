@@ -87,6 +87,7 @@
   </screenshots>
   <compulsory_for_desktop>KDE</compulsory_for_desktop>
   <releases>
+    <release version="6.6.0" date="2026-02-17"/>
     <release version="6.4.5" date="2025-09-09"/>
   </releases>
 </component>
