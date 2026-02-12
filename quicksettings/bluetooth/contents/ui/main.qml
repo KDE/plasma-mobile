@@ -16,7 +16,12 @@ QS.QuickSetting {
     text: i18n("Bluetooth")
     icon: MobileShell.BluetoothInfo.icon
     settingsCommand: "plasma-open-settings kcm_bluetooth"
+
     function toggle() {
+        if (!btManager) {
+            return;
+        }
+
         const enable = !btManager.bluetoothOperational;
         btManager.bluetoothBlocked = !enable;
 
@@ -24,7 +29,7 @@ QS.QuickSetting {
             btManager.adapters[i].powered = enable;
         }
     }
-    enabled: btManager.bluetoothOperational
+    enabled: btManager && btManager.bluetoothOperational
 
     Connections {
         target: btManager
@@ -47,6 +52,10 @@ QS.QuickSetting {
     }
 
     function updateConnectedDevices() {
+        if (!btManager) {
+            return;
+        }
+
         let _connectedDevices = [];
         for (let i = 0; i < btManager.devices.length; ++i) {
             const device = btManager.devices[i];

@@ -3,14 +3,8 @@
 # SPDX-FileCopyrightText: 2014-2019 Marco Martin
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-[kdeglobals][KDE]
-LookAndFeelPackage=org.kde.breeze.mobile
-
 [Desktop]
 Containment=org.kde.plasma.mobile.homescreen.folio
 ToolBox=org.kde.plasma.nano.desktoptoolbox
 
 [Desktop][ContainmentActions]
-
-[plasmarc][Theme]
-name=breeze

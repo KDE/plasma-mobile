@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
-"PO-Revision-Date: 2022-12-21 09:06+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-09-15 06:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -17,14 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.7\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Sound"
 msgstr "Zvok"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "No audio devices"
+msgstr "Ni zvočnih naprav"
+
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

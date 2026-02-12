@@ -20,13 +20,15 @@ class HomeScreen;
 class FolioDelegate;
 
 struct FavouritesDelegate {
-    FolioDelegate *delegate;
+    std::shared_ptr<FolioDelegate> delegate;
     qreal xPosition;
 };
 
 class FavouritesModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     enum Roles {
@@ -41,9 +43,9 @@ public:
 
     Q_INVOKABLE void removeEntry(int row);
     void moveEntry(int fromRow, int toRow);
-    bool canAddEntry(int row, FolioDelegate *delegate);
-    bool addEntry(int row, FolioDelegate *delegate);
-    FolioDelegate *getEntryAt(int row);
+    bool canAddEntry(int row, std::shared_ptr<FolioDelegate> delegate);
+    bool addEntry(int row, std::shared_ptr<FolioDelegate> delegate);
+    std::shared_ptr<FolioDelegate> getEntryAt(int row);
 
     // whether the dock is full, we can't add any more items
     bool isFull() const;
@@ -53,7 +55,7 @@ public:
     // invisible - existing delegate looks like it doesn't exist
     int getGhostEntryPosition();
     void setGhostEntry(int row);
-    void replaceGhostEntry(FolioDelegate *delegate);
+    void replaceGhostEntry(std::shared_ptr<FolioDelegate> delegate);
     void deleteGhostEntry();
 
     // whether the position given is in between 2 delegates, or at the edge.
@@ -71,7 +73,7 @@ public:
     void loadFromJson(QJsonArray arr);
 
 private:
-    void connectSaveRequests(FolioDelegate *delegate);
+    void connectSaveRequests(std::shared_ptr<FolioDelegate> delegate);
 
     // get the x (or y) position where delegates start being placed
     qreal getDelegateRowStartPos() const;

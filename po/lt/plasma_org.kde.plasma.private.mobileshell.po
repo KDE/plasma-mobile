@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-05-17 01:05+0300\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2026-01-09 13:00+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
 msgid "Open with %1"
-msgstr ""
+msgstr "Atverti naudojant %1"
 
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr ""
+msgstr "Atverti naudojant…"
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217
@@ -51,12 +51,17 @@ msgstr "Kopijuoti vietą"
 msgid "Properties"
 msgstr "Savybės"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/ContentContainer.qml:151
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Išvalyti visus pranešimus"
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "Įjungta"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "Išjungta"
@@ -66,130 +71,117 @@ msgstr "Išjungta"
 msgid "SIM Locked"
 msgstr "SIM kortelė užrakinta"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/popups/volumeosd/AudioApplet.qml:89
 #, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgid "Output Devices"
+msgstr "Išvesties įrenginiai"
 
-#: qml/volumeosd/AudioApplet.qml:73
+#: qml/popups/volumeosd/AudioApplet.qml:118
 #, kde-format
-msgid "Outputs"
-msgstr "Išvestys"
+msgid "Input Devices"
+msgstr "Įvesties įrenginiai"
 
-#: qml/volumeosd/AudioApplet.qml:111
-#, kde-format
-msgid "Inputs"
-msgstr "Įvestys"
-
-#: qml/volumeosd/AudioApplet.qml:150
+#: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
 msgid "Playback Streams"
 msgstr "Atkūrimo srautai"
 
-#: qml/volumeosd/AudioApplet.qml:211
+#: qml/popups/volumeosd/AudioApplet.qml:199
 #, kde-format
 msgid "Recording Streams"
 msgstr "Įrašymo srautai"
 
-#: qml/volumeosd/DeviceListItem.qml:25
+#: qml/popups/volumeosd/DeviceListItem.qml:24
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/volumeosd/DeviceListItem.qml:34
+#: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
 msgid "Device name not found"
 msgstr "Įrenginio pavadinimas nerastas"
 
-#: qml/volumeosd/ListItemBase.qml:101
+#: qml/popups/volumeosd/ListItemBase.qml:123
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Rodyti papildomas %1 parinktis"
 
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
-#, kde-format
-msgid "Unmute"
-msgstr "Įjungti garsą"
-
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
-#, kde-format
-msgid "Mute"
-msgstr "Nutildyti"
-
-#: qml/volumeosd/ListItemBase.qml:168
-#, kde-format
-msgctxt "Accessibility data on volume slider"
-msgid "Adjust volume for %1"
-msgstr "Reguliuoti %1 garsumą"
-
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/popups/volumeosd/ListItemBase.qml:215
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:261
+#: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/StreamListItem.qml:21
+#: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
 msgstr "Pranešimų garsai"
 
-#: qml/volumeosd/StreamListItem.qml:24
+#: qml/popups/volumeosd/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: qml/volumeosd/StreamListItem.qml:29
+#: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
 msgstr "Srauto pavadinimas nerastas"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
-msgid "configure audio streams"
-msgstr "Perjungti garso srautų rodymą"
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Unmute"
+msgstr "Įjungti garsą"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Mute"
+msgstr "Nutildyti"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
+#, kde-format
+msgid "configure audio streams"
+msgstr "konfigūruoti garso srautus"
+
+#: qml/popups/volumeosd/VolumeOSD.qml:200
 #, kde-format
 msgid "Open audio settings"
 msgstr "Atverti garso nuostatas"
 
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Ieškoti…"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:181
-#, kde-format
-msgid "Search…"
-msgstr "Ieškoti…"
-
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
 #, kde-format
 msgid "No media playing"
 msgstr "Neatkuriama jokia medija"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
 msgstr "Ankstesnis takelis"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Atkurti ar Pristabdyti mediją"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
 msgstr "Kitas takelis"
@@ -198,20 +190,19 @@ msgstr "Kitas takelis"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "Kopijuoti nuorodos adresą"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
-#, fuzzy, kde-format
-#| msgid "&Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr "&Kopijuoti"
+msgstr "Kopijuoti"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
-msgstr ""
+msgstr "Žymėti visus"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:58
 #, kde-format
@@ -220,84 +211,82 @@ msgid "Reply"
 msgstr "Atsakyti"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:31
-#, fuzzy, kde-format
-#| msgid "%1%"
+#, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr "%1%"
+msgstr "%1:"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
 msgctxt "How many bytes have been copied"
 msgid "%2 of %1"
-msgstr ""
+msgstr "%2 iš %1"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:106
 #, kde-format
 msgctxt "How many files have been copied"
 msgid "%2 of %1 file"
 msgid_plural "%2 of %1 files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 iš %1 failo"
+msgstr[1] "%2 iš %1 failų"
+msgstr[2] "%2 iš %1 failų"
+msgstr[3] "%2 iš %1 failo"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:109
 #, kde-format
 msgctxt "How many dirs have been copied"
 msgid "%2 of %1 folder"
 msgid_plural "%2 of %1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 iš %1 aplanko"
+msgstr[1] "%2 iš %1 aplankų"
+msgstr[2] "%2 iš %1 aplankų"
+msgstr[3] "%2 iš %1 aplanko"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:112
 #, kde-format
 msgctxt "How many items (that includes files and dirs) have been copied"
 msgid "%2 of %1 item"
 msgid_plural "%2 of %1 items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 iš %1 elemento"
+msgstr[1] "%2 iš %1 elementų"
+msgstr[2] "%2 iš %1 elementų"
+msgstr[3] "%2 iš %1 elemento"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:120
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1 failas"
+msgstr[1] "%1 failai"
+msgstr[2] "%1 failų"
+msgstr[3] "%1 failas"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
 msgid "%1 folder"
 msgid_plural "%1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1 aplankas"
+msgstr[1] "%1 aplankai"
+msgstr[2] "%1 aplankų"
+msgstr[3] "%1 aplankas"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:124
 #, kde-format
 msgid "%1 item"
 msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1 elementas"
+msgstr[1] "%1 elementai"
+msgstr[2] "%1 elementų"
+msgstr[3] "%1 elementas"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:141
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr ""
+msgstr "%1/sek."
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
-#, fuzzy, kde-format
-#| msgid "%1%"
+#, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
 msgstr "%1%"
@@ -306,21 +295,19 @@ msgstr "%1%"
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
-msgstr ""
+msgstr "Išsamiau"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:141
-#, fuzzy, kde-format
-#| msgctxt "Job name, e.g. Copying is paused"
-#| msgid "%1 (Paused)"
+#, kde-format
 msgctxt "Pause running job"
 msgid "Pause"
-msgstr "%1 (pristabdyta)"
+msgstr "Pristabdyti"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format
 msgctxt "Cancel running job"
 msgid "Cancel"
-msgstr ""
+msgstr "Atsisakyti"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:181
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
@@ -331,7 +318,7 @@ msgstr "Daugiau parinkčių…"
 #: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
 msgid "Open"
-msgstr ""
+msgstr "Atverti"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:36
 #, kde-format
@@ -345,89 +332,91 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Siųsti"
 
-#: qml/widgets/notifications/NotificationsUtils.js:14
+#: qml/widgets/notifications/NotificationsUtils.js:15
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
 msgstr "%1 (pristabdyta)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:19
+#: qml/widgets/notifications/NotificationsUtils.js:20
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
 msgstr "%1 (nepavyko)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:21
+#: qml/widgets/notifications/NotificationsUtils.js:22
 #, kde-format
 msgid "Job Failed"
 msgstr "Užduotis patyrė nesėkmę"
 
-#: qml/widgets/notifications/NotificationsUtils.js:24
+#: qml/widgets/notifications/NotificationsUtils.js:25
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
 msgstr "%1 (užbaigta)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:26
+#: qml/widgets/notifications/NotificationsUtils.js:27
 #, kde-format
 msgid "Job Finished"
 msgstr "Užduotis baigta"
 
-#: qml/widgets/notifications/NotificationsUtils.js:44
+#: qml/widgets/notifications/NotificationsUtils.js:45
 #, kde-format
 msgid "now"
-msgstr ""
+msgstr "dabar"
 
-#: qml/widgets/notifications/NotificationsUtils.js:49
+#: qml/widgets/notifications/NotificationsUtils.js:50
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
 msgstr "prieš %1 min."
 
-#: qml/widgets/notifications/NotificationsUtils.js:81
+#: qml/widgets/notifications/NotificationsUtils.js:82
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
 msgstr "liko %1 sek."
 
-#: qml/widgets/notifications/NotificationsUtils.js:84
+#: qml/widgets/notifications/NotificationsUtils.js:85
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
 msgstr "liko %1 min."
 
-#: qml/widgets/notifications/NotificationsUtils.js:87
+#: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "liko %1 val."
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
 msgid "Notification service not available"
 msgstr "Pranešimų tarnyba yra neprieinama"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:267
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Šiuo metu pranešimus teikia „%1 %2“"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:429
 #, kde-format
 msgid "Show Fewer"
 msgstr "Rodyti mažiau"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:431
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Rodyti dar %1"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "Išvalyti visus pranešimus"
+#~ msgctxt "Accessibility data on volume slider"
+#~ msgid "Adjust volume for %1"
+#~ msgstr "Reguliuoti %1 garsumą"
+
+#~ msgid "Search…"
+#~ msgstr "Ieškoti…"
 
 #~ msgid "100%"
 #~ msgstr "100%"

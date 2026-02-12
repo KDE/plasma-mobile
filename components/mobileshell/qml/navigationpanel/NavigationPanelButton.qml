@@ -20,7 +20,7 @@ Controls.AbstractButton {
     width: Math.min(parent.width, parent.height)
     height: width
 
-    property double iconSizeFactor: 1
+    property int shrinkSize: 0
     property alias iconSource: icon.source
 
     MobileShell.HapticsEffect {
@@ -79,9 +79,11 @@ Controls.AbstractButton {
         Kirigami.Theme.colorSet: button.Kirigami.Theme.colorSet
 
         readonly property real side: Math.min(button.width, button.height)
-        anchors {
-            fill: parent
-            margins: Math.round((side - side * iconSizeFactor * 0.6) / 2)
-        }
+        anchors.centerIn: parent
+
+        implicitHeight: Kirigami.Units.iconSizes.smallMedium - shrinkSize
+        implicitWidth: Kirigami.Units.iconSizes.smallMedium - shrinkSize
+        width: implicitWidth
+        height: implicitHeight
     }
 }

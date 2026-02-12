@@ -1,0 +1,270 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025, 2026 Emir SARI <emir_sari@icloud.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"PO-Revision-Date: 2026-01-07 20:19+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 25.12.0\n"
+
+#: ui/main.qml:19
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Waydroid Tümleştirmesi"
+
+#: ui/main.qml:32
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "Waydroid kurulu değil"
+
+#: ui/main.qml:39
+#, kde-format
+msgid "Check installation"
+msgstr "Kurulumu Denetle"
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"Android ve üretici kalıpları indiriliyor.\n"
+"Bu, birkaç dakika alabilir."
+
+#: ui/main.qml:67
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid sıfırlanıyor.\n"
+"Bu, birkaç saniye alabilir."
+
+#: ui/main.qml:76
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "Waydroid oturumu çalışmıyor."
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Start the session"
+msgstr "Oturumu Başlat"
+
+#: ui/main.qml:90
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid oturumu başlatılıyor.\n"
+"Bu, birkaç saniye alabilir."
+
+#: ui/WaydroidApplicationsPage.qml:25
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Waydroid Uygulamaları"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "APK Kur"
+
+#: ui/WaydroidApplicationsPage.qml:67
+#, kde-format
+msgid "You must select a local file"
+msgstr "Yerel dosya seçmelisiniz"
+
+#: ui/WaydroidApplicationsPage.qml:107
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "Uygulamayı Sil"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "Genel Bilgi"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "IP adresi"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "Kopyala"
+
+#: ui/WaydroidConfigurationForm.qml:35
+#, kde-format
+msgid "Waydroid status"
+msgstr "Waydroid durumu"
+
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "Çalışıyor"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stop session"
+msgstr "Oturumu Durdur"
+
+#: ui/WaydroidConfigurationForm.qml:46
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "Aygıtımı Google Play Protect için Sertifikala"
+
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr "Kurulu Uygulamalar"
+
+#: ui/WaydroidConfigurationForm.qml:56
+#, kde-format
+msgid "Reset Waydroid"
+msgstr "Waydroid’i Sıfırla"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Waydroid’in Sıfırlanmasını Onayla"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+"Waydroid’i sıfırlamak istediğinizden emin misiniz? Bu, yok edici bir "
+"işlemdir ve tüm kullanıcı verisini siler."
+
+#: ui/WaydroidConfigurationForm.qml:81
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Waydroid Özellikleri"
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, kde-format
+msgid "May require restarting the Waydroid session to apply"
+msgstr "Uygulanması için Waydroid oturumunun yeniden başlatılması gerekebilir"
+
+#: ui/WaydroidConfigurationForm.qml:109
+#, kde-format
+msgid "Multi Windows"
+msgstr "Çoklu Pencereler"
+
+#: ui/WaydroidConfigurationForm.qml:110
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "Masaüstü ile pencere tümleştirmesini etkinleştirir/devre dışı bırakır"
+
+#: ui/WaydroidConfigurationForm.qml:122
+#, kde-format
+msgid "Suspend"
+msgstr "Askıya Al"
+
+#: ui/WaydroidConfigurationForm.qml:123
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr ""
+"Etkin uygulama yokken (görüntü zaman aşımından sonra) Waydroid "
+"kapsayıcısının uyumasına izin ver"
+
+#: ui/WaydroidConfigurationForm.qml:135
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:136
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr "Tak–çıkar aygıtlara Android’in doğrudan erişmesine izin ver"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "%1 MB/%2 MB indiriliyor, hız: %3"
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1MB/s"
+msgstr "%1 MB/sn"
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1kB/s"
+msgstr "%1 kB/sn"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Google Play Project Yapılandırması"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, kde-format
+msgid ""
+"Fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"Android kimliğiniz getiriliyor.\n"
+"Bu, birkaç saniye alabilir."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, kde-format
+msgid ""
+"When launching Waydroid with GAPPS for the first time, you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
+msgstr ""
+"Waydroid’in Google Uygulamaları ile ilk kez başlatırken, aygıtın Google Play "
+"Protect ile kullanım için sertifikalanmamış olduğu hakkında bir uyarı "
+"alacaksınız. Kendi aygıtınızı sertifikalamak için Android kimliğini web "
+"sitesindeki alana yapıştırın. Sonrasında, Google hizmetlerine bu "
+"değişikliğin yansıması için birkaç dakika verin ve Waydroid’i yeniden "
+"başlatın."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "Android Kimliğini Kopyala ve Web Sitesini Aç"
+
+#: ui/WaydroidInitialConfigurationForm.qml:16
+#, kde-format
+msgid "Initial configuration"
+msgstr "Başlangıç yapılandırması"
+
+#: ui/WaydroidInitialConfigurationForm.qml:22
+#, kde-format
+msgid "System type"
+msgstr "Sistem türü"
+
+#: ui/WaydroidInitialConfigurationForm.qml:35
+#, kde-format
+msgid "Configure Waydroid"
+msgstr "Waydroid’i Yapılandır"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1 MB/sn"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1 KB/sn"
+
+#~ msgid "Go back"
+#~ msgstr "Geri Git"

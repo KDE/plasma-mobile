@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -42,153 +42,205 @@ msgstr "动效"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "如果此选项被关闭，动效将被减少到最低程度。"
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "自动隐藏面板"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr "自动隐藏状态栏和导航栏，让应用程序能够始终全屏显示。"
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "双击唤醒"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr "当屏幕关闭时，双击唤醒设备。"
+
+#: ui/main.qml:81
 #, kde-format
 msgid "Status Bar"
 msgstr "状态栏"
 
-#: ui/main.qml:59
+#: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
 msgstr "在状态栏中显示日期"
 
-#: ui/main.qml:60
+#: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "如果开启，将在状态栏中的时钟旁边显示日期。"
 
-#: ui/main.qml:74
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr "电量百分比"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "在状态栏中显示电量百分比。"
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "状态栏大小"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "顶部面板大小 (需要重启)。"
+
+#: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "超小"
 
-#: ui/main.qml:75
+#: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "小"
 
-#: ui/main.qml:76
+#: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "正常"
 
-#: ui/main.qml:77
+#: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "大"
 
-#: ui/main.qml:78
+#: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "超大"
 
-#: ui/main.qml:81
-#, kde-format
-msgid "Status Bar Size"
-msgstr "状态栏大小"
-
-#: ui/main.qml:82
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "顶部面板大小 (需要重启)。"
-
-#: ui/main.qml:109
-#, kde-format
-msgid "Navigation Panel"
-msgstr "导航面板"
-
-#: ui/main.qml:115
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "仅手势模式"
-
-#: ui/main.qml:116
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "是否隐藏导航面板。"
-
-#: ui/main.qml:130
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "总是显示键盘开关"
-
-#: ui/main.qml:131
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "是否总是在导航面板上显示键盘切换按钮。"
-
-#: ui/main.qml:142
+#: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
 msgstr "操作抽屉"
 
-#: ui/main.qml:148
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "固定模式"
 
-#: ui/main.qml:149
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "扩展模式"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "快速设置"
 
-#: ui/main.qml:161
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "左上角抽屉模式"
 
-#: ui/main.qml:162
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "从左上角打开的模式。"
 
-#: ui/main.qml:187
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "右上角抽屉模式"
 
-#: ui/main.qml:188
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "从右上角打开的模式。"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "锁屏快捷方式"
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "无"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "手电筒"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "相机"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "左键"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "右键"
+
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "隐藏"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "显示"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "快速设置列数"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "横向布局时的最大列数。"
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr "自定义下拉面板中快速设置的排序，还能隐藏快速设置项。"
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "已禁用的快速设置"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "重新启用已禁用的快速设置。"
@@ -208,25 +260,25 @@ msgstr "振动持续时间"
 msgid "How long shell vibrations should be."
 msgstr "设置外壳程序的振动持续时间。"
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "长"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "中"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "短"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

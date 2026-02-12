@@ -18,6 +18,8 @@ class ShellDBusClient : public QObject
 
     Q_PROPERTY(bool doNotDisturb READ doNotDisturb WRITE setDoNotDisturb NOTIFY doNotDisturbChanged)
     Q_PROPERTY(bool isActionDrawerOpen READ isActionDrawerOpen WRITE setIsActionDrawerOpen NOTIFY isActionDrawerOpenChanged)
+    Q_PROPERTY(bool isVolumeOSDOpen READ isVolumeOSDOpen WRITE setIsVolumeOSDOpen NOTIFY isVolumeOSDOpenChanged)
+    Q_PROPERTY(bool isNotificationPopupDrawerOpen READ isNotificationPopupDrawerOpen WRITE setIsNotificationPopupDrawerOpen NOTIFY isNotificationPopupDrawerOpenChanged)
     Q_PROPERTY(bool isTaskSwitcherVisible READ isTaskSwitcherVisible NOTIFY isTaskSwitcherVisibleChanged)
     Q_PROPERTY(QString panelState READ panelState WRITE setPanelState NOTIFY panelStateChanged)
 
@@ -29,6 +31,12 @@ public:
 
     bool isActionDrawerOpen() const;
     void setIsActionDrawerOpen(bool value);
+
+    bool isVolumeOSDOpen() const;
+    void setIsVolumeOSDOpen(bool value);
+
+    bool isNotificationPopupDrawerOpen() const;
+    void setIsNotificationPopupDrawerOpen(bool value);
 
     bool isTaskSwitcherVisible() const;
 
@@ -46,10 +54,13 @@ public:
     Q_INVOKABLE void openHomeScreen();
     Q_INVOKABLE void resetHomeScreenPosition();
     Q_INVOKABLE void showVolumeOSD();
+    Q_INVOKABLE void openLockScreenKeypad();
 
 Q_SIGNALS:
     void panelStateChanged();
     void isActionDrawerOpenChanged();
+    void isVolumeOSDOpenChanged();
+    void isNotificationPopupDrawerOpenChanged();
     void doNotDisturbChanged();
     void isTaskSwitcherVisibleChanged();
     void openActionDrawerRequested();
@@ -58,10 +69,13 @@ Q_SIGNALS:
     void openHomeScreenRequested();
     void resetHomeScreenPositionRequested();
     void showVolumeOSDRequested();
+    void openLockScreenKeypadRequested();
 
 private Q_SLOTS:
     void updateDoNotDisturb();
     void updateIsActionDrawerOpen();
+    void updateIsVolumeOSDOpen();
+    void updateIsNotificationPopupDrawerOpen();
     void updateIsTaskSwitcherVisible();
     void updatePanelState();
 
@@ -75,6 +89,8 @@ private:
 
     bool m_doNotDisturb = false;
     bool m_isActionDrawerOpen = false;
+    bool m_isVolumeOSDOpen = false;
+    bool m_isNotificationPopupDrawerOpen = false;
     bool m_isTaskSwitcherVisible = false;
 
     bool m_connected = false;

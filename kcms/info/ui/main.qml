@@ -48,13 +48,42 @@ KCM.SimpleKCM {
                 description: kcm.distroInfo.name
             }
 
-            FormCard.FormDelegateSeparator {}
+            FormCard.FormDelegateSeparator {
+                visible: webpageDelegate.visible
+            }
 
             FormCard.FormButtonDelegate {
+                id: webpageDelegate
+                visible: kcm.distroInfo.homeUrl
                 text: i18n("Webpage")
                 description: kcm.distroInfo.homeUrl
                 onClicked: {
                     Qt.openUrlExternally(kcm.distroInfo.homeUrl)
+                }
+            }
+        }
+
+        FormCard.FormHeader {
+            visible: kcm.vendorInfoTitle !== ""
+            title: kcm.vendorInfoTitle
+        }
+
+        FormCard.FormCard {
+            visible: kcm.vendorInfoTitle !== ""
+            Repeater {
+                model: kcm.vendorInfo
+                ColumnLayout {
+                    id: delegate
+
+                    required property var modelData
+
+                    spacing: 0
+
+                    FormCard.FormTextDelegate {
+                        text: delegate.modelData.Key
+                        description: delegate.modelData.Value
+                    }
+                    FormCard.FormDelegateSeparator {}
                 }
             }
         }

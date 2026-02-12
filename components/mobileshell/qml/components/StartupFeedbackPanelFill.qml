@@ -14,6 +14,8 @@ Rectangle {
     property int screen
     property var maximizedTracker
 
+    readonly property bool isShowing: height > 0
+
     // Smooth animation for colored rectangle
     NumberAnimation on height {
         id: heightAnim
@@ -29,6 +31,7 @@ Rectangle {
 
         function onShowingWindowChanged() {
             root.color = 'transparent';
+            root.height = 0;
         }
     }
 

@@ -1,15 +1,15 @@
 # Spanish translations for plasma_shell_org.kde.plasma.phone.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_shell_org\n"
+"Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-07-16 16:40+0200\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-10-07 04:31+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -25,57 +25,60 @@ msgstr "Copiar al portapapeles"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr "Ver detalles del error..."
+msgstr "Ver detalles del error…"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "Abrir %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "El administrador del sistema ha restringido el cambio del diseño"
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Configurar %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "General"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Fondo del escritorio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Diseño de la pantalla de inicio"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Cambiar la pantalla de inicio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "El diseño de pantalla de inicio a usar."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Seleccionar pantalla de inicio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "¿Cambiar la pantalla de inicio a %1?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"La configuración de la pantalla de inicio actual se han guardado y se "
+"restaurará si vuelve a cambiarla."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "Complemento de fondo del escritorio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "El complemento de fondo de escritorio a usar."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "Complementos de fondo del escritorio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
-msgstr "Obtener nuevos complementos..."
+msgstr "Obtener nuevos complementos…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
-"Los cambios en la disposición de elementos se deben aplicar antes de hacer "
-"más cambios"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Aplicar ahora"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Fondo del escritorio"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "El administrador del sistema ha restringido el cambio del diseño"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -85,24 +88,6 @@ msgstr "Introduzca el PIN"
 msgid "Wrong PIN"
 msgstr "PIN erróneo"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicador de foco del panel"
-
-#~ msgid "Logging in..."
-#~ msgstr "Iniciando sesión..."
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Cambiar fondo del escritorio"
-
-#~ msgid "Configure"
-#~ msgstr "Configurar"
-
-#~ msgid "Layout:"
-#~ msgstr "Disposición:"
-
-#~ msgid "Wallpaper Type:"
-#~ msgstr "Tipo de fondo del escritorio:"
-
-#~ msgid "Customize..."
-#~ msgstr "Personalizar..."

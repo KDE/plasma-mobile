@@ -16,8 +16,6 @@ LockscreenDBusClient::LockscreenDBusClient(QObject *parent)
                                                           QStringLiteral("org.freedesktop.ScreenSaver"),
                                                           QStringLiteral("GetActive"));
 
-    const QDBusReply<bool> response = QDBusConnection::sessionBus().call(request);
-
     QDBusConnection::sessionBus().callWithCallback(request, this, SLOT(slotLockscreenActiveChanged(bool)), SLOT(dbusError(QDBusError)));
 
     QDBusConnection::sessionBus().connect(QStringLiteral("org.freedesktop.ScreenSaver"),
@@ -31,6 +29,15 @@ LockscreenDBusClient::LockscreenDBusClient(QObject *parent)
 bool LockscreenDBusClient::lockscreenActive() const
 {
     return m_lockscreenActive;
+}
+
+void LockscreenDBusClient::lockScreen()
+{
+    QDBusMessage request = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.ScreenSaver"),
+                                                          QStringLiteral("/ScreenSaver"),
+                                                          QStringLiteral("org.freedesktop.ScreenSaver"),
+                                                          QStringLiteral("Lock"));
+    QDBusConnection::sessionBus().asyncCall(request);
 }
 
 void LockscreenDBusClient::slotLockscreenActiveChanged(bool active)

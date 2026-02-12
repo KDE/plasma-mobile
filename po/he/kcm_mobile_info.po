@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2024-03-07 11:44+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -34,55 +34,55 @@ msgstr "העתקה"
 msgid "Operating System"
 msgstr "מערכת הפעלה"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "אתר אינטרנט"
 
-#: ui/main.qml:63
+#: ui/main.qml:92
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "תוכנה"
 
-#: ui/main.qml:68
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "גרסת KDE פלזמה"
 
-#: ui/main.qml:75
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "גרסת KDE Frameworks"
 
-#: ui/main.qml:82
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "גרסת Qt"
 
-#: ui/main.qml:89
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "גרסת ליבה (kernel)"
 
-#: ui/main.qml:96
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "סוג מערכת הפעלה"
 
-#: ui/main.qml:97
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1 סיביות"
 
-#: ui/main.qml:102
+#: ui/main.qml:131
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "חומרה"
 
-#: ui/main.qml:107
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -91,18 +91,18 @@ msgstr[1] "מעבדים"
 msgstr[2] "מעבדים"
 msgstr[3] "מעבדים"
 
-#: ui/main.qml:114
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "זיכרון"
 
-#: ui/main.qml:118
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 של זיכרון RAM"
 
-#: ui/main.qml:120
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

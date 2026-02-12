@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,22 +18,23 @@ msgstr ""
 "quicksetting.caffeine.pot\n"
 "X-Crowdin-File-ID: 42549\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
 msgstr "保持亮屏"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "点击以禁用暂停息屏"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "点击以暂停息屏"
 
-#: contents/ui/main.qml:36
+#: contents/ui/main.qml:22
 #, kde-format
+msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
-msgstr "Plasma 已为系统全局启用了暂停息屏"
+msgstr "Plasma 已启用系统全局阻止电源管理"

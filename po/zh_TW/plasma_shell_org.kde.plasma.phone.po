@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-07-27 13:00+0900\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-11-24 19:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -28,53 +28,56 @@ msgstr "複製到剪貼簿"
 msgid "View Error Details…"
 msgstr "檢視錯誤詳細資訊…"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "開啟 %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "佈局變更已被系統管理員限制"
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "設定 %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "一般"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "桌布"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "主畫面佈局"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "變更主畫面"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "要使用的主畫面佈局。"
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "選取主畫面"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "要將主畫面變更為 %1 嗎？"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr "您目前主畫面的設定已儲存，切換回來的時候會復原。"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "桌布外掛程式"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "要使用的桌布外掛程式。"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "桌布外掛程式"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "取得新的外掛程式…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "佈局變更必須先套用才能進行其他變更"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "立刻套用"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "桌布"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "佈局變更已被系統管理員限制"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -84,12 +87,21 @@ msgstr "輸入 PIN 碼"
 msgid "Wrong PIN"
 msgstr "錯誤 PIN 碼"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "面板焦點指示器"
 
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "主畫面佈局"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "佈局變更必須先套用才能進行其他變更"
+
+#~ msgid "Apply now"
+#~ msgstr "立刻套用"
+
 #~ msgid "Change Wallpaper"
 #~ msgstr "變更桌布"
-
-#~ msgid "Configure"
-#~ msgstr "設定"

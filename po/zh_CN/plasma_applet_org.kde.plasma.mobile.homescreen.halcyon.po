@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:41+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,34 +18,86 @@ msgstr ""
 "plasma.mobile.homescreen.halcyon.pot\n"
 "X-Crowdin-File-ID: 43223\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
-#: package/contents/ui/FolderGrid.qml:189
-#, kde-format
-msgid "Remove from favourites"
-msgstr "移出常用应用"
-
-#: package/contents/ui/FavoritesGrid.qml:291
-#, kde-format
-msgid "Add applications to your favourites so they show up here."
-msgstr "将应用程序添加到常用程序后，它们将在此显示"
-
-#: package/contents/ui/FolderGrid.qml:194
-#, kde-format
-msgid "Move out of folder"
-msgstr "移出文件夹"
-
-#: package/contents/ui/GridAppDelegate.qml:64
-#, kde-format
-msgid "Add to favourites"
-msgstr "添加到常用应用"
-
-#: package/contents/ui/GridAppList.qml:68
-#, kde-format
-msgid "Applications"
-msgstr "应用程序"
-
-#: plugin/pinnedmodel.cpp:151
+#: pinnedmodel.cpp:146
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "文件夹"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr "常规"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr "移出常用应用"
+
+#: qml/FavoritesGrid.qml:294
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "将应用程序添加到常用程序后，它们将在此显示"
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr "移出文件夹"
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "添加到常用应用"
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr "应用程序"
+
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "主屏幕设置"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "主屏幕"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "壁纸模糊效果"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "无"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "简单"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "完全"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "双击锁定设备"
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr "壁纸"
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr "设置"

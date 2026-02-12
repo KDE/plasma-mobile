@@ -6,20 +6,35 @@
 #include "homescreenstate.h"
 #include "widgetsmanager.h"
 
-PageModel::PageModel(QList<FolioPageDelegate *> delegates, QObject *parent, HomeScreen *homeScreen)
+PageModel::PageModel(QList<FolioPageDelegate::Ptr> delegates, QObject *parent, HomeScreen *homeScreen)
     : QAbstractListModel{parent}
     , m_homeScreen{homeScreen}
     , m_delegates{delegates}
 {
+    // Listen to widget removal events and delete delegates
     connect(homeScreen->widgetsManager(), &WidgetsManager::widgetRemoved, this, [this](Plasma::Applet *applet) {
-        if (applet) {
-            // delete any instance of this widget
-            for (int i = 0; i < m_delegates.size(); i++) {
-                auto *delegate = m_delegates[i];
-                if (delegate->type() == FolioDelegate::Widget && delegate->widget()->applet() == applet) {
-                    removeDelegate(i);
-                    break;
-                }
+        if (!applet) {
+            return;
+        }
+
+        // delete any instance of this widget
+        for (int i = 0; i < m_delegates.size(); i++) {
+            FolioPageDelegate::Ptr delegate = m_delegates[i];
+
+            if (delegate->type() == FolioDelegate::Widget && delegate->widget()->applet() == applet) {
+                removeDelegate(i);
+                break;
+            }
+        }
+    });
+
+    // Listen to application removal events and delete delegates
+    connect(homeScreen->applicationListModel(), &ApplicationListModel::applicationRemoved, this, [this](const QString &storageId) {
+        for (int i = 0; i < m_delegates.size(); i++) {
+            FolioPageDelegate::Ptr delegate = m_delegates[i];
+
+            if (delegate->type() == FolioDelegate::Application && delegate->application()->storageId() == storageId) {
+                removeDelegate(i);
             }
         }
     });
@@ -29,12 +44,12 @@ PageModel::~PageModel() = default;
 
 PageModel *PageModel::fromJson(QJsonArray &arr, QObject *parent, HomeScreen *homeScreen)
 {
-    QList<FolioPageDelegate *> delegates;
+    QList<FolioPageDelegate::Ptr> delegates;
 
     for (QJsonValueRef r : arr) {
         QJsonObject obj = r.toObject();
 
-        FolioPageDelegate *delegate = FolioPageDelegate::fromJson(obj, homeScreen);
+        FolioPageDelegate::Ptr delegate = FolioPageDelegate::fromJson(obj, homeScreen);
         if (delegate) {
             delegates.append(delegate);
         }
@@ -43,7 +58,7 @@ PageModel *PageModel::fromJson(QJsonArray &arr, QObject *parent, HomeScreen *hom
     PageModel *model = new PageModel{delegates, parent, homeScreen};
 
     // ensure delegates can request saves
-    for (auto *delegate : delegates) {
+    for (FolioPageDelegate::Ptr delegate : delegates) {
         model->connectSaveRequests(delegate);
     }
 
@@ -54,7 +69,7 @@ QJsonArray PageModel::toJson() const
 {
     QJsonArray arr;
 
-    for (FolioPageDelegate *delegate : m_delegates) {
+    for (FolioPageDelegate::Ptr delegate : m_delegates) {
         if (!delegate) {
             continue;
         }
@@ -79,7 +94,7 @@ QVariant PageModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case DelegateRole:
-        return QVariant::fromValue(m_delegates.at(index.row()));
+        return QVariant::fromValue(m_delegates.at(index.row()).get());
     }
 
     return QVariant();
@@ -136,7 +151,7 @@ bool PageModel::canAddDelegate(int row, int column, FolioDelegate *delegate)
         }
 
         // check if any delegate exists at any of the spots where the widget is being added
-        for (FolioPageDelegate *d : m_delegates) {
+        for (FolioPageDelegate::Ptr d : m_delegates) {
             if (delegate->widget()->isInBounds(row, column, d->row(), d->column())) {
                 return false;
             } else if (d->type() == FolioDelegate::Widget) {
@@ -151,7 +166,7 @@ bool PageModel::canAddDelegate(int row, int column, FolioDelegate *delegate)
         // inserting app or folder...
 
         // check if there already exists a delegate in this space
-        for (FolioPageDelegate *d : m_delegates) {
+        for (FolioPageDelegate::Ptr d : m_delegates) {
             if (d->row() == row && d->column() == column) {
                 return false;
             } else if (d->type() == FolioDelegate::Widget && d->widget()->isInBounds(d->row(), d->column(), row, column)) {
@@ -163,9 +178,9 @@ bool PageModel::canAddDelegate(int row, int column, FolioDelegate *delegate)
     return true;
 }
 
-bool PageModel::addDelegate(FolioPageDelegate *delegate)
+bool PageModel::addDelegate(FolioPageDelegate::Ptr delegate)
 {
-    if (!canAddDelegate(delegate->row(), delegate->column(), delegate)) {
+    if (!canAddDelegate(delegate->row(), delegate->column(), delegate.get())) {
         return false;
     }
 
@@ -180,9 +195,9 @@ bool PageModel::addDelegate(FolioPageDelegate *delegate)
     return true;
 }
 
-FolioPageDelegate *PageModel::getDelegate(int row, int col)
+FolioPageDelegate::Ptr PageModel::getDelegate(int row, int col)
 {
-    for (FolioPageDelegate *d : m_delegates) {
+    for (FolioPageDelegate::Ptr d : m_delegates) {
         if (d->row() == row && d->column() == col) {
             return d;
         }
@@ -207,23 +222,21 @@ void PageModel::moveAndResizeWidgetDelegate(FolioPageDelegate *delegate, int new
         return;
     }
 
-    // test if we can add the delegate with new size and position
-    FolioWidget *testWidget = new FolioWidget(m_homeScreen, 0, 0, 0);
-    // we have to use setGridWidth and setGridHeight since it takes into account the page orientation
+    // Test if we can add the delegate with new size and position
+    FolioWidget::Ptr testWidget = std::make_shared<FolioWidget>(m_homeScreen, 0, 0, 0);
+    // We have to use setGridWidth and setGridHeight since it takes into account the page orientation
     testWidget->setGridWidth(newGridWidth);
     testWidget->setGridHeight(newGridHeight);
-    FolioDelegate *testDelegate = new FolioDelegate(testWidget, m_homeScreen);
+    FolioDelegate::Ptr testDelegate = std::make_shared<FolioDelegate>(testWidget, m_homeScreen);
+
+    // testWidget and testDelegate will get cleaned up automatically since are smart pointers
 
     // NOT THREAD SAFE!
     // which is fine, because the GUI isn't multithreaded
-    int index = m_delegates.indexOf(delegate);
+    int index = m_delegates.indexOf(delegate->sharedPageDelegate());
     m_delegates.remove(index); // remove the delegate temporarily, since we don't want it to check overlapping of itself
-    bool canAdd = canAddDelegate(newRow, newColumn, testDelegate);
-    m_delegates.insert(index, delegate); // add it back
-
-    // cleanup test delegate
-    testDelegate->deleteLater();
-    testWidget->deleteLater();
+    bool canAdd = canAddDelegate(newRow, newColumn, testDelegate.get());
+    m_delegates.insert(index, delegate->sharedPageDelegate()); // add it back
 
     if (!canAdd) {
         return;
@@ -240,12 +253,12 @@ bool PageModel::isPageEmpty()
     return m_delegates.size() == 0;
 }
 
-void PageModel::connectSaveRequests(FolioDelegate *delegate)
+void PageModel::connectSaveRequests(FolioDelegate::Ptr delegate)
 {
     if (delegate->type() == FolioDelegate::Folder && delegate->folder()) {
-        connect(delegate->folder(), &FolioApplicationFolder::saveRequested, this, &PageModel::save);
+        connect(delegate->folder().get(), &FolioApplicationFolder::saveRequested, this, &PageModel::save);
     } else if (delegate->type() == FolioDelegate::Widget && delegate->widget()) {
-        connect(delegate->widget(), &FolioWidget::saveRequested, this, &PageModel::save);
+        connect(delegate->widget().get(), &FolioWidget::saveRequested, this, &PageModel::save);
     }
 }
 

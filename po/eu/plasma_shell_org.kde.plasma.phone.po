@@ -1,16 +1,16 @@
 # Translation for plasma_shell_org.kde.plasma.phone.po to Euskara/Basque (eu).
-# Copyright (C) 2022-2024 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-07-17 06:37+0200\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-10-18 17:29+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -28,53 +28,58 @@ msgstr "Kopiatu arbelean"
 msgid "View Error Details…"
 msgstr "Ikusi erroreen xehetasunak..."
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "Ireki %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "Antolaeran aldaketak murriztu ditu administratzaileak"
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Konfiguratu %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Orokorra"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Horma-papera"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Etxeko pantailaren antolaera"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Aldatu Pantaila-nagusia"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "Etxeko pantailarekin erabili beharreko antolaera."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Hautatu Pantaila-nagusia"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Pantaila nagusia %1(e)ra aldatu?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"Zure pantaila-nagusiaren uneko ezarpenak gordeta daude, eta atzera aldatzen "
+"baduzu lehengoratuko dira."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "Horma-paper plugina"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "Horma-paperarekin erabili beharreko plugina."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "Horma-paper pluginak"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "Lortu plugin berriak..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "Antolaera aldaketak ezarri behar dira beste aldaketarik egin aurretik"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Ezarri orain"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Horma-papera"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Antolaeran aldaketak murriztu ditu administratzaileak"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -84,12 +89,22 @@ msgstr "Sartu PINa"
 msgid "Wrong PIN"
 msgstr "PIN okerra"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Panelaren fokuaren adierazlea"
 
+#~ msgid "General"
+#~ msgstr "Orokorra"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Etxeko pantailaren antolaera"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr ""
+#~ "Antolaera aldaketak ezarri behar dira beste aldaketarik egin aurretik"
+
+#~ msgid "Apply now"
+#~ msgstr "Ezarri orain"
+
 #~ msgid "Change Wallpaper"
 #~ msgstr "Aldatu horma-papera"
-
-#~ msgid "Configure"
-#~ msgstr "Konfiguratu"

@@ -15,6 +15,7 @@ const QList<QString> WIZARD_MODULE_ORDER = {QStringLiteral("org.kde.plasma.mobil
                                             QStringLiteral("org.kde.plasma.mobileinitialstart.time"),
                                             QStringLiteral("org.kde.plasma.mobileinitialstart.wifi"),
                                             QStringLiteral("org.kde.plasma.mobileinitialstart.cellular"),
+                                            QStringLiteral("org.kde.plasma.mobileinitialstart.systemnavigation"),
                                             QStringLiteral("org.kde.plasma.mobileinitialstart.finished")};
 
 Wizard::Wizard(QObject *parent, QQmlEngine *engine)

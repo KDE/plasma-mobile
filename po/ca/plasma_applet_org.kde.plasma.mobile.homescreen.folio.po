@@ -1,15 +1,15 @@
 # Translation of plasma_applet_org.kde.plasma.mobile.homescreen.folio.po to Catalan
-# Copyright (C) 2023-2024 This_file_is_part_of_KDE
+# Copyright (C) 2023-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2023, 2024.
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-10 00:42+0000\n"
-"PO-Revision-Date: 2024-07-02 10:10+0200\n"
+"POT-Creation-Date: 2026-01-17 00:45+0000\n"
+"PO-Revision-Date: 2025-08-13 09:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,169 +17,275 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
 msgstr "Carpeta"
 
-#: package/contents/ui/AppDrawerHeader.qml:52
+#: qml/AppDrawerHeader.qml:73
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Cerca aplicacions…"
 
-#: package/contents/ui/FavouritesBar.qml:145
-#: package/contents/ui/FavouritesBar.qml:219
-#: package/contents/ui/FolderView.qml:290
-#: package/contents/ui/HomeScreenPage.qml:218
-#: package/contents/ui/HomeScreenPage.qml:298
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "General"
+
+#: qml/delegate/WidgetDelegate.qml:119
+#, kde-format
+msgid "This widget was not found."
+msgstr "No s'ha trobat aquest giny."
+
+#: qml/delegate/WidgetDelegate.qml:137
+#, kde-format
+msgid "Configure…"
+msgstr "Configura…"
+
+#: qml/delegate/WidgetDelegateConfig.qml:193
+#, kde-format
+msgid "Options"
+msgstr "Opcions"
+
+#: qml/delegate/WidgetDelegateConfig.qml:207
+#, kde-format
+msgid "Widget Options"
+msgstr "Opcions del giny"
+
+#: qml/delegate/WidgetDelegateConfig.qml:247
+#, kde-format
+msgid "Remove widget"
+msgstr "Elimina el giny"
+
+#: qml/delegate/WidgetDelegateConfig.qml:254
+#, kde-format
+msgid "Configure widget"
+msgstr "Configura el giny"
+
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
 msgstr "Elimina"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: qml/HomeScreenPage.qml:481
+#, kde-format
+msgid "Release to configure, drag to move"
+msgstr "Deixeu anar per a configurar, arrossegueu per a moure"
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
+#, kde-format
+msgid "Confirm Folder Deletion"
+msgstr "Confirmació de la supressió de carpeta"
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
+#, kde-format
+msgid "Are you sure you want to delete this folder?"
+msgstr "Segur que voleu suprimir aquesta carpeta?"
+
+#: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
 msgid "Widgets"
 msgstr "Ginys"
 
-#: package/contents/ui/settings/SettingsWindow.qml:80
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
-msgid "Homescreen Settings"
-msgstr "Configuració de la pàgina d'inici"
+msgctxt "@action:button The word 'new' refers to widgets"
+msgid "Get New Widgets…"
+msgstr "Obtén ginys nous…"
 
-#: package/contents/ui/settings/SettingsWindow.qml:89
+#: qml/settings/AppletListViewer.qml:84
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Widgets…"
+msgstr "Obtén ginys nous…"
+
+#: qml/settings/ConfigGeneral.qml:31
 #, kde-format
 msgid "Icons"
 msgstr "Icones"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: qml/settings/ConfigGeneral.qml:47
+#, kde-format
+msgid "Application"
+msgstr "Aplicació"
+
+#: qml/settings/ConfigGeneral.qml:63
 #, kde-format
 msgid "Number of rows"
 msgstr "Nombre de files"
 
-#: package/contents/ui/settings/SettingsWindow.qml:122
+#: qml/settings/ConfigGeneral.qml:64
 #, kde-format
 msgid "Number of columns"
 msgstr "Nombre de columnes"
 
-#: package/contents/ui/settings/SettingsWindow.qml:126
+#: qml/settings/ConfigGeneral.qml:68
 #, kde-format
 msgid "Size of icons on homescreen"
 msgstr "Mida de les icones a la pàgina d'inici"
 
-#: package/contents/ui/settings/SettingsWindow.qml:165
+#: qml/settings/ConfigGeneral.qml:107
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr "Les files i columnes s'intercanviaran depenent del gir de la pantalla."
 
-#: package/contents/ui/settings/SettingsWindow.qml:169
+#: qml/settings/ConfigGeneral.qml:111
 #, kde-format
 msgid "Homescreen"
 msgstr "Pantalla d'inici"
 
-#: package/contents/ui/settings/SettingsWindow.qml:175
+#: qml/settings/ConfigGeneral.qml:117
 #, kde-format
 msgid "Show labels on homescreen"
 msgstr "Mostra les etiquetes a la pàgina d'inici"
 
-#: package/contents/ui/settings/SettingsWindow.qml:188
+#: qml/settings/ConfigGeneral.qml:130
 #, kde-format
 msgid "Show labels in favorites bar"
 msgstr "Mostra les etiquetes a la barra de preferits"
 
-#: package/contents/ui/settings/SettingsWindow.qml:201
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "Bloca la disposició"
+
+#: qml/settings/ConfigGeneral.qml:156
 #, kde-format
 msgid "Page transition effect"
 msgstr "Efecte de transició de pàgina"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: qml/settings/ConfigGeneral.qml:162
 #, kde-format
 msgid "Slide"
 msgstr "Lliscament"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: qml/settings/ConfigGeneral.qml:163
 #, kde-format
 msgid "Cube"
 msgstr "Cub"
 
-#: package/contents/ui/settings/SettingsWindow.qml:209
+#: qml/settings/ConfigGeneral.qml:164
 #, kde-format
 msgid "Fade"
 msgstr "Esvaïment"
 
-#: package/contents/ui/settings/SettingsWindow.qml:210
+#: qml/settings/ConfigGeneral.qml:165
 #, kde-format
 msgid "Stack"
 msgstr "Pila"
 
-#: package/contents/ui/settings/SettingsWindow.qml:211
+#: qml/settings/ConfigGeneral.qml:166
 #, kde-format
 msgid "Rotation"
 msgstr "Gir"
 
-#: package/contents/ui/settings/SettingsWindow.qml:226
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Toc doble per a bloquejar el dispositiu"
+
+#: qml/settings/ConfigGeneral.qml:194
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Barra de preferits"
 
-#: package/contents/ui/settings/SettingsWindow.qml:242
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr "Mostra el fons"
+
+#: qml/settings/ConfigGeneral.qml:210
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Fons de pantalla"
 
-#: package/contents/ui/settings/SettingsWindow.qml:248
+#: qml/settings/ConfigGeneral.qml:216
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
-msgstr "Mostra l'efecte difuminat del fons de pantalla"
+msgid "Wallpaper blur effect"
+msgstr "Efecte de difuminat del fons de pantalla"
 
-#: package/contents/ui/settings/SettingsWindow.qml:259
+#: qml/settings/ConfigGeneral.qml:219
 #, kde-format
-msgid "General"
-msgstr "General"
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Sense"
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: qml/settings/ConfigGeneral.qml:220
 #, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Senzill"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Complet"
+
+#: qml/settings/ConfigGeneral.qml:243
+#, kde-format
+msgid "Export layout"
+msgstr "Exporta la disposició"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, kde-format
+msgid "Import layout"
+msgstr "Importa una disposició"
+
+#: qml/settings/ConfigGeneral.qml:262
 #, kde-format
 msgid "Export layout to"
 msgstr "Exporta la disposició a"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: qml/settings/ConfigGeneral.qml:281
 #, kde-format
 msgid "Import layout from"
 msgstr "Exporta la disposició des de"
 
-#: package/contents/ui/settings/SettingsWindow.qml:323
-#: package/contents/ui/settings/SettingsWindow.qml:330
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
 #, kde-format
 msgid "Export Status"
 msgstr "Estat de l'exportació"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
+#: qml/settings/ConfigGeneral.qml:293
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Ha fallat en exportar a %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: qml/settings/ConfigGeneral.qml:300
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "La disposició de la pantalla d'inici s'ha exportat correctament a %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: qml/settings/ConfigGeneral.qml:306
 #, kde-format
 msgid "Confirm Import"
 msgstr "Confirmació de la importació"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: qml/settings/ConfigGeneral.qml:307
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""
 "Això sobreescriurà la vostra disposició existent de la pantalla d'inici!"
+
+#: qml/settings/SettingsComponent.qml:57
+#, kde-format
+msgid "Wallpapers"
+msgstr "Fons de pantalla"
+
+#: qml/settings/SettingsComponent.qml:66
+#, kde-format
+msgid "Settings"
+msgstr "Configuració"
+
+#~ msgid "Homescreen Settings"
+#~ msgstr "Configuració de la pàgina d'inici"
+
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"

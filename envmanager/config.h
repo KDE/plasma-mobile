@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -12,7 +13,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 
-// applications-blacklistrc
+// .config/plasma-mobile/applications-blacklistrc
 // NOTE: we only write these entries if they are not already defined in the config
 const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS = {
     {"Applications",
@@ -23,15 +24,22 @@ const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETT
        "nvtop,qt5-qdbusviewer,qv4l2,qvidcap,syncmonitorhelper,UserFeedbackConsole,waydroid.com.android.calculator2,waydroid.com.android.camera2,"
        "waydroid.com.android.contacts,waydroid.com.android.deskclock,waydroid.com.android.documentsui,waydroid.com.android.gallery3d,"
        "waydroid.com.android.inputmethod.latin,waydroid.com.android.settings,waydroid.org.lineageos.eleven,waydroid.org.lineageos.etar,"
-       "waydroid.org.lineageos.jelly,waydroid.org.lineageos.recorder,wordview"}}}};
+       "waydroid.org.lineageos.jelly,waydroid.org.lineageos.recorder,wordview,org.kde.drkonqi.coredump.gui"}}}};
 
-// kdeglobals
-// NOTE: we only write these entries if they are not already defined in the config
+// .config/plasma-mobile/kdeglobals - non-immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_DEFAULT_SETTINGS = {{"General", {{"BrowserApplication", "angelfish"}}}};
 
+// .config/plasma-mobile/kdeglobals - immutable settings:
 const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_SETTINGS = {{"KDE", {{"LookAndFeelPackage", "org.kde.breeze.mobile"}}}};
 
-// kwinrc
+// .config/plasma-mobile/kwinrc - non-immutable settings:
+const QMap<QString, QMap<QString, QVariant>> KWINRC_DEFAULT_SETTINGS = {
+    {"Wayland",
+     {
+         {"InputMethod", "/usr/share/applications/org.kde.plasma.keyboard.desktop"} // ensure plasma-keyboard is our default vkbd
+     }}};
+
+// .config/plasma-mobile/kwinrc - immutable settings:
 QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mobileConfig)
 {
     auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
@@ -39,6 +47,7 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 
     return {{"Windows",
              {
+                 {"BorderlessMaximizedWindows", !convergenceModeEnabled}, // turn off window decorations when not in convergence mode
                  {"Placement", convergenceModeEnabled ? "Centered" : "Maximizing"}, // maximize all windows by default if we aren't in convergence mode
                  {"InteractiveWindowMoveEnabled", convergenceModeEnabled} // only allow window moving in convergence mode
              }},
@@ -52,7 +61,6 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
              }},
             {"Wayland",
              {
-                 {"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, // ensure maliit is our vkbd
                  {"VirtualKeyboardEnabled", true} // enable vkbd
              }},
             {"org.kde.kdecoration2",
@@ -70,3 +78,6 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 // Make sure that the effect/script is added to the kwinrc "Plugins" section above!
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
 const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
+
+// .config/plasma-mobile/ksmserver - immutable settings:
+const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};

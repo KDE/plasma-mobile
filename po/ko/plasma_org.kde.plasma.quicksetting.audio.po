@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Shinjo Park <kde@peremen.name>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
-"PO-Revision-Date: 2023-07-26 00:13+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-10-09 01:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,14 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Sound"
 msgstr "소리"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "No audio devices"
+msgstr "오디오 장치 없음"
+
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

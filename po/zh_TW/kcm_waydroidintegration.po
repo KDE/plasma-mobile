@@ -1,0 +1,260 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2025, 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"PO-Revision-Date: 2026-01-05 03:01+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 26.03.70\n"
+
+#: ui/main.qml:19
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Waydroid 整合"
+
+#: ui/main.qml:32
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "Waydroid 未安裝"
+
+#: ui/main.qml:39
+#, kde-format
+msgid "Check installation"
+msgstr "請檢查安裝"
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"正在下載 Android 與廠商映像檔。\n"
+"這可能會需要幾分鐘。"
+
+#: ui/main.qml:67
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid 正在重設。\n"
+"這可能需要幾秒鐘。"
+
+#: ui/main.qml:76
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "Waydroid 工作階段並非執行中。"
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Start the session"
+msgstr "啟動工作階段"
+
+#: ui/main.qml:90
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"Wayland 工作階段正在啟動。\n"
+"這可能需要幾秒鐘。"
+
+#: ui/WaydroidApplicationsPage.qml:25
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Waydroid 應用程式"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "安裝 APK"
+
+#: ui/WaydroidApplicationsPage.qml:67
+#, kde-format
+msgid "You must select a local file"
+msgstr "您必須選取一個本機檔案"
+
+#: ui/WaydroidApplicationsPage.qml:107
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "刪除應用程式"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "一般資訊"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "IP 位址"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "複製"
+
+#: ui/WaydroidConfigurationForm.qml:35
+#, kde-format
+msgid "Waydroid status"
+msgstr "Waydroid 狀態"
+
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "執行中"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stop session"
+msgstr "停止工作階段"
+
+#: ui/WaydroidConfigurationForm.qml:46
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "向 Google Play Protect 認證我的裝置"
+
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr "已安裝的應用程式"
+
+#: ui/WaydroidConfigurationForm.qml:56
+#, kde-format
+msgid "Reset Waydroid"
+msgstr "重設 Waydroid"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "確認重設 Waydroid"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
+"will wipe all user data."
+msgstr "您確定要重設 Waydroid 嗎？這會刪除所有使用者資料，並且無法復原。"
+
+#: ui/WaydroidConfigurationForm.qml:81
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Waydroid 屬性"
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, kde-format
+msgid "May require restarting the Waydroid session to apply"
+msgstr "可能需要重新啟動 Waydroid 工作階段才會生效"
+
+#: ui/WaydroidConfigurationForm.qml:109
+#, kde-format
+msgid "Multi Windows"
+msgstr "多視窗"
+
+#: ui/WaydroidConfigurationForm.qml:110
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "啟用或停用桌面視窗整合"
+
+#: ui/WaydroidConfigurationForm.qml:122
+#, kde-format
+msgid "Suspend"
+msgstr "暫停"
+
+#: ui/WaydroidConfigurationForm.qml:123
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr "讓 Waydroid 容器在沒有作用中應用程式時一段時間後進入睡眠"
+
+#: ui/WaydroidConfigurationForm.qml:135
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:136
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr "允許 Android 直接存取熱插拔裝置"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "下載中 %1MB/%2MB 速度 %3"
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1MB/s"
+msgstr "%1MB/秒"
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1kB/s"
+msgstr "%1kB/秒"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Google Play Protect 配置"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, kde-format
+msgid ""
+"Fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"正在取得您的 Android ID。\n"
+"這可能需要幾秒鐘。"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, kde-format
+msgid ""
+"When launching Waydroid with GAPPS for the first time, you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
+msgstr ""
+"第一次啟動有 GAPPS 的 Waydroid 時，您會被告知您的裝置沒有為 Google Play "
+"Protect 所認證。要自行認證您的裝置，請將 Android ID 貼上到網站上對應的欄位"
+"裡，等幾分鐘讓 Google 服務套用變更，然後重新啟動 Waydroid。"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "複製 Android ID 並開啟網站"
+
+#: ui/WaydroidInitialConfigurationForm.qml:16
+#, kde-format
+msgid "Initial configuration"
+msgstr "初始設定"
+
+#: ui/WaydroidInitialConfigurationForm.qml:22
+#, kde-format
+msgid "System type"
+msgstr "系統類型"
+
+#: ui/WaydroidInitialConfigurationForm.qml:35
+#, kde-format
+msgid "Configure Waydroid"
+msgstr "設定 Waydroid"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1Mb/秒"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1Kb/秒"

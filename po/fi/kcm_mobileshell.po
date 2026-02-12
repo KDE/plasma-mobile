@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-11-07 17:20+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-10-12 17:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "Kuori"
+msgstr "Komentotulkki"
 
 #: ui/main.qml:27
 #, kde-format
@@ -44,154 +44,208 @@ msgstr ""
 "Jos tämä on poistettu käytöstä, animointeja vähennetään niin paljon kuin "
 "mahdollista."
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Piilota paneelit automaattisesti"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+"Piilota tila- ja navigointipaneelit automaattisesti, jotta sovellukset "
+"voivat aina olla koko näytöllä."
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "Herätä kaksoisnapautuksella"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr "Näytön ollessa poissa käytöstä herätä laite kaksoisnapautuksella."
+
+#: ui/main.qml:81
 #, kde-format
 msgid "Status Bar"
 msgstr "Tilarivi"
 
-#: ui/main.qml:59
+#: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
 msgstr "Päiväys tilarivillä"
 
-#: ui/main.qml:60
+#: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "Jos käytössä, tilarivillä kellon vieressä näytetään päiväys."
 
-#: ui/main.qml:74
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr "Akkuvirta"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "Näytä tilarivillä akkuvirta."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "Tilarivin koko"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Yläpaneelin koko (vaatii uudelleenkäynnistyksen)."
+
+#: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Pikkuruinen"
 
-#: ui/main.qml:75
+#: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Pieni"
 
-#: ui/main.qml:76
+#: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: ui/main.qml:77
+#: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Suuri"
 
-#: ui/main.qml:78
+#: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Hyvin suuri"
 
-#: ui/main.qml:81
-#, kde-format
-msgid "Status Bar Size"
-msgstr "Tilarivin koko"
-
-#: ui/main.qml:82
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "Yläpaneelin koko (vaatii uudelleenkäynnistyksen)."
-
-#: ui/main.qml:109
-#, kde-format
-msgid "Navigation Panel"
-msgstr "Navigointipaneeli"
-
-#: ui/main.qml:115
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Vain eleet -tila"
-
-#: ui/main.qml:116
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Piilotetaanko navigointipaneeli."
-
-#: ui/main.qml:130
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "Näytä näppäimistöpainike aina"
-
-#: ui/main.qml:131
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Näytetäänkö näppäimistön näyttämispainike navigointirivillä aina."
-
-#: ui/main.qml:142
+#: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
 msgstr "Toimintolaatikko"
 
-#: ui/main.qml:148
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Kiinnitetty tila"
 
-#: ui/main.qml:149
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Laajennettu tila"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "Pika-asetukset"
 
-#: ui/main.qml:161
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Ylävasemman laatikon tila"
 
-#: ui/main.qml:162
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Tila avattaessa ylävasemmalta."
 
-#: ui/main.qml:187
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Yläoikean laatikon tila"
 
-#: ui/main.qml:188
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Tila avattaessa yläoikealta."
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "Lukitusnäytön pikakuvakkeet"
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "Ei mitään"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "Taskulamppu"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "Kamera"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Vasen painike"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Oikea painike"
+
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Piilota"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Näytä"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "Pika-asetussarakkeet"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "Sarakkeiden enimmäismäärä vaaka-asennossa."
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
 "Mukauta pudotusvalikon pika-asetusten järjestystä tai piilota asetuksia."
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Käytöstä poistetut pika-asetukset"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Ota aiemmin käytöstä poistetut pika-asetukset taas käyttöön."
@@ -211,30 +265,53 @@ msgstr "Värinän kesto"
 msgid "How long shell vibrations should be."
 msgstr "Kuoren värähtelyn kesto."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Pitkä"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Keskimittainen"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Lyhyt"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Näppäimistön värinä säädetään erikseen näppäimistöasetusmoduulissa."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Jos aktiivinen, salli näytön ollessa poissa käytöstä laitteen herätys "
+#~ "kaksoisnapautuksella."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "Navigointipaneeli"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Vain eleet -tila"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Piilotetaanko navigointipaneeli."
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "Näytä näppäimistöpainike aina"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr "Näytetäänkö näppäimistön näyttämispainike navigointirivillä aina."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Värinän voimakkuus"

@@ -73,8 +73,8 @@ Item {
                 SequentialAnimation {
                     id: openAnimComplex
 
-                    // slight pause to give slower devices time to catch up when the item becomes visible
-                    PauseAnimation { duration: 20 }
+                    // pause for background color to catch up
+                    PauseAnimation { duration: 1 }
 
                     ParallelAnimation {
                         id: parallelAnim
@@ -167,10 +167,9 @@ Item {
                             id: background
                             anchors.fill: parent
 
-                            // Tint the background color if a dark theme is being used
-                            color: Kirigami.ColorUtils.brightnessForColor(Kirigami.Theme.backgroundColor) === Kirigami.ColorUtils.Dark ?
-                                    Kirigami.ColorUtils.tintWithAlpha(colorGenerator.dominant, Kirigami.Theme.backgroundColor, 0.7) :
-                                    colorGenerator.dominant
+                            // Tint the background color so that it is less prominent
+                            // This avoids flashing the user all of a sudden with bright colors
+                            color: Kirigami.ColorUtils.tintWithAlpha(colorGenerator.dominant, Kirigami.Theme.backgroundColor, 0.7)
 
                             Kirigami.ImageColors {
                                 id: colorGenerator

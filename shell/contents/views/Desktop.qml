@@ -8,10 +8,12 @@
 import QtQuick 2.15
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.shell 2.0 as Shell
 
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kirigami 2.20 as Kirigami
+
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Rectangle {
     id: root
@@ -19,6 +21,25 @@ Rectangle {
     property Item containment
 
     color: (containment && containment.backgroundHints == PlasmaCore.Types.NoBackground) ? "transparent" : Kirigami.Theme.textColor
+
+    Component.onCompleted: {
+        initializeShellSingletons();
+    }
+
+    function initializeShellSingletons() {
+        console.log('Initializing DBus objects and popup providers...');
+        // Note: The calls here must be idempotent (support being called multiple times)
+        //       - this is called every time there is a new desktop containment
+
+        // HACK: we need to initialize the DBus server somewhere in plasmashell, it might as well be here...
+        MobileShellState.ShellDBusObject.registerObject();
+        MobileShellState.PanelSettingsDBusObjectManager.registerObjects();
+
+        // Initialize the volume osd, and volume keys.
+        // Initialize notification popups.
+        // Initialize action popup buttons.
+        MobileShell.PopupProviderLoader.load();
+    }
 
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");

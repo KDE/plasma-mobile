@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-07-16 09:26+0300\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-10-06 10:09+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -26,53 +26,56 @@ msgstr "העתקה ללוח הגזירים"
 msgid "View Error Details…"
 msgstr "הצגת פרטי שגיאה…"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "פתיחת %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "שינויי פריסה הוגבלו על ידי הנהלת המערכת"
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "הגדרת %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "כללי"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "תמונת רקע"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "פריסת מסך הבית"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "שינוי מסך הבית"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "פריסת מסך הבית לשימוש."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "בחירת מסך הבית"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "לשנות את מסך הבית למסך %1?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr "הגדרות מסך הבית הנוכחיות שלך שמורות ותשוחזרנה במקרה החלפה בחזרה."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "תוסף תמונת רקע"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "תוסף תמונת הרקע לשימוש."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "תוספי תמונות רקע"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "הורדת תוספים חדשים…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "יש להחיל את שינויים הפריסה לפני שאפשר לערוך שינויים נוספים"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "החלה כעת"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "תמונת רקע"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "שינויי פריסה הוגבלו על ידי הנהלת המערכת"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -82,9 +85,29 @@ msgstr "נא למלא קוד אישי (PIN)"
 msgid "Wrong PIN"
 msgstr "קוד אישי (PIN) שגוי"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "מחוון מיקוד לוח"
+
+#~ msgid "General"
+#~ msgstr "כללי"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "פריסת מסך הבית"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "יש להחיל את שינויים הפריסה לפני שאפשר לערוך שינויים נוספים"
+
+#~ msgid "Apply now"
+#~ msgstr "החלה כעת"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "הפעלת הפנס"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "פתיחת המצלמה"
 
 #~ msgid "Logging in..."
 #~ msgstr "מתבצעת כניסה למערכת…"

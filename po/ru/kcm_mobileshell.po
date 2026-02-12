@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2023.
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-09-23 16:25+0300\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-06-24 13:08+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -44,146 +44,203 @@ msgstr "Анимация"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Если этот параметр отключён, использование анимаций будет минимальным."
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Автоматическое скрытие панелей"
+
+#: ui/main.qml:56
 #, fuzzy, kde-format
-#| msgid "Status bar"
+#| msgid ""
+#| "When active, status and navigation panels will auto hide, allowing "
+#| "applications to fill the entire screen space."
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+"Если этот параметр включён, будет выполняться автоматическое скрытие строки "
+"состояния и панели навигации, что позволит приложениям занять всё экранное "
+"пространство."
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr ""
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+
+#: ui/main.qml:81
+#, kde-format
 msgid "Status Bar"
 msgstr "Строка состояния"
 
-#: ui/main.qml:59
+#: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
 msgstr "Дата в строке состояния"
 
-#: ui/main.qml:60
+#: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 "Если этот параметр включён, в строке состояния рядом с часами будет показана "
 "дата."
 
-#: ui/main.qml:74
+#: ui/main.qml:101
 #, kde-format
-msgctxt "Status bar height"
-msgid "Tiny"
-msgstr ""
+msgid "Battery Percentage"
+msgstr "Процент заряда батареи"
 
-#: ui/main.qml:75
+#: ui/main.qml:102
 #, kde-format
-msgctxt "Status bar height"
-msgid "Small"
-msgstr ""
-
-#: ui/main.qml:76
-#, kde-format
-msgctxt "Status bar height"
-msgid "Normal"
-msgstr ""
-
-#: ui/main.qml:77
-#, kde-format
-msgctxt "Status bar height"
-msgid "Large"
-msgstr ""
-
-#: ui/main.qml:78
-#, kde-format
-msgctxt "Status bar height"
-msgid "Very Large"
-msgstr ""
-
-#: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
-msgid "Status Bar Size"
-msgstr "Строка состояния"
-
-#: ui/main.qml:82
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr ""
-
-#: ui/main.qml:109
-#, kde-format
-msgid "Navigation Panel"
-msgstr "Панель навигации"
-
-#: ui/main.qml:115
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Режим «только жесты»"
+msgid "Show battery percentage in the status bar."
+msgstr "Показывать процент заряда батареи в строке состояния."
 
 #: ui/main.qml:116
 #, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Сокрытие панели навигации."
+msgid "Status Bar Size"
+msgstr "Размер строки состояния"
 
-#: ui/main.qml:130
+#: ui/main.qml:117
 #, kde-format
-msgid "Always show keyboard toggle"
-msgstr "Всегда показывать переключатель клавиатуры"
+msgid "Size of the top panel (needs restart)."
+msgstr "Размер верхней панели (требуется перезапуск)."
 
-#: ui/main.qml:131
+#: ui/main.qml:120
 #, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Постоянный показ кнопки переключения клавиатуры на панели навигации."
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr "Крошечная"
 
-#: ui/main.qml:142
+#: ui/main.qml:121
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr "Маленькая"
+
+#: ui/main.qml:122
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr "Обычная"
+
+#: ui/main.qml:123
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr "Большая"
+
+#: ui/main.qml:124
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr "Очень большая"
+
+#: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
 msgstr "Выдвижная панель быстрой настройки"
 
-#: ui/main.qml:148
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Фиксированный режим"
 
-#: ui/main.qml:149
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Растянутый режим"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "Быстрая настройка"
 
-#: ui/main.qml:161
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Режим верхней левой выдвижной панели"
 
-#: ui/main.qml:162
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Режим открытия из верхнего левого угла."
 
-#: ui/main.qml:187
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Режим верхней правой выдвижной панели"
 
-#: ui/main.qml:188
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Режим открытия из верхнего правого угла."
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "Ярлыки на экране блокировки"
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "Нет"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "Фонарик"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "Камера"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Левая кнопка"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Правая кнопка"
+
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Скрыть"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Показать"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Quick Settings Columns"
+msgstr "Быстрая настройка"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
@@ -191,12 +248,12 @@ msgstr ""
 "Настройка порядка параметров для быстрой настройки, расположенных на "
 "выдвижной панели, и их скрытие."
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Отключённые параметры для быстрой настройки"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr ""
@@ -217,25 +274,25 @@ msgstr "Длительность вибрации"
 msgid "How long shell vibrations should be."
 msgstr "Продолжительность виброотклика."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Долгая"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Средняя"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Короткая"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -243,6 +300,23 @@ msgid ""
 msgstr ""
 "Управление виброоткликом клавиатуры выполняется отдельно, в модуле "
 "параметров клавиатуры."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "Панель навигации"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Режим «только жесты»"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Скрытие панели навигации."
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "Всегда показывать переключатель клавиатуры"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr ""
+#~ "Постоянный показ кнопки переключения клавиатуры на панели навигации."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Интенсивность вибрации"

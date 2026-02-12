@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-10 00:42+0000\n"
-"PO-Revision-Date: 2023-05-07 20:45+0400\n"
+"POT-Creation-Date: 2026-01-17 00:45+0000\n"
+"PO-Revision-Date: 2025-08-17 22:08+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -15,169 +15,275 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "المجلّد"
 
-#: package/contents/ui/AppDrawerHeader.qml:52
-#, fuzzy, kde-format
-#| msgid "Applications"
+#: qml/AppDrawerHeader.qml:73
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr "التطبيقات"
+msgstr "ابحث في التطبيقات…"
 
-#: package/contents/ui/FavouritesBar.qml:145
-#: package/contents/ui/FavouritesBar.qml:219
-#: package/contents/ui/FolderView.qml:290
-#: package/contents/ui/HomeScreenPage.qml:218
-#: package/contents/ui/HomeScreenPage.qml:298
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "عامّ"
+
+#: qml/delegate/WidgetDelegate.qml:119
+#, kde-format
+msgid "This widget was not found."
+msgstr "الودجة غير موجودة."
+
+#: qml/delegate/WidgetDelegate.qml:137
+#, kde-format
+msgid "Configure…"
+msgstr "اضبط…"
+
+#: qml/delegate/WidgetDelegateConfig.qml:193
+#, kde-format
+msgid "Options"
+msgstr "خيارات"
+
+#: qml/delegate/WidgetDelegateConfig.qml:207
+#, kde-format
+msgid "Widget Options"
+msgstr "خيارات الودجات"
+
+#: qml/delegate/WidgetDelegateConfig.qml:247
+#, kde-format
+msgid "Remove widget"
+msgstr "أزِل ودجة"
+
+#: qml/delegate/WidgetDelegateConfig.qml:254
+#, kde-format
+msgid "Configure widget"
+msgstr "اضبط الودجة"
+
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
 msgstr "أزل"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: qml/HomeScreenPage.qml:481
+#, kde-format
+msgid "Release to configure, drag to move"
+msgstr "حرر لتضبط، واسحب لتحرك"
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
+#, kde-format
+msgid "Confirm Folder Deletion"
+msgstr "أكد حذف المجلد"
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
+#, kde-format
+msgid "Are you sure you want to delete this folder?"
+msgstr "هل أنت متأكد من رغبتك في حذف هذا المجلد؟"
+
+#: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "عناصر سطح المكتب"
 
-#: package/contents/ui/settings/SettingsWindow.qml:80
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
-msgid "Homescreen Settings"
-msgstr ""
+msgctxt "@action:button The word 'new' refers to widgets"
+msgid "Get New Widgets…"
+msgstr "اجلب ودجات جديدة..."
 
-#: package/contents/ui/settings/SettingsWindow.qml:89
+#: qml/settings/AppletListViewer.qml:84
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Widgets…"
+msgstr "اجلب ودجات جديدة..."
+
+#: qml/settings/ConfigGeneral.qml:31
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "الأيقونات"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: qml/settings/ConfigGeneral.qml:47
+#, kde-format
+msgid "Application"
+msgstr "التطبيق"
+
+#: qml/settings/ConfigGeneral.qml:63
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "عدد الصفوف"
 
-#: package/contents/ui/settings/SettingsWindow.qml:122
+#: qml/settings/ConfigGeneral.qml:64
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "عدد الأعمدة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:126
+#: qml/settings/ConfigGeneral.qml:68
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "حجم الأيقونات في الشاشة الرئيسة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:165
+#: qml/settings/ConfigGeneral.qml:107
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "سيبدل بين الصفوف والأعمدة وفقًا لدوران الشاشة."
 
-#: package/contents/ui/settings/SettingsWindow.qml:169
+#: qml/settings/ConfigGeneral.qml:111
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "الشاشة الرئيسة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:175
+#: qml/settings/ConfigGeneral.qml:117
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "أظهر المسميات في الشاشة الرئيسة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:188
+#: qml/settings/ConfigGeneral.qml:130
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "أظهر المسميات في المفضّلة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:201
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr "اقفل التخطيط"
+
+#: qml/settings/ConfigGeneral.qml:156
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "تأثير الانتقال بين الصفحات"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: qml/settings/ConfigGeneral.qml:162
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "شريحة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: qml/settings/ConfigGeneral.qml:163
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "مكعب"
 
-#: package/contents/ui/settings/SettingsWindow.qml:209
+#: qml/settings/ConfigGeneral.qml:164
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "تبهيت"
 
-#: package/contents/ui/settings/SettingsWindow.qml:210
+#: qml/settings/ConfigGeneral.qml:165
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "مكدس"
 
-#: package/contents/ui/settings/SettingsWindow.qml:211
+#: qml/settings/ConfigGeneral.qml:166
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "التّدوير"
 
-#: package/contents/ui/settings/SettingsWindow.qml:226
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "طرق مزدوج لقفل الجهاز"
+
+#: qml/settings/ConfigGeneral.qml:194
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "شريط المفضّلة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:242
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr "أظهر الخلفيّة"
+
+#: qml/settings/ConfigGeneral.qml:210
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "صورة الخلفية"
 
-#: package/contents/ui/settings/SettingsWindow.qml:248
+#: qml/settings/ConfigGeneral.qml:216
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
-msgstr ""
+msgid "Wallpaper blur effect"
+msgstr "تأثير طمس الخلفية"
 
-#: package/contents/ui/settings/SettingsWindow.qml:259
+#: qml/settings/ConfigGeneral.qml:219
 #, kde-format
-msgid "General"
-msgstr ""
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "لا شيء"
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: qml/settings/ConfigGeneral.qml:220
 #, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "بسيط"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "كامل"
+
+#: qml/settings/ConfigGeneral.qml:243
+#, kde-format
+msgid "Export layout"
+msgstr "صدّر التخطيط"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, kde-format
+msgid "Import layout"
+msgstr "استورد تخطيط"
+
+#: qml/settings/ConfigGeneral.qml:262
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "صدّر التخطيط إلى"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: qml/settings/ConfigGeneral.qml:281
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "استورد تخطيط من"
 
-#: package/contents/ui/settings/SettingsWindow.qml:323
-#: package/contents/ui/settings/SettingsWindow.qml:330
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "صدّر الحالة"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
+#: qml/settings/ConfigGeneral.qml:293
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "فشل تصدير %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: qml/settings/ConfigGeneral.qml:300
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "صُدّر  تخطيط الشاشة الرئسة بنجاح إلى %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: qml/settings/ConfigGeneral.qml:306
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "أكد الاستيراد"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: qml/settings/ConfigGeneral.qml:307
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "سيؤدي هذا إلى استبدال تخطيط الشاشة الرئيسة الحالي لديك!"
+
+#: qml/settings/SettingsComponent.qml:57
+#, kde-format
+msgid "Wallpapers"
+msgstr "الخلفيات"
+
+#: qml/settings/SettingsComponent.qml:66
+#, kde-format
+msgid "Settings"
+msgstr "إعدادات"
+
+#~ msgid "Homescreen Settings"
+#~ msgstr "إعدادات الشاشة الرئيسة"
+
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "التبديل بين الشاشات الرئيسة والمزيد من خيارات صور الخلفيات"

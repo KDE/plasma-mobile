@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2023-12-22 05:36+0900\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-11-24 19:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,36 +18,92 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.01.80\n"
+"X-Generator: Lokalize 26.03.70\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
-#: package/contents/ui/FolderGrid.qml:189
-#, kde-format
-msgid "Remove from favourites"
-msgstr "從最愛中移除"
-
-#: package/contents/ui/FavoritesGrid.qml:291
-#, kde-format
-msgid "Add applications to your favourites so they show up here."
-msgstr "將應用程式加入您的最愛，它們便會出現於此。"
-
-#: package/contents/ui/FolderGrid.qml:194
-#, kde-format
-msgid "Move out of folder"
-msgstr "移動至資料夾外"
-
-#: package/contents/ui/GridAppDelegate.qml:64
-#, kde-format
-msgid "Add to favourites"
-msgstr "加入最愛"
-
-#: package/contents/ui/GridAppList.qml:68
-#, kde-format
-msgid "Applications"
-msgstr "應用程式"
-
-#: plugin/pinnedmodel.cpp:151
+#: pinnedmodel.cpp:146
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "資料夾"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr "一般"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr "從最愛中移除"
+
+#: qml/FavoritesGrid.qml:294
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "將應用程式加入您的最愛，它們便會出現於此。"
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr "移動至資料夾外"
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "加入最愛"
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr "應用程式"
+
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "主畫面設定"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "主畫面"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "桌布模糊效果"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "無"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "簡單"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "完全"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "點兩下鎖定裝置"
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr "桌布"
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr "設定"
+
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "在主畫面與更多桌布選項之間切換"

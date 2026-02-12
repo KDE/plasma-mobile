@@ -1,0 +1,48 @@
+# Sanskrit translations for plasma-mobile package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>2);\n"
+
+#: contents/ui/main.qml:11
+#, kde-format
+msgid "Mobile Data"
+msgstr "मोबाइल डाटा"
+
+#: contents/ui/main.qml:15 contents/ui/main.qml:23
+#, kde-format
+msgid "Not Available"
+msgstr "न उपलब्धम्"
+
+#: contents/ui/main.qml:17
+#, kde-format
+msgid "APN needs to be configured in the settings"
+msgstr "सेटिङ्ग्स् मध्ये एपीएन् विन्यस्तं करणीयम्"
+
+#: contents/ui/main.qml:19
+#, kde-format
+msgid "On"
+msgstr "इत्युपरि"
+
+#: contents/ui/main.qml:19
+#, kde-format
+msgid "Off"
+msgstr "दूरे"
+
+#: contents/ui/main.qml:21
+#, kde-format
+msgid "No SIM inserted"
+msgstr "न सिम सम्मिलितम्"

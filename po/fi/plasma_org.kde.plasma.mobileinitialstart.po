@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-10-18 11:50+0300\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-09-03 18:32+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -33,10 +33,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Avaa opastetun aloitustoiminnon muuttamatta asetuksia"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 KDE-yhteisö"
+msgstr "© 2024 KDE-yhteisö"
 
 #: main.cpp:37
 #, kde-format
@@ -146,6 +145,7 @@ msgid "Edit"
 msgstr "Muokkaa"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
@@ -186,10 +186,49 @@ msgstr "Säädä näyttöalkioiden kokoa."
 msgid "Display Scaling"
 msgstr "Näytön mittakaava"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tumma teema"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Järjestelmänavigointi"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Valitse järjestelmän navigointitapa."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Elenavigointi"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Näytä käynnissä olevat sovellukset pyyhkäisemällä alhaalta ylös. Nopea "
+"näpäys vie kotinäytölle."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Painikenavigointi"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "Käytä järjestelmänavigointiin navigointirivin painikkeita."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "Valintaa voi myöhemmin asetuksissa muuttaa."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -211,6 +250,21 @@ msgstr "24-tuntinen kello"
 msgid "Invalid input."
 msgstr "Virheellinen syöte."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "Yhdistä"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "Katkaise yhteys"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "Asetukset"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -231,17 +285,17 @@ msgstr "Yhdistä verkkoyhteyttä varten langattomaan verkkoon."
 msgid "Password…"
 msgstr "Salasana…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Tervetuloa<br/><b>Plasma Mobileen</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Moottorina<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Seuraava"
@@ -251,12 +305,12 @@ msgstr "Seuraava"
 msgid "Initial Start"
 msgstr "Ensikäynnistys"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Takaisin"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Viimeistele"

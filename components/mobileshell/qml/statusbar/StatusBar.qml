@@ -15,12 +15,13 @@ import QtQml.Models
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.plasma.private.systemtray as SystemTray
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Item {
     id: root
@@ -45,31 +46,17 @@ Item {
      */
     property bool showTime: true
 
-    /**
-     * Disables showing system tray indicators, preventing SIGABRT when used on the lockscreen.
-     */
-    property bool disableSystemTray: false
-
-    property color colorScopeColor: Kirigami.Theme.backgroundColor
-
     readonly property real textPixelSize: Math.round(11 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real smallerTextPixelSize: Math.round(9 * ShellSettings.Settings.statusBarScaleFactor)
     readonly property real elementSpacing: Math.round(Kirigami.Units.smallSpacing * 1.5)
 
-    P5Support.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 1000
-        intervalAlignment: P5Support.Types.AlignToMinute
+    Clock {
+        id: clockSource
     }
 
-    property alias statusNotifierSource: statusNotifierSourceLoader.item
-
-    Loader {
-        id: statusNotifierSourceLoader
-        active: !disableSystemTray
-        sourceComponent: SystemTray.StatusNotifierModel { }
+    MobileShellState.PanelSettingsDBusClient {
+        id: panelSettings
+        screenName: Screen.name
     }
 
     // drop shadow for icons
@@ -89,8 +76,8 @@ Item {
         z: 1
         topPadding: Kirigami.Units.smallSpacing
         bottomPadding: Kirigami.Units.smallSpacing
-        rightPadding: Kirigami.Units.smallSpacing * 3
-        leftPadding: Kirigami.Units.smallSpacing * 3
+        rightPadding: Kirigami.Units.smallSpacing * 3 + panelSettings.statusBarLeftPadding
+        leftPadding: Kirigami.Units.smallSpacing * 3 + panelSettings.statusBarRightPadding
 
         anchors.fill: parent
         background: Rectangle {
@@ -103,9 +90,10 @@ Item {
 
             RowLayout {
                 id: mainRow
-                readonly property real rowHeight: MobileShell.Constants.topPanelHeight - Kirigami.Units.smallSpacing * 2
+                readonly property real rowHeight: MobileShell.Constants.defaultTopPanelHeight - Kirigami.Units.smallSpacing * 2
 
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
                 Layout.preferredHeight: rowHeight
 
                 spacing: 0
@@ -115,7 +103,7 @@ Item {
                     visible: root.showTime
                     Layout.fillHeight: true
                     fontPixelSize: textPixelSize
-                    source: timeSource
+                    clockSource: clockSource
                 }
 
                 MobileShell.SignalStrengthIndicator {
@@ -128,16 +116,6 @@ Item {
                 // spacing in the middle
                 Item {
                     Layout.fillWidth: true
-                }
-
-                // system tray
-                Repeater {
-                    id: statusNotifierRepeater
-                    model: root.statusNotifierSource
-
-                    delegate: TaskWidget {
-                        Layout.leftMargin: root.elementSpacing
-                    }
                 }
 
                 // system indicators
@@ -185,7 +163,7 @@ Item {
                 Layout.fillWidth: true
 
                 PlasmaComponents.Label {
-                    text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd. MMMM d")
+                    text: Qt.formatDate(clockSource.dateTime, "ddd. MMMM d")
                     color: Kirigami.Theme.disabledTextColor
                     font.pixelSize: root.smallerTextPixelSize
                 }

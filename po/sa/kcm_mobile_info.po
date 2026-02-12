@@ -1,0 +1,106 @@
+# Sanskrit translations for plasma-mobile package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>2);\n"
+
+#: ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "प्रणाली सूचना"
+
+#: ui/main.qml:26
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr "प्रतिलिपि"
+
+#: ui/main.qml:47
+#, kde-format
+msgid "Operating System"
+msgstr "संचालन प्रणाली"
+
+#: ui/main.qml:58
+#, kde-format
+msgid "Webpage"
+msgstr "जालपुटम्"
+
+#: ui/main.qml:92
+#, kde-format
+msgctxt "@title:group"
+msgid "Software"
+msgstr "तन्त्रांश"
+
+#: ui/main.qml:97
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "KDE प्लाज्मा संस्करणम्"
+
+#: ui/main.qml:104
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "KDE Frameworks संस्करणम्"
+
+#: ui/main.qml:111
+#, kde-format
+msgid "Qt Version"
+msgstr "Qt संस्करणम्"
+
+#: ui/main.qml:118
+#, kde-format
+msgid "Kernel Version"
+msgstr "कर्नेल् संस्करणम्"
+
+#: ui/main.qml:125
+#, kde-format
+msgid "OS Type"
+msgstr "ओएस प्रकार"
+
+#: ui/main.qml:126
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-बिट्"
+
+#: ui/main.qml:131
+#, kde-format
+msgctxt "@title:group"
+msgid "Hardware"
+msgstr "हार्डवेयर"
+
+#: ui/main.qml:136
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "संसाधकः"
+msgstr[1] "संसाधकाः"
+
+#: ui/main.qml:143
+#, kde-format
+msgid "Memory"
+msgstr "स्मृति"
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 RAM इत्यस्य"
+
+#: ui/main.qml:149
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "अज्ञात"

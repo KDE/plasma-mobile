@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2026-01-20 00:44+0000\n"
 "PO-Revision-Date: 2024-05-30 09:49+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -2963,7 +2963,7 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Zvolte časové pásmo"
 
-#: ui/main.qml:178
+#: ui/main.qml:177
 #, kde-format
 msgid "Pick System Time"
 msgstr "Vyberte Systémový čas"
@@ -2977,42 +2977,3 @@ msgstr "dop."
 #, kde-format
 msgid "PM"
 msgstr "odp."
-
-#~ msgid "Jan"
-#~ msgstr "Led"
-
-#~ msgid "Feb"
-#~ msgstr "Úno"
-
-#~ msgid "Mar"
-#~ msgstr "Bře"
-
-#~ msgid "Apr"
-#~ msgstr "Dub"
-
-#~ msgid "May"
-#~ msgstr "Kvě"
-
-#~ msgid "Jun"
-#~ msgstr "Čer"
-
-#~ msgid "Jul"
-#~ msgstr "Čec"
-
-#~ msgid "Aug"
-#~ msgstr "Srp"
-
-#~ msgid "Sep"
-#~ msgstr "Zář"
-
-#~ msgid "Oct"
-#~ msgstr "Říj"
-
-#~ msgid "Nov"
-#~ msgstr "Lis"
-
-#~ msgid "Dec"
-#~ msgstr "Dec"
-
-#~ msgid "Pick System Date"
-#~ msgstr "Vyberte systémové datum"

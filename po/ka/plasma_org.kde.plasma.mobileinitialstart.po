@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-27 03:54+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-13 06:17+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -148,6 +148,7 @@ msgid "Edit"
 msgstr "ჩასწორება"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
@@ -188,10 +189,49 @@ msgstr "მოირგეთ ეკრანზე არსებული ე
 msgid "Display Scaling"
 msgstr "ეკრანის მასშტაბი"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "მუქი თემა"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "ნავიგაცია სისტემაში"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "აირჩიეთ სისტემაში ნავიგაციის მეთოდი."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "ჟესტებით ნავიგაცია"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"აუსვით ზემოთ ქვემოდან, რომ დაინახოთ გაშვებული აპლიკაციები. დაატყაპუნეთ "
+"საწყის ეკრანზე გადასასვლელად."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "ღილაკებით ნავიგაცია"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "ღილაკების გამოყენება სისტემაში ნავიგაციისთვის."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "ამის შეცვლა, მოგვიანებით, მორგების ფანჯარაში შეგიძლიათ."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -213,6 +253,21 @@ msgstr "24-საათიანი ფორმატი"
 msgid "Invalid input."
 msgstr "არასწორი შეყვანა."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "დაკავშირება"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "გათიშვა"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "მორგება"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -233,17 +288,17 @@ msgstr "ქსელთან წვდომისთვის მიუერ�
 msgid "Password…"
 msgstr "პაროლი…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "მოგესალმებათ <b>Plasma Mobile</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "სულჩამდგმელი: <b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "შემდეგი"
@@ -253,12 +308,12 @@ msgstr "შემდეგი"
 msgid "Initial Start"
 msgstr "საწყისი გაშვება"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "უკან"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "დასრულება"

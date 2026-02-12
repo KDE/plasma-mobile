@@ -1,0 +1,414 @@
+// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
+
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
+import QtQuick.Controls as QQC2
+
+import org.kde.kirigami 2.20 as Kirigami
+
+import org.kde.plasma.private.mobileshell as MobileShell
+import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
+
+import "./private"
+import "./delegate"
+
+Folio.DelegateTouchArea {
+    id: root
+    property Folio.HomeScreen folio
+
+    property var homeScreen
+
+    // the position on the screen for animations to start from
+    property real folderPositionX
+    property real folderPositionY
+
+    property Folio.FolioApplicationFolder folder: folio.HomeScreenState.currentFolder
+
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
+    onClicked: close();
+
+    function close() {
+        folio.HomeScreenState.closeFolder();
+    }
+
+    Keys.onPressed: (event) => {
+        switch (event.key) {
+        case Qt.Key_Escape:
+        case Qt.Key_Back:
+            // Close view
+            root.close();
+            event.accepted = true;
+            break;
+        case Qt.Key_Up:
+        case Qt.Key_Down:
+        case Qt.Key_Left:
+        case Qt.Key_Right:
+            // Keyboard focus on first item
+            if (delegateRepeater.count > 0) {
+                delegateRepeater.itemAt(0).keyboardFocus();
+                event.accepted = true;
+            }
+            break;
+        }
+    }
+
+    Connections {
+        target: folio.HomeScreenState
+
+        function onFolderAboutToOpen(x, y) {
+            root.folderPositionX = x - folio.HomeScreenState.viewLeftPadding;
+            root.folderPositionY = y - folio.HomeScreenState.viewTopPadding;
+
+            // Focus view when opened
+            root.forceActiveFocus();
+        }
+    }
+
+    FolderViewTitle {
+        id: titleText
+        folio: root.folio
+        width: root.width
+
+        // have to use y instead of anchors to avoid animations
+        y: Math.round(((root.height / 2) - (folderBackground.height / 2)) * 0.9 - height)
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        folder: root.folder
+
+        opacity: (root.opacity === 1) ? 1 : 0
+        Behavior on opacity {
+            NumberAnimation { duration: Kirigami.Units.shortDuration }
+        }
+    }
+
+    function updateContentWidth() {
+        let margin = folderBackground.margin;
+        folio.HomeScreenState.folderPageContentWidth = (folderBackground.width - margin * 2);
+    }
+
+    function updateContentHeight() {
+        let margin = folderBackground.margin;
+        folio.HomeScreenState.folderPageContentHeight = (folderBackground.height - margin * 2);
+    }
+
+    function keyboardNavigateForDelegate(key, column, row, page) {
+        let dx = 0;
+        let dy = 0;
+        switch (key) {
+            case Qt.Key_Up: { dy = -1; break; }
+            case Qt.Key_Down: { dy = 1; break; }
+            case Qt.Key_Left: { dx = -1; break; }
+            case Qt.Key_Right: { dx = 1; break; }
+            default: return;
+        }
+
+        let x = column + dx;
+        let y = row + dy;
+
+        // Loop in direction to find next delegate
+        while (x >= 0 && x < folio.HomeScreenState.folderGridLength
+            && y >= 0 && y < folio.HomeScreenState.folderGridLength) {
+
+            // Find delegate at x, y
+            for (let i = 0; i < delegateRepeater.count; ++i) {
+                let cDelegate = delegateRepeater.itemAt(i);
+                if (cDelegate.columnValue === x && cDelegate.rowValue === y && cDelegate.pageValue === page) {
+                    // Delegate matches, focus on it and return
+                    cDelegate.keyboardFocus();
+                    return;
+                }
+            }
+
+            x += dx;
+            y += dy;
+        }
+
+        // Behavior if no delegate is found to navigate to
+        switch (key) {
+        case Qt.Key_Up:
+        case Qt.Key_Down:
+            break;
+        case Qt.Key_Left: {
+            // Go to the left page if a delegate exists there
+            let cDelegate = delegateRepeater.itemAt((page - 1)
+                                                    * folio.HomeScreenState.folderGridLength
+                                                    * folio.HomeScreenState.folderGridLength);
+            if (cDelegate) {
+                cDelegate.keyboardFocus();
+                folio.HomeScreenState.goToFolderPage(page - 1, false);
+            }
+            break;
+        }
+        case Qt.Key_Right: {
+            // Go to the right page if a delegate exists there
+            let cDelegate = delegateRepeater.itemAt((page + 1)
+                                                    * folio.HomeScreenState.folderGridLength
+                                                    * folio.HomeScreenState.folderGridLength);
+            if (cDelegate) {
+                cDelegate.keyboardFocus();
+                folio.HomeScreenState.goToFolderPage(page + 1, false);
+            }
+            break;
+        }
+        default:
+            return;
+        }
+    }
+
+    Connections {
+        target: folio.HomeScreenState
+
+        function onPageCellWidthChanged() {
+            root.updateContentWidth();
+            root.updateContentHeight();
+        }
+
+        function onPageCellHeightChanged() {
+            root.updateContentWidth();
+            root.updateContentHeight();
+        }
+    }
+
+    Rectangle {
+        id: folderBackground
+        color: Qt.rgba(255, 255, 255, 0.3)
+        radius: Kirigami.Units.gridUnit
+
+        readonly property int gridLength: folio.HomeScreenState.folderGridLength
+
+        readonly property int margin: Kirigami.Units.largeSpacing
+        readonly property int maxLength: Math.min(root.width - Kirigami.Units.gridUnit * 4, root.height - Kirigami.Units.gridUnit * 2)
+
+        readonly property int pageSize: Math.min(maxLength, (folio.FolioSettings.delegateIconSize + Kirigami.Units.gridUnit * 3) * gridLength + Kirigami.Units.gridUnit * 2)
+
+        width: pageSize - margin * 2
+        height: pageSize
+
+        QQC2.PageIndicator {
+            visible: count > 1
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+
+            currentIndex: folio.HomeScreenState.currentFolderPage
+            count: folio.HomeScreenState.currentFolder ? folio.HomeScreenState.currentFolder.applications.numberOfPages : 0
+        }
+
+        onWidthChanged: {
+            folio.HomeScreenState.folderPageWidth = width;
+            root.updateContentWidth();
+            root.updateContentHeight();
+        }
+        onHeightChanged: {
+            folio.HomeScreenState.folderPageHeight = height;
+            root.updateContentWidth();
+            root.updateContentHeight();
+        }
+
+        x: {
+            const folderPos = root.folderPositionX;
+            const centerX = (root.width / 2) - (width / 2);
+            return Math.round(folderPos + (centerX - folderPos) * folio.HomeScreenState.folderOpenProgress);
+        }
+        y: {
+            const folderPos = root.folderPositionY;
+            const centerY = (root.height / 2) - (height / 2);
+            return Math.round(folderPos + (centerY - folderPos) * folio.HomeScreenState.folderOpenProgress);
+        }
+
+        transform: [
+            Scale {
+                origin.x: 0
+                origin.y: 0
+
+                xScale: {
+                    const iconSize = folio.FolioSettings.delegateIconSize;
+                    const fullWidth = folderBackground.width;
+                    const candidate = iconSize + (fullWidth - iconSize) * folio.HomeScreenState.folderOpenProgress;
+                    return Math.max(0, Math.min(1, candidate / fullWidth));
+                }
+                yScale: {
+                    const iconSize = folio.FolioSettings.delegateIconSize;
+                    const fullHeight = folderBackground.height;
+                    const candidate = iconSize + (fullHeight - iconSize) * folio.HomeScreenState.folderOpenProgress;
+                    return Math.max(0, Math.min(1, candidate / fullHeight));
+                }
+            }
+        ]
+
+        MouseArea {
+            id: captureTouches
+            anchors.fill: parent
+
+            // clip the pages
+            layer.enabled: true
+
+            Item {
+                id: contentContainer
+                x: folio.HomeScreenState.folderViewX
+
+                Repeater {
+                    id: delegateRepeater
+                    model: root.folder ? root.folder.applications : []
+
+                    delegate: Item {
+                        id: delegate
+
+                        readonly property var delegateModel: model.delegate
+                        readonly property int index: model.index
+
+                        readonly property int cellWidth: folio.HomeScreenState.folderPageContentWidth / folderBackground.gridLength
+                        readonly property int cellHeight: folio.HomeScreenState.folderPageContentHeight / folderBackground.gridLength
+
+                        readonly property bool outsideView: {
+                            const appPosition = x + folio.HomeScreenState.folderViewX;
+                            return (appPosition <= 0 || appPosition >= folderBackground.width);
+                        }
+
+                        readonly property var dragState: folio.HomeScreenState.dragState
+                        readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Folder &&
+                            dragState.candidateDropPosition.folderPosition === index
+
+                        // get the index position value so we can animate them
+                        property double columnValue: model.columnIndex
+                        property double rowValue: model.rowIndex
+                        property double pageValue: model.pageIndex
+
+                        Behavior on columnValue { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
+                        Behavior on rowValue { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
+                        Behavior on pageValue { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
+
+                        // multiply the index values by the cell size to get the actual position
+                        readonly property int columnPosition: cellWidth * columnValue
+                        readonly property int rowPosition: cellHeight * rowValue
+
+                        x: folderBackground.margin + (pageValue * folderBackground.width) + columnPosition
+                        y: folderBackground.margin + rowPosition
+
+                        implicitWidth: cellWidth
+                        implicitHeight: cellHeight
+                        width: cellWidth
+                        height: cellHeight
+
+                        // Implement keyboard arrow navigation
+                        Keys.onPressed: (event) => {
+                            switch (event.key) {
+                                case Qt.Key_Up:
+                                case Qt.Key_Down:
+                                case Qt.Key_Left:
+                                case Qt.Key_Right:
+                                    event.accepted = true;
+                                    break;
+                                default:
+                                    return;
+                            }
+
+                            root.keyboardNavigateForDelegate(event.key, columnValue, rowValue, pageValue);
+                        }
+
+                        function keyboardFocus() {
+                            if (delegateLoader.item) {
+                                delegateLoader.item.keyboardFocus();
+                            }
+                        }
+
+                        Loader {
+                            id: delegateLoader
+                            anchors.fill: parent
+
+                            sourceComponent: {
+                                if (delegate.delegateModel && delegate.delegateModel.type === Folio.FolioDelegate.Application) {
+                                    return appComponent;
+                                } else {
+                                    return noneComponent;
+                                }
+                            }
+                        }
+
+                        Component {
+                            id: noneComponent
+
+                            Item {}
+                        }
+
+                        Component {
+                            id: appComponent
+
+                            AppDelegate {
+                                id: appDelegate
+                                folio: root.folio
+                                application: delegate.delegateModel.application
+
+                                // do not show if the drop animation is running to this delegate
+                                visible: !(root.homeScreen.dropAnimationRunning && delegate.isDropPositionThis)
+                                enabled: !delegate.outsideView
+
+                                // don't show label in drag and drop mode
+                                labelOpacity: delegate.opacity
+
+                                onPressAndHold: {
+                                    // prevent editing if lock layout is enabled
+                                    if (folio.FolioSettings.lockLayout) return;
+
+                                    let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem);
+                                    folio.HomeScreenState.startDelegateFolderDrag(
+                                        mappedCoords.x,
+                                        mappedCoords.y,
+                                        appDelegate.pressPosition.x,
+                                        appDelegate.pressPosition.y,
+                                        root.folder,
+                                        delegate.index
+                                    );
+
+                                    contextMenu.open();
+                                    haptics.buttonVibrate();
+                                }
+
+                                onPressAndHoldReleased: {
+                                    // cancel the event if the delegate is not dragged
+                                    if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                                        homeScreen.cancelDelegateDrag();
+                                    }
+                                }
+
+                                onRightMousePress: {
+                                    contextMenu.open();
+                                }
+
+                                ContextMenuLoader {
+                                    id: contextMenu
+
+                                    // close menu when drag starts
+                                    Connections {
+                                        target: folio.HomeScreenState
+
+                                        function onDelegateDragStarted() {
+                                            contextMenu.close();
+                                        }
+                                    }
+
+                                    actions: [
+                                        Kirigami.Action {
+                                            icon.name: "emblem-favorite"
+                                            text: i18n("Remove")
+                                            enabled: !folio.FolioSettings.lockLayout
+                                            onTriggered: root.folder.removeDelegate(delegate.index)
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

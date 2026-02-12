@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2026-01-20 00:44+0000\n"
 "PO-Revision-Date: 2024-05-24 16:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -2963,7 +2963,7 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Pick Timezone"
 
-#: ui/main.qml:178
+#: ui/main.qml:177
 #, kde-format
 msgid "Pick System Time"
 msgstr "Pick System Time"

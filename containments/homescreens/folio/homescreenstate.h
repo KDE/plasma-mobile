@@ -24,6 +24,9 @@ class HomeScreen;
 class HomeScreenState : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(HomeScreenState::SwipeState swipeState READ swipeState NOTIFY swipeStateChanged)
     Q_PROPERTY(HomeScreenState::ViewState viewState READ viewState NOTIFY viewStateChanged)
     Q_PROPERTY(DragState *dragState READ dragState CONSTANT)
@@ -60,7 +63,7 @@ class HomeScreenState : public QObject
     Q_PROPERTY(qreal folderPageContentWidth READ folderPageContentWidth WRITE setFolderPageContentWidth NOTIFY folderPageContentWidthChanged)
     Q_PROPERTY(qreal folderPageContentHeight READ folderPageContentHeight WRITE setFolderPageContentHeight NOTIFY folderPageContentHeightChanged)
     Q_PROPERTY(qreal folderOpenProgress READ folderOpenProgress WRITE setFolderOpenProgress NOTIFY folderOpenProgressChanged)
-    Q_PROPERTY(FolioApplicationFolder *currentFolder READ currentFolder NOTIFY currentFolderChanged)
+    Q_PROPERTY(FolioApplicationFolder *currentFolder READ currentFolderRaw NOTIFY currentFolderChanged)
     Q_PROPERTY(qreal folderGridLength READ folderGridLength NOTIFY folderGridLengthChanged)
 
     Q_PROPERTY(qreal settingsOpenProgress READ settingsOpenProgress WRITE setSettingsOpenProgress NOTIFY settingsOpenProgressChanged)
@@ -76,6 +79,8 @@ class HomeScreenState : public QObject
 
     Q_PROPERTY(int currentPage READ currentPage NOTIFY pageNumChanged)
     Q_PROPERTY(int currentFolderPage READ currentFolderPage NOTIFY folderPageNumChanged)
+
+    Q_PROPERTY(bool isDraggingDelegate READ isDraggingDelegate NOTIFY isDraggingDelegateChanged)
 
 public:
     enum SwipeState {
@@ -208,8 +213,9 @@ public:
     int folderGridLength() const;
     void calculateFolderGridLength();
 
-    FolioApplicationFolder *currentFolder() const;
-    void setCurrentFolder(FolioApplicationFolder *folder);
+    std::shared_ptr<FolioApplicationFolder> currentFolder() const;
+    FolioApplicationFolder *currentFolderRaw() const;
+    void setCurrentFolder(std::shared_ptr<FolioApplicationFolder> folder);
 
     // the progress for the opening of the settings view
     qreal settingsOpenProgress();
@@ -253,6 +259,9 @@ public:
     void setCurrentPage(int currentPage);
 
     int currentFolderPage();
+
+    // Whether something is being dragged (either from SwipeArea or Drag & Drop)
+    bool isDraggingDelegate();
 
     // QML helpers
     Q_INVOKABLE FolioDelegate *getPageDelegateAt(int page, int row, int column);
@@ -301,7 +310,9 @@ Q_SIGNALS:
     void searchWidgetYChanged();
     void delegateDragXChanged();
     void delegateDragYChanged();
-    void delegateDragEnded();
+    void delegateDragStarted();
+    void delegateDragDropped();
+    void delegateDragCancelled();
     void delegateDragFromPageStarted(int page, int row, int column);
     void delegateDragFromFavouritesStarted(int position);
     void delegateDragFromAppDrawerStarted(QString storageId);
@@ -309,6 +320,7 @@ Q_SIGNALS:
     void delegateDragFromWidgetListStarted(QString appletPluginId);
     void pageNumChanged();
     void folderPageNumChanged();
+    void isDraggingDelegateChanged();
 
     void leftCurrentFolder();
     void folderAboutToOpen(qreal x, qreal y); // the position on the screen where the delegate is at, for animations
@@ -340,11 +352,21 @@ public Q_SLOTS:
     // from SwipeArea
     void swipeStarted(qreal deltaX, qreal deltaY);
     void swipeEnded();
+    void swipeCancelled();
     void swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
+
+    // from DropArea
+    void dragStart();
+    void dragMove(qreal deltaX, qreal deltaY);
+    void dragDrop();
+    void dragCancel();
 
 private:
     void setViewState(ViewState viewState);
     void setSwipeState(SwipeState swipeState);
+
+    void setAppDrawerOpenProgress(qreal progress);
+    void setSearchWidgetOpenProgress(qreal progress);
 
     void startDelegateDrag(qreal startX, qreal startY, qreal pointerOffsetX, qreal pointerOffsetY);
 
@@ -389,7 +411,7 @@ private:
     qreal m_folderPageContentWidth{0};
     qreal m_folderPageContentHeight{0};
     qreal m_folderOpenProgress{0};
-    FolioApplicationFolder *m_currentFolder{nullptr};
+    std::shared_ptr<FolioApplicationFolder> m_currentFolder{nullptr};
     int m_folderGridLength{0};
 
     qreal m_settingsOpenProgress{0};
@@ -402,6 +424,7 @@ private:
     qreal m_delegateDragY{0};
     qreal m_delegateDragPointerOffsetX{0};
     qreal m_delegateDragPointerOffsetY{0};
+    bool m_dragDropActive{false};
 
     int m_pageNum{0};
     int m_folderPageNum{0};

@@ -57,6 +57,11 @@ bool WidgetContainer::childMouseEventFilter(QQuickItem *item, QEvent *event)
     switch (event->type()) {
     case QEvent::MouseButtonPress: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
+
+        if (!validMouseEvent(me)) {
+            return true;
+        }
+
         if (me->buttons() & Qt::LeftButton) {
             mousePressEvent(me);
         }
@@ -64,11 +69,21 @@ bool WidgetContainer::childMouseEventFilter(QQuickItem *item, QEvent *event)
     }
     case QEvent::MouseMove: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
+
+        if (!validMouseEvent(me)) {
+            return true;
+        }
+
         mouseMoveEvent(me);
         break;
     }
     case QEvent::MouseButtonRelease: {
         QMouseEvent *me = static_cast<QMouseEvent *>(event);
+
+        if (!validMouseEvent(me)) {
+            return true;
+        }
+
         mouseReleaseEvent(me);
         break;
     }
@@ -127,5 +142,24 @@ void WidgetContainer::onActiveFocusChanged(bool activeFocus)
 {
     if (!activeFocus) {
         setEditMode(false);
+    }
+}
+
+bool WidgetContainer::validMouseEvent(QMouseEvent *event)
+{
+    bool synthesized = event->source() == Qt::MouseEventSynthesizedByQt || event->source() == Qt::MouseEventSynthesizedBySystem;
+
+    // Don't need to block propagated events
+    if (!synthesized || event->type() != QEvent::MouseButtonRelease) {
+        return true;
+    }
+
+    // If edit mode is not enabled, let the event propagate
+    if (!m_editMode) {
+        return true;
+    } else {
+        // If edit mode is enabled, block the event propagation and handle it only on the WidgetContainer
+        mouseReleaseEvent(event);
+        return false;
     }
 }

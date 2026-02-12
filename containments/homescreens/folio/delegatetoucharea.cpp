@@ -18,7 +18,7 @@ DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
     m_pressAndHoldTimer->setSingleShot(true);
     connect(m_pressAndHoldTimer, &QTimer::timeout, this, &DelegateTouchArea::startPressAndHold);
 
-    // Explcitly call setCursor on QQuickItem since
+    // Explicitly call setCursor on QQuickItem since
     // it internally keeps a boolean hasCursor that doesn't
     // get set to true unless you call setCursor
     setCursor(Qt::ArrowCursor);

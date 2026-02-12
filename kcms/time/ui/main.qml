@@ -111,6 +111,7 @@ SimpleKCM {
             id: timeZonePickerDialog
             title: i18nc("@title:window", "Pick Timezone")
             standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+            preferredWidth: Kirigami.Units.gridUnit * 18
 
             property string selectedTimeZoneId
 
@@ -126,8 +127,6 @@ SimpleKCM {
                 id: listView
                 currentIndex: -1 // otherwise the vkbd will constantly open and close while typing
                 headerPositioning: ListView.OverlayHeader
-                implicitWidth: 18 * Kirigami.Units.gridUnit
-                implicitHeight: 18 * Kirigami.Units.gridUnit
 
                 header: Controls.Control {
                     z: 1

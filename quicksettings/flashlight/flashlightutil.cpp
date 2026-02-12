@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2022 by Devin Lin <devin@kde.org>
+ * SPDX-FileCopyrightText: 2024-2025 Florian RICHER <florian.richer@protonmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -14,6 +15,11 @@
 
 #include <QDebug>
 #include <QFileInfo>
+
+#include <KAuth/Action>
+#include <KAuth/ExecuteJob>
+
+using namespace Qt::StringLiterals;
 
 #define TORCH_SUBSYSTEM "leds"
 
@@ -39,9 +45,20 @@ void FlashlightUtil::toggleTorch()
         return;
     }
 
-    int ret = udev_device_set_sysattr_value(m_device, "brightness", const_cast<char *>(m_torchEnabled ? "0" : m_maxBrightness));
-    if (ret < 0) {
-        qWarning() << "Flashlight can't be toggled";
+    const QString sysPath = udev_device_get_syspath(m_device);
+    const QString brightness = m_torchEnabled ? "0" : m_maxBrightness;
+    const QVariantMap args = {
+        {u"sysPath"_s, sysPath},
+        {u"brightness"_s, brightness},
+    };
+
+    KAuth::Action writeAction(u"org.kde.plasma.mobileshell.flashlighthelper.setbrightness"_s);
+    writeAction.setHelperId(u"org.kde.plasma.mobileshell.flashlighthelper"_s);
+    writeAction.setArguments(args);
+
+    KAuth::ExecuteJob *job = writeAction.execute();
+    if (!job->exec()) {
+        qDebug() << "Flashlight can't be toggled: kauth returned an error code:" << job->error() << " message: " << job->errorString();
         return;
     }
 

@@ -9,13 +9,17 @@
 
 #include <KNotificationJobUiDelegate>
 
-FolioApplication::FolioApplication(HomeScreen *parent, KService::Ptr service)
+FolioApplication::FolioApplication(KService::Ptr service, QObject *parent)
     : QObject{parent}
     , m_running{false}
     , m_name{service->name()}
     , m_icon{service->icon()}
     , m_storageId{service->storageId()}
 {
+    if (service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
+        m_name = service->genericName();
+    }
+
     auto windows = WindowListener::instance()->windowsFromStorageId(m_storageId);
     if (windows.empty()) {
         m_window = nullptr;
@@ -35,11 +39,11 @@ FolioApplication::FolioApplication(HomeScreen *parent, KService::Ptr service)
     });
 }
 
-FolioApplication *FolioApplication::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioApplication::Ptr FolioApplication::fromJson(QJsonObject &obj)
 {
     QString storageId = obj[QStringLiteral("storageId")].toString();
     if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
-        return new FolioApplication(parent, service);
+        return std::make_shared<FolioApplication>(service);
     }
     return nullptr;
 }

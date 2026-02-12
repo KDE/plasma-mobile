@@ -12,14 +12,18 @@ import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.configuration 2.0
 import org.kde.kitemmodels 1.0 as KItemModels
 
-Rectangle {
+import './private'
+
+/**
+ * This component is loaded by libplasma when the "configuration window" is requested for an applet.
+ */
+Item {
     id: root
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    color: "transparent"
-
 //BEGIN properties
+    // Properties filled in or needed by libplasma
 
     property bool isContainment: false
     property alias app: appLoader.item
@@ -47,90 +51,30 @@ Rectangle {
 
 //END model
 
-//BEGIN functions
-
-    function saveConfig() {
-        if (app.pageStack.currentItem.saveConfig) {
-            app.pageStack.currentItem.saveConfig()
-        }
-        for (var key in Plasmoid.configuration) {
-            if (app.pageStack.currentItem["cfg_"+key] !== undefined) {
-                Plasmoid.configuration[key] = app.pageStack.currentItem["cfg_"+key]
-            }
-        }
-    }
-
-    function configurationHasChanged() {
-        for (var key in Plasmoid.configuration) {
-            if (app.pageStack.currentItem["cfg_"+key] !== undefined) {
-                //for objects == doesn't work
-                if (typeof Plasmoid.configuration[key] == 'object') {
-                    for (var i in Plasmoid.configuration[key]) {
-                        if (Plasmoid.configuration[key][i] != app.pageStack.currentItem["cfg_"+key][i]) {
-                            return true;
-                        }
-                    }
-                    return false;
-                } else if (app.pageStack.currentItem["cfg_"+key] != Plasmoid.configuration[key]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
-    function settingValueChanged() {
-        if (app.pageStack.currentItem.saveConfig !== undefined) {
-            app.pageStack.currentItem.saveConfig();
-        } else {
-            root.saveConfig();
-        }
-    }
-
-    function pushReplace(item, config) {
-        let page;
-        if (app.pageStack.depth === 0) {
-            page = app.pageStack.push(item, config);
-        } else {
-            page = app.pageStack.replace(item, config);
-        }
-        app.currentConfigPage = page;
-    }
-
     function open(item) {
-        app.isAboutPage = false;
         if (item.source) {
-            app.isAboutPage = item.source === "AboutPlugin.qml";
-            pushReplace(Qt.resolvedUrl("ConfigurationAppletPage.qml"), {configItem: item, title: item.name});
+            app.pageStack.push(Qt.resolvedUrl("private/ConfigurationAppletPage.qml"), {configItem: item, title: item.name});
         } else if (item.kcm) {
-            pushReplace(configurationKcmPageComponent, {kcm: item.kcm, internalPage: item.kcm.mainUi});
-        } else {
-            app.pageStack.pop();
+            app.pageStack.push(configurationKcmPageComponent, {kcm: item.kcm, internalPage: item.kcm.mainUi});
         }
     }
 
-//END functions
-
-
-//BEGIN connections
-
-    Connections {
-        target: root.Window.window
-        function onVisibleChanged() {
-            if (root.Window.window.visible) {
-                root.Window.window.showMaximized();
-            }
-        }
+    Binding {
+        // Window bindings
+        root.Window.window.flags: Qt.FramelessWindowHint
+        root.Window.window.visibility: Window.Maximized
     }
-
-//END connections
-
-//BEGIN UI components
 
     Component {
         id: configurationKcmPageComponent
         ConfigurationKcmPage {}
+    }
+
+    Component {
+        id: configListPageComponent
+        ConfigListPage {
+            onRequestOpen: (delegate) => root.open(delegate);
+        }
     }
 
     Loader {
@@ -138,14 +82,15 @@ Rectangle {
         anchors.fill: parent
         asynchronous: true
         active: root.loadApp
+
+        // Load first page
         onLoaded: {
-            // if we are a containment then the first item will be ConfigurationContainmentAppearance
-            // if the applet does not have own configs then the first item will be Shortcuts
-            if (isContainment || !configDialog.configModel || configDialog.configModel.count === 0) {
-                root.open(root.globalConfigModel.get(0))
-            } else {
-                root.open(configDialog.configModel.get(0))
-            }
+            // Push config list page
+            app.pageStack.push(configListPageComponent, {
+                title: i18nc("The title of the applet configuration window", "Configure %1", Plasmoid.metaData.name),
+                model1: configDialogFilterModel,
+                model2: root.globalConfigModel
+            });
 
             root.appLoaded();
         }
@@ -154,90 +99,50 @@ Rectangle {
             id: app
             anchors.fill: parent
 
-            // animation on show
-            opacity: 0
-            NumberAnimation on opacity {
-                to: 1
-                running: true
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
+            pageStack {
+                globalToolBar {
+                    canContainHandles: true
+                    style: Kirigami.ApplicationHeaderStyle.ToolBar
+                    showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton
+                }
+                popHiddenPages: true
+                columnView.columnResizeMode: Kirigami.ColumnView.SingleColumn
             }
 
-            pageStack.globalToolBar.canContainHandles: true
-            pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
-            pageStack.globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton;
-
-            property var currentConfigPage: null
-            property bool isAboutPage: false
-
-            // pop pages when not in use
+            // Implement open/close animation
             Connections {
-                target: app.pageStack
-                function onCurrentIndexChanged() {
-                    // wait for animation to finish before popping pages
-                    timer.restart();
-                }
-            }
+                target: root.Window.window
 
-            Timer {
-                id: timer
-                interval: 300
-                onTriggered: {
-                    let currentIndex = app.pageStack.currentIndex;
-                    while (app.pageStack.depth > (currentIndex + 1) && currentIndex >= 0) {
-                        app.pageStack.pop();
+                function onVisibleChanged() {
+                    if (visible) {
+                        opacityAnim.to = 1;
+                        opacityAnim.restart();
+                    }
+                }
+
+                function onClosing(close) {
+                    if (app.opacity !== 0) {
+                        close.accepted = false;
+                        opacityAnim.to = 0;
+                        opacityAnim.restart();
                     }
                 }
             }
 
-            footer: Kirigami.NavigationTabBar {
-                id: footerBar
-                visible: count > 1
-                height: visible ? implicitHeight : 0
-                Repeater {
-                    model: root.isContainment ? globalConfigModel : undefined
-                    delegate: configCategoryDelegate
-                }
-                Repeater {
-                    model: configDialogFilterModel
-                    delegate: configCategoryDelegate
-                }
-                Repeater {
-                    model: !root.isContainment ? globalConfigModel : undefined
-                    delegate: configCategoryDelegate
-                }
-            }
+            opacity: 0
+            scale: 0.7 + 0.3 * app.opacity
 
-            Component {
-                id: configCategoryDelegate
-                Kirigami.NavigationTabButton {
-                    icon.name: model.icon
-                    text: model.name
-                    width: footerBar.buttonWidth
-                    QQC2.ButtonGroup.group: footerBar.tabGroup
-
-                    onClicked: {
-                        if (checked) {
-                            root.open(model);
-                        }
-                    }
-
-                    checked: {
-                        if (app.pageStack.currentItem) {
-                            if (model.kcm && app.pageStack.currentItem.kcm) {
-                                return model.kcm == app.pageStack.currentItem.kcm;
-                            } else if (app.pageStack.currentItem.configItem) {
-                                return model.source == app.pageStack.currentItem.configItem.source;
-                            } else {
-                                return app.pageStack.currentItem.source == Qt.resolvedUrl(model.source);
-                            }
-                        }
-                        return false;
+            NumberAnimation on opacity {
+                id: opacityAnim
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.OutCubic
+                onFinished: {
+                    if (app.opacity === 0) {
+                        root.Window.window.close();
                     }
                 }
             }
         }
     }
-//END UI components
 }
 

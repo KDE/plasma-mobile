@@ -1,15 +1,15 @@
 # Translation of plasma_org.kde.plasma.quicksetting.record.po to Catalan (Valencian)
-# Copyright (C) 2022-2023 This_file_is_part_of_KDE
+# Copyright (C) 2022-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
-"PO-Revision-Date: 2023-09-24 20:15+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-06-15 08:26+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,42 +19,50 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:54
 #, kde-format
+msgid "No encoders available for recording"
+msgstr "No hi ha cap codificador disponible per a gravar"
+
+#: recordutil.cpp:77
+#, kde-format
+msgid "New Screen Recording"
+msgstr "Gravació nova de la pantalla"
+
+#: recordutil.cpp:77
+#, kde-format
+msgid "New Screen Recording saved in %1"
+msgstr "S'ha guardat la gravació nova de la pantalla a %1"
+
+#: recordutil.cpp:124
+#, kde-format
+msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Grava la pantalla"
 
-#: package/contents/ui/main.qml:19
+#: recordutil.cpp:133
 #, kde-format
+msgctxt "@info:status"
 msgid "Recording…"
 msgstr "S'està gravant…"
 
-#: package/contents/ui/main.qml:21
+#: recordutil.cpp:136
 #, kde-format
+msgctxt "@info:status"
 msgid "Writing…"
 msgstr "S'està escrivint…"
 
-#: package/contents/ui/main.qml:25
+#: recordutil.cpp:149
 #, kde-format
 msgid "Tap to start recording"
 msgstr "Toqueu per a iniciar la gravació"
 
-#: package/contents/ui/main.qml:27
+#: recordutil.cpp:159
 #, kde-format
 msgid "Screen is being captured…"
 msgstr "S'està capturant la pantalla…"
 
-#: package/contents/ui/main.qml:29
+#: recordutil.cpp:162
 #, kde-format
 msgid "Please wait…"
 msgstr "Espereu…"
-
-#: package/contents/ui/main.qml:49
-#, kde-format
-msgid "New Screen Recording"
-msgstr "Gravació de pantalla nova"
-
-#: package/contents/ui/main.qml:49
-#, kde-format
-msgid "New Screen Recording saved in %1"
-msgstr "S'ha guardat la gravació de pantalla nova a %1"

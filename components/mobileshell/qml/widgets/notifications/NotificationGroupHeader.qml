@@ -12,7 +12,6 @@ import QtQuick.Window 2.2
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.notificationmanager as NotificationManager
 
@@ -21,7 +20,6 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 RowLayout {
     id: notificationHeading
 
-    property bool inLockscreen: false
     property var applicationIconSource
     property string applicationName
     property string originName
@@ -44,7 +42,7 @@ RowLayout {
         Layout.leftMargin: Kirigami.Units.smallSpacing
         Layout.fillWidth: true
 
-        color: inLockscreen ? "white" : Kirigami.Theme.textColor
+        color: Kirigami.Theme.textColor
 
         opacity: 0.75
         elide: Text.ElideLeft

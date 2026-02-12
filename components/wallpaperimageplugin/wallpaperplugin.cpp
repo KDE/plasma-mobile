@@ -9,6 +9,7 @@
 #include <QDBusInterface>
 #include <QDBusMessage>
 #include <QDBusReply>
+#include <QPointer>
 
 #include <KLocalizedString>
 #include <KPackage/Package>
@@ -23,8 +24,8 @@ WallpaperPlugin::WallpaperPlugin(QObject *parent)
     : QObject{parent}
     , m_homescreenConfig{new QQmlPropertyMap{this}}
     , m_lockscreenConfig{new QQmlPropertyMap{this}}
-    , m_homescreenConfigFile{KSharedConfig::openConfig("plasma-org.kde.plasma.mobileshell-appletsrc", KConfig::SimpleConfig)}
-    , m_lockscreenConfigFile{KSharedConfig::openConfig("kscreenlockerrc", KConfig::SimpleConfig)}
+    , m_homescreenConfigFile{KSharedConfig::openConfig("plasma-org.kde.plasma.mobileshell-appletsrc")}
+    , m_lockscreenConfigFile{KSharedConfig::openConfig("kscreenlockerrc")}
 {
     m_lockscreenConfigWatcher = KConfigWatcher::create(m_lockscreenConfigFile);
 
@@ -171,7 +172,13 @@ QCoro::Task<void> WallpaperPlugin::setHomescreenWallpaper(const QString &path)
     for (uint screen = 0; screen < qApp->screens().size(); screen++) {
         message.setArguments({"org.kde.image", QVariantMap{{"Image", path}}, screen});
 
+        QPointer<WallpaperPlugin> guard(this);
         const QDBusReply<void> reply = co_await QDBusConnection::sessionBus().asyncCall(message);
+
+        if (!guard) {
+            co_return;
+        }
+
         if (!reply.isValid()) {
             qWarning() << "Failed to set wallpaper for screen" << screen << ":" << reply.error();
         }
@@ -210,7 +217,13 @@ QCoro::Task<void> WallpaperPlugin::loadHomescreenSettings()
                                                   QLatin1String("wallpaper"));
     message.setArguments({(uint)0}); // assume wallpaper on first screen
 
+    QPointer<WallpaperPlugin> guard(this);
     QDBusReply<QVariantMap> reply = co_await QDBusConnection::sessionBus().asyncCall(message);
+
+    if (!guard) {
+        co_return;
+    }
+
     if (!reply.isValid()) {
         qWarning() << "unable to load homescreen wallpaper settings:" << reply.error();
         co_return;
@@ -317,7 +330,13 @@ QCoro::Task<void> WallpaperPlugin::saveHomescreenSettings()
 
     for (uint screen = 0; screen < qApp->screens().size(); screen++) {
         QList<QVariant> args = {m_homescreenWallpaperPlugin, params, screen};
+        QPointer<WallpaperPlugin> guard(this);
         const QDBusReply<void> response = co_await iface->asyncCallWithArgumentList(QStringLiteral("setWallpaper"), args);
+
+        if (!guard) {
+            co_return;
+        }
+
         if (!response.isValid()) {
             qWarning() << "Failed to set wallpaper:" << response.error();
         }

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
-"PO-Revision-Date: 2022-12-28 07:59+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-09-15 03:59+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,14 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.7\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Sound"
 msgstr "ხმა"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "No audio devices"
+msgstr "აუდიომოწყობილობების გარეშე"
+
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

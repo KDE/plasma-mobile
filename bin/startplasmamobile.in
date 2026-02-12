@@ -7,7 +7,6 @@
 
 [ -f /etc/profile ] && . /etc/profile
 
-export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=KDE
 export EGL_PLATFORM=wayland
 
@@ -16,6 +15,9 @@ export QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
 export QT_QUICK_CONTROLS_MOBILE=true
 export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=phone:handset
+
+# Set ~/.config/plasma-mobile/... as location for default mobile configs (i.e. envmanager generated)
+export XDG_CONFIG_DIRS="$HOME/.config/plasma-mobile:/etc/xdg:$XDG_CONFIG_DIRS"
 
 # if coredumpd knows about the dumps, make sure drkonqi catches them
 if grep -q '/systemd-coredump' /proc/sys/kernel/core_pattern
@@ -28,4 +30,4 @@ QT_QPA_PLATFORM=offscreen plasma-mobile-envmanager --apply-settings
 
 # start the shell
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.mobileshell
-startplasma-wayland --xwayland --inputmethod maliit-keyboard
+startplasma-wayland

@@ -4,15 +4,14 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.24)
 
 project(plasma-mobile)
-set(PROJECT_VERSION "6.2.80")
-set(PROJECT_VERSION_MAJOR 6)
+set(PROJECT_VERSION "6.6.80")
 
-set(PROJECT_DEP_VERSION "6.2.0")
-set(QT_MIN_VERSION "6.7.0")
-set(KF6_MIN_VERSION "6.5.0")
+set(PROJECT_DEP_VERSION "6.5.90")
+set(QT_MIN_VERSION "6.10.0")
+set(KF6_MIN_VERSION "6.22.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 20)
@@ -35,7 +34,9 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(ECMFindQmlModule)
 include(ECMGenerateQmlTypes)
+include(ECMConfiguredInstall)
 include(ECMFindQmlModule)
+include(ECMQtDeclareLoggingCategory)
 include(GenerateExportHeader)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
@@ -57,6 +58,10 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     WaylandClient
 )
 
+if(Qt6WaylandClient_VERSION VERSION_GREATER_EQUAL "6.10.0")
+    find_package(Qt6 REQUIRED COMPONENTS WaylandClientPrivate)
+endif()
+
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     GlobalAccel
@@ -71,6 +76,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KCMUtils
     Package
     JobWidgets
+    WindowSystem
 )
 
 find_package(Plasma CONFIG REQUIRED)
@@ -78,15 +84,13 @@ find_package(PlasmaQuick CONFIG REQUIRED)
 find_package(PlasmaActivities CONFIG REQUIRED)
 find_package(KF6Screen CONFIG REQUIRED)
 find_package(KWayland CONFIG REQUIRED)
+find_package(KPipeWire ${PROJECT_DEP_VERSION} REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 
-find_package(QCoro6 REQUIRED COMPONENTS DBus)
+find_package(QCoro6 REQUIRED COMPONENTS DBus Qml)
 qcoro_enable_coroutines()
 kde_enable_exceptions()
-
-pkg_check_modules(GOBJECT gobject-2.0 REQUIRED IMPORTED_TARGET)
-pkg_check_modules(GIO gio-2.0 REQUIRED IMPORTED_TARGET)
 
 find_package(KF6KirigamiAddons 0.6 REQUIRED)
 find_package(epoxy REQUIRED)
@@ -96,6 +100,14 @@ find_package(KWin ${PROJECT_DEP_VERSION} REQUIRED COMPONENTS
 )
 
 find_package(LayerShellQt REQUIRED)
+find_package(Wayland REQUIRED)
+find_package(PlasmaWaylandProtocols 1.8 CONFIG)
+set_package_properties(PlasmaWaylandProtocols PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "Collection of Plasma-specific Wayland protocols"
+    URL "https://invent.kde.org/libraries/plasma-wayland-protocols/"
+)
+
 
 find_package(LibKWorkspace CONFIG REQUIRED)
 find_package(Libudev REQUIRED)
@@ -104,6 +116,12 @@ find_package(KWinDBusInterface)
 set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"
     TYPE REQUIRED
     PURPOSE "Needed for virtual keyboard toggle button"
+)
+
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS Auth)
+set_package_properties(KF6::AuthCore PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "Allows Plasma Mobile to configure Waydroid"
 )
 
 include(CheckIncludeFiles)
@@ -116,6 +134,7 @@ plasma_install_package(shell org.kde.plasma.mobileshell shells)
 add_subdirectory(bin)
 add_subdirectory(components)
 add_subdirectory(containments)
+add_subdirectory(devices)
 add_subdirectory(quicksettings)
 add_subdirectory(kcms)
 add_subdirectory(kded)
@@ -126,6 +145,8 @@ add_subdirectory(layout-templates)
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
+
+install(FILES org.kde.plasma.mobileshell.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES
@@ -146,6 +167,6 @@ ki18n_install(po)
 if (INSTALL_SYSTEMD_SERVICE)
     install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/plasma-mobile.service
-        DESTINATION ${KDE_INSTALL_SYSTEMDUNITDIR}
+        DESTINATION ${KDE_INSTALL_SYSTEMDUNITDIR}/system
     )
 endif()

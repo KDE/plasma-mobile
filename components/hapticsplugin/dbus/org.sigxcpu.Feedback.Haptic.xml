@@ -1,0 +1,37 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+- SPDX-FileCopyrightText: 2025 Guido Günther <agx@sigxcpu.org>
+- SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<node>
+  <!-- org.sigxcpu.Feedback.Haptic
+       @short_description: Interface to make a device vibrate
+
+       This D-Bus interface is used to make a device's haptic motor
+       vibrate. This is can be useful e.g. for games.
+
+       To provider user feedback the event based interface should be
+       preferred.
+   -->
+  <interface name="org.sigxcpu.Feedback.Haptic">
+    <!--
+        Vibrate:
+        @app_id: The application id usually in "reverse DNS" format
+        @pattern: The vibration pattern.
+        @success: Whether vibration was triggered
+
+        Triggers the given vibration pattern on the haptic device. The
+        pattern is a sequence of relative amplitude and duration pairs.
+        The amplitude must be between 0.0 and 1.0, durations are in
+        milliseconds.
+    -->
+    <method name="Vibrate">
+      <arg direction="in" name="app_id" type="s"/>
+      <arg direction="in" name="pattern" type="a(du)"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="VibrationEventList" />
+      <arg direction="out" name="success" type="b"/>
+    </method>
+
+  </interface>
+
+</node>

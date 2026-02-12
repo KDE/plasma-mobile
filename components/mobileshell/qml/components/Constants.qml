@@ -5,6 +5,7 @@ import QtQuick
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 // NOTE: This is a singleton in the mobileshell library, so we need to be careful to
 // make this load as fast as possible (since it may be loaded in other processes ex. lockscreen).
@@ -12,8 +13,39 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 pragma Singleton
 
 QtObject {
-    readonly property real topPanelHeight: Math.round(Kirigami.Units.gridUnit * ShellSettings.Settings.statusBarScaleFactor / 2) * 2 + Kirigami.Units.smallSpacing
-    readonly property real navigationPanelThickness: ShellSettings.Settings.navigationPanelEnabled ? Kirigami.Units.gridUnit * 2 : 0
+    id: root
+    readonly property var panelSettings: MobileShellState.PanelSettingsDBusClient {
+        screenName: Screen.name
+    }
+
+    readonly property real defaultTopPanelHeight: Math.round(Kirigami.Units.gridUnit * ShellSettings.Settings.statusBarScaleFactor / 2) * 2 + Kirigami.Units.smallSpacing
+
+    readonly property real topPanelHeight: {
+        if (root.panelSettings.statusBarHeight <= 0) {
+            return defaultTopPanelHeight;
+        }
+        return root.panelSettings.statusBarHeight;
+    }
+
+    readonly property real defaultNavigationPanelThickness: Kirigami.Units.gridUnit * 2
+    readonly property real defaultGesturePanelThickness: Kirigami.Units.gridUnit
+
+    readonly property real navigationPanelThickness: {
+        if (!ShellSettings.Settings.navigationPanelEnabled) {
+            return ShellSettings.Settings.gesturePanelEnabled ? defaultGesturePanelThickness : 0;
+        }
+        if (root.panelSettings.navigationPanelHeight <= 0) {
+            return defaultNavigationPanelThickness;
+        }
+        return root.panelSettings.navigationPanelHeight;
+    }
+
+    readonly property real screenEdgeTouchTarget: (ShellSettings.Settings.gesturePanelEnabled && !ShellSettings.Settings.navigationPanelEnabled) ? defaultGesturePanelThickness : 8
+    onScreenEdgeTouchTargetChanged: {
+        if (ShellSettings.KWinSettings.screenEdgeTouchTarget != screenEdgeTouchTarget) {
+            ShellSettings.KWinSettings.screenEdgeTouchTarget = screenEdgeTouchTarget;
+        }
+    }
 
     function navigationPanelOnSide(screenWidth: real, screenHeight: real): bool {
         // TODO: we have this disabled for now, we might consider just removing this feature entirely due to it causing several issues:

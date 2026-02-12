@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Alexander Yavorsky <kekcuha@gmail.com>, 2023.
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2024-09-24 14:31+0300\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-06-24 12:30+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -19,22 +19,23 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
 msgstr "Caffeine"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "Коснитесь для отключения перехода в режим сна"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "Коснитесь для включения перехода в режим сна"
 
-#: contents/ui/main.qml:36
+#: contents/ui/main.qml:22
 #, kde-format
+msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "В Plasma Mobile включён общесистемный запрет перехода в режим сна"

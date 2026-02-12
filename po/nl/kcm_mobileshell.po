@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-10-26 11:51+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-09-16 15:37+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -42,157 +42,210 @@ msgstr "Animaties"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Als dit uit is zullen animaties zo veel mogelijk verminderd worden."
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Panelen automatisch verbergen"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+"De status en navigatiepanelen automatisch verbergen om toepassingen het "
+"altijd in volledig scherm te tonen."
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "Dubbel tikken om te wekken"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+"Wanneer het scherm uit is, tik dubbel om het apparaat te laten ontwaken."
+
+#: ui/main.qml:81
 #, kde-format
 msgid "Status Bar"
 msgstr "Statusbalk"
 
-#: ui/main.qml:59
+#: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
 msgstr "Datum in statusbalk"
 
-#: ui/main.qml:60
+#: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 "Indien aan, zal de datum getoond worden naast de klok in de statusbalk."
 
-#: ui/main.qml:74
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr "Percentage batterij"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "Percentage van batterij tonen in de statusbalk."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "Grootte statusbalk"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Grootte van het bovenste paneel (heeft herstart nodig)."
+
+#: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Miniem"
 
-#: ui/main.qml:75
+#: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Klein"
 
-#: ui/main.qml:76
+#: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normaal"
 
-#: ui/main.qml:77
+#: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Groot"
 
-#: ui/main.qml:78
+#: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Erg groot"
 
-#: ui/main.qml:81
-#, kde-format
-msgid "Status Bar Size"
-msgstr "Grootte statusbalk"
-
-#: ui/main.qml:82
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "Grootte van het bovenste paneel (heeft herstart nodig)."
-
-#: ui/main.qml:109
-#, kde-format
-msgid "Navigation Panel"
-msgstr "Navigatiepaneel"
-
-#: ui/main.qml:115
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Modus Alleen gebaren"
-
-#: ui/main.qml:116
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Of het navigatiepaneel wordt verborgen."
-
-#: ui/main.qml:130
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "Toetsenbord omschakelen altijd tonen"
-
-#: ui/main.qml:131
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr ""
-"Of de omschakelknop van het toetsenbord altijd wordt getoond op het "
-"navigatiepaneel."
-
-#: ui/main.qml:142
+#: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
 msgstr "Actieschuiflade"
 
-#: ui/main.qml:148
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Modus Vastgepind"
 
-#: ui/main.qml:149
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modus Uitgevouwen"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "Snelle instellingen"
 
-#: ui/main.qml:161
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Modus Schuiflade linksboven "
 
-#: ui/main.qml:162
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Modus bij openen vanaf linksboven."
 
-#: ui/main.qml:187
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Modus Schuiflade rechtsboven "
 
-#: ui/main.qml:188
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modus bij openen vanaf rechtsboven."
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "Sneltoetsen voor scherm vergrendelen"
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "Geen"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "Zaklamp"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "Camera"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Linker muisknop"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Rechter knop"
+
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Verbergen"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Tonen"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "Snelle instellingen kolommen"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "Maximum aantal kolommen in oriëntatie landschap."
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
 "Pas de volgorde van snelle instellingen in het afrolpaneel aan en verberg ze."
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Snelle instellingen uitschakelen"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Eerder uitgeschakelde snelle instellingen opnieuw inschakelen."
@@ -212,25 +265,25 @@ msgstr "Tijdsduur trillingen"
 msgid "How long shell vibrations should be."
 msgstr "Hoe lang shell-trillingen zouden moeten zijn."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Lang"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Middel"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Kort"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -238,6 +291,31 @@ msgid ""
 msgstr ""
 "Trillingen van het toetsenbord worden apart bestuurd in de module "
 "toetsenbordinstellingen."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Indien actief, laat het het apparaat wekken gewoon met dubbel tikken "
+#~ "wanneer het scherm uit is."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "Navigatiepaneel"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Modus Alleen gebaren"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Of het navigatiepaneel wordt verborgen."
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "Toetsenbord omschakelen altijd tonen"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr ""
+#~ "Of de omschakelknop van het toetsenbord altijd wordt getoond op het "
+#~ "navigatiepaneel."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Intensiteit van trillingen"

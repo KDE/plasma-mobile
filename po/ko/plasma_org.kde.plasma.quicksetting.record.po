@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Shinjo Park <kde@peremen.name>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
-"PO-Revision-Date: 2023-07-26 00:17+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-07-21 01:16+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,44 +15,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:54
 #, kde-format
-msgid "Record Screen"
-msgstr "화면 녹화"
+msgid "No encoders available for recording"
+msgstr "녹화에 사용할 수 있는 인코더 없음"
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "녹화 중…"
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "기록 중…"
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "탭하여 녹화 시작"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "화면 캡처 중…"
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "기다려 주십시오…"
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "새 화면 녹화"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "%1에 새 화면 녹화 저장됨"
+
+#: recordutil.cpp:124
+#, kde-format
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "화면 녹화"
+
+#: recordutil.cpp:133
+#, kde-format
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "녹화 중…"
+
+#: recordutil.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "기록 중…"
+
+#: recordutil.cpp:149
+#, kde-format
+msgid "Tap to start recording"
+msgstr "탭하여 녹화 시작"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "화면 캡처 중…"
+
+#: recordutil.cpp:162
+#, kde-format
+msgid "Please wait…"
+msgstr "기다려 주십시오…"

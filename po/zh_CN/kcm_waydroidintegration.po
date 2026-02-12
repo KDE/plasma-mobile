@@ -1,0 +1,255 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_waydroidintegration."
+"pot\n"
+"X-Crowdin-File-ID: 58308\n"
+
+#: ui/main.qml:19
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Waydroid 集成"
+
+#: ui/main.qml:32
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "没有安装 Waydroid"
+
+#: ui/main.qml:39
+#, kde-format
+msgid "Check installation"
+msgstr "检查软件安装情况"
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"正在下载安卓和制造商图像。\n"
+"这可能需要几分钟。"
+
+#: ui/main.qml:67
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid 正在重置。\n"
+"可能需要几秒钟。"
+
+#: ui/main.qml:76
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "Waydroid 会话没有运行。"
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Start the session"
+msgstr "开始会话"
+
+#: ui/main.qml:90
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid 会话正在启动。\n"
+"可能需要几秒钟。"
+
+#: ui/WaydroidApplicationsPage.qml:25
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Waydroid 应用程序"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "安装 APK"
+
+#: ui/WaydroidApplicationsPage.qml:67
+#, kde-format
+msgid "You must select a local file"
+msgstr "您必须选择一个本地文件"
+
+#: ui/WaydroidApplicationsPage.qml:107
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "删除应用程序"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "常规信息"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "IP 地址"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "复制"
+
+#: ui/WaydroidConfigurationForm.qml:35
+#, kde-format
+msgid "Waydroid status"
+msgstr "Waydroid 状态"
+
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "正在运行"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stop session"
+msgstr "停止会话"
+
+#: ui/WaydroidConfigurationForm.qml:46
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "为我的设备认证 Google Play Protect"
+
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr "已安装的应用程序"
+
+#: ui/WaydroidConfigurationForm.qml:56
+#, kde-format
+msgid "Reset Waydroid"
+msgstr "重置 Waydroid"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "确认 Waydroid 重置"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
+"will wipe all user data."
+msgstr "您确定要重置 Waydroid 吗？这是一个破坏性操作，将会清除所有用户数据。"
+
+#: ui/WaydroidConfigurationForm.qml:81
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Waydroid 属性"
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, kde-format
+msgid "May require restarting the Waydroid session to apply"
+msgstr "可能需要重启 Waydroid 会话才能应用更改"
+
+#: ui/WaydroidConfigurationForm.qml:109
+#, kde-format
+msgid "Multi Windows"
+msgstr "多窗口"
+
+#: ui/WaydroidConfigurationForm.qml:110
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "启用/禁用与桌面的窗口集成"
+
+#: ui/WaydroidConfigurationForm.qml:122
+#, kde-format
+msgid "Suspend"
+msgstr "挂起"
+
+#: ui/WaydroidConfigurationForm.qml:123
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr "当没有应用处于活动状态时，让 Waydroid 容器睡眠 (显示器超时后)"
+
+#: ui/WaydroidConfigurationForm.qml:135
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:136
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr "允许安卓直接访问热插拔设备"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "正在下载 %1MB/%2MB 速度 %3"
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1MB/s"
+msgstr "%1MB/秒"
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1kB/s"
+msgstr "%1kB/秒"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Google Play Protect 配置"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, kde-format
+msgid ""
+"Fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"正在获取您的 Android ID。\n"
+"可能需要几秒钟。"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, kde-format
+msgid ""
+"When launching Waydroid with GAPPS for the first time, you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
+msgstr ""
+"首次使用 GAPPS 启动 Waydroid 时，您会收到通知，提示设备未通过 Google Play "
+"Protect 认证。要自行认证设备，请将 Android ID 粘贴到该网站对应的输入框中。然"
+"后给 Google 服务几分钟时间来反映更改，并重新启动 Waydroid。"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "复制 Android ID 并打开网站"
+
+#: ui/WaydroidInitialConfigurationForm.qml:16
+#, kde-format
+msgid "Initial configuration"
+msgstr "初始配置"
+
+#: ui/WaydroidInitialConfigurationForm.qml:22
+#, kde-format
+msgid "System type"
+msgstr "系统类型"
+
+#: ui/WaydroidInitialConfigurationForm.qml:35
+#, kde-format
+msgid "Configure Waydroid"
+msgstr "配置 Waydroid"

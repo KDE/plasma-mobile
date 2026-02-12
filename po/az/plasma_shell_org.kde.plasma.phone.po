@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
 "PO-Revision-Date: 2022-07-03 14:23+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -25,55 +25,62 @@ msgstr ""
 msgid "View Error Details…"
 msgstr ""
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/AppletConfiguration.qml:90
+#, fuzzy
+#| msgid "Configure"
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Tənzimləyin"
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Divar kağızı"
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
+msgstr "İstifadə ediləcək ana ekran düzəni."
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
+msgid "Wallpaper Plugin"
+msgstr "Dİvar kağızı qoşması"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
+msgid "The wallpaper plugin to use."
+msgstr "İstifadə ediləcək divar kağızı qoşması."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
+msgid "Wallpaper Plugins"
+msgstr "Divar kağızı qoşmaları"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
+msgid "Get New Plugins…"
+msgstr "Yeni qoşmalar alın…"
+
+#: contents/configuration/private/ConfigListPage.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "İş otaqlarının növünün dəyişdirilməsi imkanları inzibatçı tərəfindən "
 "məhdudlaşdırılıb"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Ümumi"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Ana ekran düzəni"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "İstifadə ediləcək ana ekran düzəni."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
-msgid "Wallpaper Plugin"
-msgstr "Dİvar kağızı qoşması"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
-msgid "The wallpaper plugin to use."
-msgstr "İstifadə ediləcək divar kağızı qoşması."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
-msgid "Wallpaper Plugins"
-msgstr "Divar kağızı qoşmaları"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
-msgid "Get New Plugins…"
-msgstr "Yeni qoşmalar alın…"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "İş otağı növü digər ayarları tətbiq etmədən öncə dəyişdirilməlidir"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "İndi tətbiq edin"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Divar kağızı"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -83,12 +90,21 @@ msgstr ""
 msgid "Wrong PIN"
 msgstr ""
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr ""
 
+#~ msgid "General"
+#~ msgstr "Ümumi"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Ana ekran düzəni"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "İş otağı növü digər ayarları tətbiq etmədən öncə dəyişdirilməlidir"
+
+#~ msgid "Apply now"
+#~ msgstr "İndi tətbiq edin"
+
 #~ msgid "Change Wallpaper"
 #~ msgstr "Divar kağızını dəyişin"
-
-#~ msgid "Configure"
-#~ msgstr "Tənzimləyin"

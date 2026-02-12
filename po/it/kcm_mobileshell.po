@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Paolo Zamponi <feus73@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Paolo Zamponi <feus73@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-10-31 15:07+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-09-28 16:12+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -42,146 +42,199 @@ msgstr "Animazioni"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Se non è attivata, le animazioni verranno ridotte al minimo."
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Nascondi automaticamente i pannelli"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+"Nascondi automaticamente i pannelli di stato e di navigazione, per "
+"permettere alle applicazioni di essere sempre a schermo intero."
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "Doppio tocco per risvegliare"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+"Quando lo schermo è spento, doppio tocco per risvegliare il dispositivo."
+
+#: ui/main.qml:81
 #, kde-format
 msgid "Status Bar"
 msgstr "Barra di stato"
 
-#: ui/main.qml:59
+#: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
 msgstr "Data nella barra di stato"
 
-#: ui/main.qml:60
+#: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 "Quando è attiva, la data verrà mostrata accanto all'orologio nella barra di "
 "stato."
 
-#: ui/main.qml:74
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr "Percentuale batteria"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "Mostra la percentuale della batteria nella barra di stato."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "Dimensione della barra di stato"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Dimensione del pannello superiore (richiede il riavvio)."
+
+#: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Sottile"
 
-#: ui/main.qml:75
+#: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Piccola"
 
-#: ui/main.qml:76
+#: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normale"
 
-#: ui/main.qml:77
+#: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Grande"
 
-#: ui/main.qml:78
+#: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Molto grande"
 
-#: ui/main.qml:81
-#, kde-format
-msgid "Status Bar Size"
-msgstr "Dimensione della barra di stato"
-
-#: ui/main.qml:82
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "Dimensione del pannello superiore (richiede il riavvio)."
-
-#: ui/main.qml:109
-#, kde-format
-msgid "Navigation Panel"
-msgstr "Pannello di navigazione"
-
-#: ui/main.qml:115
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Modalità solo gesti"
-
-#: ui/main.qml:116
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Se nascondere il pannello di navigazione."
-
-#: ui/main.qml:130
-#, kde-format
-msgid "Always show keyboard toggle"
-msgstr "Mostra sempre il pulsante di attivazione della tastiera"
-
-#: ui/main.qml:131
-#, kde-format
-msgid ""
-"Whether to always show the keyboard toggle button on the navigation panel."
-msgstr ""
-"Se mostrare sempre il pulsante di attivazione della tastiera nel pannello di "
-"navigazione."
-
-#: ui/main.qml:142
+#: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
 msgstr "Cassetto delle azioni"
 
-#: ui/main.qml:148
+#: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Modalità appuntata"
 
-#: ui/main.qml:149
+#: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modalità espansa"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
 msgid "Quick Settings"
 msgstr "Impostazioni rapide"
 
-#: ui/main.qml:161
+#: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Modalità cassetto in alto a sinistra"
 
-#: ui/main.qml:162
+#: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Modalità quando si apre dall'alto a sinistra."
 
-#: ui/main.qml:187
+#: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Modalità cassetto in alto a destra"
 
-#: ui/main.qml:188
+#: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modalità quando si apre dall'alto a destra."
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "Scorciatoie per la schermata di blocco"
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "Nessuna"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "Torcia"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "Fotocamera"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Pulsante sinistro"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Pulsante destro"
+
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Nascondi"
 
-#: ui/QuickSettingsForm.qml:55
+#: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Mostra"
 
-#: ui/QuickSettingsForm.qml:76
+#: ui/QuickSettingsForm.qml:80
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "Colonne delle impostazioni rapide"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "Numero massimo di colonne in modalità orizzontale."
+
+#: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
@@ -189,12 +242,12 @@ msgstr ""
 "Personalizza l'ordine delle impostazioni rapide nel pannello a discesa e "
 "nascondile."
 
-#: ui/QuickSettingsForm.qml:99
+#: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Impostazioni rapide disabilitate"
 
-#: ui/QuickSettingsForm.qml:104
+#: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Abilita di nuovo le impostazioni rapide disabilitate in precedenza."
@@ -214,25 +267,25 @@ msgstr "Durata vibrazione"
 msgid "How long shell vibrations should be."
 msgstr "Quanto dovrebbe essere lunga la vibrazione della shell."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Lunga"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Media"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Breve"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -240,6 +293,31 @@ msgid ""
 msgstr ""
 "La vibrazione della tastiera è controllata separatamente nel modulo delle "
 "impostazioni della tastiera."
+
+#~ msgid ""
+#~ "When active, it allow to wakeup the device just with double tap when the "
+#~ "screen is off."
+#~ msgstr ""
+#~ "Quando è attiva, permette di risvegliare il dispositivo semplicemente con "
+#~ "un doppio tocco a schermo spento."
+
+#~ msgid "Navigation Panel"
+#~ msgstr "Pannello di navigazione"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Modalità solo gesti"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Se nascondere il pannello di navigazione."
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "Mostra sempre il pulsante di attivazione della tastiera"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr ""
+#~ "Se mostrare sempre il pulsante di attivazione della tastiera nel pannello "
+#~ "di navigazione."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Intensità della vibrazione"

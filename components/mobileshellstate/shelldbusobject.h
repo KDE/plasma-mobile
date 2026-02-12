@@ -28,6 +28,8 @@ public:
 Q_SIGNALS:
     Q_SCRIPTABLE void doNotDisturbChanged();
     Q_SCRIPTABLE void isActionDrawerOpenChanged();
+    Q_SCRIPTABLE void isVolumeOSDOpenChanged();
+    Q_SCRIPTABLE void isNotificationPopupDrawerOpenChanged();
     Q_SCRIPTABLE void panelStateChanged();
     Q_SCRIPTABLE void isTaskSwitcherVisibleChanged();
     Q_SCRIPTABLE void openActionDrawerRequested();
@@ -36,6 +38,7 @@ Q_SIGNALS:
     Q_SCRIPTABLE void openHomeScreenRequested();
     Q_SCRIPTABLE void resetHomeScreenPositionRequested();
     Q_SCRIPTABLE void showVolumeOSDRequested();
+    Q_SCRIPTABLE void openLockScreenKeypadRequested();
 
 public Q_SLOTS:
     Q_SCRIPTABLE bool doNotDisturb();
@@ -44,6 +47,12 @@ public Q_SLOTS:
     // TODO: Account for multiple action drawers?
     Q_SCRIPTABLE bool isActionDrawerOpen();
     Q_SCRIPTABLE void setIsActionDrawerOpen(bool value);
+
+    Q_SCRIPTABLE bool isVolumeOSDOpen();
+    Q_SCRIPTABLE void setIsVolumeOSDOpen(bool value);
+
+    Q_SCRIPTABLE bool isNotificationPopupDrawerOpen();
+    Q_SCRIPTABLE void setIsNotificationPopupDrawerOpen(bool value);
 
     Q_SCRIPTABLE QString panelState();
     Q_SCRIPTABLE void setPanelState(QString state);
@@ -62,12 +71,15 @@ public Q_SLOTS:
     Q_SCRIPTABLE void openHomeScreen();
     Q_SCRIPTABLE void resetHomeScreenPosition();
     Q_SCRIPTABLE void showVolumeOSD();
+    Q_SCRIPTABLE void openLockScreenKeypad();
 
 private:
     bool m_initialized{false};
 
     bool m_doNotDisturb{false};
     bool m_isActionDrawerOpen{false};
+    bool m_isVolumeOSDOpen{false};
+    bool m_isNotificationPopupDrawerOpen{false};
     bool m_isTaskSwitcherVisible{false};
 
     QString m_panelState{};

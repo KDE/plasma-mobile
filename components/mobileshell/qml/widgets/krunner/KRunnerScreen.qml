@@ -20,7 +20,7 @@ import org.kde.kirigami 2.19 as Kirigami
 
 MouseArea {
     id: root
-    onClicked: root.requestedClose()
+    onClicked: root.requestedClose(false)
 
     function requestFocus() {
         queryField.forceActiveFocus();
@@ -30,11 +30,11 @@ MouseArea {
         queryField.text = "";
     }
 
-    signal requestedClose()
+    signal requestedClose(triggeredByKeyEvent: bool)
 
     Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Escape) {
-            root.requestedClose();
+            root.requestedClose(true);
             event.accepted = true;
         }
     }
@@ -72,7 +72,21 @@ MouseArea {
 
             font.weight: Font.Bold
 
-            KeyNavigation.down: listView
+            // Keyboard navigation
+            Keys.onPressed: (event) => {
+                if (event.key === Qt.Key_Down) {
+                    if (listView.count === 0) {
+                        // Close if listview has no elements
+                        root.requestedClose(true);
+                    } else {
+                        // Focus on listview if there are elements
+                        listView.forceActiveFocus();
+                        listView.currentIndex = 0;
+                    }
+                    event.accepted = true;
+                }
+            }
+
         }
 
         QQC2.ScrollView {
@@ -84,7 +98,7 @@ MouseArea {
             Layout.rightMargin: Kirigami.Units.gridUnit
             Layout.alignment: Qt.AlignHCenter
 
-            Milou.ResultsListView {
+            Milou.ResultsView {
                 id: listView
                 queryString: queryField.text
                 clip: true
@@ -97,7 +111,7 @@ MouseArea {
                 }
 
                 onActivated: {
-                    root.requestedClose();
+                    root.requestedClose(false);
                 }
                 onUpdateQueryString: {
                     queryField.text = text
@@ -139,12 +153,12 @@ MouseArea {
                     // Close search view if we press down with last item selected
                     Keys.onPressed: (event) => {
                         if (event.key === Qt.Key_Down && (model.index === listView.count - 1)) {
-                            root.requestedClose();
+                            root.requestedClose(true);
                             event.accepted = true;
                         }
                     }
 
-                    // Used by ResultsListView to determine next tab action
+                    // Used by ResultsView to determine next tab action
                     function activateNextAction() {
                         queryField.forceActiveFocus();
                         queryField.selectAll();
@@ -155,7 +169,7 @@ MouseArea {
                         listView.currentIndex = model.index;
                         listView.runCurrentIndex();
 
-                        root.requestedClose();
+                        root.requestedClose(false);
                     }
                     hoverEnabled: true
 

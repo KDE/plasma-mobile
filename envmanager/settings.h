@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -27,20 +28,19 @@ private:
     // applies our mobile configuration
     void applyMobileConfiguration();
 
-    void writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty);
+    void writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings);
+
     void loadKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings);
     void saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value);
     const QString loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write = true);
 
-    void reloadKWinConfig();
+    void reloadKWinConfig(KSharedConfig::Ptr kwinrc);
 
     // whether this is Plasma Mobile
     bool m_isMobilePlatform;
 
     KSharedConfig::Ptr m_mobileConfig;
-    KSharedConfig::Ptr m_kwinrcConfig;
-    KSharedConfig::Ptr m_appBlacklistConfig;
-    KSharedConfig::Ptr m_kdeglobalsConfig;
 
-    KConfigWatcher::Ptr m_configWatcher;
+    // For legacy upgrade purposes
+    KSharedConfig::Ptr m_originalKdeglobalsConfig; // (~/.config/kdeglobals)
 };

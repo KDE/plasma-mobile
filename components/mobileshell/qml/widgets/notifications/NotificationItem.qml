@@ -24,7 +24,10 @@ BaseNotificationItem {
     id: notificationItem
     implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
 
-    property bool inLockscreen: false
+    property bool inLockScreen: false
+    property int panelType: MobileShell.PanelBackground.PanelType.Drawer
+
+    property var cardColorScheme: Kirigami.Theme.View
 
     signal dragStart()
     signal dragEnd()
@@ -36,11 +39,6 @@ BaseNotificationItem {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-
-        inLockscreen: root.inLockscreen
-
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
 
         visible: !notificationItem.inGroup
         height: visible ? implicitHeight : 0
@@ -62,9 +60,14 @@ BaseNotificationItem {
         onTapped: notificationItem.actionInvoked("default");
         swipeGestureEnabled: notificationItem.closable
         onDismissRequested: notificationItem.close();
+        inLockScreen: notificationItem.inLockScreen
+        panelType: notificationItem.panelType
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: notificationItem.cardColorScheme
 
         ColumnLayout {
             id: column
@@ -98,7 +101,7 @@ BaseNotificationItem {
                     jobDetails: notificationItem.jobDetails
 
                     time: notificationItem.time
-                    timeSource: notificationItem.timeSource
+                    clockSource: notificationItem.clockSource
                 }
             }
 

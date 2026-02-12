@@ -75,21 +75,21 @@ FormCard.AbstractFormDelegate {
             }
             Controls.ToolButton {
                 icon.name: "network-connect"
-                text: i18n('Connect')
+                text: i18n("Connect")
                 visible: ConnectionState != PlasmaNM.Enums.Activated && root.editMode
                 display: Controls.ToolButton.IconOnly
                 onClicked: changeState()
             }
             Controls.ToolButton {
                 icon.name: "network-disconnect"
-                text: i18n('Disconnect')
+                text: i18n("Disconnect")
                 visible: ConnectionState == PlasmaNM.Enums.Activated && root.editMode
                 display: Controls.ToolButton.IconOnly
                 onClicked: handler.deactivateConnection(ConnectionPath, DevicePath)
             }
             Controls.ToolButton {
                 icon.name: "configure"
-                text: i18n('Configure')
+                text: i18n("Configure")
                 visible: (Uuid != "") && root.editMode
                 display: Controls.ToolButton.IconOnly
                 onClicked: {
@@ -98,7 +98,7 @@ FormCard.AbstractFormDelegate {
             }
             Controls.ToolButton {
                 icon.name: "entry-delete"
-                text: i18n('Delete')
+                text: i18n("Delete")
                 visible: (Uuid != "") && root.editMode
                 display: Controls.ToolButton.IconOnly
                 onClicked: handler.removeConnection(ConnectionPath)

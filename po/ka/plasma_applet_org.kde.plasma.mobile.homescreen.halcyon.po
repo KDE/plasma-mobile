@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2022-08-15 15:07+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-10-06 10:37+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,36 +16,92 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.7\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
-#: package/contents/ui/FolderGrid.qml:189
-#, kde-format
-msgid "Remove from favourites"
-msgstr "რჩეულებიდან წაშლა"
-
-#: package/contents/ui/FavoritesGrid.qml:291
-#, kde-format
-msgid "Add applications to your favourites so they show up here."
-msgstr "პროგრამების რჩეულებში ჩამატება. ისინი აქ გამოჩნდება."
-
-#: package/contents/ui/FolderGrid.qml:194
-#, kde-format
-msgid "Move out of folder"
-msgstr "საქაღალდიდან გატანა"
-
-#: package/contents/ui/GridAppDelegate.qml:64
-#, kde-format
-msgid "Add to favourites"
-msgstr "რჩეულებში ჩამატება"
-
-#: package/contents/ui/GridAppList.qml:68
-#, kde-format
-msgid "Applications"
-msgstr "აპლიკაციები"
-
-#: plugin/pinnedmodel.cpp:151
+#: pinnedmodel.cpp:146
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "საქაღალდე"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr "ზოგადი"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr "რჩეულებიდან წაშლა"
+
+#: qml/FavoritesGrid.qml:294
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "პროგრამების რჩეულებში ჩამატება. ისინი აქ გამოჩნდება."
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr "საქაღალდიდან გატანა"
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "რჩეულებში ჩამატება"
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr "აპლიკაციები"
+
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "საწყის ეკრანის მორგება"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "საწყისი ეკრანი"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "ფონის სურათის გაბუნდოვნების ეფექტი"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "არცერთი"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "მარტივი"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "სრული"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "ორმაგი დატყაპუნება მოწყობილობის დასაბლოკად"
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr "ფონის სურათები"
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr "მორგება"
+
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "გადაერთვა საწყის ეკრანებსა და მეტი ფონის სურათის პარამეტრს შორის"

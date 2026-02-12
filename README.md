@@ -45,7 +45,7 @@ Dependencies:
 * Milou (for search)
 * Kirigami
 * Kirigami Addons
-* hfd-service (optional: for vibrations)
+* feedbackd (optional: for vibrations)
 
 To start the shell in a window, run:
 
@@ -60,6 +60,10 @@ Useful options:
 ```
 QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.mobileshell" --output-count 2 --width 360 --height 720
 ```
+
+### Device specific configuration
+
+See [/devices/README.md](/devices/README.md) for more details on setting device specific configuration (ex. notches, screen curves).
 
 ---
 

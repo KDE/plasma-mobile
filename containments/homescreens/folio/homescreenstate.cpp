@@ -37,10 +37,9 @@ HomeScreenState::HomeScreenState(HomeScreen *parent)
 
 void HomeScreenState::init()
 {
-    const int expoDuration = 800;
-    const int cubicDuration = 400;
+    const int animDuration = 400; // Kirigami.Units.veryLongDuration
 
-    m_openAppDrawerAnim = setupAnimation("appDrawerY", expoDuration, QEasingCurve::OutExpo, 0);
+    m_openAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutCubic, 0);
 
     connect(m_openAppDrawerAnim, &QPropertyAnimation::valueChanged, this, [this]() {
         // the animation runs too long to connect to QPropertyAnimation::finished
@@ -51,41 +50,48 @@ void HomeScreenState::init()
         }
     });
 
-    m_closeAppDrawerAnim = setupAnimation("appDrawerY", expoDuration, QEasingCurve::OutExpo, APP_DRAWER_OPEN_DIST);
+    m_closeAppDrawerAnim = setupAnimation("appDrawerY", animDuration, QEasingCurve::OutCubic, APP_DRAWER_OPEN_DIST);
 
     connect(m_closeAppDrawerAnim, &QPropertyAnimation::valueChanged, this, [this]() {
         // the animation runs too long to connect to QPropertyAnimation::finished
         // instead just have the end behaviour execute once we are 90% through
         if (m_appDrawerOpenProgress < 0.1) {
-            setViewState(ViewState::PageView);
+            if (m_viewState == ViewState::AppDrawerView) {
+                // confirm view state is still AppDrawerView before setting to prevent oddities
+                setViewState(ViewState::PageView);
+            }
             Q_EMIT appDrawerClosed();
         }
     });
 
-    m_openSearchWidgetAnim = setupAnimation("searchWidgetY", cubicDuration, QEasingCurve::OutCubic, 0);
+    m_openSearchWidgetAnim = setupAnimation("searchWidgetY", animDuration, QEasingCurve::OutExpo, 0);
 
     connect(m_openSearchWidgetAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::SearchWidgetView);
     });
 
-    m_closeSearchWidgetAnim = setupAnimation("searchWidgetY", cubicDuration, QEasingCurve::OutCubic, SEARCH_WIDGET_OPEN_DIST);
+    m_closeSearchWidgetAnim = setupAnimation("searchWidgetY", animDuration, QEasingCurve::OutExpo, SEARCH_WIDGET_OPEN_DIST);
 
     connect(m_closeSearchWidgetAnim, &QPropertyAnimation::finished, this, [this]() {
-        setViewState(ViewState::PageView);
+        if (m_viewState == ViewState::SearchWidgetView) {
+            setViewState(ViewState::PageView);
+        }
     });
 
-    m_pageAnim = setupAnimation("pageViewX", cubicDuration, QEasingCurve::OutCubic, 0);
+    m_pageAnim = setupAnimation("pageViewX", animDuration, QEasingCurve::OutExpo, 0);
 
-    m_openFolderAnim = setupAnimation("folderOpenProgress", cubicDuration, QEasingCurve::OutCubic, 1.0);
+    m_openFolderAnim = setupAnimation("folderOpenProgress", animDuration, QEasingCurve::OutExpo, 1.0);
 
     connect(m_openFolderAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::FolderView);
     });
 
-    m_closeFolderAnim = setupAnimation("folderOpenProgress", cubicDuration, QEasingCurve::OutCubic, 0.0);
+    m_closeFolderAnim = setupAnimation("folderOpenProgress", animDuration, QEasingCurve::OutExpo, 0.0);
 
     connect(m_closeFolderAnim, &QPropertyAnimation::finished, this, [this]() {
-        setViewState(ViewState::PageView);
+        if (m_viewState == ViewState::FolderView) {
+            setViewState(ViewState::PageView);
+        }
         setCurrentFolder(nullptr);
         setFolderViewX(0); // reset to first page
         m_folderPageNum = 0;
@@ -94,18 +100,20 @@ void HomeScreenState::init()
         Q_EMIT leftCurrentFolder();
     });
 
-    m_folderPageAnim = setupAnimation("folderViewX", cubicDuration, QEasingCurve::OutCubic, 0);
+    m_folderPageAnim = setupAnimation("folderViewX", animDuration, QEasingCurve::OutExpo, 0);
 
-    m_openSettingsAnim = setupAnimation("settingsOpenProgress", cubicDuration, QEasingCurve::OutExpo, 1.0);
+    m_openSettingsAnim = setupAnimation("settingsOpenProgress", animDuration, QEasingCurve::OutExpo, 1.0);
 
     connect(m_openSettingsAnim, &QPropertyAnimation::finished, this, [this]() {
         setViewState(ViewState::SettingsView);
     });
 
-    m_closeSettingsAnim = setupAnimation("settingsOpenProgress", cubicDuration, QEasingCurve::InOutExpo, 0.0);
+    m_closeSettingsAnim = setupAnimation("settingsOpenProgress", animDuration, QEasingCurve::InOutExpo, 0.0);
 
     connect(m_closeSettingsAnim, &QPropertyAnimation::finished, this, [this]() {
-        setViewState(ViewState::PageView);
+        if (m_viewState == ViewState::SettingsView) {
+            setViewState(ViewState::PageView);
+        }
     });
 
     connect(this, &HomeScreenState::viewWidthChanged, this, [this]() {
@@ -187,6 +195,7 @@ void HomeScreenState::setSwipeState(SwipeState swipeState)
     if (swipeState != m_swipeState) {
         m_swipeState = swipeState;
         Q_EMIT swipeStateChanged();
+        Q_EMIT isDraggingDelegateChanged();
     }
 }
 
@@ -517,12 +526,17 @@ void HomeScreenState::setFolderOpenProgress(qreal folderOpenProgress)
     }
 }
 
-FolioApplicationFolder *HomeScreenState::currentFolder() const
+FolioApplicationFolder::Ptr HomeScreenState::currentFolder() const
 {
     return m_currentFolder;
 }
 
-void HomeScreenState::setCurrentFolder(FolioApplicationFolder *folder)
+FolioApplicationFolder *HomeScreenState::currentFolderRaw() const
+{
+    return m_currentFolder.get();
+}
+
+void HomeScreenState::setCurrentFolder(FolioApplicationFolder::Ptr folder)
 {
     if (m_currentFolder != folder) {
         m_currentFolder = folder;
@@ -564,6 +578,16 @@ qreal HomeScreenState::appDrawerOpenProgress()
     return m_appDrawerOpenProgress;
 }
 
+void HomeScreenState::setAppDrawerOpenProgress(qreal appDrawerOpenProgress)
+{
+    if (appDrawerOpenProgress == m_appDrawerOpenProgress) {
+        return;
+    }
+
+    m_appDrawerOpenProgress = appDrawerOpenProgress;
+    Q_EMIT appDrawerOpenProgressChanged();
+}
+
 qreal HomeScreenState::appDrawerY()
 {
     return m_appDrawerY;
@@ -571,10 +595,12 @@ qreal HomeScreenState::appDrawerY()
 
 void HomeScreenState::setAppDrawerY(qreal appDrawerY)
 {
-    m_appDrawerY = appDrawerY;
-    m_appDrawerOpenProgress = 1 - qBound(0.0, m_appDrawerY, APP_DRAWER_OPEN_DIST) / APP_DRAWER_OPEN_DIST;
-    Q_EMIT appDrawerYChanged();
-    Q_EMIT appDrawerOpenProgressChanged();
+    if (m_appDrawerY != appDrawerY) {
+        m_appDrawerY = appDrawerY;
+        Q_EMIT appDrawerYChanged();
+    }
+
+    setAppDrawerOpenProgress(1 - qBound(0.0, m_appDrawerY, APP_DRAWER_OPEN_DIST) / APP_DRAWER_OPEN_DIST);
 }
 
 qreal HomeScreenState::searchWidgetOpenProgress()
@@ -582,17 +608,29 @@ qreal HomeScreenState::searchWidgetOpenProgress()
     return m_searchWidgetOpenProgress;
 }
 
+void HomeScreenState::setSearchWidgetOpenProgress(qreal progress)
+{
+    if (m_searchWidgetOpenProgress == progress) {
+        return;
+    }
+
+    m_searchWidgetOpenProgress = progress;
+    Q_EMIT searchWidgetOpenProgressChanged();
+}
+
 qreal HomeScreenState::searchWidgetY()
 {
-    return m_searchWidgetOpenProgress;
+    return m_searchWidgetY;
 }
 
 void HomeScreenState::setSearchWidgetY(qreal searchWidgetY)
 {
-    m_searchWidgetY = searchWidgetY;
-    m_searchWidgetOpenProgress = 1 - qBound(0.0, m_searchWidgetY, SEARCH_WIDGET_OPEN_DIST) / SEARCH_WIDGET_OPEN_DIST;
-    Q_EMIT searchWidgetYChanged();
-    Q_EMIT searchWidgetOpenProgressChanged();
+    if (m_searchWidgetY != searchWidgetY) {
+        m_searchWidgetY = searchWidgetY;
+        Q_EMIT searchWidgetYChanged();
+    }
+
+    setSearchWidgetOpenProgress(1 - qBound(0.0, m_searchWidgetY, SEARCH_WIDGET_OPEN_DIST) / SEARCH_WIDGET_OPEN_DIST);
 }
 
 qreal HomeScreenState::delegateDragX()
@@ -655,6 +693,11 @@ int HomeScreenState::currentFolderPage()
     return m_folderPageNum;
 }
 
+bool HomeScreenState::isDraggingDelegate()
+{
+    return m_dragDropActive || m_swipeState == SwipeState::DraggingDelegate;
+}
+
 FolioDelegate *HomeScreenState::getPageDelegateAt(int page, int row, int column)
 {
     PageModel *pageModel = m_homeScreen->pageListModel()->getPage(page);
@@ -662,17 +705,17 @@ FolioDelegate *HomeScreenState::getPageDelegateAt(int page, int row, int column)
         return nullptr;
     }
 
-    FolioDelegate *delegate = pageModel->getDelegate(row, column);
+    FolioDelegate::Ptr delegate = pageModel->getDelegate(row, column);
     if (!delegate) {
         return nullptr;
     }
 
-    return delegate;
+    return delegate.get();
 }
 
 FolioDelegate *HomeScreenState::getFavouritesDelegateAt(int position)
 {
-    return m_homeScreen->favouritesModel()->getEntryAt(position);
+    return m_homeScreen->favouritesModel()->getEntryAt(position).get();
 }
 
 FolioDelegate *HomeScreenState::getFolderDelegateAt(int position)
@@ -681,7 +724,7 @@ FolioDelegate *HomeScreenState::getFolderDelegateAt(int position)
         return nullptr;
     }
 
-    return m_currentFolder->applications()->getDelegate(position);
+    return m_currentFolder->applications()->getDelegate(position).get();
 }
 
 QPointF HomeScreenState::getPageDelegateScreenPosition(int page, int row, int column)
@@ -799,7 +842,7 @@ void HomeScreenState::goToFolderPage(int page, bool snap)
 
 void HomeScreenState::openFolder(qreal delegateX, qreal delegateY, FolioApplicationFolder *folder)
 {
-    setCurrentFolder(folder);
+    setCurrentFolder(folder->shared_from_this());
 
     m_openFolderAnim->stop();
     m_closeFolderAnim->stop();
@@ -868,6 +911,7 @@ void HomeScreenState::startDelegateAppDrawerDrag(qreal startX, qreal startY, qre
     // we start dragging the delegate immediately from the app drawer, because we don't have a context menu to deal with!
     // NOTE: this has to happen after delegateDragFromAppDrawerStarted, because slots for that expect SwipeState::AwaitingDraggingDelegate
     setSwipeState(SwipeState::DraggingDelegate);
+    Q_EMIT delegateDragStarted();
 }
 
 void HomeScreenState::startDelegateFolderDrag(qreal startX,
@@ -885,10 +929,6 @@ void HomeScreenState::startDelegateWidgetListDrag(qreal startX, qreal startY, qr
 {
     startDelegateDrag(startX, startY, pointerOffsetX, pointerOffsetY);
     Q_EMIT delegateDragFromWidgetListStarted(appletPluginId);
-
-    // we start dragging the delegate immediately from the app drawer, because we don't have a context menu to deal with!
-    // NOTE: this has to happen after delegateDragFromAppDrawerStarted, because slots for that expect SwipeState::AwaitingDraggingDelegate
-    setSwipeState(SwipeState::DraggingDelegate);
 }
 
 void HomeScreenState::cancelDelegateDrag()
@@ -954,7 +994,7 @@ void HomeScreenState::swipeEnded()
         break;
     }
     case SwipeState::DraggingDelegate:
-        Q_EMIT delegateDragEnded();
+        Q_EMIT delegateDragDropped();
         break;
     case SwipeState::AwaitingDraggingDelegate:
     case SwipeState::DeterminingSwipeType:
@@ -963,6 +1003,50 @@ void HomeScreenState::swipeEnded()
         break;
     }
 
+    setSwipeState(SwipeState::None);
+}
+
+void HomeScreenState::dragStart()
+{
+    // Cancel AwaitingDraggingDelegate
+    swipeEnded();
+
+    m_dragDropActive = true;
+    Q_EMIT delegateDragStarted();
+    Q_EMIT isDraggingDelegateChanged();
+}
+
+void HomeScreenState::dragMove(qreal deltaX, qreal deltaY)
+{
+    if (!m_dragDropActive) {
+        return;
+    }
+    setDelegateDragX(m_delegateDragX + deltaX);
+    setDelegateDragY(m_delegateDragY + deltaY);
+}
+
+void HomeScreenState::dragDrop()
+{
+    if (!m_dragDropActive) {
+        return;
+    }
+    m_dragDropActive = false;
+    Q_EMIT delegateDragDropped();
+    Q_EMIT isDraggingDelegateChanged();
+}
+
+void HomeScreenState::dragCancel()
+{
+    if (!m_dragDropActive) {
+        return;
+    }
+    m_dragDropActive = false;
+    Q_EMIT delegateDragCancelled();
+    Q_EMIT isDraggingDelegateChanged();
+}
+
+void HomeScreenState::swipeCancelled()
+{
     setSwipeState(SwipeState::None);
 }
 
@@ -996,6 +1080,7 @@ void HomeScreenState::swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal del
         break;
     case SwipeState::AwaitingDraggingDelegate:
         setSwipeState(SwipeState::DraggingDelegate);
+        Q_EMIT delegateDragStarted();
         break;
     case SwipeState::DraggingDelegate:
         setDelegateDragX(m_delegateDragX + deltaX);

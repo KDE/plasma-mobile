@@ -1,0 +1,284 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2025 Tommi Nieminen <translator@legisign.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"PO-Revision-Date: 2025-09-03 18:31+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.0\n"
+
+#: ui/main.qml:19
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Waydroid-eheytys"
+
+#: ui/main.qml:32
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "Waydroidia ei ole asennettu"
+
+#: ui/main.qml:39
+#, kde-format
+msgid "Check installation"
+msgstr "Tarkista asennus"
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"Ladataan Android- ja valmistajakuvia.\n"
+"Voi kestää joitakin minuutteja."
+
+#: ui/main.qml:67
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroidia palautetaan.\n"
+"Voi kestää joitakin sekunteja."
+
+#: ui/main.qml:76
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "Waydroid-istunto ei ole käynnissä."
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Start the session"
+msgstr "Aloita istunto"
+
+#: ui/main.qml:90
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid-istunto käynnistyy.\n"
+"Tämä voi kestää pari sekuntia."
+
+#: ui/WaydroidApplicationsPage.qml:25
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Waydroid-sovellukset"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "Asenna APK"
+
+#: ui/WaydroidApplicationsPage.qml:67
+#, fuzzy, kde-format
+#| msgid "You must selected local file"
+msgid "You must select a local file"
+msgstr "On valittava paikallinen tiedosto"
+
+#: ui/WaydroidApplicationsPage.qml:107
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "Poista sovellus"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "Yleistietoa"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "IP-osoite"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "Kopioi"
+
+#: ui/WaydroidConfigurationForm.qml:35
+#, kde-format
+msgid "Waydroid status"
+msgstr "Waydroidin tila"
+
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "Käynnissä"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stop session"
+msgstr "Pysäytä istunto"
+
+#: ui/WaydroidConfigurationForm.qml:46
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "Vahvista laitteeni Google Play -suojauksella"
+
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr "Asennetut sovellukset"
+
+#: ui/WaydroidConfigurationForm.qml:56
+#, fuzzy, kde-format
+#| msgid "Reset waydroid"
+msgid "Reset Waydroid"
+msgstr "Palauta Waydroid"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Vahvista Waydroidin palauttaminen"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
+#| "and will wipe all user data."
+msgid ""
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+"Haluatko varmasti palauttaa Waydroidin alkutilaan? Toimenpide poistaa kaikki "
+"käyttäjätiedot."
+
+#: ui/WaydroidConfigurationForm.qml:81
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Waydroidin ominaisuudet"
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, fuzzy, kde-format
+#| msgid "May require restarting the waydroid session to apply"
+msgid "May require restarting the Waydroid session to apply"
+msgstr "Käyttöönotto voi vaatia Waydroid-istunnon käynnistämistä uudelleen"
+
+#: ui/WaydroidConfigurationForm.qml:109
+#, kde-format
+msgid "Multi Windows"
+msgstr "Useampi ikkuna"
+
+#: ui/WaydroidConfigurationForm.qml:110
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "Ottaa työpöydän ikkunaeheytyksen käyttöön tai poistaa sen käytöstä"
+
+#: ui/WaydroidConfigurationForm.qml:122
+#, kde-format
+msgid "Suspend"
+msgstr "Valmiustila"
+
+#: ui/WaydroidConfigurationForm.qml:123
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr ""
+"Salli Waydroid-säilön siirtyä valmiustilaan (näytön aikakatkaisun jälkeen), "
+"ellei aktiivisia sovelluksia ole"
+
+#: ui/WaydroidConfigurationForm.qml:135
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:136
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr "Salli Androidin suora pääsy ajonaikaiskytkettyihin laitteisiin"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "Ladataan %1 Mt/%2 Mt  Nopeus %3"
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1MB/s"
+msgstr ""
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1kB/s"
+msgstr ""
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Google Play -suojausasetukset"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, fuzzy, kde-format
+#| msgid ""
+#| "We fetching your Android ID.\n"
+#| "It can take a few seconds."
+msgid ""
+"Fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"Noudetaan Android-tunnistetta.\n"
+"Kestänee joitakin sekunteja."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, fuzzy, kde-format
+#| msgid ""
+#| "When launching waydroid with GAPPS for the first time you will be "
+#| "notified that the device is not certified for Google Play Protect. To "
+#| "self certify your device, paste the Android ID on the field in the "
+#| "website. Then, give the Google services some minutes to reflect the "
+#| "change and restart waydroid."
+msgid ""
+"When launching Waydroid with GAPPS for the first time, you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
+msgstr ""
+"Käynnistettäessä Waydroid GAPPSilla ensi kertaa saat ilmoituksen, ettei "
+"Google Playn suojaus on vahvistanut laitetta. Vahvistaaksesi laitteen liitä "
+"Androidin tunniste sivuston kenttään, anna Google-palveluille hetki "
+"käsitellä muutosta ja käynnistä Waydroid sitten uudelleen."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "Kopioi Androidin tunniste ja siirry verkkosivulle"
+
+#: ui/WaydroidInitialConfigurationForm.qml:16
+#, kde-format
+msgid "Initial configuration"
+msgstr "Alkuasetukset"
+
+#: ui/WaydroidInitialConfigurationForm.qml:22
+#, kde-format
+msgid "System type"
+msgstr "Järjestelmän tyyppi"
+
+#: ui/WaydroidInitialConfigurationForm.qml:35
+#, fuzzy, kde-format
+#| msgid "Configure waydroid"
+msgid "Configure Waydroid"
+msgstr "Waydroidin asetukset"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1 Mt/s"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1 kt/s"
+
+#~ msgid "Go back"
+#~ msgstr "Siirry taaksepäin"

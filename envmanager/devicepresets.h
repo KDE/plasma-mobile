@@ -1,0 +1,25 @@
+// SPDX-FileCopyrightText: 2025 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#include <QObject>
+
+#include <KConfigGroup>
+#include <KSharedConfig>
+
+class DevicePresets : public QObject
+{
+    Q_OBJECT
+
+public:
+    DevicePresets(QObject *parent = nullptr);
+
+    void initialize();
+
+private:
+    void setKey(KConfigGroup &fallbackGroup, KConfigGroup &fromGroup, KConfigGroup &toGroup, const QString &fromKey, const QString &toKey);
+    QStringList detectDeviceString();
+
+    KSharedConfig::Ptr m_mobileConfig;
+};

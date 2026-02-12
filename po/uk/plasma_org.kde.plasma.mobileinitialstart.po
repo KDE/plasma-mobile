@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2023, 2024.
+# Yuri Chornoivan <yurchor@ukr.net>, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-27 08:36+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-13 21:52+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -148,6 +148,7 @@ msgid "Edit"
 msgstr "Змінити"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Вилучити"
@@ -190,10 +191,49 @@ msgstr "Скоригуйте розмір елементів на екрані."
 msgid "Display Scaling"
 msgstr "Масштабування дисплея"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Темна тема"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Навігація системою"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Виберіть спосіб навігації системою."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Навігація за жестами"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Проведіть сенсорною панеллю знизу вгору, щоб побачити список запущених "
+"програм. Стукніть, щоб перейти до домашньої сторінки."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Навігація з кнопками"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "Використовувати кнопки на панелі навігації для навігації системою."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "Це пізніше можна змінити у параметрах системи."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -215,6 +255,21 @@ msgstr "24-годинний формат"
 msgid "Invalid input."
 msgstr "Некоректні вхідні дані."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "З'єднатися"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "Від’єднатися"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "Налаштувати"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -235,17 +290,17 @@ msgstr "З'єднатися з мережею WiFi для доступу до м
 msgid "Password…"
 msgstr "Пароль…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Вітаємо у<br/><b>Plasma Mobile</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "На основі<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Далі"
@@ -255,12 +310,12 @@ msgstr "Далі"
 msgid "Initial Start"
 msgstr "Початковий запуск"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Назад"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Завершити"

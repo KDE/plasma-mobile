@@ -9,6 +9,7 @@
 
 #include <NetworkManagerQt/Connection>
 #include <NetworkManagerQt/ModemDevice>
+#include <QCoroDBusPendingReply>
 
 #include <QObject>
 #include <qqmlregistration.h>
@@ -53,10 +54,10 @@ public:
     // connection profiles
     QList<ProfileSettings *> &profileList();
     void refreshProfiles();
-    Q_INVOKABLE void activateProfile(const QString &connectionUni);
-    Q_INVOKABLE void addProfile(const QString &name, const QString &apn, const QString &username, const QString &password, const QString &networkType);
-    Q_INVOKABLE void removeProfile(const QString &connectionUni);
-    Q_INVOKABLE void updateProfile(const QString &connectionUni,
+    Q_INVOKABLE QCoro::Task<void> activateProfile(const QString &connectionUni);
+    Q_INVOKABLE QCoro::Task<void> addProfile(const QString &name, const QString &apn, const QString &username, const QString &password, const QString &networkType);
+    Q_INVOKABLE QCoro::Task<void> removeProfile(const QString &connectionUni);
+    Q_INVOKABLE QCoro::Task<void> updateProfile(const QString &connectionUni,
                                    const QString &name,
                                    const QString &apn,
                                    const QString &username,

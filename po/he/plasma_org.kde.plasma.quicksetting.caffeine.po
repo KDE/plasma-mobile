@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2024-03-07 11:29+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-04-26 10:30+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,24 +16,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.12.3\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
 msgstr "קפאין"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "נגיעה תשבית את השהיית השינה"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "נגיעה תשהה את השינה"
 
-#: contents/ui/main.qml:36
+#: contents/ui/main.qml:22
 #, kde-format
+msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "פלזמה לניידים הפעילה מניעה כלל מערכתית"

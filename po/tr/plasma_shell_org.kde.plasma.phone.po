@@ -1,21 +1,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2022, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-07-16 13:49+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-10-06 09:58+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -25,71 +25,93 @@ msgstr "Panoya Kopyala"
 msgid "View Error Details…"
 msgstr "Hata Ayrıntılarını Görüntüle…"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "Aç: %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "Sistem yöneticisi tarafından yerleşim değişiklikleri kısıtlandı"
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Yapılandır: %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Genel"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Duvar Kâğıdı"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Ana Ekran Yerleşimi"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Ana Ekranı Değiştir"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "Kullanılacak ana ekran yerleşimi."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Ana Ekran Seç"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Ana ekran %1 olarak değiştirilsin mi?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"Geçerli ana ekran ayarlarınız kaydedildi ve yeniden geçerseniz geri "
+"yüklenecekler."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
-msgstr "Duvar Kağıdı Eklentisi"
+msgstr "Duvar Kâğıdı Eklentisi"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
-msgstr "Kullanılacak duvar kağıdı eklentisi."
+msgstr "Kullanılacak duvar kâğıdı eklentisi."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
-msgstr "Duvar Kağıdı Eklentileri"
+msgstr "Duvar Kâğıdı Eklentileri"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "Yeni Eklentiler Al…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "Yerleşim değişiklikleri, diğer değişikliklerden önce uygulanmalıdır"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Şimdi Uygula"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Duvar Kağıdı"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Sistem yöneticisi tarafından yerleşim değişiklikleri kısıtlandı"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr "PIN Gir"
+msgstr "PIN’i Girin"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Yanlış PIN"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Panel Odağı Belirteci"
+
+#~ msgid "General"
+#~ msgstr "Genel"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Ana Ekran Yerleşimi"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "Yerleşim değişiklikleri, diğer değişikliklerden önce uygulanmalıdır"
+
+#~ msgid "Apply now"
+#~ msgstr "Şimdi Uygula"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "Feneri Yak"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "Kamerayı Aç"
 
 #~ msgid "Logging in..."
 #~ msgstr "Oturum açılıyor…"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Duvar Kağıdını Değiştir"
-
-#~ msgid "Configure"
-#~ msgstr "Yapılandır"

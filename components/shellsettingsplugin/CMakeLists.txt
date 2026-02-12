@@ -2,7 +2,10 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 ecm_add_qml_module(shellsettingsplugin URI org.kde.plasma.private.mobileshell.shellsettingsplugin GENERATE_PLUGIN_SOURCE)
-target_sources(shellsettingsplugin PRIVATE mobileshellsettings.cpp)
+target_sources(shellsettingsplugin PRIVATE
+    kwinsettings.cpp
+    mobileshellsettings.cpp
+)
 
 target_link_libraries(shellsettingsplugin PRIVATE
     Qt::Qml
@@ -14,6 +17,7 @@ target_link_libraries(shellsettingsplugin PRIVATE
     KF6::Package
     KF6::KIOGui
     KF6::JobWidgets
+    KF6::Screen
 )
 
 ecm_finalize_qml_module(shellsettingsplugin)

@@ -44,8 +44,9 @@ Item {
         readonly property bool isLandscape: width >= height
 
         source: {
-            // default wallpaper background
-            const imgFile = isLandscape ? '2560x1440.png' : '1080x1920.png';
+            // Default wallpaper background
+            // Needs to be in-sync with breeze/wallpapers/Next/contents/images
+            const imgFile = isLandscape ? '5120x2880.png' : '1440x2960.png';
             const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
             const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
 

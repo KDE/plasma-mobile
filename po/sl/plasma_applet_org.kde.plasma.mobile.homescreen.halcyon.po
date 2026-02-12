@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2022-07-13 05:11+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-10-06 07:09+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,36 +16,92 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Poedit 3.7\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
-#: package/contents/ui/FolderGrid.qml:189
-#, kde-format
-msgid "Remove from favourites"
-msgstr "Odstrani iz priljubljenih"
-
-#: package/contents/ui/FavoritesGrid.qml:291
-#, kde-format
-msgid "Add applications to your favourites so they show up here."
-msgstr "Dodaj aplikacije k vašim priljubljenim, tako da se prikažejo tukaj."
-
-#: package/contents/ui/FolderGrid.qml:194
-#, kde-format
-msgid "Move out of folder"
-msgstr "Pomakni ven iz mape"
-
-#: package/contents/ui/GridAppDelegate.qml:64
-#, kde-format
-msgid "Add to favourites"
-msgstr "Dodaj k priljubljenim"
-
-#: package/contents/ui/GridAppList.qml:68
-#, kde-format
-msgid "Applications"
-msgstr "Aplikacije"
-
-#: plugin/pinnedmodel.cpp:151
+#: pinnedmodel.cpp:146
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "Mapa"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr "Splošno"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr "Odstrani iz priljubljenih"
+
+#: qml/FavoritesGrid.qml:294
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "Dodaj aplikacije k vašim priljubljenim, tako da se prikažejo tukaj."
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr "Pomakni ven iz mape"
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "Dodaj k priljubljenim"
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr "Aplikacije"
+
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "Nastavitve začetnega zaslona"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "Začetni zaslon"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Učinek zameglitve ozadja"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Brez"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Enostaven"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Poln"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Dvakrat se dotaknite za zaklepanje naprave"
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr "Ozadja"
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr "Nastavitve"
+
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr "Preklapljanje med začetnimi zasloni in več možnostmi ozadja"

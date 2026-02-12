@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ - SPDX-FileCopyrightText: 2025 Marco Mattiolo <marco.mattiolo@hotmail.it>
+ - SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<component>
+  <id>org.kde.plasma.mobileshell</id>
+  <developer id="org.kde">
+    <name translate="no">KDE</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>KDE Plasma Mobile Shell</name>
+  <name xml:lang="ar">صدفة بلازما الجوال من كيدي</name>
+  <name xml:lang="ca">Espai de treball del Plasma Mobile de KDE</name>
+  <name xml:lang="ca-valencia">Espai de treball Plasma Mobile de KDE</name>
+  <name xml:lang="es">Entorno KDE Plasma Móvil</name>
+  <name xml:lang="eu">KDE Plasma Mugikor Oskola</name>
+  <name xml:lang="fi">KDE Plasma Mobile -käyttöliittymä</name>
+  <name xml:lang="fr">Shell pour KDE Plasma Mobile</name>
+  <name xml:lang="he">מעטפת לניידים של פלזמה מבית KDE</name>
+  <name xml:lang="ia">KDE Plasma Mobile Shell (Shell de Plasma KDE Mobile)</name>
+  <name xml:lang="it">Shell Plasma Mobile di KDE</name>
+  <name xml:lang="ka">KDE Plasma Mobile-ის გარსი</name>
+  <name xml:lang="ko">KDE Plasma 모바일 셸</name>
+  <name xml:lang="nl">KDE Plasma Mobiel-shell</name>
+  <name xml:lang="pt-BR">Shell do KDE Plasma Mobile</name>
+  <name xml:lang="sl">KDE Plasma Mobile Shell</name>
+  <name xml:lang="sv">KDE Plasma mobilskal</name>
+  <name xml:lang="tr">KDE Plasma Cep Kabuğu</name>
+  <name xml:lang="uk">Оболонка Мобільної Плазми KDE</name>
+  <name xml:lang="zh-CN">KDE Plasma Mobile Shell</name>
+  <name xml:lang="zh-TW">KDE Plasma 行動殼層</name>
+  <summary>KDE's Plasma shell for mobile form-factor devices</summary>
+  <summary xml:lang="ar">صدفة بلازما كيدي للأجهزة المحمولة</summary>
+  <summary xml:lang="ca">Espai de treball del Plasma de KDE per a dispositius de factor de forma mòbil</summary>
+  <summary xml:lang="ca-valencia">Espai de treball Plasma de KDE per a dispositius de factor de forma mòbil</summary>
+  <summary xml:lang="es">Entorno de Plasma de KDE para dispositivos con factor de forma móvil</summary>
+  <summary xml:lang="eu">Mugikor forma faktorea duten gailuetarako KDEren Plasma Oskola</summary>
+  <summary xml:lang="fi">KDE Plasman käyttöliittymä mobiililaitteille</summary>
+  <summary xml:lang="fr">Shell pour KDE Plasma pour les périphériques de format mobile</summary>
+  <summary xml:lang="he">מעטפת פלזמה מבית KDE למכשירים בתצורת ניוד</summary>
+  <summary xml:lang="ia">Shell  de Plasma per dispositivos de factor de forma mobile</summary>
+  <summary xml:lang="it">Shell Plasma di KDE per dispositivi mobili</summary>
+  <summary xml:lang="ka">KDE's Plasma-ის გარსი მობილური ფორმფაქტორის მქონე მოწყობილობებისთვის</summary>
+  <summary xml:lang="ko">KDE의 모바일 장치를 위한 Plasma 셸</summary>
+  <summary xml:lang="nl">Plasma-shell van KDE voor apparaten met mobiele vormfactor</summary>
+  <summary xml:lang="pt-BR">Shell do Plasma do KDE para dispositivos móveis</summary>
+  <summary xml:lang="sl">KDE's Plasma shell za mobilne naprave</summary>
+  <summary xml:lang="sv">KDE:s Plasma skal för mobilapparater</summary>
+  <summary xml:lang="tr">Taşınabilir biçimdeki aygıtlar için KDE’nin Plasma kabuğu</summary>
+  <summary xml:lang="uk">Оболонка Плазми KDE для пристроїв мобільного форм-фактора</summary>
+  <summary xml:lang="zh-CN">KDE Plasma 的手机形态设备外壳程序</summary>
+  <summary xml:lang="zh-TW">行動裝置用的 KDE Plasma 殼層</summary>
+  <url type="homepage">https://plasma-mobile.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=plasma-mobile</url>
+  <url type="vcs-browser">https://invent.kde.org/plasma/plasma-mobile</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>plasma.mobileshell</binary>
+  </provides>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Plasma Mobile shell being used on mobile form-factor screen</caption>
+      <caption xml:lang="ar">تُستخدم صدفة بلازما الجوال على شاشة الجوال</caption>
+      <caption xml:lang="ca">Espai de treball del Plasma Mobile que es fa servir en una pantalla de factor de forma mòbil</caption>
+      <caption xml:lang="ca-valencia">Espai de treball Plasma Mobile que s'utilitza en una pantalla de factor de forma mòbil</caption>
+      <caption xml:lang="es">El entorno Plasma Mobile en uso en una pantalla con factor de forma móvil</caption>
+      <caption xml:lang="eu">Mugikor forma faktoreko pantaila batean Plasma Mugikor oskola erabiltzen</caption>
+      <caption xml:lang="fi">Plasma Mobilen käyttöliittymä käytössä mobiilinäytöllä</caption>
+      <caption xml:lang="fr">Shell pour Plasma Mobile utilisée sur un écran de périphérique de format mobile</caption>
+      <caption xml:lang="he">המעטפת של פלזמה לניידים מיועדת למסכים של מכשירים שמיועדים לניוד</caption>
+      <caption xml:lang="ia">KDE Plasma Mobile Shell e usate sur schermo de factor de forma mobile</caption>
+      <caption xml:lang="it">Shell di Plasma Mobile utilizzata su schermi per dispositivi mobili</caption>
+      <caption xml:lang="ka">Plasma Mobile-ის გარსი გამოიყენება მობილური ფორმფაქტორის მქონე ეკრანზე</caption>
+      <caption xml:lang="ko">모바일 화면에서 사용 중인 Plasma 모바일 셸</caption>
+      <caption xml:lang="nl">Plasma Mobiel-shell wordt gebruikt op schermen met een mobiele vormfactor</caption>
+      <caption xml:lang="pt-BR">O shell do Plasma Mobile está sendo usado em telas de fator de formato móvel</caption>
+      <caption xml:lang="sl">Plasma Mobile shell uporabljen za zaslon oblikovan za mobilno napravo</caption>
+      <caption xml:lang="sv">Plasma mobilskal använt på mobilskärm</caption>
+      <caption xml:lang="tr">Plasma Cep kabuğu, taşınabilir biçimli bir aygıtta kullanılırken</caption>
+      <caption xml:lang="uk">Оболонка Мобільної Плазми, яку використовують для екранів мобільного форм-фактора</caption>
+      <caption xml:lang="zh-CN">Plasma Mobile 的手机形态设备外壳程序</caption>
+      <caption xml:lang="zh-TW">Plasma 行動殼層在行動螢幕上使用</caption>
+      <image type="source">https://plasma-mobile.org/img/plasmaphone.png</image>
+    </screenshot>
+  </screenshots>
+  <compulsory_for_desktop>KDE</compulsory_for_desktop>
+  <releases>
+    <release version="6.4.5" date="2025-09-09"/>
+  </releases>
+</component>

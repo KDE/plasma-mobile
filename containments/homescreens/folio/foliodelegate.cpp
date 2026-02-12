@@ -4,7 +4,7 @@
 #include "foliodelegate.h"
 #include "homescreenstate.h"
 
-FolioDelegate::FolioDelegate(HomeScreen *parent)
+FolioDelegate::FolioDelegate(QObject *parent)
     : QObject{parent}
     , m_type{FolioDelegate::None}
     , m_application{nullptr}
@@ -13,7 +13,7 @@ FolioDelegate::FolioDelegate(HomeScreen *parent)
 {
 }
 
-FolioDelegate::FolioDelegate(FolioApplication *application, HomeScreen *parent)
+FolioDelegate::FolioDelegate(FolioApplication::Ptr application, QObject *parent)
     : QObject{parent}
     , m_type{FolioDelegate::Application}
     , m_application{application}
@@ -22,7 +22,7 @@ FolioDelegate::FolioDelegate(FolioApplication *application, HomeScreen *parent)
 {
 }
 
-FolioDelegate::FolioDelegate(FolioApplicationFolder *folder, HomeScreen *parent)
+FolioDelegate::FolioDelegate(FolioApplicationFolder::Ptr folder, QObject *parent)
     : QObject{parent}
     , m_type{FolioDelegate::Folder}
     , m_application{nullptr}
@@ -31,7 +31,7 @@ FolioDelegate::FolioDelegate(FolioApplicationFolder *folder, HomeScreen *parent)
 {
 }
 
-FolioDelegate::FolioDelegate(FolioWidget *widget, HomeScreen *parent)
+FolioDelegate::FolioDelegate(FolioWidget::Ptr widget, QObject *parent)
     : QObject{parent}
     , m_type{FolioDelegate::Widget}
     , m_application{nullptr}
@@ -40,34 +40,34 @@ FolioDelegate::FolioDelegate(FolioWidget *widget, HomeScreen *parent)
 {
 }
 
-FolioDelegate *FolioDelegate::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioDelegate::Ptr FolioDelegate::fromJson(QJsonObject &obj, HomeScreen *homeScreen)
 {
     const QString type = obj[QStringLiteral("type")].toString();
     if (type == "application") {
         // read application
-        FolioApplication *app = FolioApplication::fromJson(obj, parent);
+        FolioApplication::Ptr app = FolioApplication::fromJson(obj);
 
         if (app) {
-            return new FolioDelegate{app, parent};
+            return std::make_shared<FolioDelegate>(app);
         }
 
     } else if (type == "folder") {
         // read folder
-        FolioApplicationFolder *folder = FolioApplicationFolder::fromJson(obj, parent);
+        FolioApplicationFolder::Ptr folder = FolioApplicationFolder::fromJson(obj, homeScreen);
 
         if (folder) {
-            return new FolioDelegate{folder, parent};
+            return std::make_shared<FolioDelegate>(folder);
         }
 
     } else if (type == "widget") {
         // read widget
-        FolioWidget *widget = FolioWidget::fromJson(obj, parent);
+        FolioWidget::Ptr widget = FolioWidget::fromJson(obj, homeScreen);
 
         if (widget) {
-            return new FolioDelegate{widget, parent};
+            return std::make_shared<FolioDelegate>(widget);
         }
     } else if (type == "none") {
-        return new FolioDelegate{parent};
+        return std::make_shared<FolioDelegate>();
     }
 
     return nullptr;
@@ -93,65 +93,80 @@ QJsonObject FolioDelegate::toJson() const
     return QJsonObject{};
 }
 
-FolioDelegate::Type FolioDelegate::type()
+FolioDelegate::Type FolioDelegate::type() const
 {
     return m_type;
 }
 
-FolioApplication *FolioDelegate::application()
+FolioApplication::Ptr FolioDelegate::application()
 {
     return m_application;
 }
 
-FolioApplicationFolder *FolioDelegate::folder()
+FolioApplication *FolioDelegate::applicationRaw()
+{
+    return m_application.get();
+}
+
+FolioApplicationFolder::Ptr FolioDelegate::folder()
 {
     return m_folder;
 }
 
-FolioWidget *FolioDelegate::widget()
+FolioApplicationFolder *FolioDelegate::folderRaw()
+{
+    return m_folder.get();
+}
+
+FolioWidget::Ptr FolioDelegate::widget()
 {
     return m_widget;
 }
 
-FolioPageDelegate::FolioPageDelegate(int row, int column, HomeScreen *parent)
+FolioWidget *FolioDelegate::widgetRaw()
+{
+    return m_widget.get();
+}
+
+FolioPageDelegate::FolioPageDelegate(int row, int column, HomeScreen *homeScreen, QObject *parent)
     : FolioDelegate{parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_row{row}
     , m_column{column}
 {
     init();
 }
 
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioApplication *application, HomeScreen *parent)
+FolioPageDelegate::FolioPageDelegate(int row, int column, FolioApplication::Ptr application, HomeScreen *homeScreen, QObject *parent)
     : FolioDelegate{application, parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_row{row}
     , m_column{column}
 {
     init();
 }
 
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioApplicationFolder *folder, HomeScreen *parent)
+FolioPageDelegate::FolioPageDelegate(int row, int column, FolioApplicationFolder::Ptr folder, HomeScreen *homeScreen, QObject *parent)
     : FolioDelegate{folder, parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_row{row}
     , m_column{column}
 {
     init();
 }
 
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioWidget *widget, HomeScreen *parent)
+FolioPageDelegate::FolioPageDelegate(int row, int column, FolioWidget::Ptr widget, HomeScreen *homeScreen, QObject *parent)
     : FolioDelegate{widget, parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_row{row}
     , m_column{column}
 {
     init();
 }
 
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioDelegate *delegate, HomeScreen *parent)
+FolioPageDelegate::FolioPageDelegate(int row, int column, FolioDelegate::Ptr delegate, HomeScreen *homeScreen, QObject *parent)
     : FolioDelegate{parent}
-    , m_homeScreen{parent}
+    , m_homeScreen{homeScreen}
     , m_row{row}
     , m_column{column}
 {
@@ -207,21 +222,21 @@ void FolioPageDelegate::init()
     }
 
     if (m_widget) {
-        connect(m_widget, &FolioWidget::realTopLeftPositionChanged, this, [this](int rowOffset, int columnOffset) {
+        connect(m_widget.get(), &FolioWidget::realTopLeftPositionChanged, this, [this](int rowOffset, int columnOffset) {
             m_realRow += rowOffset;
             m_realColumn += columnOffset;
         });
     }
 
     connect(homeScreenState, &HomeScreenState::pageOrientationChanged, this, [this]() {
-        setRowOnly(getTranslatedTopLeftRow(m_homeScreen, m_realRow, m_realColumn, this));
-        setColumnOnly(getTranslatedTopLeftColumn(m_homeScreen, m_realRow, m_realColumn, this));
+        setRowOnly(getTranslatedTopLeftRow(m_homeScreen, m_realRow, m_realColumn, this->shared_from_this()));
+        setColumnOnly(getTranslatedTopLeftColumn(m_homeScreen, m_realRow, m_realColumn, this->shared_from_this()));
     });
 }
 
-FolioPageDelegate *FolioPageDelegate::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioPageDelegate::Ptr FolioPageDelegate::fromJson(QJsonObject &obj, HomeScreen *homeScreen)
 {
-    FolioDelegate *fd = FolioDelegate::fromJson(obj, parent);
+    FolioDelegate::Ptr fd = FolioDelegate::fromJson(obj, homeScreen);
 
     if (!fd) {
         return nullptr;
@@ -230,16 +245,16 @@ FolioPageDelegate *FolioPageDelegate::fromJson(QJsonObject &obj, HomeScreen *par
     int realRow = obj[QStringLiteral("row")].toInt();
     int realColumn = obj[QStringLiteral("column")].toInt();
 
-    int row = getTranslatedTopLeftRow(parent, realRow, realColumn, fd);
-    int column = getTranslatedTopLeftColumn(parent, realRow, realColumn, fd);
+    int row = getTranslatedTopLeftRow(homeScreen, realRow, realColumn, fd);
+    int column = getTranslatedTopLeftColumn(homeScreen, realRow, realColumn, fd);
 
-    FolioPageDelegate *delegate = new FolioPageDelegate{row, column, fd, parent};
+    FolioPageDelegate::Ptr delegate = std::make_shared<FolioPageDelegate>(row, column, fd, homeScreen);
     fd->deleteLater();
 
     return delegate;
 }
 
-int FolioPageDelegate::getTranslatedTopLeftRow(HomeScreen *homeScreen, int realRow, int realColumn, FolioDelegate *fd)
+int FolioPageDelegate::getTranslatedTopLeftRow(HomeScreen *homeScreen, int realRow, int realColumn, FolioDelegate::Ptr fd)
 {
     int row = getTranslatedRow(homeScreen, realRow, realColumn);
     int column = getTranslatedColumn(homeScreen, realRow, realColumn);
@@ -252,7 +267,7 @@ int FolioPageDelegate::getTranslatedTopLeftRow(HomeScreen *homeScreen, int realR
     }
 }
 
-int FolioPageDelegate::getTranslatedTopLeftColumn(HomeScreen *homeScreen, int realRow, int realColumn, FolioDelegate *fd)
+int FolioPageDelegate::getTranslatedTopLeftColumn(HomeScreen *homeScreen, int realRow, int realColumn, FolioDelegate::Ptr fd)
 {
     int row = getTranslatedRow(homeScreen, realRow, realColumn);
     int column = getTranslatedColumn(homeScreen, realRow, realColumn);
@@ -385,4 +400,9 @@ void FolioPageDelegate::setColumnOnly(int column)
         m_column = column;
         Q_EMIT columnChanged();
     }
+}
+
+std::shared_ptr<FolioPageDelegate> FolioPageDelegate::sharedPageDelegate()
+{
+    return static_pointer_cast<FolioPageDelegate>(shared_from_this());
 }

@@ -1,15 +1,13 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
+# SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
-#
-# Automatically generated, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.caffeine\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2024-05-20 12:09+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -20,22 +18,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.02.2\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
 msgstr "Koffein"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "Tippen um das außer Kraft setzen des Ruhezustandes zu deaktivieren"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "Tippen um den Ruhezustand außer Kraft zu setzen"
 
-#: contents/ui/main.qml:36
-#, kde-format
+#: contents/ui/main.qml:22
+#, fuzzy, kde-format
+#| msgid "Plasma Mobile has enabled system-wide inhibition"
+msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "Plasma Mobile hat eine systemweite Blockade aktiviert"

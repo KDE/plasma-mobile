@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell as MobileShell
 
-import initialstart 1.0 as InitialStart
+import initialstart as InitialStart
 
 Kirigami.Page {
     id: root
@@ -128,11 +128,13 @@ Kirigami.Page {
 
     Item {
         id: stepsComponent
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
 
         // animation when we switch to step stage
         opacity: root.showingLanding ? 0 : 1
-        property real translateY: root.showingLanding ? overlaySteps.height : 0
+        x: 0
+        y: root.showingLanding ? overlaySteps.height : 0
 
         Behavior on opacity {
             NumberAnimation {
@@ -141,14 +143,12 @@ Kirigami.Page {
             }
         }
 
-        Behavior on translateY {
+        Behavior on y {
             NumberAnimation {
                 duration: 1000
                 easing.type: Easing.OutExpo
             }
         }
-
-        transform: Translate { y: stepsComponent.translateY }
 
         // heading for all the wizard steps
         Label {
@@ -191,14 +191,20 @@ Kirigami.Page {
 
         Rectangle {
             id: overlaySteps
+            clip: true
 
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
             color: Kirigami.Theme.backgroundColor
+            topLeftRadius: Kirigami.Units.gridUnit
+            topRightRadius: Kirigami.Units.gridUnit
 
-            anchors.fill: parent
-            anchors.topMargin: root.height * 0.3
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            height: root.height * 0.7
+            width: Math.min(parent.width, Kirigami.Units.gridUnit * 30)
 
             // all steps are in this container
             Item {

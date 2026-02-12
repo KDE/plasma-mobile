@@ -1,20 +1,20 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2024-03-07 14:43+0200\n"
+"POT-Creation-Date: 2026-01-20 00:44+0000\n"
+"PO-Revision-Date: 2025-10-05 11:34+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -1489,7 +1489,7 @@ msgstr "מרנגו"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Mariehamn"
-msgstr "ןמרייהאמן"
+msgstr "מרייהאמן"
 
 #: timezonesi18n.cpp:288
 #, kde-format
@@ -2964,7 +2964,7 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "בחירת אזור זמן"
 
-#: ui/main.qml:178
+#: ui/main.qml:177
 #, kde-format
 msgid "Pick System Time"
 msgstr "בחירת שעת המערכת"

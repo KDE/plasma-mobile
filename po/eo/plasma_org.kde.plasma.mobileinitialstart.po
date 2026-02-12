@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2023-11-18 08:12+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Malfermas la komencan startsorĉiston sen modifi agordon"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 KDE-Komunumo"
+msgstr "© 2024 KDE-Komunumo"
 
 #: main.cpp:37
 #, kde-format
@@ -149,6 +148,7 @@ msgid "Edit"
 msgstr "Redakti"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Forigi"
@@ -189,10 +189,47 @@ msgstr "Alĝustigu la grandecon de elementoj sur la ekrano."
 msgid "Display Scaling"
 msgstr "Montra Skalado"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Malhela Etoso"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr ""
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr ""
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -214,6 +251,23 @@ msgstr "24-Hora Formato"
 msgid "Invalid input."
 msgstr "Nevalida enigo."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Connect"
+msgstr "Konekti al"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Disconnect"
+msgstr "Konekti al"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr ""
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -234,40 +288,32 @@ msgstr "Konekti al WiFi-reto por retaliro."
 msgid "Password…"
 msgstr "Pasvorto…"
 
-#: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#: qml/LandingComponent.qml:105
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "Bonvenon al<br/><b>%1</b>"
+msgstr "Bonvenon al<br/><b>Plasma Mobile</b>"
 
-#: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#: qml/LandingComponent.qml:131
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "Bonvenon al<br/><b>%1</b>"
+msgstr "Pelita de<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
-msgstr "Poste"
+msgstr "Sekva"
 
 #: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
-msgstr "Komenca Komenco"
+msgstr "Komenca Starto"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Reen"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Fini"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi estas malŝaltita"
-
-#~ msgid "Enable"
-#~ msgstr "Ebligi"

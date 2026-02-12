@@ -47,6 +47,34 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: shellVibrationsButton; below: animationsSwitch }
+
+            FormCard.FormSwitchDelegate {
+                id: autoHidePanels
+                text: i18n("Auto Hide Panels")
+                description: i18n("Auto-hide the status and navigation panels to allow applications to always be in fullscreen.")
+                checked: ShellSettings.Settings.autoHidePanelsEnabled
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.autoHidePanelsEnabled) {
+                        ShellSettings.Settings.autoHidePanelsEnabled = checked;
+                    }
+                }
+            }
+
+            FormCard.FormDelegateSeparator { above: autoHidePanels; below: doubleTapWakeup }
+
+            FormCard.FormSwitchDelegate {
+                id: doubleTapWakeup
+                text: i18n("Double Tap to Wakeup")
+                description: i18n("When the screen is off, double tap to wakeup the device.")
+                checked: ShellSettings.KWinSettings.doubleTapWakeup
+                onCheckedChanged: {
+                    if (checked != ShellSettings.KWinSettings.doubleTapWakeup) {
+                        ShellSettings.KWinSettings.doubleTapWakeup = checked;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {
@@ -68,74 +96,44 @@ KCM.SimpleKCM {
 
             FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
 
+            FormCard.FormSwitchDelegate {
+                id: showBatteryPercentage
+                text: i18n("Battery Percentage")
+                description: i18n("Show battery percentage in the status bar.")
+                checked: ShellSettings.Settings.showBatteryPercentage
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.showBatteryPercentage) {
+                        ShellSettings.Settings.showBatteryPercentage = checked;
+                    }
+                }
+            }
+
+            FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
+
             FormCard.FormComboBoxDelegate {
                 id: statusBarScaleFactorDelegate
-
-                property string tinyString: i18nc("Status bar height", "Tiny")
-                property string smallString: i18nc("Status bar height", "Small")
-                property string normalString: i18nc("Status bar height", "Normal")
-                property string largeString: i18nc("Status bar height","Large")
-                property string xlargeString: i18nc("Status bar height", "Very Large")
-
 
                 text: i18n("Status Bar Size")
                 description: i18n("Size of the top panel (needs restart).")
 
-                currentIndex: indexOfValue(ShellSettings.Settings.statusBarScaleFactor)
-                model: ListModel {
-                    // We can't use i18n with ListElement, so use a property instead
-                    Component.onCompleted: {
-                        append({"name": statusBarScaleFactorDelegate.tinyString, "value": 1.0});
-                        append({"name": statusBarScaleFactorDelegate.smallString, "value": 1.15});
-                        append({"name": statusBarScaleFactorDelegate.normalString, "value": 1.25});
-                        append({"name": statusBarScaleFactorDelegate.largeString, "value": 1.5});
-                        append({"name": statusBarScaleFactorDelegate.xlargeString, "value": 2.0});
-
-                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                        statusBarScaleFactorDelegate.currentIndex = statusBarScaleFactorDelegate.indexOfValue(ShellSettings.Settings.statusBarScaleFactor)
-                    }
-                }
+                model: [
+                    {"name": i18nc("Status bar height", "Tiny"), "value": 1.0},
+                    {"name": i18nc("Status bar height", "Small"), "value": 1.15},
+                    {"name": i18nc("Status bar height", "Normal"), "value": 1.25},
+                    {"name": i18nc("Status bar height", "Large"), "value": 1.5},
+                    {"name": i18nc("Status bar height", "Very Large"), "value": 2.0}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
-                Component.onCompleted: dialog.parent = root
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.statusBarScaleFactor);
+                    dialog.parent = root;
+                }
                 onCurrentValueChanged: ShellSettings.Settings.statusBarScaleFactor = currentValue
             }
 
-        }
-
-        FormCard.FormHeader {
-            title: i18n("Navigation Panel")
-        }
-
-        FormCard.FormCard {
-            FormCard.FormSwitchDelegate {
-                id: gestureDelegate
-                text: i18n("Gesture-only Mode")
-                description: i18n("Whether to hide the navigation panel.")
-                checked: !ShellSettings.Settings.navigationPanelEnabled
-                onCheckedChanged: {
-                    if (checked != !ShellSettings.Settings.navigationPanelEnabled) {
-                        ShellSettings.Settings.navigationPanelEnabled = !checked;
-                    }
-                }
-            }
-
-            FormCard.FormDelegateSeparator { visible: keyboardToggleDelegate.visible; above: gestureDelegate; below: keyboardToggleDelegate }
-
-            FormCard.FormSwitchDelegate {
-                id: keyboardToggleDelegate
-                visible: !gestureDelegate.checked
-                text: i18n("Always show keyboard toggle")
-                description: i18n("Whether to always show the keyboard toggle button on the navigation panel.")
-                checked: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel
-                onCheckedChanged: {
-                    if (checked != ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel) {
-                        ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel = checked;
-                    }
-                }
-            }
         }
 
         FormCard.FormHeader {
@@ -161,22 +159,18 @@ KCM.SimpleKCM {
                 text: i18n("Top Left Drawer Mode")
                 description: i18n("Mode when opening from the top left.")
 
-                currentIndex: indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode)
-                model: ListModel {
-                    // we can't use i18n with ListElement
-                    Component.onCompleted: {
-                        append({"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned});
-                        append({"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded});
-
-                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                        topLeftActionDrawerModeDelegate.currentIndex = topLeftActionDrawerModeDelegate.indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode)
-                    }
-                }
+                model: [
+                    {"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned},
+                    {"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
-                Component.onCompleted: dialog.parent = root
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode);
+                    dialog.parent = root;
+                }
                 onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopLeftMode = currentValue
             }
 
@@ -187,24 +181,72 @@ KCM.SimpleKCM {
                 text: i18n("Top Right Drawer Mode")
                 description: i18n("Mode when opening from the top right.")
 
-                model: ListModel {
-                    // we can't use i18n with ListElement
-                    Component.onCompleted: {
-                        append({"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned});
-                        append({"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded});
-
-                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                        topRightActionDrawerModeDelegate.currentIndex = topRightActionDrawerModeDelegate.indexOfValue(ShellSettings.Settings.actionDrawerTopRightMode)
-                    }
-                }
+                model: [
+                    {"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned},
+                    {"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
                 Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.actionDrawerTopRightMode);
                     dialog.parent = root
                 }
                 onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopRightMode = currentValue
+            }
+        }
+
+        FormCard.FormHeader {
+            title: i18nc("@title:group, shortcuts available from lock screen", "Lock Screen Shortcuts")
+        }
+
+        FormCard.FormCard {
+            id: quickActionButtons
+            property string noneString: i18nc("@item:inlistbox", "None")
+            property string flashlightString: i18nc("@item:inlistbox", "Flashlight")
+            property string cameraString: i18nc("@item:inlistbox", "Camera")
+
+            FormCard.FormComboBoxDelegate {
+                id: lockscreenLeftButtonDelegate
+                text: i18nc("@label:listbox", "Left button")
+
+                model: [
+                    {"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None},
+                    {"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight}
+                    // {"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera}
+                ]
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.lockscreenLeftButtonAction);
+                    dialog.parent = root;
+                }
+                onCurrentValueChanged: ShellSettings.Settings.lockscreenLeftButtonAction = currentValue
+            }
+
+            FormCard.FormDelegateSeparator { above: lockscreenRightButtonDelegate; below: lockscreenLeftButtonDelegate }
+
+            FormCard.FormComboBoxDelegate {
+                id: lockscreenRightButtonDelegate
+                text: i18nc("@label:listbox", "Right button")
+
+                model: [
+                    {"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None},
+                    {"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight}
+                    // {"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera}
+                ]
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.lockscreenRightButtonAction);
+                    dialog.parent = root;
+                }
+                onCurrentValueChanged: ShellSettings.Settings.lockscreenRightButtonAction = currentValue
             }
         }
     }

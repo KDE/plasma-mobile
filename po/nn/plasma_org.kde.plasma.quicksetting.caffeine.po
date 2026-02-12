@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2023-02-23 17:48+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,23 +19,25 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
 msgstr "Caffeine"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "Trykk for å slå av «skjerm av»-hindring"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "Trykk for å slå på «skjerm av»-hindring"
 
-#: contents/ui/main.qml:36
-#, kde-format
+#: contents/ui/main.qml:22
+#, fuzzy, kde-format
+#| msgid "Plasma Mobile has enabled system-wide inhibition"
+msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr ""
 "Plasma Mobile slått har slått på «skjerm av»-hindring for heila systemet"

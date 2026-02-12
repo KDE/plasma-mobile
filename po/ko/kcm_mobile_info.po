@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2023-10-08 23:47+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -33,72 +33,72 @@ msgstr "복사"
 msgid "Operating System"
 msgstr "운영 체제"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "웹 페이지"
 
-#: ui/main.qml:63
+#: ui/main.qml:92
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "소프트웨어"
 
-#: ui/main.qml:68
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma 버전"
 
-#: ui/main.qml:75
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE 프레임워크 버전"
 
-#: ui/main.qml:82
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt 버전"
 
-#: ui/main.qml:89
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "커널 버전"
 
-#: ui/main.qml:96
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "OS 종류"
 
-#: ui/main.qml:97
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1비트"
 
-#: ui/main.qml:102
+#: ui/main.qml:131
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "하드웨어"
 
-#: ui/main.qml:107
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "프로세서"
 
-#: ui/main.qml:114
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "메모리"
 
-#: ui/main.qml:118
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "RAM %1"
 
-#: ui/main.qml:120
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

@@ -1,0 +1,272 @@
+# Translation for kcm_waydroidintegration.po to Euskara/Basque (eu).
+# Copyright (C) 2025-2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2025, 2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+#
+# Translators:
+# SPDX-FileCopyrightText: 2025, 2026 Iñigo Salvador Azurmendi <xalba@ni.eus>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"PO-Revision-Date: 2026-01-04 23:12+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.12.0\n"
+
+#: ui/main.qml:19
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Waydroid bateratzea"
+
+#: ui/main.qml:32
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "Waydroid ez dago instalatuta"
+
+#: ui/main.qml:39
+#, kde-format
+msgid "Check installation"
+msgstr "Ikuskatu instalazioa"
+
+#: ui/main.qml:52
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"Androiden eta saltzaileen irudiak zama-jaisten.\n"
+"Minutu batzuk beharko ditu."
+
+#: ui/main.qml:67
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid berrezartzen ari da.\n"
+"Segundo batzuk beharko ditu."
+
+#: ui/main.qml:76
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "Waydroid saioa ez da exekutatzen ari."
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Start the session"
+msgstr "Abiatu saioa"
+
+#: ui/main.qml:90
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid saioa abiatzen ari da.\n"
+"Segundo batzuk beharko ditu."
+
+#: ui/WaydroidApplicationsPage.qml:25
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Waydroid aplikazioak"
+
+#: ui/WaydroidApplicationsPage.qml:29
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "Instalatu APK"
+
+#: ui/WaydroidApplicationsPage.qml:67
+#, kde-format
+msgid "You must select a local file"
+msgstr "Fitxategi lokal bat hautatu behar duzu"
+
+#: ui/WaydroidApplicationsPage.qml:107
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "Ezabatu aplikazioa"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "Informazio orokorra"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "IP helbidea"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "Kopiatu"
+
+#: ui/WaydroidConfigurationForm.qml:35
+#, kde-format
+msgid "Waydroid status"
+msgstr "Waydroid-en egoera"
+
+#: ui/WaydroidConfigurationForm.qml:36
+#, kde-format
+msgid "Running"
+msgstr "Martxan"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stop session"
+msgstr "Gelditu saioa"
+
+#: ui/WaydroidConfigurationForm.qml:46
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "Ziurtatu nire gailua Google Play Protect-erako"
+
+#: ui/WaydroidConfigurationForm.qml:51
+#, kde-format
+msgid "Installed applications"
+msgstr "Instalatutako aplikazioak"
+
+#: ui/WaydroidConfigurationForm.qml:56
+#, kde-format
+msgid "Reset Waydroid"
+msgstr "Berrezarri Waydroid"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Baieztatu Waydroid berrezartzea"
+
+#: ui/WaydroidConfigurationForm.qml:63
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+"Ziur zaude Waydroid berrezarri nahi duzula? Ekintza suntsigarria da, eta "
+"erabiltzaileen datu guztiak ezabatuko ditu."
+
+#: ui/WaydroidConfigurationForm.qml:81
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Waydroid-en propietateak"
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, kde-format
+msgid "May require restarting the Waydroid session to apply"
+msgstr "Eragina izateko, baliteke Waydroid saioa berrabiarazi behar izatea"
+
+#: ui/WaydroidConfigurationForm.qml:109
+#, kde-format
+msgid "Multi Windows"
+msgstr "Leiho anizkoitzak"
+
+#: ui/WaydroidConfigurationForm.qml:110
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "Leihoa mahaigainarekin bateratzea gaitzen/ezgaitzen du"
+
+#: ui/WaydroidConfigurationForm.qml:122
+#, kde-format
+msgid "Suspend"
+msgstr "Eseki"
+
+#: ui/WaydroidConfigurationForm.qml:123
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr ""
+"Utzi Waydroid edukiontziak lo egin dezan (bistaratzailearen denbora-muga "
+"igarotakoan) aktibo dagoen aplikaziorik ez dagoenean"
+
+#: ui/WaydroidConfigurationForm.qml:135
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:136
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr ""
+"Baimendu androidek ibilian konektatutako gailuetara zuzeneko sarbidea izatea"
+
+#: ui/WaydroidDownloadStatus.qml:40
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "%1MB/%2MB zama-jaisten abiadura %3"
+
+#: ui/WaydroidDownloadStatus.qml:48
+#, kde-format
+msgid "%1MB/s"
+msgstr "%1MB/s"
+
+#: ui/WaydroidDownloadStatus.qml:50
+#, kde-format
+msgid "%1kB/s"
+msgstr "%1kB/s"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Google Play Protect-en konfigurazioa"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, kde-format
+msgid ""
+"Fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"Zure Android ID eskuratzen.\n"
+"Segundo batzuk iraun dezake."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, kde-format
+msgid ""
+"When launching Waydroid with GAPPS for the first time, you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
+msgstr ""
+"Waydroid GAPPSerekin aurreneko aldiz abiaraztean, Google Play Protec-erako "
+"ziurtatu gabe dagoela jakinaraziko zaizu. Zerorrek zeure gailua ziurtatzeko, "
+"itsatsi Android ID webguneko eremuan. Ondoren, eman Google zerbitzuei minutu "
+"batzuk aldaketak islatzeko eta Waydroid berrabiarazi."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "Kopiatu Android ID eta ireki webgunea"
+
+#: ui/WaydroidInitialConfigurationForm.qml:16
+#, kde-format
+msgid "Initial configuration"
+msgstr "Hasierako konfigurazioa"
+
+#: ui/WaydroidInitialConfigurationForm.qml:22
+#, kde-format
+msgid "System type"
+msgstr "Sistema mota"
+
+#: ui/WaydroidInitialConfigurationForm.qml:35
+#, kde-format
+msgid "Configure Waydroid"
+msgstr "Konfiguratu Waydroid"
+
+#~ msgid "%1Mb/s"
+#~ msgstr "%1Mb/s"
+
+#~ msgid "%1Kb/s"
+#~ msgstr "%1Kb/s"
+
+#~ msgid "Go back"
+#~ msgstr "Joan atzera"

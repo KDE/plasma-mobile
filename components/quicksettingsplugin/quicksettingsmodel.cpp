@@ -82,6 +82,50 @@ QVariant QuickSettingsModel::data(const QModelIndex &index, int role) const
     return QVariant::fromValue<QObject *>(obj);
 }
 
+QuickSetting *QuickSettingsModel::loadQuickSettingComponent(KPluginMetaData metaData)
+{
+    // Load KPackage
+    const KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
+    if (!package.isValid()) {
+        return nullptr;
+    }
+
+    // Create translation context
+    QQmlEngine *engine = qmlEngine(this);
+    KLocalizedContext *i18nContext = new KLocalizedContext(engine);
+    i18nContext->setTranslationDomain(QLatin1String("plasma_") + metaData.pluginId());
+    engine->rootContext()->setContextObject(i18nContext);
+
+    // Create component synchronously
+    QQmlComponent component(engine, package.fileUrl("mainscript"));
+    if (component.isError()) {
+        qWarning() << "Unable to load quick setting element:" << metaData.pluginId();
+        for (auto error : component.errors()) {
+            qWarning() << error;
+        }
+        return nullptr;
+    }
+
+    // Create object
+    QObject *object = component.create(engine->rootContext());
+    if (!object) {
+        qWarning() << "Unable to create quick setting element:" << metaData.pluginId();
+        return nullptr;
+    }
+
+    auto createdSetting = qobject_cast<QuickSetting *>(object);
+    if (createdSetting && createdSetting->isAvailable()) {
+        // Connect availability signal
+        connect(createdSetting, &QuickSetting::availableChanged, this, [this, metaData, createdSetting]() {
+            availabilityChanged(metaData, createdSetting);
+        });
+        return createdSetting;
+    } else {
+        object->deleteLater();
+        return nullptr;
+    }
+}
+
 void QuickSettingsModel::loadQuickSettings()
 {
     if (!m_loaded) {
@@ -96,10 +140,12 @@ void QuickSettingsModel::loadQuickSettings()
     m_quickSettings.clear();
     m_quickSettingsMetaData.clear();
 
-    // Loop through enabled quick settings and start loading them
+    // Loop through enabled quick settings and load them synchronously
     for (const auto &metaData : m_savedQuickSettings->enabledQuickSettingsModel()->list()) {
-        // false - Ensure row insertion signals aren't emitted (since we are resetting the model)
-        loadQuickSetting(metaData, false);
+        if (auto *setting = loadQuickSettingComponent(metaData)) {
+            m_quickSettings.append(setting);
+            m_quickSettingsMetaData.append(metaData);
+        }
     }
 
     endResetModel();
@@ -112,77 +158,19 @@ void QuickSettingsModel::loadQuickSetting(KPluginMetaData metaData, bool emitIns
         return;
     }
 
-    // Load KPackage
-    const KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
-    if (!package.isValid()) {
-        return;
-    }
-
-    // Create translation context
-    QQmlEngine *engine = qmlEngine(this);
-    KLocalizedContext *i18nContext = new KLocalizedContext(engine);
-    i18nContext->setTranslationDomain(QLatin1String("plasma_") + metaData.pluginId());
-    engine->rootContext()->setContextObject(i18nContext);
-
-    QQmlComponent *component = new QQmlComponent(engine, this);
-
-    // Load QML from KPackage async
-    component->loadUrl(package.fileUrl("mainscript"), QQmlComponent::Asynchronous);
-
-    if (component->isLoading()) {
-        // Listen to load completion
-        connect(component, &QQmlComponent::statusChanged, this, [this, metaData, component, engine]() {
-            afterQuickSettingLoad(engine, metaData, component, true);
-        });
-    } else {
-        // Only emit insertion signal if we aren't resetting the model
-        afterQuickSettingLoad(engine, metaData, component, emitInsertSignal);
+    if (auto *setting = loadQuickSettingComponent(metaData)) {
+        insertQuickSettingToModel(metaData, setting, emitInsertSignal);
     }
 }
 
 void QuickSettingsModel::removeQuickSetting(int index)
 {
     if (index >= 0) {
-        beginRemoveRows({}, index, 0);
+        beginRemoveRows({}, index, index);
         m_quickSettings.removeAt(index);
         m_quickSettingsMetaData.removeAt(index);
         endRemoveRows();
         Q_EMIT countChanged();
-    }
-}
-
-void QuickSettingsModel::afterQuickSettingLoad(QQmlEngine *engine, KPluginMetaData metaData, QQmlComponent *component, bool emitInsertSignal)
-{
-    // Create quicksetting component
-    QObject *object = component->create(engine->rootContext());
-    if (!object) {
-        qWarning() << "Unable to load quick setting element:" << metaData.pluginId();
-        component->deleteLater();
-        return;
-    }
-
-    if (component->isError()) {
-        // Print errors
-        qWarning() << "Unable to load quick setting element:" << metaData.pluginId();
-        for (auto error : component->errors()) {
-            qWarning() << error;
-        }
-
-        component->deleteLater();
-    } else if (component->isReady()) {
-        component->deleteLater();
-
-        auto createdSetting = qobject_cast<QuickSetting *>(object);
-
-        // Connect availability signal to insert/remove quicksetting into model
-        connect(createdSetting, &QuickSetting::availableChanged, this, [this, metaData, createdSetting]() {
-            availabilityChanged(metaData, createdSetting);
-        });
-
-        // Add quicksetting to model if available
-        if (createdSetting->isAvailable()) {
-            insertQuickSettingToModel(metaData, createdSetting, emitInsertSignal);
-        }
     }
 }
 

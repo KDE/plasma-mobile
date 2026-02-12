@@ -32,6 +32,8 @@ class ApplicationListSearchModel;
 class HomeScreen : public Plasma::Containment
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(FolioSettings *FolioSettings READ folioSettings CONSTANT)
     Q_PROPERTY(HomeScreenState *HomeScreenState READ homeScreenState CONSTANT)
     Q_PROPERTY(WidgetsManager *WidgetsManager READ widgetsManager CONSTANT)

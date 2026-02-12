@@ -117,8 +117,7 @@ void PageListModel::save()
     QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_homeScreen->config().writeEntry("Pages", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_homeScreen->configNeedsSaving();
+    m_homeScreen->folioSettings()->setPages(QString::fromStdString(data.toStdString()));
 }
 
 void PageListModel::load()
@@ -127,7 +126,7 @@ void PageListModel::load()
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->config().readEntry("Pages", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->folioSettings()->pages().toUtf8());
     loadFromJson(doc.array());
 }
 

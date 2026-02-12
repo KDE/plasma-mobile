@@ -18,10 +18,12 @@
 
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
+const QString LOCKSCREEN_CONFIG_GROUP = QStringLiteral("Lockscreen");
+const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
 
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
-    , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
+    , m_config{KSharedConfig::openConfig(CONFIG_FILE)}
 {
     m_configWatcher = KConfigWatcher::create(m_config);
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
@@ -32,14 +34,24 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT animationsEnabledChanged();
             Q_EMIT dateInStatusBarChanged();
             Q_EMIT statusBarScaleFactorChanged();
+            Q_EMIT showBatteryPercentageChanged();
             Q_EMIT navigationPanelEnabledChanged();
+            Q_EMIT gesturePanelEnabledChanged();
             Q_EMIT alwaysShowKeyboardToggleOnNavigationPanelChanged();
             Q_EMIT keyboardButtonEnabledChanged();
             Q_EMIT taskSwitcherPreviewsEnabledChanged();
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
+            Q_EMIT autoHidePanelsEnabledChanged();
             Q_EMIT allowLogoutChanged();
+        }
+        if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
+            Q_EMIT lockscreenLeftButtonActionChanged();
+            Q_EMIT lockscreenRightButtonActionChanged();
+        }
+        if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
+            Q_EMIT quickSettingsColumnsChanged();
         }
     });
 }
@@ -109,6 +121,19 @@ void MobileShellSettings::setStatusBarScaleFactor(float statusBarScaleFactor)
     m_config->sync();
 }
 
+bool MobileShellSettings::showBatteryPercentage() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("showBatteryPercentage", true);
+}
+
+void MobileShellSettings::setShowBatteryPercentage(bool showBatteryPercentage)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("showBatteryPercentage", showBatteryPercentage, KConfigGroup::Notify);
+    m_config->sync();
+}
+
 bool MobileShellSettings::navigationPanelEnabled() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
@@ -121,7 +146,22 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
     m_config->sync();
 
-    updateNavigationBarsInPlasma(navigationPanelEnabled);
+    updateNavigationBarsInPlasma();
+}
+
+bool MobileShellSettings::gesturePanelEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("gesturePanelEnabled", true);
+}
+
+void MobileShellSettings::setGesturePanelEnabled(bool gesturePanelEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("gesturePanelEnabled", gesturePanelEnabled, KConfigGroup::Notify);
+    m_config->sync();
+
+    updateNavigationBarsInPlasma();
 }
 
 bool MobileShellSettings::alwaysShowKeyboardToggleOnNavigationPanel() const
@@ -147,6 +187,19 @@ void MobileShellSettings::setActionDrawerTopLeftMode(ActionDrawerMode actionDraw
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("actionDrawerTopLeftMode", (int)actionDrawerMode, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+int MobileShellSettings::quickSettingsColumns() const
+{
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
+    return group.readEntry("quickSettingsColumns", 3);
+}
+
+void MobileShellSettings::setQuickSettingsColumns(int columns)
+{
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
+    group.writeEntry("quickSettingsColumns", columns, KConfigGroup::Notify);
     m_config->sync();
 }
 
@@ -182,7 +235,20 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
     job->start();
 }
 
-void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabled)
+bool MobileShellSettings::autoHidePanelsEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("autoHidePanelsEnabled", false);
+}
+
+void MobileShellSettings::setAutoHidePanelsEnabled(bool enabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("autoHidePanelsEnabled", enabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+void MobileShellSettings::updateNavigationBarsInPlasma()
 {
     // Do not update panels when not in Plasma Mobile
     bool isMobilePlatform = KRuntimePlatform::runtimePlatform().contains("phone");
@@ -195,13 +261,22 @@ void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabl
                                                   QLatin1String("org.kde.PlasmaShell"),
                                                   QLatin1String("evaluateScript"));
 
-    if (navigationPanelEnabled) {
+    if (navigationPanelEnabled() || gesturePanelEnabled()) {
         QString createNavigationPanelScript = R"(
-            loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
+            let allPanels = panels();
+            let foundPanel = false;
+            for (var i = 0; i < allPanels.length; i++) {
+                if (allPanels[i].type === "org.kde.plasma.mobile.taskpanel") {
+                    foundPanel = true;
+                }
+            }
+
+            if (!foundPanel) {
+                loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
+            }
         )";
 
         message << createNavigationPanelScript;
-
     } else {
         QString deleteNavigationPanelScript = R"(
             let allPanels = panels();
@@ -223,4 +298,30 @@ bool MobileShellSettings::allowLogout() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     return group.readEntry("allowLogout", true);
+}
+
+MobileShellSettings::LockscreenButtonAction MobileShellSettings::lockscreenLeftButtonAction() const
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    return (LockscreenButtonAction)group.readEntry("lockscreenLeftButtonAction", (int)LockscreenButtonAction::None);
+}
+
+void MobileShellSettings::setLockscreenLeftButtonAction(const LockscreenButtonAction action)
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    group.writeEntry("lockscreenLeftButtonAction", (int)action, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+MobileShellSettings::LockscreenButtonAction MobileShellSettings::lockscreenRightButtonAction() const
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    return (LockscreenButtonAction)group.readEntry("lockscreenRightButtonAction", (int)LockscreenButtonAction::None);
+}
+
+void MobileShellSettings::setLockscreenRightButtonAction(const LockscreenButtonAction action)
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    group.writeEntry("lockscreenRightButtonAction", (int)action, KConfigGroup::Notify);
+    m_config->sync();
 }

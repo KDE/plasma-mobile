@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
-"PO-Revision-Date: 2024-04-22 17:31+0300\n"
-"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-30 16:58+0300\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,44 +16,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.0\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:54
 #, kde-format
-msgid "Record Screen"
-msgstr "Ierakstīt ekrānu"
+msgid "No encoders available for recording"
+msgstr "Nav pieejami kodētāji ierakstīšanai"
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "Ieraksta..."
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "Raksta..."
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "Spiediet, lai sākt ierakstīšanu"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "Notiek ekrāna ierakstīšana..."
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "Uzgaidiet..."
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Jauns ekrāna ieraksts"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Jaunais ekrāna ieraksts ir saglabāts „%1“"
+
+#: recordutil.cpp:124
+#, kde-format
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "Ierakstīt ekrānu"
+
+#: recordutil.cpp:133
+#, kde-format
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "Ieraksta…"
+
+#: recordutil.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "Raksta…"
+
+#: recordutil.cpp:149
+#, kde-format
+msgid "Tap to start recording"
+msgstr "Pieskarieties, lai sāktu ierakstīšanu"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "Notiek ekrāna ierakstīšana…"
+
+#: recordutil.cpp:162
+#, kde-format
+msgid "Please wait…"
+msgstr "Uzgaidiet…"

@@ -1,10 +1,10 @@
-# SPDX-FileCopyrightText: 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-28 10:31+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-14 09:05+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.80\n"
+"X-Generator: Lokalize 25.07.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -145,6 +145,7 @@ msgid "Edit"
 msgstr "Modifier"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Supprimer"
@@ -188,10 +189,50 @@ msgstr "Ajuster la taille des éléments sur l'écran."
 msgid "Display Scaling"
 msgstr "Mise à l'échelle de l'affichage"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Thème sombre"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Système de navigation"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Veuillez sélectionner une méthode pour naviguer dans le système."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Navigation par gestes"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Balayez vers le haut à partir du bouton pour voir les applications en cours "
+"d'exécution. Faire défiler pour aller à l'écran d'accueil."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Bouton de navigation"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr ""
+"Utilisez les boutons d'une barre de navigation pour naviguer dans le système."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "Cela peut être modifié ultérieurement dans la configuration."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -213,6 +254,21 @@ msgstr "Format sur 24 heures"
 msgid "Invalid input."
 msgstr "Saisie non-valable."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "Se connecter"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "Se déconnecter"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "Configurer"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -233,17 +289,17 @@ msgstr "Se connecter à un réseau Wifi pour un accès réseau."
 msgid "Password…"
 msgstr "Mot de passe…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Bienvenue dans <br/><b>Plasma Mobile</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Propulsé par <br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Suivant"
@@ -253,12 +309,12 @@ msgstr "Suivant"
 msgid "Initial Start"
 msgstr "Démarrage initial"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Retour"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Terminer"

@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2024-04-22 17:30+0300\n"
-"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-30 16:56+0300\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: contents/ui/main.qml:12
 #, kde-format
@@ -36,4 +36,4 @@ msgstr "Izslēgta"
 #: contents/ui/main.qml:15
 #, kde-format
 msgid "Tap to open settings"
-msgstr "Spiediet, lai atvērt iestatījumus"
+msgstr "Pieskarieties, lai atvērtu iestatījumus"

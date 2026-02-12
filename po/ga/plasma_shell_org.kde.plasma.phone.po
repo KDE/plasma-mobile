@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Irish Gaelic <kde-i18n-doc@kde.org>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#: contents/applet/AppletError.qml:168
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: contents/applet/AppletError.qml:191
+msgid "View Error Details…"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:88
+msgid "Open %1"
+msgstr ""
+
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr ""
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
+msgid "Wallpaper Plugin"
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
+msgid "The wallpaper plugin to use."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
+msgid "Wallpaper Plugins"
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
+msgid "Get New Plugins…"
+msgstr ""
+
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+
+#: contents/lockscreen/LockScreenState.qml:31
+msgid "Enter PIN"
+msgstr ""
+
+#: contents/lockscreen/LockScreenState.qml:32
+msgid "Wrong PIN"
+msgstr ""
+
+#: contents/views/Panel.qml:318
+msgid "Panel Focus Indicator"
+msgstr ""

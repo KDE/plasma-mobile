@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2023-03-06 10:04+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-10-06 12:36+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,36 +15,93 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
-#: package/contents/ui/FavoritesGrid.qml:221
-#: package/contents/ui/FolderGrid.qml:189
-#, kde-format
-msgid "Remove from favourites"
-msgstr "Uit favorieten verwijderen"
-
-#: package/contents/ui/FavoritesGrid.qml:291
-#, kde-format
-msgid "Add applications to your favourites so they show up here."
-msgstr "Toepassingen aan uw favorieten toevoegen zodat ze zich hier vertonen."
-
-#: package/contents/ui/FolderGrid.qml:194
-#, kde-format
-msgid "Move out of folder"
-msgstr "Uit de map verplaatsen"
-
-#: package/contents/ui/GridAppDelegate.qml:64
-#, kde-format
-msgid "Add to favourites"
-msgstr "Aan favorieten toevoegen"
-
-#: package/contents/ui/GridAppList.qml:68
-#, kde-format
-msgid "Applications"
-msgstr "Toepassingen"
-
-#: plugin/pinnedmodel.cpp:151
+#: pinnedmodel.cpp:146
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
 msgstr "Map"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr "Algemeen"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr "Uit favorieten verwijderen"
+
+#: qml/FavoritesGrid.qml:294
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "Toepassingen aan uw favorieten toevoegen zodat ze zich hier vertonen."
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr "Uit de map verplaatsen"
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "Aan favorieten toevoegen"
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr "Toepassingen"
+
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "Instellingen van standaard scherm"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "Standaard scherm"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Vervagingseffect op achtergrondafbeelding"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Geen"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Eenvoudig"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Volledig"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Tik tweemaal om apparaat te vergrendelen"
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr "Achtergrondafbeeldingen"
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr "Instellingen"
+
+#~ msgctxt "@action:button"
+#~ msgid "Switch between homescreens and more wallpaper options"
+#~ msgstr ""
+#~ "Tussen homescherm en meer opties voor achtergrondafbeeldingen schakelen"

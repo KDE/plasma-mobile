@@ -1,22 +1,22 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-10-12 10:21+0200\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-30 08:52+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Otwiera pomocnika pierwszego uruchomienia bez zmiany ustawień"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 Społeczność KDE"
+msgstr "© 2024 Społeczność KDE"
 
 #: main.cpp:37
 #, kde-format
@@ -149,6 +148,7 @@ msgid "Edit"
 msgstr "Edytuj"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Usuń"
@@ -189,10 +189,49 @@ msgstr "Dostosuj rozmiar rzeczy na ekranie."
 msgid "Display Scaling"
 msgstr "Wyświetl skalowanie"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Ciemny tryb"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Poruszanie się po systemie"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Wybierz sposób poruszania się po systemie."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Poruszanie się gestami"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Przeciągnij z dołu w górę, aby zobaczyć uruchomione aplikacje. Przeciągnij, "
+"aby przejść do ekranu domowego."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Poruszanie się przyciskami"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "Użyj przycisków na pasku poruszania się do poruszania się po systemie."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "Będzie to można później zmienić w systemie."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -214,6 +253,21 @@ msgstr "24 godzinny zapis czasu"
 msgid "Invalid input."
 msgstr "Nieprawidłowe wejście."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "Połącz"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "Rozłącz"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "Ustawienia"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -234,17 +288,17 @@ msgstr "Podłącz się do WiFi, aby uzyskać dostęp do sieci."
 msgid "Password…"
 msgstr "Hasło…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Witaj w<br/><b>Przenośnej Plazmie</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Napędzane przez<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Następny"
@@ -254,12 +308,12 @@ msgstr "Następny"
 msgid "Initial Start"
 msgstr "Początkowy widok po uruchomieniu"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Wstecz"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Zakończ"

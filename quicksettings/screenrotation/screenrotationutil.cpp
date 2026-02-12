@@ -28,6 +28,11 @@ ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
 
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
+        if (!m_config) {
+            qDebug() << "screenrotationutil: Unable to obtain kscreen config";
+            return;
+        }
+
         KScreen::ConfigMonitor::instance()->addConfig(m_config);
 
         // update all screens with event connect
@@ -96,7 +101,7 @@ void ScreenRotationUtil::actuallySetAutoScreenRotationEnabled(bool value)
     }
 
     auto setop = new KScreen::SetConfigOperation(m_config, this);
-    setop->exec();
-
-    Q_EMIT autoScreenRotationEnabledChanged();
+    connect(setop, &KScreen::SetConfigOperation::finished, this, [this]() {
+        Q_EMIT autoScreenRotationEnabledChanged();
+    });
 }

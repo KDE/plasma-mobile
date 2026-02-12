@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2022, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-11-13 11:48+0100\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-12-28 12:41+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -49,12 +49,17 @@ msgstr "Locatie kopiëren"
 msgid "Properties"
 msgstr "Eigenschappen"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/ContentContainer.qml:151
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Alle meldingen wissen"
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "Aan"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "Uit"
@@ -64,100 +69,94 @@ msgstr "Uit"
 msgid "SIM Locked"
 msgstr "SIM is vergrendeld"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/popups/volumeosd/AudioApplet.qml:89
 #, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgid "Output Devices"
+msgstr "Uitvoerapparaten"
 
-#: qml/volumeosd/AudioApplet.qml:73
+#: qml/popups/volumeosd/AudioApplet.qml:118
 #, kde-format
-msgid "Outputs"
-msgstr "Uitvoer"
+msgid "Input Devices"
+msgstr "Invoerapparaten"
 
-#: qml/volumeosd/AudioApplet.qml:111
-#, kde-format
-msgid "Inputs"
-msgstr "Invoer"
-
-#: qml/volumeosd/AudioApplet.qml:150
+#: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
 msgid "Playback Streams"
 msgstr "Afspeelstromen"
 
-#: qml/volumeosd/AudioApplet.qml:211
+#: qml/popups/volumeosd/AudioApplet.qml:199
 #, kde-format
 msgid "Recording Streams"
-msgstr "Streams worden opgenomen"
+msgstr "Opnamestreams"
 
-#: qml/volumeosd/DeviceListItem.qml:25
+#: qml/popups/volumeosd/DeviceListItem.qml:24
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/volumeosd/DeviceListItem.qml:34
+#: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
 msgid "Device name not found"
 msgstr "Apparaatnaam niet gevonden"
 
-#: qml/volumeosd/ListItemBase.qml:101
+#: qml/popups/volumeosd/ListItemBase.qml:123
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Additionele opties voor %1 tonen"
 
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
-#, kde-format
-msgid "Unmute"
-msgstr "Dempen opheffen"
-
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
-#, kde-format
-msgid "Mute"
-msgstr "Dempen"
-
-#: qml/volumeosd/ListItemBase.qml:168
-#, kde-format
-msgctxt "Accessibility data on volume slider"
-msgid "Adjust volume for %1"
-msgstr "Volume voor %1 aanpassen"
-
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/popups/volumeosd/ListItemBase.qml:215
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:261
+#: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/StreamListItem.qml:21
+#: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
 msgstr "Meldingsgeluiden"
 
-#: qml/volumeosd/StreamListItem.qml:24
+#: qml/popups/volumeosd/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: qml/volumeosd/StreamListItem.qml:29
+#: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
 msgstr "Streamnaam niet gevonden"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:261
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Unmute"
+msgstr "Dempen opheffen"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Mute"
+msgstr "Dempen"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
 msgstr "audio-streams configureren"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/popups/volumeosd/VolumeOSD.qml:200
 #, kde-format
 msgid "Open audio settings"
 msgstr "Audio-instellingen openen"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
@@ -165,27 +164,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Zoeken…"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:181
-#, kde-format
-msgid "Search…"
-msgstr "Zoeken…"
-
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
 #, kde-format
 msgid "No media playing"
 msgstr "Er speelt geen medium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
 msgstr "Vorige track"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Afspelen of pauzeren van medium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
 msgstr "Volgende track"
@@ -324,89 +318,91 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Verzenden"
 
-#: qml/widgets/notifications/NotificationsUtils.js:14
+#: qml/widgets/notifications/NotificationsUtils.js:15
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
 msgstr "%1 [gepauzeerd]"
 
-#: qml/widgets/notifications/NotificationsUtils.js:19
+#: qml/widgets/notifications/NotificationsUtils.js:20
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
 msgstr "%1 (Mislukt)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:21
+#: qml/widgets/notifications/NotificationsUtils.js:22
 #, kde-format
 msgid "Job Failed"
 msgstr "Taak mislukt"
 
-#: qml/widgets/notifications/NotificationsUtils.js:24
+#: qml/widgets/notifications/NotificationsUtils.js:25
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
 msgstr "%1 (beëindigd)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:26
+#: qml/widgets/notifications/NotificationsUtils.js:27
 #, kde-format
 msgid "Job Finished"
 msgstr "Job voltooid"
 
-#: qml/widgets/notifications/NotificationsUtils.js:44
+#: qml/widgets/notifications/NotificationsUtils.js:45
 #, kde-format
 msgid "now"
 msgstr "nu"
 
-#: qml/widgets/notifications/NotificationsUtils.js:49
+#: qml/widgets/notifications/NotificationsUtils.js:50
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
 msgstr "%1 m geleden"
 
-#: qml/widgets/notifications/NotificationsUtils.js:81
+#: qml/widgets/notifications/NotificationsUtils.js:82
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
 msgstr "%1 s resterend"
 
-#: qml/widgets/notifications/NotificationsUtils.js:84
+#: qml/widgets/notifications/NotificationsUtils.js:85
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
 msgstr "%1 m resterend"
 
-#: qml/widgets/notifications/NotificationsUtils.js:87
+#: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 u resterend"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
 msgid "Notification service not available"
 msgstr "Meldingenservice niet beschikbaar"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:267
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Meldingen worden nu geleverd door '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:429
 #, kde-format
 msgid "Show Fewer"
 msgstr "Minder tonen"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:431
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1 meer tonen"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "Alle meldingen wissen"
+#~ msgctxt "Accessibility data on volume slider"
+#~ msgid "Adjust volume for %1"
+#~ msgstr "Volume voor %1 aanpassen"
+
+#~ msgid "Search…"
+#~ msgstr "Zoeken…"
 
 #~ msgid "100%"
 #~ msgstr "100%"

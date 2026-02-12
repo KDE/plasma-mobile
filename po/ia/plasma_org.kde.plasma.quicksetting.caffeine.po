@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# giovanni <g.sora@tiscali.it>, 2023.
+# giovanni <g.sora@tiscali.it>, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2023-01-27 12:27+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-05-12 15:39+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -17,22 +17,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.12.1\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
 msgstr "Caffeine"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "Tocca per dishabilitar suspension de dormi"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "Tocca per suspender dormi"
 
-#: contents/ui/main.qml:36
+#: contents/ui/main.qml:22
 #, kde-format
+msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
-msgstr "Plasma MObile ha habilitate inhibition per toto le systema "
+msgstr "Plasma Mobile ha habilitate inhibition per toto le systema "

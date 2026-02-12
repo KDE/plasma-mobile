@@ -22,9 +22,12 @@ public:
 /**
  * @short Object that represents a widget on the homescreen.
  */
-class FolioWidget : public QObject
+class FolioWidget : public QObject, public std::enable_shared_from_this<FolioWidget>
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(int id READ id NOTIFY idChanged)
     Q_PROPERTY(int gridWidth READ gridWidth NOTIFY gridWidthChanged)
     Q_PROPERTY(int gridHeight READ gridHeight NOTIFY gridHeightChanged)
@@ -32,10 +35,12 @@ class FolioWidget : public QObject
     Q_PROPERTY(PlasmaQuick::AppletQuickItem *visualApplet READ visualApplet NOTIFY visualAppletChanged)
 
 public:
-    FolioWidget(HomeScreen *parent = nullptr, int id = -1, int gridWidth = 0, int gridHeight = 0);
-    FolioWidget(HomeScreen *parent, Plasma::Applet *applet, int gridWidth, int gridHeight);
+    typedef std::shared_ptr<FolioWidget> Ptr;
 
-    static FolioWidget *fromJson(QJsonObject &obj, HomeScreen *parent);
+    FolioWidget(HomeScreen *homeScreen = nullptr, int id = -1, int gridWidth = 0, int gridHeight = 0, QObject *parent = nullptr);
+    FolioWidget(HomeScreen *homeScreen, Plasma::Applet *applet, int gridWidth, int gridHeight, QObject *parent = nullptr);
+
+    static std::shared_ptr<FolioWidget> fromJson(QJsonObject &obj, HomeScreen *homeScreen);
     QJsonObject toJson() const;
 
     int id() const;
@@ -59,7 +64,7 @@ public:
     // query whether (row, column) is inside this widget, if it was at position (widgetRow, widgetColumn)
     bool isInBounds(int widgetRow, int widgetColumn, int row, int column);
 
-    bool overlapsWidget(int widgetRow, int widgetColumn, FolioWidget *otherWidget, int otherWidgetRow, int otherWidgetColumn);
+    bool overlapsWidget(int widgetRow, int widgetColumn, std::shared_ptr<FolioWidget> otherWidget, int otherWidgetRow, int otherWidgetColumn);
 
     Plasma::Applet *applet() const;
     void setApplet(Plasma::Applet *applet);

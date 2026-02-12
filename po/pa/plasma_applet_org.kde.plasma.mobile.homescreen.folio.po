@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-10 00:42+0000\n"
+"POT-Creation-Date: 2026-01-17 00:45+0000\n"
 "PO-Revision-Date: 2023-12-24 09:12-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -22,162 +22,269 @@ msgstr ""
 msgid "Folder"
 msgstr "ਫੋਲਡਰ"
 
-#: package/contents/ui/AppDrawerHeader.qml:52
+#: qml/AppDrawerHeader.qml:73
 #, fuzzy, kde-format
 #| msgid "Applications"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "ਐਪਲੀਕੇਸ਼ਨਾਂ"
 
-#: package/contents/ui/FavouritesBar.qml:145
-#: package/contents/ui/FavouritesBar.qml:219
-#: package/contents/ui/FolderView.qml:290
-#: package/contents/ui/HomeScreenPage.qml:218
-#: package/contents/ui/HomeScreenPage.qml:298
+#: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
+#, kde-format
+msgid "General"
+msgstr "ਆਮ"
+
+#: qml/delegate/WidgetDelegate.qml:119
+#, kde-format
+msgid "This widget was not found."
+msgstr ""
+
+#: qml/delegate/WidgetDelegate.qml:137
+#, kde-format
+msgid "Configure…"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:193
+#, kde-format
+msgid "Options"
+msgstr ""
+
+#: qml/delegate/WidgetDelegateConfig.qml:207
+#, fuzzy, kde-format
+#| msgid "Widgets"
+msgid "Widget Options"
+msgstr "ਵਿਜੈਟ"
+
+#: qml/delegate/WidgetDelegateConfig.qml:247
+#, fuzzy, kde-format
+#| msgid "Remove"
+msgid "Remove widget"
+msgstr "ਹਟਾਓ"
+
+#: qml/delegate/WidgetDelegateConfig.qml:254
+#, kde-format
+msgid "Configure widget"
+msgstr ""
+
+#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
 #, kde-format
 msgid "Remove"
 msgstr "ਹਟਾਓ"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: qml/HomeScreenPage.qml:481
+#, kde-format
+msgid "Release to configure, drag to move"
+msgstr ""
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
+#, kde-format
+msgid "Confirm Folder Deletion"
+msgstr ""
+
+#: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
+#, kde-format
+msgid "Are you sure you want to delete this folder?"
+msgstr ""
+
+#: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
 msgid "Widgets"
 msgstr "ਵਿਜੈਟ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:80
+#: qml/settings/AppletListViewer.qml:83
 #, kde-format
-msgid "Homescreen Settings"
-msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਦੀਆਂ ਸੈਟਿੰਗਾਂ"
+msgctxt "@action:button The word 'new' refers to widgets"
+msgid "Get New Widgets…"
+msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:89
+#: qml/settings/AppletListViewer.qml:84
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Widgets…"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:31
 #, kde-format
 msgid "Icons"
 msgstr "ਆਈਕਾਨ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:121
+#: qml/settings/ConfigGeneral.qml:47
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgid "Application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨਾਂ"
+
+#: qml/settings/ConfigGeneral.qml:63
 #, kde-format
 msgid "Number of rows"
 msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:122
+#: qml/settings/ConfigGeneral.qml:64
 #, kde-format
 msgid "Number of columns"
 msgstr "ਕਾਲਮਾ ਦੀ ਗਿਣਤੀ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:126
+#: qml/settings/ConfigGeneral.qml:68
 #, kde-format
 msgid "Size of icons on homescreen"
 msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਉੱਤੇ ਆਈਕਾਨਾਂ ਦਾ ਆਕਾਰ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:165
+#: qml/settings/ConfigGeneral.qml:107
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:169
+#: qml/settings/ConfigGeneral.qml:111
 #, kde-format
 msgid "Homescreen"
 msgstr "ਮੁੱਖ-ਸਕਰੀਨ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:175
+#: qml/settings/ConfigGeneral.qml:117
 #, kde-format
 msgid "Show labels on homescreen"
 msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਉੱਤੇ ਲੇਬਲ ਵੇਖਾਓ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:188
+#: qml/settings/ConfigGeneral.qml:130
 #, kde-format
 msgid "Show labels in favorites bar"
 msgstr "ਪਸੰਦੀਦਾ ਪੱਟੀ ਵਿੱਚ ਲੇਬਲ ਵੇਖਾਓ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:201
+#: qml/settings/ConfigGeneral.qml:143
+#, kde-format
+msgid "Lock layout"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:156
 #, kde-format
 msgid "Page transition effect"
 msgstr "ਸਫ਼ਾ ਤਬਦੀਲ ਕਰਨ ਪ੍ਰਭਾਵ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: qml/settings/ConfigGeneral.qml:162
 #, kde-format
 msgid "Slide"
 msgstr "ਸਲਾਈਡ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: qml/settings/ConfigGeneral.qml:163
 #, kde-format
 msgid "Cube"
 msgstr "ਘਣ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:209
+#: qml/settings/ConfigGeneral.qml:164
 #, kde-format
 msgid "Fade"
 msgstr "ਫਿੱਕਾ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:210
+#: qml/settings/ConfigGeneral.qml:165
 #, kde-format
 msgid "Stack"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:211
+#: qml/settings/ConfigGeneral.qml:166
 #, kde-format
 msgid "Rotation"
 msgstr "ਘੁੰਮਾਉਣਾ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:226
+#: qml/settings/ConfigGeneral.qml:183
+#, kde-format
+msgid "Double tap to lock device"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:194
 #, kde-format
 msgid "Favorites Bar"
 msgstr "ਪਸੰਦੀਦਾ ਪੱਟੀ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:242
+#: qml/settings/ConfigGeneral.qml:199
+#, kde-format
+msgid "Show background"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:210
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:248
+#: qml/settings/ConfigGeneral.qml:216
 #, kde-format
-msgctxt "@option:check"
-msgid "Show wallpaper blur effect"
+msgid "Wallpaper blur effect"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:259
+#: qml/settings/ConfigGeneral.qml:219
 #, kde-format
-msgid "General"
-msgstr "ਆਮ"
-
-#: package/contents/ui/settings/SettingsWindow.qml:266
-#, kde-format
-msgctxt "@action:button"
-msgid "Switch between homescreens and more wallpaper options"
+msgctxt "Wallpaper blur effect"
+msgid "None"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: qml/settings/ConfigGeneral.qml:220
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:221
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr ""
+
+#: qml/settings/ConfigGeneral.qml:243
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Export layout"
+msgstr "ਲੇਆਉਟ ਐਕਸਪੋਰਟ ਕਰੋ"
+
+#: qml/settings/ConfigGeneral.qml:252
+#, fuzzy, kde-format
+#| msgid "Import layout from"
+msgid "Import layout"
+msgstr "ਲੇਆਉਟ ਇੰਪੋਰਟ ਕਰੋ"
+
+#: qml/settings/ConfigGeneral.qml:262
 #, kde-format
 msgid "Export layout to"
 msgstr "ਲੇਆਉਟ ਐਕਸਪੋਰਟ ਕਰੋ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: qml/settings/ConfigGeneral.qml:281
 #, kde-format
 msgid "Import layout from"
 msgstr "ਲੇਆਉਟ ਇੰਪੋਰਟ ਕਰੋ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:323
-#: package/contents/ui/settings/SettingsWindow.qml:330
+#: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
 #, kde-format
 msgid "Export Status"
 msgstr "ਐਕਸਪੋਰਟ ਸਥਿਤੀ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
+#: qml/settings/ConfigGeneral.qml:293
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1 ਉੱਤੇ ਐਕਸਪੋਰਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: qml/settings/ConfigGeneral.qml:300
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਲੇਆਉਟ ਨੂੰ %1 ਉੱਤੇ ਕਾਮਯਾਬੀ ਨਾਲ ਐਕਸਪੋਰਟ ਕੀਤਾ ਗਿਆ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: qml/settings/ConfigGeneral.qml:306
 #, kde-format
 msgid "Confirm Import"
 msgstr "ਇੰਪੋਰਟ ਕਰਨ ਦੀ ਤਸਦੀਕ"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: qml/settings/ConfigGeneral.qml:307
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "ਇਹ ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਮੁੱਖ-ਸਕਰੀਨ ਲੇਆਉਟ ਉੱਤੇ ਲਿਖੇਗਾ!"
+
+#: qml/settings/SettingsComponent.qml:57
+#, kde-format
+msgid "Wallpapers"
+msgstr ""
+
+#: qml/settings/SettingsComponent.qml:66
+#, kde-format
+msgid "Settings"
+msgstr ""
+
+#~ msgid "Homescreen Settings"
+#~ msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਦੀਆਂ ਸੈਟਿੰਗਾਂ"

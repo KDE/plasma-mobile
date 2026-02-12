@@ -1,10 +1,10 @@
-# SPDX-FileCopyrightText: 2022, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-07-17 10:39+0200\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-10-07 07:56+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -22,57 +22,60 @@ msgstr "Copier dans le presse-papier"
 msgid "View Error Details…"
 msgstr "Afficher les détails des erreurs"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr "Ouvrir %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Configurer %1"
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Fond d'écran"
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Modifier l'écran d'accueil"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Sélectionner l'écran d'accueil"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Modifier l'écran d'accueil à %1 ?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"La configuration de votre écran d'accueil courant a été enregistrée. Elle "
+"sera restaurée si vous revenez en arrière."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
+msgid "Wallpaper Plugin"
+msgstr "Module externe de fonds d'écran"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
+msgid "The wallpaper plugin to use."
+msgstr "Le module externe de fonds d'écran à utiliser."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
+msgid "Wallpaper Plugins"
+msgstr "Modules externes de fonds d'écran"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
+msgid "Get New Plugins…"
+msgstr "Obtenir de nouveaux modules externes..."
+
+#: contents/configuration/private/ConfigListPage.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "Les modifications de disposition ont été limitées par l'administrateur du "
 "système."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Général"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Disposition de l'écran d'accueil"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "La disposition de l'écran d'accueil à utiliser."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
-msgid "Wallpaper Plugin"
-msgstr "Module externe de fonds d'écran"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
-msgid "The wallpaper plugin to use."
-msgstr "Le module externe de fonds d'écran à utiliser."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
-msgid "Wallpaper Plugins"
-msgstr "Modules externes de fonds d'écran"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
-msgid "Get New Plugins…"
-msgstr "Obtenir de nouveaux modules externes..."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
-"Les modifications de disposition doivent être appliquées avant que d'autres "
-"modifications ne puissent être faites."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Appliquer maintenant"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Fond d'écran"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -82,15 +85,34 @@ msgstr "Saisir un code « PIN »"
 msgid "Wrong PIN"
 msgstr "Code « PIN » incorrect"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicateur de focus du panneau"
+
+#~ msgid "General"
+#~ msgstr "Général"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Disposition de l'écran d'accueil"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr ""
+#~ "Les modifications de disposition doivent être appliquées avant que "
+#~ "d'autres modifications ne puissent être faites."
+
+#~ msgid "Apply now"
+#~ msgstr "Appliquer maintenant"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "Allumer la lampe de poche"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "Ouvrir l'appareil photo"
 
 #~ msgid "Logging in..."
 #~ msgstr "Connexion en cours..."
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Modifier un fond d'écran"
-
-#~ msgid "Configure"
-#~ msgstr "Configurer"

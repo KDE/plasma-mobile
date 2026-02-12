@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
-"PO-Revision-Date: 2022-12-21 12:27+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-06-15 14:37+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,44 +15,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 25.04.2\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:54
 #, kde-format
-msgid "Record Screen"
-msgstr "Registra schermo"
+msgid "No encoders available for recording"
+msgstr "Nessun codificatore disponibile per la registrazione"
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "Registrazione…"
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "Scrittura..."
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "Tocca per avviare la registrazione"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "Cattura dello schermo in corso..."
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "Attendi…"
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Nuova registrazione dello schermo"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Nuova registrazione dello schermo salvata in %1"
+
+#: recordutil.cpp:124
+#, kde-format
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "Registra schermo"
+
+#: recordutil.cpp:133
+#, kde-format
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "Registrazione…"
+
+#: recordutil.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "Scrittura..."
+
+#: recordutil.cpp:149
+#, kde-format
+msgid "Tap to start recording"
+msgstr "Tocca per avviare la registrazione"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "Cattura dello schermo in corso..."
+
+#: recordutil.cpp:162
+#, kde-format
+msgid "Please wait…"
+msgstr "Attendi…"

@@ -1,11 +1,13 @@
-// SPDX-FileCopyrightText: 2022 Devin LIn <devin@kde.org>
+// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.notificationmanager as NotificationManager
 
 import "../shell/contents/lockscreen" as LockScreen
 
@@ -61,9 +63,47 @@ ApplicationWindow {
         }
     }
 
-    // component to test
+    // Component to test
     LockScreen.LockScreen {
         anchors.fill: parent
+    }
+
+    // Simulate "overlaid" status bar and quick settings panel
+    MobileShell.StatusBar {
+        id: statusBar
+        z: 1
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        height: Kirigami.Units.gridUnit * 1.25
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
+        backgroundColor: "transparent"
+
+        showSecondRow: false
+        showDropShadow: true
+        showTime: true
+    }
+
+    MobileShell.ActionDrawerOpenSurface {
+        anchors.fill: statusBar
+        actionDrawer: drawer
+        z: 1
+    }
+
+    MobileShell.ActionDrawer {
+        id: drawer
+        z: 1
+        anchors.fill: parent
+        visible: offset !== 0
+
+        notificationSettings: NotificationManager.Settings {}
+        notificationModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
+        notificationModel: NotificationManager.WatchedNotificationsModel {}
     }
 }
 

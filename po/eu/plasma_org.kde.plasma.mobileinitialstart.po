@@ -1,16 +1,16 @@
 # Translation for plasma_org.kde.plasma.mobileinitialstart.po to Euskara/Basque (eu).
-# Copyright (C) 2023-2024 This file is copyright:
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-28 20:39+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-14 10:42+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -121,8 +121,8 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
-"Mesedez, konfiguratu mugikorreko datuetarako zure APNa behean, zure "
-"hornitzaileak informazio gehiago erabilgarri izango du."
+"Mesedez, zure APNa mugikorreko datuetarako behean konfiguratu, zure "
+"operadoreak informazio gehiago erabilgarri izango du."
 
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
@@ -150,6 +150,7 @@ msgid "Edit"
 msgstr "Editatu"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
@@ -172,7 +173,7 @@ msgstr "Zure gailua orain prest dago. <br /><br />Gozatu <b>%1</b>!"
 #: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
-msgstr "Hasi baino lehen..."
+msgstr "Hasi baino lehen…"
 
 #: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
@@ -188,12 +189,51 @@ msgstr "Doitu pantailako elementuen neurria."
 #: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Display Scaling"
-msgstr "Azaldutakoaren eskala"
+msgstr "Pantailaren eskalatzea"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Gai iluna"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Sistemaren nabigazioa"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Aukeratu sisteman nabigatzeko metodo bat."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Keinu bidez nabigatzea"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Behetik, hatza goraka irristatu martxan dauden aplikazioak ikusteko. Hatz-"
+"kolpe arina etxeko pantailara joateko."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Botoi bidez nabigatzea"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "Nabigazio-barra bateko botoiak erabili sisteman nabigatzeko."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "Hori, geroago, ezarpenetan alda daiteke."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -215,6 +255,21 @@ msgstr "24 orduko formatua"
 msgid "Invalid input."
 msgstr "Sarrerako baliogabea."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "Konektatu"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "Deskonektatu"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "Konfiguratu"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -235,17 +290,17 @@ msgstr "Konektatu Wi-Fi sare batera sareko sarbiderako."
 msgid "Password…"
 msgstr "Pasahitza…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Ongi etorri <b>Plasma Mugikorrera</b>"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "<br/><b>%1</b>(e)k bultzatua"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Hurrengoa"
@@ -255,12 +310,12 @@ msgstr "Hurrengoa"
 msgid "Initial Start"
 msgstr "Hasierako abioa"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Atzera"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Amaitu"

@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: 2021, 2024 Alois Spitzbart <spitz234@hotmail.com>
-# Frederik Schwarzer <schwarzer@kde.org>, 2014, 2015, 2016, 2018, 2020, 2021, 2022, 2023.
-# Burkhard Lück <lueck@hube-lueck.de>, 2014, 2015, 2018, 2019, 2021.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2018, 2020, 2021, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2014, 2015, 2018, 2019, 2021 Burkhard Lück <lueck@hube-lueck.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2026-01-20 00:44+0000\n"
 "PO-Revision-Date: 2024-05-20 10:49+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2962,7 +2962,7 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Zeitzonen auswählen"
 
-#: ui/main.qml:178
+#: ui/main.qml:177
 #, kde-format
 msgid "Pick System Time"
 msgstr "Systemzeit auswählen"

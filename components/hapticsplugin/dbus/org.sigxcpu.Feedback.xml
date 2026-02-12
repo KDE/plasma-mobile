@@ -1,0 +1,80 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+- SPDX-FileCopyrightText: 2025 Guido Günther <agx@sigxcpu.org>
+- SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<node>
+  <!-- org.sigxcpu.Feedback
+       @short_description: haptic/audio/visual feedback interface
+
+       This D-Bus interface is used to get the current feedback theme
+       and to give feedback on events.
+   -->
+  <interface name="org.sigxcpu.Feedback">
+    <!--
+         Profile: The currently used profile.
+
+         The currently used feedback profile name. Applications should
+         usually not change this value.
+    -->
+    <property name="Profile" type="s" access="readwrite" />
+
+    <!--
+        TriggerFeedback:
+        @app_id: The application id usually in "reverse DNS" format
+        @event: The event name from the Event naming spec
+        @hints: Additional hints. Currently known hints
+          - profile: Override the profile used for this event with the given profile name
+          - important: Override the current global feedback level.
+            Together with the 'profile' hint this allows to trigger feedback for events
+            that would otherwise be disabled. A typical use case is an alarm clock. Note
+            that the feedback daemon (depending on it's configuration) might ignore this flag.
+          - sound-file: A custom sound file to play. This file will be used instead of any
+            sound event specified in the "full" profile. The sound will only be played if
+            appropriate for the feedback level of the event.
+        @timeout: When the feedbacks for this event should end latest in seconds. The special
+            values '-1' (just run each feedback once) and '0' (endless loop) are also supported.
+	@id: Event id for future reference
+
+        Give user feedback for an event by triggering feedbacks
+        defined in the daemon. The method call returns an event id
+        that can be used later on to e.g. cancel the triggered
+        feedbacks early.
+
+        Depending on the event, theme and profile several forms of
+        feedback will be triggered such as an audio ring tone and a
+        haptic motor.
+    -->
+    <method name="TriggerFeedback">
+      <arg direction="in" name="app_id" type="s"/>
+      <arg direction="in" name="event" type="s"/>
+      <arg direction="in" name="hints" type="a{sv}"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="QVariantMap" />
+      <arg direction="in" name="timeout" type="i"/>
+      <arg direction="out" name="id" type="u"/>
+    </method>
+
+    <!--
+         EndFeedback:
+         @id: The id of the event
+
+         End all feedbacks triggered by the event with the given id.
+     -->
+    <method name="EndFeedback">
+      <arg direction="in" name="id" type="u"/>
+    </method>
+
+    <!--
+         FeedbackEnded:
+         @id: The id of the event
+         @reason: The reason why feedback was ended (currently unused).
+
+         Emitted when all feedbacks for an event have ended.
+    -->
+    <signal name="FeedbackEnded">
+      <arg name="id" type="u"/>
+      <arg name="reason" type="u"/>
+    </signal>
+  </interface>
+
+</node>

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
 "PO-Revision-Date: 2023-07-22 15:27+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -24,53 +24,60 @@ msgstr ""
 msgid "View Error Details…"
 msgstr ""
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "Zmeny rozloženia boli zakázané systémovým administrátorom"
+#: contents/configuration/AppletConfiguration.qml:90
+#, fuzzy
+#| msgid "Configure"
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Nastaviť"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Všeobecné"
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Tapeta"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Rozloženie domovskej obrazovky"
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr ""
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+#, fuzzy
+#| msgid "The homescreen layout to use."
+msgid "Change homescreen to %1?"
 msgstr "Rozloženie domovskej obrazovky, ktoré sa má používať."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "Doplnok tapety"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "Modul tapiet, ktorý sa má použiť."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "Doplnky tapety"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "Získať nové doplnky..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr "Zmeny rozloženia sa musia použiť pred inými zmenami"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Použiť teraz"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Tapeta"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Zmeny rozloženia boli zakázané systémovým administrátorom"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -80,12 +87,21 @@ msgstr ""
 msgid "Wrong PIN"
 msgstr ""
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr ""
 
+#~ msgid "General"
+#~ msgstr "Všeobecné"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Rozloženie domovskej obrazovky"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr "Zmeny rozloženia sa musia použiť pred inými zmenami"
+
+#~ msgid "Apply now"
+#~ msgstr "Použiť teraz"
+
 #~ msgid "Change Wallpaper"
 #~ msgstr "Zmeniť tapetu"
-
-#~ msgid "Configure"
-#~ msgstr "Nastaviť"

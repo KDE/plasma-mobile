@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2023-01-04 22:23+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -33,55 +33,55 @@ msgstr "Kopírovat"
 msgid "Operating System"
 msgstr "Operační systém"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "Webová stránka"
 
-#: ui/main.qml:63
+#: ui/main.qml:92
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Software"
 
-#: ui/main.qml:68
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "Verze Plasma KDE"
 
-#: ui/main.qml:75
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Verze KDE Frameworks"
 
-#: ui/main.qml:82
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "Verze Qt"
 
-#: ui/main.qml:89
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "Verze jádra"
 
-#: ui/main.qml:96
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "Typ OS"
 
-#: ui/main.qml:97
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bit"
 
-#: ui/main.qml:102
+#: ui/main.qml:131
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ui/main.qml:107
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -89,18 +89,18 @@ msgstr[0] "Procesor"
 msgstr[1] "Procesory"
 msgstr[2] "Procesory"
 
-#: ui/main.qml:114
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "Paměť"
 
-#: ui/main.qml:118
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM"
 
-#: ui/main.qml:120
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

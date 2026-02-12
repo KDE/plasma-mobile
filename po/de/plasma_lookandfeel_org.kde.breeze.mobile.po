@@ -1,14 +1,12 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
-#
-# Automatically generated, 2023.
+# SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_lookandfeel_org.kde.breeze.mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-02 00:44+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2023-03-12 16:01+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"

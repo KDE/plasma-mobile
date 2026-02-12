@@ -1,16 +1,16 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Sveinn í Felli <sv1@fellsnet.is>, 2022.
-# SPDX-FileCopyrightText: 2023, 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2025 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-06-28 16:20+0000\n"
-"Last-Translator: Gummi <gudmundure@gmail.com>\n"
-"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-11-22 12:07+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,61 +20,64 @@ msgstr ""
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Afrita á klippispjald"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Skoða villuupplýsingar..."
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
+msgstr "Opna %1"
+
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Grunnstilla %1"
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Veggfóður"
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Breyta upphafsskjá"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Veldu upphafsskjá"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Breyta upphafsskjá í %1?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
 msgstr ""
+"Fyrirliggjandi stillingar þínar fyrir upphafsskjá eru vistaðar og verða "
+"endurheimtar ef þú skiptir til baka."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
-msgid "Layout changes have been restricted by the system administrator"
-msgstr "Kerfisstjórinn hefur takmarkað breytingar á framsetningu"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Almennt"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Framsetning heimaskjás"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "Framsetning sem á að nota fyrir heimaskjáinn."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
 msgstr "Veggfóðursviðbót"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
 msgstr "Veggfóðursviðbót sem á að nota."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
 msgstr "Veggfóðursviðbót"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
 msgstr "Sækja nýjar viðbætur…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
-"Breytingar á framsetningu verður að virkja áður en hægt er að gera aðrar "
-"breytingar"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Sækja um núna"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Veggfóður"
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Kerfisstjórinn hefur takmarkað breytingar á framsetningu"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -84,12 +87,23 @@ msgstr "Sláðu inn PIN-númer"
 msgid "Wrong PIN"
 msgstr "Rangt PIN-númer"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Fókusvísir skjáborðsstiku"
+
+#~ msgid "General"
+#~ msgstr "Almennt"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Framsetning heimaskjás"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr ""
+#~ "Breytingar á framsetningu verður að virkja áður en hægt er að gera aðrar "
+#~ "breytingar"
+
+#~ msgid "Apply now"
+#~ msgstr "Sækja um núna"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Skipta um veggfóður"
-
-#~ msgid "Configure"
-#~ msgstr "Grunnstilla"

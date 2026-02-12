@@ -1,95 +1,111 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2022.
+# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
+# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2022-07-14 10:22-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-11-08 21:10-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Copiar para a área de transferência"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Exibir detalhes do erro…"
 
-#: contents/applet/CompactApplet.qml:77
+#: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
-msgstr ""
+msgstr "Abrir %1"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/AppletConfiguration.qml:90
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Configurar %1"
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Papel de parede"
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Alterar tela de início"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Selecionar tela de início"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Alterar a tela de início para %1?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"As configurações atuais da sua tela de início serão salvas e serão "
+"restauradas quando você voltar."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
+msgid "Wallpaper Plugin"
+msgstr "Plugin de papel de parede"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
+msgid "The wallpaper plugin to use."
+msgstr "O plugin de papel de parede a ser usado."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
+msgid "Wallpaper Plugins"
+msgstr "Plugins de papéis de parede"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
+msgid "Get New Plugins…"
+msgstr "Baixar novos plugins…"
+
+#: contents/configuration/private/ConfigListPage.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "As alterações de layout foram restringidas pelo administrador do sistema"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:59
-msgid "General"
-msgstr "Geral"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
-msgid "Homescreen Layout"
-msgstr "Layout da tela de início"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:67
-msgid "The homescreen layout to use."
-msgstr "O layout da tela de início a ser usado."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:93
-msgid "Wallpaper Plugin"
-msgstr "Plugin de papel de parede"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:94
-msgid "The wallpaper plugin to use."
-msgstr "O plugin de papel de parede a ser usado."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:129
-msgid "Wallpaper Plugins"
-msgstr "Plugins de papéis de parede"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
-msgid "Get New Plugins…"
-msgstr "Baixar novos plugins..."
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:148
-msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
-"Alterações do layout devem ser aplicadas antes que outras alterações possam "
-"ser feitas"
-
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
-msgid "Apply now"
-msgstr "Aplicar agora"
-
-#: contents/configuration/ContainmentConfiguration.qml:34
-msgid "Wallpaper"
-msgstr "Papel de parede"
-
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr ""
+msgstr "Digite o PIN"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
-msgstr ""
+msgstr "PIN errado"
 
-#: contents/views/Panel.qml:321
+#: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Painel indicador de foco"
+
+#~ msgid "General"
+#~ msgstr "Geral"
+
+#~ msgid "Homescreen Layout"
+#~ msgstr "Layout da tela de início"
+
+#~ msgid "Layout changes must be applied before other changes can be made"
+#~ msgstr ""
+#~ "Alterações do layout devem ser aplicadas antes que outras alterações "
+#~ "possam ser feitas"
+
+#~ msgid "Apply now"
+#~ msgstr "Aplicar agora"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Alterar papel de parede..."
-
-#~ msgid "Configure"
-#~ msgstr "Configurar"

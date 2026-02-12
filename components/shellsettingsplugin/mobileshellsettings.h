@@ -32,21 +32,32 @@ class MobileShellSettings : public QObject
     // status bar
     Q_PROPERTY(bool dateInStatusBar READ dateInStatusBar WRITE setDateInStatusBar NOTIFY dateInStatusBarChanged)
     Q_PROPERTY(float statusBarScaleFactor READ statusBarScaleFactor WRITE setStatusBarScaleFactor NOTIFY statusBarScaleFactorChanged)
+    Q_PROPERTY(bool showBatteryPercentage READ showBatteryPercentage WRITE setShowBatteryPercentage NOTIFY showBatteryPercentageChanged)
 
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
-    Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel
-                   NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
+    Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
+    Q_PROPERTY(bool gesturePanelEnabled READ gesturePanelEnabled WRITE setGesturePanelEnabled NOTIFY gesturePanelEnabledChanged)
 
     // action drawer
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
     Q_PROPERTY(ActionDrawerMode actionDrawerTopRightMode READ actionDrawerTopRightMode WRITE setActionDrawerTopRightMode NOTIFY actionDrawerTopRightModeChanged)
 
+    // quicksettings
+    Q_PROPERTY(int quickSettingsColumns READ quickSettingsColumns WRITE setQuickSettingsColumns NOTIFY quickSettingsColumnsChanged)
+
     // convergence mode
     Q_PROPERTY(bool convergenceModeEnabled READ convergenceModeEnabled WRITE setConvergenceModeEnabled NOTIFY convergenceModeEnabledChanged)
 
+    // Auto Hide Panels
+    Q_PROPERTY(bool autoHidePanelsEnabled READ autoHidePanelsEnabled WRITE setAutoHidePanelsEnabled NOTIFY autoHidePanelsEnabledChanged)
+
     // logout dialog
     Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
+
+    // locksreen shortcut icons
+    Q_PROPERTY(LockscreenButtonAction lockscreenLeftButtonAction READ lockscreenLeftButtonAction WRITE setLockscreenLeftButtonAction NOTIFY lockscreenLeftButtonActionChanged)
+    Q_PROPERTY(LockscreenButtonAction lockscreenRightButtonAction READ lockscreenRightButtonAction WRITE setLockscreenRightButtonAction NOTIFY lockscreenRightButtonActionChanged)
 
 public:
     MobileShellSettings(QObject *parent = nullptr);
@@ -56,6 +67,14 @@ public:
         Expanded /** The drawer is fully expanded when pulled down.*/
     };
     Q_ENUM(ActionDrawerMode)
+
+    enum LockscreenButtonAction {
+        None, // hide the button
+        Flashlight, // toggle flashlight/torch
+        Camera, // camera
+        OpenApp // cant be selected, no support yet
+    };
+    Q_ENUM(LockscreenButtonAction)
 
     /**
      * Get whether shell vibrations are enabled.
@@ -127,6 +146,20 @@ public:
     void setStatusBarScaleFactor(float statusBarScaleFactor);
 
     /**
+     * Whether the battery percentage is shown in the status bar.
+     *
+     * If true, the percentage will be shown next to the battery in the status bar.
+     */
+    bool showBatteryPercentage() const;
+
+    /**
+     * Set whether the battery percentage is shown in the status bar.
+     *
+     * @param showBatteryPercentage Whether the battery percentage is shown in the status bar.
+     */
+    void setShowBatteryPercentage(bool showBatteryPercentage);
+
+    /**
      * Whether the navigation panel is enabled.
      *
      * If this is false, then gesture based navigation is used.
@@ -139,6 +172,20 @@ public:
      * @param navigationPanelEnabled Whether the navigation panel should be enabled.
      */
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
+
+    /**
+     * Whether the gesture panel is enabled.
+     *
+     * This is only applicable when navigationPanelEnabled() = false (gesture mode).
+     */
+    bool gesturePanelEnabled() const;
+
+    /**
+     * Set whether the gesture panel is enabled.
+     *
+     * @param gesturePanelEnabled Whether the gesture panel should be enabled.
+     */
+    void setGesturePanelEnabled(bool gesturePanelEnabled);
 
     /**
      * Set whether the keyboard toggle button should always show on the navigation panel, regardless of
@@ -182,6 +229,18 @@ public:
     void setActionDrawerTopRightMode(ActionDrawerMode actionDrawerMode);
 
     /**
+     * The number of columns to use for the QuickSettings drawer.
+     */
+    int quickSettingsColumns() const;
+
+    /**
+     * Set the number of columns to use for the QuickSettings drawer.
+     *
+     * @param columns The number of columns to use.
+     */
+    void setQuickSettingsColumns(int columns);
+
+    /**
      * Whether convergence/docked mode is enabled.
      */
     bool convergenceModeEnabled() const;
@@ -194,27 +253,69 @@ public:
     void setConvergenceModeEnabled(bool enabled);
 
     /**
+     * Whether Auto Hide Panels is enabled.
+     */
+    bool autoHidePanelsEnabled() const;
+
+    /**
+     * Set whether Auto Hide Panels is enabled.
+     *
+     * @param enabled
+     */
+    void setAutoHidePanelsEnabled(bool enabled);
+
+    /**
      * Whether logout button is shown in the logout/shutdown dialog.
      */
     bool allowLogout() const;
+
+    /**
+     * The action of the left lock screen shortcut
+     */
+    LockscreenButtonAction lockscreenLeftButtonAction() const;
+
+    /**
+     * Set the action of the left lock screen shortcut
+     *
+     * @param action
+     */
+    void setLockscreenLeftButtonAction(LockscreenButtonAction action);
+
+    /**
+     * The action of the right lock screen shortcut
+     */
+    LockscreenButtonAction lockscreenRightButtonAction() const;
+
+    /**
+     * Set the action of the right lock screen shortcut
+     *
+     * @param action
+     */
+    void setLockscreenRightButtonAction(LockscreenButtonAction action);
 
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
+    void gesturePanelEnabledChanged();
     void alwaysShowKeyboardToggleOnNavigationPanelChanged();
     void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
     void dateInStatusBarChanged();
     void statusBarScaleFactorChanged();
+    void showBatteryPercentageChanged();
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
+    void quickSettingsColumnsChanged();
     void convergenceModeEnabledChanged();
+    void autoHidePanelsEnabledChanged();
     void allowLogoutChanged();
+    void lockscreenLeftButtonActionChanged();
+    void lockscreenRightButtonActionChanged();
 
 private:
-    void updateNavigationBarsInPlasma(bool navigationPanelEnabled);
+    void updateNavigationBarsInPlasma();
 
     KConfigWatcher::Ptr m_configWatcher;
     KSharedConfig::Ptr m_config;

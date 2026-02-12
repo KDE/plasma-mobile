@@ -1,0 +1,303 @@
+# Sanskrit translations for plasma-mobile package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>2);\n"
+
+#: ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr "कोष्ठ"
+
+#: ui/main.qml:27
+#, kde-format
+msgid "General"
+msgstr "सामान्य"
+
+#: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
+#, kde-format
+msgid "Shell Vibrations"
+msgstr "शंख स्पन्दनम्"
+
+#: ui/main.qml:41
+#, kde-format
+msgid "Animations"
+msgstr "एनिमेशन"
+
+#: ui/main.qml:42
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr "यदि एतत् निष्क्रियं भवति तर्हि एनिमेशनं यथाशक्ति न्यूनीकृतं भविष्यति ।"
+
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr ""
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr ""
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Status Bar"
+msgstr "स्थिति पट्टी"
+
+#: ui/main.qml:87
+#, kde-format
+msgid "Date in status bar"
+msgstr "स्थितिपट्टिकायां तिथिः"
+
+#: ui/main.qml:88
+#, kde-format
+msgid "If on, date will be shown next to the clock in the status bar."
+msgstr "यदि चालू अस्ति तर्हि स्थितिपट्टिकायां घण्टायाः पार्श्वे तिथिः दर्शिता भविष्यति ।"
+
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "स्थितिपट्टिका आकार"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "उपरितनपटलस्य आकारः (पुनः आरम्भस्य आवश्यकता अस्ति) ।"
+
+#: ui/main.qml:120
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr "तुच्छ"
+
+#: ui/main.qml:121
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr "लघु"
+
+#: ui/main.qml:122
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr "सामान्य"
+
+#: ui/main.qml:123
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr "बृहत्‌"
+
+#: ui/main.qml:124
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr "अतीव विशालः"
+
+#: ui/main.qml:140
+#, kde-format
+msgid "Action Drawer"
+msgstr "क्रिया दराज"
+
+#: ui/main.qml:146
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr "पिन मोड"
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr "विस्तारितः मोडः"
+
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#, kde-format
+msgid "Quick Settings"
+msgstr "त्वरित सेटिंग्स्"
+
+#: ui/main.qml:159
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr "उपरि वामदराज मोड"
+
+#: ui/main.qml:160
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr "उपरि वामतः उद्घाटने मोड्।"
+
+#: ui/main.qml:181
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr "शीर्ष दक्षिण दराज मोड"
+
+#: ui/main.qml:182
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr "उपरि दक्षिणतः उद्घाटने मोड्।"
+
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr ""
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr ""
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr ""
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr ""
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide"
+msgstr "गोपयतु"
+
+#: ui/QuickSettingsForm.qml:56
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr "दर्शयतु"
+
+#: ui/QuickSettingsForm.qml:80
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Quick Settings Columns"
+msgstr "त्वरित सेटिंग्स्"
+
+#: ui/QuickSettingsForm.qml:81
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr ""
+
+#: ui/QuickSettingsForm.qml:94
+#, kde-format
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr "पुल-डाउन-पैनल-मध्ये द्रुत-सेटिंग्स्-क्रमं अनुकूलितं कृत्वा तान् गोपयन्तु ।"
+
+#: ui/QuickSettingsForm.qml:117
+#, kde-format
+msgid "Disabled Quick Settings"
+msgstr "त्वरितसेटिंग्स् अक्षमम्"
+
+#: ui/QuickSettingsForm.qml:122
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr "पूर्वं अक्षमानि द्रुतसेटिंग्स् पुनः सक्षमं कुर्वन्तु ।"
+
+#: ui/VibrationForm.qml:26
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr "किं शंखे स्पन्दनानि सक्षमानि भवेयुः।"
+
+#: ui/VibrationForm.qml:39
+#, kde-format
+msgid "Vibration Duration"
+msgstr "स्पन्दन अवधि"
+
+#: ui/VibrationForm.qml:40
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr "शंखस्पन्दनानि कियत् दीर्घाः भवेयुः।"
+
+#: ui/VibrationForm.qml:43
+#, kde-format
+msgctxt "Long duration"
+msgid "Long"
+msgstr "दीर्घम्‌"
+
+#: ui/VibrationForm.qml:44
+#, kde-format
+msgctxt "Medium duration"
+msgid "Medium"
+msgstr "मध्यम"
+
+#: ui/VibrationForm.qml:45
+#, kde-format
+msgctxt "Short duration"
+msgid "Short"
+msgstr "वामनः"
+
+#: ui/VibrationForm.qml:60
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr "कीबोर्ड-कम्पनानि कीबोर्ड-सेटिंग्स्-मॉड्यूल्-मध्ये पृथक् पृथक् नियन्त्रितानि भवन्ति ।"
+
+#~ msgid "Navigation Panel"
+#~ msgstr "नेविगेशन पैनल"
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "इशारा-मात्र-मोड"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "नेविगेशनपटलं गोपनीयं वा।"
+
+#~ msgid "Always show keyboard toggle"
+#~ msgstr "सर्वदा कीबोर्ड टॉगलं दर्शयन्तु"
+
+#~ msgid ""
+#~ "Whether to always show the keyboard toggle button on the navigation panel."
+#~ msgstr "किं सर्वदा नेविगेशन-पटले कीबोर्ड-टॉग्ल्-बटनं दर्शयितव्यम् इति ।"

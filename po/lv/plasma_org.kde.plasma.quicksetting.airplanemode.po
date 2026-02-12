@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
 "PO-Revision-Date: 2024-04-22 17:28+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "2);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:13
 #, kde-format
 msgid "Airplane Mode"
 msgstr "Lidmašīnas režīms"

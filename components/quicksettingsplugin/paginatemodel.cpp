@@ -73,41 +73,43 @@ QAbstractItemModel *PaginateModel::sourceModel() const
 
 void PaginateModel::setSourceModel(QAbstractItemModel *model)
 {
+    if (model == d->m_sourceModel) {
+        return;
+    }
+
     if (d->m_sourceModel) {
         disconnect(d->m_sourceModel, nullptr, this, nullptr);
     }
 
-    if (model != d->m_sourceModel) {
-        beginResetModel();
-        d->m_sourceModel = model;
-        if (model) {
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsAboutToBeInserted, this, &PaginateModel::_k_sourceRowsAboutToBeInserted);
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsInserted, this, &PaginateModel::_k_sourceRowsInserted);
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsAboutToBeRemoved, this, &PaginateModel::_k_sourceRowsAboutToBeRemoved);
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsRemoved, this, &PaginateModel::_k_sourceRowsRemoved);
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsAboutToBeMoved, this, &PaginateModel::_k_sourceRowsAboutToBeMoved);
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsMoved, this, &PaginateModel::_k_sourceRowsMoved);
+    beginResetModel();
+    d->m_sourceModel = model;
+    if (model) {
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsAboutToBeInserted, this, &PaginateModel::_k_sourceRowsAboutToBeInserted);
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsInserted, this, &PaginateModel::_k_sourceRowsInserted);
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsAboutToBeRemoved, this, &PaginateModel::_k_sourceRowsAboutToBeRemoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsRemoved, this, &PaginateModel::_k_sourceRowsRemoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsAboutToBeMoved, this, &PaginateModel::_k_sourceRowsAboutToBeMoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsMoved, this, &PaginateModel::_k_sourceRowsMoved);
 
-            connect(d->m_sourceModel, &QAbstractItemModel::columnsAboutToBeInserted, this, &PaginateModel::_k_sourceColumnsAboutToBeInserted);
-            connect(d->m_sourceModel, &QAbstractItemModel::columnsInserted, this, &PaginateModel::_k_sourceColumnsInserted);
-            connect(d->m_sourceModel, &QAbstractItemModel::columnsAboutToBeRemoved, this, &PaginateModel::_k_sourceColumnsAboutToBeRemoved);
-            connect(d->m_sourceModel, &QAbstractItemModel::columnsRemoved, this, &PaginateModel::_k_sourceColumnsRemoved);
-            connect(d->m_sourceModel, &QAbstractItemModel::columnsAboutToBeMoved, this, &PaginateModel::_k_sourceColumnsAboutToBeMoved);
-            connect(d->m_sourceModel, &QAbstractItemModel::columnsMoved, this, &PaginateModel::_k_sourceColumnsMoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::columnsAboutToBeInserted, this, &PaginateModel::_k_sourceColumnsAboutToBeInserted);
+        connect(d->m_sourceModel, &QAbstractItemModel::columnsInserted, this, &PaginateModel::_k_sourceColumnsInserted);
+        connect(d->m_sourceModel, &QAbstractItemModel::columnsAboutToBeRemoved, this, &PaginateModel::_k_sourceColumnsAboutToBeRemoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::columnsRemoved, this, &PaginateModel::_k_sourceColumnsRemoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::columnsAboutToBeMoved, this, &PaginateModel::_k_sourceColumnsAboutToBeMoved);
+        connect(d->m_sourceModel, &QAbstractItemModel::columnsMoved, this, &PaginateModel::_k_sourceColumnsMoved);
 
-            connect(d->m_sourceModel, &QAbstractItemModel::dataChanged, this, &PaginateModel::_k_sourceDataChanged);
-            connect(d->m_sourceModel, &QAbstractItemModel::headerDataChanged, this, &PaginateModel::_k_sourceHeaderDataChanged);
+        connect(d->m_sourceModel, &QAbstractItemModel::dataChanged, this, &PaginateModel::_k_sourceDataChanged);
+        connect(d->m_sourceModel, &QAbstractItemModel::headerDataChanged, this, &PaginateModel::_k_sourceHeaderDataChanged);
 
-            connect(d->m_sourceModel, &QAbstractItemModel::modelAboutToBeReset, this, &PaginateModel::_k_sourceModelAboutToBeReset);
-            connect(d->m_sourceModel, &QAbstractItemModel::modelReset, this, &PaginateModel::_k_sourceModelReset);
+        connect(d->m_sourceModel, &QAbstractItemModel::modelAboutToBeReset, this, &PaginateModel::_k_sourceModelAboutToBeReset);
+        connect(d->m_sourceModel, &QAbstractItemModel::modelReset, this, &PaginateModel::_k_sourceModelReset);
 
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsInserted, this, &PaginateModel::pageCountChanged);
-            connect(d->m_sourceModel, &QAbstractItemModel::rowsRemoved, this, &PaginateModel::pageCountChanged);
-            connect(d->m_sourceModel, &QAbstractItemModel::modelReset, this, &PaginateModel::pageCountChanged);
-        }
-        endResetModel();
-        Q_EMIT sourceModelChanged();
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsInserted, this, &PaginateModel::pageCountChanged);
+        connect(d->m_sourceModel, &QAbstractItemModel::rowsRemoved, this, &PaginateModel::pageCountChanged);
+        connect(d->m_sourceModel, &QAbstractItemModel::modelReset, this, &PaginateModel::pageCountChanged);
     }
+    endResetModel();
+    Q_EMIT sourceModelChanged();
 }
 
 QHash<int, QByteArray> PaginateModel::roleNames() const
@@ -377,7 +379,7 @@ void PaginateModel::_k_sourceRowsRemoved(const QModelIndex &parent, int start, i
     if (canSizeChange()) {
         endRemoveRows();
     } else {
-        beginResetModel();
+        endResetModel();
     }
 }
 

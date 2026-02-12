@@ -1,15 +1,15 @@
 # Spanish translations for plasma_org.kde.plasma.private.mobileshell.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-11-13 14:13+0100\n"
+"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"PO-Revision-Date: 2025-09-15 14:58+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -27,7 +27,7 @@ msgstr "Abrir con %1"
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr "Abrir con..."
+msgstr "Abrir con…"
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217
@@ -51,12 +51,17 @@ msgstr "Copiar ubicación"
 msgid "Properties"
 msgstr "Propiedades"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/ContentContainer.qml:151
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Borrar todas las notificaciones"
+
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "Activado"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
+#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "Desactivado"
@@ -66,128 +71,117 @@ msgstr "Desactivado"
 msgid "SIM Locked"
 msgstr "SIM bloqueada"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/popups/volumeosd/AudioApplet.qml:89
 #, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgid "Output Devices"
+msgstr "Dispositivos de salida"
 
-#: qml/volumeosd/AudioApplet.qml:73
+#: qml/popups/volumeosd/AudioApplet.qml:118
 #, kde-format
-msgid "Outputs"
-msgstr "Salidas"
+msgid "Input Devices"
+msgstr "Dispositivos de entrada"
 
-#: qml/volumeosd/AudioApplet.qml:111
-#, kde-format
-msgid "Inputs"
-msgstr "Entradas"
-
-#: qml/volumeosd/AudioApplet.qml:150
+#: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
 msgid "Playback Streams"
 msgstr "Emisiones en reproducción"
 
-#: qml/volumeosd/AudioApplet.qml:211
+#: qml/popups/volumeosd/AudioApplet.qml:199
 #, kde-format
 msgid "Recording Streams"
 msgstr "Emisiones en grabación"
 
-#: qml/volumeosd/DeviceListItem.qml:25
+#: qml/popups/volumeosd/DeviceListItem.qml:24
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/volumeosd/DeviceListItem.qml:34
+#: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
 msgid "Device name not found"
 msgstr "Nombre de dispositivo no encontrado"
 
-#: qml/volumeosd/ListItemBase.qml:101
+#: qml/popups/volumeosd/ListItemBase.qml:123
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Mostrar opciones adicionales de %1"
 
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
-#, kde-format
-msgid "Unmute"
-msgstr "Reanudar el sonido"
-
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
-#, kde-format
-msgid "Mute"
-msgstr "Silenciar"
-
-#: qml/volumeosd/ListItemBase.qml:168
-#, kde-format
-msgctxt "Accessibility data on volume slider"
-msgid "Adjust volume for %1"
-msgstr "Ajustar el volumen de %1"
-
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/popups/volumeosd/ListItemBase.qml:215
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
-#: qml/volumeosd/ListItemBase.qml:261
+#: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
-#: qml/volumeosd/StreamListItem.qml:21
+#: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
 msgstr "Sonidos de notificación"
 
-#: qml/volumeosd/StreamListItem.qml:24
+#: qml/popups/volumeosd/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: qml/volumeosd/StreamListItem.qml:29
+#: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
 msgstr "Nombre de emisión no encontrado"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:261
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Unmute"
+msgstr "Reanudar el sonido"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Mute"
+msgstr "Silenciar"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
 msgstr "Configurar emisiones de sonido"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/popups/volumeosd/VolumeOSD.qml:200
 #, kde-format
 msgid "Open audio settings"
 msgstr "Abrir las preferencias de sonido"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#, kde-format
+msgid "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Buscar..."
+msgstr "Buscar…"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:181
-#, kde-format
-msgid "Search…"
-msgstr "Buscar..."
-
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
 #, kde-format
 msgid "No media playing"
 msgstr "Ningún medio en reproducción"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
 #, kde-format
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Reproducir o pausar multimedia"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Next track"
 msgstr "Pista siguiente"
@@ -307,7 +301,7 @@ msgstr "Cancelar"
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
-msgstr "Más opciones..."
+msgstr "Más opciones…"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
@@ -318,7 +312,7 @@ msgstr "Abrir"
 #, kde-format
 msgctxt "Text field placeholder"
 msgid "Type a reply…"
-msgstr "Escriba una respuesta..."
+msgstr "Escriba una respuesta…"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:55
 #, kde-format
@@ -326,105 +320,81 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Enviar"
 
-#: qml/widgets/notifications/NotificationsUtils.js:14
+#: qml/widgets/notifications/NotificationsUtils.js:15
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
 msgstr "%1 (en pausa)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:19
+#: qml/widgets/notifications/NotificationsUtils.js:20
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
 msgstr "%1 (ha fallado)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:21
+#: qml/widgets/notifications/NotificationsUtils.js:22
 #, kde-format
 msgid "Job Failed"
 msgstr "Trabajo fallido"
 
-#: qml/widgets/notifications/NotificationsUtils.js:24
+#: qml/widgets/notifications/NotificationsUtils.js:25
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
 msgstr "%1 (terminado)"
 
-#: qml/widgets/notifications/NotificationsUtils.js:26
+#: qml/widgets/notifications/NotificationsUtils.js:27
 #, kde-format
 msgid "Job Finished"
 msgstr "Trabajo terminado"
 
-#: qml/widgets/notifications/NotificationsUtils.js:44
+#: qml/widgets/notifications/NotificationsUtils.js:45
 #, kde-format
 msgid "now"
 msgstr "ahora"
 
-#: qml/widgets/notifications/NotificationsUtils.js:49
+#: qml/widgets/notifications/NotificationsUtils.js:50
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
 msgstr "Hace %1 m"
 
-#: qml/widgets/notifications/NotificationsUtils.js:81
+#: qml/widgets/notifications/NotificationsUtils.js:82
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
 msgstr "Faltan %1 s"
 
-#: qml/widgets/notifications/NotificationsUtils.js:84
+#: qml/widgets/notifications/NotificationsUtils.js:85
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
 msgstr "Faltan %1 m"
 
-#: qml/widgets/notifications/NotificationsUtils.js:87
+#: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Faltan %1 h"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
 msgid "Notification service not available"
 msgstr "Servicio de notificaciones no disponible"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:267
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Notificaciones proporcionadas en la actualidad por «%1 %2»"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:429
 #, kde-format
 msgid "Show Fewer"
 msgstr "Mostrar menos"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:431
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Mostrar %1 más"
-
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "Borrar todas las notificaciones"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"
-
-#~ msgid "Audio Settings"
-#~ msgstr "Preferencias de sonido"
-
-#~ msgid "Audio"
-#~ msgstr "Sonido"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Aumentar el volumen"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Disminuir el volumen"

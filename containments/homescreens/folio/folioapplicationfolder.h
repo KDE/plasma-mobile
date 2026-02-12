@@ -28,17 +28,22 @@ class FolioApplication;
  * @short Object that represents an application folder.
  */
 
-class FolioApplicationFolder : public QObject
+class FolioApplicationFolder : public QObject, public std::enable_shared_from_this<FolioApplicationFolder>
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
+
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QList<FolioApplication *> appPreviews READ appPreviews NOTIFY applicationsChanged)
     Q_PROPERTY(ApplicationFolderModel *applications READ applications NOTIFY applicationsReset)
 
 public:
-    FolioApplicationFolder(HomeScreen *parent = nullptr, QString name = QString{});
+    typedef std::shared_ptr<FolioApplicationFolder> Ptr;
 
-    static FolioApplicationFolder *fromJson(QJsonObject &obj, HomeScreen *parent);
+    FolioApplicationFolder(HomeScreen *homeScreen = nullptr, QString name = QString{}, QObject *parent = nullptr);
+
+    static std::shared_ptr<FolioApplicationFolder> fromJson(QJsonObject &obj, HomeScreen *parent);
     QJsonObject toJson() const;
 
     QString name() const;
@@ -47,10 +52,10 @@ public:
     QList<FolioApplication *> appPreviews();
 
     ApplicationFolderModel *applications();
-    void setApplications(QList<FolioApplication *> applications);
+    void setApplications(QList<std::shared_ptr<FolioApplication>> applications);
 
     void moveEntry(int fromRow, int toRow);
-    bool addDelegate(FolioDelegate *delegate, int row);
+    bool addDelegate(std::shared_ptr<FolioDelegate> delegate, int row);
     Q_INVOKABLE void removeDelegate(int row);
 
     int dropInsertPosition(int page, qreal x, qreal y);
@@ -73,7 +78,7 @@ private:
 };
 
 struct ApplicationDelegate {
-    FolioDelegate *delegate;
+    std::shared_ptr<FolioDelegate> delegate;
     int columnIndex;
     int rowIndex;
     int pageIndex;
@@ -91,16 +96,16 @@ public:
         rowIndexRole,
         pageIndexRole,
     };
-    ApplicationFolderModel(FolioApplicationFolder *folder);
+    ApplicationFolderModel(FolioApplicationFolder *parent);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    FolioDelegate *getDelegate(int index);
+    std::shared_ptr<FolioDelegate> getDelegate(int index);
     void moveEntry(int fromRow, int toRow);
-    bool canAddDelegate(FolioDelegate *delegate, int index);
-    bool addDelegate(FolioDelegate *delegate, int index);
+    bool canAddDelegate(std::shared_ptr<FolioDelegate> delegate, int index);
+    bool addDelegate(std::shared_ptr<FolioDelegate> delegate, int index);
     void removeDelegate(int index);
     QPointF getDelegatePosition(int index);
 
@@ -109,7 +114,7 @@ public:
     // invisible - existing delegate looks like it doesn't exist
     int getGhostEntryPosition();
     void setGhostEntry(int index);
-    void replaceGhostEntry(FolioDelegate *delegate);
+    void replaceGhostEntry(std::shared_ptr<FolioDelegate> delegate);
     void deleteGhostEntry();
 
     // the index that dropping at the position given would place the delegate at.

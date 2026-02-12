@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-06 16:04+0200\n"
-"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-08-30 16:57+0300\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,13 +31,12 @@ msgstr "toms.trasuns@posteo.net"
 #: main.cpp:21
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr "Atver sākotnējo sākuma vedni, nemainot konfigurāciju"
+msgstr "Atver sākuma palaišanas vedni, nemainot konfigurāciju"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 KDE kopiena"
+msgstr "© 2024 KDE kopiena"
 
 #: main.cpp:37
 #, kde-format
@@ -149,6 +148,7 @@ msgid "Edit"
 msgstr "Rediģēt"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Dzēst"
@@ -189,10 +189,49 @@ msgstr "Pielāgojiet ekrāna elementu izmēru."
 msgid "Display Scaling"
 msgstr "Displeja mērogošana"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tumšais motīvs"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Sistēmas navigācija"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Izvēlieties metodi navigācijai sistēmā."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Žestu navigācija"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Lai redzētu ieslēgtās programmas, pavelciet no apakšas. Lai atgrieztos mājas "
+"ekrānā, ātri pārvelciet."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Pogu navigācija"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "Lietojiet pogas navigācijas joslā, lai pārvietotos sistēmā."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr "To vēlāk varēsiet izmainīt sistēmas iestatījumos."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -214,6 +253,21 @@ msgstr "24 stundu formāts"
 msgid "Invalid input."
 msgstr "Nederīga ievade"
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, kde-format
+msgid "Connect"
+msgstr "Savienoties"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, kde-format
+msgid "Disconnect"
+msgstr "Atvienoties"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr "Konfigurēt"
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -234,32 +288,32 @@ msgstr "Savienojieties ar „WiFi“ tīklu, lai piekļūtu internetam."
 msgid "Password…"
 msgstr "Parole…"
 
-#: qml/LandingComponent.qml:104
+#: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Laipni lūgti<br/><b>Plasma Mobile</b>!"
 
-#: qml/LandingComponent.qml:130
+#: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Nodrošina<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
-msgstr "Uz priekšu"
+msgstr "Tālāk"
 
 #: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
 msgstr "Pirmā palaišana"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Atpakaļ"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Pabeigt"

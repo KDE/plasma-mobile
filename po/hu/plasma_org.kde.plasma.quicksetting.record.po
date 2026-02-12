@@ -1,58 +1,66 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
-"PO-Revision-Date: 2023-12-16 21:35+0100\n"
-"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-06-22 15:33+0200\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 25.04.2\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:54
 #, kde-format
-msgid "Record Screen"
-msgstr "Képernyőfelvétel"
+msgid "No encoders available for recording"
+msgstr "Nem érhetők el kódolók a felvételhez"
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "Felvétel…"
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "Írás…"
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "Koppintson a felvétel indításához"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "Képernyő rögzítése folyamatban…"
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "Kérem várjon…"
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Új képernyőfelvétel"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:77
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Új képernyőfelvétel mentve ide: %1"
+
+#: recordutil.cpp:124
+#, kde-format
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "Képernyő felvétele"
+
+#: recordutil.cpp:133
+#, kde-format
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "Felvétel…"
+
+#: recordutil.cpp:136
+#, kde-format
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "Írás…"
+
+#: recordutil.cpp:149
+#, kde-format
+msgid "Tap to start recording"
+msgstr "Koppintson a felvétel indításához"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "Képernyő rögzítése folyamatban…"
+
+#: recordutil.cpp:162
+#, kde-format
+msgid "Please wait…"
+msgstr "Kérem várjon…"

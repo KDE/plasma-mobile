@@ -10,6 +10,8 @@
 #include <QQuickItem>
 #include <QSet>
 
+#include <KService>
+
 #include "foliodelegate.h"
 #include "homescreen.h"
 
@@ -22,6 +24,8 @@ class FolioDelegate;
 class ApplicationListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     enum Roles {
@@ -38,17 +42,27 @@ public:
 
     void load();
 
+Q_SIGNALS:
+    // Emitted when an application was detected to have been removed from the system
+    void applicationRemoved(QString storageId);
+
 public Q_SLOTS:
     void sycocaDbChanged();
 
 protected:
+    KService::List queryApplications();
+
     HomeScreen *m_homeScreen{nullptr};
-    QList<FolioDelegate *> m_delegates;
+
+    QList<std::shared_ptr<FolioDelegate>> m_delegates;
+    QTimer *m_reloadAppsTimer{nullptr};
 };
 
 class ApplicationListSearchModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("")
 
 public:
     ApplicationListSearchModel(HomeScreen *parent = nullptr, ApplicationListModel *model = nullptr);

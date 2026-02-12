@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # SPDX-FileCopyrightText: 2023 Alexander Yavorsky <kekcuha@gmail.com>
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-09-24 11:54+0300\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-06-24 12:52+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -35,10 +35,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Открыть мастер начального запуска без изменения конфигурации"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© Сообщество KDE, 2023"
+msgstr "© Сообщество KDE, 2024"
 
 #: main.cpp:37
 #, kde-format
@@ -150,6 +149,7 @@ msgid "Edit"
 msgstr "Изменить"
 
 #: modules/cellular/package/contents/ui/main.qml:124
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "Удалить"
@@ -192,10 +192,50 @@ msgstr "Настройте размер элементов на экране."
 msgid "Display Scaling"
 msgstr "Масштабирование экрана"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Тёмная тема"
+
+#: modules/systemnavigation/contents/ui/main.qml:15
+#, kde-format
+msgid "System Navigation"
+msgstr "Навигация системы"
+
+#: modules/systemnavigation/contents/ui/main.qml:40
+#, kde-format
+msgid "Choose a method to navigate around the system."
+msgstr "Выберите способ навигации в системе."
+
+#: modules/systemnavigation/contents/ui/main.qml:49
+#, kde-format
+msgid "Gesture navigation"
+msgstr "Навигация с помощью жестов"
+
+#: modules/systemnavigation/contents/ui/main.qml:50
+#, kde-format
+msgid ""
+"Swipe up from the bottom to see running applications. Flick to go to the "
+"home screen."
+msgstr ""
+"Проведите пальцем вверх из нижней части экрана для просмотра запущенных "
+"приложений. Перелистните для перехода на домашний экран."
+
+#: modules/systemnavigation/contents/ui/main.qml:70
+#, kde-format
+msgid "Button navigation"
+msgstr "Навигация с помощью кнопок"
+
+#: modules/systemnavigation/contents/ui/main.qml:71
+#, kde-format
+msgid "Use buttons on a navigation bar to navigate the system."
+msgstr "Используйте кнопки на панели навигации для навигации в системе."
+
+#: modules/systemnavigation/contents/ui/main.qml:93
+#, kde-format
+msgid "This can later be changed in the settings."
+msgstr ""
+"Выбранный способ навигации возможно изменить в разделе настройки позже."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -217,6 +257,23 @@ msgstr "24-часовой формат"
 msgid "Invalid input."
 msgstr "Недопустимые входные данные."
 
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Connect"
+msgstr "Подключиться к"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgid "Disconnect"
+msgstr "Подключиться к"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
+#, kde-format
+msgid "Configure"
+msgstr ""
+
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
@@ -237,19 +294,17 @@ msgstr "Подключитесь к сети Wi-Fi для получения с�
 msgid "Password…"
 msgstr "Пароль…"
 
-#: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#: qml/LandingComponent.qml:105
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "Добро пожаловать в<br/><b>%1</b>"
+msgstr "Добро пожаловать в<br/><b>Plasma Mobile</b>"
 
-#: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#: qml/LandingComponent.qml:131
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "Добро пожаловать в<br/><b>%1</b>"
+msgstr "На основе<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
 msgid "Next"
 msgstr "Далее"
@@ -259,12 +314,12 @@ msgstr "Далее"
 msgid "Initial Start"
 msgstr "Начальный запуск"
 
-#: qml/Wizard.qml:278
+#: qml/Wizard.qml:284
 #, kde-format
 msgid "Back"
 msgstr "Назад"
 
-#: qml/Wizard.qml:314
+#: qml/Wizard.qml:320
 #, kde-format
 msgid "Finish"
 msgstr "Готово"

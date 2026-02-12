@@ -24,6 +24,16 @@ FavouritesModel::FavouritesModel(HomeScreen *parent)
     : QAbstractListModel{parent}
     , m_homeScreen{parent}
 {
+    // Listen to application removal events and delete delegates
+    connect(m_homeScreen->applicationListModel(), &ApplicationListModel::applicationRemoved, this, [this](const QString &storageId) {
+        for (int i = 0; i < m_delegates.size(); i++) {
+            auto delegate = m_delegates[i].delegate;
+
+            if (delegate->type() == FolioDelegate::Application && delegate->application()->storageId() == storageId) {
+                removeEntry(i);
+            }
+        }
+    });
 }
 
 int FavouritesModel::rowCount(const QModelIndex &parent) const
@@ -40,7 +50,7 @@ QVariant FavouritesModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case DelegateRole:
-        return QVariant::fromValue(m_delegates.at(index.row()).delegate);
+        return QVariant::fromValue(m_delegates.at(index.row()).delegate.get());
     }
 
     return QVariant();
@@ -90,7 +100,7 @@ void FavouritesModel::moveEntry(int fromRow, int toRow)
     save();
 }
 
-bool FavouritesModel::canAddEntry(int row, FolioDelegate *delegate)
+bool FavouritesModel::canAddEntry(int row, FolioDelegate::Ptr delegate)
 {
     if (!delegate) {
         return false;
@@ -103,7 +113,7 @@ bool FavouritesModel::canAddEntry(int row, FolioDelegate *delegate)
     return true;
 }
 
-bool FavouritesModel::addEntry(int row, FolioDelegate *delegate)
+bool FavouritesModel::addEntry(int row, FolioDelegate::Ptr delegate)
 {
     if (!canAddEntry(row, delegate)) {
         return false;
@@ -129,7 +139,7 @@ bool FavouritesModel::addEntry(int row, FolioDelegate *delegate)
     return true;
 }
 
-FolioDelegate *FavouritesModel::getEntryAt(int row)
+FolioDelegate::Ptr FavouritesModel::getEntryAt(int row)
 {
     if (row < 0 || row >= m_delegates.size()) {
         return nullptr;
@@ -186,12 +196,12 @@ void FavouritesModel::setGhostEntry(int row)
 
     // if it doesn't, add a new empty delegate
     if (!found) {
-        FolioDelegate *ghost = new FolioDelegate{m_homeScreen};
+        FolioDelegate::Ptr ghost = std::make_shared<FolioDelegate>();
         addEntry(row, ghost);
     }
 }
 
-void FavouritesModel::replaceGhostEntry(FolioDelegate *delegate)
+void FavouritesModel::replaceGhostEntry(FolioDelegate::Ptr delegate)
 {
     for (int i = 0; i < m_delegates.size(); i++) {
         if (m_delegates[i].delegate->type() == FolioDelegate::None) {
@@ -221,7 +231,7 @@ QJsonArray FavouritesModel::exportToJson()
 {
     QJsonArray arr;
     for (int i = 0; i < m_delegates.size(); i++) {
-        FolioDelegate *delegate = m_delegates[i].delegate;
+        FolioDelegate::Ptr delegate = m_delegates[i].delegate;
 
         // if this delegate is empty, ignore it
         if (!delegate || delegate->type() == FolioDelegate::None) {
@@ -242,8 +252,7 @@ void FavouritesModel::save()
     QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_homeScreen->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_homeScreen->configNeedsSaving();
+    m_homeScreen->folioSettings()->setFavorites(QString::fromStdString(data.toStdString()));
 }
 
 void FavouritesModel::load()
@@ -252,7 +261,7 @@ void FavouritesModel::load()
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->config().readEntry("Favourites", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->folioSettings()->favorites().toUtf8());
     loadFromJson(doc.array());
 }
 
@@ -264,7 +273,7 @@ void FavouritesModel::loadFromJson(QJsonArray arr)
 
     for (QJsonValueRef r : arr) {
         QJsonObject obj = r.toObject();
-        FolioDelegate *delegate = FolioDelegate::fromJson(obj, m_homeScreen);
+        FolioDelegate::Ptr delegate = FolioDelegate::fromJson(obj, m_homeScreen);
 
         if (delegate) {
             connectSaveRequests(delegate);
@@ -275,10 +284,10 @@ void FavouritesModel::loadFromJson(QJsonArray arr)
     endResetModel();
 }
 
-void FavouritesModel::connectSaveRequests(FolioDelegate *delegate)
+void FavouritesModel::connectSaveRequests(FolioDelegate::Ptr delegate)
 {
     if (delegate->type() == FolioDelegate::Folder && delegate->folder()) {
-        connect(delegate->folder(), &FolioApplicationFolder::saveRequested, this, &FavouritesModel::save);
+        connect(delegate->folder().get(), &FolioApplicationFolder::saveRequested, this, &FavouritesModel::save);
     }
 }
 

@@ -12,18 +12,20 @@ import QtQuick.Window 2.2
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
+import org.kde.plasma.private.mobileshell as MobileShell
+
+import 'actiondrawer/private'
 
 Item {
     id: root
 
     /*
-     * The intended visiblity of the action drawer.
+     * The intended visibility of the action drawer.
      *
      * This is separate from "visible" in order to avoid having to set
-     * item visiblity when its on its own window (wasteful since the window itself can be shown/hidden).
+     * item visibility when it's on its own window (wasteful since the window itself can be shown/hidden).
      */
     property bool intendedToBeVisible: false
 
@@ -60,6 +62,19 @@ Item {
     property real offset: 0
 
     /**
+     * Same as offset value except this adds resistance when passing the open position of the current drawer state.
+     */
+    readonly property real offsetResistance: {
+        if (!openToPinnedMode) {
+            return root.calculateResistance(offset, contentContainer.maximizedQuickSettingsOffset);
+        } else if (!opened) {
+            return root.calculateResistance(offset, contentContainer.minimizedQuickSettingsOffset);
+        } else {
+            return root.calculateResistance(offset, contentContainer.maximizedQuickSettingsOffset);
+        }
+    }
+
+    /**
      * Whether the panel is being dragged.
      */
     property bool dragging: false
@@ -81,14 +96,9 @@ Item {
     property int direction: MobileShell.Direction.None
 
     /**
-     * The notifications widget being shown. May be null.
-     */
-    property var notificationsWidget: contentContainer.notificationsWidget
-
-    /**
      * The mode of the action drawer (portrait or landscape).
      */
-    property int mode: (height > width && width <= largePortraitThreshold) ? ActionDrawer.Portrait : ActionDrawer.Landscape
+    property int mode: (height > width && width <= largePortraitThreshold) ? MobileShell.ActionDrawer.Portrait : MobileShell.ActionDrawer.Landscape
 
     /**
      * At some point, even if the screen is technically portrait, if we have a ton of width it'd be best to just show the landscape mode.
@@ -124,10 +134,6 @@ Item {
      */
     signal runPendingNotificationAction()
 
-    onOpenedChanged: {
-        if (opened) swipeArea.focus = true;
-    }
-
     property real oldOffset
     onOffsetChanged: {
         if (offset < 0) {
@@ -135,18 +141,27 @@ Item {
         }
 
         root.direction = (oldOffset === offset)
-                            ? MobileShell.Direction.None
-                            : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
+            ? MobileShell.Direction.None
+            : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
 
         oldOffset = offset;
 
         // close panel immediately after panel is not shown, and the flickable is not being dragged
-        if (opened && root.offset <= 0 && !swipeArea.moving && !drawerAnimation.running) {
+        if (opened && root.offset <= 0 && !contentContainer.swipeAreaMoving && !drawerAnimation.running) {
             root.state = "";
             offset = 0;
             focus = false;
             root.opened = false;
             root.updateState();
+        }
+    }
+
+    // calculates offset resistance for the action drawer overshoots it's open position
+    function calculateResistance(value : double, threshold : int) : double {
+        if (value > threshold) {
+            return threshold + Math.pow(value - threshold + 1, Math.max(0.8 - (value - threshold) / ((root.height - threshold) * 15), 0.35));
+        } else {
+            return value;
         }
     }
 
@@ -249,7 +264,9 @@ Item {
         SequentialAnimation {
             PropertyAnimation {
                 id: drawerAnimation
-                properties: "offset"; easing.type: Easing.OutExpo; duration: root.state != "" ? Kirigami.Units.veryLongDuration : 0
+                properties: "offset"
+                easing.type: Easing.OutExpo
+                duration: root.state != "" ? Kirigami.Units.veryLongDuration : 0
             }
             ScriptAction {
                 script: {
@@ -267,45 +284,12 @@ Item {
         }
     }
 
-    MobileShell.SwipeArea {
-        id: swipeArea
-        mode: MobileShell.SwipeArea.VerticalOnly
+    // action drawer ui content
+    ContentContainer {
+        id: contentContainer
         anchors.fill: parent
 
-        function startSwipe() {
-            root.cancelAnimations();
-            root.dragging = true;
-
-            // Immediately open action drawer if we interact with it and it's already open
-            // This allows us to have 2 quick flicks from minimized -> expanded
-            if (root.visible && !root.opened) {
-                root.opened = true;
-            }
-        }
-
-        function endSwipe() {
-            root.dragging = false;
-            root.updateState();
-        }
-
-        function moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY) {
-            root.offset += deltaY;
-        }
-
-        onSwipeStarted: startSwipe()
-        onSwipeEnded: endSwipe()
-        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
-
-        onTouchpadScrollStarted: startSwipe()
-        onTouchpadScrollEnded: endSwipe()
-        onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
-
-        ContentContainer {
-            id: contentContainer
-            anchors.fill: parent
-
-            actionDrawer: root
-            quickSettingsModel: root.quickSettingsModel
-        }
+        actionDrawer: root
+        quickSettingsModel: root.quickSettingsModel
     }
 }

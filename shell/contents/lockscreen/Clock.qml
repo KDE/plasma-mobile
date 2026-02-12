@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.clock
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell as MobileShell
 
@@ -20,12 +20,8 @@ Item {
 
     property int layoutAlignment
 
-    P5Support.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60000
-        intervalAlignment: P5Support.Types.AlignToMinute
+    Clock {
+        id: clockSource
     }
 
     ColumnLayout {
@@ -38,7 +34,7 @@ Item {
 
         PC3.Label {
             text: {
-                let timeText = Qt.formatTime(timeSource.data["Local"]["DateTime"], MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap");
+                let timeText = Qt.formatTime(clockSource.dateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap");
 
                 // Remove am/pm in 12-hour time to avoid excessive length
                 if (!MobileShell.ShellUtil.isSystem24HourFormat) {
@@ -62,7 +58,7 @@ Item {
             }
         }
         PC3.Label {
-            text: Qt.formatDate(timeSource.data["Local"]["DateTime"], "dddd, MMMM d")
+            text: Qt.formatDate(clockSource.dateTime, "dddd, MMMM d")
             color: "white"
             opacity: 0.9
 

@@ -1,15 +1,15 @@
 # Translation of plasma_org.kde.plasma.quicksetting.audio.po to Catalan (Valencian)
-# Copyright (C) 2022 This_file_is_part_of_KDE
+# Copyright (C) 2022-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
-"PO-Revision-Date: 2022-12-20 11:54+0100\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2025-09-15 09:32+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,14 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Sound"
 msgstr "So"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:15
+#, kde-format
+msgid "No audio devices"
+msgstr "No hi ha cap dispositiu d'àudio"
+
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
