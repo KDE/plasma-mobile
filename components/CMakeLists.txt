@@ -4,7 +4,6 @@
 
 add_subdirectory(waydroidintegrationplugin)
 add_subdirectory(hapticsplugin)
-add_subdirectory(mmplugin)
 add_subdirectory(mobileshell)
 add_subdirectory(mobileshellstate)
 add_subdirectory(quicksettingsplugin)

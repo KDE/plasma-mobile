@@ -9,13 +9,18 @@
 pragma Singleton
 
 import QtQuick 2.1
-import org.kde.plasma.mm
+import org.kde.plasma.networkmanagement.cellular as Cellular
 
 QtObject {
-    readonly property string icon: "network-mobile-" + Math.floor(SignalIndicator.strength / 20) * 20
+    property Cellular.CellularModemList _modemList: Cellular.CellularModemList {}
 
-    readonly property string label: SignalIndicator.simLocked ? i18n("SIM Locked") : SignalIndicator.name
+    readonly property string icon: "network-mobile-" + Math.floor((_modemList.primaryModem ? _modemList.primaryModem.signalStrength : 0) / 20) * 20
 
-    readonly property bool showIndicator: SignalIndicator.modemAvailable
+    readonly property string label: {
+        if (!_modemList.primaryModem) return "";
+        if (_modemList.primaryModem.simLocked) return i18n("SIM Locked");
+        return _modemList.primaryModem.operatorName;
+    }
+
+    readonly property bool showIndicator: _modemList.modemAvailable
 }
-
