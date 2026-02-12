@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
                          QStringLiteral(PLASMA_MOBILE_VERSION_STRING),
                          QStringLiteral(""),
                          KAboutLicense::GPL,
-                         i18n("© 2024 KDE Community"));
+                         i18n("© 2026 KDE Community"));
     aboutData.addAuthor(i18n("Devin Lin"), QString(), QStringLiteral("devin@kde.org"));
     KAboutData::setApplicationData(aboutData);
 
