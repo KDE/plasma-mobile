@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-13 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 14:35-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -33,8 +33,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Abre o assistente de inicialização sem modificar a configuração"
 
 #: main.cpp:36
-#, kde-format
-msgid "© 2024 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2024 KDE Community"
+msgid "© 2026 KDE Community"
 msgstr "© 2024 Comunidade do KDE"
 
 #: main.cpp:37

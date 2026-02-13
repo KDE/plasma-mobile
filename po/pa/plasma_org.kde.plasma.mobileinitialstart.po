@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-13 00:45+0000\n"
 "PO-Revision-Date: 2023-12-24 09:06-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -35,7 +35,7 @@ msgstr "ਸੰਰਚਨਾ ਬਦਲਣ ਤੋਂ ਬਿਨਾਂ ਸ਼ੁਰੂ�
 #: main.cpp:36
 #, fuzzy, kde-format
 #| msgid "© 2023 KDE Community"
-msgid "© 2024 KDE Community"
+msgid "© 2026 KDE Community"
 msgstr "© 2023 ਕੇਡੀਈ ਕਮਿਊਨਟੀ"
 
 #: main.cpp:37

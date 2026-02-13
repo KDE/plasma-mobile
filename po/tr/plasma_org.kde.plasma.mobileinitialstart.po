@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-13 00:45+0000\n"
 "PO-Revision-Date: 2025-08-13 16:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -33,8 +33,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Yapılandırmayı değiştirmeden başlangıç sihirbazını açar"
 
 #: main.cpp:36
-#, kde-format
-msgid "© 2024 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2024 KDE Community"
+msgid "© 2026 KDE Community"
 msgstr "© 2024 KDE Topluluğu"
 
 #: main.cpp:37
