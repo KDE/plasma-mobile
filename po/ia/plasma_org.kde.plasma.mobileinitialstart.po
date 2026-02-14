@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-13 00:45+0000\n"
-"PO-Revision-Date: 2026-01-30 11:09+0100\n"
+"PO-Revision-Date: 2026-02-13 12:01+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -35,10 +35,9 @@ msgstr ""
 "configuration"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2024 KDE Community"
+#, kde-format
 msgid "© 2026 KDE Community"
-msgstr "© 2024 Communitate de KDE"
+msgstr "© 2026 Communitate de KDE"
 
 #: main.cpp:37
 #, kde-format

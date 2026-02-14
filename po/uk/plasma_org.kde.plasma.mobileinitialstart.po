@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2023, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-13 00:45+0000\n"
-"PO-Revision-Date: 2025-08-13 21:52+0300\n"
+"PO-Revision-Date: 2026-02-13 09:24+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Відкриває майстер початкового запуску без внесення змін до налаштувань"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2024 KDE Community"
+#, kde-format
 msgid "© 2026 KDE Community"
-msgstr "© Спільнота KDE, 2024"
+msgstr "© Спільнота KDE, 2026"
 
 #: main.cpp:37
 #, kde-format

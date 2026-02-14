@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "打开初始化向导，但不修改配置"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2024 KDE Community"
+#, kde-format
 msgid "© 2026 KDE Community"
-msgstr "© 2024 KDE Community"
+msgstr "© 2026 KDE Community"
 
 #: main.cpp:37
 #, kde-format
