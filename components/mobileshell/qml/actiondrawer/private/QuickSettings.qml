@@ -46,18 +46,9 @@ Item {
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int rowCount: {
         let totalRows = Math.ceil(quickSettingsCount / columnCount);
-
-        if (root.mode === QuickSettings.Pages) {
-            // portrait orientation
-            let maxRows = 5; // more than 5 is just disorienting
-            let targetRows = Math.floor(Window.height * 0.65 / rowHeight);
-            return Math.min(maxRows, Math.min(totalRows, targetRows));
-
-        } else if (root.mode === QuickSettings.ScrollView) {
-            // horizontal orientation
-            let targetRows = Math.floor(Window.height * 0.8 / rowHeight);
-            return Math.min(totalRows, targetRows);
-        }
+        let maxRows = 5; // more than 5 is just disorienting
+        let targetRows = Math.floor(Window.height * 0.65 / rowHeight);
+        return Math.min(maxRows, Math.min(totalRows, targetRows));
     }
 
     readonly property int pageSize: rowCount * columnCount
@@ -66,9 +57,7 @@ Item {
     readonly property alias brightnessPressedValue: brightnessItem.brightnessPressedValue
 
     function resetSwipeView() {
-        if (root.mode === QuickSettings.Pages) {
-            swipeView.currentIndex = 0;
-        }
+        swipeView.currentIndex = 0;
     }
 
     // return to the first page when the action drawer is closed
