@@ -69,7 +69,7 @@ Loader {
             anchors.leftMargin: root.leftMargin
             anchors.rightMargin: root.rightMargin
 
-            Kirigami.Theme.colorSet: Kirigami.Theme.Window
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
             Kirigami.Theme.inherit: false
 
             height: Math.min(parent.height - root.topMargin - root.bottomMargin, notificationsList.listView.listHeight + Kirigami.Units.gridUnit)
@@ -85,7 +85,7 @@ Loader {
                 notificationSettings: root.notificationSettings
                 panelType: MobileShell.PanelBackground.PanelType.Wallpaper
                 inLockScreen: true
-                topPadding: root.topPadding // Kirigami.Units.gridUnit
+                topPadding: root.topPadding
                 bottomPadding: Kirigami.Units.gridUnit
                 listView.interactive: !root.scrollLock && listView.listOverflowing
 
