@@ -37,7 +37,6 @@ RowLayout {
         delegate: RowLayout {
             id: batteryBase
 
-            width: (batteryBase.visible ? ((batteryLabel.visible ? batteryLabel.width : 0) + battery.width) + (ShellSettings.Settings.showBatteryPercentage ? root.elementSpacing : 0) : 0)
             Layout.fillHeight: false
             Layout.alignment: Qt.AlignVCenter
 
