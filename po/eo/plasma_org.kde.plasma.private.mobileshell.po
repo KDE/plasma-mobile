@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"POT-Creation-Date: 2026-02-16 00:48+0000\n"
 "PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -156,7 +156,7 @@ msgstr "agordi sonfluojn"
 msgid "Open audio settings"
 msgstr "Malfermi sonajn agordojn"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#: qml/statusbar/indicators/BatteryIndicator.qml:61
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

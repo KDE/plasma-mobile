@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"POT-Creation-Date: 2026-02-16 00:48+0000\n"
 "PO-Revision-Date: 2025-09-16 19:02+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -154,7 +154,7 @@ msgstr "اضبط تدفقات الصوت"
 msgid "Open audio settings"
 msgstr "افتح إعدادات الصوت"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#: qml/statusbar/indicators/BatteryIndicator.qml:61
 #, kde-format
 msgid "%1%"
 msgstr "%1٪"

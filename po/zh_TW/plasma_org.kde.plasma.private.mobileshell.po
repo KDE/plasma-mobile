@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"POT-Creation-Date: 2026-02-16 00:48+0000\n"
 "PO-Revision-Date: 2025-09-30 21:43+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -153,7 +153,7 @@ msgstr "設定音效串流"
 msgid "Open audio settings"
 msgstr "開啟音效設定"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#: qml/statusbar/indicators/BatteryIndicator.qml:61
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
