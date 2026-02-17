@@ -122,12 +122,12 @@ msgstr ""
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
-msgstr ""
+msgstr "Nejste připojeni k mobilní síti."
 
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr ""
+msgstr "Prosím, vložte kartu SIM do vašeho zařízení."
 
 #: modules/cellular/package/contents/ui/main.qml:61
 #, kde-format
