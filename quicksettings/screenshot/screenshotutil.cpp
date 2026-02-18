@@ -88,6 +88,7 @@ void ScreenShotUtil::takeScreenShot()
         // We don't have access to the ScreenPool so we'll just take the first screen
         QVariantMap options;
         options.insert(QStringLiteral("native-resolution"), true);
+        options.insert(QStringLiteral("hide-caller-windows"), false);
 
         auto pendingCall = m_screenshotInterface->CaptureScreen(qGuiApp->screens().constFirst()->name(), options, QDBusUnixFileDescriptor(lPipeFds[1]));
         close(lPipeFds[1]);
