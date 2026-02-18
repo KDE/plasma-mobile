@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-18 00:48+0000\n"
 "PO-Revision-Date: 2023-04-18 09:30+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,32 +18,32 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobile Data"
 
-#: contents/ui/main.qml:15 contents/ui/main.qml:23
+#: contents/ui/main.qml:23 contents/ui/main.qml:31
 #, kde-format
 msgid "Not Available"
 msgstr "Ne disponebla"
 
-#: contents/ui/main.qml:17
+#: contents/ui/main.qml:25
 #, kde-format
 msgid "APN needs to be configured in the settings"
 msgstr "APN bezonas agordon en la metoj"
 
-#: contents/ui/main.qml:19
+#: contents/ui/main.qml:27
 #, kde-format
 msgid "On"
 msgstr "En"
 
-#: contents/ui/main.qml:19
+#: contents/ui/main.qml:27
 #, kde-format
 msgid "Off"
 msgstr "El"
 
-#: contents/ui/main.qml:21
+#: contents/ui/main.qml:29
 #, kde-format
 msgid "No SIM inserted"
 msgstr "Neniu SIM enigita"

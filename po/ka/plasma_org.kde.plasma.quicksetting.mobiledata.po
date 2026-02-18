@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-18 00:48+0000\n"
 "PO-Revision-Date: 2022-12-28 08:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "Mobile Data"
 msgstr "მობილური ინტერნეტი"
 
-#: contents/ui/main.qml:15 contents/ui/main.qml:23
+#: contents/ui/main.qml:23 contents/ui/main.qml:31
 #, kde-format
 msgid "Not Available"
 msgstr "მიუწვდომელია"
 
-#: contents/ui/main.qml:17
+#: contents/ui/main.qml:25
 #, kde-format
 msgid "APN needs to be configured in the settings"
 msgstr "მობილური ინტერნეტისთვის APN-ის მორგება სავალდებულოა"
 
-#: contents/ui/main.qml:19
+#: contents/ui/main.qml:27
 #, kde-format
 msgid "On"
 msgstr "ჩართული"
 
-#: contents/ui/main.qml:19
+#: contents/ui/main.qml:27
 #, kde-format
 msgid "Off"
 msgstr "გამორთული"
 
-#: contents/ui/main.qml:21
+#: contents/ui/main.qml:29
 #, kde-format
 msgid "No SIM inserted"
 msgstr "SIM ბარათი არ დევს"

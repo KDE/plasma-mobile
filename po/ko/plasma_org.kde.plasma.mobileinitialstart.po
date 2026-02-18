@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-13 00:45+0000\n"
+"POT-Creation-Date: 2026-02-18 00:48+0000\n"
 "PO-Revision-Date: 2025-10-09 01:57+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -48,62 +48,68 @@ msgstr "Devin Lin"
 msgid "Edit APN"
 msgstr "APN 편집"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
+#: modules/cellular/package/contents/ui/main.qml:145
+#, kde-format
+msgid "Add APN"
+msgstr "APN 추가"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:60
 #, kde-format
 msgid "Name"
 msgstr "이름"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:43
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:64
 #, kde-format
 msgid "APN"
 msgstr "APN"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:68
 #, kde-format
 msgid "Username"
 msgstr "사용자 이름"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:53
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:72
 #, kde-format
 msgid "Password"
 msgstr "암호"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:76
 #, kde-format
 msgid "Network type"
 msgstr "네트워크 형식"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "4G/3G/2G"
 msgstr "4G/3G/2G"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "3G/2G"
 msgstr "3G/2G"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "2G"
 msgstr "2G"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 4G"
 msgstr "4G 전용"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 3G"
 msgstr "3G 전용"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 2G"
 msgstr "2G 전용"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Any"
 msgstr "임의"
@@ -113,7 +119,13 @@ msgstr "임의"
 msgid "Cellular"
 msgstr "셀룰러"
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:68
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "장치에 사용 가능한 모뎀이 없습니다."
+
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -122,41 +134,31 @@ msgstr ""
 "모바일 데이터를 사용하려면 APN을 설정하십시오. 자세한 사항은 통신사에 문의하"
 "십시오."
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:64
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "모바일 네트워크에 연결되어 있습니다."
 
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:66
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "장치에 SIM 카드를 삽입하십시오."
 
-#: modules/cellular/package/contents/ui/main.qml:61
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "장치에 사용 가능한 모뎀이 없습니다."
-
-#: modules/cellular/package/contents/ui/main.qml:73
+#: modules/cellular/package/contents/ui/main.qml:80
 #, kde-format
 msgid "Mobile Data"
 msgstr "모바일 데이터"
 
-#: modules/cellular/package/contents/ui/main.qml:116
+#: modules/cellular/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Edit"
 msgstr "편집"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:136
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
-
-#: modules/cellular/package/contents/ui/main.qml:133
-#, kde-format
-msgid "Add APN"
-msgstr "APN 추가"
 
 #: modules/finished/contents/ui/main.qml:13
 #, kde-format

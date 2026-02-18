@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-13 00:45+0000\n"
+"POT-Creation-Date: 2026-02-18 00:48+0000\n"
 "PO-Revision-Date: 2024-12-25 19:35+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -50,62 +50,68 @@ msgstr "डेविन् लिन्"
 msgid "Edit APN"
 msgstr "एपीएन सम्पादयतु"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
+#: modules/cellular/package/contents/ui/main.qml:145
+#, kde-format
+msgid "Add APN"
+msgstr "एपीएन योजयतु"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:60
 #, kde-format
 msgid "Name"
 msgstr "नामः"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:43
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:64
 #, kde-format
 msgid "APN"
 msgstr "ए.पी.एन"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:68
 #, kde-format
 msgid "Username"
 msgstr "उपयोक्तृनाम"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:53
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:72
 #, kde-format
 msgid "Password"
 msgstr "समाभाष्"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:76
 #, kde-format
 msgid "Network type"
 msgstr "संजालप्रकारः"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "4G/3G/2G"
 msgstr "४ग/३जी/२जी"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "3G/2G"
 msgstr "३ग/२जी"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "2G"
 msgstr "२ग"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 4G"
 msgstr "केवलं ४जी"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 3G"
 msgstr "केवलं 3G"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 2G"
 msgstr "केवलं २जी"
 
-#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Any"
 msgstr "कश्चित्‌"
@@ -115,7 +121,13 @@ msgstr "कश्चित्‌"
 msgid "Cellular"
 msgstr "कोशिकीय"
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:68
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "भवतः उपकरणे मोडेम् उपलब्धः नास्ति ।"
+
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -124,41 +136,31 @@ msgstr ""
 "कृपया मोबाईल-दत्तांशस्य कृते अधः स्वस्य APN विन्यस्यताम्, अधिकसूचनाः भवतः वाहकेन सह "
 "उपलभ्यन्ते।"
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:64
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "भवन्तः चलजालेन सह सम्बद्धाः सन्ति।"
 
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:66
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "कृपया स्वयन्त्रे सिमकार्डं सम्मिलितं कुर्वन्तु।"
 
-#: modules/cellular/package/contents/ui/main.qml:61
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "भवतः उपकरणे मोडेम् उपलब्धः नास्ति ।"
-
-#: modules/cellular/package/contents/ui/main.qml:73
+#: modules/cellular/package/contents/ui/main.qml:80
 #, kde-format
 msgid "Mobile Data"
 msgstr "मोबाइल डाटा"
 
-#: modules/cellular/package/contents/ui/main.qml:116
+#: modules/cellular/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Edit"
 msgstr "सम्पादन"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:136
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:101
 #, kde-format
 msgid "Delete"
 msgstr "लुप्"
-
-#: modules/cellular/package/contents/ui/main.qml:133
-#, kde-format
-msgid "Add APN"
-msgstr "एपीएन योजयतु"
 
 #: modules/finished/contents/ui/main.qml:13
 #, kde-format

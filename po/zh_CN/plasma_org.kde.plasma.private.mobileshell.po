@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 00:48+0000\n"
+"POT-Creation-Date: 2026-02-18 00:48+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -65,7 +65,7 @@ msgstr "开"
 msgid "Off"
 msgstr "关"
 
-#: qml/dataproviders/SignalStrengthInfo.qml:17
+#: qml/dataproviders/SignalStrengthInfo.qml:21
 #, kde-format
 msgid "SIM Locked"
 msgstr "SIM 卡已锁定"

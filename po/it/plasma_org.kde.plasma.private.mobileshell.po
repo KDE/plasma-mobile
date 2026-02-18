@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 00:48+0000\n"
+"POT-Creation-Date: 2026-02-18 00:48+0000\n"
 "PO-Revision-Date: 2025-09-23 18:45+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -64,7 +64,7 @@ msgstr "Acceso"
 msgid "Off"
 msgstr "Spento"
 
-#: qml/dataproviders/SignalStrengthInfo.qml:17
+#: qml/dataproviders/SignalStrengthInfo.qml:21
 #, kde-format
 msgid "SIM Locked"
 msgstr "SIM bloccata"
