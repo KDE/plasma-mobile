@@ -7,7 +7,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core as PlasmaCore
@@ -240,11 +239,11 @@ Item {
                         id: thumbSource
                         wId: delegate.window.internalId
                         anchors.fill: item
+                    }
 
-                        layer.enabled: true
-                        layer.effect: ColorOverlay {
-                            color: Qt.rgba(0, 0, 0, delegate.darken)
-                        }
+                    Rectangle {
+                        anchors.fill: item
+                        color: Qt.rgba(0, 0, 0, delegate.darken)
                     }
                 }
             }
