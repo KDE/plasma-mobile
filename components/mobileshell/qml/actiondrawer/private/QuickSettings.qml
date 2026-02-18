@@ -88,12 +88,28 @@ Item {
                 sourceModel: root.quickSettingsModel
                 pageSize: Math.min(root.pageSize, root.minimizedColumns) // HACK: just root.minimizedColumns appears to end up with an empty model?
             }
-            delegate: Loader {
+            delegate: MobileShell.BaseItem {
                 required property var modelData
 
-                asynchronous: true
+                implicitHeight: root.minimizedRowHeight
+                implicitWidth: root.minimizedColumnWidth
+                horizontalPadding: (width - Kirigami.Units.gridUnit * 3) / 2
+                verticalPadding: (height - Kirigami.Units.gridUnit * 3) / 2
 
-                sourceComponent: quickSettingComponentMinimized
+                contentItem: QuickSettingsMinimizedDelegate {
+                    restrictedPermissions: actionDrawer.restrictedPermissions
+
+                    text: modelData.text
+                    status: modelData.status
+                    icon: modelData.icon
+                    enabled: modelData.enabled
+                    settingsCommand: modelData.settingsCommand
+                    toggleFunction: modelData.toggle
+
+                    onCloseRequested: {
+                        actionDrawer.close();
+                    }
+                }
             }
         }
     }
@@ -137,12 +153,27 @@ Item {
                                 pageSize: root.pageSize
                                 firstItem: pageSize * flow.index
                             }
-                            delegate: Loader {
+                            delegate: MobileShell.BaseItem {
                                 required property var modelData
 
-                                asynchronous: true
+                                height: root.rowHeight
+                                width: root.columnWidth
+                                padding: Kirigami.Units.smallSpacing
 
-                                sourceComponent: quickSettingComponentFull
+                                contentItem: QuickSettingsFullDelegate {
+                                    restrictedPermissions: actionDrawer.restrictedPermissions
+
+                                    text: modelData.text
+                                    status: modelData.status
+                                    icon: modelData.icon
+                                    enabled: modelData.enabled
+                                    settingsCommand: modelData.settingsCommand
+                                    toggleFunction: modelData.toggle
+
+                                    onCloseRequested: {
+                                        actionDrawer.close();
+                                    }
+                                }
                             }
                         }
                     }
@@ -190,56 +221,4 @@ Item {
         }
     }
 
-    // Quick setting component minimized
-    Component {
-        id: quickSettingComponentMinimized
-
-        MobileShell.BaseItem {
-            implicitHeight: root.minimizedRowHeight
-            implicitWidth: root.minimizedColumnWidth
-            horizontalPadding: (width - Kirigami.Units.gridUnit * 3) / 2
-            verticalPadding: (height - Kirigami.Units.gridUnit * 3) / 2
-
-            contentItem: QuickSettingsMinimizedDelegate {
-                restrictedPermissions: actionDrawer.restrictedPermissions
-
-                text: modelData.text
-                status: modelData.status
-                icon: modelData.icon
-                enabled: modelData.enabled
-                settingsCommand: modelData.settingsCommand
-                toggleFunction: modelData.toggle
-
-                onCloseRequested: {
-                    actionDrawer.close();
-                }
-            }
-        }
-    }
-
-    // Quick setting component full
-    Component {
-        id: quickSettingComponentFull
-
-        MobileShell.BaseItem {
-            height: root.rowHeight
-            width: root.columnWidth
-            padding: Kirigami.Units.smallSpacing
-
-            contentItem: QuickSettingsFullDelegate {
-                restrictedPermissions: actionDrawer.restrictedPermissions
-
-                text: modelData.text
-                status: modelData.status
-                icon: modelData.icon
-                enabled: modelData.enabled
-                settingsCommand: modelData.settingsCommand
-                toggleFunction: modelData.toggle
-
-                onCloseRequested: {
-                    actionDrawer.close();
-                }
-            }
-        }
-    }
 }
