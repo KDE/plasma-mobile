@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:48+0000\n"
-"PO-Revision-Date: 2026-02-15 14:30+0200\n"
+"PO-Revision-Date: 2026-02-17 20:47+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -35,10 +35,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Открыть мастер начального запуска без изменения конфигурации"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2024 KDE Community"
+#, kde-format
 msgid "© 2026 KDE Community"
-msgstr "© Сообщество KDE, 2024"
+msgstr "© Сообщество KDE, 2026"
 
 #: main.cpp:37
 #, kde-format
