@@ -72,9 +72,14 @@ MouseArea {
             anchors.bottomMargin: root.verticalMargin
 
             // animation so that full opacity is only when the page is in view
-            readonly property real distanceToCenter: Math.abs(-folio.HomeScreenState.pageViewX - root.width * pageNum)
-            readonly property real positionX: root.width * index + folio.HomeScreenState.pageViewX
-            readonly property real progressToCenter: 1 - Math.min(1, Math.max(0, distanceToCenter / root.width))
+            readonly property real distanceToCenter: Math.abs(-folio.HomeScreenState.pageViewX - folio.HomeScreenState.pageWidth * pageNum)
+            readonly property real positionX: folio.HomeScreenState.pageWidth * index + folio.HomeScreenState.pageViewX
+            readonly property real progressToCenter: 1 - Math.min(1, Math.max(0, distanceToCenter / folio.HomeScreenState.pageWidth))
+
+            // Use layer to render all page items together in one texture
+            layer.enabled: Math.abs(index - folio.HomeScreenState.currentPage) <= 1
+                           && !folio.HomeScreenState.isDraggingDelegate
+            layer.smooth: true
 
             visible: opacity > 0
             opacity: {
