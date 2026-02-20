@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-20 00:47+0000\n"
 "PO-Revision-Date: 2022-12-20 10:51+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -27,12 +27,12 @@ msgstr "Schermafdruk"
 msgid "Tap to screenshot"
 msgstr "Tik om schermafdruk te maken"
 
-#: screenshotutil.cpp:139
+#: screenshotutil.cpp:140
 #, kde-format
 msgid "New Screenshot"
 msgstr "Nieuwe schermafdruk"
 
-#: screenshotutil.cpp:141
+#: screenshotutil.cpp:142
 #, kde-format
 msgid "New screenshot saved to %1"
 msgstr "Nieuwe schermafdruk opgeslagen naar %1"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-20 00:47+0000\n"
 "PO-Revision-Date: 2023-04-01 19:22-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -27,12 +27,12 @@ msgstr "ਸਕਰੀਨਸ਼ਾਟ"
 msgid "Tap to screenshot"
 msgstr "ਸਕਰੀਨਸ਼ਾਟ ਲਈ ਛੂਹੋ"
 
-#: screenshotutil.cpp:139
+#: screenshotutil.cpp:140
 #, kde-format
 msgid "New Screenshot"
 msgstr "ਨਵਾਂ ਸਕਰੀਨਸ਼ਾਟ"
 
-#: screenshotutil.cpp:141
+#: screenshotutil.cpp:142
 #, kde-format
 msgid "New screenshot saved to %1"
 msgstr "ਨਵਾਂ ਸਕਰੀਨਸ਼ਾਟ %1 ਲਈ ਸੰਭਾਲਿਆ"

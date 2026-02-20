@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-20 00:47+0000\n"
 "PO-Revision-Date: 2023-01-27 12:29+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -27,12 +27,12 @@ msgstr "Instantanee de schermo"
 msgid "Tap to screenshot"
 msgstr "Tocca per Captura de schermo"
 
-#: screenshotutil.cpp:139
+#: screenshotutil.cpp:140
 #, kde-format
 msgid "New Screenshot"
 msgstr "Nove instantaneo de schermo"
 
-#: screenshotutil.cpp:141
+#: screenshotutil.cpp:142
 #, kde-format
 msgid "New screenshot saved to %1"
 msgstr "Nove instantaneo de schermo salveguardate a %1"

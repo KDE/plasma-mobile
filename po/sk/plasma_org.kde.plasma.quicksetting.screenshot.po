@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.screenshot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-20 00:47+0000\n"
 "PO-Revision-Date: 2023-07-21 15:56+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -26,12 +26,12 @@ msgstr "Snímka obrazovky"
 msgid "Tap to screenshot"
 msgstr "Ťuknutím urobiť snímku obrazovky"
 
-#: screenshotutil.cpp:139
+#: screenshotutil.cpp:140
 #, kde-format
 msgid "New Screenshot"
 msgstr "Nová snímka obrazovky"
 
-#: screenshotutil.cpp:141
+#: screenshotutil.cpp:142
 #, kde-format
 msgid "New screenshot saved to %1"
 msgstr "Nová snímka obrazovky uložená do %1"

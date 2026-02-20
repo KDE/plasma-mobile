@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-02-20 00:47+0000\n"
 "PO-Revision-Date: 2025-11-22 12:09+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -27,12 +27,12 @@ msgstr "Skjámynd"
 msgid "Tap to screenshot"
 msgstr "Ýttu til að taka skjámynd"
 
-#: screenshotutil.cpp:139
+#: screenshotutil.cpp:140
 #, kde-format
 msgid "New Screenshot"
 msgstr "Ný skjámynd"
 
-#: screenshotutil.cpp:141
+#: screenshotutil.cpp:142
 #, kde-format
 msgid "New screenshot saved to %1"
 msgstr "Ný skjámynd vistuð í %1"
