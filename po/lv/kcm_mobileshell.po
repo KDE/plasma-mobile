@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-08-30 17:00+0300\n"
-"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2026-03-03 13:06+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -49,16 +49,13 @@ msgid "Auto Hide Panels"
 msgstr "Automātiski slēpt paneļus"
 
 #: ui/main.qml:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "When active, status and navigation panels will auto hide, allowing "
-#| "applications to fill the entire screen space."
+#, kde-format
 msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Ja aktīvs, sistēma automātiski slēps statusa un navigācijas paneļus, ļaujot "
-"programmām aizpildīt visu ekrānu"
+"Automātiski slēpt statusa un navigācijas paneļus, lai ļautu programmām "
+"vienmēr būt pilnekrāna režīmā."
 
 #: ui/main.qml:69
 #, kde-format
@@ -68,7 +65,7 @@ msgstr "Pamodināt ar diviem pieskārieniem"
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "Veiciet dubultu uzsitienu, lai pamodinātu izslēgtu ekrānu."
 
 #: ui/main.qml:81
 #, kde-format
@@ -226,15 +223,14 @@ msgid "Show"
 msgstr "Rādīt"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Ātrie iestatījumi"
+msgstr "Ātro iestatījumu kolonnas"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Maksimālais kolonnu skaits ainavas orientācijā."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
