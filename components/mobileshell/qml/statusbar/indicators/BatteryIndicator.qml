@@ -10,6 +10,7 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.4
 
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kitemmodels
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PW
@@ -26,13 +27,21 @@ RowLayout {
         id: batteryRepeater
 
         spacing: 0
-        model: MobileShell.BatteryInfo.batteries
+        model: filterModel
         orientation: ListView.Horizontal
 
         Layout.alignment: Qt.AlignVCenter
         Layout.preferredWidth: contentItem.childrenRect.width
         Layout.fillHeight: true
         Layout.fillWidth: false
+
+        KSortFilterProxyModel {
+            id: filterModel
+            sourceModel: MobileShell.BatteryInfo.batteries
+
+            filterRoleName: "Type"
+            filterString: "Battery" // only show internal batteries
+        }
 
         delegate: RowLayout {
             id: batteryBase
@@ -41,8 +50,6 @@ RowLayout {
             Layout.alignment: Qt.AlignVCenter
 
             height: batteryRepeater.height
-
-            visible: Type === "Battery" // only show the internal battery
 
             PW.BatteryIcon {
                 id: battery

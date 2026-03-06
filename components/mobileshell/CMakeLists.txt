@@ -162,6 +162,7 @@ target_link_libraries(mobileshellplugin
         KF6::Service
         KF6::Package
         KF6::ConfigGui
+        KF6::ItemModels
         LayerShellQt::Interface
 )
 
