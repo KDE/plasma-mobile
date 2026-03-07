@@ -14,7 +14,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 /**
  * Quick settings elements layout, change the height to clip.

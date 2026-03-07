@@ -9,7 +9,7 @@ import QtQuick.Controls as Controls
 import QtQuick.Layouts
 import QtQuick.Effects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell as MobileShell
 

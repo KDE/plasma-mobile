@@ -7,7 +7,7 @@ import QtQuick.Controls 2.3 as Controls
 import Qt5Compat.GraphicalEffects
 import QtQuick.Effects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.kquickcontrolsaddons 2.0
 

@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Window 2.2
 import Qt5Compat.GraphicalEffects
 
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.clock
 import org.kde.plasma.private.mobileshell as MobileShell

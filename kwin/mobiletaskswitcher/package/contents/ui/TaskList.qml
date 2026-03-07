@@ -7,7 +7,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.kwin 3.0 as KWinComponents

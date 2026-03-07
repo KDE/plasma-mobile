@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root

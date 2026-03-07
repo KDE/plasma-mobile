@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.private.mobileshell as MobileShell

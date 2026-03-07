@@ -4,7 +4,7 @@
 import QtQuick 2.0
 
 import org.kde.plasma.plasmoid
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Kirigami.Page {
     id: root

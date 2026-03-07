@@ -10,7 +10,7 @@ import QtQuick 2.15
 import org.kde.plasma.core as PlasmaCore
 
 import org.kde.kquickcontrolsaddons 2.0
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState

@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.plasma.plasmoid
 import org.kde.newstuff 1.62 as NewStuff
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 
 ColumnLayout {

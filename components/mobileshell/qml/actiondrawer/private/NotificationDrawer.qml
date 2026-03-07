@@ -11,7 +11,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.clock
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root

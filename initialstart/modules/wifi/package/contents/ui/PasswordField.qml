@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 import QtQuick 2.15
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.networkmanagement as PlasmaNM
 
 Kirigami.PasswordField {
