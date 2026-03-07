@@ -6,7 +6,7 @@ import QtQuick.Effects
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell

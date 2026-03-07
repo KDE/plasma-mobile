@@ -9,7 +9,7 @@ import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import "./private"
 import "./delegate"

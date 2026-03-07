@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager as Notifications
 import org.kde.plasma.private.mobileshell as MobileShell

@@ -7,7 +7,7 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Controls as Controls
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 import org.kde.plasma.private.mobileshell.wallpaperimageplugin as WallpaperImagePlugin
 import org.kde.plasma.private.mobileshell as MobileShell

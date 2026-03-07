@@ -6,7 +6,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import QtQuick.Effects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 import org.kde.plasma.private.mobileshell.state as MobileShellState

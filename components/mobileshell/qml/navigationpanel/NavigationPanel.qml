@@ -10,7 +10,7 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Effects
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.mobileshell.state as MobileShellState

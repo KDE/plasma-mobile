@@ -6,7 +6,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Effects
 
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.core as PlasmaCore

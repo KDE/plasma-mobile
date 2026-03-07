@@ -9,7 +9,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.2 as Controls
 
 import org.kde.kcmutils as KCM
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard 1 as FormCard
 
 KCM.SimpleKCM {

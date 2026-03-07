@@ -11,7 +11,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.plasma.private.mobileshell as MobileShell
 
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root

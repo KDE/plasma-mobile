@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.15
 import QtQuick.Shapes 1.8
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root
