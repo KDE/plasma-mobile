@@ -35,12 +35,26 @@ Window {
     property alias actionDrawer: drawer
     property alias state: drawer.state
 
-    visible: drawer.intendedToBeVisible
+    visible: true
 
     color: "transparent"
 
-    // set input to transparent when closing to prevent window from taking unwanted touch inputs
+    // Set input to transparent when closing to prevent window from taking unwanted touch inputs
     onStateChanged: MobileShell.ShellUtil.setInputTransparent(window, state === "close")
+
+    // Preload and render content to avoid lag on first open
+    Component.onCompleted: {
+        preloadTimer.start();
+    }
+
+    Timer {
+        id: preloadTimer
+        interval: 1
+        onTriggered: {
+            // Set window visibility binding after preloading content to the action drawer state
+            window.visible = Qt.binding(() => drawer.intendedToBeVisible);
+        }
+    }
 
     onVisibleChanged: {
         if (visible) {
