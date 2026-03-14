@@ -1,21 +1,21 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2026 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-08-29 09:38+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-03-13 11:39+0100\n"
+"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -30,7 +30,7 @@ msgstr "Obecné"
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "Vibrace shellu"
 
 #: ui/main.qml:41
 #, kde-format
@@ -40,12 +40,12 @@ msgstr "Animace"
 #: ui/main.qml:42
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
+msgstr "Pokud je tato funkce vypnutá, animace budou co nejvíce omezeny."
 
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Automatické skrytí panelů"
 
 #: ui/main.qml:56
 #, kde-format
@@ -53,16 +53,19 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
+"Automaticky skrýt stavový a navigační panel, aby aplikace mohly být vždy "
+"zobrazeny na celou obrazovku."
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "Probudit dvojitým klepnutím"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
+"Když je obrazovka vypnutá, dvakrát klepněte, aby se zařízení probudilo."
 
 #: ui/main.qml:81
 #, kde-format
@@ -78,73 +81,75 @@ msgstr "Datum se stavovém řádku"
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
+"Pokud je tato funkce zapnutá, datum se zobrazí vedle hodin ve stavovém "
+"panelu."
 
 #: ui/main.qml:101
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Procento nabití baterie"
 
 #: ui/main.qml:102
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Zobrazit procento nabití baterie ve stavovém panelu."
 
 #: ui/main.qml:116
 #, kde-format
 msgid "Status Bar Size"
-msgstr ""
+msgstr "Velikost stavového panelu"
 
 #: ui/main.qml:117
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "Velikost horního panelu (vyžaduje restart)."
 
 #: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "Mini"
 
 #: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Malá"
 
 #: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Normální"
 
 #: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "Velká"
 
 #: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Velmi velká"
 
 #: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Akční nabídka"
 
 #: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "Připnutý režim"
 
 #: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "Rozvinutý režim"
 
 #: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
 #, kde-format
@@ -154,28 +159,28 @@ msgstr "Rychlé nastavení"
 #: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Horní levý režim nabídky"
 
 #: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Režim při otevírání z levého horního rohu."
 
 #: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Horní pravý režim nabídky"
 
 #: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Režim při otevírání z pravého horního rohu."
 
 #: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Zkratky zámku displeje"
 
 # žádné parametry funkce v inspektoru funkcí
 #: ui/main.qml:206
@@ -188,7 +193,7 @@ msgstr "Nic"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Baterka"
 
 #: ui/main.qml:208
 #, kde-format
@@ -200,13 +205,13 @@ msgstr "Fotoaparát"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Levé tlačítko"
 
 #: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Pravé tlačítko"
 
 #: ui/QuickSettingsForm.qml:56
 #, kde-format
@@ -223,33 +228,34 @@ msgstr "Zobrazit"
 #: ui/QuickSettingsForm.qml:80
 #, kde-format
 msgid "Quick Settings Columns"
-msgstr ""
+msgstr "Rychlého nastavení sloupců"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Maximální počet sloupců v orientaci na šířku."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
+"Přizpůsobte pořadí rychlých nastavení v rozevíracím panelu a skryjte je."
 
 #: ui/QuickSettingsForm.qml:117
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Vypnuto rychlé nastavení"
+msgstr "Vypnuté rychlé nastavení"
 
 #: ui/QuickSettingsForm.qml:122
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "Znovu povolit dříve zakázané rychlé nastavení."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "Povolení vibrací v shellu."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
@@ -259,7 +265,7 @@ msgstr "Délka vibrace"
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "Délka vibrací v shellu."
 
 #: ui/VibrationForm.qml:43
 #, kde-format
@@ -285,3 +291,4 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"Vibrace klávesnice se ovládají samostatně v modulu nastavení klávesnice."
