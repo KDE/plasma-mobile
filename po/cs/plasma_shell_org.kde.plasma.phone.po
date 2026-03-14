@@ -1,21 +1,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2022, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2022, 2024, 2026 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-14 00:43+0000\n"
-"PO-Revision-Date: 2024-08-20 15:24+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-03-13 11:49+0100\n"
+"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -32,7 +32,7 @@ msgstr "Otevřít %1"
 #: contents/configuration/AppletConfiguration.qml:90
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr ""
+msgstr "Nastavit %1"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -40,21 +40,23 @@ msgstr "Tapeta"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "Změnit domovskou obrazovku"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "Vybrat domovskou obrazovku"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
 msgid "Change homescreen to %1?"
-msgstr ""
+msgstr "Změnit domovskou obrazovku na %1?"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
 msgstr ""
+"Nastavení vaší aktuální domovské obrazovky se uloží a obnoví se, pokud se "
+"vrátíte zpět."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
@@ -86,4 +88,4 @@ msgstr "Špatný PIN"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Indikátor zaměření panelu"
