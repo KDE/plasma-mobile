@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-16 03:02+0000\n"
-"PO-Revision-Date: 2026-03-13 11:47+0100\n"
+"PO-Revision-Date: 2026-03-17 10:25+0100\n"
 "Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -73,7 +73,7 @@ msgstr "Odstranit"
 #: qml/HomeScreenPage.qml:481
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Uvolněte pro nastavení, přetáhněte pro přesunuti"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
