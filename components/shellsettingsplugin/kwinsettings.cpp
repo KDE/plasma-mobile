@@ -6,6 +6,9 @@
 
 #include "kwinsettings.h"
 
+#include <QDBusConnection>
+#include <QDBusMessage>
+
 const QString CONFIG_FILE = QStringLiteral("kwinrc");
 const QString OVERLAY_CONFIG_FILE = QStringLiteral("plasma-mobile/kwinrc");
 const QString WAYLAND_CONFIG_GROUP = QStringLiteral("Wayland");
@@ -55,5 +58,9 @@ void KWinSettings::setScreenEdgeTouchTarget(int target)
         auto group = KConfigGroup{m_overlayConfig, SCREEN_EDGES_CONFIG_GROUP};
         group.writeEntry("TouchTarget", target, KConfigGroup::Notify);
         m_overlayConfig->sync();
+
+        // Notify KWin to reload its config so screen edges are updated live
+        QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"));
+        QDBusConnection::sessionBus().send(message);
     }
 }
