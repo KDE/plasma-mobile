@@ -55,7 +55,7 @@ msgstr "هل أغيّر  الشاشة الرئيسة إلى %1؟"
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
-msgstr "تُحفظ إعدادات شاشتك الرئيسية الحالية، وسوف تُستعاد إذا عدت إليها."
+msgstr "تُحفظ إعدادات شاشتك الرئيسة الحالية، وسوف تُستعاد إذا عدت إليها."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
