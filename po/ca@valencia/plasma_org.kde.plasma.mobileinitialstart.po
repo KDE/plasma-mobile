@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:48+0000\n"
-"PO-Revision-Date: 2026-02-13 08:52+0100\n"
+"PO-Revision-Date: 2026-03-29 13:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -247,7 +247,7 @@ msgstr "Hora i data"
 #: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr "Trieu la zona horària i el format de l'hora."
+msgstr "Trieu el fus horari i el format de l'hora."
 
 #: modules/time/package/contents/ui/main.qml:50
 #, kde-format
