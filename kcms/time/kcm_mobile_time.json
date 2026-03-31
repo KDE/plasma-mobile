@@ -3,8 +3,8 @@
     "KPlugin": {
         "Description": "Timezone, Date Display",
         "Description[ar]": "المنطقة الزمنية,عرض التاريخ",
-        "Description[ca@valencia]": "Zona horària, Mostra la data",
-        "Description[ca]": "Zona horària, Mostra la data",
+        "Description[ca@valencia]": "Fus horari, Mostra la data",
+        "Description[ca]": "Fus horari, Mostra la data",
         "Description[cs]": "Zobrazení data a časového pásma",
         "Description[de]": "Zeitzone, Datumsanzeige",
         "Description[en_GB]": "Timezone, Date Display",
