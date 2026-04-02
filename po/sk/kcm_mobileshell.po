@@ -64,12 +64,12 @@ msgstr "Prepínač úloh"
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr ""
+msgstr "Zobraziť náhľady aplikácií"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr ""
+msgstr "Vypnutie tohto môže pomôcť zlepšiť výkon."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
@@ -118,7 +118,7 @@ msgstr "Režim pri otvorení z pravého horného rohu."
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr ""
+msgstr "Prispôsobte poradie rýchlych nastavení v rozbaľovacom paneli."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
@@ -128,12 +128,12 @@ msgstr "Či majú byť v shelli povolené vibrácie."
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr ""
+msgstr "Intenzita vibrácií"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr ""
+msgstr "Aké intenzívne majú byť vibrácie rozhrania."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format

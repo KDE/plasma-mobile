@@ -23,14 +23,14 @@ msgstr "Snímka obrazovky"
 #: package/contents/ui/main.qml:12
 #, kde-format
 msgid "Tap to screenshot"
-msgstr ""
+msgstr "Ťuknite pre snímku obrazovky"
 
 #: screenshotutil.cpp:139
 #, kde-format
 msgid "New Screenshot"
-msgstr ""
+msgstr "Nová snímka obrazovky"
 
 #: screenshotutil.cpp:141
 #, kde-format
 msgid "New screenshot saved to %1"
-msgstr ""
+msgstr "Nová snímka obrazovky uložená do %1"
