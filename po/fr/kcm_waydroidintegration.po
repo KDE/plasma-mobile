@@ -4,15 +4,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:45+0000\n"
-"PO-Revision-Date: 2026-01-05 09:14+0100\n"
+"PO-Revision-Date: 2026-04-03 19:30+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: \n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: ui/main.qml:19
 #, kde-format
@@ -121,7 +121,7 @@ msgstr "Arrêter la session"
 #: ui/WaydroidConfigurationForm.qml:46
 #, kde-format
 msgid "Certify my device for Google Play Protect"
-msgstr "Certifier mon périphérique pour Google Play Protect"
+msgstr "Certifier mon périphérique pour GooglePlay Protect"
 
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
@@ -212,7 +212,7 @@ msgstr "%1 Ko / s"
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
 msgid "Google Play Protect configuration"
-msgstr "Configuration de Google Play Protect"
+msgstr "Configuration de GooglePlay Protect"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
 #, kde-format
@@ -232,11 +232,11 @@ msgid ""
 "the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
 "Lorsque vous lancez Waydroid avec GAPPS pour la première fois, vous serez "
-"informé que le périphérique n'est pas certifié pour Google Play Protect. "
-"Pour auto-certifier votre périphérique, veuillez coller l'identifiant "
-"Android dans le champ du site Internet. Ensuite, veuillez laisser quelques "
-"minutes aux services de Google pour prendre en compte la modification et "
-"enfin, redémarrer Waydroid."
+"informé que le périphérique n'est pas certifié pour GooglePlay Protect. Pour "
+"auto-certifier votre périphérique, veuillez coller l'identifiant Android "
+"dans le champ du site Internet. Ensuite, veuillez laisser quelques minutes "
+"aux services de Google pour prendre en compte la modification et enfin, "
+"redémarrer Waydroid."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
