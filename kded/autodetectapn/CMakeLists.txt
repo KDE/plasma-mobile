@@ -20,3 +20,10 @@ target_link_libraries(kded_plasma_mobile_autodetect_apn PRIVATE
     KF6::ModemManagerQt
     QCoro::DBus
 )
+
+ecm_qt_declare_logging_category(kded_plasma_mobile_autodetect_apn
+    HEADER autodetectapn_debug.h
+    IDENTIFIER AUTODETECTAPN_LOG
+    CATEGORY_NAME org.kde.plasma.autodetectapn
+    DESCRIPTION "Plasma Mobile Autodetect APNs"
+)

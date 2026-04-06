@@ -27,10 +27,9 @@
 #include <ModemManagerQt/Modem3Gpp>
 
 #include "autodetectapn.h"
+#include "autodetectapn_debug.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(StartFactory, "kded_plasma_mobile_autodetectapn.json", registerPlugin<AutoDetectAPN>();)
-
-static const QLoggingCategory LOGGING_CATEGORY("plasma-mobile-autodetectapn");
 
 AutoDetectAPN::AutoDetectAPN(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
@@ -41,11 +40,11 @@ AutoDetectAPN::AutoDetectAPN(QObject *parent, const QList<QVariant> &)
 QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
 {
     if (!KRuntimePlatform::runtimePlatform().contains(QStringLiteral("phone"))) {
-        qCDebug(LOGGING_CATEGORY) << "Not running APN autodetection because this is not a Plasma Mobile session...";
+        qCDebug(AUTODETECTAPN_LOG) << "Not running APN autodetection because this is not a Plasma Mobile session...";
         co_return;
     }
 
-    qCDebug(LOGGING_CATEGORY) << "Running APN autodetection...";
+    qCDebug(AUTODETECTAPN_LOG) << "Running APN autodetection...";
 
     for (ModemManager::ModemDevice::Ptr mmDevice : ModemManager::modemDevices()) {
         ModemManager::Modem::Ptr mmModem = mmDevice->modemInterface();
@@ -65,7 +64,7 @@ QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
         // TODO: currently just check if there are any NM connections, this doesn't work if the user swapped out their SIM.
         //       we need something that detects when this occurs
         if (!nmModem->availableConnections().empty()) {
-            qCDebug(LOGGING_CATEGORY) << "Modem" << nmModem->uni() << "already has a connection configured";
+            qCDebug(AUTODETECTAPN_LOG) << "Modem" << nmModem->uni() << "already has a connection configured";
             continue;
         }
 
@@ -78,7 +77,7 @@ QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
         // Autodetect an APN
         std::optional<APNEntry> detectedAPNOpt = findAPN(operatorCode, gid1, spn, imsi);
         if (detectedAPNOpt == std::nullopt || (*detectedAPNOpt).apn.isEmpty()) {
-            qCDebug(LOGGING_CATEGORY) << "Could not find an APN for the SIM with code" << operatorCode;
+            qCDebug(AUTODETECTAPN_LOG) << "Could not find an APN for the SIM with code" << operatorCode;
             continue;
         }
 
@@ -115,9 +114,9 @@ QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
         }
 
         if (!reply.isValid()) {
-            qCWarning(LOGGING_CATEGORY) << "Error adding autodetected connection:" << reply.error().message();
+            qCWarning(AUTODETECTAPN_LOG) << "Error adding autodetected connection:" << reply.error().message();
         } else {
-            qCDebug(LOGGING_CATEGORY) << "Successfully autodetected" << detectedAPN.carrier << "with APN" << detectedAPN.apn << ".";
+            qCDebug(AUTODETECTAPN_LOG) << "Successfully autodetected" << detectedAPN.carrier << "with APN" << detectedAPN.apn << ".";
         }
     }
 }
