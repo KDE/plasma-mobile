@@ -26,4 +26,5 @@ ecm_qt_declare_logging_category(kded_plasma_mobile_autodetect_apn
     IDENTIFIER AUTODETECTAPN_LOG
     CATEGORY_NAME org.kde.plasma.autodetectapn
     DESCRIPTION "Plasma Mobile Autodetect APNs"
+    EXPORT PLASMA_MOBILE
 )

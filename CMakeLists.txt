@@ -170,3 +170,9 @@ if (INSTALL_SYSTEMD_SERVICE)
         DESTINATION ${KDE_INSTALL_SYSTEMDUNITDIR}/system
     )
 endif()
+
+ecm_qt_install_logging_categories(
+    EXPORT PLASMA_MOBILE
+    FILE plasmamobile.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)

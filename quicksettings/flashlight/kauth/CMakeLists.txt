@@ -24,4 +24,5 @@ ecm_qt_declare_logging_category(flashlighthelper
     DEFAULT_SEVERITY Warning
     CATEGORY_NAME org.kde.plasma.mobileshell.flashlighthelper
     DESCRIPTION "Helper for Flashlight for some actions need root access"
+    EXPORT PLASMA_MOBILE
 )

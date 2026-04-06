@@ -65,6 +65,7 @@ ecm_qt_declare_logging_category(waydroidintegrationplugin
     DEFAULT_SEVERITY Warning
     CATEGORY_NAME org.kde.plasma.private.mobileshell.waydroidintegrationplugin
     DESCRIPTION "Plugin to add Waydroid Integration on Plasma"
+    EXPORT PLASMA_MOBILE
 )
 
 add_subdirectory(kauth)
