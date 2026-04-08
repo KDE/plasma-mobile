@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
@@ -25,7 +25,7 @@ msgstr "Priečinok"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Všeobecné"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -55,47 +55,47 @@ msgstr "Aplikácie"
 #: qml/settings/ConfigGeneral.qml:17
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Homescreen Settings"
 
 #: qml/settings/ConfigGeneral.qml:26
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Homescreen"
 
 #: qml/settings/ConfigGeneral.qml:32
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "Wallpaper blur effect"
 
 #: qml/settings/ConfigGeneral.qml:35
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Žiadne"
 
 #: qml/settings/ConfigGeneral.qml:36
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Simple"
 
 #: qml/settings/ConfigGeneral.qml:37
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Full"
 
 #: qml/settings/ConfigGeneral.qml:54
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Double tap to lock device"
 
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr ""
+msgstr "Wallpapers"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Nastavenia"
