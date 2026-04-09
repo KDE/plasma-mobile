@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -44,7 +44,7 @@ msgstr "Ak je toto vypnuté, animácie sa čo najviac znížia."
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Auto Hide Panels"
 
 #: ui/main.qml:56
 #, kde-format
@@ -52,81 +52,83 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "Double Tap to Wakeup"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "When the screen is off, double tap to wakeup the device."
 
 #: ui/main.qml:81
 #, kde-format
 msgid "Status Bar"
-msgstr ""
+msgstr "Stavový riadok"
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "Date in status bar"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
-msgstr ""
+msgstr "If on, date bude shown next to the clock in the status bar."
 
 #: ui/main.qml:101
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Battery Percentage"
 
 #: ui/main.qml:102
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Show battery percentage in the status bar."
 
 #: ui/main.qml:116
 #, kde-format
 msgid "Status Bar Size"
-msgstr ""
+msgstr "Status Bar Size"
 
 #: ui/main.qml:117
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "Size of the top panel (needs restart)."
 
 #: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "Tiny"
 
 #: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Small"
 
 #: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Normálna"
 
 #: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "Large"
 
 #: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Very Large"
 
 #: ui/main.qml:140
 #, kde-format
@@ -174,60 +176,59 @@ msgstr "Režim pri otvorení z pravého horného rohu."
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Lock Screen Shortcuts"
 
 #: ui/main.qml:206
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Žiadne"
 
 #: ui/main.qml:207
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Flashlight"
 
 #: ui/main.qml:208
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Fotoaparát"
 
 #: ui/main.qml:212
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Left button"
 
 #: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Right button"
 
 #: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "Skryť"
 
 #: ui/QuickSettingsForm.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "Zobraziť"
 
 #: ui/QuickSettingsForm.qml:80
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
 msgstr "Rýchle nastavenia"
 
 #: ui/QuickSettingsForm.qml:81
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "Maximum počet columns in landscape orientation."
 
 #: ui/QuickSettingsForm.qml:94
 #, kde-format
@@ -297,7 +298,6 @@ msgstr ""
 #~ msgstr "Či sa má skryť navigačný panel."
 
 #, fuzzy
-#~| msgid "Whether to hide the navigation panel."
 #~ msgid ""
 #~ "Whether to always show the keyboard toggle button on the navigation panel."
 #~ msgstr "Či sa má skryť navigačný panel."
