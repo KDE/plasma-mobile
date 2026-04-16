@@ -26,6 +26,7 @@
   <name xml:lang="ko">KDE Plasma 모바일 셸</name>
   <name xml:lang="nl">KDE Plasma Mobiel-shell</name>
   <name xml:lang="pt-BR">Shell do KDE Plasma Mobile</name>
+  <name xml:lang="sk">Prostredie KDE Plasma Mobile</name>
   <name xml:lang="sl">KDE Plasma Mobile Shell</name>
   <name xml:lang="sv">KDE Plasma mobilskal</name>
   <name xml:lang="tr">KDE Plasma Cep Kabuğu</name>
@@ -47,6 +48,7 @@
   <summary xml:lang="ko">KDE의 모바일 장치를 위한 Plasma 셸</summary>
   <summary xml:lang="nl">Plasma-shell van KDE voor apparaten met mobiele vormfactor</summary>
   <summary xml:lang="pt-BR">Shell do Plasma do KDE para dispositivos móveis</summary>
+  <summary xml:lang="sk">Prostredie KDE Plasma pre mobilné zariadenia</summary>
   <summary xml:lang="sl">KDE's Plasma shell za mobilne naprave</summary>
   <summary xml:lang="sv">KDE:s Plasma skal för mobilapparater</summary>
   <summary xml:lang="tr">Taşınabilir biçimdeki aygıtlar için KDE’nin Plasma kabuğu</summary>
@@ -77,6 +79,7 @@
       <caption xml:lang="ko">모바일 화면에서 사용 중인 Plasma 모바일 셸</caption>
       <caption xml:lang="nl">Plasma Mobiel-shell wordt gebruikt op schermen met een mobiele vormfactor</caption>
       <caption xml:lang="pt-BR">O shell do Plasma Mobile está sendo usado em telas de fator de formato móvel</caption>
+      <caption xml:lang="sk">Prostredie Plasma Mobile používané na obrazovke mobilného zariadenia</caption>
       <caption xml:lang="sl">Plasma Mobile shell uporabljen za zaslon oblikovan za mobilno napravo</caption>
       <caption xml:lang="sv">Plasma mobilskal använt på mobilskärm</caption>
       <caption xml:lang="tr">Plasma Cep kabuğu, taşınabilir biçimli bir aygıtta kullanılırken</caption>
