@@ -37,6 +37,7 @@
   <summary xml:lang="ar">صدفة بلازما كيدي للأجهزة المحمولة</summary>
   <summary xml:lang="ca">Espai de treball del Plasma de KDE per a dispositius de factor de forma mòbil</summary>
   <summary xml:lang="ca-valencia">Espai de treball Plasma de KDE per a dispositius de factor de forma mòbil</summary>
+  <summary xml:lang="cs">Prostředí Plasma od KDE pro zařízení s mobilním rozhraním</summary>
   <summary xml:lang="es">Entorno de Plasma de KDE para dispositivos con factor de forma móvil</summary>
   <summary xml:lang="eu">Mugikor forma faktorea duten gailuetarako KDEren Plasma Oskola</summary>
   <summary xml:lang="fi">KDE Plasman käyttöliittymä mobiililaitteille</summary>
@@ -68,6 +69,7 @@
       <caption xml:lang="ar">تُستخدم صدفة بلازما الجوال على شاشة الجوال</caption>
       <caption xml:lang="ca">Espai de treball del Plasma Mobile que es fa servir en una pantalla de factor de forma mòbil</caption>
       <caption xml:lang="ca-valencia">Espai de treball Plasma Mobile que s'utilitza en una pantalla de factor de forma mòbil</caption>
+      <caption xml:lang="cs">Prostředí Plasma Mobile používané na displeji mobilního zařízení</caption>
       <caption xml:lang="es">El entorno Plasma Mobile en uso en una pantalla con factor de forma móvil</caption>
       <caption xml:lang="eu">Mugikor forma faktoreko pantaila batean Plasma Mugikor oskola erabiltzen</caption>
       <caption xml:lang="fi">Plasma Mobilen käyttöliittymä käytössä mobiilinäytöllä</caption>
