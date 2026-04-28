@@ -163,7 +163,7 @@ Item {
                 Layout.fillWidth: true
 
                 PlasmaComponents.Label {
-                    text: Qt.formatDate(clockSource.dateTime, "ddd. MMMM d")
+                    text: clockSource.dateTime.toLocaleDateString(Qt.locale(), Locale.LongFormat)
                     color: Kirigami.Theme.disabledTextColor
                     font.pixelSize: root.smallerTextPixelSize
                 }

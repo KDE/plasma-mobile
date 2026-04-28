@@ -85,7 +85,7 @@ SimpleKCM {
             FormCard.FormButtonDelegate {
                 id: dateSelect
                 text: i18n("System Date")
-                description: Qt.formatDate(kcm.currentDate, Locale.LongFormat)
+                description: kcm.currentDate.toLocaleDateString(Qt.locale(), Locale.LongFormat)
                 icon.name: "view-calendar"
                 enabled: !ntpCheckBox.checked
                 onClicked: {

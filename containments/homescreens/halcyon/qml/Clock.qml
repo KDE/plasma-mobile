@@ -40,7 +40,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         horizontalAlignment: Text.AlignLeft
-        text: Qt.formatDate(clockSource.dateTime, "ddd, MMM d")
+        text: clockSource.dateTime.toLocaleDateString(Qt.locale(), Locale.LongFormat)
         color: "white"
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter
@@ -54,5 +54,4 @@ ColumnLayout {
     Clock {
         id: clockSource
     }
-
 }

@@ -147,7 +147,6 @@ Item {
                 }
             }
         }
-
     }
 
     // time and date displayed in landscape mode
@@ -180,7 +179,7 @@ Item {
 
         PlasmaComponents.Label {
             id: date
-            text: Qt.formatDate(clockSource.dateTime, "ddd MMMM d")
+            text: clockSource.dateTime.toLocaleDateString(Qt.locale(), Locale.LongFormat)
             verticalAlignment: Qt.AlignTop
             color: Kirigami.Theme.disabledTextColor
 
