@@ -58,7 +58,7 @@ Item {
             }
         }
         PC3.Label {
-            text: Qt.formatDate(clockSource.dateTime, "dddd, MMMM d")
+            text: clockSource.dateTime.toLocaleDateString(Qt.locale(), Locale.LongFormat)
             color: "white"
             opacity: 0.9
 

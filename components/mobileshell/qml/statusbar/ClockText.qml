@@ -36,7 +36,7 @@ RowLayout {
         id: date
         visible: ShellSettings.Settings.dateInStatusBar && !root.showSecondRow
 
-        text: Qt.formatDate(clockSource.dateTime, "ddd. MMMM d")
+        text: clockSource.dateTime.toLocaleDateString(Qt.locale(), Locale.LongFormat)
         color: Kirigami.Theme.textColor
         verticalAlignment: Qt.AlignVCenter
         font.pixelSize: fontPixelSize
