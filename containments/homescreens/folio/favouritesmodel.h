@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include <QObject>
-
 #include <QAbstractListModel>
 #include <QList>
 #include <QObject>
