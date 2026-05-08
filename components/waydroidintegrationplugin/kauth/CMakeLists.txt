@@ -20,7 +20,6 @@ kauth_install_actions(org.kde.plasma.mobileshell.waydroidhelper waydroidhelper.a
 ecm_qt_declare_logging_category(waydroidhelper
     HEADER waydroidhelper_debug.h
     IDENTIFIER WAYDROIDHELPER
-    DEFAULT_SEVERITY Warning
     CATEGORY_NAME org.kde.plasma.mobileshell.waydroidhelper
     DESCRIPTION "Helper for Waydroid for some actions need root access"
 )

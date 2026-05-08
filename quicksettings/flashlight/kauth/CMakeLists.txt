@@ -21,7 +21,6 @@ kauth_install_actions(org.kde.plasma.mobileshell.flashlighthelper flashlighthelp
 ecm_qt_declare_logging_category(flashlighthelper
     HEADER flashlighthelper_debug.h
     IDENTIFIER FLASHLIGHTHELPER
-    DEFAULT_SEVERITY Warning
     CATEGORY_NAME org.kde.plasma.mobileshell.flashlighthelper
     DESCRIPTION "Helper for Flashlight for some actions need root access"
     EXPORT PLASMA_MOBILE

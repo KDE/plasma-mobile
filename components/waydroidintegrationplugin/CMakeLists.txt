@@ -62,7 +62,6 @@ ecm_finalize_qml_module(waydroidintegrationplugin)
 ecm_qt_declare_logging_category(waydroidintegrationplugin
     HEADER waydroidintegrationplugin_debug.h
     IDENTIFIER WAYDROIDINTEGRATIONPLUGIN
-    DEFAULT_SEVERITY Warning
     CATEGORY_NAME org.kde.plasma.private.mobileshell.waydroidintegrationplugin
     DESCRIPTION "Plugin to add Waydroid Integration on Plasma"
     EXPORT PLASMA_MOBILE
