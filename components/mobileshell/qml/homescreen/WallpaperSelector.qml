@@ -26,8 +26,8 @@ Controls.Drawer {
         wallpapersView.forceActiveFocus()
     }
 
-    implicitWidth: Kirigami.Units.gridUnit * 10
-    implicitHeight: Kirigami.Units.gridUnit * 8
+    implicitWidth: Kirigami.Units.gridUnit * 12
+    implicitHeight: Kirigami.Units.gridUnit * 10
     width: imageWallpaperDrawer.horizontal ? implicitWidth : parent.width
     height: imageWallpaperDrawer.horizontal ? parent.height : implicitHeight
 
