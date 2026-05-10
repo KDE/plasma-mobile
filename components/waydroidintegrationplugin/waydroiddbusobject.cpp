@@ -404,7 +404,7 @@ void WaydroidDBusObject::refreshSupportsInfo()
         }
 
         fetchSessionInfo().then([this](const QString &output) {
-            if (!output.contains("WayDroid is not initialized")) {
+            if (!output.contains("is not initialized", Qt::CaseInsensitive)) {
                 m_status = Initialized;
             } else {
                 m_status = NotInitialized;
