@@ -141,6 +141,17 @@ Controls.Drawer {
                     fillMode: Image.PreserveAspectCrop
                     source: model.preview
                     sourceSize: Qt.size(width * 3, height * 3)
+                    layer.enabled: true
+                    layer.effect: MultiEffect {
+                        maskEnabled: true
+                        maskSource: ShaderEffectSource {
+                            sourceItem: Rectangle {
+                                width: walliePreview.width
+                                height: walliePreview.height
+                                radius: Kirigami.Units.cornerRadius
+                            }
+                        }
+                    }
                 }
             }
             onClicked: {
