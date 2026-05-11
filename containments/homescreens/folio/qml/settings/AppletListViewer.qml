@@ -134,6 +134,7 @@ Loader {
         WidgetExplorer {
             id: widgetExplorer
             containment: Plasmoid
+            showNotSupportedWidgets: false
 
             onShouldClose: root.requestClose()
         }
