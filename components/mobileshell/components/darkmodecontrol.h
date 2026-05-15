@@ -8,6 +8,7 @@
 #pragma once
 
 #include <QObject>
+#include <KConfigWatcher>
 #include <qqmlintegration.h>
 
 #include "colorssettings.h"
@@ -24,11 +25,12 @@ public:
 
     [[nodiscard]] bool darkMode() const;
     void setDarkMode(const bool darkMode);
-    
+
 Q_SIGNALS:
     void darkModeChanged();
 
 private:
+    KConfigWatcher::Ptr m_globalConfigWatcher;
     ColorsSettings *m_colorsSettings;
     bool m_darkMode;
 };

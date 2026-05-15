@@ -11,16 +11,23 @@
 
 using namespace Qt::StringLiterals;
 
+#define GROUP_NAME u"General"_s
+#define GROUP_ENTRY u"ColorScheme"_s
+
 DarkModeControl::DarkModeControl(QObject *parent)
     : QObject(parent)
     , m_colorsSettings(ColorsSettings::self())
 {
+    m_globalConfigWatcher = KConfigWatcher::create(m_colorsSettings->sharedConfig());
+
     // set property initially
     m_darkMode = m_colorsSettings->colorScheme() == "BreezeDark";
 
-    connect(m_colorsSettings, &ColorsSettings::colorSchemeChanged, this, [this] {
-        m_darkMode = m_colorsSettings->colorScheme() == "BreezeDark";
-        Q_EMIT darkModeChanged();
+    connect(m_globalConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &) {
+        if (group.name() == GROUP_NAME) {
+            m_darkMode = group.readEntry(GROUP_ENTRY) == "BreezeDark";
+            Q_EMIT darkModeChanged();
+        }
     });
 }
 

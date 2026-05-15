@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "florian.richer@protonmail.com",
+                "Name": "Florian RICHER"
+            }
+        ],
+        "Description": "Dark Mode quick setting for Plasma Mobile",
+        "Icon": "lighttable",
+        "Id": "org.kde.plasma.quicksetting.darkmode",
+        "License": "GPL-2.0+",
+        "Name": "Dark Mode",
+        "Website": "https://kde.org"
+    }
+}
