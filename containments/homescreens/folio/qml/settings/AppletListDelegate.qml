@@ -84,53 +84,65 @@ Item {
 
         Item {
             id: iconWidget
-            Layout.fillWidth: true
-            Layout.maximumWidth: delegate.width
-            Layout.preferredHeight: Kirigami.Units.iconSizes.large
-            Layout.preferredWidth: Kirigami.Units.iconSizes.large
-            Layout.alignment: Qt.AlignBottom
+            Layout.preferredWidth: Kirigami.Units.iconSizes.enormous
+            Layout.preferredHeight: Kirigami.Units.iconSizes.enormous
+            Layout.alignment: Qt.AlignHCenter
 
             Kirigami.Icon {
                 anchors.centerIn: parent
                 source: model.decoration
                 visible: model.screenshot == ""
-                implicitWidth: Kirigami.Units.iconSizes.large
-                implicitHeight: Kirigami.Units.iconSizes.large
+                implicitWidth: Kirigami.Units.iconSizes.huge
+                implicitHeight: Kirigami.Units.iconSizes.huge
             }
             Image {
                 anchors.centerIn: parent
                 fillMode: Image.PreserveAspectFit
                 source: model.screenshot
-                width: Kirigami.Units.iconSizes.large
-                height: Kirigami.Units.iconSizes.large
+                width: Kirigami.Units.iconSizes.huge
+                height: Kirigami.Units.iconSizes.huge
             }
         }
 
-        PC3.Label {
-            id: heading
+        Item {
             Layout.fillWidth: true
-            Layout.maximumWidth: delegate.width
-            Layout.alignment: Qt.AlignCenter
-            text: model.name
-            elide: Text.ElideRight
-            wrapMode: Text.Wrap
-            maximumLineCount: 2
-            horizontalAlignment: Text.AlignHCenter
-            font.weight: Font.Bold
-        }
+            Layout.fillHeight: true
 
-        PC3.Label {
-            Layout.fillWidth: true
-            Layout.maximumWidth: delegate.width
-            Layout.alignment: Qt.AlignTop
-            // otherwise causes binding loop due to the way the Plasma sets the height
-            height: implicitHeight
-            text: model.isSupported ? model.description : model.unsupportedMessage
-            font.pointSize: Kirigami.Theme.smallFont.pointSize
-            wrapMode: Text.Wrap
-            elide: Text.ElideRight
-            maximumLineCount: heading.lineCount === 1 ? 3 : 2
-            horizontalAlignment: Text.AlignHCenter
+            ColumnLayout {
+                anchors.fill: parent
+                
+                PC3.Label {
+                    id: heading
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: delegate.width
+                    text: model.name
+                    elide: Text.ElideRight
+                    wrapMode: Text.Wrap
+                    maximumLineCount: 2
+                    horizontalAlignment: Text.AlignHCenter
+                    font.weight: Font.Bold
+                }
+    
+                PC3.Label {
+                    id: description
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: delegate.width
+                    // otherwise causes binding loop due to the way the Plasma sets the height
+                    height: implicitHeight
+                    text: model.isSupported ? model.description : model.unsupportedMessage
+                    font.pointSize: Kirigami.Theme.smallFont.pointSize
+                    wrapMode: Text.Wrap
+                    elide: Text.ElideRight
+                    maximumLineCount: heading.lineCount === 1 ? 3 : 2
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                // Required to align heading and description at the top
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true                    
+                }
+            }
         }
     }
 }
