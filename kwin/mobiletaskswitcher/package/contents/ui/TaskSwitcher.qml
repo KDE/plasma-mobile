@@ -85,11 +85,12 @@ FocusScope {
 
     Keys.onEscapePressed: hide();
 
-    Component.onCompleted: {
-        initialSetup();
-    }
-
     function initialSetup(): void {
+        closeAnim.stop();
+        container.opacity = 1;
+        closeAllButton.closeRequested = false;
+        oldTasksCount = tasksCount;
+
         taskSwitcherHelpers.cancelAnimations();
         state.updateWasInActiveTask(KWinComponents.Workspace.activeWindow);
 
@@ -102,12 +103,14 @@ FocusScope {
         taskSwitcherHelpers.hasVibrated = false;
 
         taskSwitcherHelpers.closingFactor = 1;
+        taskSwitcherHelpers.closingScalingFactor = 1;
 
         taskSwitcherHelpers.taskSwitchCanLaunch = false;
         taskSwitchCanLaunchTimer.restart()
 
         taskList.taskOffsetEasing = Easing.InOutQuart;
         taskList.homeTouchPositionX = 0;
+        flickable.resetPosition();
 
         backgroundColorOpacityAn.enabled = false;
         backgroundColorOpacity = state.wasInActiveTask ? 1 : 0;
@@ -160,6 +163,11 @@ FocusScope {
 
     Connections {
         target: root.state
+
+        function onActivated(): void {
+            root.tasksModel.refresh();
+            root.initialSetup();
+        }
 
         // task scrub mode allows scrubbing through a number of tasks with a mostly horizontal motion
         function taskScrubMode(): void {
@@ -827,4 +835,3 @@ FocusScope {
         }
     }
 }
-
