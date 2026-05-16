@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/plasma_lookandfeel_org.kde."
-"breeze.mobile.pot\n"
-"X-Crowdin-File-ID: 42631\n"
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/plasma_lookandfeel_org."
+"kde.breeze.mobile.pot\n"
+"X-Crowdin-File-ID: 51802\n"
 
 #: contents/logout/Logout.qml:141
 #, kde-format
