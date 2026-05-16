@@ -43,6 +43,12 @@ void TaskFilterModel::setWindowModel(TaskModel *taskModel)
     sort(0);
 }
 
+void TaskFilterModel::refresh()
+{
+    invalidateFilter();
+    sort(0);
+}
+
 QString TaskFilterModel::screenName() const
 {
     return m_output ? m_output->name() : QString();

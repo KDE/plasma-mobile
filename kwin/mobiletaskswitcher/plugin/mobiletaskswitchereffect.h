@@ -144,6 +144,7 @@ private Q_SLOTS:
 
 private:
     void invokeEffect();
+    void resetGestureState();
 
     bool m_gestureEnabled{false};
     EffectTouchBorderState *m_effectState{nullptr};
@@ -154,8 +155,8 @@ private:
     Status m_status = Status::Inactive;
     bool m_gestureInProgress = false;
 
-    int m_currentTaskIndex;
-    int m_initialTaskIndex;
+    int m_currentTaskIndex = 0;
+    int m_initialTaskIndex = 0;
 
     void clearVelocityFilter();
     void calculateFilteredVelocity(qreal primaryPosition, qreal orthogonalPosition);
@@ -163,22 +164,24 @@ private:
 
     // velocities in (logical) pixels/msec
     QElapsedTimer m_frameTimer;
+    qreal m_previousPrimaryDelta = 0;
+    qreal m_previousOrthogonalDelta = 0;
     qreal m_flickVelocityThreshold = 0.5 * 0.5; // squared because total velocity is kept as a square
     qreal m_filterTimeConstant = 0.03; // time constant of velocity filter
 
-    qreal m_touchXPosition;
-    qreal m_touchYPosition;
+    qreal m_touchXPosition = 0;
+    qreal m_touchYPosition = 0;
     qreal m_xVelocity = 0;
     qreal m_yVelocity = 0;
     // Using the square of velocity for the total (2-axis) because we just need it
     // for one threshold comparison and we skip having to calculate the square root
-    qreal m_totalSquaredVelocity;
+    qreal m_totalSquaredVelocity = 0;
 
     // Positions of the task switcher effect itself
     qreal m_xPosition = 0;
     qreal m_yPosition = 0;
 
-    bool m_wasInActiveTask;
+    bool m_wasInActiveTask = false;
 
     QElapsedTimer *m_doubleClickTimer;
     qint64 getDoubleClickInterval() const

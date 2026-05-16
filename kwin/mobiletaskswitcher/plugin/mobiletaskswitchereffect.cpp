@@ -35,8 +35,11 @@ void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
     m_border = new EffectTouchBorder{m_effectState};
     m_taskModel = new TaskModel{parent};
     m_effect = parent;
+    m_effect->setViewCachingEnabled(true);
 
     // Connect signals
+    connect(m_effect, &QuickSceneEffect::activated, this, &MobileTaskSwitcherState::activated);
+    connect(m_effect, &QuickSceneEffect::deactivated, this, &MobileTaskSwitcherState::deactivated);
     connect(this, &MobileTaskSwitcherState::gestureEnabledChanged, this, &MobileTaskSwitcherState::refreshBorders);
     connect(m_border, &EffectTouchBorder::touchPositionChanged, this, &MobileTaskSwitcherState::processTouchPositionChanged);
     connect(this, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
@@ -223,13 +226,10 @@ void MobileTaskSwitcherState::restartDoubleClickTimer()
 
 void MobileTaskSwitcherState::calculateFilteredVelocity(qreal primaryDelta, qreal orthogonalDelta)
 {
-    static qreal prevPrimaryDelta = 0;
-    static qreal prevOrthogonalDelta = 0;
-
     qint64 frameTime = 0;
     if (!m_frameTimer.isValid()) {
-        prevPrimaryDelta = 0;
-        prevOrthogonalDelta = 0;
+        m_previousPrimaryDelta = primaryDelta;
+        m_previousOrthogonalDelta = orthogonalDelta;
         m_frameTimer.start();
         return;
     }
@@ -239,10 +239,10 @@ void MobileTaskSwitcherState::calculateFilteredVelocity(qreal primaryDelta, qrea
         return;
     }
 
-    qreal framePrimaryDelta = primaryDelta - prevPrimaryDelta;
-    qreal frameOrthogonalDelta = orthogonalDelta - prevOrthogonalDelta;
-    prevPrimaryDelta = primaryDelta;
-    prevOrthogonalDelta = orthogonalDelta;
+    qreal framePrimaryDelta = primaryDelta - m_previousPrimaryDelta;
+    qreal frameOrthogonalDelta = orthogonalDelta - m_previousOrthogonalDelta;
+    m_previousPrimaryDelta = primaryDelta;
+    m_previousOrthogonalDelta = orthogonalDelta;
 
     // Implements an exponentially weighted moving average (EWMA) filter (= exponential smoothing)
     // Smoothing factor is approximated each event to achieve a chosen filter time constant
@@ -251,6 +251,24 @@ void MobileTaskSwitcherState::calculateFilteredVelocity(qreal primaryDelta, qrea
     m_xVelocity = m_xVelocity + smoothingFactor * (frameOrthogonalDelta / frameTime - m_xVelocity);
     m_totalSquaredVelocity = m_yVelocity * m_yVelocity + m_xVelocity * m_xVelocity;
     Q_EMIT velocityChanged();
+}
+
+void MobileTaskSwitcherState::clearVelocityFilter()
+{
+    m_frameTimer.invalidate();
+    m_previousPrimaryDelta = 0;
+    m_previousOrthogonalDelta = 0;
+    m_xVelocity = 0;
+    m_yVelocity = 0;
+    m_totalSquaredVelocity = 0;
+    Q_EMIT velocityChanged();
+}
+
+void MobileTaskSwitcherState::resetGestureState()
+{
+    m_touchXPosition = 0;
+    m_touchYPosition = 0;
+    clearVelocityFilter();
 }
 
 void MobileTaskSwitcherState::processTouchPositionChanged(qreal primaryDelta, qreal orthogonalDelta)
@@ -289,6 +307,7 @@ void MobileTaskSwitcherState::activate()
         return;
     }
 
+    resetGestureState();
     m_effectState->setInProgress(false);
     invokeEffect();
 }
@@ -339,6 +358,8 @@ void MobileTaskSwitcherState::setDBusState(bool active)
 
 void MobileTaskSwitcherState::invokeEffect()
 {
+    m_shutdownTimer->stop();
+    resetGestureState();
     setInitialTaskIndex(currentTaskIndex()); // TODO! this is only until the crashing bug is fixed and recency sorting is in
     m_effect->setRunning(true);
     setDBusState(true);

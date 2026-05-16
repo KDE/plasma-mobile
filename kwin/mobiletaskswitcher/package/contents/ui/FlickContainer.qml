@@ -25,10 +25,16 @@ Flickable {
 
     readonly property real startContentX: (taskSwitcherHelpers.taskWidth + taskSwitcherHelpers.taskSpacing) * tasksCount
     property bool movingRight: false // TODO needed for flickable not flicking workaround
+    property bool resettingPosition: false
 
     // update position from horizontal flickable movement
     property real oldContentX
     onContentXChanged: {
+        if (resettingPosition) {
+            oldContentX = contentX;
+            return;
+        }
+
         // disable if animations are running to prevent bugs
         if (taskSwitcherHelpers.currentlyBeingClosed) {return}
 
@@ -43,6 +49,8 @@ Flickable {
 
     onMovementStarted: {
         if (taskSwitcherHelpers.currentlyBeingClosed) {return}
+        oldContentX = contentX;
+        movingRight = false;
         taskSwitcherHelpers.cancelAnimations();
     }
     onMovementEnded: {
@@ -63,6 +71,8 @@ Flickable {
     onDraggingChanged: {
         if (taskSwitcherHelpers.currentlyBeingClosed) {return}
         if (dragging) {
+            oldContentX = contentX;
+            movingRight = false;
             taskSwitcherHelpers.cancelAnimations();
         } else {
             resetPosition();
@@ -70,7 +80,14 @@ Flickable {
     }
 
     function resetPosition(): void {
+        resettingPosition = true;
+        cancelFlick();
         oldContentX = startContentX;
         contentX = startContentX;
+        movingRight = false;
+        Qt.callLater(() => {
+            oldContentX = contentX;
+            resettingPosition = false;
+        });
     }
 }
