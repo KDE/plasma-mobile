@@ -30,6 +30,8 @@ public:
     TaskModel *windowModel() const;
     void setWindowModel(KWin::TaskModel *taskModel);
 
+    Q_INVOKABLE void refresh();
+
     QString screenName() const;
     void setScreenName(const QString &screenName);
 
