@@ -6,8 +6,6 @@ set(prepareplugin_SRCS
     prepareutil.cpp
 )
 
-kconfig_add_kcfg_files(prepareplugin_SRCS colorssettings.kcfgc GENERATE_MOC)
-
 add_library(prepareplugin ${prepareplugin_SRCS})
 
 target_link_libraries(prepareplugin

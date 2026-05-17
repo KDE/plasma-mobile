@@ -14,12 +14,8 @@
 
 PrepareUtil::PrepareUtil(QObject *parent)
     : QObject{parent}
-    , m_colorsSettings{new ColorsSettings(this)}
 {
     initKScreen([]() { });
-
-    // set property initially
-    m_usingDarkTheme = m_colorsSettings->colorScheme() == "BreezeDark";
 }
 
 void PrepareUtil::initKScreen(std::function<void()> callback)
@@ -98,22 +94,4 @@ void PrepareUtil::setScalingInternal(int scaling)
 QStringList PrepareUtil::scalingOptions()
 {
     return {"50%", "75%", "100%", "125%", "150%", "175%", "200%", "225%", "250%", "275%", "300%"};
-}
-
-bool PrepareUtil::usingDarkTheme() const
-{
-    return m_usingDarkTheme;
-}
-
-void PrepareUtil::setUsingDarkTheme(bool usingDarkTheme)
-{
-    // use plasma-apply-colorscheme since it has logic for notifying the shell of changes
-    if (usingDarkTheme) {
-        QProcess::execute("plasma-apply-colorscheme", {QStringLiteral("BreezeDark")});
-    } else {
-        QProcess::execute("plasma-apply-colorscheme", {QStringLiteral("BreezeLight")});
-    }
-
-    m_usingDarkTheme = usingDarkTheme;
-    Q_EMIT usingDarkThemeChanged();
 }

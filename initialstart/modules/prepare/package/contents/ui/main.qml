@@ -9,6 +9,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
 import org.kde.plasma.private.mobileshell.screenbrightnessplugin as ScreenBrightness
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.plasma.mobileinitialstart.initialstart
 
@@ -134,10 +135,10 @@ InitialStartModule {
                     FormCard.FormSwitchDelegate {
                         id: darkThemeSwitch
                         text: i18n("Dark Theme")
-                        checked: Prepare.PrepareUtil.usingDarkTheme
+                        checked: MobileShell.DarkModeControl.darkMode
                         onCheckedChanged: {
-                            if (checked !== Prepare.PrepareUtil.usingDarkTheme) {
-                                Prepare.PrepareUtil.usingDarkTheme = checked;
+                            if (checked !== MobileShell.DarkModeControl.darkMode) {
+                                MobileShell.DarkModeControl.darkMode = checked;
                             }
                         }
                     }

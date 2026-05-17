@@ -8,14 +8,11 @@
 
 #include <kscreen/config.h>
 
-#include "colorssettings.h"
-
 class PrepareUtil : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int scaling READ scaling WRITE setScaling NOTIFY scalingChanged);
     Q_PROPERTY(QStringList scalingOptions READ scalingOptions CONSTANT);
-    Q_PROPERTY(bool usingDarkTheme READ usingDarkTheme WRITE setUsingDarkTheme NOTIFY usingDarkThemeChanged)
 
 public:
     PrepareUtil(QObject *parent = nullptr);
@@ -24,9 +21,6 @@ public:
     void setScaling(int scaling);
 
     QStringList scalingOptions();
-
-    bool usingDarkTheme() const;
-    void setUsingDarkTheme(bool usingDarkTheme);
 
 Q_SIGNALS:
     void scalingChanged();
@@ -37,10 +31,8 @@ private:
     void setScalingInternal(int scaling);
 
     int m_scaling;
-    bool m_usingDarkTheme;
 
     int m_output{0};
 
-    ColorsSettings *m_colorsSettings;
     KScreen::ConfigPtr m_config;
 };
