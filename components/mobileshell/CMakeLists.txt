@@ -5,6 +5,7 @@ ecm_add_qml_module(mobileshellplugin URI org.kde.plasma.private.mobileshell GENE
 
 set(mobileshellplugin_SRCS
     shellutil.cpp
+    components/darkmodecontrol.cpp
     components/direction.cpp
     components/direction.h
     components/swipearea.cpp
@@ -14,6 +15,9 @@ set(mobileshellplugin_SRCS
     masklayer/masklayer.cpp
     masklayer/maskmanager.cpp
 )
+
+kconfig_add_kcfg_files(mobileshellplugin_SRCS colorssettings.kcfgc GENERATE_MOC)
+
 target_include_directories(mobileshellplugin PRIVATE components)
 target_include_directories(mobileshellplugin PRIVATE notifications)
 target_include_directories(mobileshellplugin PRIVATE masklayer)

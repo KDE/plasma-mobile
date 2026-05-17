@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+  SPDX-License-Identifier: LGPL-2.0-or-later
+-->
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="kdeglobals"/>
+  <group name="General">
+    <entry name="colorScheme" key="ColorScheme" type="String">
+      <label>Color scheme name</label>
+      <default>BreezeLight</default>
+    </entry>
+    <entry name="accentColor" key="AccentColor" type="Color">
+      <label>Accent color</label>
+      <default>transparent</default>
+    </entry>
+    <entry name="lastUsedCustomAccentColor" key="LastUsedCustomAccentColor" type="Color">
+      <label>The last used custom accent color before user switched to wallpaper generated color or default color</label>
+      <default>transparent</default>
+    </entry>
+    <entry name="accentColorFromWallpaper" key="accentColorFromWallpaper" type="Bool">
+      <label>Whether accent color from wallpaper should be applied</label>
+      <default>false</default>
+    </entry>
+  </group>
+</kcfg>
