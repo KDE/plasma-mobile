@@ -3,8 +3,7 @@
 
 #include "screenrotationutil.h"
 
-#include <fcntl.h>
-#include <unistd.h>
+#include "../../components/rotationplugin/sensorproxy.h"
 
 #include <kscreen/configmonitor.h>
 #include <kscreen/getconfigoperation.h>
@@ -12,15 +11,14 @@
 #include <kscreen/setconfigoperation.h>
 
 #include <QDebug>
-#include <QOrientationSensor>
 #include <QTimer>
 
 ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
     : QObject{parent}
     , m_config{nullptr}
-    , m_sensor{new QOrientationSensor(this)}
+    , m_sensorProxy{new SensorProxy(this)}
 {
-    connect(m_sensor, &QOrientationSensor::activeChanged, this, &ScreenRotationUtil::availableChanged);
+    connect(m_sensorProxy, &SensorProxy::availableChanged, this, &ScreenRotationUtil::availableChanged);
 
     connect(KScreen::ConfigMonitor::instance(), &KScreen::ConfigMonitor::configurationChanged, this, [this]() {
         Q_EMIT autoScreenRotationEnabledChanged();
@@ -78,7 +76,7 @@ void ScreenRotationUtil::setAutoScreenRotationEnabled(bool value)
 
 bool ScreenRotationUtil::isAvailable()
 {
-    return m_sensor->connectToBackend();
+    return m_sensorProxy->available();
 }
 
 void ScreenRotationUtil::actuallySetAutoScreenRotationEnabled(bool value)

@@ -4,6 +4,8 @@
 set(screenrotationplugin_SRCS
     screenrotationplugin.cpp
     screenrotationutil.cpp
+    ../../components/rotationplugin/sensorproxy.cpp
+    ../../components/rotationplugin/sensorproxy.h
 )
 
 add_library(screenrotationplugin ${screenrotationplugin_SRCS})
@@ -13,7 +15,6 @@ target_link_libraries(screenrotationplugin
     Qt::Qml
     Qt::Quick
     Qt::DBus
-    Qt::Sensors
     KF6::CoreAddons
     KF6::ConfigCore
     KF6::ConfigGui
@@ -29,5 +30,3 @@ install(TARGETS screenrotationplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/p
 install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/screenrotation)
 
 plasma_install_package(package org.kde.plasma.quicksetting.screenrotation quicksettings)
-
-

@@ -7,11 +7,12 @@
 #pragma once
 
 #include <QObject>
-#include <QOrientationSensor>
 
 #include <kscreen/config.h>
 #include <qqmlregistration.h>
 #include <qtmetamacros.h>
+
+class SensorProxy;
 
 class RotationUtil : public QObject
 {
@@ -50,10 +51,10 @@ private:
     void retrieveKScreen();
 
     bool m_showRotationButton{false};
-    KScreen::Output::Rotation m_rotateTo;
-    Rotation m_deviceRotation;
-    Rotation m_currentRotation;
+    KScreen::Output::Rotation m_rotateTo{KScreen::Output::Rotation::None};
+    Rotation m_deviceRotation{Rotation::Portrait};
+    Rotation m_currentRotation{Rotation::Portrait};
 
     KScreen::ConfigPtr m_config{nullptr};
-    QOrientationSensor *m_sensor{nullptr};
+    SensorProxy *m_sensorProxy{nullptr};
 };

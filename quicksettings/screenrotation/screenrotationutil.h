@@ -4,9 +4,10 @@
 #pragma once
 
 #include <QObject>
-#include <QOrientationSensor>
 
 #include <kscreen/config.h>
+
+class SensorProxy;
 
 class ScreenRotationUtil : public QObject
 {
@@ -30,7 +31,5 @@ private:
     void actuallySetAutoScreenRotationEnabled(bool value);
 
     KScreen::ConfigPtr m_config{nullptr};
-    QOrientationSensor *m_sensor{nullptr};
-
-    bool m_available{false};
+    SensorProxy *m_sensorProxy{nullptr};
 };

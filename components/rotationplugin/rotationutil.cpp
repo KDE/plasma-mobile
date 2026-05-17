@@ -6,10 +6,9 @@
 
 #include "rotationutil.h"
 
-#include <QDBusConnection>
-#include <QDBusPendingReply>
+#include "sensorproxy.h"
+
 #include <QDebug>
-#include <QGuiApplication>
 
 #include <kscreen/configmonitor.h>
 #include <kscreen/getconfigoperation.h>
@@ -17,21 +16,19 @@
 #include <kscreen/setconfigoperation.h>
 #include <qtmetamacros.h>
 
-KScreen::Output::Rotation mapReadingOrientation(QOrientationReading::Orientation orientation)
+KScreen::Output::Rotation mapReadingOrientation(SensorProxy::Orientation orientation)
 {
     switch (orientation) {
-        case QOrientationReading::Orientation::TopUp:
-            return KScreen::Output::Rotation::None;
-        case QOrientationReading::Orientation::TopDown:
-            return KScreen::Output::Rotation::Inverted;
-        case QOrientationReading::Orientation::LeftUp:
-            return KScreen::Output::Rotation::Left;
-        case QOrientationReading::Orientation::RightUp:
-            return KScreen::Output::Rotation::Right;
-        case QOrientationReading::Orientation::FaceUp:
-        case QOrientationReading::Orientation::FaceDown:
-        case QOrientationReading::Orientation::Undefined:
-            return KScreen::Output::Rotation::None;
+    case SensorProxy::Orientation::TopUp:
+        return KScreen::Output::Rotation::None;
+    case SensorProxy::Orientation::TopDown:
+        return KScreen::Output::Rotation::Inverted;
+    case SensorProxy::Orientation::LeftUp:
+        return KScreen::Output::Rotation::Left;
+    case SensorProxy::Orientation::RightUp:
+        return KScreen::Output::Rotation::Right;
+    case SensorProxy::Orientation::Undefined:
+        return KScreen::Output::Rotation::None;
     }
     return KScreen::Output::Rotation::None;
 }
@@ -39,25 +36,26 @@ KScreen::Output::Rotation mapReadingOrientation(QOrientationReading::Orientation
 RotationUtil::Rotation mapRotation(KScreen::Output::Rotation rotation)
 {
     switch (rotation) {
-        case KScreen::Output::Rotation::Left:
-            return RotationUtil::Rotation::LandscapeLeft;
-        case KScreen::Output::Rotation::Inverted:
-            return RotationUtil::Rotation::UpsideDown;
-        case KScreen::Output::Rotation::Right:
-            return RotationUtil::Rotation::LandscapeRight;
-        default:
-            return RotationUtil::Rotation::Portrait;
+    case KScreen::Output::Rotation::Left:
+        return RotationUtil::Rotation::LandscapeLeft;
+    case KScreen::Output::Rotation::Inverted:
+        return RotationUtil::Rotation::UpsideDown;
+    case KScreen::Output::Rotation::Right:
+        return RotationUtil::Rotation::LandscapeRight;
+    default:
+        return RotationUtil::Rotation::Portrait;
     }
 }
 
 RotationUtil::RotationUtil(QObject *parent)
     : QObject{parent}
-    , m_sensor{new QOrientationSensor(this)}
+    , m_sensorProxy{new SensorProxy(this)}
 {
     retrieveKScreen();
 
-    connect(m_sensor, &QOrientationSensor::readingChanged, this, &RotationUtil::updateShowRotationButton);
-    m_sensor->start();
+    connect(m_sensorProxy, &SensorProxy::orientationChanged, this, &RotationUtil::updateShowRotationButton);
+    connect(m_sensorProxy, &SensorProxy::availableChanged, this, &RotationUtil::updateShowRotationButton);
+    m_sensorProxy->claimAccelerometer();
 }
 
 void RotationUtil::retrieveKScreen()
@@ -131,12 +129,11 @@ void RotationUtil::updateShowRotationButton()
         return;
     }
 
-    QOrientationReading *reading = m_sensor->reading();
-    if (!reading) {
+    if (!m_sensorProxy->available() || m_sensorProxy->orientation() == SensorProxy::Orientation::Undefined) {
         return;
     }
 
-    m_rotateTo = mapReadingOrientation(reading->orientation());
+    m_rotateTo = mapReadingOrientation(m_sensorProxy->orientation());
     m_deviceRotation = mapRotation(m_rotateTo);
 
     const auto outputs = m_config->outputs();
