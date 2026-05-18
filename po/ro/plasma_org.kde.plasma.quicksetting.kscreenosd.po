@@ -1,6 +1,6 @@
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2026 Sergiu Bivol <sergiu@cip.md>
+# SPDX-FileCopyrightText: 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
@@ -18,17 +18,13 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 25.12.3\n"
 
-#: contents/ui/main.qml:11
+#: package/contents/ui/main.qml:11
 #, kde-format
-msgid "Sound"
-msgstr "Sunet"
+msgid "Display Config"
+msgstr "Configurarea afișajului"
 
-#: contents/ui/main.qml:15
+#: package/contents/ui/main.qml:14
 #, kde-format
-msgid "No audio devices"
-msgstr "Niciun dispozitiv de sunet"
-
-#: contents/ui/main.qml:17
-#, kde-format
-msgid "%1%"
-msgstr "%1%"
+msgctxt "kscreen osd quicksetting"
+msgid "Tap to set up"
+msgstr "Atingeți pentru a configura"
