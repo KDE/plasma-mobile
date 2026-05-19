@@ -24,3 +24,5 @@ add_subdirectory(powermenu)
 add_subdirectory(record)
 add_subdirectory(screenshot)
 add_subdirectory(screenrotation)
+add_subdirectory(grayscale)
+

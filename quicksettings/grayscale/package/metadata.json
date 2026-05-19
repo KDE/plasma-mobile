@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "florian.richer@protonmail.com",
+                "Name": "Florian Richer"
+            }
+        ],
+        "Description": "Grayscale QuickSettings for Plasma Mobile",
+        "Icon": "lighttable",
+        "Id": "org.kde.plasma.quicksetting.grayscale",
+        "License": "GPL-2.0+",
+        "Name": "Grayscale",
+        "Website": "https://kde.org"
+    }
+}
