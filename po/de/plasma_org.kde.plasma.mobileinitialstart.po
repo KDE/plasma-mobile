@@ -2,13 +2,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
-# SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2024, 2026 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:48+0000\n"
-"PO-Revision-Date: 2024-05-11 16:57+0200\n"
+"PO-Revision-Date: 2026-05-17 19:28+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 26.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Öffnet den Startassistenten, ohne die Konfiguration zu ändern"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2024 KDE Community"
+#, kde-format
 msgid "© 2026 KDE Community"
-msgstr "© 2024 KDE-Gemeinschaft"
+msgstr "© 2026 KDE-Gemeinschaft"
 
 #: main.cpp:37
 #, kde-format
@@ -202,17 +201,17 @@ msgstr "Dunkles Design"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Systemnavigation"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Wählen Sie eine Methode, um im System zu navigieren."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Gestennavigation"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -220,21 +219,26 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Streichen Sie vom unteren Bildschirmrand nach oben, um laufende Anwendungen "
+"anzuzeigen. Mit einem schnellen Wisch („Flick“) können Sie zur Startseite "
+"wechseln."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Knopfnavigation"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
 msgstr ""
+"Verwenden Sie die Knöpfe in der Navigationsleiste, um im System zu "
+"navigieren."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "Das kann später in den Einstellungen geändert werden."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -257,21 +261,19 @@ msgid "Invalid input."
 msgstr "Ungültige Eingabe."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Connect"
-msgstr "Verbinden mit"
+msgstr "Verbinden"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Disconnect"
-msgstr "Verbinden mit"
+msgstr "Verbindung trennen"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Einrichten"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
@@ -294,16 +296,14 @@ msgid "Password…"
 msgstr "Passwort ..."
 
 #: qml/LandingComponent.qml:105
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "Willkommen zu<br/><b>%1</b>"
+msgstr "Willkommen bei<br/><b>Plasma Mobile</b>"
 
 #: qml/LandingComponent.qml:131
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "Willkommen zu<br/><b>%1</b>"
+msgstr "Ermöglicht durch<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
