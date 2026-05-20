@@ -2,13 +2,13 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2023-2026 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-14 00:43+0000\n"
-"PO-Revision-Date: 2025-05-04 13:24+0200\n"
+"PO-Revision-Date: 2026-05-17 12:51+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 26.07.70\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -31,11 +31,9 @@ msgid "Open %1"
 msgstr "%1 öffnen"
 
 #: contents/configuration/AppletConfiguration.qml:90
-#, fuzzy
-#| msgid "Configure"
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr "Einrichten"
+msgstr "%1 einrichten"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -43,23 +41,23 @@ msgstr "Hintergrundbild"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "Startbildschirm ändern"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "Startbildschirm auswählen"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
-#, fuzzy
-#| msgid "The homescreen layout to use."
 msgid "Change homescreen to %1?"
-msgstr "Das verwendete Layout des Startbildschirms."
+msgstr "Startbildschirm zu %1 ändern?"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
 msgstr ""
+"Die Einstellungen Ihres aktuellen Startbildschirms wurden gespeichert und "
+"werden wiederhergestellt, wenn Sie zurück wechseln."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
@@ -91,7 +89,7 @@ msgstr "Falsche PIN"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Indikator für den Kontrollleistenfokus"
 
 #~ msgid "General"
 #~ msgstr "Allgemein"

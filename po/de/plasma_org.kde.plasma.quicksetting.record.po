@@ -1,13 +1,13 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2023-2024, 2026 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.record\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-05-20 12:36+0200\n"
+"PO-Revision-Date: 2026-05-17 12:50+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 26.07.70\n"
 
 #: recordutil.cpp:54
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "Keine Encoder für Aufnahmen verfügbar"
 
 #: recordutil.cpp:77
 #, kde-format
@@ -33,25 +33,22 @@ msgid "New Screen Recording saved in %1"
 msgstr "Neue Bildschirmaufnahme in %1 gespeichert"
 
 #: recordutil.cpp:124
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Bildschirm aufnehmen"
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
-msgstr "Aufnahme läuft ..."
+msgstr "Aufnahme läuft …"
 
 #: recordutil.cpp:136
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
-msgstr "Wird geschrieben ..."
+msgstr "Wird geschrieben …"
 
 #: recordutil.cpp:149
 #, kde-format
