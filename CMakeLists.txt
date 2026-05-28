@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.24)
 project(plasma-mobile)
 set(PROJECT_VERSION "6.6.91")
 
-set(PROJECT_DEP_VERSION "6.6.90")
+set(PROJECT_DEP_VERSION "6.6.91")
 set(QT_MIN_VERSION "6.10.0")
 set(KF6_MIN_VERSION "6.26.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
