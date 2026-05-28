@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-18 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:45+0000\n"
 "PO-Revision-Date: 2026-02-20 16:08+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -168,12 +168,12 @@ msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 "Votre périphérique est prêt maintenant. <br /><br />Profitez de <b>%1</b> !"
 
-#: modules/prepare/package/contents/ui/main.qml:17
+#: modules/prepare/package/contents/ui/main.qml:18
 #, kde-format
 msgid "Before we get started…"
 msgstr "Avant de commencer..."
 
-#: modules/prepare/package/contents/ui/main.qml:49
+#: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
@@ -181,17 +181,17 @@ msgstr ""
 "Ajuster la luminosité de l'écran pour que le processus d'installation soit "
 "confortable."
 
-#: modules/prepare/package/contents/ui/main.qml:105
+#: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ajuster la taille des éléments sur l'écran."
 
-#: modules/prepare/package/contents/ui/main.qml:116
+#: modules/prepare/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Display Scaling"
 msgstr "Mise à l'échelle de l'affichage"
 
-#: modules/prepare/package/contents/ui/main.qml:136
+#: modules/prepare/package/contents/ui/main.qml:137
 #, kde-format
 msgid "Dark Theme"
 msgstr "Thème sombre"

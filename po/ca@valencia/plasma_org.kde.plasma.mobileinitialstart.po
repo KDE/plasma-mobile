@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-18 00:48+0000\n"
+"POT-Creation-Date: 2026-05-28 00:45+0000\n"
 "PO-Revision-Date: 2026-03-29 13:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -172,12 +172,12 @@ msgstr "Finalitzat!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "El dispositiu ara està llest. <br /><br />Gaudiu <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:17
+#: modules/prepare/package/contents/ui/main.qml:18
 #, kde-format
 msgid "Before we get started…"
 msgstr "Abans de començar…"
 
-#: modules/prepare/package/contents/ui/main.qml:49
+#: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
@@ -185,17 +185,17 @@ msgstr ""
 "Ajusteu la brillantor de la pantalla perquè siga confortable durant el "
 "procés d'instal·lació."
 
-#: modules/prepare/package/contents/ui/main.qml:105
+#: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ajusteu la mida dels elements a la pantalla."
 
-#: modules/prepare/package/contents/ui/main.qml:116
+#: modules/prepare/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Display Scaling"
 msgstr "Escalat de la pantalla"
 
-#: modules/prepare/package/contents/ui/main.qml:136
+#: modules/prepare/package/contents/ui/main.qml:137
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tema fosc"
