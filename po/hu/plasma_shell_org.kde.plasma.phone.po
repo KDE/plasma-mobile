@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2023-2024, 2026 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-14 00:43+0000\n"
-"PO-Revision-Date: 2024-09-23 21:57+0200\n"
+"PO-Revision-Date: 2026-05-30 21:29+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -30,11 +30,9 @@ msgid "Open %1"
 msgstr "%1 megnyitása"
 
 #: contents/configuration/AppletConfiguration.qml:90
-#, fuzzy
-#| msgid "Configure"
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr "Beállítás"
+msgstr "%1 beállítása"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -42,23 +40,23 @@ msgstr "Háttérkép"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "Kezdőképernyő módosítása"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "Kezdőképernyő kiválasztása"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
-#, fuzzy
-#| msgid "The homescreen layout to use."
 msgid "Change homescreen to %1?"
-msgstr "A használandó kezdőképernyő elrendezés."
+msgstr "Megváltoztatja a kezdőképernyőt erre: %1?"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
 msgstr ""
+"A jelenlegi kezdőképernyő beállításai mentésre kerülnek, és "
+"visszaállítódnak, ha visszavált."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
