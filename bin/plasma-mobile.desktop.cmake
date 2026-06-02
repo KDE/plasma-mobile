@@ -47,6 +47,7 @@ Name[sl]=Plasma Mobile
 Name[sv]=Plasma mobil
 Name[ta]=பிளாஸ்மா கைபேசி
 Name[tr]=Plasma Cep
+Name[ug]=Plasma كۆچمە
 Name[uk]=Мобільна Плазма
 Name[zh_CN]=Plasma Mobile
 Name[zh_TW]=Plasma 行動
