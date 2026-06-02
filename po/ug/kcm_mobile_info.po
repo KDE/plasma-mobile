@@ -1,0 +1,106 @@
+# Uyghur translation for kcm_mobile_info.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2026-06-01 17:59-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
+
+#: ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "سىستېما ئۇچۇرى"
+
+#: ui/main.qml:26
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr "كۆچۈر"
+
+#: ui/main.qml:47
+#, kde-format
+msgid "Operating System"
+msgstr "مەشغۇلات سىستېمىسى"
+
+#: ui/main.qml:58
+#, kde-format
+msgid "Webpage"
+msgstr ""
+
+#: ui/main.qml:92
+#, kde-format
+msgctxt "@title:group"
+msgid "Software"
+msgstr "يۇمشاق دېتال"
+
+#: ui/main.qml:97
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr ""
+
+#: ui/main.qml:104
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr ""
+
+#: ui/main.qml:111
+#, kde-format
+msgid "Qt Version"
+msgstr ""
+
+#: ui/main.qml:118
+#, kde-format
+msgid "Kernel Version"
+msgstr ""
+
+#: ui/main.qml:125
+#, kde-format
+msgid "OS Type"
+msgstr ""
+
+#: ui/main.qml:126
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr ""
+
+#: ui/main.qml:131
+#, kde-format
+msgctxt "@title:group"
+msgid "Hardware"
+msgstr "قاتتىق دېتال"
+
+#: ui/main.qml:136
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "بىر تەرەپ قىلغۇچ"
+
+#: ui/main.qml:143
+#, kde-format
+msgid "Memory"
+msgstr "ئەسلەك"
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 ئەسلەك"
+
+#: ui/main.qml:149
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "يوچۇن"
