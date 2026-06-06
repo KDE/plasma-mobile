@@ -13,6 +13,7 @@
 
 #include <QDebug>
 #include <QtCore/QDate>
+#include <qqml.h>
 
 #include <QDBusConnection>
 #include <QDBusMessage>
