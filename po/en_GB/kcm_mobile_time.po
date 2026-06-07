@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-20 00:44+0000\n"
+"POT-Creation-Date: 2026-06-07 00:47+0000\n"
 "PO-Revision-Date: 2024-05-24 16:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.02.2\n"
 
-#: timesettings.cpp:126
+#: timesettings.cpp:127
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "Unable to change NTP settings"
 
-#: timesettings.cpp:153
+#: timesettings.cpp:154
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Unable to set current time"
 
-#: timesettings.cpp:173
+#: timesettings.cpp:174
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Unable to set timezone"
