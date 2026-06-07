@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-20 00:44+0000\n"
+"POT-Creation-Date: 2026-06-07 02:49+0000\n"
 "PO-Revision-Date: 2024-03-17 11:07+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: timesettings.cpp:126
+#: timesettings.cpp:127
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "Klarte ikkje å endra NTP-innstillingar"
 
-#: timesettings.cpp:153
+#: timesettings.cpp:154
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Klarte ikkje å stilla inn gjeldande tid"
 
-#: timesettings.cpp:173
+#: timesettings.cpp:174
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Klarte ikkje stilla inn tidssone"
