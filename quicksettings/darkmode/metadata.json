@@ -37,6 +37,7 @@
             }
         ],
         "Description": "Dark Mode quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع للوضع المظلم لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del mode fosc per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del mode fosc per al Plasma Mobile",
         "Description[cs]": "Rychlé nastavení tmavého režimu pro Plasma Mobile",
@@ -56,6 +57,7 @@
         "Id": "org.kde.plasma.quicksetting.darkmode",
         "License": "GPL-2.0+",
         "Name": "Dark Mode",
+        "Name[ar]": "الوضع المظلم",
         "Name[ca@valencia]": "Mode fosc",
         "Name[ca]": "Mode fosc",
         "Name[cs]": "Tmavý režim",
