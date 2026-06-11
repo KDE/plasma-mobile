@@ -14,7 +14,7 @@ import org.kde.ksvg 1.0 as KSvg
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.kwindowsystem 1.0
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.shell.panel 0.1 as Panel
+import org.kde.plasma.shell
 
 import org.kde.plasma.plasmoid 2.0
 
@@ -133,7 +133,7 @@ Item {
 
         Binding on regionGeometry {
             delayed: true
-            value: panel.width, panel.height, panel.x, panel.y, panel.dogdeGeometryByDistance(panel.visibilityMode === Panel.Global.DodgeWindows ? -1 : 1) // +1 is for overlap detection, -1 is for snapping to panel
+            value: panel.width, panel.height, panel.x, panel.y, panel.dogdeGeometryByDistance(panel.visibilityMode === Panel.DodgeWindows ? -1 : 1) // +1 is for overlap detection, -1 is for snapping to panel
         }
     }
 
@@ -199,12 +199,12 @@ Item {
         root.parent.focus = false
     }
 
-    property bool isOpaque: panel.opacityMode === Panel.Global.Opaque
-    property bool isTransparent: panel.opacityMode === Panel.Global.Translucent
-    property bool isAdaptive: panel.opacityMode === Panel.Global.Adaptive
+    property bool isOpaque: panel.opacityMode === Panel.Opaque
+    property bool isTransparent: panel.opacityMode === Panel.Translucent
+    property bool isAdaptive: panel.opacityMode === Panel.Adaptive
     property bool floating: panel.floating
     property bool hasCompositing: KWindowSystem.isPlatformX11 ? KX11Extras.compositingActive : true
-    readonly property bool screenCovered: touchingWindow && panel.visibilityMode == Panel.Global.NormalPanel
+    readonly property bool screenCovered: touchingWindow && panel.visibilityMode == Panel.NormalPanel
     property var stateTriggers: [floating, screenCovered, isOpaque, isAdaptive, isTransparent, hasCompositing, containment]
     onStateTriggersChanged: {
         let opaqueApplets = false
