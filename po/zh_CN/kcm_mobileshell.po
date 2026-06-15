@@ -175,7 +175,7 @@ msgstr "从右上角打开的模式。"
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr "锁屏快捷方式"
+msgstr "锁屏快捷键"
 
 #: ui/main.qml:206
 #, kde-format
