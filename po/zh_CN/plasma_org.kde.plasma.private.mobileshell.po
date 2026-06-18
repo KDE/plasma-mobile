@@ -350,25 +350,25 @@ msgstr "当前"
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr "%1分钟前"
+msgstr "%1 分钟前"
 
 #: qml/widgets/notifications/NotificationsUtils.js:82
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr "剩余 %1秒"
+msgstr "剩余 %1 秒"
 
 #: qml/widgets/notifications/NotificationsUtils.js:85
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr "剩余 %1分钟"
+msgstr "剩余 %1 分钟"
 
 #: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr "剩余 %1小时"
+msgstr "剩余 %1 小时"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
