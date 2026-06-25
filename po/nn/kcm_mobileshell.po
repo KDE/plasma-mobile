@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-07-13 21:51+0200\n"
+"PO-Revision-Date: 2026-06-24 21:04+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 26.07.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -46,7 +46,7 @@ msgstr "Viss dette er av, vert animasjonane reduserte så mykje som mogleg."
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Gøym automatisk panel"
 
 #: ui/main.qml:56
 #, kde-format
@@ -66,7 +66,7 @@ msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
+#, kde-format
 msgid "Status Bar"
 msgstr "Statuslinje"
 
@@ -85,7 +85,7 @@ msgstr ""
 #: ui/main.qml:101
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Batteriprosent"
 
 #: ui/main.qml:102
 #, kde-format
