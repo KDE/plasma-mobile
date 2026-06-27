@@ -24,7 +24,10 @@ BaseNotificationItem {
     id: notificationItem
     implicitHeight: mainCard.implicitHeight
 
+    readonly property real cardHeight: mainCard.cardHeight
+
     property bool inPopupDrawer: false
+    property bool animateHeight: false
     property int currentPopupHeight: 0
     property real remainingTimeProgress: 1
     property bool closeTimerRunning: false
@@ -46,6 +49,7 @@ BaseNotificationItem {
 
         popupNotification: true
         inPopupDrawer: notificationItem.inPopupDrawer
+        animateHeight: notificationItem.animateHeight
         currentPopupHeight: notificationItem.currentPopupHeight
         remainingTimeProgress: notificationItem.remainingTimeProgress
         closeTimerRunning: notificationItem.closeTimerRunning
