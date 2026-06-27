@@ -85,6 +85,31 @@ Window {
         property real offset: -Kirigami.Units.gridUnit
         property real scale: 0.95
 
+        // internal tracking states for gesture thresholds
+        property bool isAtBeginning: false
+        property bool isAtEnd: false
+
+        // event handlers
+        onDragStarted: {
+            isAtBeginning = flickable.atYBeginning;
+            isAtEnd = flickable.atYEnd;
+        }
+        onFlickStarted: {
+            isAtBeginning = flickable.atYBeginning;
+            isAtEnd = flickable.atYEnd;
+        }
+        onDragEnded: flickable.checkDismiss();
+        onFlickEnded: flickable.checkDismiss();
+
+        // helper function
+        function checkDismiss() {
+            let dismissFromTop = isAtBeginning && flickable.verticalOvershoot < -Kirigami.Units.gridUnit;
+            let dismissFromBottom = isAtEnd && flickable.verticalOvershoot > Kirigami.Units.gridUnit;
+            if (dismissFromTop || dismissFromBottom) {
+                window.close();
+            }
+        }
+
         state: "closed"
 
         states: [
