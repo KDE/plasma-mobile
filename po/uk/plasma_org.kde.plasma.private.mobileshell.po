@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:46+0000\n"
+"POT-Creation-Date: 2026-06-30 00:45+0000\n"
 "PO-Revision-Date: 2025-09-15 08:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -149,7 +149,7 @@ msgstr "Вимкнути звук"
 msgid "configure audio streams"
 msgstr "налаштовування звукових потоків"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:200
+#: qml/popups/volumeosd/VolumeOSD.qml:225
 #, kde-format
 msgid "Open audio settings"
 msgstr "Відкрити параметри звуку"

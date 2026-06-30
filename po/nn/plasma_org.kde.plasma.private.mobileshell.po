@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:46+0000\n"
+"POT-Creation-Date: 2026-06-30 00:45+0000\n"
 "PO-Revision-Date: 2024-08-04 18:01+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -151,7 +151,7 @@ msgstr "Slå av lyd"
 msgid "configure audio streams"
 msgstr "Vis/gøym lydstraumar"
 
-#: qml/popups/volumeosd/VolumeOSD.qml:200
+#: qml/popups/volumeosd/VolumeOSD.qml:225
 #, kde-format
 msgid "Open audio settings"
 msgstr "Opna lydinnstillingar"
