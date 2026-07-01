@@ -94,7 +94,7 @@ msgstr "Duple colpa per blocar dispositivo"
 #: qml/settings/SettingsScreen.qml:71
 #, kde-format
 msgid "Wallpapers"
-msgstr "Tapetes de papiro"
+msgstr "Fundos de schermo"
 
 #: qml/settings/SettingsScreen.qml:99
 #, kde-format
