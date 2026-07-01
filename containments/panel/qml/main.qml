@@ -70,7 +70,6 @@ ContainmentItem {
     function setWindowProperties() {
         if (root.panel) {
             root.panel.floating = false;
-            root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
 
             // HACK: set thickness twice, sometimes it doesn't set the first time??
             root.panel.thickness = root.panelHeight;

@@ -42,11 +42,9 @@ ContainmentItem {
     onNavigationPanelHeightChanged: setWindowProperties()
 
     readonly property real intendedWindowThickness: navigationPanelHeight
-    readonly property real intendedWindowLength: inLandscape ? Screen.height : Screen.width
     readonly property real intendedWindowOffset: inLandscape ? MobileShell.Constants.topPanelHeight : 0; // offset for top panel
     readonly property int intendedWindowLocation: inLandscape ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
-    onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
     onIntendedWindowLocationChanged: setPanelLocationTimer.restart()
     onIntendedWindowOffsetChanged: {
         if (root.panel) {
@@ -65,24 +63,9 @@ ContainmentItem {
         }
     }
 
-    // use a timer so we don't have to maximize for every single pixel
-    // - improves performance if the shell is run in a window, and can be resized
-    Timer {
-        id: maximizeTimer
-        running: false
-        interval: 100
-        onTriggered: {
-            // maximize first, then we can apply offsets (otherwise they are overridden)
-            root.panel.maximize();
-            root.panel.offset = intendedWindowOffset;
-        }
-    }
-
-
     function setWindowProperties() {
         if (root.panel) {
             root.panel.floating = false;
-            root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
             root.panel.offset = intendedWindowOffset;
             root.panel.thickness = navigationPanelHeight;
             root.panel.location = intendedWindowLocation;
