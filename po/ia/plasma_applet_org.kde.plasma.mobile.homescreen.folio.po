@@ -201,7 +201,7 @@ msgstr "Monstra fundo"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr "Tapete de papiro"
+msgstr "Fundo de schermo"
 
 #: qml/settings/ConfigGeneral.qml:216
 #, kde-format
@@ -274,7 +274,7 @@ msgstr "Isto superscribera tu disposition de schermo initial existente!"
 #: qml/settings/SettingsComponent.qml:57
 #, kde-format
 msgid "Wallpapers"
-msgstr "Tapetes de papiro"
+msgstr "Fundos de schermo"
 
 #: qml/settings/SettingsComponent.qml:66
 #, kde-format

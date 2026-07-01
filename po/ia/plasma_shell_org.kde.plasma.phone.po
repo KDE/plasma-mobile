@@ -36,7 +36,7 @@ msgstr "Configura %1"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
-msgstr "Tapete de papiro"
+msgstr "Fundo de schermo"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
@@ -60,15 +60,15 @@ msgstr ""
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
-msgstr "Plugin de tapete de papiro"
+msgstr "Plugin de fundo de schermo"
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
-msgstr "Le plugin de tapete de papiro a usar."
+msgstr "Le plugin de fundo de schermo a usar."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
-msgstr "Plugins de tapete de papiro"
+msgstr "Plugins de fundo de schermo"
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:89
 msgid "Get New Plugins…"
@@ -118,4 +118,4 @@ msgstr "Indicator de foco de pannello"
 #~ msgstr "Accedente ..."
 
 #~ msgid "Change Wallpaper"
-#~ msgstr "Campia tapete de papiro"
+#~ msgstr "Campia fundo de schermo"
