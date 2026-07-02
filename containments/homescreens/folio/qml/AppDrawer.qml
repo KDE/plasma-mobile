@@ -110,7 +110,7 @@ Item {
 
                             currentPage: folio.HomeScreenState.currentAppDrawerPage === index
 
-                            opacity: 0
+                            opacity: 0 // we display with the opacity gradient below
 
                             model: Folio.ApplicationListSearchModel {
                                 sourceModel: root.folio.ApplicationListModel
@@ -120,9 +120,7 @@ Item {
 
                             // Keyboard navigation
                             topEdgeCallback: () => {
-                                if (root.headerItem && typeof root.headerItem.focusTabBar === "function") {
-                                    root.headerItem.focusTabBar();
-                                }
+                                root.headerItem.focusTabBar();
                             }
 
                             Keys.onPressed: (event) => {
@@ -184,7 +182,7 @@ Item {
                             flickable: appDrawerGrid
                         }
 
-                        // No search results found message
+                        // No results find message
                         ColumnLayout {
                             anchors.left: parent.left
                             anchors.right: parent.right
