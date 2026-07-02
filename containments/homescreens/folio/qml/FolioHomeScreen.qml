@@ -142,8 +142,15 @@ Item {
                 }
             }
 
+            // mask out horizontal swipes when the app drawer is opened to prevent scroll conflicts with the tabbar
             swipeMaskMode: MobileShell.SwipeArea.MaskHorizontalOnly
-            swipeMask: Qt.rect(0, appDrawer.headerHeight + root.topMargin, width, height - appDrawer.headerHeight - root.topMargin)
+            swipeMask: {
+                if (folio.HomeScreenState.viewState === Folio.HomeScreenState.AppDrawerView) {
+                    return Qt.rect(0, appDrawer.headerHeight + root.topMargin, width, height - appDrawer.headerHeight - root.topMargin);
+                } else {
+                    return Qt.rect(0, 0, 0, 0);
+                }
+            }
 
             onSwipeStarted: (currentPos, startPos) => {
                 const deltaX = currentPos.x - startPos.x;
