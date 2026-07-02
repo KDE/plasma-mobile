@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"POT-Creation-Date: 2026-07-02 00:46+0000\n"
 "PO-Revision-Date: 2023-07-22 15:27+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -84,6 +84,22 @@ msgstr "Zadať PIN"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Wrong PIN"
+
+#: contents/logout/Logout.qml:141
+msgid "Restart"
+msgstr ""
+
+#: contents/logout/Logout.qml:150
+msgid "Shut Down"
+msgstr ""
+
+#: contents/logout/Logout.qml:159
+msgid "Log Out"
+msgstr ""
+
+#: contents/logout/Logout.qml:175
+msgid "Cancel"
+msgstr ""
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

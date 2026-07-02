@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-14 00:43+0000\n"
+"POT-Creation-Date: 2026-07-02 00:46+0000\n"
 "PO-Revision-Date: 2024-07-17 17:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -86,6 +86,22 @@ msgstr "Skriv inn PIN"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Feil PIN"
+
+#: contents/logout/Logout.qml:141
+msgid "Restart"
+msgstr ""
+
+#: contents/logout/Logout.qml:150
+msgid "Shut Down"
+msgstr ""
+
+#: contents/logout/Logout.qml:159
+msgid "Log Out"
+msgstr ""
+
+#: contents/logout/Logout.qml:175
+msgid "Cancel"
+msgstr ""
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
