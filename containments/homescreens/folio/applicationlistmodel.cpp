@@ -120,9 +120,10 @@ void ApplicationListModel::load()
     bool categoriesUpdated = false;
 
     for (auto mapIterator = newApplicationsMap.constBegin(); mapIterator != newApplicationsMap.constEnd(); ++mapIterator) {
-        auto existingIterator = storageIdMap.find(mapIterator.key());
-        if (existingIterator != storageIdMap.end()) {
-            int delegateIndex = existingIterator.value();
+        auto it = storageIdMap.find(mapIterator.key());
+        if (it != storageIdMap.end()) {
+            // Service already in m_delegates
+            int delegateIndex = it.value();
             auto app = m_delegates[delegateIndex]->application();
             if (app && app->categories() != mapIterator.value().second) {
                 app->setCategories(mapIterator.value().second);
@@ -131,7 +132,7 @@ void ApplicationListModel::load()
                 QModelIndex modelIndex = index(delegateIndex, 0);
                 Q_EMIT dataChanged(modelIndex, modelIndex, {CategoryRole});
             }
-            storageIdMap.erase(existingIterator);
+            storageIdMap.erase(it);
         } else {
             // Service needs to be inserted into m_delegates
             toInsert.append(mapIterator.value());
@@ -168,12 +169,12 @@ void ApplicationListModel::load()
         endInsertRows();
     }
 
-    // rebuild tab categories if insertions, removals, or category changes happened
+    // Rebuild tab categories if insertions, removals, or category changes happened
     if (!toRemove.isEmpty() || !toInsert.isEmpty() || categoriesUpdated) {
         QStringList newCategories;
         newCategories << i18n("All"); // always put "All" first
 
-        // append categories in the exact order they were discovered in the menu tree
+        // Append categories in the exact order they were discovered in the menu tree
         for (const QString &category : orderedCategories) {
             if (!category.isEmpty() && !newCategories.contains(category)) {
                 newCategories << category;
