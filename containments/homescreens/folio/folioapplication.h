@@ -42,7 +42,7 @@ public:
                      const QStringList &categories = QStringList(),
                      QObject *parent = nullptr);
 
-    static FolioApplication::Ptr fromJson(QJsonObject &obj);
+    static FolioApplication::Ptr fromJson(QJsonObject &obj); // may return nullptr
     QJsonObject toJson() const;
 
     bool running() const;
