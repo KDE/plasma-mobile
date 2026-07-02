@@ -27,12 +27,17 @@ class SwipeArea : public QQuickItem
     Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
     Q_PROPERTY(bool moving READ moving NOTIFY movingChanged)
     Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged)
+    Q_PROPERTY(QRectF swipeMask READ swipeMask WRITE setSwipeMask NOTIFY swipeMaskChanged)
+    Q_PROPERTY(SwipeArea::SwipeMaskMode swipeMaskMode READ swipeMaskMode WRITE setSwipeMaskMode NOTIFY swipeMaskModeChanged)
 
 public:
     SwipeArea(QQuickItem *parent = nullptr);
 
     enum Mode { BothAxis = 0, VerticalOnly, HorizontalOnly };
     Q_ENUM(Mode)
+
+    enum SwipeMaskMode { MaskBothAxis = 0, MaskVerticalOnly, MaskHorizontalOnly };
+    Q_ENUM(SwipeMaskMode)
 
     Mode mode() const;
     void setMode(Mode mode);
@@ -43,6 +48,12 @@ public:
     bool moving() const;
     bool pressed() const;
 
+    QRectF swipeMask() const;
+    void setSwipeMask(const QRectF &mask);
+
+    SwipeMaskMode swipeMaskMode() const;
+    void setSwipeMaskMode(SwipeMaskMode mode);
+
     Q_INVOKABLE void setSkipSwipeThreshold(bool value);
     Q_INVOKABLE void resetSwipe();
 
@@ -51,6 +62,8 @@ Q_SIGNALS:
     void interactiveChanged();
     void movingChanged();
     void pressedChanged();
+    void swipeMaskChanged();
+    void swipeMaskModeChanged();
 
     void swipeEnded();
     void swipeStarted(QPointF currentPoint, QPointF startPoint); // we let the user move a couple of pixels for swipe detection
@@ -87,6 +100,12 @@ private:
     bool m_interactive = true;
     bool m_pressed = false;
     bool m_touchpadScrolling = false;
+
+    QRectF m_swipeMask;
+    SwipeMaskMode m_swipeMaskMode = MaskBothAxis;
+
+    // whether the current gesture started outside the mask and should be ignored
+    bool m_swipeRejected = false;
 
     // whether we have started a flick
     bool m_moving = false;

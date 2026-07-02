@@ -80,6 +80,8 @@ void HomeScreenState::init()
 
     m_pageAnim = setupAnimation("pageViewX", animDuration, QEasingCurve::OutExpo, 0);
 
+    m_appDrawerPageAnim = setupAnimation("appDrawerPageX", animDuration, QEasingCurve::OutExpo, 0);
+
     m_openFolderAnim = setupAnimation("folderOpenProgress", animDuration, QEasingCurve::OutExpo, 1.0);
 
     connect(m_openFolderAnim, &QPropertyAnimation::finished, this, [this]() {
@@ -603,6 +605,48 @@ void HomeScreenState::setAppDrawerY(qreal appDrawerY)
     setAppDrawerOpenProgress(1 - qBound(0.0, m_appDrawerY, APP_DRAWER_OPEN_DIST) / APP_DRAWER_OPEN_DIST);
 }
 
+qreal HomeScreenState::appDrawerPageX()
+{
+    return m_appDrawerPageX;
+}
+
+void HomeScreenState::setAppDrawerPageX(qreal appDrawerPageX)
+{
+    if (m_appDrawerPageX != appDrawerPageX) {
+        m_appDrawerPageX = appDrawerPageX;
+        Q_EMIT appDrawerPageXChanged();
+    }
+}
+
+qreal HomeScreenState::appDrawerPageWidth() const
+{
+    return m_appDrawerPageWidth;
+}
+
+void HomeScreenState::setAppDrawerPageWidth(qreal appDrawerPageWidth)
+{
+    if (m_appDrawerPageWidth != appDrawerPageWidth) {
+        m_appDrawerPageWidth = appDrawerPageWidth;
+        Q_EMIT appDrawerPageWidthChanged();
+
+        // make sure we snap
+        goToAppDrawerPage(m_appDrawerPageNum, true);
+    }
+}
+
+int HomeScreenState::appDrawerPageCount() const
+{
+    return m_appDrawerPageCount;
+}
+
+void HomeScreenState::setAppDrawerPageCount(int count)
+{
+    if (m_appDrawerPageCount != count) {
+        m_appDrawerPageCount = count;
+        Q_EMIT appDrawerPageCountChanged();
+    }
+}
+
 qreal HomeScreenState::searchWidgetOpenProgress()
 {
     return m_searchWidgetOpenProgress;
@@ -691,6 +735,19 @@ void HomeScreenState::setCurrentPage(int currentPage)
 int HomeScreenState::currentFolderPage()
 {
     return m_folderPageNum;
+}
+
+int HomeScreenState::currentAppDrawerPage()
+{
+    return m_appDrawerPageNum;
+}
+
+void HomeScreenState::setCurrentAppDrawerPage(int currentPage)
+{
+    if (m_appDrawerPageNum != currentPage) {
+        m_appDrawerPageNum = currentPage;
+        Q_EMIT appDrawerPageNumChanged();
+    }
 }
 
 bool HomeScreenState::isDraggingDelegate()
@@ -838,6 +895,28 @@ void HomeScreenState::goToFolderPage(int page, bool snap)
     }
     m_folderPageAnim->setEndValue(-page * m_folderPageWidth);
     m_folderPageAnim->start();
+}
+
+void HomeScreenState::goToAppDrawerPage(int page, bool snap)
+{
+    if (page < 0) {
+        page = 0;
+    }
+
+    if (page >= m_appDrawerPageCount && m_appDrawerPageCount > 0) {
+        page = std::max(0, m_appDrawerPageCount - 1);
+    }
+
+    setCurrentAppDrawerPage(page);
+
+    if (snap) {
+        // Skip the animation and go straight to the intended page
+        m_appDrawerPageAnim->setStartValue(-page * m_appDrawerPageWidth);
+    } else {
+        m_appDrawerPageAnim->setStartValue(m_appDrawerPageX);
+    }
+    m_appDrawerPageAnim->setEndValue(-page * m_appDrawerPageWidth);
+    m_appDrawerPageAnim->start();
 }
 
 void HomeScreenState::openFolder(qreal delegateX, qreal delegateY, FolioApplicationFolder *folder)
@@ -993,6 +1072,17 @@ void HomeScreenState::swipeEnded()
         }
         break;
     }
+    case SwipeState::SwipingAppDrawerPage: {
+        int page = std::max(0.0, -m_appDrawerPageX) / m_appDrawerPageWidth;
+
+        // m_movingRight refers to finger movement
+        if (m_movingRight || m_appDrawerPageX > 0) {
+            goToAppDrawerPage(page, false);
+        } else {
+            goToAppDrawerPage(page + 1, false);
+        }
+        break;
+    }
     case SwipeState::DraggingDelegate:
         Q_EMIT delegateDragDropped();
         break;
@@ -1070,6 +1160,10 @@ void HomeScreenState::swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal del
     case SwipeState::SwipingAppDrawerGrid:
         Q_EMIT appDrawerGridYChanged(deltaY);
         break;
+    case SwipeState::SwipingAppDrawerPage:
+        m_movingRight = deltaX > 0;
+        setAppDrawerPageX(m_appDrawerPageX + deltaX);
+        break;
     case SwipeState::SwipingPages:
         m_movingRight = deltaX > 0;
         setPageViewX(m_pageViewX + deltaX);
@@ -1108,6 +1202,13 @@ void HomeScreenState::determineSwipeTypeAfterThreshold(qreal totalDeltaX, qreal 
 
         // ensure no animations are running when starting a swipe
         m_folderPageAnim->stop();
+
+    } else if (qAbs(totalDeltaX) >= DETERMINE_SWIPE_THRESHOLD && m_viewState == ViewState::AppDrawerView) {
+        // select horizontal swipe mode (only if in page view)
+        setSwipeState(SwipeState::SwipingAppDrawerPage);
+
+        // ensure no animations are running when starting a swipe
+        m_appDrawerPageAnim->stop();
 
     } else if (qAbs(totalDeltaY) >= DETERMINE_SWIPE_THRESHOLD) {
         // select vertical swipe mode

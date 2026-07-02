@@ -70,6 +70,9 @@ class HomeScreenState : public QObject
 
     Q_PROPERTY(qreal appDrawerOpenProgress READ appDrawerOpenProgress NOTIFY appDrawerOpenProgressChanged)
     Q_PROPERTY(qreal appDrawerY READ appDrawerY WRITE setAppDrawerY NOTIFY appDrawerYChanged)
+    Q_PROPERTY(qreal appDrawerPageX READ appDrawerPageX WRITE setAppDrawerPageX NOTIFY appDrawerPageXChanged)
+    Q_PROPERTY(qreal appDrawerPageWidth READ appDrawerPageWidth WRITE setAppDrawerPageWidth NOTIFY appDrawerPageWidthChanged)
+    Q_PROPERTY(int appDrawerPageCount READ appDrawerPageCount WRITE setAppDrawerPageCount NOTIFY appDrawerPageCountChanged)
 
     Q_PROPERTY(qreal searchWidgetOpenProgress READ searchWidgetOpenProgress NOTIFY searchWidgetOpenProgressChanged)
     Q_PROPERTY(qreal searchWidgetY READ searchWidgetY WRITE setSearchWidgetY NOTIFY searchWidgetYChanged)
@@ -79,6 +82,7 @@ class HomeScreenState : public QObject
 
     Q_PROPERTY(int currentPage READ currentPage NOTIFY pageNumChanged)
     Q_PROPERTY(int currentFolderPage READ currentFolderPage NOTIFY folderPageNumChanged)
+    Q_PROPERTY(int currentAppDrawerPage READ currentAppDrawerPage NOTIFY appDrawerPageNumChanged)
 
     Q_PROPERTY(bool isDraggingDelegate READ isDraggingDelegate NOTIFY isDraggingDelegateChanged)
 
@@ -90,6 +94,7 @@ public:
         SwipingOpenAppDrawer,
         SwipingCloseAppDrawer,
         SwipingAppDrawerGrid,
+        SwipingAppDrawerPage,
         SwipingOpenSearchWidget,
         SwipingCloseSearchWidget,
         SwipingFolderPages,
@@ -230,6 +235,15 @@ public:
     qreal appDrawerY();
     void setAppDrawerY(qreal appDrawerY);
 
+    qreal appDrawerPageX();
+    void setAppDrawerPageX(qreal appDrawerPageX);
+
+    qreal appDrawerPageWidth() const;
+    void setAppDrawerPageWidth(qreal appDrawerPageWidth);
+
+    int appDrawerPageCount() const;
+    void setAppDrawerPageCount(int count);
+
     // between 0-1, the progress for the opening of the search widget
     qreal searchWidgetOpenProgress();
 
@@ -259,6 +273,11 @@ public:
     void setCurrentPage(int currentPage);
 
     int currentFolderPage();
+
+    int currentAppDrawerPage();
+
+    int currentAppDrawerPage() const;
+    void setCurrentAppDrawerPage(int page);
 
     // Whether something is being dragged (either from SwipeArea or Drag & Drop)
     bool isDraggingDelegate();
@@ -304,6 +323,9 @@ Q_SIGNALS:
     void settingsOpenProgressChanged();
     void appDrawerOpenProgressChanged();
     void appDrawerYChanged();
+    void appDrawerPageXChanged();
+    void appDrawerPageWidthChanged();
+    void appDrawerPageCountChanged();
     void appDrawerClosed();
     void appDrawerOpened();
     void searchWidgetOpenProgressChanged();
@@ -320,6 +342,7 @@ Q_SIGNALS:
     void delegateDragFromWidgetListStarted(QString appletPluginId);
     void pageNumChanged();
     void folderPageNumChanged();
+    void appDrawerPageNumChanged();
     void isDraggingDelegateChanged();
 
     void leftCurrentFolder();
@@ -338,6 +361,8 @@ public Q_SLOTS:
     void goToFolderPage(int page, bool snap);
     void openFolder(qreal delegateX, qreal delegateY, FolioApplicationFolder *folder);
     void closeFolder();
+
+    void goToAppDrawerPage(int page, bool snap);
 
     void openSettingsView();
     void closeSettingsView();
@@ -418,6 +443,9 @@ private:
 
     qreal m_appDrawerOpenProgress{0};
     qreal m_appDrawerY{0};
+    qreal m_appDrawerPageX{0};
+    qreal m_appDrawerPageWidth{0};
+    int m_appDrawerPageCount{1};
     qreal m_searchWidgetOpenProgress{0};
     qreal m_searchWidgetY{0};
     qreal m_delegateDragX{0};
@@ -428,12 +456,14 @@ private:
 
     int m_pageNum{0};
     int m_folderPageNum{0};
+    int m_appDrawerPageNum{0};
 
     bool m_movingUp{false};
     bool m_movingRight{false};
 
     QPropertyAnimation *m_openAppDrawerAnim{nullptr};
     QPropertyAnimation *m_closeAppDrawerAnim{nullptr};
+    QPropertyAnimation *m_appDrawerPageAnim{nullptr};
     QPropertyAnimation *m_openSearchWidgetAnim{nullptr};
     QPropertyAnimation *m_closeSearchWidgetAnim{nullptr};
     QPropertyAnimation *m_pageAnim{nullptr};

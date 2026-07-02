@@ -24,11 +24,20 @@ MobileShell.GridView {
     layer.enabled: true
 
     keyNavigationEnabled: true
+    keyNavigationWraps: true
     highlightMoveDuration: 0
     highlight: null // We supply our own highlight from the delegate
 
     property var homeScreen
     property real headerHeight
+
+    property bool currentPage: false
+
+    onCurrentPageChanged: {
+        if (!currentPage) {
+            root.positionViewAtBeginning()
+        }
+    }
 
     readonly property int reservedSpaceForLabel: folio.HomeScreenState.pageDelegateLabelHeight
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
@@ -52,6 +61,7 @@ MobileShell.GridView {
 
     Connections {
         target: folio.HomeScreenState
+        enabled: root.currentPage
 
         function onSwipeStateChanged() {
             if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid) {
@@ -85,8 +95,6 @@ MobileShell.GridView {
     MobileShell.HapticsEffect {
         id: haptics
     }
-
-    model: folio.ApplicationListSearchModel
 
     // Keyboard focus on app delegate when it is the selected item
     onCurrentItemChanged: {

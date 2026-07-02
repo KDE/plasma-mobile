@@ -33,25 +33,31 @@ class FolioApplication : public QObject, public std::enable_shared_from_this<Fol
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
     Q_PROPERTY(QString storageId READ storageId NOTIFY storageIdChanged)
+    Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged)
 
 public:
     typedef std::shared_ptr<FolioApplication> Ptr;
 
-    FolioApplication(KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr}, QObject *parent = nullptr);
+    FolioApplication(KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr},
+                     const QStringList &categories = QStringList(),
+                     QObject *parent = nullptr);
 
-    static FolioApplication::Ptr fromJson(QJsonObject &obj); // may return nullptr
+    static FolioApplication::Ptr fromJson(QJsonObject &obj);
     QJsonObject toJson() const;
 
     bool running() const;
     QString name() const;
     QString icon() const;
     QString storageId() const;
+    QStringList categories() const;
     KWayland::Client::PlasmaWindow *window() const;
+    KService::Ptr service() const;
 
     void setName(QString &name);
     void setIcon(QString &icon);
     void setStorageId(QString &storageId);
     void setWindow(KWayland::Client::PlasmaWindow *window);
+    void setCategories(const QStringList &categories);
 
     Q_INVOKABLE void setMinimizedDelegate(QQuickItem *delegate);
     Q_INVOKABLE void unsetMinimizedDelegate(QQuickItem *delegate);
@@ -61,11 +67,14 @@ Q_SIGNALS:
     void iconChanged();
     void storageIdChanged();
     void windowChanged();
+    void categoriesChanged();
 
 private:
     bool m_running;
     QString m_name;
     QString m_icon;
     QString m_storageId;
+    QStringList m_categories;
     KWayland::Client::PlasmaWindow *m_window{nullptr};
+    KService::Ptr m_service;
 };

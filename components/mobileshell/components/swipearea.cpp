@@ -44,6 +44,32 @@ void SwipeArea::setInteractive(bool interactive)
     Q_EMIT interactiveChanged();
 }
 
+QRectF SwipeArea::swipeMask() const
+{
+    return m_swipeMask;
+}
+
+void SwipeArea::setSwipeMask(const QRectF &mask)
+{
+    if (m_swipeMask != mask) {
+        m_swipeMask = mask;
+        Q_EMIT swipeMaskChanged();
+    }
+}
+
+SwipeArea::SwipeMaskMode SwipeArea::swipeMaskMode() const
+{
+    return m_swipeMaskMode;
+}
+
+void SwipeArea::setSwipeMaskMode(SwipeMaskMode mode)
+{
+    if (m_swipeMaskMode != mode) {
+        m_swipeMaskMode = mode;
+        Q_EMIT swipeMaskModeChanged();
+    }
+}
+
 bool SwipeArea::moving() const
 {
     return m_moving;
@@ -278,6 +304,7 @@ void SwipeArea::resetSwipe()
 {
     m_skipSwipeThreshold = false;
     m_stealMouse = false;
+    m_swipeRejected = false;
     if (m_pressed) {
         setPressed(false);
     }
@@ -318,6 +345,10 @@ void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
 {
     Q_UNUSED(event)
 
+    if (m_swipeRejected) {
+        return;
+    }
+
     if (!m_stealMouse) {
         if (!m_skipSwipeThreshold) {
             // if we haven't reached the swipe registering threshold yet, don't start the swipe
@@ -326,6 +357,26 @@ void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
             } else if (m_mode == Mode::HorizontalOnly && qAbs(point.x() - m_pressPos.x()) < SWIPE_REGISTER_THRESHOLD) {
                 return;
             } else if (m_mode == Mode::BothAxis && qAbs(point.manhattanLength() - m_pressPos.manhattanLength()) < SWIPE_REGISTER_THRESHOLD) {
+                return;
+            }
+        }
+
+        if (!m_swipeMask.isEmpty() && !m_swipeMask.contains(m_pressPos)) {
+            bool isHorizontal = qAbs(point.x() - m_pressPos.x()) > qAbs(point.y() - m_pressPos.y());
+            if (m_mode == Mode::HorizontalOnly) isHorizontal = true;
+            if (m_mode == Mode::VerticalOnly) isHorizontal = false;
+
+            bool maskApplies = false;
+            if (m_swipeMaskMode == MaskBothAxis) {
+                maskApplies = true;
+            } else if (m_swipeMaskMode == MaskHorizontalOnly && isHorizontal) {
+                maskApplies = true;
+            } else if (m_swipeMaskMode == MaskVerticalOnly && !isHorizontal) {
+                maskApplies = true;
+            }
+
+            if (maskApplies) {
+                m_swipeRejected = true;
                 return;
             }
         }

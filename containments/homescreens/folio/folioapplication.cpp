@@ -1,4 +1,3 @@
-
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
@@ -7,34 +6,26 @@
 
 #include <QQuickWindow>
 
-#include <KNotificationJobUiDelegate>
-
-FolioApplication::FolioApplication(KService::Ptr service, QObject *parent)
+FolioApplication::FolioApplication(KService::Ptr service, const QStringList &categories, QObject *parent)
     : QObject{parent}
     , m_running{false}
-    , m_name{service->name()}
-    , m_icon{service->icon()}
-    , m_storageId{service->storageId()}
+    , m_name{service ? service->name() : QString()}
+    , m_icon{service ? service->icon() : QString()}
+    , m_storageId{service ? service->storageId() : QString()}
+    , m_categories{categories}
+    , m_service{service}
 {
-    if (service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
+    if (service && service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
         m_name = service->genericName();
     }
 
     auto windows = WindowListener::instance()->windowsFromStorageId(m_storageId);
-    if (windows.empty()) {
-        m_window = nullptr;
-    } else {
-        m_window = windows[0];
-    }
+    m_window = windows.empty() ? nullptr : windows[0];
 
     connect(WindowListener::instance(), &WindowListener::windowChanged, this, [this](QString storageId) {
         if (storageId == m_storageId) {
             auto windows = WindowListener::instance()->windowsFromStorageId(m_storageId);
-            if (windows.empty()) {
-                setWindow(nullptr);
-            } else {
-                setWindow(windows[0]);
-            }
+            setWindow(windows.empty() ? nullptr : windows[0]);
         }
     });
 }
@@ -71,6 +62,11 @@ QString FolioApplication::icon() const
     return m_icon;
 }
 
+QStringList FolioApplication::categories() const
+{
+    return m_categories;
+}
+
 QString FolioApplication::storageId() const
 {
     return m_storageId;
@@ -79,6 +75,11 @@ QString FolioApplication::storageId() const
 KWayland::Client::PlasmaWindow *FolioApplication::window() const
 {
     return m_window;
+}
+
+KService::Ptr FolioApplication::service() const
+{
+    return m_service;
 }
 
 void FolioApplication::setName(QString &name)
@@ -103,6 +104,14 @@ void FolioApplication::setWindow(KWayland::Client::PlasmaWindow *window)
 {
     m_window = window;
     Q_EMIT windowChanged();
+}
+
+void FolioApplication::setCategories(const QStringList &categories)
+{
+    if (m_categories != categories) {
+        m_categories = categories;
+        Q_EMIT categoriesChanged();
+    }
 }
 
 void FolioApplication::setMinimizedDelegate(QQuickItem *delegate)
