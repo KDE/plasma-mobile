@@ -57,6 +57,7 @@ void ApplicationListModel::sycocaDbChanged()
 
 void ApplicationListModel::fetchAppsFromMenu(const KServiceGroup::Ptr &serviceGroup,
                                              const QString &categoryName,
+                                             const QStringList &blacklist,
                                              QMap<QString, std::pair<KService::Ptr, QStringList>> &applicationsMap,
                                              QStringList &orderedCategories)
 {
@@ -70,7 +71,7 @@ void ApplicationListModel::fetchAppsFromMenu(const KServiceGroup::Ptr &serviceGr
         if (entry->isType(KST_KService)) {
             KService::Ptr service(static_cast<KService *>(entry.data()));
 
-            if (!service->showOnCurrentPlatform()) {
+            if (!service->showOnCurrentPlatform() || blacklist.contains(service->desktopEntryName())) {
                 continue;
             }
 
@@ -90,7 +91,7 @@ void ApplicationListModel::fetchAppsFromMenu(const KServiceGroup::Ptr &serviceGr
             KServiceGroup::Ptr subServiceGroup(static_cast<KServiceGroup *>(entry.data()));
 
             QString currentCategoryName = categoryName.isEmpty() ? subServiceGroup->caption() : categoryName;
-            fetchAppsFromMenu(subServiceGroup, currentCategoryName, applicationsMap, orderedCategories);
+            fetchAppsFromMenu(subServiceGroup, currentCategoryName, blacklist, applicationsMap, orderedCategories);
         }
     }
 }
@@ -101,13 +102,14 @@ void ApplicationListModel::load()
 
     // This function supports dynamic insertions and deletions to the existing
 
-    KSharedConfig::Ptr  stateConfig = KSharedConfig::openStateConfig(QStringLiteral("kickerstaterc"));
-    KConfigGroup applicationsGroup = KConfigGroup(stateConfig, QStringLiteral("Applications"));
+    auto config = KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"));
+    auto blacklistConfigGroup = KConfigGroup(config, QStringLiteral("Applications"));
+    const QStringList blacklist = blacklistConfigGroup.readEntry("blacklist", QStringList());
 
     QMap<QString, std::pair<KService::Ptr, QStringList>> newApplicationsMap;
     QStringList orderedCategories;
 
-    fetchAppsFromMenu(KServiceGroup::root(), QString(), newApplicationsMap, orderedCategories);
+    fetchAppsFromMenu(KServiceGroup::root(), QString(), blacklist, newApplicationsMap, orderedCategories);
 
     QMap<QString, int> storageIdMap; // <storageId, index>
     for (int i = 0; i < m_delegates.size(); ++i) {
