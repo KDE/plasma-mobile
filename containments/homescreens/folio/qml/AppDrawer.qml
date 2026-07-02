@@ -171,7 +171,7 @@ Item {
                                             }
                                         }
                                         event.accepted = true;
-                                        }
+                                    }
                                 }
                             }
                         }
