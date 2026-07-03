@@ -91,24 +91,3 @@ msgstr "PIN erroni"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicador de focus del plafó"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Homescreen Layout"
-#~ msgstr "Disposició de la pantalla d'inici"
-
-#~ msgid "Layout changes must be applied before other changes can be made"
-#~ msgstr ""
-#~ "Cal aplicar els canvis de disposició abans de poder fer altres canvis"
-
-#~ msgid "Apply now"
-#~ msgstr "Aplica ara"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "Activa la llum de flaix"
-
-#~ msgctxt "@action:button"
-#~ msgid "Open camera"
-#~ msgstr "Obre la càmera"
