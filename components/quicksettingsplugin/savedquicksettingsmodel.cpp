@@ -42,7 +42,7 @@ void SavedQuickSettingsModel::moveRow(int oldIndex, int newIndex)
     }
 
     Q_EMIT beginMoveRows(QModelIndex(), oldIndex, oldIndex, QModelIndex(), newIndex + (oldIndex < newIndex ? 1 : 0));
-    std::iter_swap(m_data.begin() + oldIndex, m_data.begin() + newIndex);
+    m_data.move(oldIndex, newIndex);
     Q_EMIT endMoveRows();
 
     Q_EMIT dataUpdated(m_data);
@@ -92,14 +92,12 @@ QList<KPluginMetaData> SavedQuickSettingsModel::list() const
 
 void SavedQuickSettingsModel::updateData(QList<KPluginMetaData> data)
 {
-    Q_EMIT beginResetModel();
-
-    m_data.clear();
-    for (auto metaData : data) {
-        m_data.push_back(metaData);
+    if (m_data == data) {
+        return;
     }
 
+    Q_EMIT beginResetModel();
+    m_data = data;
     Q_EMIT endResetModel();
-
     Q_EMIT dataUpdated(m_data);
 }
