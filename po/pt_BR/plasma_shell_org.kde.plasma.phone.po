@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2022.
-# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
+# SPDX-FileCopyrightText: 2025-2026 Marcus Gama <marcus.gama@gmail.com>
 # SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-02 00:46+0000\n"
-"PO-Revision-Date: 2025-11-08 21:10-0300\n"
-"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
+"PO-Revision-Date: 2026-07-02 08:20-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -91,19 +91,19 @@ msgstr "PIN errado"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "Reiniciar"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "Desligar"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "Encerrar sessão"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

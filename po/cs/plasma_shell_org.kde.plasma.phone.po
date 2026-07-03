@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-02 00:46+0000\n"
-"PO-Revision-Date: 2026-03-13 11:49+0100\n"
+"PO-Revision-Date: 2026-03-30 12:49+0200\n"
 "Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -88,19 +88,19 @@ msgstr "Špatný PIN"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "Restartovat"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "Vypnout"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "Odhlásit se"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

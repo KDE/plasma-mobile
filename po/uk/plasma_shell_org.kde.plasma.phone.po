@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-02 00:46+0000\n"
-"PO-Revision-Date: 2025-10-06 13:49+0300\n"
+"PO-Revision-Date: 2026-07-02 11:23+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -89,19 +89,19 @@ msgstr "Помилковий код"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "Перезапустити"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "Вимкнути"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "Вийти"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

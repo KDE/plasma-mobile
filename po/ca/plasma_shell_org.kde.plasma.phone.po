@@ -1,15 +1,15 @@
 # Translation of plasma_shell_org.kde.plasma.phone.po to Catalan
-# Copyright (C) 2022-2025 This_file_is_part_of_KDE
+# Copyright (C) 2022-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-02 00:46+0000\n"
-"PO-Revision-Date: 2025-10-06 12:21+0200\n"
+"PO-Revision-Date: 2026-07-02 08:22+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -90,19 +90,19 @@ msgstr "PIN erroni"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "Reinicia"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "Atura"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "Surt"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·la"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

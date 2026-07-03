@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-02 00:46+0000\n"
-"PO-Revision-Date: 2025-10-06 10:38+0200\n"
+"PO-Revision-Date: 2026-07-02 05:59+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.9\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -89,19 +89,19 @@ msgstr "არასწორი PIN-კოდი"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "გადატვირთვა"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "გამორთვა"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "გასვლა"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "გაუქმება"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
