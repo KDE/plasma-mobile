@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-04 00:46+0000\n"
 "PO-Revision-Date: 2025-09-16 10:55+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -153,7 +153,7 @@ msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Mode expandit"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
 msgid "Quick Settings"
 msgstr "Opcions ràpides"
@@ -214,29 +214,29 @@ msgctxt "@label:listbox"
 msgid "Right button"
 msgstr "Botó dret"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Oculta"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Mostra"
 
-#: ui/QuickSettingsForm.qml:80
+#: ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings Columns"
 msgstr "Columnes d'opcions ràpides"
 
-#: ui/QuickSettingsForm.qml:81
+#: ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
 msgstr "Nombre màxim de columnes en l'orientació apaïsada."
 
-#: ui/QuickSettingsForm.qml:94
+#: ui/QuickSettingsForm.qml:128
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
@@ -244,12 +244,12 @@ msgstr ""
 "Personalitzeu l'ordre de les opcions ràpides en el quadro desplegable i les "
 "oculta."
 
-#: ui/QuickSettingsForm.qml:117
+#: ui/QuickSettingsForm.qml:166
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Opcions ràpides desactivades"
 
-#: ui/QuickSettingsForm.qml:122
+#: ui/QuickSettingsForm.qml:171
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Torna a activar les opcions ràpides desactivades prèviament."
