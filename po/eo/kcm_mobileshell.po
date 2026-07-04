@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-04 02:37+0000\n"
 "PO-Revision-Date: 2025-03-23 07:29+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -148,7 +148,7 @@ msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Vastigita Reĝimo"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
 msgid "Quick Settings"
 msgstr "Rapidaj Agordoj"
@@ -209,42 +209,42 @@ msgctxt "@label:listbox"
 msgid "Right button"
 msgstr "Destra butono"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Kaŝi"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Montri"
 
-#: ui/QuickSettingsForm.qml:80
+#: ui/QuickSettingsForm.qml:114
 #, fuzzy, kde-format
 #| msgid "Quick Settings"
 msgid "Quick Settings Columns"
 msgstr "Rapidaj Agordoj"
 
-#: ui/QuickSettingsForm.qml:81
+#: ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
 msgstr ""
 
-#: ui/QuickSettingsForm.qml:94
+#: ui/QuickSettingsForm.qml:128
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
 "Agordu la ordon de rapidaj agordoj en la tiro-malsupren panelo kaj kaŝu ilin."
 
-#: ui/QuickSettingsForm.qml:117
+#: ui/QuickSettingsForm.qml:166
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Malŝaltitaj Rapidaj Agordoj"
 
-#: ui/QuickSettingsForm.qml:122
+#: ui/QuickSettingsForm.qml:171
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Reŝalti antaŭe malŝaltitajn rapidajn agordojn."

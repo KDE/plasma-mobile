@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-04 02:37+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -146,7 +146,7 @@ msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "扩展模式"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
 msgid "Quick Settings"
 msgstr "快速设置"
@@ -207,40 +207,40 @@ msgctxt "@label:listbox"
 msgid "Right button"
 msgstr "右键"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "隐藏"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "显示"
 
-#: ui/QuickSettingsForm.qml:80
+#: ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings Columns"
 msgstr "快速设置列数"
 
-#: ui/QuickSettingsForm.qml:81
+#: ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
 msgstr "横向布局时的最大列数。"
 
-#: ui/QuickSettingsForm.qml:94
+#: ui/QuickSettingsForm.qml:128
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr "自定义下拉面板中快速设置的排序，还能隐藏快速设置项。"
 
-#: ui/QuickSettingsForm.qml:117
+#: ui/QuickSettingsForm.qml:166
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "已禁用的快速设置"
 
-#: ui/QuickSettingsForm.qml:122
+#: ui/QuickSettingsForm.qml:171
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "重新启用已禁用的快速设置。"

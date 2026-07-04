@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-04 02:37+0000\n"
 "PO-Revision-Date: 2025-10-12 17:39+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -150,7 +150,7 @@ msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Laajennettu tila"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:19 ui/QuickSettingsForm.qml:72
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
 msgid "Quick Settings"
 msgstr "Pika-asetukset"
@@ -211,41 +211,41 @@ msgctxt "@label:listbox"
 msgid "Right button"
 msgstr "Oikea painike"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
 msgstr "Piilota"
 
-#: ui/QuickSettingsForm.qml:56
+#: ui/QuickSettingsForm.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "Näytä"
 
-#: ui/QuickSettingsForm.qml:80
+#: ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings Columns"
 msgstr "Pika-asetussarakkeet"
 
-#: ui/QuickSettingsForm.qml:81
+#: ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
 msgstr "Sarakkeiden enimmäismäärä vaaka-asennossa."
 
-#: ui/QuickSettingsForm.qml:94
+#: ui/QuickSettingsForm.qml:128
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
 "Mukauta pudotusvalikon pika-asetusten järjestystä tai piilota asetuksia."
 
-#: ui/QuickSettingsForm.qml:117
+#: ui/QuickSettingsForm.qml:166
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Käytöstä poistetut pika-asetukset"
 
-#: ui/QuickSettingsForm.qml:122
+#: ui/QuickSettingsForm.qml:171
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Ota aiemmin käytöstä poistetut pika-asetukset taas käyttöön."
