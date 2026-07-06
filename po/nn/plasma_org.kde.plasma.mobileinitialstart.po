@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:45+0000\n"
-"PO-Revision-Date: 2024-10-27 14:45+0100\n"
+"PO-Revision-Date: 2026-07-05 16:21+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 26.04.3\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -244,6 +244,7 @@ msgid "Select your time zone and preferred time format."
 msgstr "Vel tidssone og føretrekt format for klokkeslett."
 
 # skip-rule: klammeform
+# skip-rule: bokmålsord
 #: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
