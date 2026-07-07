@@ -28,11 +28,19 @@ public Q_SLOTS:
 
 KAuth::ActionReply Flashlighthelper::setbrightness(const QVariantMap &args)
 {
-    const char *sysPath = args.value("sysPath"_L1).toString().toUtf8().constData();
-    const char *brightness = args.value("brightness"_L1).toString().toUtf8().constData();
+    QByteArray sysPathBytes = args.value("sysPath"_L1).toString().toUtf8();
+    const char *sysPath = sysPathBytes.constData();
+
+    QByteArray brightnessBytes = args.value("brightness"_L1).toString().toUtf8();
+    const char *brightness = brightnessBytes.constData();
 
     struct udev *udev = udev_new();
     struct udev_device *device = udev_device_new_from_syspath(udev, sysPath);
+
+    if (!device) {
+        udev_unref(udev);
+        return KAuth::ActionReply::HelperErrorReply();
+    }
 
     int ret = udev_device_set_sysattr_value(device, "brightness", const_cast<char *>(brightness));
 
