@@ -13,12 +13,14 @@ Item {
     id: root
     property Folio.HomeScreen folio
 
+    property bool labelVisible: false
+
     width: folio.HomeScreenState.pageCellWidth
     height: folio.HomeScreenState.pageCellHeight
 
     // we need to simulate the position of the icon if it is placed at this spot
     ColumnLayout {
-        anchors.fill: parent
+        anchors.centerIn: parent
         spacing: 0
 
         // icon position placement
@@ -27,7 +29,7 @@ Item {
             color: Qt.rgba(255, 255, 255, 0.3)
             radius: Kirigami.Units.cornerRadius
 
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+            Layout.alignment: Qt.AlignHCenter
             Layout.minimumWidth: folio.FolioSettings.delegateIconSize
             Layout.minimumHeight: folio.FolioSettings.delegateIconSize
             Layout.preferredHeight: Layout.minimumHeight
@@ -38,7 +40,7 @@ Item {
         // simulate a delegate's label for positioning purposes
         DelegateLabel {
             id: label
-            opacity: 0
+            visible: root.labelVisible
             Layout.fillWidth: true
             Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
             Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing

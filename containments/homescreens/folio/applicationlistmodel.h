@@ -76,24 +76,33 @@ class ApplicationListSearchModel : public QSortFilterProxyModel
     Q_OBJECT
     QML_ELEMENT
 
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString categoryFilter READ categoryFilter WRITE setCategoryFilter NOTIFY categoryFilterChanged)
     Q_PROPERTY(QString searchString READ searchString WRITE setSearchString NOTIFY searchStringChanged)
 
 public:
     explicit ApplicationListSearchModel(QObject *parent = nullptr);
 
+    int count() const
+    {
+        return rowCount();
+    }
     QString categoryFilter() const
     {
         return m_categoryFilter;
     }
     void setCategoryFilter(const QString &category);
 
-    QString searchString() const {
+    QString searchString() const
+    {
         return m_searchString;
     }
     void setSearchString(const QString &search);
 
+    Q_INVOKABLE QVariant get(int row, const QString &roleName) const;
+
 Q_SIGNALS:
+    void countChanged();
     void categoryFilterChanged();
     void searchStringChanged();
 

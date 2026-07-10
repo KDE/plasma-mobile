@@ -5,15 +5,33 @@
 #include "windowlistener.h"
 
 #include <QQuickWindow>
+#include <QFileInfo>
+#include <QUrl>
+#include <QIcon>
+
+static bool isIconValid(const QString &iconNameOrPath)
+{
+    if (iconNameOrPath.isEmpty()) {
+        return false;
+    }
+
+    if (iconNameOrPath.startsWith(QStringLiteral("file://"))) {
+        return QFileInfo::exists(QUrl(iconNameOrPath).toLocalFile());
+    } else if (iconNameOrPath.startsWith(QLatin1Char('/'))) {
+        return QFileInfo::exists(iconNameOrPath);
+    }
+
+    return QIcon::hasThemeIcon(iconNameOrPath);
+}
 
 FolioApplication::FolioApplication(KService::Ptr service, const QStringList &categories, QObject *parent)
-    : QObject{parent}
-    , m_running{false}
-    , m_name{service ? service->name() : QString()}
-    , m_icon{service ? service->icon() : QString()}
-    , m_storageId{service ? service->storageId() : QString()}
-    , m_categories{categories}
-    , m_service{service}
+: QObject{parent}
+, m_running{false}
+, m_name{service ? service->name() : QString()}
+, m_icon{service && isIconValid(service->icon()) ? service->icon() : QStringLiteral("unknown")}
+, m_storageId{service ? service->storageId() : QString()}
+, m_categories{categories}
+, m_service{service}
 {
     if (service && service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
         m_name = service->genericName();

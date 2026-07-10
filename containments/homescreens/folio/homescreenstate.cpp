@@ -394,6 +394,45 @@ void HomeScreenState::calculatePageContentHeight()
     }
 }
 
+qreal HomeScreenState::favouritesBarWidth() const
+{
+    return m_favouritesBarWidth;
+}
+
+void HomeScreenState::setFavouritesBarWidth(qreal favouritesBarHeight)
+{
+    if (m_favouritesBarWidth != favouritesBarHeight) {
+        m_favouritesBarWidth = favouritesBarHeight;
+        Q_EMIT favouritesBarWidthChanged();
+    }
+}
+
+qreal HomeScreenState::favouritesBarHeight() const
+{
+    return m_favouritesBarHeight;
+}
+
+void HomeScreenState::setFavouritesBarHeight(qreal favouritesBarHeight)
+{
+    if (m_favouritesBarHeight != favouritesBarHeight) {
+        m_favouritesBarHeight = favouritesBarHeight;
+        Q_EMIT favouritesBarHeightChanged();
+    }
+}
+
+qreal HomeScreenState::favouritesBarDistanceFromEdge() const
+{
+    return m_favouritesBarDistanceFromEdge;
+}
+
+void HomeScreenState::setFavouritesBarDistanceFromEdge(qreal favouritesBarDistanceFromEdge)
+{
+    if (m_favouritesBarDistanceFromEdge != favouritesBarDistanceFromEdge) {
+        m_favouritesBarDistanceFromEdge = favouritesBarDistanceFromEdge;
+        Q_EMIT favouritesBarDistanceFromEdgeChanged();
+    }
+}
+
 qreal HomeScreenState::pageCellWidth() const
 {
     return m_pageCellWidth;
@@ -789,12 +828,16 @@ QPointF HomeScreenState::getPageDelegateScreenPosition(int page, int row, int co
     Q_UNUSED(page)
     qreal x = m_viewLeftPadding + ((m_pageWidth - m_pageContentWidth) / 2) + (m_pageCellWidth * column);
     qreal y = m_viewTopPadding + ((m_pageHeight - m_pageContentHeight) / 2) + (m_pageCellHeight * row);
+    y -= m_homeScreen->folioSettings()->showPagesAppLabels() ? (m_pageDelegateLabelHeight + m_pageDelegateLabelSpacing) * 0.5 : 0;
     return QPointF{x, y};
 }
 
 QPointF HomeScreenState::getFavouritesDelegateScreenPosition(int position)
 {
-    return m_homeScreen->favouritesModel()->getDelegateScreenPosition(position);
+    auto pos = m_homeScreen->favouritesModel()->getDelegateScreenPosition(position);
+    qreal x = pos.x();
+    qreal y = pos.y() - (m_homeScreen->folioSettings()->showFavouritesAppLabels() ? (m_pageDelegateLabelHeight + m_pageDelegateLabelSpacing) * 0.5 : 0);
+    return QPointF{x, y};
 }
 
 QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
@@ -808,6 +851,7 @@ QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
     qreal y = pos.y() + (m_viewHeight - m_viewTopPadding - m_viewBottomPadding - m_folderPageHeight) / 2;
     x += m_viewLeftPadding;
     y += m_viewTopPadding;
+    y -= m_homeScreen->folioSettings()->showPagesAppLabels() ? (m_pageDelegateLabelHeight + m_pageDelegateLabelSpacing) * 0.5 : 0;
 
     return {x, y};
 }
@@ -1173,6 +1217,8 @@ void HomeScreenState::swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal del
         setFolderViewX(m_folderViewX + deltaX);
         break;
     case SwipeState::AwaitingDraggingDelegate:
+        setDelegateDragX(m_delegateDragX + totalDeltaX);
+        setDelegateDragY(m_delegateDragY + totalDeltaY);
         setSwipeState(SwipeState::DraggingDelegate);
         Q_EMIT delegateDragStarted();
         break;

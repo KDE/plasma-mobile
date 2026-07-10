@@ -12,7 +12,7 @@ import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 PC3.Label {
     id: label
     wrapMode: Text.WordWrap
-    maximumLineCount: 2
+    maximumLineCount: 1
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignTop
     elide: Text.ElideRight

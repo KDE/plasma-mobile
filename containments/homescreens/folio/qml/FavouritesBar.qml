@@ -163,6 +163,7 @@ MouseArea {
                     folio: root.folio
                     width: folio.HomeScreenState.pageCellWidth
                     height: folio.HomeScreenState.pageCellHeight
+                    labelVisible: folio.FolioSettings.showFavouritesAppLabels
                 }
             }
 
@@ -190,7 +191,7 @@ MouseArea {
                         // prevent editing if lock layout is enabled
                         if (folio.FolioSettings.lockLayout) return;
 
-                        let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem);
+                        let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem, false, folio.FolioSettings.showFavouritesAppLabels);
                         folio.HomeScreenState.startDelegateFavouritesDrag(
                             mappedCoords.x,
                             mappedCoords.y,

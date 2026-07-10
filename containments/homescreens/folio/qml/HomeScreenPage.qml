@@ -118,6 +118,7 @@ Item {
         folio: root.folio
         width: folio.HomeScreenState.pageCellWidth
         height: folio.HomeScreenState.pageCellHeight
+        labelVisible: folio.FolioSettings.showPagesAppLabels
 
         property var dropPosition: folio.HomeScreenState.dragState.candidateDropPosition
         property var dropDelegate: folio.HomeScreenState.dragState.dropDelegate
@@ -291,7 +292,7 @@ Item {
                         // prevent editing if lock layout is enabled
                         if (folio.FolioSettings.lockLayout) return;
 
-                        let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.pageDelegate, appDelegate.delegateItem);
+                        let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.pageDelegate, appDelegate.delegateItem, false, folio.FolioSettings.showPagesAppLabels);
                         folio.HomeScreenState.startDelegatePageDrag(
                             mappedCoords.x,
                             mappedCoords.y,

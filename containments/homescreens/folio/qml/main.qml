@@ -29,6 +29,7 @@ ContainmentItem {
         folio.FolioSettings.load();
         folio.FavouritesModel.load();
         folio.PageListModel.load();
+        folio.HomeScreenState.pageDelegateLabelSpacing = Kirigami.Units.smallSpacing;
     }
 
     property MobileShell.MaskManager maskManager: MobileShell.MaskManager {
@@ -118,7 +119,7 @@ ContainmentItem {
     Rectangle {
         id: appDrawerBackground
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6)
+        color: Qt.rgba(0, 0, 0, 0.3)
 
         opacity: folio.HomeScreenState.appDrawerOpenProgress
     }

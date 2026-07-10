@@ -23,6 +23,9 @@ class DelegateTouchArea : public QQuickItem
     Q_PROPERTY(Qt::CursorShape cursorShape READ cursorShape WRITE setCursorShape RESET unsetCursor NOTIFY cursorShapeChanged FINAL)
     Q_PROPERTY(QPointF pressPosition READ pressPosition NOTIFY pressPositionChanged FINAL)
 
+    Q_PROPERTY(QQuickItem *hitItem READ hitItem WRITE setHitItem NOTIFY hitItemChanged FINAL)
+    Q_PROPERTY(qreal hitPadding READ hitPadding WRITE setHitPadding NOTIFY hitPaddingChanged FINAL)
+
     QML_NAMED_ELEMENT(DelegateTouchArea)
 
 public:
@@ -35,6 +38,14 @@ public:
     void unsetCursor();
     QPointF pressPosition();
 
+    QQuickItem *hitItem() const;
+    void setHitItem(QQuickItem *hitItem);
+
+    qreal hitPadding() const;
+    void setHitPadding(qreal hitPadding);
+
+    bool contains(const QPointF &point) const override;
+
 Q_SIGNALS:
     void clicked();
     void rightMousePress();
@@ -44,6 +55,8 @@ Q_SIGNALS:
     void hoveredChanged(bool hovered);
     void cursorShapeChanged();
     void pressPositionChanged();
+    void hitItemChanged();
+    void hitPaddingChanged();
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -72,6 +85,8 @@ private:
     bool m_pressAndHeld{false};
     Qt::CursorShape m_cursorShape{Qt::ArrowCursor};
     QPointF m_mouseDownPosition{};
+    QPointer<QQuickItem> m_hitItem{nullptr};
+    qreal m_hitPadding{0.0};
 
     QTimer *m_pressAndHoldTimer{nullptr};
 };

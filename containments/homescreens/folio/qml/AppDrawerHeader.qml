@@ -21,6 +21,10 @@ ColumnLayout {
     property alias currentCategoryIndex: tabBar.currentIndex
     property alias searchText: searchField.text
 
+    property alias tabbar: tabListView
+
+    readonly property real searchFieldMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
+
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     Kirigami.Theme.inherit: false
 
@@ -63,17 +67,17 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.topMargin: Kirigami.Units.largeSpacing
         Layout.margins: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
-        Layout.bottomMargin: 0
+        Layout.bottomMargin: Kirigami.Units.smallSpacing * 0.5
         Layout.alignment: Qt.AlignHCenter
 
         Kirigami.SearchField {
             id: searchField
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 26
             Layout.alignment: Qt.AlignHCenter
 
             background: Rectangle {
                 radius: Kirigami.Units.cornerRadius
-                color: Qt.rgba(255, 255, 255, (searchField.hovered || searchField.focus) ? 0.2 : 0.1)
+                color: Qt.rgba(255, 255, 255, (searchField.hovered || searchField.focus) ? 0.2 : 0.15)
 
                 Behavior on color { ColorAnimation {} }
             }
@@ -128,11 +132,11 @@ ColumnLayout {
     Item {
         id: tabBar
         Layout.fillWidth: true
-        Layout.bottomMargin: -Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing * 2
-        Layout.leftMargin: -Kirigami.Units.smallSpacing
-        Layout.rightMargin: -Kirigami.Units.smallSpacing
+        Layout.bottomMargin: -Kirigami.Units.largeSpacing + Kirigami.Units.largeSpacing * 2
+        Layout.leftMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
+        Layout.rightMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
 
-        implicitHeight: Kirigami.Units.gridUnit * 2
+        implicitHeight: Kirigami.Units.gridUnit * 1.75
         Layout.minimumHeight: implicitHeight
 
         property int currentIndex: 0
@@ -149,7 +153,7 @@ ColumnLayout {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
-            model: folio.ApplicationListModel.categories
+            model: ["All Apps", "Categories"] // folio.ApplicationListModel.categories
             currentIndex: tabBar.currentIndex
             onCurrentIndexChanged: {
                 if (tabBar.currentIndex !== currentIndex) {
@@ -160,11 +164,11 @@ ColumnLayout {
             readonly property real defaultMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
             readonly property real moveDuration: Kirigami.Units.longDuration
 
-            width: Math.min(contentWidth, tabBar.width)
-            leftMargin: defaultMargin
-            rightMargin: defaultMargin
+            width: Math.min(Kirigami.Units.gridUnit * 12, tabBar.width)
+            // leftMargin: defaultMargin
+            // rightMargin: defaultMargin
 
-            spacing: Kirigami.Units.smallSpacing
+            // spacing: Kirigami.Units.smallSpacing
             orientation: ListView.Horizontal
             flickableDirection: Flickable.AutoFlickIfNeeded
 
@@ -173,8 +177,8 @@ ColumnLayout {
             highlightResizeDuration: 0
             highlightFollowsCurrentItem: true
 
-            preferredHighlightBegin: tabListView.defaultMargin
-            preferredHighlightEnd: Math.max(preferredHighlightBegin, tabBar.width - tabListView.defaultMargin)
+            // preferredHighlightBegin: tabListView.defaultMargin
+            // preferredHighlightEnd: Math.max(preferredHighlightBegin, tabBar.width - tabListView.defaultMargin)
 
             highlightRangeMode: ListView.ApplyRange
 
@@ -200,11 +204,20 @@ ColumnLayout {
             keyNavigationEnabled: true
             keyNavigationWraps: true
 
+            Rectangle {
+                anchors.fill: parent
+
+                property color backgroundColor: "white"
+
+                color: Qt.rgba(backgroundColor.r, backgroundColor.g, backgroundColor.b, 0.15)
+                radius: height * 2 // Kirigami.Units.cornerRadius
+            }
+
             delegate: Item {
                 id: tabButton
                 readonly property bool checked: tabListView.currentIndex === index
 
-                width: txtMeter.advanceWidth + Math.round(Kirigami.Units.gridUnit * 1.75)
+                width: Math.floor(tabListView.width / tabListView.count)// txtMeter.advanceWidth + Math.round(Kirigami.Units.gridUnit * 1.75)
                 height: tabListView.height
 
                 TextMetrics {
@@ -215,19 +228,20 @@ ColumnLayout {
 
                 Rectangle {
                     anchors.fill: parent
-                    anchors.topMargin: Kirigami.Units.smallSpacing
-                    anchors.bottomMargin: Kirigami.Units.smallSpacing
+                    anchors.margins: Kirigami.Units.smallSpacing * 0.5
+                    //anchors.topMargin: Kirigami.Units.smallSpacing
+                    //anchors.bottomMargin: Kirigami.Units.smallSpacing
                     property color buttonColor: "white"
 
-                    color: tabButton.checked ? Qt.rgba(buttonColor.r, buttonColor.g, buttonColor.b, tabListView.activeFocus ? 0.2 : 0.1) : "transparent"
-                    radius: Kirigami.Units.cornerRadius
+                    color: tabButton.checked ? Qt.rgba(buttonColor.r, buttonColor.g, buttonColor.b, tabListView.activeFocus ? 0.3 : 0.2) : "transparent"
+                    radius: height // Kirigami.Units.cornerRadius
                 }
 
                 PlasmaComponents.Label {
                     id: label
                     anchors.centerIn: parent
                     text: modelData
-                    color: "white"
+                    color: Qt.rgba(255, 255, 255, tabButton.checked ? 1 : 0.9)
                 }
 
                 MouseArea {
@@ -243,6 +257,7 @@ ColumnLayout {
             }
         }
 
+        /*
         // Opacity gradient at grid edges
         layer.enabled: !tabListView.fitsEntirely
         layer.effect: OpacityMask {
@@ -262,6 +277,7 @@ ColumnLayout {
                 }
             }
         }
+        */
     }
 
     Connections {

@@ -31,7 +31,12 @@ Item {
     // Height from top of screen that the drawer starts
     readonly property real drawerTopMargin: height - topPadding - bottomPadding
 
-    property var flickable: delegateRepeater.itemAt(folio.HomeScreenState.currentAppDrawerPage)?.flickable
+    property var flickable: {
+        if (categoryAppGridItem.opened) {
+            return categoryAppGridItem;
+        }
+        return folio.HomeScreenState.currentAppDrawerPage === 0 ? allAppsGrid : categoryGridView;
+    }
 
     // Keyboard navigation
     Keys.onPressed: (event) => {
@@ -42,14 +47,27 @@ Item {
         }
     }
 
+    function reset() {
+        appDrawer.flickable.contentY = 0 - appDrawer.flickable.topMargin;
+        appDrawer.flickable.returnToBounds();
+    }
+
     // App drawer container
     Item {
+        id: appDrawerContainer
         anchors.fill: parent
 
         anchors.leftMargin: root.leftPadding
         anchors.topMargin: root.topPadding
         anchors.rightMargin: root.rightPadding
         anchors.bottomMargin: root.bottomPadding
+
+        readonly property real scaleEase: Math.pow(categoryAppGridItem.animationProgress, 1)
+        readonly property real opacityEase: Math.pow(1.0 - categoryAppGridItem.animationProgress, 2)
+
+        opacity: Math.min(Math.max(0.0, opacityEase), 1)
+        visible: opacity > 0.01
+        scale: Math.min(Math.max(1.0 - (scaleEase * 0.25), 0), 1)
 
         // Drawer header
         MobileShell.BaseItem {
@@ -66,6 +84,8 @@ Item {
 
         Item {
             id: swipeContainer
+            anchors.topMargin: -Kirigami.Units.gridUnit * 2.5
+            anchors.bottomMargin: -root.bottomPadding + Math.max(root.bottomPadding - Kirigami.Units.gridUnit, 0)
             anchors.top: drawerHeader.bottom
             anchors.left: parent.left
             anchors.right: parent.right
@@ -79,7 +99,7 @@ Item {
             Binding {
                 target: folio.HomeScreenState
                 property: "appDrawerPageCount"
-                value: folio.ApplicationListModel.categories.length
+                value: 2
             }
 
             Item {
@@ -87,140 +107,138 @@ Item {
                 height: parent.height
                 x: folio.HomeScreenState.appDrawerPageX
 
-                Repeater {
-                    id: delegateRepeater
-                    model: folio.ApplicationListModel.categories
+                // All apps grid
+                AppDrawerAppGrid {
+                    id: allAppsGrid
+                    folio: root.folio
+                    homeScreen: root.homeScreen
+                    headerHeight: root.headerHeight
+                    currentPage: folio.HomeScreenState.currentAppDrawerPage === 0
 
-                    Item {
-                        id: pageItem
-                        width: swipeContainer.width
-                        height: swipeContainer.height
+                    width: swipeContainer.width
+                    height: swipeContainer.height
+                    containerWidth: swipeContainer.width
+                    containerTopMargin: swipeContainer.anchors.topMargin
+                    containerBottomMargin: swipeContainer.anchors.bottomMargin
 
-                        x: index * width
+                    model: Folio.ApplicationListSearchModel {
+                        sourceModel: root.folio.ApplicationListModel
+                        searchString: root.headerItem.searchText
+                    }
+                }
 
-                        property alias flickable: appDrawerGrid
+                // Categories grid
+                AppDrawerCategoryGrid {
+                    id: categoryGridView
+                    folio: root.folio
+                    homeScreen: root.homeScreen
+                    categoryAppGrid: categoryAppGridItem
+                    headerHeight: root.headerHeight
+                    currentPage: folio.HomeScreenState.currentAppDrawerPage === 1
 
-                        // App list
-                        AppDrawerGrid {
-                            id: appDrawerGrid
-                            anchors.fill: parent
-                            folio: root.folio
-                            homeScreen: root.homeScreen
-                            headerHeight: root.headerHeight
+                    width: swipeContainer.width
+                    height: swipeContainer.height
+                    x: swipeContainer.width
+                    containerWidth: swipeContainer.width
+                    containerTopMargin: swipeContainer.anchors.topMargin
+                    containerBottomMargin: swipeContainer.anchors.bottomMargin
 
-                            currentPage: folio.HomeScreenState.currentAppDrawerPage === index
+                    model: root.folio.ApplicationListModel.categories.slice(1)
 
-                            opacity: 0 // we display with the opacity gradient below
-
-                            model: Folio.ApplicationListSearchModel {
-                                sourceModel: root.folio.ApplicationListModel
-                                categoryFilter: modelData
-                                searchString: root.headerItem.searchText
-                            }
-
-                            // Keyboard navigation
-                            topEdgeCallback: () => {
-                                root.headerItem.focusTabBar();
-                            }
-
-                            Keys.onPressed: (event) => {
-                                if (event.key === Qt.Key_Tab || event.key === Qt.Key_Backtab) {
-                                    topEdgeCallback();
-                                    event.accepted = true;
-                                } else if (event.key === Qt.Key_Up) {
-                                    if (appDrawerGrid.currentIndex < appDrawerGrid.columns) {
-                                        topEdgeCallback();
-                                        event.accepted = true;
-                                    }
-                                } else if (event.key === Qt.Key_Down) {
-                                    if (appDrawerGrid.currentIndex + appDrawerGrid.columns >= appDrawerGrid.count) {
-                                        event.accepted = true;
-                                    }
-                                } else if (event.key === Qt.Key_Left) {
-                                    if (appDrawerGrid.currentIndex % appDrawerGrid.columns === 0) {
-                                        if (index > 0) {
-                                            folio.HomeScreenState.goToAppDrawerPage(index - 1, false);
-                                            let prevGrid = delegateRepeater.itemAt(index - 1).flickable;
-                                            if (prevGrid) {
-                                                prevGrid.forceActiveFocus();
-                                            }
-                                        } else {
-                                            folio.HomeScreenState.goToAppDrawerPage(delegateRepeater.count - 1, false);
-                                            let wrapAround = delegateRepeater.itemAt(delegateRepeater.count - 1).flickable;
-                                            if (wrapAround) {
-                                                wrapAround.forceActiveFocus();
-                                            }
-                                        }
-                                        event.accepted = true;
-                                    }
-                                } else if (event.key === Qt.Key_Right) {
-                                    if (appDrawerGrid.currentIndex % appDrawerGrid.columns === appDrawerGrid.columns - 1 ||
-                                        appDrawerGrid.currentIndex === appDrawerGrid.count - 1) {
-
-                                        if (index < delegateRepeater.count - 1) {
-                                            folio.HomeScreenState.goToAppDrawerPage(index + 1, false);
-                                            let nextGrid = delegateRepeater.itemAt(index + 1).flickable;
-                                            if (nextGrid) {
-                                                nextGrid.forceActiveFocus();
-                                            }
-                                        } else {
-                                            folio.HomeScreenState.goToAppDrawerPage(0, false);
-                                            let wrapAround = delegateRepeater.itemAt(0).flickable;
-                                            if (wrapAround) {
-                                                wrapAround.forceActiveFocus();
-                                            }
-                                        }
-                                        event.accepted = true;
-                                    }
-                                }
-                            }
-                        }
-
-                        // Opacity gradient at grid edges
-                        MobileShell.FlickableOpacityGradient {
-                            anchors.fill: appDrawerGrid
-                            flickable: appDrawerGrid
-                        }
-
-                        // No results find message
-                        ColumnLayout {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            opacity: 0.5
-                            y: (parent.height * 0.25) - (height * 0.5)
-                            visible: appDrawerGrid.count == 0 && root.headerItem.searchText != ""
-
-                            Kirigami.Icon {
-                                Layout.alignment: Qt.AlignHCenter
-                                source: "file-search-symbolic"
-
-                                Layout.preferredHeight: Kirigami.Units.gridUnit * 3
-                                Layout.preferredWidth: Kirigami.Units.gridUnit * 3
-                            }
-
-                            PC3.Label {
-                                text: "No Results for \"" + root.headerItem.searchText  + "\""
-                                font.bold: true
-                                color: "white"
-                                wrapMode: Text.Wrap
-                                horizontalAlignment: Text.AlignHCenter
-
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.maximumWidth: Math.min(parent.width - Kirigami.Units.gridUnit * 2, Kirigami.Units.gridUnit * 16)
-                            }
-                            PC3.Label {
-                                text: "Check spelling or try a different search."
-                                color: "white"
-                                wrapMode: Text.Wrap
-                                horizontalAlignment: Text.AlignHCenter
-
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.maximumWidth: Math.min(parent.width - Kirigami.Units.gridUnit * 2, Kirigami.Units.gridUnit * 16)
-                            }
-                        }
+                    onExpandCategory: (expandCategoryButton, category) => {
+                        categoryAppGridItem.expandCategory(expandCategoryButton, category);
                     }
                 }
             }
+
+            layer.enabled: true
+            layer.effect: OpacityMask {
+                invert: true
+
+                maskSource: Rectangle {
+                    id: gridViewMask
+                    width: swipeContainer.width
+                    height: swipeContainer.height
+
+                    property real gradientPct: (Kirigami.Units.gridUnit * 3) / height
+                    property real bottomGradientPct: (-swipeContainer.anchors.bottomMargin + Kirigami.Units.gridUnit) / height
+
+                    gradient: Gradient {
+                        orientation: Gradient.Vertical
+
+                        GradientStop { position: 0; color: 'white' }
+                        GradientStop { position: 0 + gridViewMask.gradientPct; color: 'transparent' }
+                        GradientStop { position: 1.0 - gridViewMask.bottomGradientPct; color: 'transparent' }
+                        GradientStop { position: 1.0; color: 'white' }
+                    }
+
+                    Rectangle {
+                        width: root.headerItem.tabbar.width
+                        height: root.headerItem.tabbar.height
+                        radius: height * 2
+                        opacity: 0.95
+
+                        readonly property point position: {
+                            swipeContainer.width
+                            swipeContainer.height
+                            folio.HomeScreenState.appDrawerPageX
+                            swipeContainer.mapFromItem(root.headerItem.tabbar, 0, 0)
+                        }
+
+                        x: position.x
+                        y: position.y
+                        color: "white"
+                    }
+                }
+            }
+        }
+    }
+
+    Item {
+        anchors.fill: parent
+        visible: categoryAppGridItem.opened || categoryAppGridItem.animationProgress > 0 || categoryAppGridItem.keepVisibleForDrag
+
+        CategoryAppGrid {
+            id: categoryAppGridItem
+            anchors.fill: parent
+
+            anchors.leftMargin: root.leftPadding
+            anchors.topMargin: root.topPadding + Kirigami.Units.gridUnit * 3
+            anchors.rightMargin: root.rightPadding
+            anchors.bottomMargin: root.bottomPadding
+
+            folio: root.folio
+            homeScreen: root.homeScreen
+            clip: true
+
+            layer.enabled: true
+            layer.effect: OpacityMask {
+                maskSource: Rectangle {
+                    id: categoryAppGridMask
+                    width: swipeContainer.width
+                    height: swipeContainer.height
+
+                    property real gradientPct: (Kirigami.Units.gridUnit * 3) / height
+                    property real bottomGradientPct: (-swipeContainer.anchors.bottomMargin + Kirigami.Units.gridUnit) / height
+
+                    gradient: Gradient {
+                        orientation: Gradient.Vertical
+
+                        GradientStop { position: 0; color: 'transparent' }
+                        GradientStop { position: 0 + categoryAppGridMask.gradientPct; color: 'white' }
+                        GradientStop { position: 1.0 - categoryAppGridMask.bottomGradientPct; color: 'white' }
+                        GradientStop { position: 1.0; color: 'transparent' }
+                    }
+                }
+            }
+        }
+
+        CategoryAppGridTitle {
+            categoryAppGrid: categoryAppGridItem
+        }
+
+        TapHandler {
+            onTapped: categoryAppGridItem.closeCategory()
         }
     }
 }

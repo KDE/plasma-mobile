@@ -17,6 +17,9 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 Folio.DelegateTouchArea {
     id: root
+    hitItem: visualItem
+    hitPadding: Math.max(0, Math.min(Kirigami.Units.smallSpacing, (root.width - visualItem.width) * 0.5))
+
     property Folio.HomeScreen folio
     property MobileShell.MaskManager maskManager
 
@@ -27,7 +30,19 @@ Folio.DelegateTouchArea {
     property alias delegateItem: delegateWrapper
     property alias labelOpacity: label.opacity
 
+    property bool debugHitboxes: false
+
     signal afterClickAnimation()
+
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+
+        border.color : "white"
+        border.width: 1
+
+        visible: debugHitboxes
+    }
 
     // grow/shrink animation
     property real scaleAmount: 1
@@ -98,7 +113,9 @@ Folio.DelegateTouchArea {
         }
 
         ColumnLayout {
-            anchors.fill: parent
+            id: visualLayout
+            anchors.centerIn: parent
+            width: parent.width
             spacing: 0
 
             layer.enabled: root.shadow
@@ -108,8 +125,8 @@ Folio.DelegateTouchArea {
             // affects the delegate's x and y position, which messes up the starting drag and drop
             // position (for mapFromItem in HomeScreen.qml)
             transform: Scale {
-                origin.x: root.width / 2;
-                origin.y: root.height / 2;
+                origin.x: visualLayout.width / 2;
+                origin.y: visualLayout.height / 2;
                 xScale: root.scaleAmount
                 yScale: root.scaleAmount
             }
@@ -117,7 +134,7 @@ Folio.DelegateTouchArea {
             MobileShell.BaseItem {
                 id: visualItem
 
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                Layout.alignment: Qt.AlignHCenter
                 Layout.minimumWidth: folio.FolioSettings.delegateIconSize
                 Layout.minimumHeight: folio.FolioSettings.delegateIconSize
                 Layout.preferredHeight: Layout.minimumHeight
@@ -130,12 +147,33 @@ Folio.DelegateTouchArea {
                 //         color: Qt.rgba(0, 0, 0, 0.3)
                 //     }
                 // }
+
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.margins: -root.hitPadding
+                    color: "red"
+                    z: -1000
+                    opacity: 0.25
+
+                    visible: debugHitboxes
+                }
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "transparent"
+
+                    border.color : "green"
+                    border.width: 1
+
+                    visible: debugHitboxes
+                }
             }
 
             DelegateLabel {
                 id: label
-                opacity: text.length > 0
+                visible: text.length > 0
 
+                Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
                 Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
                 Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
@@ -144,6 +182,16 @@ Folio.DelegateTouchArea {
 
                 text: root.name
                 color: "white"
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "transparent"
+
+                    border.color : "blue"
+                    border.width: 1
+
+                    visible: debugHitboxes
+                }
             }
         }
     }

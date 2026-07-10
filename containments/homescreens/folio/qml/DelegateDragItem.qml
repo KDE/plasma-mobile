@@ -18,6 +18,8 @@ Item {
     property MobileShell.MaskManager maskManager
     property Folio.FolioDelegate delegate
 
+    property bool debugHitboxes: false
+
     width: folio.HomeScreenState.pageCellWidth
     height: folio.HomeScreenState.pageCellHeight
 
@@ -35,6 +37,16 @@ Item {
     }
     function setYBinding() {
         y = Qt.binding(() => folio.HomeScreenState.delegateDragY);
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+
+        border.color : "white"
+        border.width: 1
+
+        visible: debugHitboxes
     }
 
     // animate drop x
@@ -157,7 +169,8 @@ Item {
 
     // simulate an icon delegate
     ColumnLayout {
-        anchors.fill: parent
+        id: appIconVisual
+        anchors.centerIn: parent
         spacing: 0
 
         // icon
@@ -165,7 +178,7 @@ Item {
             id: loader
             folio: root.folio
             maskManager: root.maskManager
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+            Layout.alignment: Qt.AlignHCenter
             Layout.minimumWidth: folio.FolioSettings.delegateIconSize
             Layout.minimumHeight: folio.FolioSettings.delegateIconSize
             Layout.preferredHeight: Layout.minimumHeight
@@ -174,12 +187,23 @@ Item {
 
             layer.enabled: true
             layer.effect: DelegateShadow {}
+
+            Rectangle {
+                anchors.fill: parent
+                color: "transparent"
+
+                border.color : "green"
+                border.width: 1
+
+                visible: debugHitboxes
+            }
         }
 
         // simulate the delegate label for positioning purposes
         DelegateLabel {
             id: label
-            opacity: 0
+            visible: false
+            // opacity: 0
 
             Layout.fillWidth: true
             Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight

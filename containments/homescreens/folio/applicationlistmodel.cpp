@@ -232,6 +232,11 @@ ApplicationListSearchModel::ApplicationListSearchModel(QObject *parent)
     setSortLocaleAware(true);
 
     sort(0, Qt::AscendingOrder);
+
+    connect(this, &QSortFilterProxyModel::rowsInserted, this, &ApplicationListSearchModel::countChanged);
+    connect(this, &QSortFilterProxyModel::rowsRemoved, this, &ApplicationListSearchModel::countChanged);
+    connect(this, &QSortFilterProxyModel::modelReset, this, &ApplicationListSearchModel::countChanged);
+    connect(this, &QSortFilterProxyModel::layoutChanged, this, &ApplicationListSearchModel::countChanged);
 }
 
 void ApplicationListSearchModel::setCategoryFilter(const QString &category)
@@ -268,4 +273,16 @@ bool ApplicationListSearchModel::filterAcceptsRow(int source_row, const QModelIn
     QStringList rowCategories = sourceModel()->data(index, ApplicationListModel::CategoryRole).toStringList();
 
     return rowCategories.contains(m_categoryFilter);
+}
+
+QVariant ApplicationListSearchModel::get(int row, const QString &roleName) const
+{
+    if (row < 0 || row >= rowCount())
+        return QVariant();
+
+    int role = roleNames().key(roleName.toUtf8(), -1);
+    if (role == -1)
+        return QVariant();
+
+    return data(index(row, 0), role);
 }
