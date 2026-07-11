@@ -2748,7 +2748,7 @@ msgstr "文森尼斯"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Vladivostok"
-msgstr "符拉迪沃斯托克"
+msgstr "符拉迪沃斯托克 (海参崴)"
 
 #: timezonesi18n.cpp:498
 #, kde-format
