@@ -24,7 +24,10 @@ BaseNotificationItem {
     id: notificationItem
     implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
 
+    readonly property real cardHeight: mainCard.cardHeight
+
     property bool inLockScreen: false
+    property bool animateHeight: false
     property int panelType: MobileShell.PanelBackground.PanelType.Drawer
 
     property var cardColorScheme: Kirigami.Theme.View
@@ -62,6 +65,7 @@ BaseNotificationItem {
         onDismissRequested: notificationItem.close();
         inLockScreen: notificationItem.inLockScreen
         panelType: notificationItem.panelType
+        animateHeight: notificationItem.animateHeight
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()

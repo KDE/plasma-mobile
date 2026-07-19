@@ -20,6 +20,11 @@ Item {
     default property Item contentItem
 
     /**
+     * The height of the main card. This value is synced to the animated height if 'animateHeight' is set to true.
+     */
+    readonly property real cardHeight: mainCard.implicitHeight
+
+    /**
      * The panel background type for this notification.
      */
     property int panelType: MobileShell.PanelBackground.PanelType.Drawer
@@ -38,6 +43,11 @@ Item {
      * Whether this notification is within the lockscreen.
      */
     property bool inLockScreen: false
+
+    /**
+     * Whether to animate the changes in the notification card height.
+     */
+    property bool animateHeight: false
 
     /**
      * The current notification popup height.
@@ -79,7 +89,6 @@ Item {
         contentItem.parent = contentParent;
         contentItem.anchors.fill = contentParent;
         contentItem.anchors.margins = Kirigami.Units.largeSpacing;
-        contentParent.children.push(contentItem);
     }
 
     implicitHeight: contentParent.implicitHeight
@@ -113,7 +122,7 @@ Item {
         implicitHeight: inPopupDrawer ? currentPopupHeight : contentParent.implicitHeight
         Behavior on implicitHeight {
             NumberAnimation {
-                duration: Kirigami.Units.veryLongDuration
+                duration: root.animateHeight ? Kirigami.Units.veryLongDuration : 0
                 easing.type: Easing.OutExpo
             }
         }
@@ -135,7 +144,7 @@ Item {
                 }
             }
 
-            background: Item
+            background: Item {}
 
             contentItem: Item {
                 implicitWidth: parent.width

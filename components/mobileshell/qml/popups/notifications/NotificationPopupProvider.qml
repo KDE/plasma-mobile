@@ -1,14 +1,12 @@
 /*
- *  SPDX-FileCopyrightText: 2024 Micah Stanley <stanleymicah@proton.me>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
+    SPDX-FileCopyrightText: 2024 Micah Stanley <stanleymicah@proton.me>
+
+    SPDX-License-Identifier: GPL-2.0-or-later
  */
 
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.notificationmanager as NotificationManager
@@ -28,7 +26,7 @@ QtObject {
         onNotificationsInhibitedUntilChanged: notificationProvider.checkInhibition()
     }
 
-    property QtObject popupNotificationsModel: NotificationManager.Notifications {
+    property var popupNotificationsModel: NotificationManager.Notifications {
         showExpired: false
         showDismissed: false
         blacklistedDesktopEntries: notificationSettings.popupBlacklistedApplications
