@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2026-06-01 18:01-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -25,6 +25,11 @@ msgstr "مەۋھۇم ھەرپتاختا"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "تەڭشەكنى ئېچىشتا چېكىلىدۇ"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "ئوچۇق"
 
@@ -32,8 +37,3 @@ msgstr "ئوچۇق"
 #, kde-format
 msgid "Off"
 msgstr "تاقاق"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "تەڭشەكنى ئېچىشتا چېكىلىدۇ"

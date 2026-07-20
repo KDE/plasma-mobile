@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2023-12-22 05:30+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -24,6 +24,11 @@ msgstr "虛擬鍵盤"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "輕點以開啟設定"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "開啟"
 
@@ -31,8 +36,3 @@ msgstr "開啟"
 #, kde-format
 msgid "Off"
 msgstr "關閉"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "輕點以開啟設定"

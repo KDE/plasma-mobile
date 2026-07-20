@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2025-08-04 21:11+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -25,6 +25,11 @@ msgstr "لوحة مفاتيح افتراضية"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "اطرق لتفتح الإعدادات"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "تعمل"
 
@@ -32,8 +37,3 @@ msgstr "تعمل"
 #, kde-format
 msgid "Off"
 msgstr "لا تعمل"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "اطرق لتفتح الإعدادات"

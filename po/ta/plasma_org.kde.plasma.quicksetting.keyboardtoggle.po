@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2023-04-23 17:08+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -24,6 +24,11 @@ msgstr "மெய்நிகர் விசைப்பலகை"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "அமைப்புகளை திறக்க தட்டவும்"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "இயக்கத்தில்"
 
@@ -31,8 +36,3 @@ msgstr "இயக்கத்தில்"
 #, kde-format
 msgid "Off"
 msgstr "முடக்கத்தில்"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "அமைப்புகளை திறக்க தட்டவும்"

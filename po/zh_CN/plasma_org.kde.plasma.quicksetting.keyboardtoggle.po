@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -25,6 +25,11 @@ msgstr "虚拟键盘"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "点击打开设置"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "开"
 
@@ -32,8 +37,3 @@ msgstr "开"
 #, kde-format
 msgid "Off"
 msgstr "关"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "点击打开设置"

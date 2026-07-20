@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2023-01-18 16:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -23,6 +23,11 @@ msgstr "Näyttönäppäimistö"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Avaa asetukset napauttamalla"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Käytössä"
 
@@ -30,8 +35,3 @@ msgstr "Käytössä"
 #, kde-format
 msgid "Off"
 msgstr "Ei käytössä"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Avaa asetukset napauttamalla"

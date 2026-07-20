@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.keyboardtoggle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2025-05-26 01:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -26,6 +26,11 @@ msgstr "Teclado virtual"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Toque para abrir las preferencias"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Activado"
 
@@ -33,8 +38,3 @@ msgstr "Activado"
 #, kde-format
 msgid "Off"
 msgstr "Desactivado"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Toque para abrir las preferencias"

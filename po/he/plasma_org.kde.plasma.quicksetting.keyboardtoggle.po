@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2024-03-07 11:31+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -25,6 +25,11 @@ msgstr "מקלדת וירטואלית"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "נגיעה לפתיחת ההגדרות"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "פעילה"
 
@@ -32,8 +37,3 @@ msgstr "פעילה"
 #, kde-format
 msgid "Off"
 msgstr "כבויה"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "נגיעה לפתיחת ההגדרות"

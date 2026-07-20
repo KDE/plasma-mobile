@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-20 00:45+0000\n"
 "PO-Revision-Date: 2024-06-21 11:29+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -24,6 +24,11 @@ msgstr "Virtuellt tangentbord"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Tryck för att öppna inställningar"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "På"
 
@@ -31,8 +36,3 @@ msgstr "På"
 #, kde-format
 msgid "Off"
 msgstr "Av"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Tryck för att öppna inställningar"
