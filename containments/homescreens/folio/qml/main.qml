@@ -29,6 +29,7 @@ ContainmentItem {
         folio.FolioSettings.load();
         folio.FavouritesModel.load();
         folio.PageListModel.load();
+        folio.HomeScreenState.pageDelegateLabelSpacing = Kirigami.Units.smallSpacing;
     }
 
     property MobileShell.MaskManager maskManager: MobileShell.MaskManager {

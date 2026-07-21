@@ -351,35 +351,33 @@ QPointF FavouritesModel::getDelegateScreenPosition(int position) const
     position = adjustIndex(position);
 
     auto homeScreenState = m_homeScreen->homeScreenState();
-    qreal screenHeight = homeScreenState->viewHeight();
     qreal screenWidth = homeScreenState->viewWidth();
-    qreal pageHeight = homeScreenState->pageHeight();
-    qreal pageWidth = homeScreenState->pageWidth();
-    qreal screenTopPadding = homeScreenState->viewTopPadding();
+    qreal screenHeight = homeScreenState->viewHeight();
     qreal screenBottomPadding = homeScreenState->viewBottomPadding();
     qreal screenLeftPadding = homeScreenState->viewLeftPadding();
     qreal screenRightPadding = homeScreenState->viewRightPadding();
     qreal cellHeight = homeScreenState->pageCellHeight();
     qreal cellWidth = homeScreenState->pageCellWidth();
 
+    qreal favouritesBarWidth = homeScreenState->favouritesBarWidth();
+    qreal favouritesBarHeight = homeScreenState->favouritesBarHeight();
+    qreal distanceFromEdge = homeScreenState->favouritesBarDistanceFromEdge();
+
     qreal startPosition = getDelegateRowStartPos();
 
     switch (homeScreenState->favouritesBarLocation()) {
     case HomeScreenState::Bottom: {
-        qreal favouritesHeight = screenHeight - pageHeight - screenBottomPadding - screenTopPadding;
         qreal x = screenLeftPadding + startPosition + cellWidth * position;
-        qreal y = screenTopPadding + pageHeight + (favouritesHeight / 2) - (cellHeight / 2);
+        qreal y = screenHeight - screenBottomPadding - distanceFromEdge - favouritesBarHeight + (favouritesBarHeight / 2) - (cellHeight / 2);
         return {x, y};
     }
     case HomeScreenState::Left: {
-        qreal favouritesWidth = screenWidth - screenLeftPadding - pageWidth - screenRightPadding;
-        qreal x = screenLeftPadding + (favouritesWidth / 2) - (cellWidth / 2);
+        qreal x = screenLeftPadding + distanceFromEdge + favouritesBarWidth + (favouritesBarWidth / 2) - (cellWidth / 2);
         qreal y = startPosition + cellHeight * position;
         return {x, y};
     }
     case HomeScreenState::Right: {
-        qreal favouritesWidth = screenWidth - screenLeftPadding - pageWidth - screenRightPadding;
-        qreal x = screenLeftPadding + pageWidth + (favouritesWidth / 2) - (cellWidth / 2);
+        qreal x = screenWidth - screenRightPadding- distanceFromEdge - favouritesBarWidth + (favouritesBarWidth / 2) - (cellWidth / 2);
         qreal y = startPosition + cellHeight * position;
         return {x, y};
     }

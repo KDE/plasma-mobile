@@ -50,6 +50,10 @@ class HomeScreenState : public QObject
     Q_PROPERTY(qreal pageContentWidth READ pageContentWidth NOTIFY pageContentWidthChanged)
     Q_PROPERTY(qreal pageContentHeight READ pageContentHeight NOTIFY pageContentHeightChanged)
 
+    Q_PROPERTY(qreal favouritesBarWidth READ favouritesBarWidth WRITE setFavouritesBarWidth NOTIFY favouritesBarWidthChanged)
+    Q_PROPERTY(qreal favouritesBarHeight READ favouritesBarHeight WRITE setFavouritesBarHeight NOTIFY favouritesBarHeightChanged)
+    Q_PROPERTY(qreal favouritesBarDistanceFromEdge READ favouritesBarDistanceFromEdge WRITE setFavouritesBarDistanceFromEdge NOTIFY favouritesBarDistanceFromEdgeChanged)
+
     // cell measurements
     Q_PROPERTY(qreal pageCellWidth READ pageCellWidth NOTIFY pageCellWidthChanged)
     Q_PROPERTY(qreal pageCellHeight READ pageCellHeight NOTIFY pageCellHeightChanged)
@@ -180,6 +184,15 @@ public:
     qreal pageContentHeight() const;
     void calculatePageContentHeight();
 
+    qreal favouritesBarWidth() const;
+    void setFavouritesBarWidth(qreal favouritesBarWidth);
+
+    qreal favouritesBarHeight() const;
+    void setFavouritesBarHeight(qreal favouritesBarHeight);
+
+    qreal favouritesBarDistanceFromEdge() const;
+    void setFavouritesBarDistanceFromEdge(qreal favouritesBarDistanceFromEdge);
+
     qreal pageCellWidth() const;
     void calculatePageCellWidth();
 
@@ -289,6 +302,9 @@ Q_SIGNALS:
     void pageHeightChanged();
     void pageContentWidthChanged();
     void pageContentHeightChanged();
+    void favouritesBarWidthChanged();
+    void favouritesBarHeightChanged();
+    void favouritesBarDistanceFromEdgeChanged();
     void pageCellWidthChanged();
     void pageCellHeightChanged();
     void pageDelegateLabelHeightChanged();
@@ -399,6 +415,10 @@ private:
     qreal m_pageHeight{0};
     qreal m_pageContentWidth{0};
     qreal m_pageContentHeight{0};
+
+    qreal m_favouritesBarWidth{0};
+    qreal m_favouritesBarHeight{0};
+    qreal m_favouritesBarDistanceFromEdge{0};
 
     qreal m_pageCellWidth{0};
     qreal m_pageCellHeight{0};

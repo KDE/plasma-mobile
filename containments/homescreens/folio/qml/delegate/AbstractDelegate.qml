@@ -17,6 +17,9 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 Folio.DelegateTouchArea {
     id: root
+    hitItem: visualItem
+    hitPadding: Math.max(0, Math.min(Kirigami.Units.smallSpacing, (root.width - visualItem.width) * 0.5))
+
     property Folio.HomeScreen folio
     property MobileShell.MaskManager maskManager
 
@@ -98,7 +101,9 @@ Folio.DelegateTouchArea {
         }
 
         ColumnLayout {
-            anchors.fill: parent
+            id: visualLayout
+            anchors.centerIn: parent
+            width: parent.width
             spacing: 0
 
             layer.enabled: root.shadow
@@ -108,8 +113,8 @@ Folio.DelegateTouchArea {
             // affects the delegate's x and y position, which messes up the starting drag and drop
             // position (for mapFromItem in HomeScreen.qml)
             transform: Scale {
-                origin.x: root.width / 2;
-                origin.y: root.height / 2;
+                origin.x: visualLayout.width / 2;
+                origin.y: visualLayout.height / 2;
                 xScale: root.scaleAmount
                 yScale: root.scaleAmount
             }
@@ -117,7 +122,7 @@ Folio.DelegateTouchArea {
             MobileShell.BaseItem {
                 id: visualItem
 
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                Layout.alignment: Qt.AlignHCenter
                 Layout.minimumWidth: folio.FolioSettings.delegateIconSize
                 Layout.minimumHeight: folio.FolioSettings.delegateIconSize
                 Layout.preferredHeight: Layout.minimumHeight
@@ -134,8 +139,9 @@ Folio.DelegateTouchArea {
 
             DelegateLabel {
                 id: label
-                opacity: text.length > 0
+                visible: text.length > 0
 
+                Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
                 Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
                 Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
@@ -148,5 +154,3 @@ Folio.DelegateTouchArea {
         }
     }
 }
-
-

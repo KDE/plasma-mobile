@@ -157,7 +157,8 @@ Item {
 
     // simulate an icon delegate
     ColumnLayout {
-        anchors.fill: parent
+        id: appIconVisual
+        anchors.centerIn: parent
         spacing: 0
 
         // icon
@@ -165,7 +166,7 @@ Item {
             id: loader
             folio: root.folio
             maskManager: root.maskManager
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+            Layout.alignment: Qt.AlignHCenter
             Layout.minimumWidth: folio.FolioSettings.delegateIconSize
             Layout.minimumHeight: folio.FolioSettings.delegateIconSize
             Layout.preferredHeight: Layout.minimumHeight
@@ -174,18 +175,6 @@ Item {
 
             layer.enabled: true
             layer.effect: DelegateShadow {}
-        }
-
-        // simulate the delegate label for positioning purposes
-        DelegateLabel {
-            id: label
-            opacity: 0
-
-            Layout.fillWidth: true
-            Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
-            Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
-            Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing
-            Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing
         }
     }
 }

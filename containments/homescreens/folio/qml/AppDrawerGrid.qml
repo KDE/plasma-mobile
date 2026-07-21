@@ -109,7 +109,7 @@ MobileShell.GridView {
             // prevent editing if lock layout is enabled
             if (folio.FolioSettings.lockLayout) return;
 
-            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, appDelegate.delegateItem, true);
+            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, appDelegate.delegateItem, true, true);
             folio.HomeScreenState.closeAppDrawer();
             haptics.buttonVibrate();
 

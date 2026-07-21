@@ -80,6 +80,49 @@ QPointF DelegateTouchArea::pressPosition()
     return m_mouseDownPosition;
 }
 
+QQuickItem *DelegateTouchArea::hitItem() const
+{
+    return m_hitItem;
+}
+
+void DelegateTouchArea::setHitItem(QQuickItem *hitItem)
+{
+    if (m_hitItem == hitItem) {
+        return;
+    }
+    m_hitItem = hitItem;
+    Q_EMIT hitItemChanged();
+}
+
+qreal DelegateTouchArea::hitPadding() const
+{
+    return m_hitPadding;
+}
+
+void DelegateTouchArea::setHitPadding(qreal hitPadding)
+{
+    if (qFuzzyCompare(m_hitPadding, hitPadding)) {
+        return;
+    }
+    m_hitPadding = hitPadding;
+    Q_EMIT hitPaddingChanged();
+}
+
+bool DelegateTouchArea::contains(const QPointF &point) const
+{
+    // if no target item is set, fallback to normal QQuickItem bounding box behavior
+    if (!m_hitItem) {
+        return QQuickItem::contains(point);
+    }
+
+    // map touch point to the hitItem's coordinate space
+    QPointF mappedPoint = mapToItem(m_hitItem, point);
+    // calculate the hit box plus configured padding on all sides
+    QRectF paddedRect(-m_hitPadding, -m_hitPadding, m_hitItem->width() + (m_hitPadding * 2), m_hitItem->height() + (m_hitPadding * 2));
+
+    return paddedRect.contains(mappedPoint);
+}
+
 void DelegateTouchArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() & Qt::RightButton) {

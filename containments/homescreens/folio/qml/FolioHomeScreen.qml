@@ -50,7 +50,7 @@ Item {
 
     // called by any delegates when starting drag
     // returns the mapped coordinates to be used in the home screen state
-    function prepareStartDelegateDrag(delegate, item, skipSwipeThreshold) {
+    function prepareStartDelegateDrag(delegate, item, skipSwipeThreshold, hasLabel = false) {
 
         // If the user is prompted with a context menu, they may want to let go, and so we keep the detect swipe threshold.
         // Otherwise, we want to skip detecting a swipe because we know we immediately go into delegate dragging.
@@ -61,7 +61,7 @@ Item {
         if (delegate) {
             delegateDragItem.delegate = delegate;
         }
-        return root.mapFromItem(item, 0, 0);
+        return root.mapFromItem(item, 0, hasLabel ? (folio.HomeScreenState.pageDelegateLabelHeight + folio.HomeScreenState.pageDelegateLabelSpacing) * -0.5 : 0);
     }
 
     function cancelDelegateDrag() {
@@ -213,7 +213,8 @@ Item {
                     anchors.topMargin: root.topMargin
                     anchors.leftMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? 0 : root.leftMargin
                     anchors.rightMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? 0 : root.rightMargin
-                    anchors.bottomMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? 0 : root.bottomMargin
+                    // when the favorites bar is below the home screen pages, we add an extra bottom margin for better framing and aesthetics
+                    anchors.bottomMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? Kirigami.Units.largeSpacing : root.bottomMargin
 
                     // update the model with page dimensions
                     onWidthChanged: {
@@ -345,14 +346,49 @@ Item {
                     opacity: 1 - folio.HomeScreenState.settingsOpenProgress
                     visible: opacity > 0
 
+                    readonly property int preferredHeight: Math.max(Kirigami.Units.gridUnit * 5, folio.FolioSettings.delegateIconSize + folio.HomeScreenState.pageDelegateLabelSpacing + folio.HomeScreenState.pageDelegateLabelHeight + Kirigami.Units.gridUnit)
+                    readonly property int preferredWidth: Math.max(Kirigami.Units.gridUnit * 5, folio.FolioSettings.delegateIconSize + Kirigami.Units.gridUnit)
+
+                    readonly property real distanceFromEdge: {
+                        switch (folio.HomeScreenState.favouritesBarLocation) {
+                            case Folio.HomeScreenState.Bottom:
+                                // when the favorites bar is at the bottom, we add an extra bottom margin between it and the bottom of the screen for better framing and aesthetics
+                                return Math.max((Kirigami.Units.gridUnit * 2) - root.bottomMargin, 0);
+                            case Folio.HomeScreenState.Right:
+                                return 0;
+                            case Folio.HomeScreenState.Left:
+                                return 0;
+                            default:
+                                return 0;
+                        }
+                    }
+
                     // one is ignored as anchors are set
-                    height: Kirigami.Units.gridUnit * 6
-                    width: Kirigami.Units.gridUnit * 6
+                    height: favouritesBar.preferredHeight
+                    width: favouritesBar.preferredWidth
+
+                    Binding {
+                        target: folio.HomeScreenState
+                        property: "favouritesBarDistanceFromEdge"
+                        value: favouritesBar.distanceFromEdge
+                    }
+
+                    Binding {
+                        target: folio.HomeScreenState
+                        property: "favouritesBarWidth"
+                        value: favouritesBar.width
+                    }
+
+                    Binding {
+                        target: folio.HomeScreenState
+                        property: "favouritesBarHeight"
+                        value: favouritesBar.height
+                    }
 
                     anchors.topMargin: root.topMargin
-                    anchors.bottomMargin: root.bottomMargin
-                    anchors.leftMargin: root.leftMargin
-                    anchors.rightMargin: root.rightMargin
+                    anchors.bottomMargin: root.bottomMargin + (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? distanceFromEdge : 0)
+                    anchors.leftMargin: root.leftMargin + (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? distanceFromEdge : 0)
+                    anchors.rightMargin: root.rightMargin + (folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? distanceFromEdge : 0)
 
                     // Keyboard navigation on favorites bar
                     Keys.onPressed: (event) => {
@@ -403,7 +439,7 @@ Item {
                             }
                             PropertyChanges {
                                 target: favouritesBar
-                                height: Kirigami.Units.gridUnit * 6
+                                height: favouritesBar.preferredHeight
                             }
                         }, State {
                             name: "left"
@@ -417,7 +453,7 @@ Item {
                             }
                             PropertyChanges {
                                 target: favouritesBar
-                                width: Kirigami.Units.gridUnit * 6
+                                width: favouritesBar.preferredWidth
                             }
                         }, State {
                             name: "right"
@@ -431,7 +467,7 @@ Item {
                             }
                             PropertyChanges {
                                 target: favouritesBar
-                                width: Kirigami.Units.gridUnit * 6
+                                width: favouritesBar.preferredWidth
                             }
                         }
                     ]
