@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2023-01-04 18:14+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -27,6 +27,11 @@ msgstr "Alegiazko teklatua"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Egin tak ezarpenak irekitzeko"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Piztuta"
 
@@ -34,8 +39,3 @@ msgstr "Piztuta"
 #, kde-format
 msgid "Off"
 msgstr "Itzalita"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Egin tak ezarpenak irekitzeko"

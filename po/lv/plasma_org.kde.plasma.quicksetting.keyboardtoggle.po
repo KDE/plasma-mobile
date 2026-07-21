@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2025-08-30 16:56+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -25,6 +25,11 @@ msgstr "Virtuālā tastatūra"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Pieskarieties, lai atvērtu iestatījumus"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Ieslēgta"
 
@@ -32,8 +37,3 @@ msgstr "Ieslēgta"
 #, kde-format
 msgid "Off"
 msgstr "Izslēgta"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Pieskarieties, lai atvērtu iestatījumus"

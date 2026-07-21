@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -24,6 +24,11 @@ msgstr "आभासी कीबोर्ड"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "सेटिंग्स् उद्घाटयितुं ट्याप् कुर्वन्तु"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "इत्युपरि"
 
@@ -31,8 +36,3 @@ msgstr "इत्युपरि"
 #, kde-format
 msgid "Off"
 msgstr "दूरे"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "सेटिंग्स् उद्घाटयितुं ट्याप् कुर्वन्तु"

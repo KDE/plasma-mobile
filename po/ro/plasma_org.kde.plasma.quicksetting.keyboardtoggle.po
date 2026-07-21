@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2024-02-24 19:02+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -25,6 +25,11 @@ msgstr "Tastatură virtuală"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Atingeți pentru a deschide configurările"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Activă"
 
@@ -32,8 +37,3 @@ msgstr "Activă"
 #, kde-format
 msgid "Off"
 msgstr "Inactivă"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Atingeți pentru a deschide configurările"

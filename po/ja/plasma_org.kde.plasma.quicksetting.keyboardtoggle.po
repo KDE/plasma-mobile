@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2022-12-20 22:48-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr ""
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr ""
 
 #: contents/ui/main.qml:15
 #, kde-format
 msgid "Off"
-msgstr ""
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
 msgstr ""

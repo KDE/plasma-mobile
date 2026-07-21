@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2023-01-29 13:42+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -25,6 +25,11 @@ msgstr "Виртуальная клавиатура"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Нажмите чтобы настроить"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Включено"
 
@@ -32,8 +37,3 @@ msgstr "Включено"
 #, kde-format
 msgid "Off"
 msgstr "Отключено"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Нажмите чтобы настроить"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2022-12-20 10:47+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -24,6 +24,11 @@ msgstr "Virtueel toetsenbord"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Tik om instellingen te openen"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Aan"
 
@@ -31,8 +36,3 @@ msgstr "Aan"
 #, kde-format
 msgid "Off"
 msgstr "Uit"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Tik om instellingen te openen"

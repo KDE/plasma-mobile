@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2025-11-22 12:16+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -24,6 +24,11 @@ msgstr "Sýndarlyklaborð"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Ýttu til að opna stillingar"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Á"
 
@@ -31,8 +36,3 @@ msgstr "Á"
 #, kde-format
 msgid "Off"
 msgstr "Af"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Ýttu til að opna stillingar"

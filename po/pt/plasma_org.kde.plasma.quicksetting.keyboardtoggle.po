@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2022-12-23 15:18+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -19,6 +19,11 @@ msgstr "Teclado Virtual"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "Toque para abrir a configuração"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "Ligado"
 
@@ -26,8 +31,3 @@ msgstr "Ligado"
 #, kde-format
 msgid "Off"
 msgstr "Desligado"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "Toque para abrir a configuração"

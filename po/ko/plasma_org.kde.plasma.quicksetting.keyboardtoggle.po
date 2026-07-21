@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-07-21 02:43+0000\n"
 "PO-Revision-Date: 2023-07-26 00:17+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -24,6 +24,11 @@ msgstr "가상 키보드"
 
 #: contents/ui/main.qml:14
 #, kde-format
+msgid "Tap to open settings"
+msgstr "탭하여 설정 열기"
+
+#: contents/ui/main.qml:15
+#, kde-format
 msgid "On"
 msgstr "켬"
 
@@ -31,8 +36,3 @@ msgstr "켬"
 #, kde-format
 msgid "Off"
 msgstr "끔"
-
-#: contents/ui/main.qml:15
-#, kde-format
-msgid "Tap to open settings"
-msgstr "탭하여 설정 열기"
