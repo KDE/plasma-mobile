@@ -51,14 +51,20 @@ Item {
         if (!running) {
             return;
         }
+
+        running = false;
         loopTimer.stop();
         stepTimer.stop();
-        animations[_step].stop();
+
+        if (_step >= 0 && _step < animations.length) {
+            animations[_step].stop();
+        }
     }
 
     function body(): void {
         if (_step >= animations.length) {
             hasFinished = true;
+            running = false;
             finished();
             return;
         }

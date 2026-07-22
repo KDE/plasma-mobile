@@ -4,9 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
+import QtQuick.Effects
+
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
@@ -24,6 +27,141 @@ KCM.SimpleKCM {
     rightPadding: 0
 
     ColumnLayout {
+        ListView {
+            id: tutorialView
+
+            property int phoneWidth: Math.min(Screen.width * 0.25, gestureSelectionCard.maximumWidth * 0.65)
+            property int phoneHeight: phoneWidth * Screen.height / Screen.width
+            property int count: 3
+            property int fingerSize: 20
+
+            Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
+            Layout.preferredHeight: phoneHeight + fingerSize / 2
+            Layout.topMargin: Kirigami.Units.largeSpacing * 2
+            Layout.leftMargin: Kirigami.Units.largeSpacing * 2
+            Layout.rightMargin: Kirigami.Units.largeSpacing * 2
+
+            clip: true
+            orientation: ListView.Horizontal
+            spacing: Math.min(Math.round((tutorialView.width - phoneWidth) * 0.5), Kirigami.Units.largeSpacing * 6)
+
+            snapMode: ListView.SnapOneItem
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            preferredHighlightBegin: width / 2 - phoneWidth / 2
+            preferredHighlightEnd: width / 2 + phoneWidth / 2
+
+            property int activeTutorialIndex: currentIndex
+
+            model: tutorialView.count
+            delegate: Item {
+                id: delegateItem
+
+                required property int index
+
+                width: tutorialView.phoneWidth
+                height: tutorialView.phoneHeight
+
+                property bool isCurrentItem: ListView.isCurrentItem
+                property bool isGestureMode: !ShellSettings.Settings.navigationPanelEnabled
+
+                onIsCurrentItemChanged: {
+                    if (isCurrentItem) {
+                        tutorialPhone.playTutorial(isGestureMode, delegateItem.index);
+                    } else {
+                        tutorialPhone.stopAllAnimations(isGestureMode);
+                    }
+                }
+
+                onIsGestureModeChanged: {
+                    if (isCurrentItem) {
+                        tutorialPhone.playTutorial(isGestureMode, delegateItem.index);
+                    } else {
+                        tutorialPhone.stopAllAnimations(isGestureMode);
+                    }
+                }
+
+                function playTutorial(gestureMode, idx) {
+                    tutorialPhone.playTutorial(gestureMode, idx);
+                }
+
+                TutorialPhone {
+                    id: tutorialPhone
+                    anchors.fill: parent
+                    phoneWidth: delegateItem.width
+                    phoneHeight: delegateItem.height
+                    fingerSize: tutorialView.fingerSize
+
+                    Component.onCompleted: {
+                        if (delegateItem.index === tutorialView.activeTutorialIndex) {
+                            tutorialPhone.playTutorial(isGestureMode, delegateItem.index);
+                        } else {
+                            tutorialPhone.stopAllAnimations(isGestureMode);
+                        }
+                    }
+                }
+            }
+
+            layer.enabled: true
+            layer.effect: OpacityMask {
+                maskSource: Rectangle {
+                    id: maskRect
+                    width: tutorialView.width
+                    height: tutorialView.height
+
+                    property real gradientBoundaries: Math.max((tutorialView.width * 0.5) - (tutorialView.phoneWidth * 0.5) - (Kirigami.Units.gridUnit * 6), 0) / Math.max(1, width)
+                    property real gradientDistance: Math.max(((tutorialView.width * 0.5) - (tutorialView.phoneWidth * 0.5)) / Math.max(1, width), maskRect.gradientBoundaries)
+
+                    gradient: Gradient {
+                        orientation: Gradient.Horizontal
+
+                        GradientStop { position: maskRect.gradientBoundaries; color: 'transparent' }
+                        GradientStop { position: 0 + maskRect.gradientDistance; color: 'white' }
+                        GradientStop { position: 1.0 - maskRect.gradientDistance; color: 'white' }
+                        GradientStop { position: 1.0 - maskRect.gradientBoundaries; color: 'transparent' }
+                    }
+                }
+            }
+        }
+
+        Controls.PageIndicator {
+            currentIndex: tutorialView.activeTutorialIndex
+            count: tutorialView.count
+
+            Layout.alignment: Qt.AlignCenter
+        }
+
+        FormCard.FormSectionText {
+            id: tutorialText
+            verticalAlignment: Text.AlignTop
+            Layout.preferredHeight: textMetrics.lineSpacing * 2
+
+            property bool isGestureMode: !ShellSettings.Settings.navigationPanelEnabled
+
+            FontMetrics {
+                id: textMetrics
+                font: tutorialText.font
+            }
+
+            text: {
+                if (isGestureMode) {
+                    switch (tutorialView.activeTutorialIndex) {
+                        case 0: return i18n("Swipe up, hold, then release to enter the Task Switcher.");
+                        case 1: return i18n("Swipe up from the bottom to return to Home Screen.");
+                        case 2: return i18n("Swipe horizontally near the bottom to scrub through open tasks. Release to select.");
+                        default: return "";
+                    }
+                } else {
+                    switch (tutorialView.activeTutorialIndex) {
+                        case 0: return i18n("Tap the square button to enter the Task Switcher. Double tap to switch to the last used application.");
+                        case 1: return i18n("Tap the center button to return to the Home Screen.");
+                        case 2: return i18n("Tap the X button to close the current application.");
+                        default: return "";
+                    }
+                }
+            }
+        }
+
         FormCard.FormHeader {
             title: i18nc("@label", "Navigation Mode")
         }
@@ -37,192 +175,16 @@ KCM.SimpleKCM {
 
             FormCard.FormRadioDelegate {
                 id: navPanelRadio
-                text: i18nc("Nav Panel Navigation Mode", "Panel")
+                text: i18nc("Nav Panel Navigation Mode", "Buttons")
                 checked: ShellSettings.Settings.navigationPanelEnabled
                 onClicked: ShellSettings.Settings.navigationPanelEnabled = true;
             }
 
             FormCard.FormRadioDelegate {
                 id: gesturesRadio
-                text: i18nc("Gestures Navigation Mode", "Gestures")
+                text: i18nc("Gestures Navigation Mode", "Swipe Gestures")
                 checked: !ShellSettings.Settings.navigationPanelEnabled
                 onClicked: ShellSettings.Settings.navigationPanelEnabled = false;
-            }
-
-            FormCard.FormDelegateSeparator {
-                visible: !ShellSettings.Settings.navigationPanelEnabled
-                above: gesturesRadio
-                below: tutorialContainer
-            }
-
-            Item {
-                id: tutorialContainer
-                visible: !ShellSettings.Settings.navigationPanelEnabled
-
-                property int phoneWidth: Math.min(Window.width * 0.4, gestureSelectionCard.maximumWidth * 0.9)
-                property int phoneHeight: phoneWidth * Window.height / Window.width
-                property int count: 3
-                property int fingerSize: 20
-
-                Layout.alignment: Qt.AlignCenter
-                Layout.preferredWidth: phoneWidth
-                Layout.preferredHeight: phoneHeight + fingerSize / 2
-                Layout.topMargin: Kirigami.Units.largeSpacing * 2
-
-                clip: true
-
-                MouseArea {
-                    id: tutorialSwitcherInput
-
-                    anchors.fill: tutorialContainer
-
-                    preventStealing: true
-
-                    property int activeTutorialIndex: 0
-
-                    property real lastX
-                    property real lastDelta
-
-                    onPressedChanged: {
-                        if (pressed) {
-                            lastX = mouseX;
-                        }
-                        else {
-                            let moveOffset = lastDelta > 0 ? -0.45 : 0.45
-                            let candidateIndex = Math.round(-tutorialLayout.offset / (tutorialLayout.spacing + tutorialContainer.phoneWidth) + moveOffset);
-                            activeTutorialIndex = Math.max(0, Math.min(tutorialContainer.count - 1, candidateIndex));
-                            updateActiveTutorial();
-                            releaseAnim.start()
-                        }
-                    }
-
-                    function updateActiveTutorial(): void {
-                        switch (activeTutorialIndex) {
-                            case 0:
-                                switchTutorial.loopSwitcherAnimation();
-                                flickTutorial.stopAnimation();
-                                scrubTutorial.stopAnimation();
-                                break;
-                            case 1:
-                                switchTutorial.stopAnimation();
-                                flickTutorial.loopFlickAnimation();
-                                scrubTutorial.stopAnimation();
-                                break;
-                            case 2:
-                                switchTutorial.stopAnimation();
-                                flickTutorial.stopAnimation();
-                                scrubTutorial.loopScrubAnimation();
-                                break;
-                        }
-                    }
-
-                    onPositionChanged: (mouse) => {
-                        let delta = mouse.x - lastX;
-                        let endOffset = -(tutorialContainer.count - 1) * (tutorialContainer.phoneWidth + tutorialLayout.spacing);
-                        if (activeTutorialIndex == 0 && tutorialLayout.offset > 0 && delta > 0) {
-                            // handle overshoot on the left
-                            delta /= tutorialLayout.x;
-                        }
-                        else if (activeTutorialIndex == tutorialContainer.count - 1 && tutorialLayout.offset < endOffset) {
-                            // handle overhoot on the right
-                            delta /= Math.abs(tutorialLayout.x - endOffset);
-                        }
-                        tutorialLayout.offset += delta
-                        lastDelta = delta;
-                        lastX = mouse.x
-                    }
-
-                    NumberAnimation {
-                        id: releaseAnim
-
-                        target: tutorialLayout
-                        property: "offset"
-
-                        to: -tutorialSwitcherInput.activeTutorialIndex * (tutorialContainer.phoneWidth + tutorialLayout.spacing)
-
-                        duration: Kirigami.Units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-
-                Item {
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.preferredWidth: tutorialContainer.phoneWidth
-                    Layout.preferredHeight: tutorialContainer.phoneHeight + tutorialContainer.fingerSize / 2
-
-                    RowLayout {
-                        id: tutorialLayout
-
-                        property int offset: 0
-                        x: offset
-
-                        width: tutorialContainer.phoneWidth * tutorialContainer.count + Kirigami.Units.largeSpacing * (tutorialContainer.count - 1)
-                        height: tutorialContainer.phoneHeight
-                        spacing: Kirigami.Units.largeSpacing
-
-                        TutorialPhone {
-                            id: switchTutorial
-
-                            phoneWidth: tutorialContainer.phoneWidth
-                            phoneHeight: tutorialContainer.phoneHeight
-                            fingerSize: tutorialContainer.fingerSize
-                            showBackground: false
-
-                            Layout.alignment: Qt.AlignCenter
-
-                            Component.onCompleted: {
-                                loopSwitcherAnimation();
-                            }
-                        }
-
-                        TutorialPhone {
-                            id: flickTutorial
-
-                            phoneWidth: tutorialContainer.phoneWidth
-                            phoneHeight: tutorialContainer.phoneHeight
-                            fingerSize: tutorialContainer.fingerSize
-
-                            Layout.alignment: Qt.AlignCenter
-                        }
-
-                        TutorialPhone {
-                            id: scrubTutorial
-
-                            phoneWidth: tutorialContainer.phoneWidth
-                            phoneHeight: tutorialContainer.phoneHeight
-                            fingerSize: tutorialContainer.fingerSize
-                            showBackground: false
-
-                            Layout.alignment: Qt.AlignCenter
-                        }
-                    }
-                }
-            }
-
-            Controls.PageIndicator {
-                visible: !ShellSettings.Settings.navigationPanelEnabled
-                currentIndex: tutorialSwitcherInput.activeTutorialIndex
-                count: tutorialContainer.count
-
-                Layout.alignment: Qt.AlignCenter
-            }
-
-            FormCard.FormSectionText {
-                visible: !ShellSettings.Settings.navigationPanelEnabled && tutorialSwitcherInput.activeTutorialIndex == 0
-
-                text: i18n("Swipe up, hold then release to enter Task Switcher")
-            }
-
-            FormCard.FormSectionText {
-                visible: !ShellSettings.Settings.navigationPanelEnabled && tutorialSwitcherInput.activeTutorialIndex == 1
-
-                text: i18n("Swipe up and release to go to Home Screen")
-            }
-
-            FormCard.FormSectionText {
-                visible: !ShellSettings.Settings.navigationPanelEnabled && tutorialSwitcherInput.activeTutorialIndex == 2
-
-                text: i18n("Swipe left and right near the bottom screen edge to scrub through open tasks. Release to select a task to focus")
             }
 
             FormCard.FormDelegateSeparator { visible: keyboardToggleDelegate.visible; above: gesturesRadio; below: keyboardToggleDelegate }
