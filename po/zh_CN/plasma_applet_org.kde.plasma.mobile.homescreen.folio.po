@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-17 00:45+0000\n"
+"POT-Creation-Date: 2026-07-22 00:47+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -64,13 +64,13 @@ msgstr "移除小部件"
 msgid "Configure widget"
 msgstr "配置小部件"
 
-#: qml/FavouritesBar.qml:232 qml/FavouritesBar.qml:307 qml/FolderView.qml:401
-#: qml/HomeScreenPage.qml:334 qml/HomeScreenPage.qml:418
+#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
 #, kde-format
 msgid "Remove"
 msgstr "移除"
 
-#: qml/HomeScreenPage.qml:481
+#: qml/HomeScreenPage.qml:482
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "松开以配置，拖动以移动"
