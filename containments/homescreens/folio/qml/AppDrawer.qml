@@ -42,6 +42,11 @@ Item {
         }
     }
 
+    function reset() {
+        root.flickable.contentY = 0 - root.flickable.topMargin;
+        root.flickable.returnToBounds();
+    }
+
     // App drawer container
     Item {
         anchors.fill: parent
@@ -79,16 +84,18 @@ Item {
         }
 
         // App list
-        AppDrawerGrid {
+        AppDrawerAppGrid {
             id: appDrawerGrid
             folio: root.folio
             homeScreen: root.homeScreen
             height: parent.height - drawerHeader.height
+            anchors.top: parent.top
+            anchors.topMargin: root.headerHeight
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
             opacity: 0 // we display with the opacity gradient below
-            headerHeight: root.headerHeight
+
+            model: folio.ApplicationListSearchModel
 
             // Keyboard navigation
             topEdgeCallback: () => {

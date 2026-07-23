@@ -599,7 +599,7 @@ Item {
 
                     function onAppDrawerClosed() {
                         // reset app drawer position when closed
-                        appDrawer.flickable.contentY = 0;
+                        appDrawer.reset();
                     }
                 }
             }
