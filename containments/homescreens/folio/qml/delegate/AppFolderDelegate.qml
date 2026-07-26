@@ -11,6 +11,7 @@ import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 AbstractDelegate {
     id: root
     name: folder.name
+    accessibleName: folder.name
     shadow: true
 
     property Folio.FolioApplicationFolder folder

@@ -17,7 +17,11 @@ AbstractDelegate {
     id: root
 
     shadow: true
-    name: application ? application.name : ""
+
+    readonly property string applicationName: application ? application.name : ""
+
+    name: applicationName
+    accessibleName: applicationName
 
     // This may be null for short periods of time due to model changes
     property Folio.FolioApplication application

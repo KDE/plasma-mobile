@@ -24,6 +24,9 @@ Folio.DelegateTouchArea {
     property MobileShell.MaskManager maskManager
 
     property string name
+
+    property string accessibleName: name
+
     property bool shadow: false
 
     property alias contentItem: visualItem.contentItem
@@ -31,6 +34,10 @@ Folio.DelegateTouchArea {
     property alias labelOpacity: label.opacity
 
     signal afterClickAnimation()
+
+    Accessible.role: Accessible.Button
+    Accessible.name: root.accessibleName
+    Accessible.onPressAction: root.afterClickAnimation()
 
     // grow/shrink animation
     property real scaleAmount: 1
