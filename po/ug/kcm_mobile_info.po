@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-06-01 17:59-0400\n"
+"PO-Revision-Date: 2026-07-22 17:06-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -37,7 +37,7 @@ msgstr "مەشغۇلات سىستېمىسى"
 #: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
-msgstr ""
+msgstr "تور بەت"
 
 #: ui/main.qml:92
 #, kde-format
@@ -48,33 +48,33 @@ msgstr "يۇمشاق دېتال"
 #: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
-msgstr ""
+msgstr "KDE Plasma نەشرى"
 
 #: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
-msgstr ""
+msgstr "KDE قۇرۇلما نەشرى"
 
 #: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
-msgstr ""
+msgstr "Qt نەشرى"
 
 #: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
-msgstr ""
+msgstr "يادرو نەشرى"
 
 #: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
-msgstr ""
+msgstr "مەشغۇلات سىستېما تۈرى"
 
 #: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
-msgstr ""
+msgstr "%1 بىت"
 
 #: ui/main.qml:131
 #, kde-format

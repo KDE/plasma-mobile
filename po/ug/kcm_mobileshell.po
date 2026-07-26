@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-04 00:46+0000\n"
-"PO-Revision-Date: 2026-06-01 18:00-0400\n"
+"PO-Revision-Date: 2026-07-22 17:07-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr ""
+msgstr "Shell"
 
 #: ui/main.qml:27
 #, kde-format
@@ -31,7 +31,7 @@ msgstr "ئادەتتىكى"
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "Shell تىترىتىش"
 
 #: ui/main.qml:41
 #, kde-format
@@ -41,7 +41,7 @@ msgstr "جانلاندۇرۇم"
 #: ui/main.qml:42
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
+msgstr "ئەگەر بۇ تاللانما تاقالسا، جانلاندۇرۇم مۇمكىنقەدەر ئازايتىلىدۇ."
 
 #: ui/main.qml:55
 #, kde-format
@@ -54,16 +54,18 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
+"ھالەت بالداق ۋە يولباشچى كۆزنەكچىنى ئۆزلۈكىدىن يوشۇرۇش، پىروگراممىنىڭ ھەمىشە "
+"پۈتۈن ئېكراندا كۆرسىتىشىگە يول قويىدۇ."
 
 #: ui/main.qml:69
 #, kde-format
 msgid "Double Tap to Wakeup"
-msgstr ""
+msgstr "ئويغىتىشتا قوش چېكىلىدۇ"
 
 #: ui/main.qml:70
 #, kde-format
 msgid "When the screen is off, double tap to wakeup the device."
-msgstr ""
+msgstr "ئېكران تاقالغاندا، ئۈسكۈنىنى ئويغىتىشتا قوش چېكىلىدۇ."
 
 #: ui/main.qml:81
 #, kde-format
@@ -73,32 +75,32 @@ msgstr "ھالەت بالدىقى"
 #: ui/main.qml:87
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "ھالەت بالداقتا چېسلا كۆرسىتىدۇ"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
-msgstr ""
+msgstr "ئەگەر ئوچۇق بولسا، ھالەت بالداقتىكى سائەتنىڭ يېنىدا چېسلا كۆرۈنىدۇ."
 
 #: ui/main.qml:101
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "توكداننىڭ پىرسەنتى"
 
 #: ui/main.qml:102
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "ھالەت بالداقتا توكدان پىرسەنتىنى كۆرسىتىدۇ."
 
 #: ui/main.qml:116
 #, kde-format
 msgid "Status Bar Size"
-msgstr ""
+msgstr "ھالەت بالداق چوڭلۇقى"
 
 #: ui/main.qml:117
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "چوققا كۆزنەكچىنىڭ چوڭلۇقى (قايتا قوزغىتىش زۆرۈر)"
 
 #: ui/main.qml:120
 #, kde-format
@@ -133,19 +135,19 @@ msgstr "بەك چوڭ"
 #: ui/main.qml:140
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "مەشغۇلات تارتمىسى"
 
 #: ui/main.qml:146
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "مىخلانغان ھالەت"
 
 #: ui/main.qml:147
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "كېڭەيتىلگەن ھالەت"
 
 #: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
@@ -155,28 +157,28 @@ msgstr "تېز تەڭشەك"
 #: ui/main.qml:159
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "سول ئۈستى تارتما ھالىتى"
 
 #: ui/main.qml:160
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "سول ئۈستىدىن ئېچىش ھالىتى."
 
 #: ui/main.qml:181
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "ئوڭ ئۈستى تارتما ھالىتى"
 
 #: ui/main.qml:182
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "ئوڭ ئۈستىدىن ئېچىش ھالىتى."
 
 #: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "ئېكران قۇلۇپ تېزلەتمىسى"
 
 #: ui/main.qml:206
 #, kde-format
@@ -200,13 +202,13 @@ msgstr "كامېرا"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "سول توپچە"
 
 #: ui/main.qml:234
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "ئوڭ توپچە"
 
 #: ui/QuickSettingsForm.qml:89
 #, kde-format
@@ -223,43 +225,44 @@ msgstr "كۆرسەت"
 #: ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings Columns"
-msgstr ""
+msgstr "تېز تەڭشەك رەت سانى"
 
 #: ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid "Maximum number of columns in landscape orientation."
-msgstr ""
+msgstr "توغرىسىغا يۆنىلىشتە ئەڭ كۆپ رەت سانى."
 
 #: ui/QuickSettingsForm.qml:128
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
+"تارتما كۆزنەكچىدىكى تېز تەڭشەكنىڭ تەرتىپىنى خاسلاشتۇرۇپ ۋە ئۇلارنى يوشۇرايدۇ."
 
 #: ui/QuickSettingsForm.qml:166
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr ""
+msgstr "تېز تەڭشەكنى چەكلەيدۇ"
 
 #: ui/QuickSettingsForm.qml:171
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "ئىلگىرى چەكلىگەن تېز تەڭشەكنى قايتا قوزغىتىدۇ."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "shell دا تىترىتىشنى قوزغىتامدۇ يوق."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
 msgid "Vibration Duration"
-msgstr ""
+msgstr "تىترىتىشنىڭ داۋاملىشىش ۋاقتى"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "shell دا تىترىتىش قانچىلىك ۋاقىت داۋاملىشىدۇ."
 
 #: ui/VibrationForm.qml:43
 #, kde-format
@@ -271,7 +274,7 @@ msgstr "ئۇزۇن"
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "ئوتتۇراھال"
+msgstr "ئوتتۇرا ھال"
 
 #: ui/VibrationForm.qml:45
 #, kde-format
@@ -284,4 +287,4 @@ msgstr "قىسقا"
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr ""
+msgstr "ھەرپتاختا تىترەش ھەرپتاختا تەڭشىكىدە ئايرىم تىزگىنلىنىدۇ."

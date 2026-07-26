@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-22 00:47+0000\n"
-"PO-Revision-Date: 2026-06-01 18:00-0400\n"
+"PO-Revision-Date: 2026-07-22 17:08-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -27,7 +27,7 @@ msgstr "قىسقۇچ"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr ""
+msgstr "ئىزدەش پىروگراممىسى…"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
@@ -37,7 +37,7 @@ msgstr "ئادەتتىكى"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "بۇ ئەپچە تېپىلمىدى."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
@@ -52,17 +52,17 @@ msgstr "تاللانما"
 #: qml/delegate/WidgetDelegateConfig.qml:207
 #, kde-format
 msgid "Widget Options"
-msgstr ""
+msgstr "ئەپچە تاللانما"
 
 #: qml/delegate/WidgetDelegateConfig.qml:247
 #, kde-format
 msgid "Remove widget"
-msgstr ""
+msgstr "ئەپچىنى چىقىرىۋەت"
 
 #: qml/delegate/WidgetDelegateConfig.qml:254
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "ئەپچە سەپلە"
 
 #: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
 #: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
@@ -73,17 +73,17 @@ msgstr "چىقىرىۋەت"
 #: qml/HomeScreenPage.qml:482
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "سەپلەشتە قويۇۋېتىلىدۇ، يۆتكەشتە سۆرىلىدۇ"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "قىسقۇچ ئۆچۈرۈشنى جەزملە"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "بۇ قىسقۇچنى راستتىنلا ئۆچۈرەمسىز؟"
 
 #: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
@@ -115,7 +115,7 @@ msgstr "پىروگرامما"
 #: qml/settings/ConfigGeneral.qml:63
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "قۇر سانى"
 
 #: qml/settings/ConfigGeneral.qml:64
 #, kde-format
@@ -125,37 +125,37 @@ msgstr "رەت سانى"
 #: qml/settings/ConfigGeneral.qml:68
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "باش ئېكراندىكى سىنبەلگە چوڭلۇقى"
 
 #: qml/settings/ConfigGeneral.qml:107
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "قۇر ۋە رەت سانى ئېكران ئېنىقلىقىغا ئاساسەن ئۆزئارا ئالماشتۇرۇلىدۇ."
 
 #: qml/settings/ConfigGeneral.qml:111
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "باش ئېكران"
 
 #: qml/settings/ConfigGeneral.qml:117
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "باش ئېكراندا بەلگە كۆرسەت"
 
 #: qml/settings/ConfigGeneral.qml:130
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "يىغقۇچ بالداقتا بەلگە كۆرسەت"
 
 #: qml/settings/ConfigGeneral.qml:143
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "قۇلۇپ جايلاشتۇرۇش"
 
 #: qml/settings/ConfigGeneral.qml:156
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "بەت ئالمىشىش ئۈنۈمى"
 
 #: qml/settings/ConfigGeneral.qml:162
 #, kde-format
@@ -165,7 +165,7 @@ msgstr "تام تەسۋىر"
 #: qml/settings/ConfigGeneral.qml:163
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "كۇب"
 
 #: qml/settings/ConfigGeneral.qml:164
 #, kde-format
@@ -175,7 +175,7 @@ msgstr "سۇسلاشتۇر"
 #: qml/settings/ConfigGeneral.qml:165
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "دەستىلە"
 
 #: qml/settings/ConfigGeneral.qml:166
 #, kde-format
@@ -185,17 +185,17 @@ msgstr "ئايلاندۇر"
 #: qml/settings/ConfigGeneral.qml:183
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "ئۈسكۈنىنى قۇلۇپلاشتا قوش چېكىلىدۇ"
 
 #: qml/settings/ConfigGeneral.qml:194
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "يىغقۇچ بالداق"
 
 #: qml/settings/ConfigGeneral.qml:199
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "تەگلىك كۆرسەت"
 
 #: qml/settings/ConfigGeneral.qml:210
 #, kde-format
@@ -206,7 +206,7 @@ msgstr "تام قەغەز"
 #: qml/settings/ConfigGeneral.qml:216
 #, kde-format
 msgid "Wallpaper blur effect"
-msgstr ""
+msgstr "تام قەغەز غۇۋا ئۈنۈمى"
 
 #: qml/settings/ConfigGeneral.qml:219
 #, kde-format
@@ -229,47 +229,47 @@ msgstr "تامامەن"
 #: qml/settings/ConfigGeneral.qml:243
 #, kde-format
 msgid "Export layout"
-msgstr ""
+msgstr "جايلاشتۇرۇشنى چىقار"
 
 #: qml/settings/ConfigGeneral.qml:252
 #, kde-format
 msgid "Import layout"
-msgstr ""
+msgstr "جايلاشتۇرۇش ئەكىر"
 
 #: qml/settings/ConfigGeneral.qml:262
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "جايلاشتۇرۇشنى چىقىرىش ئورنى"
 
 #: qml/settings/ConfigGeneral.qml:281
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "جايلاشتۇرۇشنى ئەكىرىش ئورنى"
 
 #: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "چىقىرىش ھالىتى"
 
 #: qml/settings/ConfigGeneral.qml:293
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "%1 غا چىقىرالمىدى"
 
 #: qml/settings/ConfigGeneral.qml:300
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "باش ئېكران جايلاشتۇرۇلۇشى %1 غا مۇۋەپپەقىيەتلىك چىقىرىلدى"
 
 #: qml/settings/ConfigGeneral.qml:306
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "ئەكىرىشنى جەزملە"
 
 #: qml/settings/ConfigGeneral.qml:307
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "بۇ نۆۋەتتىكى مەۋجۇت باش ئېكران جايلاشتۇرۇلۇشىنى قاپلىۋېتىدۇ!"
 
 #: qml/settings/SettingsComponent.qml:57
 #, kde-format

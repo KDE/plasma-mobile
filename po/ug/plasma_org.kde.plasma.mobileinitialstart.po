@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:45+0000\n"
-"PO-Revision-Date: 2026-06-01 18:00-0400\n"
+"PO-Revision-Date: 2026-07-22 17:08-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,12 +31,12 @@ msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 #: main.cpp:21
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr ""
+msgstr "سەپلىمىنى ئۆزگەرتمەستىن دەسلەپكى قوزغىتىش يېتەكچىسىنى ئاچىدۇ"
 
 #: main.cpp:36
 #, kde-format
 msgid "© 2026 KDE Community"
-msgstr ""
+msgstr "© 2026 KDE جامائىتى"
 
 #: main.cpp:37
 #, kde-format
@@ -46,13 +46,13 @@ msgstr "Devin Lin"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
 #, kde-format
 msgid "Edit APN"
-msgstr ""
+msgstr "APN تەھرىر"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
 #: modules/cellular/package/contents/ui/main.qml:145
 #, kde-format
 msgid "Add APN"
-msgstr ""
+msgstr "APN قوش"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:60
 #, kde-format
@@ -62,7 +62,7 @@ msgstr "ئاتى"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:64
 #, kde-format
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:68
 #, kde-format
@@ -77,7 +77,7 @@ msgstr "ئىم"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:76
 #, kde-format
 msgid "Network type"
-msgstr ""
+msgstr "تور تۈرى"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
@@ -97,17 +97,17 @@ msgstr "2G"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 4G"
-msgstr ""
+msgstr "4G لا"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 3G"
-msgstr ""
+msgstr "3G لا"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "Only 2G"
-msgstr ""
+msgstr "2G لا"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
@@ -117,13 +117,13 @@ msgstr "خالىغان"
 #: modules/cellular/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Cellular"
-msgstr ""
+msgstr "كۆچمە تېلېفون"
 
 #: modules/cellular/package/contents/ui/main.qml:60
 #: modules/cellular/package/contents/ui/main.qml:68
 #, kde-format
 msgid "Your device does not have a modem available."
-msgstr ""
+msgstr "ئۈسكۈنىڭىزدە ئىشلەتكىلى بولىدىغان مودېم يوق."
 
 #: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
@@ -131,21 +131,23 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
+"تۆۋەندە كۆچمە سانلىق مەلۇماتنىڭ APN يەنى زىيارەت نۇقتا ئىسمىنى سەپلەڭ، "
+"مۇلازىمەت تەمىنلىگۈچىڭىز تېخىمۇ كۆپ ئۇچۇر تەمىنلەيدۇ."
 
 #: modules/cellular/package/contents/ui/main.qml:64
 #, kde-format
 msgid "You are connected to the mobile network."
-msgstr ""
+msgstr "كۆچمە تورغا باغلاندىڭىز."
 
 #: modules/cellular/package/contents/ui/main.qml:66
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr ""
+msgstr "ئۈسكۈنىڭىزگە SIM كارتا قىستۇرۇڭ."
 
 #: modules/cellular/package/contents/ui/main.qml:80
 #, kde-format
 msgid "Mobile Data"
-msgstr ""
+msgstr "كۆچمە سانلىق مەلۇمات"
 
 #: modules/cellular/package/contents/ui/main.qml:128
 #, kde-format
@@ -161,53 +163,55 @@ msgstr "ئۆچۈر"
 #: modules/finished/contents/ui/main.qml:13
 #, kde-format
 msgid "Complete!"
-msgstr ""
+msgstr "تامام!"
 
 #: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
+msgstr "ئۈسكۈنە ئىشلىتىشكە تەييارلاندى.<br /><br />بەھۇزۇر ئىشلىتىڭ<b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:18
 #, kde-format
 msgid "Before we get started…"
-msgstr ""
+msgstr "باشلاشتىن ئىلگىرى…"
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
+"ئورنىتىش جەريانىدا ئېكراندىكى مەزمۇننى راھەت ئوقۇش ئۈچۈن ئېكران يورۇقلۇقى "
+"تەڭشىلىدۇ."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
 msgid "Adjust the size of elements on the screen."
-msgstr ""
+msgstr "ئېكراندىكى ئېلېمېنتلارنىڭ چوڭلۇقى تەڭشىلىدۇ."
 
 #: modules/prepare/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Display Scaling"
-msgstr ""
+msgstr "كۆرسىتىش نىسبىتى"
 
 #: modules/prepare/package/contents/ui/main.qml:137
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "قاراڭغۇ ئۆرنەك"
 
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "سىستېما يولباشچى"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "سىستېمىنىڭ يول باشلاش ئۇسۇلى تاللىنىدۇ."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "قول ئىشارىتى يولباشچى"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -215,21 +219,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"ئاستىدىن ئۈستىگە سىيرىلسا ئىجرا قىلىنىۋاتقان پىروگراممىنى كۆرسىتىدۇ. ئۈستىگە "
+"تېز سىيرىلسا باش ئېكرانغا قايتىدۇ."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "توپچە يولباشچى"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "يولباشچى بالداقتىكى توپچە ئارقىلىق سىستېمىدا يول باشلايدۇ."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "بۇنى كېيىن تەڭشەكتە ئۆزگەرتكىلى بولىدۇ."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -239,17 +245,17 @@ msgstr "ۋاقىت ۋە چېسلا"
 #: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr ""
+msgstr "ۋاقىت رايونى ۋە ۋاقىت پىچىمى مايىللىقى تاللىنىدۇ."
 
 #: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
-msgstr ""
+msgstr "24 سائەت پىچىمى"
 
 #: modules/wifi/package/contents/ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
-msgstr ""
+msgstr "ئىناۋەتسىز كىرگۈزۈش."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
 #, kde-format
@@ -269,7 +275,7 @@ msgstr "سەپلە"
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
-msgstr ""
+msgstr "باغلىنىدىغىنى"
 
 #: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
@@ -279,7 +285,7 @@ msgstr "تور"
 #: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
-msgstr ""
+msgstr "تورنى زىيارەت قىلىش ئۈچۈن WiFi تورغا باغلىنىدۇ."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -289,12 +295,12 @@ msgstr "ئىم…"
 #: qml/LandingComponent.qml:105
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr ""
+msgstr "<br/><b>Plasma كۆچمە</b> گە خۇش كەلدىڭىز"
 
 #: qml/LandingComponent.qml:131
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr ""
+msgstr "<b>%1</b> تەمىنلىگەن"
 
 #: qml/LandingComponent.qml:152 qml/Wizard.qml:303
 #, kde-format
@@ -304,7 +310,7 @@ msgstr "كېيىنكى"
 #: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
-msgstr ""
+msgstr "دەسلەپكى قوزغىلىش"
 
 #: qml/Wizard.qml:284
 #, kde-format

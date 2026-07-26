@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-02 00:46+0000\n"
-"PO-Revision-Date: 2026-06-01 18:02-0400\n"
+"PO-Revision-Date: 2026-07-22 17:09-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -41,29 +41,31 @@ msgstr "تام قەغەز"
 
 #: contents/configuration/ContainmentConfiguration.qml:35
 msgid "Change Homescreen"
-msgstr ""
+msgstr "باش ئېكران ئۆزگەرت"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:26
 msgid "Select Homescreen"
-msgstr ""
+msgstr "باش ئېكران تاللا"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:58
 msgid "Change homescreen to %1?"
-msgstr ""
+msgstr "باش ئېكراننى %1 غا ئۆزگەرتەمدۇ؟"
 
 #: contents/configuration/private/ChangeContainmentModule.qml:59
 msgid ""
 "Your current homescreen's settings are saved, and will be restored if you "
 "switch back."
 msgstr ""
+"نۆۋەتتىكى باش ئېكران تەڭشىكى ساقلاندى، ئەگەر كەينىگە ياندۇرسىڭىز ئەسلىگە "
+"قايتۇرىدۇ."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:48
 msgid "Wallpaper Plugin"
-msgstr ""
+msgstr "تام قەغەز قىستۇرما"
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:49
 msgid "The wallpaper plugin to use."
-msgstr ""
+msgstr "ئىشلىتىدىغان تام قەغەز قىستۇرمىسى."
 
 #: contents/configuration/private/ChangeWallpaperModule.qml:84
 msgid "Wallpaper Plugins"
@@ -79,27 +81,27 @@ msgstr "جايلاشتۇرۇش ئۆزگەرتىشنى سىستېما باشقۇ�
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr ""
+msgstr "PIN كىرگۈزۈلىدۇ"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
-msgstr ""
+msgstr "PIN خاتا"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "قايتا قوزغات"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "تاقا"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "تىزىمدىن چىق"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "ۋاز كەچ"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

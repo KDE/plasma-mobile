@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-30 00:45+0000\n"
-"PO-Revision-Date: 2026-06-01 18:00-0400\n"
+"PO-Revision-Date: 2026-07-22 17:08-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -68,12 +68,12 @@ msgstr "تاقاق"
 #: qml/dataproviders/SignalStrengthInfo.qml:21
 #, kde-format
 msgid "SIM Locked"
-msgstr ""
+msgstr "SIM كارتا قۇلۇپلانغان"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
 #, kde-format
 msgid "Output Devices"
-msgstr ""
+msgstr "چىقىرىش ئۈسكۈنىسى"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
 #, kde-format
@@ -88,7 +88,7 @@ msgstr "ياڭرىتىش ئېقىمى"
 #: qml/popups/volumeosd/AudioApplet.qml:199
 #, kde-format
 msgid "Recording Streams"
-msgstr ""
+msgstr "خاتىرىلەش ئېقىمى"
 
 #: qml/popups/volumeosd/DeviceListItem.qml:24
 #, kde-format
@@ -99,12 +99,12 @@ msgstr "%1 (%2)"
 #: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
 msgid "Device name not found"
-msgstr ""
+msgstr "ئۈسكۈنە ئىسمى تېپىلمىدى"
 
 #: qml/popups/volumeosd/ListItemBase.qml:123
 #, kde-format
 msgid "Show additional options for %1"
-msgstr ""
+msgstr "%1 نىڭ قوشۇمچە تاللانمىسىنى كۆرسىتىدۇ"
 
 #: qml/popups/volumeosd/ListItemBase.qml:215
 #, kde-format
@@ -121,7 +121,7 @@ msgstr "100%"
 #: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
-msgstr ""
+msgstr "ئۇقتۇرۇش ئاۋازى"
 
 #: qml/popups/volumeosd/StreamListItem.qml:24
 #, kde-format
@@ -132,7 +132,7 @@ msgstr "%1: %2"
 #: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
-msgstr ""
+msgstr "ئېقىم ئىسمى تېپىلمىدى"
 
 #: qml/popups/volumeosd/VolumeChangedPopup.qml:161
 #, kde-format
@@ -147,12 +147,12 @@ msgstr "ئۈنسىز"
 #: qml/popups/volumeosd/VolumeChangedPopup.qml:210
 #, kde-format
 msgid "configure audio streams"
-msgstr ""
+msgstr "ئاۋاز ئېقىمىنى سەپلە"
 
 #: qml/popups/volumeosd/VolumeOSD.qml:225
 #, kde-format
 msgid "Open audio settings"
-msgstr ""
+msgstr "ئاۋاش تەڭشىكىنى ئاچ"
 
 #: qml/statusbar/indicators/BatteryIndicator.qml:68
 #, kde-format
@@ -350,7 +350,7 @@ msgstr "ھازىر"
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr ""
+msgstr "%1 مىنۇت ئىلگىرى"
 
 #: qml/widgets/notifications/NotificationsUtils.js:82
 #, kde-format
@@ -362,13 +362,13 @@ msgstr "%1 سېكۇنت قالدى"
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr ""
+msgstr "%1 مىنۇت قالدى"
 
 #: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr ""
+msgstr "%1 سائەت قالدى"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format
