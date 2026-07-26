@@ -92,6 +92,7 @@ Comment[sl]=Plasma Mobile od KDE
 Comment[sv]=Plasma mobil av KDE
 Comment[ta]=கே.டீ.யீ. வழங்கும் பிளாஸ்மா கைபேசி
 Comment[tr]=KDE tarafından yapılan Plasma Cep
+Comment[ug]=KDE نىڭ Plasma كۆچمە
 Comment[uk]=Мобільна Плазма від KDE
 Comment[zh_CN]=KDE Plasma Mobile
 Comment[zh_TW]=來自 KDE 的 Plasma 行動作業系統
