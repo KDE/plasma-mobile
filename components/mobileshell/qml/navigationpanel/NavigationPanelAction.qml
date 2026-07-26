@@ -12,5 +12,8 @@ QtObject {
     property string iconSource
     property real shrinkSize
 
+    // Description of the action for assistive technology
+    property string accessibleText
+
     signal triggered()
 }

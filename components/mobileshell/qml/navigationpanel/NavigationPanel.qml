@@ -65,6 +65,7 @@ Item {
             enabled: root.leftCornerAction.enabled
             shrinkSize: root.leftCornerAction.shrinkSize
             iconSource: root.leftCornerAction.iconSource
+            Accessible.name: root.leftCornerAction.accessibleText
             onClicked: {
                 if (enabled) {
                     root.leftCornerAction.triggered();
@@ -81,6 +82,7 @@ Item {
             enabled: root.leftAction.enabled
             shrinkSize: root.leftAction.shrinkSize
             iconSource: root.leftAction.iconSource
+            Accessible.name: root.leftAction.accessibleText
             onClicked: {
                 if (enabled) {
                     root.leftAction.triggered();
@@ -97,6 +99,7 @@ Item {
             enabled: root.middleAction.enabled
             shrinkSize: root.middleAction.shrinkSize
             iconSource: root.middleAction.iconSource
+            Accessible.name: root.middleAction.accessibleText
             onClicked: {
                 if (enabled) {
                     root.middleAction.triggered();
@@ -112,6 +115,7 @@ Item {
             enabled: root.rightAction.enabled
             shrinkSize: root.rightAction.shrinkSize
             iconSource: root.rightAction.iconSource
+            Accessible.name: root.rightAction.accessibleText
             onClicked: {
                 if (enabled) {
                     root.rightAction.triggered();
@@ -127,6 +131,7 @@ Item {
             enabled: root.rightCornerAction.enabled
             shrinkSize: root.rightCornerAction.shrinkSize
             iconSource: root.rightCornerAction.iconSource
+            Accessible.name: root.rightCornerAction.accessibleText
             onClicked: {
                 if (enabled) {
                     root.rightCornerAction.triggered();

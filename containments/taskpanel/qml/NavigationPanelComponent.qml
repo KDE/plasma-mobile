@@ -74,6 +74,7 @@ MobileShell.NavigationPanel {
 
         enabled: true
         iconSource: "mobile-task-switcher"
+        accessibleText: i18nc("@action:button", "Task switcher")
         shrinkSize: 4
 
         onTriggered: {
@@ -87,6 +88,7 @@ MobileShell.NavigationPanel {
 
         enabled: true
         iconSource: "start-here-kde"
+        accessibleText: i18nc("@action:button", "Home")
 
         onTriggered: {
             MobileShellState.ShellDBusClient.openHomeScreen();
@@ -99,6 +101,8 @@ MobileShell.NavigationPanel {
 
         enabled: Keyboards.KWinVirtualKeyboard.visible || WindowPlugin.WindowUtil.hasCloseableActiveWindow
         iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
+        accessibleText: Keyboards.KWinVirtualKeyboard.visible ? i18nc("@action:button", "Hide keyboard")
+                                                              : i18nc("@action:button", "Close app")
         // mobile-close-app (from plasma-frameworks) seems to have fewer margins than icons from breeze-icons
         shrinkSize: Keyboards.KWinVirtualKeyboard.visible ? 0 : 4
 
@@ -120,6 +124,7 @@ MobileShell.NavigationPanel {
         visible: RotationPlugin.RotationUtil.showRotationButton
         enabled: true
         iconSource: "rotation-allowed-symbolic"
+        accessibleText: i18nc("@action:button", "Rotate screen")
         shrinkSize: 4
 
         onTriggered: {
@@ -133,6 +138,8 @@ MobileShell.NavigationPanel {
                  (Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput)
         enabled: true
         iconSource: "input-keyboard-virtual-symbolic"
+        accessibleText: Keyboards.KWinVirtualKeyboard.active ? i18nc("@action:button", "Hide keyboard")
+                                                             : i18nc("@action:button", "Show keyboard")
         shrinkSize: 4
 
         onTriggered: {
