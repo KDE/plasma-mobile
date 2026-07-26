@@ -94,8 +94,7 @@ QuickSettingsDelegate {
             }
 
             MobileShell.MarqueeLabel {
-                // if no status is given, just use On/Off
-                inputText: root.status ? root.status : (root.enabled ? i18n("On") : i18n("Off"))
+                inputText: root.statusText
                 opacity: 0.6
 
                 Layout.fillWidth: true

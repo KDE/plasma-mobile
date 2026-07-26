@@ -34,6 +34,13 @@ MobileShell.BaseItem {
     // set by children
     property var iconItem
 
+    readonly property string statusText: root.status ? root.status : (root.enabled ? i18nc("@info:status quick setting is on", "On") : i18nc("@info:status quick setting is off", "Off"))
+
+    Accessible.role: Accessible.Button
+    Accessible.name: root.text
+    Accessible.description: root.statusText
+    Accessible.onPressAction: root.delegateClick()
+
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Button
 
