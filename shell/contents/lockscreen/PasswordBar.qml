@@ -184,6 +184,7 @@ Rectangle {
             implicitWidth: height
             icon.name: root.lockScreenState.isKeyboardMode ? "input-dialpad-symbolic" : "input-keyboard-virtual-symbolic"
             icon.color: 'white'
+            Accessible.name: root.lockScreenState.isKeyboardMode ? i18n("Show keypad") : i18n("Show keyboard")
             onClicked: {
                 root.lockScreenState.isKeyboardMode = !root.lockScreenState.isKeyboardMode;
                 if (root.lockScreenState.isKeyboardMode) {

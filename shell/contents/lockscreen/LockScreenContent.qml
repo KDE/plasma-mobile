@@ -24,6 +24,9 @@ Item {
 
     property bool scrollLock: false
 
+    readonly property string flashlightText: i18n("Flashlight")
+    readonly property string cameraText: i18n("Camera")
+
     signal passwordRequested()
 
     // Vertical layout
@@ -146,6 +149,8 @@ Item {
         QuickActionButton {
             id: leftButton
             buttonAction: ShellSettings.Settings.lockscreenLeftButtonAction
+            accessibleName: buttonAction === ShellSettings.Settings.Flashlight ? root.flashlightText
+                          : buttonAction === ShellSettings.Settings.Camera ? root.cameraText : ""
             opacity: Math.max(0, 1 - flickable.openFactor * 2)
 
             Layout.alignment: Qt.AlignVCenter
@@ -158,6 +163,8 @@ Item {
         QuickActionButton {
             id: rightButton
             buttonAction: ShellSettings.Settings.lockscreenRightButtonAction
+            accessibleName: buttonAction === ShellSettings.Settings.Flashlight ? root.flashlightText
+                          : buttonAction === ShellSettings.Settings.Camera ? root.cameraText : ""
             opacity: Math.max(0, 1 - flickable.openFactor * 2)
 
             Layout.alignment: Qt.AlignVCenter

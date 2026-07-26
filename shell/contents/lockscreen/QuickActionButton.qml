@@ -15,6 +15,8 @@ AbstractButton {
 
     property int buttonAction
 
+    required property string accessibleName
+
     property bool buttonHeld: false
     property double scale: pressed ? (buttonHeld ? 1.7 : 1.5) : 1
     property real fillAmount: 0.0
@@ -32,6 +34,8 @@ AbstractButton {
 
     visible: buttonAction !== ShellSettings.Settings.None
     padding: Math.round(Kirigami.Units.gridUnit * 1.25)
+
+    Accessible.name: root.accessibleName
 
     transform: Scale {
         origin.x: width / 2

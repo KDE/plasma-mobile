@@ -169,6 +169,14 @@ Item {
                 visible: modelData.length > 0
                 enabled: root.openProgress >= 0.8 && !lockScreenState.isKeyboardMode // Only enable after a certain point in animation
 
+                Accessible.name: {
+                    switch (modelData) {
+                        case "R": return i18n("Backspace");
+                        case "E": return i18n("Enter");
+                        default: return modelData;
+                    }
+                }
+
                 opacity: enabled
                 Behavior on opacity {
                     SequentialAnimation {
