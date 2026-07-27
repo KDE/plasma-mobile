@@ -64,6 +64,7 @@
   <summary xml:lang="sl">KDE's Plasma shell za mobilne naprave</summary>
   <summary xml:lang="sv">KDE:s Plasma skal för mobilapparater</summary>
   <summary xml:lang="tr">Taşınabilir biçimdeki aygıtlar için KDE’nin Plasma kabuğu</summary>
+  <summary xml:lang="ug">KDE Plasma نىڭ كۆچمە شەكىلدىكى ئۈسكۈنىدە ئىشلىتىدىغان Shell پىروگراممىسى</summary>
   <summary xml:lang="uk">Оболонка Плазми KDE для пристроїв мобільного форм-фактора</summary>
   <summary xml:lang="zh-CN">KDE Plasma 的手机形态设备外壳程序</summary>
   <summary xml:lang="zh-TW">行動裝置用的 KDE Plasma 殼層</summary>
@@ -101,6 +102,7 @@
       <caption xml:lang="sl">Plasma Mobile shell uporabljen za zaslon oblikovan za mobilno napravo</caption>
       <caption xml:lang="sv">Plasma mobilskal använt på mobilskärm</caption>
       <caption xml:lang="tr">Plasma Cep kabuğu, taşınabilir biçimli bir aygıtta kullanılırken</caption>
+      <caption xml:lang="ug">Plasma Mobile نىڭ كۆچمە شەكىلدىكى ئۈسكۈنىدە ئىشلىتىدىغان Shell پىروگراممىسى</caption>
       <caption xml:lang="uk">Оболонка Мобільної Плазми, яку використовують для екранів мобільного форм-фактора</caption>
       <caption xml:lang="zh-CN">Plasma Mobile 的手机形态设备外壳程序</caption>
       <caption xml:lang="zh-TW">Plasma 行動殼層在行動螢幕上使用</caption>
