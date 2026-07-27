@@ -57,6 +57,7 @@
         "Description[sl]": "Hitre nastavitve temnega načina za Plasma Mobile",
         "Description[sv]": "Snabbinställning av mörkt läge för Plasma mobil",
         "Description[tr]": "Plasma Cep Koyu Kip tez ayarı",
+        "Description[ug]": "Plasma كۆچمە قاراڭغۇ ھالەت تېز تەڭشىكى",
         "Description[uk]": "Швидке налаштовування темного режиму для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的 深色模式快捷设置",
         "Icon": "lighttable",
@@ -83,6 +84,7 @@
         "Name[sl]": "Temni način",
         "Name[sv]": "Mörkt läge",
         "Name[tr]": "Koyu Kip",
+        "Name[ug]": "قاراڭغۇ ھالەت",
         "Name[uk]": "Темний режим",
         "Name[zh_CN]": "深色模式",
         "Website": "https://kde.org"

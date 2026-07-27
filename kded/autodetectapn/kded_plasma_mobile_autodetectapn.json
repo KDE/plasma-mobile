@@ -31,6 +31,7 @@
         "Description[sl]": "Samodejno zaznavaj celične APN v Plasma Mobile",
         "Description[sv]": "Detektera automatiskt mobilaccesspunkter i Plasma mobil",
         "Description[tr]": "Plasma Cep’teki erişim noktası adlarını kendiliğinden algılayın",
+        "Description[ug]": "Plasma كۆچمە يانفون APN نى ئۆزلۈكىدىن بايقايدۇ",
         "Description[uk]": "Автоматично виявляти стільникові точки доступу у Мобільній Плазмі",
         "Description[zh_CN]": "在 Plasma Mobile 中自动检测蜂窝网络 APN",
         "Description[zh_TW]": "在 Plasma 行動中自動偵測行動 APN",
@@ -65,6 +66,7 @@
         "Name[sl]": "Plasma Mobile je samodejno zaznala APN",
         "Name[sv]": "Plasma mobil automatiskt detekterade åtkomstpunkter",
         "Name[tr]": "Plasma Cep Erişim Noktası Adlarını Kendiliğinden Algıla",
+        "Name[ug]": "Plasma كۆچمە APN نى ئۆزلۈكىدىن بايقايدۇ",
         "Name[uk]": "Автоматичне виявлення точок доступу у Мобільній Плазмі",
         "Name[zh_CN]": "Plasma Mobile 自动检测 APN",
         "Name[zh_TW]": "Plasma 行動自動偵測 APN"

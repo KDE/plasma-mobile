@@ -32,6 +32,7 @@
         "Description[sl]": "Poženi zagonske naloge za Plasma Mobile ob začetku seje",
         "Description[sv]": "Utför initieringsuppgifter för Plasma mobil under sessionsstart",
         "Description[tr]": "Oturum başlangıcı sırasında Plasma Cep başlangıç görevlerini çalıştırın",
+        "Description[ug]": "جەريانچاق قوزغالغاندا Plasma كۆچمە دەسلەپكى ۋەزىپىسىنى ئىجرا قىلىدۇ",
         "Description[uk]": "Запуск початкових завдань для Plasma Mobile під час запуску сеансу",
         "Description[zh_CN]": "会话启动时为 Plasma Mobile 运行初始任务",
         "Description[zh_TW]": "在工作階段啟動時為 Plasma 行動執行初始工作",
@@ -67,6 +68,7 @@
         "Name[sl]": "Zagon Plasma Mobile",
         "Name[sv]": "Plasma mobil start",
         "Name[tr]": "Plasma Cep Başlangıç",
+        "Name[ug]": "Plasma كۆچمە باشلاش",
         "Name[uk]": "Запуск Plasma Mobile",
         "Name[zh_CN]": "Plasma Mobile 启动程序",
         "Name[zh_TW]": "Plasma 行動起始畫面"
