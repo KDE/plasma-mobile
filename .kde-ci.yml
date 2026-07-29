@@ -4,26 +4,26 @@
 Dependencies:
  - 'on': ['@all']
    'require':
-    'frameworks/extra-cmake-modules': '@latest-kf6'
-    'frameworks/kauth': '@latest-kf6'
-    'frameworks/kconfig': '@latest-kf6'
-    'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kio': '@latest-kf6'
-    'frameworks/kitemmodels': '@latest-kf6'
-    'frameworks/knotifications': '@latest-kf6'
-    'frameworks/kpackage': '@latest-kf6'
-    'frameworks/kservice': '@latest-kf6'
-    'frameworks/kwindowsystem': '@latest-kf6'
-    'frameworks/modemmanager-qt': '@latest-kf6'
-    'frameworks/networkmanager-qt': '@latest-kf6'
-    'frameworks/kjobwidgets': '@latest-kf6'
+    'frameworks/extra-cmake-modules': 'Frameworks/6.24'
+    'frameworks/kauth': 'Frameworks/6.24'
+    'frameworks/kconfig': 'Frameworks/6.24'
+    'frameworks/kcoreaddons': 'Frameworks/6.24'
+    'frameworks/ki18n': 'Frameworks/6.24'
+    'frameworks/kio': 'Frameworks/6.24'
+    'frameworks/kitemmodels': 'Frameworks/6.24'
+    'frameworks/knotifications': 'Frameworks/6.24'
+    'frameworks/kpackage': 'Frameworks/6.24'
+    'frameworks/kservice': 'Frameworks/6.24'
+    'frameworks/kwindowsystem': 'Frameworks/6.24'
+    'frameworks/modemmanager-qt': 'Frameworks/6.24'
+    'frameworks/networkmanager-qt': 'Frameworks/6.24'
+    'frameworks/kjobwidgets': 'Frameworks/6.24'
     'plasma/kwayland': '@same'
     'plasma/libkscreen': '@same'
     'plasma/libplasma': '@same'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'
-    'libraries/kirigami-addons': '@latest-kf6'
+    'libraries/kirigami-addons': 'v1.11.0'
 Options:
  require-passing-tests-on: ['Linux', 'FreeBSD']
  run-qmllint: true
@@ -36,7 +36,7 @@ RuntimeDependencies:
     'plasma/bluedevil': '@same'
     'plasma/milou': '@same'
     'plasma/qqc2-breeze-style': '@same'
-    'frameworks/bluez-qt': '@latest-kf6'
+    'frameworks/bluez-qt': 'Frameworks/6.24'
  - 'on': ['Linux', 'FreeBSD']
    'require':
     'plasma/milou': '@same'
