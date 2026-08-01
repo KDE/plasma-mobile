@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2026-07-02 06:58+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -79,6 +79,27 @@ msgstr "Pridobi nove vtičnike…"
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Spremembe postavitev je omejil skrbnik sistema"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "Vnesite PIN"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+#, fuzzy
+#| msgctxt "@action:button"
+#| msgid "Turn flashlight on"
+msgid "Flashlight"
+msgstr "Vklopi svetilko"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "Vnesite PIN"
@@ -86,6 +107,14 @@ msgstr "Vnesite PIN"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Napačen PIN"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
@@ -119,10 +148,6 @@ msgstr "Indikator fokusa plošče"
 
 #~ msgid "Apply now"
 #~ msgstr "Uveljavi zdaj"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "Vklopi svetilko"
 
 #~ msgctxt "@action:button"
 #~ msgid "Open camera"

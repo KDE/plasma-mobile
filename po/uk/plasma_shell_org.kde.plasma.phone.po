@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2026-07-02 11:23+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -79,6 +79,27 @@ msgstr "Отримати нові додатки…"
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Можливість зміни компонування було обмежено адміністратором системи"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "Введіть PIN-код"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+#, fuzzy
+#| msgctxt "@action:button"
+#| msgid "Turn flashlight on"
+msgid "Flashlight"
+msgstr "Увімкнути спалах"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "Введіть PIN-код"
@@ -86,6 +107,14 @@ msgstr "Введіть PIN-код"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Помилковий код"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
@@ -118,10 +147,6 @@ msgstr "Індикатор фокусування панелі"
 
 #~ msgid "Apply now"
 #~ msgstr "Застосувати зараз"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "Увімкнути спалах"
 
 #~ msgctxt "@action:button"
 #~ msgid "Open camera"

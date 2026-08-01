@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2025-11-22 12:07+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -79,6 +79,24 @@ msgstr "Sækja nýjar viðbætur…"
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Kerfisstjórinn hefur takmarkað breytingar á framsetningu"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "Sláðu inn PIN-númer"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+msgid "Flashlight"
+msgstr ""
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "Sláðu inn PIN-númer"
@@ -86,6 +104,14 @@ msgstr "Sláðu inn PIN-númer"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Rangt PIN-númer"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"

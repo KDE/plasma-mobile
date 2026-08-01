@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -77,6 +77,24 @@ msgstr "获取新插件…"
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "布局更改操作已被系统管理员限制使用"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "输入 PIN 码"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+msgid "Flashlight"
+msgstr ""
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "输入 PIN 码"
@@ -84,6 +102,14 @@ msgstr "输入 PIN 码"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "PIN 码错误"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"

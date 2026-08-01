@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2026-07-05 19:45+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -78,6 +78,24 @@ msgstr "Hämta nya insticksprogram..."
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Layoutändringar har begränsats av systemadministratören"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "Ange PIN-kod"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+msgid "Flashlight"
+msgstr ""
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "Ange PIN-kod"
@@ -85,6 +103,14 @@ msgstr "Ange PIN-kod"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Felaktig PIN-kod"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-30 00:45+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2025-09-16 08:57+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -51,13 +51,17 @@ msgstr "Propriétés"
 msgid "Clear All Notifications"
 msgstr "Effacer toutes les notifications"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "On"
+msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "Activé"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "Off"
+msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "Désactivé"
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-30 00:45+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -53,13 +53,17 @@ msgstr "Vlastnosti"
 msgid "Clear All Notifications"
 msgstr "Vymazať všetky oznámenia"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "On"
+msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "Zapnuté"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "Off"
+msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "Vypnuté"
 

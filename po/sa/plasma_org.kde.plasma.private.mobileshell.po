@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-30 00:45+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -56,13 +56,17 @@ msgstr "गुणाः"
 msgid "Clear All Notifications"
 msgstr "सर्वाणि सूचनानि स्वच्छं कुर्वन्तु"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "On"
+msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "इत्युपरि"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "Off"
+msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "दूरे"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2026-07-02 08:17+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -77,6 +77,27 @@ msgstr "הורדת תוספים חדשים…"
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "שינויי פריסה הוגבלו על ידי הנהלת המערכת"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "נא למלא קוד אישי (PIN)"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+#, fuzzy
+#| msgctxt "@action:button"
+#| msgid "Turn flashlight on"
+msgid "Flashlight"
+msgstr "הפעלת הפנס"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "נא למלא קוד אישי (PIN)"
@@ -84,6 +105,14 @@ msgstr "נא למלא קוד אישי (PIN)"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "קוד אישי (PIN) שגוי"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
@@ -116,10 +145,6 @@ msgstr "מחוון מיקוד לוח"
 
 #~ msgid "Apply now"
 #~ msgstr "החלה כעת"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "הפעלת הפנס"
 
 #~ msgctxt "@action:button"
 #~ msgid "Open camera"

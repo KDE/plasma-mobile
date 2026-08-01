@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2026-07-02 13:24+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -78,6 +78,27 @@ msgstr "Haal nieuwe plug-ins op…"
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Wijzigingen in de indeling zijn beperkt door de systeembeheerder"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "PIN invoeren"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+#, fuzzy
+#| msgctxt "@action:button"
+#| msgid "Turn flashlight on"
+msgid "Flashlight"
+msgstr "Flitslicht aanzetten"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "PIN invoeren"
@@ -85,6 +106,14 @@ msgstr "PIN invoeren"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Verkeerde PIN"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
@@ -119,10 +148,6 @@ msgstr "Focusindicator van paneel"
 
 #~ msgid "Apply now"
 #~ msgstr "Nu toepassen"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "Flitslicht aanzetten"
 
 #~ msgctxt "@action:button"
 #~ msgid "Open camera"

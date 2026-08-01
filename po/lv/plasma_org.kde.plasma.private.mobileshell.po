@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-30 00:45+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2026-03-03 13:13+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -55,13 +55,17 @@ msgstr "Īpašības"
 msgid "Clear All Notifications"
 msgstr "Notīrīt visus paziņojumus"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "On"
+msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "Ieslēgts"
 
-#: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
-#, kde-format
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, fuzzy, kde-format
+#| msgid "Off"
+msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "Izslēgts"
 

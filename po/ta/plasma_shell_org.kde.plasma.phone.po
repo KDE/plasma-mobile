@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-02 00:46+0000\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
 "PO-Revision-Date: 2025-03-16 14:13+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -80,6 +80,27 @@ msgstr "புதிய செருகுநிரல்களை பதிவ�
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "தளவமைப்பு மாற்றங்களை கைபேசியின் நிர்வாகி தடைசெய்துள்ளார்"
 
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr ""
+
+#: contents/lockscreen/Keypad.qml:175
+#, fuzzy
+#| msgid "Enter PIN"
+msgid "Enter"
+msgstr "கடவெண்ணை உள்ளிடவும்"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+#, fuzzy
+#| msgctxt "@action:button"
+#| msgid "Turn flashlight on"
+msgid "Flashlight"
+msgstr "கைவிளக்கை இயக்கு"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr ""
+
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "கடவெண்ணை உள்ளிடவும்"
@@ -87,6 +108,14 @@ msgstr "கடவெண்ணை உள்ளிடவும்"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "தவறான கடவெண்"
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keypad"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:187
+msgid "Show keyboard"
+msgstr ""
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
@@ -119,10 +148,6 @@ msgstr "பலகைக் குவியக்காட்டி"
 
 #~ msgid "Apply now"
 #~ msgstr "இப்போது செயல்படுத்து"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "கைவிளக்கை இயக்கு"
 
 #~ msgctxt "@action:button"
 #~ msgid "Open camera"
