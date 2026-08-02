@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2026-07-02 06:58+0200\n"
+"PO-Revision-Date: 2026-08-01 08:11+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -81,24 +81,19 @@ msgstr "Spremembe postavitev je omejil skrbnik sistema"
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "Vnesite PIN"
+msgstr "Enter"
 
 #: contents/lockscreen/LockScreenContent.qml:27
-#, fuzzy
-#| msgctxt "@action:button"
-#| msgid "Turn flashlight on"
 msgid "Flashlight"
-msgstr "Vklopi svetilko"
+msgstr "Svetilka"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -110,11 +105,11 @@ msgstr "Napačen PIN"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "Prikaži zaslonsko tipkovnico"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "Prikaži tipkovnico"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"

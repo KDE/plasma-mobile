@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2026-07-02 05:59+0200\n"
+"PO-Revision-Date: 2026-08-01 03:56+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -81,24 +81,19 @@ msgstr "განლაგების ცვლილება შეზღუ�
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "შეიყვანეთ PIN კოდი"
+msgstr "შესვლა"
 
 #: contents/lockscreen/LockScreenContent.qml:27
-#, fuzzy
-#| msgctxt "@action:button"
-#| msgid "Turn flashlight on"
 msgid "Flashlight"
-msgstr "ფანრის ჩართვა"
+msgstr "ფანარი"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "კამერა"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -110,11 +105,11 @@ msgstr "არასწორი PIN-კოდი"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "ციფრული კლავიატურის ჩვენება"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "კლავიატურის ჩვენება"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
