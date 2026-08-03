@@ -56,18 +56,16 @@ msgid "Clear All Notifications"
 msgstr "清除所有通知"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "On"
+#, kde-format
 msgctxt "@info:status quick setting is on"
 msgid "On"
-msgstr "开"
+msgstr ""
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "Off"
+#, kde-format
 msgctxt "@info:status quick setting is off"
 msgid "Off"
-msgstr "关"
+msgstr ""
 
 #: qml/dataproviders/SignalStrengthInfo.qml:21
 #, kde-format

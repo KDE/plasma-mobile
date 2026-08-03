@@ -82,10 +82,8 @@ msgid "Backspace"
 msgstr ""
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "输入 PIN 码"
+msgstr ""
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"

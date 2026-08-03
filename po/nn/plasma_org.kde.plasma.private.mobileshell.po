@@ -1,12 +1,12 @@
 # Translation of plasma_org.kde.plasma.private.mobileshell to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2023, 2024.
+# Karl Ove Hufthammer <karl@huftis.org>, 2023, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2024-08-04 18:01+0200\n"
+"PO-Revision-Date: 2026-08-02 19:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -57,15 +57,13 @@ msgid "Clear All Notifications"
 msgstr "Tøm varslingar"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "On"
+#, kde-format
 msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "På"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "Off"
+#, kde-format
 msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "Av"
@@ -76,16 +74,14 @@ msgid "SIM Locked"
 msgstr "Sim låst"
 
 #: qml/popups/volumeosd/AudioApplet.qml:89
-#, fuzzy, kde-format
-#| msgid "Outputs"
+#, kde-format
 msgid "Output Devices"
-msgstr "Utlyd"
+msgstr "Ut­einingar"
 
 #: qml/popups/volumeosd/AudioApplet.qml:118
-#, fuzzy, kde-format
-#| msgid "Inputs"
+#, kde-format
 msgid "Input Devices"
-msgstr "Innlyd"
+msgstr "Inn­einingar"
 
 #: qml/popups/volumeosd/AudioApplet.qml:148
 #, kde-format
@@ -152,9 +148,9 @@ msgid "Mute"
 msgstr "Slå av lyd"
 
 #: qml/popups/volumeosd/VolumeChangedPopup.qml:210
-#, fuzzy, kde-format
+#, kde-format
 msgid "configure audio streams"
-msgstr "Vis/gøym lydstraumar"
+msgstr "Set opp lydstraumar"
 
 #: qml/popups/volumeosd/VolumeOSD.qml:225
 #, kde-format
@@ -167,7 +163,7 @@ msgid "%1%"
 msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Søk …"

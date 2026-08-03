@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2026-07-21 01:09+0200\n"
+"PO-Revision-Date: 2026-08-02 23:22+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,20 +22,20 @@ msgstr ""
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr "Kopiatu arbelean"
+msgstr "Arbelera kopiatu"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr "Ikusi erroreen xehetasunak..."
+msgstr "Erroreen xehetasunak ikusi…"
 
 #: contents/applet/CompactApplet.qml:88
 msgid "Open %1"
-msgstr "Ireki %1"
+msgstr "%1 ireki"
 
 #: contents/configuration/AppletConfiguration.qml:90
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
-msgstr "Konfiguratu %1"
+msgstr "%1 konfiguratu"
 
 #: contents/configuration/ContainmentConfiguration.qml:30
 msgid "Wallpaper"
@@ -83,21 +83,19 @@ msgstr "Antolaeran aldaketak murriztu ditu administratzaileak"
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "Atzera-tekla"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "Sartu PINa"
+msgstr "Sartu"
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"
-msgstr ""
+msgstr "Esku-argia"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -109,11 +107,11 @@ msgstr "PIN okerra"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "Zenbakizko teklatua erakutsi"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "Teklatua erakutsi"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"

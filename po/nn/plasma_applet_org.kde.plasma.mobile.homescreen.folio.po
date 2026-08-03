@@ -1,12 +1,12 @@
 # Translation of plasma_applet_org.kde.plasma.mobile.homescreen.folio to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2021, 2022, 2024.
+# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2021, 2022, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-22 00:47+0000\n"
-"PO-Revision-Date: 2024-07-17 17:36+0200\n"
+"PO-Revision-Date: 2026-08-02 19:47+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -43,12 +43,12 @@ msgstr ""
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
 msgid "Configure…"
-msgstr ""
+msgstr "Set opp …"
 
 #: qml/delegate/WidgetDelegateConfig.qml:193
 #, kde-format
 msgid "Options"
-msgstr ""
+msgstr "Val"
 
 #: qml/delegate/WidgetDelegateConfig.qml:207
 #, fuzzy, kde-format
@@ -57,15 +57,14 @@ msgid "Widget Options"
 msgstr "Skjermelement"
 
 #: qml/delegate/WidgetDelegateConfig.qml:247
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove widget"
-msgstr "Fjern"
+msgstr "Fjern elementet"
 
 #: qml/delegate/WidgetDelegateConfig.qml:254
 #, kde-format
 msgid "Configure widget"
-msgstr ""
+msgstr "Set opp elementet"
 
 #: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
 #: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
@@ -81,12 +80,12 @@ msgstr ""
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
 msgid "Confirm Folder Deletion"
-msgstr ""
+msgstr "Stadfest sletting av mappe"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:35
 #, kde-format
 msgid "Are you sure you want to delete this folder?"
-msgstr ""
+msgstr "Er du sikker på at du vil sletta denne mappa?"
 
 #: qml/settings/AppletListViewer.qml:73 qml/settings/SettingsComponent.qml:74
 #, kde-format
@@ -97,13 +96,13 @@ msgstr "Skjermelement"
 #, kde-format
 msgctxt "@action:button The word 'new' refers to widgets"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Hent nye element …"
 
 #: qml/settings/AppletListViewer.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Widgets…"
-msgstr ""
+msgstr "Hent nye element …"
 
 #: qml/settings/ConfigGeneral.qml:31
 #, kde-format
@@ -111,11 +110,9 @@ msgid "Icons"
 msgstr "Ikon"
 
 #: qml/settings/ConfigGeneral.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Search applications…"
+#, kde-format
 msgid "Application"
-msgstr "Søk etter program …"
+msgstr "Program"
 
 #: qml/settings/ConfigGeneral.qml:63
 #, kde-format
@@ -155,7 +152,7 @@ msgstr "Vis merkelappar på favorittlinja"
 #: qml/settings/ConfigGeneral.qml:143
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "Lås utforming"
 
 #: qml/settings/ConfigGeneral.qml:156
 #, kde-format
@@ -190,7 +187,7 @@ msgstr "Dreiing"
 #: qml/settings/ConfigGeneral.qml:183
 #, kde-format
 msgid "Double tap to lock device"
-msgstr ""
+msgstr "Dobbelttrykk for å låsa eininga"
 
 #: qml/settings/ConfigGeneral.qml:194
 #, kde-format
@@ -200,7 +197,7 @@ msgstr "Favorittlinje"
 #: qml/settings/ConfigGeneral.qml:199
 #, kde-format
 msgid "Show background"
-msgstr ""
+msgstr "Vis bakgrunn"
 
 #: qml/settings/ConfigGeneral.qml:210
 #, kde-format
@@ -209,41 +206,37 @@ msgid "Wallpaper"
 msgstr "Bakgrunnsbilete"
 
 #: qml/settings/ConfigGeneral.qml:216
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show wallpaper blur effect"
+#, kde-format
 msgid "Wallpaper blur effect"
-msgstr "Vis sløreeffekt på bakgrunnsbilete"
+msgstr "Sløreeffekt på bakgrunnsbilete"
 
 #: qml/settings/ConfigGeneral.qml:219
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: qml/settings/ConfigGeneral.qml:220
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr ""
+msgstr "Enkel"
 
 #: qml/settings/ConfigGeneral.qml:221
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr ""
+msgstr "Fullstendig"
 
 #: qml/settings/ConfigGeneral.qml:243
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Export layout"
-msgstr "Eksporter utforming til"
+msgstr "Eksporter utforming"
 
 #: qml/settings/ConfigGeneral.qml:252
-#, fuzzy, kde-format
-#| msgid "Import layout from"
+#, kde-format
 msgid "Import layout"
-msgstr "Importer utforming frå"
+msgstr "Importer utforming"
 
 #: qml/settings/ConfigGeneral.qml:262
 #, kde-format
@@ -281,13 +274,11 @@ msgid "This will overwrite your existing homescreen layout!"
 msgstr "Dette vil overskriva utforminga du brukar på heimeskjermen."
 
 #: qml/settings/SettingsComponent.qml:57
-#, fuzzy, kde-format
-#| msgctxt "@title:group settings group"
-#| msgid "Wallpaper"
+#, kde-format
 msgid "Wallpapers"
 msgstr "Bakgrunnsbilete"
 
 #: qml/settings/SettingsComponent.qml:66
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Innstillingar"
