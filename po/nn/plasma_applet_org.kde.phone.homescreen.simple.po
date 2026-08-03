@@ -1,6 +1,6 @@
 # Translation of plasma_applet_org.kde.plasma.mobile.homescreen.halcyon to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023.
+# Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
