@@ -58,12 +58,12 @@ msgstr "清除所有通知"
 #: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
-msgstr "开"
+msgstr ""
 
 #: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
-msgstr "关"
+msgstr ""
 
 #: qml/dataproviders/SignalStrengthInfo.qml:21
 #, kde-format

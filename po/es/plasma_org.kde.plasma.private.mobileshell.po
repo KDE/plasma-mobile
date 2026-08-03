@@ -1,15 +1,15 @@
 # Spanish translations for plasma_org.kde.plasma.private.mobileshell.po package.
-# Copyright (C) 2022-2025 This file is copyright:
+# Copyright (C) 2022-2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Automatically generated, 2022.
 #
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2022, 2024-2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-07 00:46+0000\n"
-"PO-Revision-Date: 2025-09-15 14:58+0100\n"
+"PO-Revision-Date: 2026-08-02 00:32+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -59,12 +59,12 @@ msgstr "Borrar todas las notificaciones"
 #: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
-msgstr "Activado"
+msgstr "Activadas"
 
 #: qml/actiondrawer/private/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
-msgstr "Desactivado"
+msgstr "Desactivadas"
 
 #: qml/dataproviders/SignalStrengthInfo.qml:21
 #, kde-format

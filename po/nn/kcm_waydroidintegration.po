@@ -1,11 +1,12 @@
 # Translation of kcm_waydroidintegration to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-03 00:45+0000\n"
-"PO-Revision-Date: 2026-06-24 21:04+0200\n"
+"PO-Revision-Date: 2026-08-02 19:49+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.07.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -94,27 +95,27 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
-msgstr ""
+msgstr "IP-adresse"
 
 #: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopier"
 
 #: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
 msgid "Waydroid status"
-msgstr ""
+msgstr "Waydroid-status"
 
 #: ui/WaydroidConfigurationForm.qml:36
 #, kde-format
 msgid "Running"
-msgstr ""
+msgstr "Køyrer"
 
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stop session"
-msgstr ""
+msgstr "Stopp økta"
 
 #: ui/WaydroidConfigurationForm.qml:46
 #, kde-format
@@ -124,18 +125,18 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:51
 #, kde-format
 msgid "Installed applications"
-msgstr ""
+msgstr "Installerte program"
 
 #: ui/WaydroidConfigurationForm.qml:56
 #, kde-format
 msgid "Reset Waydroid"
-msgstr ""
+msgstr "Tilbakestill Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr ""
+msgstr "Stadfest tilbakestilling av Waydroid"
 
 #: ui/WaydroidConfigurationForm.qml:63
 #, kde-format
@@ -147,7 +148,7 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:81
 #, kde-format
 msgid "Waydroid properties"
-msgstr ""
+msgstr "Waydroid-eigenskapar"
 
 #: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
@@ -157,7 +158,7 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Multi Windows"
-msgstr ""
+msgstr "Fleire vindauge"
 
 #: ui/WaydroidConfigurationForm.qml:110
 #, kde-format
@@ -189,7 +190,7 @@ msgstr ""
 #: ui/WaydroidDownloadStatus.qml:40
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
-msgstr ""
+msgstr "Lastar ned %1 MB / %2 MB – fart %3"
 
 #: ui/WaydroidDownloadStatus.qml:48
 #, kde-format
@@ -236,9 +237,9 @@ msgstr ""
 #: ui/WaydroidInitialConfigurationForm.qml:22
 #, kde-format
 msgid "System type"
-msgstr ""
+msgstr "Systemtype"
 
 #: ui/WaydroidInitialConfigurationForm.qml:35
 #, kde-format
 msgid "Configure Waydroid"
-msgstr ""
+msgstr "Set opp Waydroid"

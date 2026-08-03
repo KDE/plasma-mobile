@@ -1,11 +1,12 @@
 # Translation of plasma_org.kde.plasma.mobileinitialstart to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2023, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:48+0000\n"
-"PO-Revision-Date: 2026-07-05 16:21+0200\n"
+"PO-Revision-Date: 2026-08-02 19:43+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -34,9 +35,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Opnar vegvisar for første start, utan å endra oppsettet"
 
 #: main.cpp:36
-#, fuzzy, kde-format
+#, kde-format
 msgid "© 2026 KDE Community"
-msgstr "© 2023 KDE-fellesskapet"
+msgstr "© 2026 KDE-fellesskapet"
 
 #: main.cpp:37
 #, kde-format
@@ -199,17 +200,17 @@ msgstr "Mørkt tema"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "System­navigering"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Vel korleis du vil navigera i systemet."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Fingernavigering"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -217,21 +218,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Sveip opp frå botnen for å sjå programma som køyrer. Dra fort for å gå til "
+"heimeskjermen."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Knappenavigering"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "Bruk knappane på navigasjonslinja for å navigera i systemet."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "Du kan endra dette seinare i innstillingane."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -256,21 +259,19 @@ msgid "Invalid input."
 msgstr "Ugyldige inndata."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:78
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Connect"
 msgstr "Kopla til"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:85
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgid "Disconnect"
-msgstr "Kopla til"
+msgstr "Kopla frå"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:92
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Set opp"
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
