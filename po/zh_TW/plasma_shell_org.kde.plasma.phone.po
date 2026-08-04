@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2022, 2024-2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2025-11-24 19:23+0900\n"
+"PO-Revision-Date: 2026-08-04 07:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -81,21 +81,19 @@ msgstr "佈局變更已被系統管理員限制"
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "輸入 PIN 碼"
+msgstr "Enter"
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"
-msgstr ""
+msgstr "手電筒"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "相機"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -107,27 +105,27 @@ msgstr "錯誤 PIN 碼"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "顯示數字鍵盤"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "顯示鍵盤"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "重新啟動"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "關機"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "登出"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"

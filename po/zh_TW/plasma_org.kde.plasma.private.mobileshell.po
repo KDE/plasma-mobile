@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2025-2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2025-09-30 21:43+0900\n"
+"PO-Revision-Date: 2026-08-04 07:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -55,15 +55,13 @@ msgid "Clear All Notifications"
 msgstr "清除所有通知"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "On"
+#, kde-format
 msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "開啟"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "Off"
+#, kde-format
 msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "關閉"
