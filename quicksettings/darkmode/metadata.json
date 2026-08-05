@@ -62,6 +62,7 @@
         "Description[ug]": "Plasma كۆچمە قاراڭغۇ ھالەت تېز تەڭشىكى",
         "Description[uk]": "Швидке налаштовування темного режиму для Мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的 深色模式快捷设置",
+        "Description[zh_TW]": "Plasma 行動的深色模式快速設定",
         "Icon": "lighttable",
         "Id": "org.kde.plasma.quicksetting.darkmode",
         "License": "GPL-2.0+",
@@ -90,6 +91,7 @@
         "Name[ug]": "قاراڭغۇ ھالەت",
         "Name[uk]": "Темний режим",
         "Name[zh_CN]": "深色模式",
+        "Name[zh_TW]": "深色模式",
         "Website": "https://kde.org"
     }
 }
