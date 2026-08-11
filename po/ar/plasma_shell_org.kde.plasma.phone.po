@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2026-07-04 21:14+0400\n"
+"PO-Revision-Date: 2026-08-10 14:47+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -79,21 +79,19 @@ msgstr "قُيد تغييرات التخطيط من قبل مسؤول النظا
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "مسافة للخلف"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "أدخل رقم التعريفي الشخصي"
+msgstr "أدخل"
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"
-msgstr ""
+msgstr "كشاف"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "كاميرا"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -105,11 +103,11 @@ msgstr "رقم التعريف الشخصي خاطئ"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "اعرض لوح المفاتيح"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "اعرض لوحة المفاتيح"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
