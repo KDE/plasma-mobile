@@ -90,7 +90,7 @@ msgstr[0] "معالج"
 msgstr[1] "معالج"
 msgstr[2] "معالجين"
 msgstr[3] "معالجات"
-msgstr[4] "معالجاً"
+msgstr[4] "معالجًا"
 msgstr[5] "معالج"
 
 #: ui/main.qml:143
