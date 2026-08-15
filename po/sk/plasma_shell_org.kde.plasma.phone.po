@@ -79,21 +79,19 @@ msgstr "Zmeny rozloženia boli zakázané systémovým administrátorom"
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "Zadať PIN"
+msgstr "Enter"
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"
-msgstr ""
+msgstr "Baterka"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "Fotoaparát"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -105,27 +103,27 @@ msgstr "Wrong PIN"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "Zobraziť klávesnicu"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "Zobraziť klávesnicu"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "Reštartovať"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "Vypnúť"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "Odhlásiť sa"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušiť"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
