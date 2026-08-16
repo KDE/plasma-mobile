@@ -1,0 +1,52 @@
+# translation of plasma_applet_org.kde.plasma.mobile.taskpanel.po to Slovak
+# Roman Paholik <wizzardsk@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.kde.plasma.mobile.taskpanel\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"PO-Revision-Date: 2026-08-15 17:01+0200\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: qml/NavigationPanelComponent.qml:77
+#, kde-format
+msgctxt "@action:button"
+msgid "Task switcher"
+msgstr "Prepínač úloh"
+
+#: qml/NavigationPanelComponent.qml:91
+#, kde-format
+msgctxt "@action:button"
+msgid "Home"
+msgstr "Domov"
+
+#: qml/NavigationPanelComponent.qml:104 qml/NavigationPanelComponent.qml:141
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide keyboard"
+msgstr "Skryť klávesnicu"
+
+#: qml/NavigationPanelComponent.qml:105
+#, kde-format
+msgctxt "@action:button"
+msgid "Close app"
+msgstr "Zavrieť aplikáciu"
+
+#: qml/NavigationPanelComponent.qml:127
+#, kde-format
+msgctxt "@action:button"
+msgid "Rotate screen"
+msgstr "Otočiť obrazovku"
+
+#: qml/NavigationPanelComponent.qml:142
+#, kde-format
+msgctxt "@action:button"
+msgid "Show keyboard"
+msgstr "Zobraziť klávesnicu"
