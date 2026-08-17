@@ -1,4 +1,3 @@
-
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
@@ -6,17 +5,35 @@
 #include "windowlistener.h"
 
 #include <QQuickWindow>
+#include <QFileInfo>
+#include <QUrl>
+#include <QIcon>
 
-#include <KNotificationJobUiDelegate>
-
-FolioApplication::FolioApplication(KService::Ptr service, QObject *parent)
-    : QObject{parent}
-    , m_running{false}
-    , m_name{service->name()}
-    , m_icon{service->icon()}
-    , m_storageId{service->storageId()}
+static bool isIconValid(const QString &iconNameOrPath)
 {
-    if (service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
+    if (iconNameOrPath.isEmpty()) {
+        return false;
+    }
+
+    if (iconNameOrPath.startsWith(QStringLiteral("file://"))) {
+        return QFileInfo::exists(QUrl(iconNameOrPath).toLocalFile());
+    } else if (iconNameOrPath.startsWith(QLatin1Char('/'))) {
+        return QFileInfo::exists(iconNameOrPath);
+    }
+
+    return QIcon::hasThemeIcon(iconNameOrPath);
+}
+
+FolioApplication::FolioApplication(KService::Ptr service, const QStringList &categories, QObject *parent)
+: QObject{parent}
+, m_running{false}
+, m_name{service ? service->name() : QString()}
+, m_icon{service && isIconValid(service->icon()) ? service->icon() : QStringLiteral("unknown")}
+, m_storageId{service ? service->storageId() : QString()}
+, m_categories{categories}
+, m_service{service}
+{
+    if (service && service->property<bool>(QStringLiteral("X-KDE-PlasmaMobile-UseGenericName"))) {
         m_name = service->genericName();
     }
 
@@ -71,6 +88,11 @@ QString FolioApplication::icon() const
     return m_icon;
 }
 
+QStringList FolioApplication::categories() const
+{
+    return m_categories;
+}
+
 QString FolioApplication::storageId() const
 {
     return m_storageId;
@@ -79,6 +101,11 @@ QString FolioApplication::storageId() const
 KWayland::Client::PlasmaWindow *FolioApplication::window() const
 {
     return m_window;
+}
+
+KService::Ptr FolioApplication::service() const
+{
+    return m_service;
 }
 
 void FolioApplication::setName(QString &name)
@@ -103,6 +130,14 @@ void FolioApplication::setWindow(KWayland::Client::PlasmaWindow *window)
 {
     m_window = window;
     Q_EMIT windowChanged();
+}
+
+void FolioApplication::setCategories(const QStringList &categories)
+{
+    if (m_categories != categories) {
+        m_categories = categories;
+        Q_EMIT categoriesChanged();
+    }
 }
 
 void FolioApplication::setMinimizedDelegate(QQuickItem *delegate)

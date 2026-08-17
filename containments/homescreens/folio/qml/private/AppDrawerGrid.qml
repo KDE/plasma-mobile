@@ -16,8 +16,24 @@ import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 MobileShell.GridView {
     id: root
 
+    enum SwipeArea {
+        Enable,
+        Disable
+    }
+
+    // whether or not the enable the globel swipeArea for this grid view
+    // disabling this prevents swiping away the app drawer when at the top of the list
+    property int swipeArea: AppDrawerGrid.SwipeArea.Enable
+
     property Folio.HomeScreen folio
     property var homeScreen
+    // whether or not this in the currently active grid view page
+    // used to determine which grid view to link up to the globel swipeArea for swiping at the top of the list and swiping away the app drawer
+    property bool currentPage: false
+
+    // set the top and botton margin values using these properties so other margin values can be added on top if needed
+    property real containerTopMargin: 0
+    property real containerBottomMargin: 0
 
     cacheBuffer: cellHeight * 20
     reuseItems: true
@@ -29,7 +45,7 @@ MobileShell.GridView {
 
     // HACK: the first swipe from the top of the app drawer is done from HomeScreenState, not the flickable
     //       due to issues with Flickable getting its swipe stolen by SwipeArea
-    interactive: (dragging || !atYBeginning) && folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
+    interactive: (dragging || !atYBeginning || swipeArea === AppDrawerGrid.SwipeArea.Disable) && folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
 
     readonly property real __iconCellPadding: Kirigami.Units.largeSpacing * 5 // extra space reserved around the icons to fit comfortably within the grid
     readonly property real __horizontalMarginLowerLimit: Kirigami.Units.largeSpacing
@@ -57,6 +73,7 @@ MobileShell.GridView {
 
     Connections {
         target: folio.HomeScreenState
+        enabled: root.currentPage
 
         function onSwipeStateChanged() {
             if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid) {

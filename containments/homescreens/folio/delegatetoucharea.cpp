@@ -18,6 +18,15 @@ DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
     m_pressAndHoldTimer->setSingleShot(true);
     connect(m_pressAndHoldTimer, &QTimer::timeout, this, &DelegateTouchArea::startPressAndHold);
 
+    connect(this, &QQuickItem::enabledChanged, this, [this]() {
+        if (!isEnabled()) {
+            m_pressAndHoldTimer->stop();
+            m_pressAndHeld = false;
+            setPressed(false);
+            setHovered(false);
+        }
+    });
+
     // Explicitly call setCursor on QQuickItem since
     // it internally keeps a boolean hasCursor that doesn't
     // get set to true unless you call setCursor
@@ -27,6 +36,29 @@ DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
     setAcceptTouchEvents(true);
     setFlags(QQuickItem::ItemIsFocusScope);
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton);
+}
+
+bool DelegateTouchArea::isInteractive() const
+{
+    return m_interactive;
+}
+
+void DelegateTouchArea::setInteractive(bool interactive)
+{
+    if (m_interactive == interactive) {
+        return;
+    }
+
+    m_interactive = interactive;
+
+    if (!m_interactive) {
+        m_pressAndHoldTimer->stop();
+        m_pressAndHeld = false;
+        setPressed(false);
+        setHovered(false);
+    }
+
+    Q_EMIT interactiveChanged();
 }
 
 bool DelegateTouchArea::pressed()
@@ -110,6 +142,10 @@ void DelegateTouchArea::setHitPadding(qreal hitPadding)
 
 bool DelegateTouchArea::contains(const QPointF &point) const
 {
+    if (!m_interactive || !isEnabled()) {
+        return false;
+    }
+
     // if no target item is set, fallback to normal QQuickItem bounding box behavior
     if (!m_hitItem) {
         return QQuickItem::contains(point);
@@ -125,6 +161,11 @@ bool DelegateTouchArea::contains(const QPointF &point) const
 
 void DelegateTouchArea::mousePressEvent(QMouseEvent *event)
 {
+    if (!m_interactive || !isEnabled()) {
+        event->ignore();
+        return;
+    }
+
     if (event->button() & Qt::RightButton) {
         Q_EMIT rightMousePress();
     } else if (event->button() & Qt::LeftButton) {
@@ -137,12 +178,22 @@ void DelegateTouchArea::mousePressEvent(QMouseEvent *event)
 
 void DelegateTouchArea::mouseMoveEvent(QMouseEvent *event)
 {
+    if (!m_interactive || !isEnabled()) {
+        event->ignore();
+        return;
+    }
+
     handleMoveEvent(event, event->points().first().position());
     event->accept();
 }
 
 void DelegateTouchArea::mouseReleaseEvent(QMouseEvent *event)
 {
+    if (!m_interactive || !isEnabled()) {
+        event->ignore();
+        return;
+    }
+
     if (event->button() & Qt::LeftButton) {
         handleReleaseEvent(event, true);
         event->accept();
@@ -161,6 +212,11 @@ void DelegateTouchArea::mouseUngrabEvent()
 
 void DelegateTouchArea::touchEvent(QTouchEvent *event)
 {
+    if (!m_interactive || !isEnabled()) {
+        event->ignore();
+        return;
+    }
+
     bool unhandled = true;
     const auto &firstPoint = event->points().first();
 
@@ -200,6 +256,12 @@ void DelegateTouchArea::touchUngrabEvent()
 
 void DelegateTouchArea::hoverEnterEvent(QHoverEvent *event)
 {
+    if (!m_interactive || !isEnabled()) {
+        setHovered(false);
+        event->ignore();
+        return;
+    }
+
     setHovered(true);
 
     // don't block hover events

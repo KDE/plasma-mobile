@@ -119,7 +119,7 @@ ContainmentItem {
     Rectangle {
         id: appDrawerBackground
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6)
+        color: Qt.rgba(0, 0, 0, 0.2)
 
         opacity: folio.HomeScreenState.appDrawerOpenProgress
     }
@@ -127,7 +127,7 @@ ContainmentItem {
     Rectangle {
         id: searchWidgetBackground
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.3)
+        color: Qt.rgba(0, 0, 0, 0.2)
 
         opacity: folio.HomeScreenState.searchWidgetOpenProgress
     }
@@ -135,7 +135,7 @@ ContainmentItem {
     Rectangle {
         id: settingsViewBackground
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.3)
+        color: Qt.rgba(0, 0, 0, 0.2)
 
         opacity: folio.HomeScreenState.settingsOpenProgress
     }

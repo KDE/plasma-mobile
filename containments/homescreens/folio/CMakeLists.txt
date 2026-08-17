@@ -7,6 +7,9 @@ plasma_add_applet(org.kde.plasma.mobile.homescreen.folio
     QML_SOURCES
         qml/AppDrawer.qml
         qml/AppDrawerAppGrid.qml
+        qml/AppDrawerCategoryGrid.qml
+        qml/CategoryAppGrid.qml
+        qml/CategoryAppGridTitle.qml
         qml/AppDrawerHeader.qml
         qml/DelegateDragItem.qml
         qml/DelegateDropArea.qml
@@ -51,6 +54,7 @@ ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
     qml/delegate/KeyboardHighlight.qml
     qml/delegate/WidgetDelegate.qml
     qml/delegate/WidgetDelegateConfig.qml
+    qml/delegate/CategoryDelegate.qml
     PATH delegate
 )
 
@@ -63,6 +67,7 @@ ecm_target_qml_sources(org.kde.plasma.mobile.homescreen.folio SOURCES
     qml/private/WidgetResizeHandle.qml
     qml/private/WidgetResizeHandleFrame.qml
     qml/private/AppDrawerGrid.qml
+    qml/private/PillTabBar.qml
     PATH private
 )
 

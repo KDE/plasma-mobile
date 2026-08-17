@@ -18,6 +18,7 @@ class DelegateTouchArea : public QQuickItem
     Q_OBJECT
     QML_ELEMENT
 
+    Q_PROPERTY(bool interactive READ isInteractive WRITE setInteractive NOTIFY interactiveChanged FINAL)
     Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged FINAL)
     Q_PROPERTY(bool hovered READ hovered NOTIFY hoveredChanged FINAL)
     Q_PROPERTY(Qt::CursorShape cursorShape READ cursorShape WRITE setCursorShape RESET unsetCursor NOTIFY cursorShapeChanged FINAL)
@@ -30,6 +31,9 @@ class DelegateTouchArea : public QQuickItem
 
 public:
     DelegateTouchArea(QQuickItem *parent = nullptr);
+
+    bool isInteractive() const;
+    void setInteractive(bool interactive);
 
     bool pressed();
     bool hovered();
@@ -47,6 +51,7 @@ public:
     bool contains(const QPointF &point) const override;
 
 Q_SIGNALS:
+    void interactiveChanged();
     void clicked();
     void rightMousePress();
     void pressAndHold();
@@ -80,6 +85,7 @@ private:
     void handleReleaseEvent(QPointerEvent *event, bool click);
     void handleMoveEvent(QPointerEvent *event, QPointF point);
 
+    bool m_interactive{true};
     bool m_pressed{false};
     bool m_hovered{false};
     bool m_pressAndHeld{false};
