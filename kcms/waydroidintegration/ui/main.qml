@@ -10,7 +10,6 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
-import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell.waydroidintegrationplugin as AIP
 
 KCM.SimpleKCM {
@@ -35,7 +34,7 @@ KCM.SimpleKCM {
 
         }
 
-        PC3.Button {
+        QQC2.Button {
             text: i18n("Check installation")
             Layout.alignment: Qt.AlignHCenter
             onClicked: AIP.WaydroidDBusClient.refreshSupportsInfo()
@@ -78,7 +77,7 @@ KCM.SimpleKCM {
             horizontalAlignment: Text.AlignHCenter
         }
 
-        PC3.Button {
+        QQC2.Button {
             text: i18n("Start the session")
             Layout.alignment: Qt.AlignHCenter
             onClicked: AIP.WaydroidDBusClient.startSession()
