@@ -79,19 +79,19 @@ msgstr "布局更改操作已被系统管理员限制使用"
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "退格键"
 
 #: contents/lockscreen/Keypad.qml:175
 msgid "Enter"
-msgstr ""
+msgstr "回车键"
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"
-msgstr ""
+msgstr "手电筒"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "相机"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -103,11 +103,11 @@ msgstr "PIN 码错误"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "显示数字键盘"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "显示全键盘"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"

@@ -22,34 +22,34 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Task switcher"
-msgstr ""
+msgstr "任务切换器"
 
 #: qml/NavigationPanelComponent.qml:91
 #, kde-format
 msgctxt "@action:button"
 msgid "Home"
-msgstr ""
+msgstr "主页"
 
 #: qml/NavigationPanelComponent.qml:104 qml/NavigationPanelComponent.qml:141
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide keyboard"
-msgstr ""
+msgstr "隐藏键盘"
 
 #: qml/NavigationPanelComponent.qml:105
 #, kde-format
 msgctxt "@action:button"
 msgid "Close app"
-msgstr ""
+msgstr "关闭应用"
 
 #: qml/NavigationPanelComponent.qml:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Rotate screen"
-msgstr ""
+msgstr "旋转屏幕"
 
 #: qml/NavigationPanelComponent.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Show keyboard"
-msgstr ""
+msgstr "显示键盘"
