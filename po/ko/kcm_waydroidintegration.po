@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"POT-Creation-Date: 2026-08-19 18:07+0000\n"
 "PO-Revision-Date: 2026-02-03 22:05+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 25.08.1\n"
 
-#: ui/main.qml:19
+#: ui/main.qml:18
 #, kde-format
 msgid "Waydroid Integration"
 msgstr "Waydroid 통합"
 
-#: ui/main.qml:32
+#: ui/main.qml:31
 #, kde-format
 msgid "Waydroid is not installed"
 msgstr "Waydroid가 설치되어 있지 않음"
 
-#: ui/main.qml:39
+#: ui/main.qml:38
 #, kde-format
 msgid "Check installation"
 msgstr "설치 상태를 확인하십시오"
 
-#: ui/main.qml:52
+#: ui/main.qml:51
 #, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
@@ -41,7 +41,7 @@ msgstr ""
 "Android와 제조사 이미지를 다운로드하는 중입니다.\n"
 "몇 분 정도 걸릴 수 있습니다."
 
-#: ui/main.qml:67
+#: ui/main.qml:66
 #, kde-format
 msgid ""
 "Waydroid is resetting.\n"
@@ -50,17 +50,17 @@ msgstr ""
 "Waydroid가 초기화 중입니다.\n"
 "몇 초 정도 걸릴 수 있습니다."
 
-#: ui/main.qml:76
+#: ui/main.qml:75
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "Waydroid 세션이 실행 중이 아닙니다."
 
-#: ui/main.qml:82
+#: ui/main.qml:81
 #, kde-format
 msgid "Start the session"
 msgstr "세션 시작"
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -69,80 +69,80 @@ msgstr ""
 "Waydroid 세션이 시작 중입니다.\n"
 "몇 초 정도 걸릴 수 있습니다."
 
-#: ui/WaydroidApplicationsPage.qml:25
+#: ui/WaydroidApplicationsPage.qml:24
 #, kde-format
 msgid "Waydroid applications"
 msgstr "Waydroid 앱"
 
-#: ui/WaydroidApplicationsPage.qml:29
+#: ui/WaydroidApplicationsPage.qml:28
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
 msgstr "APK 설치"
 
-#: ui/WaydroidApplicationsPage.qml:67
+#: ui/WaydroidApplicationsPage.qml:66
 #, kde-format
 msgid "You must select a local file"
 msgstr "로컬 파일을 선택해야 함"
 
-#: ui/WaydroidApplicationsPage.qml:107
+#: ui/WaydroidApplicationsPage.qml:106
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "앱 삭제"
 
-#: ui/WaydroidConfigurationForm.qml:19
+#: ui/WaydroidConfigurationForm.qml:18
 #, kde-format
 msgid "General information"
 msgstr "일반 정보"
 
-#: ui/WaydroidConfigurationForm.qml:24
+#: ui/WaydroidConfigurationForm.qml:23
 #, kde-format
 msgid "IP address"
 msgstr "IP 주소"
 
-#: ui/WaydroidConfigurationForm.qml:28
+#: ui/WaydroidConfigurationForm.qml:27
 #, kde-format
 msgid "Copy"
 msgstr "복사"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:34
 #, kde-format
 msgid "Waydroid status"
 msgstr "Waydroid 상태"
 
-#: ui/WaydroidConfigurationForm.qml:36
+#: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
 msgid "Running"
 msgstr "실행 중"
 
-#: ui/WaydroidConfigurationForm.qml:39
+#: ui/WaydroidConfigurationForm.qml:38
 #, kde-format
 msgid "Stop session"
 msgstr "세션 중지"
 
-#: ui/WaydroidConfigurationForm.qml:46
+#: ui/WaydroidConfigurationForm.qml:45
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "내 장치를 Google Play Protect에 인증"
 
-#: ui/WaydroidConfigurationForm.qml:51
+#: ui/WaydroidConfigurationForm.qml:50
 #, kde-format
 msgid "Installed applications"
 msgstr "설치된 앱"
 
-#: ui/WaydroidConfigurationForm.qml:56
+#: ui/WaydroidConfigurationForm.qml:55
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "Waydroid 초기화"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:61
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "Waydroid 초기화 확인"
 
-#: ui/WaydroidConfigurationForm.qml:63
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
@@ -151,32 +151,32 @@ msgstr ""
 "Waydroid를 초기화하시겠습니까? 모든 사용자 데이터를 삭제하며 취소할 수 없습니"
 "다."
 
-#: ui/WaydroidConfigurationForm.qml:81
+#: ui/WaydroidConfigurationForm.qml:80
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroid 속성"
 
-#: ui/WaydroidConfigurationForm.qml:92
+#: ui/WaydroidConfigurationForm.qml:91
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "적용하려면 Waydroid 세션을 다시 시작해야 할 수도 있음"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:108
 #, kde-format
 msgid "Multi Windows"
 msgstr "멀티 윈도"
 
-#: ui/WaydroidConfigurationForm.qml:110
+#: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "데스크톱과 창 통합 활성화/비활성화"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Suspend"
 msgstr "일시 정지"
 
-#: ui/WaydroidConfigurationForm.qml:123
+#: ui/WaydroidConfigurationForm.qml:122
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -185,27 +185,27 @@ msgstr ""
 "활성화된 앱이 없을 때 Waydroid 컨테이너가 (디스플레이 시간 제한 이후) 대기 상"
 "태로 진입하도록 허용"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:136
+#: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "안드로이드에서 핫플러그된 장치에 직접 접근 허용"
 
-#: ui/WaydroidDownloadStatus.qml:40
+#: ui/WaydroidDownloadStatus.qml:39
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
 msgstr "다운로드 중: %1 MB/%2 MB, 속도: %3"
 
-#: ui/WaydroidDownloadStatus.qml:48
+#: ui/WaydroidDownloadStatus.qml:47
 #, kde-format
 msgid "%1MB/s"
 msgstr "%1MB/초"
 
-#: ui/WaydroidDownloadStatus.qml:50
+#: ui/WaydroidDownloadStatus.qml:49
 #, kde-format
 msgid "%1kB/s"
 msgstr "%1kB/초"
@@ -243,17 +243,17 @@ msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
 msgstr "안드로이드 ID를 복사하고 웹사이트 열기"
 
-#: ui/WaydroidInitialConfigurationForm.qml:16
+#: ui/WaydroidInitialConfigurationForm.qml:15
 #, kde-format
 msgid "Initial configuration"
 msgstr "초기 설정"
 
-#: ui/WaydroidInitialConfigurationForm.qml:22
+#: ui/WaydroidInitialConfigurationForm.qml:21
 #, kde-format
 msgid "System type"
 msgstr "시스템 형식"
 
-#: ui/WaydroidInitialConfigurationForm.qml:35
+#: ui/WaydroidInitialConfigurationForm.qml:34
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "Waydroid 설정"

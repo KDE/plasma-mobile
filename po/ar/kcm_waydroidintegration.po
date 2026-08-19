@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"POT-Creation-Date: 2026-08-19 18:07+0000\n"
 "PO-Revision-Date: 2026-01-08 11:44+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,22 +18,22 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: ui/main.qml:19
+#: ui/main.qml:18
 #, kde-format
 msgid "Waydroid Integration"
 msgstr "تكامل ويدرويد"
 
-#: ui/main.qml:32
+#: ui/main.qml:31
 #, kde-format
 msgid "Waydroid is not installed"
 msgstr "ويدرويد غير مثبت"
 
-#: ui/main.qml:39
+#: ui/main.qml:38
 #, kde-format
 msgid "Check installation"
 msgstr "تأكد من التثبيت"
 
-#: ui/main.qml:52
+#: ui/main.qml:51
 #, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
@@ -42,7 +42,7 @@ msgstr ""
 "تنزيل صور أندرويد والموردين.\n"
 "قد يستغرق الأمر بضع دقائق."
 
-#: ui/main.qml:67
+#: ui/main.qml:66
 #, kde-format
 msgid ""
 "Waydroid is resetting.\n"
@@ -51,17 +51,17 @@ msgstr ""
 "جلسة ويدرويد تصفر.\n"
 "قد تأخذ بعض الوقت."
 
-#: ui/main.qml:76
+#: ui/main.qml:75
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "جلسة ويدرويد لا تعمل."
 
-#: ui/main.qml:82
+#: ui/main.qml:81
 #, kde-format
 msgid "Start the session"
 msgstr "ابدأ الجلسة"
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -70,112 +70,112 @@ msgstr ""
 "جلسة ويدرويد تعمل.\n"
 "قد تأخذ بعض الوقت."
 
-#: ui/WaydroidApplicationsPage.qml:25
+#: ui/WaydroidApplicationsPage.qml:24
 #, kde-format
 msgid "Waydroid applications"
 msgstr "تطبيقات ويدرويد"
 
-#: ui/WaydroidApplicationsPage.qml:29
+#: ui/WaydroidApplicationsPage.qml:28
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
 msgstr "ثبّت APK"
 
-#: ui/WaydroidApplicationsPage.qml:67
+#: ui/WaydroidApplicationsPage.qml:66
 #, kde-format
 msgid "You must select a local file"
 msgstr "يجب عليك تحديد ملف محلي"
 
-#: ui/WaydroidApplicationsPage.qml:107
+#: ui/WaydroidApplicationsPage.qml:106
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "احذف التطبيق"
 
-#: ui/WaydroidConfigurationForm.qml:19
+#: ui/WaydroidConfigurationForm.qml:18
 #, kde-format
 msgid "General information"
 msgstr "معلومات عامة"
 
-#: ui/WaydroidConfigurationForm.qml:24
+#: ui/WaydroidConfigurationForm.qml:23
 #, kde-format
 msgid "IP address"
 msgstr "عنوان IP"
 
-#: ui/WaydroidConfigurationForm.qml:28
+#: ui/WaydroidConfigurationForm.qml:27
 #, kde-format
 msgid "Copy"
 msgstr "انسخ"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:34
 #, kde-format
 msgid "Waydroid status"
 msgstr "حالة ويدرويد"
 
-#: ui/WaydroidConfigurationForm.qml:36
+#: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
 msgid "Running"
 msgstr "يعمل"
 
-#: ui/WaydroidConfigurationForm.qml:39
+#: ui/WaydroidConfigurationForm.qml:38
 #, kde-format
 msgid "Stop session"
 msgstr "أوقف الجلسة"
 
-#: ui/WaydroidConfigurationForm.qml:46
+#: ui/WaydroidConfigurationForm.qml:45
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "اعتماد جهازي  لحماية متجر غوغل"
 
-#: ui/WaydroidConfigurationForm.qml:51
+#: ui/WaydroidConfigurationForm.qml:50
 #, kde-format
 msgid "Installed applications"
 msgstr "التطبيقات المثبتة"
 
-#: ui/WaydroidConfigurationForm.qml:56
+#: ui/WaydroidConfigurationForm.qml:55
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "صفّر ويدرويد"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:61
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "أكد تصفير ويدرويد"
 
-#: ui/WaydroidConfigurationForm.qml:63
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
 msgstr "هل تريد تصفير ويدرويد؟ هذا قرر خطير حيث أنه سيمسح كل بيانات المستخدم."
 
-#: ui/WaydroidConfigurationForm.qml:81
+#: ui/WaydroidConfigurationForm.qml:80
 #, kde-format
 msgid "Waydroid properties"
 msgstr "خصائص ويدرويد"
 
-#: ui/WaydroidConfigurationForm.qml:92
+#: ui/WaydroidConfigurationForm.qml:91
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "قد يطلب إعادة تشغيل جلسة ويدرويد للتطبيق التعديلات"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:108
 #, kde-format
 msgid "Multi Windows"
 msgstr "نوافذ متعددة"
 
-#: ui/WaydroidConfigurationForm.qml:110
+#: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "تمكين/تعطيل تكامل النافذة مع سطح المكتب"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Suspend"
 msgstr "علّق"
 
-#: ui/WaydroidConfigurationForm.qml:123
+#: ui/WaydroidConfigurationForm.qml:122
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -184,27 +184,27 @@ msgstr ""
 "دع حاوية ويدرويد في وضع التعليق (بعد انتهاء مهلة العرض) عندما لا تكون أي "
 "تطبيقات نشطة"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:136
+#: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "السماح للأندرويد بالوصول المباشر إلى الأجهزة الموصولة مباشرةً"
 
-#: ui/WaydroidDownloadStatus.qml:40
+#: ui/WaydroidDownloadStatus.qml:39
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
 msgstr "تنزيل %1ميغابايت/%2 ميغابايت السرعة %3"
 
-#: ui/WaydroidDownloadStatus.qml:48
+#: ui/WaydroidDownloadStatus.qml:47
 #, kde-format
 msgid "%1MB/s"
 msgstr "%1 م.ب/ث"
 
-#: ui/WaydroidDownloadStatus.qml:50
+#: ui/WaydroidDownloadStatus.qml:49
 #, kde-format
 msgid "%1kB/s"
 msgstr "%1ك‌ب/ث"
@@ -242,17 +242,17 @@ msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
 msgstr "انسخ معرّف أندرويد وافتح الموقع الإلكتروني"
 
-#: ui/WaydroidInitialConfigurationForm.qml:16
+#: ui/WaydroidInitialConfigurationForm.qml:15
 #, kde-format
 msgid "Initial configuration"
 msgstr "تهيئة أولية"
 
-#: ui/WaydroidInitialConfigurationForm.qml:22
+#: ui/WaydroidInitialConfigurationForm.qml:21
 #, kde-format
 msgid "System type"
 msgstr "نوع النظام"
 
-#: ui/WaydroidInitialConfigurationForm.qml:35
+#: ui/WaydroidInitialConfigurationForm.qml:34
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "اضبط ويدرويد"

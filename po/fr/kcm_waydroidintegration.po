@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-03 00:45+0000\n"
+"POT-Creation-Date: 2026-08-19 18:07+0000\n"
 "PO-Revision-Date: 2026-04-03 19:30+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -14,22 +14,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 25.12.3\n"
 
-#: ui/main.qml:19
+#: ui/main.qml:18
 #, kde-format
 msgid "Waydroid Integration"
 msgstr "Intégration de Waydroid"
 
-#: ui/main.qml:32
+#: ui/main.qml:31
 #, kde-format
 msgid "Waydroid is not installed"
 msgstr "Waydroid n'est pas installé."
 
-#: ui/main.qml:39
+#: ui/main.qml:38
 #, kde-format
 msgid "Check installation"
 msgstr "Vérifier l'installation"
 
-#: ui/main.qml:52
+#: ui/main.qml:51
 #, kde-format
 msgid ""
 "Downloading Android and vendor images.\n"
@@ -38,7 +38,7 @@ msgstr ""
 "Téléchargement en cours des images Android et fournisseur.\n"
 "Cela peut prendre quelques minutes."
 
-#: ui/main.qml:67
+#: ui/main.qml:66
 #, kde-format
 msgid ""
 "Waydroid is resetting.\n"
@@ -47,17 +47,17 @@ msgstr ""
 "La session de Waydroid est en cours de réinitialisation.\n"
 "Cela peut prendre quelques secondes."
 
-#: ui/main.qml:76
+#: ui/main.qml:75
 #, kde-format
 msgid "The Waydroid session is not running."
 msgstr "La session de Waydroid n'est pas en cours d'exécution."
 
-#: ui/main.qml:82
+#: ui/main.qml:81
 #, kde-format
 msgid "Start the session"
 msgstr "Démarrer la session"
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
 msgid ""
 "Waydroid session is starting.\n"
@@ -66,80 +66,80 @@ msgstr ""
 "La session avec Waydroid est en cours de démarrage.\n"
 "Cela peut prendre quelques secondes."
 
-#: ui/WaydroidApplicationsPage.qml:25
+#: ui/WaydroidApplicationsPage.qml:24
 #, kde-format
 msgid "Waydroid applications"
 msgstr "Applications sous Waydroid"
 
-#: ui/WaydroidApplicationsPage.qml:29
+#: ui/WaydroidApplicationsPage.qml:28
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
 msgstr "Installer APK"
 
-#: ui/WaydroidApplicationsPage.qml:67
+#: ui/WaydroidApplicationsPage.qml:66
 #, kde-format
 msgid "You must select a local file"
 msgstr "Vous devez sélectionner un fichier local."
 
-#: ui/WaydroidApplicationsPage.qml:107
+#: ui/WaydroidApplicationsPage.qml:106
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "Supprimer l'application"
 
-#: ui/WaydroidConfigurationForm.qml:19
+#: ui/WaydroidConfigurationForm.qml:18
 #, kde-format
 msgid "General information"
 msgstr "Informations générales"
 
-#: ui/WaydroidConfigurationForm.qml:24
+#: ui/WaydroidConfigurationForm.qml:23
 #, kde-format
 msgid "IP address"
 msgstr "Adresse IP"
 
-#: ui/WaydroidConfigurationForm.qml:28
+#: ui/WaydroidConfigurationForm.qml:27
 #, kde-format
 msgid "Copy"
 msgstr "Copier"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:34
 #, kde-format
 msgid "Waydroid status"
 msgstr "État de Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:36
+#: ui/WaydroidConfigurationForm.qml:35
 #, kde-format
 msgid "Running"
 msgstr "En cours d'exécution"
 
-#: ui/WaydroidConfigurationForm.qml:39
+#: ui/WaydroidConfigurationForm.qml:38
 #, kde-format
 msgid "Stop session"
 msgstr "Arrêter la session"
 
-#: ui/WaydroidConfigurationForm.qml:46
+#: ui/WaydroidConfigurationForm.qml:45
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "Certifier mon périphérique pour GooglePlay Protect"
 
-#: ui/WaydroidConfigurationForm.qml:51
+#: ui/WaydroidConfigurationForm.qml:50
 #, kde-format
 msgid "Installed applications"
 msgstr "Applications installées"
 
-#: ui/WaydroidConfigurationForm.qml:56
+#: ui/WaydroidConfigurationForm.qml:55
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "Réinitialiser Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:61
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "Confirmer la réinitialisation de Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:63
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
@@ -148,34 +148,34 @@ msgstr ""
 "Voulez-vous vraiment réinitialiser Waydroid ? Il s'agit d'une action "
 "destructrice qui effacera toutes les données utilisateur."
 
-#: ui/WaydroidConfigurationForm.qml:81
+#: ui/WaydroidConfigurationForm.qml:80
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Propriétés de Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:92
+#: ui/WaydroidConfigurationForm.qml:91
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr ""
 "Peut nécessiter le redémarrage de la session de Waydroid pour prise en "
 "compte."
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:108
 #, kde-format
 msgid "Multi Windows"
 msgstr "Fenêtres multiples"
 
-#: ui/WaydroidConfigurationForm.qml:110
+#: ui/WaydroidConfigurationForm.qml:109
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Active / Désactive l'intégration des fenêtres avec le bureau"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Suspend"
 msgstr "Suspendre"
 
-#: ui/WaydroidConfigurationForm.qml:123
+#: ui/WaydroidConfigurationForm.qml:122
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -184,27 +184,27 @@ msgstr ""
 "Laisser le conteneur de Waydroid en veille (Après le délai d'affichage) "
 "lorsqu'aucune application n'est active"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:136
+#: ui/WaydroidConfigurationForm.qml:135
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Autoriser l'accès direct à Android aux périphériques branchés à chaud"
 
-#: ui/WaydroidDownloadStatus.qml:40
+#: ui/WaydroidDownloadStatus.qml:39
 #, kde-format
 msgid "Downloading %1MB/%2MB Speed %3"
 msgstr "Téléchargement en cours à la vitesse de %3, %1 Mo / %2 Mo"
 
-#: ui/WaydroidDownloadStatus.qml:48
+#: ui/WaydroidDownloadStatus.qml:47
 #, kde-format
 msgid "%1MB/s"
 msgstr "%1 Mo / s"
 
-#: ui/WaydroidDownloadStatus.qml:50
+#: ui/WaydroidDownloadStatus.qml:49
 #, kde-format
 msgid "%1kB/s"
 msgstr "%1 Ko / s"
@@ -244,17 +244,17 @@ msgctxt "@action:button"
 msgid "Copy Android ID and open the website"
 msgstr "Copiez l'identifiant Android et ouvrez le site Internet"
 
-#: ui/WaydroidInitialConfigurationForm.qml:16
+#: ui/WaydroidInitialConfigurationForm.qml:15
 #, kde-format
 msgid "Initial configuration"
 msgstr "Configuration initiale"
 
-#: ui/WaydroidInitialConfigurationForm.qml:22
+#: ui/WaydroidInitialConfigurationForm.qml:21
 #, kde-format
 msgid "System type"
 msgstr "Type de système"
 
-#: ui/WaydroidInitialConfigurationForm.qml:35
+#: ui/WaydroidInitialConfigurationForm.qml:34
 #, kde-format
 msgid "Configure Waydroid"
 msgstr "Configurer Waydroid"
