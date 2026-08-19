@@ -9,7 +9,6 @@ import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
-import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell.waydroidintegrationplugin as AIP
 
 ColumnLayout {
@@ -23,7 +22,7 @@ ColumnLayout {
         FormCard.FormTextDelegate {
             text: i18n("IP address")
             description: AIP.WaydroidDBusClient.ipAddress
-            trailing: PC3.Button {
+            trailing: QQC2.Button {
                 visible: AIP.WaydroidDBusClient.ipAddress !== ""
                 text: i18n("Copy")
                 icon.name: 'edit-copy-symbolic'
@@ -35,7 +34,7 @@ ColumnLayout {
             text: i18n("Waydroid status")
             description: i18n("Running")
 
-            trailing: PC3.Button {
+            trailing: QQC2.Button {
                 text: i18n("Stop session")
                 onClicked: AIP.WaydroidDBusClient.stopSession()
             }

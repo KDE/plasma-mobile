@@ -8,7 +8,6 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.components 3.0 as PC3
 
 ColumnLayout {
     id: root
