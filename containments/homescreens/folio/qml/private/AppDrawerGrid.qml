@@ -40,6 +40,9 @@ MobileShell.GridView {
     layer.enabled: true
     keyNavigationEnabled: true
     highlightMoveDuration: 0
+    highlightRangeMode: MobileShell.GridView.ApplyRange
+    preferredHighlightBegin: root.topMargin
+    preferredHighlightEnd: root.height - root.bottomMargin
     highlight: null // We supply our own highlight from the delegate
     boundsBehavior: Flickable.DragAndOvershootBounds
 
