@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2025, 2026 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-19 16:08+0000\n"
-"PO-Revision-Date: 2025-09-03 18:31+0300\n"
+"PO-Revision-Date: 2026-02-25 18:26+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -81,8 +81,7 @@ msgid "Install APK"
 msgstr "Asenna APK"
 
 #: ui/WaydroidApplicationsPage.qml:66
-#, fuzzy, kde-format
-#| msgid "You must selected local file"
+#, kde-format
 msgid "You must select a local file"
 msgstr "On valittava paikallinen tiedosto"
 
@@ -133,8 +132,7 @@ msgid "Installed applications"
 msgstr "Asennetut sovellukset"
 
 #: ui/WaydroidConfigurationForm.qml:55
-#, fuzzy, kde-format
-#| msgid "Reset waydroid"
+#, kde-format
 msgid "Reset Waydroid"
 msgstr "Palauta Waydroid"
 
@@ -145,16 +143,13 @@ msgid "Confirm Waydroid Reset"
 msgstr "Vahvista Waydroidin palauttaminen"
 
 #: ui/WaydroidConfigurationForm.qml:62
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to reset Waydroid ? This is a destructive action, "
-#| "and will wipe all user data."
+#, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
-"Haluatko varmasti palauttaa Waydroidin alkutilaan? Toimenpide poistaa kaikki "
-"käyttäjätiedot."
+"Haluatko varmasti palauttaa Waydroidin alkutilaan? Toimenpide on tuhoisa ja "
+"poistaa kaikki käyttäjätiedot."
 
 #: ui/WaydroidConfigurationForm.qml:80
 #, kde-format
@@ -162,8 +157,7 @@ msgid "Waydroid properties"
 msgstr "Waydroidin ominaisuudet"
 
 #: ui/WaydroidConfigurationForm.qml:91
-#, fuzzy, kde-format
-#| msgid "May require restarting the waydroid session to apply"
+#, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "Käyttöönotto voi vaatia Waydroid-istunnon käynnistämistä uudelleen"
 
@@ -209,12 +203,12 @@ msgstr "Ladataan %1 Mt/%2 Mt  Nopeus %3"
 #: ui/WaydroidDownloadStatus.qml:47
 #, kde-format
 msgid "%1MB/s"
-msgstr ""
+msgstr "%1 Mt/s"
 
 #: ui/WaydroidDownloadStatus.qml:49
 #, kde-format
 msgid "%1kB/s"
-msgstr ""
+msgstr "%1 kt/s"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -222,10 +216,7 @@ msgid "Google Play Protect configuration"
 msgstr "Google Play -suojausasetukset"
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "We fetching your Android ID.\n"
-#| "It can take a few seconds."
+#, kde-format
 msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
@@ -234,13 +225,7 @@ msgstr ""
 "Kestänee joitakin sekunteja."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
-#, fuzzy, kde-format
-#| msgid ""
-#| "When launching waydroid with GAPPS for the first time you will be "
-#| "notified that the device is not certified for Google Play Protect. To "
-#| "self certify your device, paste the Android ID on the field in the "
-#| "website. Then, give the Google services some minutes to reflect the "
-#| "change and restart waydroid."
+#, kde-format
 msgid ""
 "When launching Waydroid with GAPPS for the first time, you will be notified "
 "that the device is not certified for Google Play Protect. To self certify "
@@ -248,9 +233,9 @@ msgid ""
 "the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
 "Käynnistettäessä Waydroid GAPPSilla ensi kertaa saat ilmoituksen, ettei "
-"Google Playn suojaus on vahvistanut laitetta. Vahvistaaksesi laitteen liitä "
-"Androidin tunniste sivuston kenttään, anna Google-palveluille hetki "
-"käsitellä muutosta ja käynnistä Waydroid sitten uudelleen."
+"laitetta ole varmennettu Googlen Playn suojaukselle. Varmentaaksesi laitteen "
+"liitä Androidin tunniste sivuston kenttään, anna Google-palveluille hetki "
+"aikaa käsitellä muutosta ja käynnistä Waydroid uudelleen."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format
@@ -269,8 +254,7 @@ msgid "System type"
 msgstr "Järjestelmän tyyppi"
 
 #: ui/WaydroidInitialConfigurationForm.qml:34
-#, fuzzy, kde-format
-#| msgid "Configure waydroid"
+#, kde-format
 msgid "Configure Waydroid"
 msgstr "Waydroidin asetukset"
 
