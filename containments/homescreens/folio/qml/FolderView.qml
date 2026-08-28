@@ -349,7 +349,7 @@ Folio.DelegateTouchArea {
 
                                 // do not show if the drop animation is running to this delegate
                                 visible: !(root.homeScreen.dropAnimationRunning && delegate.isDropPositionThis)
-                                enabled: !delegate.outsideView
+                                interactive: !delegate.outsideView
 
                                 // don't show label in drag and drop mode
                                 labelOpacity: delegate.opacity
