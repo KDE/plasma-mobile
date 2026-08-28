@@ -19,10 +19,12 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     , m_homeScreenState{new HomeScreenState{this}}
     , m_widgetsManager{new WidgetsManager{this}}
     , m_applicationListModel{new ApplicationListModel{this}}
-    , m_applicationListSearchModel{new ApplicationListSearchModel{this, m_applicationListModel}}
+    , m_applicationListSearchModel{new ApplicationListSearchModel{this}}
     , m_favouritesModel{new FavouritesModel{this}}
     , m_pageListModel{new PageListModel{this}}
 {
+    m_applicationListSearchModel->setSourceModel(m_applicationListModel);
+
     // HomeScreenState init() has dependencies on other objects
     m_homeScreenState->init();
 

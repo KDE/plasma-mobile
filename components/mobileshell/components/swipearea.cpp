@@ -329,6 +329,7 @@ void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
                 return;
             }
         }
+
         m_skipSwipeThreshold = false;
 
         // we now start the swipe, stealing it from children

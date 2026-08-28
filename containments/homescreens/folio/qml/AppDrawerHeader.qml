@@ -4,6 +4,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Effects
+
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami as Kirigami
 
@@ -11,9 +14,17 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import plasma.applet.org.kde.plasma.mobile.homescreen.folio as Folio
 import './delegate'
 
-Item {
+ColumnLayout {
     id: root
     property Folio.HomeScreen folio
+
+    property alias currentCategoryIndex: tabBar.currentIndex
+    property alias searchText: searchField.text
+
+    property alias searchField: searchField
+    property alias tabbar: tabBar
+
+    readonly property real searchFieldMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     Kirigami.Theme.inherit: false
@@ -28,10 +39,20 @@ Item {
 
     // Request to not focus on the search bar
     signal releaseFocusRequested()
+    signal focusGridRequested()
 
-    onFocusChanged: {
-        if (focus) {
-            searchField.focus = true;
+    function focusSearchBar() {
+        searchField.forceActiveFocus();
+    }
+
+    function focusTabBar() {
+        tabBar.keyboardFocus = true;
+        tabBar.forceActiveFocus();
+    }
+
+    onActiveFocusChanged: {
+        if (activeFocus && !searchField.activeFocus && !tabBar.activeFocus) {
+            focusTabBar();
         }
     }
 
@@ -43,21 +64,22 @@ Item {
         }
     }
 
+    // Search field
     RowLayout {
-        anchors.topMargin: Kirigami.Units.largeSpacing
-        anchors.leftMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
-        anchors.rightMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
-        anchors.fill: parent
+        Layout.fillWidth: true
+        Layout.topMargin: Kirigami.Units.largeSpacing
+        Layout.margins: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.smallSpacing * 0.5
+        Layout.alignment: Qt.AlignHCenter
 
         Kirigami.SearchField {
             id: searchField
-            onTextChanged: folio.ApplicationListSearchModel.setFilterFixedString(text)
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 26
             Layout.alignment: Qt.AlignHCenter
 
             background: Rectangle {
                 radius: Kirigami.Units.cornerRadius
-                color: Qt.rgba(255, 255, 255, (searchField.hovered || searchField.focus) ? 0.2 : 0.1)
+                color: Qt.rgba(255, 255, 255, (searchField.hovered || searchField.focus) ? 0.2 : 0.15)
 
                 Behavior on color { ColorAnimation {} }
             }
@@ -76,6 +98,33 @@ Item {
 
             font.weight: Font.Bold
 
+            // when searching, we switch to the "All Apps" page since we are not filtering any other pages
+            onEditingFinished: {
+                folio.HomeScreenState.goToAppDrawerPage(0, false); // changes the page to the "All Apps" page
+            }
+
+            onTextEdited: {
+                folio.HomeScreenState.goToAppDrawerPage(0, false); // changes the page to the "All Apps" page
+            }
+
+            Keys.onUpPressed: (event) => {
+                folio.HomeScreenState.closeAppDrawer();
+                event.accepted = true;
+            }
+            Keys.onBacktabPressed: (event) => {
+                folio.HomeScreenState.closeAppDrawer();
+                event.accepted = true;
+            }
+
+            Keys.onDownPressed: (event) => {
+                root.focusAllAppsGrid();
+                event.accepted = true;
+            }
+            Keys.onTabPressed: (event) => {
+                root.focusAllAppsGrid();
+                event.accepted = true;
+            }
+
             Connections {
                 target: folio.HomeScreenState
                 function onViewStateChanged(): void {
@@ -86,6 +135,38 @@ Item {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    PillTabBar {
+        id: tabBar
+        Layout.alignment: Qt.AlignHCenter
+        Layout.maximumWidth: Math.min(Kirigami.Units.gridUnit * 12, searchField.width)
+        Layout.bottomMargin: Kirigami.Units.largeSpacing
+
+        implicitHeight: Kirigami.Units.gridUnit * 1.75
+
+        model: [i18n("All Apps"), i18n("Categories")]
+
+        onFocusUpRequested: root.focusSearchBar()
+        onFocusDownRequested: root.focusGridRequested()
+        onFocusNextRequested: root.focusGridRequested()
+        onFocusPreviousRequested: root.focusSearchBar()
+
+        onCurrentIndexChanged: {
+            if (folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerCategories) {
+                folio.HomeScreenState.goToAppDrawerPage(currentIndex, false);
+            }
+        }
+    }
+
+    Connections {
+        target: folio.HomeScreenState
+
+        function onAppDrawerPageNumChanged() {
+            if (tabBar.currentIndex !== folio.HomeScreenState.currentAppDrawerPage) {
+                tabBar.currentIndex = folio.HomeScreenState.currentAppDrawerPage;
             }
         }
     }

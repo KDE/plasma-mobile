@@ -130,14 +130,20 @@ Item {
 
             interactive: root.interactive &&
                 settings.homeScreenInteractive &&
-                !dropArea.containsDrag &&
-                (appDrawer.flickable.atYBeginning || // there are cases where contentY > 0 but atYBeginning is true
-                appDrawer.flickable.contentY <= 10 ||
-                // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
-                folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
-                folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
-                folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
-                folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
+                (!appDrawer.flickable || appDrawer.flickable.swipeAreaEnabled || folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView) &&
+                !dropArea.containsDrag
+
+            // we restrict the axis movement to the horizontal axis only when the app drawer is opened and the app grid is scrolled down some
+            // this is so we can still use horizontal swipes to change the page within the app drawer without interfering with the app grid scrolling
+            mode: {
+                if (appDrawer.flickable && (appDrawer.flickable.atYBeginning || // there are cases where contentY > 0 but atYBeginning is true
+                    appDrawer.flickable.contentY + appDrawer.flickable.topMargin <= 10 || folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView))
+                {
+                    return MobileShell.SwipeArea.BothAxis
+                } else {
+                    return MobileShell.SwipeArea.HorizontalOnly
+                }
+            }
 
             onSwipeStarted: (currentPos, startPos) => {
                 const deltaX = currentPos.x - startPos.x;
@@ -564,7 +570,7 @@ Item {
                 //       it doesn't mess with app drag and drop from the app drawer
                 y: (opacity > 0) ? animationY : parent.height
 
-                headerHeight: Math.round(Kirigami.Units.gridUnit * 4)
+                headerHeight: appDrawerHeader.implicitHeight
                 headerItem: AppDrawerHeader {
                     id: appDrawerHeader
                     folio: root.folio

@@ -88,6 +88,13 @@ Folio.DelegateTouchArea {
         id: delegateWrapper
         anchors.fill: parent
 
+        Controls.Control {
+            id: focusTracker
+            anchors.fill: parent
+            focus: true
+            background: null
+        }
+
         // Select keyboard navigation
         Keys.onPressed: (event) => {
             switch (event.key) {
@@ -104,7 +111,7 @@ Folio.DelegateTouchArea {
 
         KeyboardHighlight {
             anchors.fill: parent
-            visible: delegateWrapper.activeFocus
+            visible: focusTracker.activeFocus && focusTracker.focusReason !== Qt.MouseFocusReason
         }
 
         ColumnLayout {
