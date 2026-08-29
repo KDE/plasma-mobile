@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-22 00:47+0000\n"
+"POT-Creation-Date: 2026-08-29 00:47+0000\n"
 "PO-Revision-Date: 2024-07-06 21:34+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -17,16 +17,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.05.2\n"
 
+#: applicationlistmodel.cpp:177
+#, kde-format
+msgctxt "Label indicating app category for all applications"
+msgid "All"
+msgstr ""
+
+#: applicationlistmodel.cpp:267
+#, kde-format
+msgid "All"
+msgstr ""
+
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
 msgstr "அடைவு"
 
-#: qml/AppDrawerHeader.qml:73
+#: qml/AppDrawerHeader.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "செயலியை கண்டுபிடி…"
+
+#: qml/AppDrawerHeader.qml:150
+#, kde-format
+msgid "All Apps"
+msgstr ""
+
+#: qml/AppDrawerHeader.qml:150
+#, kde-format
+msgid "Categories"
+msgstr ""
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format

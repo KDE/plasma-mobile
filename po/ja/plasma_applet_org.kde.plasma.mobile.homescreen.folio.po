@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-22 00:47+0000\n"
+"POT-Creation-Date: 2026-08-29 00:47+0000\n"
 "PO-Revision-Date: 2016-10-07 23:55-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -14,17 +14,38 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
+#: applicationlistmodel.cpp:177
+#, kde-format
+msgctxt "Label indicating app category for all applications"
+msgid "All"
+msgstr ""
+
+#: applicationlistmodel.cpp:267
+#, kde-format
+msgid "All"
+msgstr ""
+
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
 msgstr ""
 
-#: qml/AppDrawerHeader.qml:73
+#: qml/AppDrawerHeader.qml:95
 #, fuzzy, kde-format
 #| msgid "Applications"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "アプリケーション"
+
+#: qml/AppDrawerHeader.qml:150
+#, kde-format
+msgid "All Apps"
+msgstr ""
+
+#: qml/AppDrawerHeader.qml:150
+#, kde-format
+msgid "Categories"
+msgstr ""
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format

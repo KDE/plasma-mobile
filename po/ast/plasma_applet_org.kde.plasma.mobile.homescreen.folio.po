@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-22 00:47+0000\n"
+"POT-Creation-Date: 2026-08-29 00:47+0000\n"
 "PO-Revision-Date: 2023-05-09 00:09+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -17,17 +17,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
+#: applicationlistmodel.cpp:177
+#, kde-format
+msgctxt "Label indicating app category for all applications"
+msgid "All"
+msgstr ""
+
+#: applicationlistmodel.cpp:267
+#, kde-format
+msgid "All"
+msgstr ""
+
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
 msgstr ""
 
-#: qml/AppDrawerHeader.qml:73
+#: qml/AppDrawerHeader.qml:95
 #, fuzzy, kde-format
 #| msgid "Applications"
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Aplicaciones"
+
+#: qml/AppDrawerHeader.qml:150
+#, kde-format
+msgid "All Apps"
+msgstr ""
+
+#: qml/AppDrawerHeader.qml:150
+#, kde-format
+msgid "Categories"
+msgstr ""
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
