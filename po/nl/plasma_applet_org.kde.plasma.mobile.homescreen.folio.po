@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2023-2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:47+0000\n"
-"PO-Revision-Date: 2025-08-14 14:58+0200\n"
+"PO-Revision-Date: 2026-08-29 11:47+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,18 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: applicationlistmodel.cpp:177
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "Alles"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Alles"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -42,12 +42,12 @@ msgstr "Toepassingen zoeken…"
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "Alle toepassingen"
 
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "Categorieën"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format

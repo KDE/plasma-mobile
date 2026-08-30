@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:47+0000\n"
-"PO-Revision-Date: 2025-08-13 07:02+0200\n"
+"PO-Revision-Date: 2026-08-29 12:40+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: applicationlistmodel.cpp:177
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "Vse"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Vse"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -44,12 +44,12 @@ msgstr "Išči aplikacije…"
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "Vse aplikacije"
 
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "Kategorije"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format

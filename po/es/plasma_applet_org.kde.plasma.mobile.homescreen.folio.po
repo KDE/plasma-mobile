@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.mobile.homescreen.folio.po package.
-# Copyright (C) 2023-2025 This file is copyright:
+# Copyright (C) 2023-2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Automatically generated, 2023.
 #
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2023-2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:47+0000\n"
-"PO-Revision-Date: 2025-08-13 18:28+0100\n"
+"PO-Revision-Date: 2026-08-29 17:42+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: applicationlistmodel.cpp:177
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "Todas"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Todas"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -44,12 +44,12 @@ msgstr "Buscar aplicaciones…"
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "Todas las aplicaciones"
 
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
@@ -304,10 +304,3 @@ msgstr "Fondos de escritorio"
 #, kde-format
 msgid "Settings"
 msgstr "Preferencias"
-
-#~ msgid "Homescreen Settings"
-#~ msgstr "Preferencias de la pantalla de inicio"
-
-#~ msgctxt "@action:button"
-#~ msgid "Switch between homescreens and more wallpaper options"
-#~ msgstr "Cambiar pantallas de inicio y más opciones del fondo de escritorio"

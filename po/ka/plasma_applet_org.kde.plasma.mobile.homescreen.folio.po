@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-29 00:47+0000\n"
-"PO-Revision-Date: 2025-08-13 06:16+0200\n"
+"PO-Revision-Date: 2026-08-29 04:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,18 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: applicationlistmodel.cpp:177
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "ყველა"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "ყველა"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -43,12 +43,12 @@ msgstr "აპლიკაციების ძებნა…"
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "ყველა აპი"
 
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "კატეგორიები"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
