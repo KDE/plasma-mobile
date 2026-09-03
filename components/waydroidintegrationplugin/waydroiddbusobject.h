@@ -54,7 +54,8 @@ public:
     enum SessionStatus {
         SessionStopped = 0,
         SessionStarting,
-        SessionRunning
+        SessionRunning,
+        SessionStopping
     };
     Q_ENUM(SessionStatus)
 

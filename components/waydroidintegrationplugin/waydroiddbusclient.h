@@ -58,6 +58,7 @@ public:
         SessionStopped = WaydroidDBusObject::SessionStopped,
         SessionStarting = WaydroidDBusObject::SessionStarting,
         SessionRunning = WaydroidDBusObject::SessionRunning,
+        SessionStopping = WaydroidDBusObject::SessionStopping
     };
     Q_ENUM(SessionStatus)
 

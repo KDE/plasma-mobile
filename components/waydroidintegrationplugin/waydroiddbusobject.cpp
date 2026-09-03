@@ -132,7 +132,7 @@ void WaydroidDBusObject::initialize(const int systemType, const int romType, con
 
 void WaydroidDBusObject::startSession()
 {
-    if (m_sessionStatus == SessionStarting || m_sessionStatus == SessionRunning) {
+    if (m_sessionStatus != SessionStopped) {
         return;
     }
 
@@ -169,9 +169,12 @@ void WaydroidDBusObject::startSession()
 
 void WaydroidDBusObject::stopSession()
 {
-    if (m_sessionStatus == SessionStopped) {
+    if (m_sessionStatus != SessionRunning) {
         return;
     }
+
+    m_sessionStatus = SessionStopping;
+    Q_EMIT sessionStatusChanged();
 
     const QStringList arguments{u"session"_s, u"stop"_s};
 
@@ -182,6 +185,9 @@ void WaydroidDBusObject::stopSession()
         process->deleteLater();
 
         if (exitCode != 0) {
+            m_sessionStatus = SessionRunning; // Rollback to the previous status
+            Q_EMIT sessionStatusChanged();
+
             qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to stop the Waydroid session: " << process->readAllStandardError();
             return;
         }
@@ -195,7 +201,7 @@ void WaydroidDBusObject::stopSession()
 
 void WaydroidDBusObject::resetWaydroid()
 {
-    if (m_status != Initialized || m_sessionStatus == SessionStarting) {
+    if (m_status != Initialized || m_sessionStatus == SessionStarting || m_sessionStatus == SessionStopping) {
         return;
     }
 

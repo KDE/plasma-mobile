@@ -13,6 +13,7 @@ import org.kde.plasma.private.mobileshell.waydroidintegrationplugin as AIP
 
 ColumnLayout {
     id: root
+    readonly property bool stopping: AIP.WaydroidDBusClient.sessionStatus === AIP.WaydroidDBusClient.SessionStopping
 
     FormCard.FormHeader {
         title: i18n("General information")
@@ -31,12 +32,23 @@ ColumnLayout {
         }
 
         FormCard.FormTextDelegate {
-            text: i18n("Waydroid status")
-            description: i18n("Running")
+            id: waydroidStatusInfo
 
-            trailing: QQC2.Button {
-                text: i18n("Stop session")
-                onClicked: AIP.WaydroidDBusClient.stopSession()
+            text: i18n("Waydroid status")
+            description: root.stopping
+                ? i18n("Stopping...")
+                : i18n("Running")
+
+            trailing: RowLayout {
+                QQC2.BusyIndicator {
+                    visible: root.stopping
+                    running: root.stopping
+                }
+                QQC2.Button {
+                    visible: !root.stopping
+                    text: i18n("Stop session")
+                    onClicked: AIP.WaydroidDBusClient.stopSession()
+                }
             }
         }
 
