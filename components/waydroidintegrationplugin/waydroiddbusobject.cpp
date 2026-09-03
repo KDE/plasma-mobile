@@ -181,7 +181,7 @@ void WaydroidDBusObject::stopSession()
         Q_UNUSED(exitStatus);
         process->deleteLater();
 
-        if (exitCode == 0) {
+        if (exitCode != 0) {
             qCWarning(WAYDROIDINTEGRATIONPLUGIN) << "Failed to stop the Waydroid session: " << process->readAllStandardError();
             return;
         }
