@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 16:08+0000\n"
+"POT-Creation-Date: 2026-09-04 00:47+0000\n"
 "PO-Revision-Date: 2026-01-03 06:30-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -91,58 +91,63 @@ msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "Excluir o aplicativo"
 
-#: ui/WaydroidConfigurationForm.qml:18
+#: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
 msgstr "Informações gerais"
 
-#: ui/WaydroidConfigurationForm.qml:23
+#: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
 msgstr "Endereço IP"
 
-#: ui/WaydroidConfigurationForm.qml:27
+#: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
 msgstr "Copiar"
 
-#: ui/WaydroidConfigurationForm.qml:34
+#: ui/WaydroidConfigurationForm.qml:37
 #, kde-format
 msgid "Waydroid status"
 msgstr "Status do Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stopping..."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
 msgid "Running"
 msgstr "Em execução"
 
-#: ui/WaydroidConfigurationForm.qml:38
+#: ui/WaydroidConfigurationForm.qml:49
 #, kde-format
 msgid "Stop session"
 msgstr "Sessão parada"
 
-#: ui/WaydroidConfigurationForm.qml:45
+#: ui/WaydroidConfigurationForm.qml:57
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "Certificar meu dispositivo para o Google Play Protect"
 
-#: ui/WaydroidConfigurationForm.qml:50
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Installed applications"
 msgstr "Aplicativos instalados"
 
-#: ui/WaydroidConfigurationForm.qml:55
+#: ui/WaydroidConfigurationForm.qml:67
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "Redefinir Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:61
+#: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "Confirmação do redefinição do Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:74
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
@@ -151,32 +156,32 @@ msgstr ""
 "Tem certeza de que deseja redefinir o Waydroid? Esta é uma ação destrutiva e "
 "apagará todos os dados do usuário."
 
-#: ui/WaydroidConfigurationForm.qml:80
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Propriedades do Waydroid"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "Pode ser necessário reiniciar a sessão do Waydroid para aplicar"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "Multi Windows"
 msgstr "Janelas múltiplas"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Habilita/Desabilita a integração da janela com a área de trabalho"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:133
 #, kde-format
 msgid "Suspend"
 msgstr "Suspender"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -185,12 +190,12 @@ msgstr ""
 "Deixe o contêiner Waydroid hibernar (após o tempo limite de exibição) quando "
 "nenhum aplicativo estiver ativo"
 
-#: ui/WaydroidConfigurationForm.qml:134
+#: ui/WaydroidConfigurationForm.qml:146
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:147
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Permitir acesso direto do Android aos dispositivos hotplugged"

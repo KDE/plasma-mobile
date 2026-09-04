@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 16:08+0000\n"
+"POT-Creation-Date: 2026-09-04 00:47+0000\n"
 "PO-Revision-Date: 2026-03-03 13:05+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -92,58 +92,63 @@ msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "Dzēst lietotni"
 
-#: ui/WaydroidConfigurationForm.qml:18
+#: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
 msgstr "Pamata informācija"
 
-#: ui/WaydroidConfigurationForm.qml:23
+#: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
 msgstr "IP adrese"
 
-#: ui/WaydroidConfigurationForm.qml:27
+#: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
 msgstr "Kopēt"
 
-#: ui/WaydroidConfigurationForm.qml:34
+#: ui/WaydroidConfigurationForm.qml:37
 #, kde-format
 msgid "Waydroid status"
 msgstr "„Waydroid“ statuss"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stopping..."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
 msgid "Running"
 msgstr "Palaist"
 
-#: ui/WaydroidConfigurationForm.qml:38
+#: ui/WaydroidConfigurationForm.qml:49
 #, kde-format
 msgid "Stop session"
 msgstr "Apturēt sesiju"
 
-#: ui/WaydroidConfigurationForm.qml:45
+#: ui/WaydroidConfigurationForm.qml:57
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "Sertificēt ierīci priekš „Google Play Protect“"
 
-#: ui/WaydroidConfigurationForm.qml:50
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Installed applications"
 msgstr "Instalētās lietotnes"
 
-#: ui/WaydroidConfigurationForm.qml:55
+#: ui/WaydroidConfigurationForm.qml:67
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "Atiestatīt „Waydroid“"
 
-#: ui/WaydroidConfigurationForm.qml:61
+#: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "Apstiprināt „Waydroid“ atiestatīšanu"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:74
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
@@ -152,32 +157,32 @@ msgstr ""
 "Vai tiešām vēlaties atiestatīt „Waydroid“? Šāda rīcība ir destruktīva un "
 "dzēsīs visus lietotāja datus."
 
-#: ui/WaydroidConfigurationForm.qml:80
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "Waydroid properties"
 msgstr "„Waydroid“ īpašības"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "Lai darbību pabeigtu, var būt nepieciešams „Waydroid“ pārstartēt"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "Multi Windows"
 msgstr "Vairāki logi"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Ieslēgt/izslēgt logu integrāciju darbvirsmā"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:133
 #, kde-format
 msgid "Suspend"
 msgstr "Iesnaudināt"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -186,12 +191,12 @@ msgstr ""
 "Ļaut „Waydroid“ konteineram iemigt (iestājoties displeja noildzei), kad "
 "neviena lietotne nav aktīva"
 
-#: ui/WaydroidConfigurationForm.qml:134
+#: ui/WaydroidConfigurationForm.qml:146
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:147
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Atļaut „Android“ tiešu piekļuvi pievienotām ierīcēm"

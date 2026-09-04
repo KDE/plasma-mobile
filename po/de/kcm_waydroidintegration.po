@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 16:08+0000\n"
+"POT-Creation-Date: 2026-09-04 00:47+0000\n"
 "PO-Revision-Date: 2026-05-17 12:03+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -93,58 +93,63 @@ msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "Die Anwendung löschen"
 
-#: ui/WaydroidConfigurationForm.qml:18
+#: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
 msgstr "Allgemeine Informationen"
 
-#: ui/WaydroidConfigurationForm.qml:23
+#: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
 msgstr "IP-Adresse"
 
-#: ui/WaydroidConfigurationForm.qml:27
+#: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
 msgstr "Kopieren"
 
-#: ui/WaydroidConfigurationForm.qml:34
+#: ui/WaydroidConfigurationForm.qml:37
 #, kde-format
 msgid "Waydroid status"
 msgstr "Waydroid-Status"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stopping..."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
 msgid "Running"
 msgstr "Läuft"
 
-#: ui/WaydroidConfigurationForm.qml:38
+#: ui/WaydroidConfigurationForm.qml:49
 #, kde-format
 msgid "Stop session"
 msgstr "Sitzung beenden"
 
-#: ui/WaydroidConfigurationForm.qml:45
+#: ui/WaydroidConfigurationForm.qml:57
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "Mein Gerät für Google Play Protect zertifizieren"
 
-#: ui/WaydroidConfigurationForm.qml:50
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Installed applications"
 msgstr "Installierte Anwendungen"
 
-#: ui/WaydroidConfigurationForm.qml:55
+#: ui/WaydroidConfigurationForm.qml:67
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "Waydroid zurücksetzen"
 
-#: ui/WaydroidConfigurationForm.qml:61
+#: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "Zurücksetzung von Waydroid bestätigen"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:74
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
@@ -153,34 +158,34 @@ msgstr ""
 "Möchten Sie Waydroid wirklich zurücksetzen? Dies ist ein destruktiver "
 "Vorgang und wird alle Benutzerdaten löschen."
 
-#: ui/WaydroidConfigurationForm.qml:80
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroid-Eigenschaften"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr ""
 "Ein Neustart der Waydroid-Sitzung könnte erforderlich sein, um dies "
 "anzuwenden."
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "Multi Windows"
 msgstr "Integrierter Modus"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Aktiviert/Deaktiviert die Fensterintegration in die Arbeitsfläche"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:133
 #, kde-format
 msgid "Suspend"
 msgstr "Standby"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -189,12 +194,12 @@ msgstr ""
 "Waydroid (nach dem Ausschalten des Bildschirms) erlauben, in den Standby-"
 "Modus zu wechseln, wenn keine Anwendungen aktiv sind"
 
-#: ui/WaydroidConfigurationForm.qml:134
+#: ui/WaydroidConfigurationForm.qml:146
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:147
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr "Android den direkten Zugriff auf Hotplug-Geräte erlauben"

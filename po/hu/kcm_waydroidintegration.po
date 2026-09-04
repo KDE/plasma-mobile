@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 16:08+0000\n"
+"POT-Creation-Date: 2026-09-04 00:47+0000\n"
 "PO-Revision-Date: 2026-06-09 22:11+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -91,58 +91,63 @@ msgctxt "@action:button"
 msgid "Delete the application"
 msgstr "Alkalmazás törlése"
 
-#: ui/WaydroidConfigurationForm.qml:18
+#: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
 msgstr "Általános információk"
 
-#: ui/WaydroidConfigurationForm.qml:23
+#: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
 msgid "IP address"
 msgstr "IP-cím"
 
-#: ui/WaydroidConfigurationForm.qml:27
+#: ui/WaydroidConfigurationForm.qml:28
 #, kde-format
 msgid "Copy"
 msgstr "Másolás"
 
-#: ui/WaydroidConfigurationForm.qml:34
+#: ui/WaydroidConfigurationForm.qml:37
 #, kde-format
 msgid "Waydroid status"
 msgstr "Waydroid állapota"
 
-#: ui/WaydroidConfigurationForm.qml:35
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stopping..."
+msgstr ""
+
+#: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
 msgid "Running"
 msgstr "Fut"
 
-#: ui/WaydroidConfigurationForm.qml:38
+#: ui/WaydroidConfigurationForm.qml:49
 #, kde-format
 msgid "Stop session"
 msgstr "Munkamenet leállítása"
 
-#: ui/WaydroidConfigurationForm.qml:45
+#: ui/WaydroidConfigurationForm.qml:57
 #, kde-format
 msgid "Certify my device for Google Play Protect"
 msgstr "Eszköz tanúsítása a Google Play Protect számára"
 
-#: ui/WaydroidConfigurationForm.qml:50
+#: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
 msgid "Installed applications"
 msgstr "Telepített alkalmazások"
 
-#: ui/WaydroidConfigurationForm.qml:55
+#: ui/WaydroidConfigurationForm.qml:67
 #, kde-format
 msgid "Reset Waydroid"
 msgstr "Waydroid visszaállítása"
 
-#: ui/WaydroidConfigurationForm.qml:61
+#: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
 msgstr "Waydroid visszaállítás megerősítése"
 
-#: ui/WaydroidConfigurationForm.qml:62
+#: ui/WaydroidConfigurationForm.qml:74
 #, kde-format
 msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
@@ -151,32 +156,32 @@ msgstr ""
 "Biztosan vissza szeretné állítani a Waydroidot? Ez egy visszafordíthatatlan "
 "művelet, és minden felhasználói adat törlődni fog."
 
-#: ui/WaydroidConfigurationForm.qml:80
+#: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
 msgid "Waydroid properties"
 msgstr "Waydroid tulajdonságai"
 
-#: ui/WaydroidConfigurationForm.qml:91
+#: ui/WaydroidConfigurationForm.qml:103
 #, kde-format
 msgid "May require restarting the Waydroid session to apply"
 msgstr "A Waydroid munkamenet újraindítására lehet szükség az alkalmazáshoz"
 
-#: ui/WaydroidConfigurationForm.qml:108
+#: ui/WaydroidConfigurationForm.qml:120
 #, kde-format
 msgid "Multi Windows"
 msgstr "Több ablak"
 
-#: ui/WaydroidConfigurationForm.qml:109
+#: ui/WaydroidConfigurationForm.qml:121
 #, kde-format
 msgid "Enables/Disables window integration with the desktop"
 msgstr "Ablakok és az asztal integrációjának bekapcsolása/kikapcsolása"
 
-#: ui/WaydroidConfigurationForm.qml:121
+#: ui/WaydroidConfigurationForm.qml:133
 #, kde-format
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: ui/WaydroidConfigurationForm.qml:122
+#: ui/WaydroidConfigurationForm.qml:134
 #, kde-format
 msgid ""
 "Let the Waydroid container sleep (after the display timeout) when no apps "
@@ -185,12 +190,12 @@ msgstr ""
 "Engedélyezze, hogy a Waydroid konténer alvó módba lépjen (a képernyő "
 "időkorlátja után), ha nincs aktív alkalmazás"
 
-#: ui/WaydroidConfigurationForm.qml:134
+#: ui/WaydroidConfigurationForm.qml:146
 #, kde-format
 msgid "UEvent"
 msgstr "UEvent"
 
-#: ui/WaydroidConfigurationForm.qml:135
+#: ui/WaydroidConfigurationForm.qml:147
 #, kde-format
 msgid "Allow android direct access to hotplugged devices"
 msgstr ""
