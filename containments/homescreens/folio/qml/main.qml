@@ -55,7 +55,8 @@ ContainmentItem {
                                1 - homeScreen.contentOpacity,
                                folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
                                folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
-                               folio.HomeScreenState.folderOpenProgress
+                               folio.HomeScreenState.folderOpenProgress,
+                               folio.HomeScreenState.settingsOpenProgress
                            )
         )
     }
