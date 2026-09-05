@@ -114,7 +114,7 @@ msgstr "Stav Waydroidu"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "Zastavuji..."
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
