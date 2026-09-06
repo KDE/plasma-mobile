@@ -1,10 +1,10 @@
-# SPDX-FileCopyrightText: 2025, 2026 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2025-2026 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-04-03 19:30+0200\n"
+"PO-Revision-Date: 2026-09-04 11:16+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -111,7 +111,7 @@ msgstr "État de Waydroid"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "Arrêt en cours…"
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
