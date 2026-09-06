@@ -23,7 +23,7 @@ Dependencies:
     'plasma/libplasma': '@same'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'
-    'libraries/kirigami-addons': 'v1.11.0'
+    'libraries/kirigami-addons': 'stable/1.11'
 Options:
  require-passing-tests-on: ['Linux', 'FreeBSD']
  run-qmllint: true
