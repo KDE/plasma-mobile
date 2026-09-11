@@ -115,7 +115,7 @@ msgstr "Waydroid 状态"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "正在停止..."
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format

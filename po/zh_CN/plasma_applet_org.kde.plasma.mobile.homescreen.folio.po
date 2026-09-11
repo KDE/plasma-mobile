@@ -22,12 +22,12 @@ msgstr ""
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -43,12 +43,12 @@ msgstr "搜索应用程序…"
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "全部应用"
 
 #: qml/AppDrawerHeader.qml:150
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "类别"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
