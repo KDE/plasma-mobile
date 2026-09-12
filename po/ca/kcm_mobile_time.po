@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-07 00:47+0000\n"
-"PO-Revision-Date: 2026-03-29 13:11+0200\n"
+"PO-Revision-Date: 2026-09-11 13:27+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2859,7 +2859,7 @@ msgstr "Zaporíjia"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Zurich"
-msgstr "Zuric"
+msgstr "Zúric"
 
 #: timezonesi18n.cpp:776
 #, kde-format
