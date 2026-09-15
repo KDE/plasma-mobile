@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2026-07-22 18:14+0200\n"
+"PO-Revision-Date: 2026-09-14 11:46+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -82,24 +82,19 @@ msgstr ""
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "RetroSpatio"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "Inserta PIN"
+msgstr "Inserta"
 
 #: contents/lockscreen/LockScreenContent.qml:27
-#, fuzzy
-#| msgctxt "@action:button"
-#| msgid "Turn flashlight on"
 msgid "Flashlight"
-msgstr "Accende Lumine de flash"
+msgstr "Flashlight (luce de fulgure)"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "Camera"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -111,11 +106,11 @@ msgstr "PIN Errate"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keypad"
-msgstr ""
+msgstr "Monstra Claviero"
 
 #: contents/lockscreen/PasswordBar.qml:187
 msgid "Show keyboard"
-msgstr ""
+msgstr "Monstra Claviero"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
