@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-01 00:50+0000\n"
-"PO-Revision-Date: 2026-01-30 11:10+0100\n"
+"PO-Revision-Date: 2026-09-14 17:04+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -55,15 +55,13 @@ msgid "Clear All Notifications"
 msgstr "Netta omne Notificationes"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "On"
+#, kde-format
 msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "Activate (On)"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "Off"
+#, kde-format
 msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "De-Activate (Off)"
