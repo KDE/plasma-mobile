@@ -5,13 +5,13 @@
 #
 # Automatically generated, 2019.
 # pan93412 <pan93412@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023-2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-07 00:47+0000\n"
-"PO-Revision-Date: 2025-09-30 22:25+0900\n"
+"PO-Revision-Date: 2026-09-17 00:08+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 
 #: timesettings.cpp:127
 #, kde-format
@@ -514,7 +514,7 @@ msgstr "開曼"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Center"
-msgstr ""
+msgstr "Center"
 
 #: timezonesi18n.cpp:125
 #, kde-format
@@ -646,7 +646,7 @@ msgstr "庫拉桑"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Currie"
-msgstr ""
+msgstr "Currie"
 
 #: timezonesi18n.cpp:147
 #, kde-format
@@ -670,7 +670,7 @@ msgstr "丹馬沙文"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Dar es Salaam"
-msgstr ""
+msgstr "三蘭港"
 
 #: timezonesi18n.cpp:151
 #, kde-format
@@ -688,7 +688,7 @@ msgstr "戴維斯"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Dawson Creek"
-msgstr ""
+msgstr "道森河市"
 
 #: timezonesi18n.cpp:154
 #, kde-format
@@ -790,7 +790,7 @@ msgstr "艾魯內佩"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "El Aaiun"
-msgstr ""
+msgstr "阿尤恩"
 
 #: timezonesi18n.cpp:171
 #, kde-format
@@ -802,7 +802,7 @@ msgstr "薩爾瓦多"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Enderbury"
-msgstr ""
+msgstr "恩德伯里"
 
 #: timezonesi18n.cpp:173
 #, kde-format
@@ -838,7 +838,7 @@ msgstr "斐濟"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Fort Nelson"
-msgstr ""
+msgstr "納爾遜堡"
 
 #: timezonesi18n.cpp:179
 #, kde-format
@@ -1788,7 +1788,7 @@ msgstr "努克"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Ojinaga"
-msgstr ""
+msgstr "奧希納加"
 
 #: timezonesi18n.cpp:337
 #, kde-format
@@ -1818,7 +1818,7 @@ msgstr "瓦加杜古"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Pago Pago"
-msgstr ""
+msgstr "帕果帕果"
 
 #: timezonesi18n.cpp:342
 #, kde-format
@@ -1842,7 +1842,7 @@ msgstr "巴拿馬"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Pangnirtung"
-msgstr ""
+msgstr "潘納唐"
 
 #: timezonesi18n.cpp:346
 #, kde-format
@@ -1866,7 +1866,7 @@ msgstr "珀斯"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Petersburg"
-msgstr ""
+msgstr "彼得斯堡"
 
 #: timezonesi18n.cpp:350
 #, kde-format
@@ -1980,7 +1980,7 @@ msgstr "克孜勒奧爾達"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Rainy River"
-msgstr ""
+msgstr "雷尼河市"
 
 #: timezonesi18n.cpp:369
 #, kde-format
@@ -1992,7 +1992,7 @@ msgstr "仰光"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Rankin Inlet"
-msgstr ""
+msgstr "蘭金因萊特"
 
 #: timezonesi18n.cpp:371
 #, kde-format
@@ -2238,7 +2238,7 @@ msgstr "聖赫勒拿"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "St Johns"
-msgstr ""
+msgstr "聖約翰斯"
 
 #: timezonesi18n.cpp:412
 #, kde-format
@@ -2280,7 +2280,7 @@ msgstr "斯德哥爾摩"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Swift Current"
-msgstr ""
+msgstr "斯維夫特卡倫特"
 
 #: timezonesi18n.cpp:419
 #, kde-format
@@ -2346,7 +2346,7 @@ msgstr "德黑蘭"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tell City"
-msgstr ""
+msgstr "特爾城"
 
 #: timezonesi18n.cpp:430
 #, kde-format

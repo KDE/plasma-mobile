@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2025, 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2025-2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-01-05 03:01+0900\n"
+"PO-Revision-Date: 2026-09-16 23:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -114,7 +114,7 @@ msgstr "Waydroid 狀態"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "停止中..."
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
