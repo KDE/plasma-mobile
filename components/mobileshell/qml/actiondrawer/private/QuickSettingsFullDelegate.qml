@@ -18,6 +18,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 QuickSettingsDelegate {
     id: root
 
+    required property bool animationsEnabled
+
     padding: Kirigami.Units.smallSpacing * 2
     iconItem: icon
 
@@ -87,6 +89,7 @@ QuickSettingsDelegate {
             anchors.bottom: parent.bottom
 
             MobileShell.MarqueeLabel {
+                scrollingEnabled: root.animationsEnabled
                 Layout.fillWidth: true
                 inputText: root.text
                 font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.75 // TODO base height off of size of delegate
@@ -94,6 +97,7 @@ QuickSettingsDelegate {
             }
 
             MobileShell.MarqueeLabel {
+                scrollingEnabled: root.animationsEnabled
                 inputText: root.statusText
                 opacity: 0.6
 
@@ -103,4 +107,3 @@ QuickSettingsDelegate {
         }
     }
 }
-
