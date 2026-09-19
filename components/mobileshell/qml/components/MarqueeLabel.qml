@@ -23,15 +23,19 @@ OpacityMask {
     required property string inputText
     property font font
     property var textFormat: Text.RichText
+    property bool scrollingEnabled: true
     // properties for the marquee label scroll speed and wait duration
     readonly property real scrollSpeed: 0.025
     readonly property int waitDuration: 2000
 
     readonly property string filteredText: inputText.replace(/\n/g, ' ') // remove new line characters
-    readonly property bool charactersOverflowing: txtMeter.advanceWidth > root.width // true when text is overflowing
+
+    readonly property real textAdvanceWidth: txtMeter.advanceWidth // Cache TextMetrics.advanceWidth
+    readonly property bool charactersOverflowing: textAdvanceWidth > root.width // true when text is overflowing
+    readonly property bool shouldAnimate: scrollingEnabled && charactersOverflowing && visible && Window.window && Window.window.visible
 
     // update animation values and text positions whenever the label overflows or changes
-    onFilteredTextChanged: if (root.charactersOverflowing) { textAnimationLoop.restart() }
+    onFilteredTextChanged: if (root.shouldAnimate) { textAnimationLoop.restart() }
     onCharactersOverflowingChanged: if (charactersOverflowing) { row.scrollPosition = 0 }
 
     Item {
@@ -91,11 +95,11 @@ OpacityMask {
     // if the label is overflowing, this animation in a loop smoothly scrolling thought the text
     SequentialAnimation {
         id: textAnimationLoop
-        running: root.charactersOverflowing && root.visible
+        running: root.shouldAnimate
         onRunningChanged: row.scrollPosition = 0
         loops: Animation.Infinite
         PauseAnimation { duration: root.waitDuration }
-        NumberAnimation { target: row; property: "scrollPosition"; from: 0; to: -txtMeter.advanceWidth - row.spacing; duration: (txtMeter.advanceWidth + row.spacing) / root.scrollSpeed }
+        NumberAnimation { target: row; property: "scrollPosition"; from: 0; to: -root.textAdvanceWidth - row.spacing; duration: (root.textAdvanceWidth + row.spacing) / root.scrollSpeed }
     }
 
     // gradient mask to smoothly fade the ends of the label when it is scrolling
@@ -109,11 +113,10 @@ OpacityMask {
         gradient: Gradient {
             orientation: Gradient.Horizontal
 
-            GradientStop { position: 0; color: row.scrollPosition == 0 || row.scrollPosition < -txtMeter.advanceWidth ? 'white' : 'transparent' } // remove the beginning of the gradient when at the start of the label so the front text is fully visible
+            GradientStop { position: 0; color: row.scrollPosition == 0 || row.scrollPosition < -root.textAdvanceWidth ? 'white' : 'transparent' } // remove the beginning of the gradient when at the start of the label so the front text is fully visible
             GradientStop { position: 0 + mask.gradientPct; color: 'white' }
             GradientStop { position: 1.0 - mask.gradientPct; color: 'white' }
             GradientStop { position: 1.0; color: 'transparent' }
         }
     }
 }
-
