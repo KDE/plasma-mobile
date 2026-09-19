@@ -15,7 +15,7 @@ import Qt5Compat.GraphicalEffects
  * This is a simple marquee (flowing) label based on PlasmaComponents Label.
  */
 
-OpacityMask {
+Item {
     id: root
     height: row.height
 
@@ -42,7 +42,6 @@ OpacityMask {
         id: rowContaner
         anchors.fill: parent
         height: row.height
-        opacity: 0 // we display with the opacity gradient below
 
         // use two identical labels for scrolling so we can give the illusion of infinite scrolling
         RowLayout {
@@ -89,9 +88,6 @@ OpacityMask {
         }
     }
 
-    // setting the gradient mask source
-    source: rowContaner
-
     // if the label is overflowing, this animation in a loop smoothly scrolling thought the text
     SequentialAnimation {
         id: textAnimationLoop
@@ -103,20 +99,23 @@ OpacityMask {
     }
 
     // gradient mask to smoothly fade the ends of the label when it is scrolling
-    maskSource: Rectangle {
-        id: mask
-        width: root.width
-        height: root.height
+    layer.enabled: root.charactersOverflowing
+    layer.effect: OpacityMask {
+        maskSource: Rectangle {
+            id: mask
+            width: root.width
+            height: root.height
 
-        property real gradientPct: (Kirigami.Units.gridUnit * 0.35) / root.width
+            property real gradientPct: (Kirigami.Units.gridUnit * 0.35) / root.width
 
-        gradient: Gradient {
-            orientation: Gradient.Horizontal
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
 
-            GradientStop { position: 0; color: row.scrollPosition == 0 || row.scrollPosition < -root.textAdvanceWidth ? 'white' : 'transparent' } // remove the beginning of the gradient when at the start of the label so the front text is fully visible
-            GradientStop { position: 0 + mask.gradientPct; color: 'white' }
-            GradientStop { position: 1.0 - mask.gradientPct; color: 'white' }
-            GradientStop { position: 1.0; color: 'transparent' }
+                GradientStop { position: 0; color: row.scrollPosition == 0 || row.scrollPosition < -root.textAdvanceWidth ? 'white' : 'transparent' } // remove the beginning of the gradient when at the start of the label so the front text is fully visible
+                GradientStop { position: 0 + mask.gradientPct; color: 'white' }
+                GradientStop { position: 1.0 - mask.gradientPct; color: 'white' }
+                GradientStop { position: 1.0; color: 'transparent' }
+            }
         }
     }
 }
