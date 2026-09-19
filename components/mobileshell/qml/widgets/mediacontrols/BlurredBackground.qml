@@ -3,7 +3,6 @@
 
 import QtQuick
 import QtQuick.Effects
-import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami as Kirigami
 
@@ -12,28 +11,21 @@ Item {
 
     property string imageSource
     property bool darken: false
-    property bool inActionDrawer: false
 
-    // clip corners so that the image has rounded corners
-    layer.enabled: true
-    layer.effect: OpacityMask {
-        maskSource: Item {
-            width: img.width
-            height: img.height
-
-            Rectangle {
-                anchors.centerIn: parent
-                width: img.width
-                height: img.height
-                radius: Kirigami.Units.cornerRadius
-            }
-        }
+    Rectangle {
+        id: cornerMask
+        anchors.fill: parent
+        radius: Kirigami.Units.cornerRadius
+        color: "white"
+        visible: false
+        layer.enabled: true
     }
 
     // darken background when pressed
     Rectangle {
         anchors.fill: parent
         color: "black"
+        radius: Kirigami.Units.cornerRadius
         opacity: root.darken ? 0.05 : 0
     }
 
@@ -44,6 +36,9 @@ Item {
 
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
+        // Bound decoding to the displayed size, in steps to avoid reloading on every resize pixel.
+        sourceSize: Qt.size(Math.max(64, Math.ceil(width * Screen.devicePixelRatio / 64) * 64),
+                            Math.max(64, Math.ceil(height * Screen.devicePixelRatio / 64) * 64))
 
         // ensure text is readable
         Rectangle {
@@ -58,6 +53,8 @@ Item {
         layer.enabled: true
         layer.effect: MultiEffect {
             brightness: 0.075
+            maskEnabled: true
+            maskSource: cornerMask
 
             blurEnabled: true
             blurMax: 32

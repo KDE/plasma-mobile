@@ -23,6 +23,9 @@ Item {
 
     property int panelType: MobileShell.PanelBackground.PanelType.Drawer
     property bool detailledView: false
+    property bool active: true
+
+    readonly property bool controlsActive: active && visible && opacity > 0 && Window.window && Window.window.visible
 
     readonly property real padding: Kirigami.Units.gridUnit
     readonly property real contentHeight: {
@@ -84,6 +87,26 @@ Item {
 
                 asynchronous: true
 
+                readonly property bool controlsActive: root.controlsActive && QQC2.SwipeView.isCurrentItem
+                readonly property bool positionVisible: controlsActive && root.detailledView
+                readonly property bool playing: model.playbackStatus === Mpris.PlaybackStatus.Playing
+
+                function refreshPosition(): void {
+                    mpris2Source.setIndex(model.index);
+                    mpris2Source.updatePosition();
+                }
+
+                onPositionVisibleChanged: {
+                    if (positionVisible && !playing) {
+                        refreshPosition();
+                    }
+                }
+                onPlayingChanged: {
+                    if (positionVisible && !playing) {
+                        refreshPosition();
+                    }
+                }
+
                 function getTrackName() {
                     console.log('track name: ' + model.title);
                     if (model.title) {
@@ -125,7 +148,6 @@ Item {
                     BlurredBackground {
                         anchors.fill: parent
                         darken: mouseArea.pressed
-                        inActionDrawer: root.inActionDrawer
                         imageSource: model.artUrl
                     }
 
@@ -167,6 +189,7 @@ Item {
                                     // media track name text
                                     MobileShell.MarqueeLabel {
                                         id: trackLabel
+                                        scrollingEnabled: delegate.controlsActive
                                         Layout.fillWidth: true
 
                                         inputText: model.track || i18n("No media playing");
@@ -177,6 +200,7 @@ Item {
                                     // media artist name text
                                     MobileShell.MarqueeLabel {
                                         id: artistLabel
+                                        scrollingEnabled: delegate.controlsActive
                                         Layout.fillWidth: true
 
                                         // if no artist is given, show player name instead
@@ -249,11 +273,11 @@ Item {
                                     onMoved: model.position = value
 
                                     Timer {
-                                        interval: 1000; running: true; repeat: true
-                                        onTriggered: {
-                                            mpris2Source.setIndex(model.index);
-                                            mpris2Source.updatePosition()
-                                        }
+                                        interval: 1000
+                                        running: delegate.positionVisible && delegate.playing
+                                        repeat: true
+                                        triggeredOnStart: true
+                                        onTriggered: delegate.refreshPosition()
                                     }
                                 }
 

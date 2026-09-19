@@ -274,6 +274,7 @@ Item {
 
     property MobileShell.MediaControlsWidget mediaControlsWidget: MobileShell.MediaControlsWidget {
         id: mediaWidget
+        active: root.actionDrawer.intendedToBeVisible && root.brightnessPressedValue > 0
         opacity: brightnessPressedValue
     }
 }
