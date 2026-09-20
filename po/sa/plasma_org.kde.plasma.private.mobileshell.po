@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-09-20 00:47+0000\n"
 "PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -172,22 +172,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "अन्वेषण…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "न मीडिया वाद्यते"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Previous track"
 msgstr "पूर्वः पटलः"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:235
 #, kde-format
 msgid "Play or Pause media"
 msgstr "माध्यमं प्ले कुर्वन्तु अथवा विरामयन्तु"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:248
 #, kde-format
 msgid "Next track"
 msgstr "अग्रिमः पटलः"

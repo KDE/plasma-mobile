@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-09-20 00:47+0000\n"
 "PO-Revision-Date: 2026-08-29 14:16+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -168,22 +168,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Suchen …"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "Es werden keine Medien wiedergegeben"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Previous track"
 msgstr "Vorheriges Stück"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:235
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Medien wiedergeben oder anhalten"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:248
 #, kde-format
 msgid "Next track"
 msgstr "Nächstes Stück"

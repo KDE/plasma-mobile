@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-09-20 00:47+0000\n"
 "PO-Revision-Date: 2026-08-02 09:50+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -163,22 +163,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Rechercher..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "Aucun média en lecture"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Previous track"
 msgstr "Piste précédente"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:235
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Lire ou mettre en pause un média"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:248
 #, kde-format
 msgid "Next track"
 msgstr "Piste suivante"

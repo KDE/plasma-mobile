@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-09-20 00:47+0000\n"
 "PO-Revision-Date: 2026-08-01 14:03+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -167,22 +167,22 @@ msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Шукати…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "Відтворення не відбувається"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
 #, kde-format
 msgid "Previous track"
 msgstr "Попередня доріжка"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:235
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Почати або призупинити відтворення"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:248
 #, kde-format
 msgid "Next track"
 msgstr "Наступна доріжка"
