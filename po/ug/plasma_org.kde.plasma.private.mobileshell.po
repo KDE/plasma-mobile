@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:47+0000\n"
-"PO-Revision-Date: 2026-07-22 17:08-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -98,7 +98,7 @@ msgstr "خاتىرىلەش ئېقىمى"
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
-msgstr "%1 (%2)"
+msgstr ""
 
 #: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
@@ -114,13 +114,13 @@ msgstr "%1 نىڭ قوشۇمچە تاللانمىسىنى كۆرسىتىدۇ"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr ""
 
 #: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr ""
 
 #: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -131,7 +131,7 @@ msgstr "ئۇقتۇرۇش ئاۋازى"
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
-msgstr "%1: %2"
+msgstr ""
 
 #: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
@@ -161,7 +161,7 @@ msgstr "ئاۋاش تەڭشىكىنى ئاچ"
 #: qml/statusbar/indicators/BatteryIndicator.qml:68
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr ""
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
@@ -217,7 +217,7 @@ msgstr "جاۋاب قايتۇر"
 #, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr "%1:"
+msgstr ""
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
@@ -268,13 +268,13 @@ msgstr[0] "%1 تۈر"
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr "%1/s"
+msgstr ""
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
 #, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
-msgstr "%1%"
+msgstr ""
 
 #: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-07-22 17:08-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -39,8 +39,6 @@ msgid ""
 "Downloading Android and vendor images.\n"
 "It can take a few minutes."
 msgstr ""
-"Android ۋە تەمىنلىگۈچى سۈرىتىنى چۈشۈرۈۋاتىدۇ.\n"
-"بۇنىڭغا بىر قانچە مىنۇت كېتىشى مۇمكىن."
 
 #: ui/main.qml:66
 #, kde-format
@@ -48,8 +46,6 @@ msgid ""
 "Waydroid is resetting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid قايتا تەڭشىلىۋاتىدۇ.\n"
-"بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن."
 
 #: ui/main.qml:75
 #, kde-format
@@ -67,8 +63,6 @@ msgid ""
 "Waydroid session is starting.\n"
 "It can take a few seconds."
 msgstr ""
-"Waydroid جەريانچاق قوزغىلىۋاتىدۇ.\n"
-"بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن."
 
 #: ui/WaydroidApplicationsPage.qml:24
 #, kde-format
@@ -154,8 +148,6 @@ msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
-"سىز Waydroid نى راستتىنلا ئەسلىگە قايتۇرامسىز؟ بۇ بۇزغۇنچىلىق خاراكتېرىدىكى "
-"مەشغۇلات بارلىق ئىشلەتكۈچى سانلىق مەلۇماتىنى يوق قىلىدۇ."
 
 #: ui/WaydroidConfigurationForm.qml:92
 #, kde-format
@@ -194,7 +186,7 @@ msgstr ""
 #: ui/WaydroidConfigurationForm.qml:146
 #, kde-format
 msgid "UEvent"
-msgstr "UEvent"
+msgstr ""
 
 #: ui/WaydroidConfigurationForm.qml:147
 #, kde-format
@@ -210,12 +202,12 @@ msgstr "%1MB/%2MB چۈشۈرۈۋاتىدۇ سۈرئىتى %3"
 #: ui/WaydroidDownloadStatus.qml:47
 #, kde-format
 msgid "%1MB/s"
-msgstr "%1MB/s"
+msgstr ""
 
 #: ui/WaydroidDownloadStatus.qml:49
 #, kde-format
 msgid "%1kB/s"
-msgstr "%1kB/s"
+msgstr ""
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
 #, kde-format
@@ -228,8 +220,6 @@ msgid ""
 "Fetching your Android ID.\n"
 "It can take a few seconds."
 msgstr ""
-"Android كىملىكىگە ئېرىشىۋاتىدۇ.\n"
-"بۇنىڭغا بىر قانچە سېكۇنت كېتىشى مۇمكىن."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
 #, kde-format
@@ -239,11 +229,6 @@ msgid ""
 "your device, paste the Android ID in the field on the website. Then, give "
 "the Google services some minutes to reflect the change and restart Waydroid."
 msgstr ""
-"Waydroid نى GAPPS بىلەن بىللە تۇنجى قېتىم قوزغاتقاندا، Google Play Protect "
-"ئۈچۈن گۇۋاھنامە بېرىلمىگەنلىكىنى ئەسكەرتىدۇ. ئۈسكۈنىڭىزگە ئۆزىڭىز گۇۋاھنامە "
-"ئارقىلىق دەلىللەش ئۈچۈن، Android كىملىكىنى تور بەتتىكى تولدۇرىدىغان بۆلەككە "
-"چاپلاڭ. ئاندىن Google مۇلازىمەتنىڭ ئۆزگىرىشكە ئىنكاس قايتۇرۇشى ئۈچۈن ئازراق "
-"ۋاقىت بېرىپ، Waydroid نى قايتا قوزغىتىڭ."
 
 #: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
 #, kde-format

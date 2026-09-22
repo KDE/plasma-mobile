@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-07 00:47+0000\n"
-"PO-Revision-Date: 2026-07-22 17:07-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -2461,229 +2461,229 @@ msgstr "ئۇست-نېرا"
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+00:00"
-msgstr "UTC+00:00"
+msgstr ""
 
 #: timezonesi18n.cpp:450
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+01:00"
-msgstr "UTC+01:00"
+msgstr ""
 
 #: timezonesi18n.cpp:451
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+02:00"
-msgstr "UTC+02:00"
+msgstr ""
 
 #: timezonesi18n.cpp:452
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+03:00"
-msgstr "UTC+03:00"
+msgstr ""
 
 #: timezonesi18n.cpp:453
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+03:30"
-msgstr "UTC+03:30"
+msgstr ""
 
 #: timezonesi18n.cpp:454
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+04:00"
-msgstr "UTC+04:00"
+msgstr ""
 
 #: timezonesi18n.cpp:455
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+04:30"
-msgstr "UTC+04:30"
+msgstr ""
 
 #: timezonesi18n.cpp:456
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+05:00"
-msgstr "UTC+05:00"
+msgstr ""
 
 #: timezonesi18n.cpp:457
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+05:30"
-msgstr "UTC+05:30"
+msgstr ""
 
 #: timezonesi18n.cpp:458
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+05:45"
-msgstr "UTC+05:45"
+msgstr ""
 
 #: timezonesi18n.cpp:459
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+06:00"
-msgstr "UTC+06:00"
+msgstr ""
 
 #: timezonesi18n.cpp:460
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+06:30"
-msgstr "UTC+06:30"
+msgstr ""
 
 #: timezonesi18n.cpp:461
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+07:00"
-msgstr "UTC+07:00"
+msgstr ""
 
 #: timezonesi18n.cpp:462
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+08:00"
-msgstr "UTC+08:00"
+msgstr ""
 
 #: timezonesi18n.cpp:463
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+09:00"
-msgstr "UTC+09:00"
+msgstr ""
 
 #: timezonesi18n.cpp:464
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+09:30"
-msgstr "UTC+09:30"
+msgstr ""
 
 #: timezonesi18n.cpp:465
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+10:00"
-msgstr "UTC+10:00"
+msgstr ""
 
 #: timezonesi18n.cpp:466
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+11:00"
-msgstr "UTC+11:00"
+msgstr ""
 
 #: timezonesi18n.cpp:467
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+12:00"
-msgstr "UTC+12:00"
+msgstr ""
 
 #: timezonesi18n.cpp:468
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+13:00"
-msgstr "UTC+13:00"
+msgstr ""
 
 #: timezonesi18n.cpp:469
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+14:00"
-msgstr "UTC+14:00"
+msgstr ""
 
 #: timezonesi18n.cpp:470
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-00:00"
-msgstr "UTC-00:00"
+msgstr ""
 
 #: timezonesi18n.cpp:471
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-01:00"
-msgstr "UTC-01:00"
+msgstr ""
 
 #: timezonesi18n.cpp:472
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-02:00"
-msgstr "UTC-02:00"
+msgstr ""
 
 #: timezonesi18n.cpp:473
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-03:00"
-msgstr "UTC-03:00"
+msgstr ""
 
 #: timezonesi18n.cpp:474
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-03:30"
-msgstr "UTC-03:30"
+msgstr ""
 
 #: timezonesi18n.cpp:475
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-04:00"
-msgstr "UTC-04:00"
+msgstr ""
 
 #: timezonesi18n.cpp:476
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-04:30"
-msgstr "UTC-04:30"
+msgstr ""
 
 #: timezonesi18n.cpp:477
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-05:00"
-msgstr "UTC-05:00"
+msgstr ""
 
 #: timezonesi18n.cpp:478
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-06:00"
-msgstr "UTC-06:00"
+msgstr ""
 
 #: timezonesi18n.cpp:479
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-07:00"
-msgstr "UTC-07:00"
+msgstr ""
 
 #: timezonesi18n.cpp:480
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-08:00"
-msgstr "UTC-08:00"
+msgstr ""
 
 #: timezonesi18n.cpp:481
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-09:00"
-msgstr "UTC-09:00"
+msgstr ""
 
 #: timezonesi18n.cpp:482
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-10:00"
-msgstr "UTC-10:00"
+msgstr ""
 
 #: timezonesi18n.cpp:483
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-11:00"
-msgstr "UTC-11:00"
+msgstr ""
 
 #: timezonesi18n.cpp:484
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-12:00"
-msgstr "UTC-12:00"
+msgstr ""
 
 #: timezonesi18n.cpp:485
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-13:00"
-msgstr "UTC-13:00"
+msgstr ""
 
 #: timezonesi18n.cpp:486
 #, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-14:00"
-msgstr "UTC-14:00"
+msgstr ""
 
 #: timezonesi18n.cpp:487
 #, kde-format
