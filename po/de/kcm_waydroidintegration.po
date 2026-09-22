@@ -4,20 +4,21 @@
 # This file is distributed under the same license as the plasma-mobile package.
 # SPDX-FileCopyrightText: 2025 marctg <m@ghencea.net>
 # SPDX-FileCopyrightText: 2026 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-05-17 12:03+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2026-09-19 21:01+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.07.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -116,7 +117,7 @@ msgstr "Waydroid-Status"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "Wird angehalten …"
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
