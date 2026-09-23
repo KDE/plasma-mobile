@@ -121,11 +121,11 @@ ColumnLayout {
             }
 
             Keys.onDownPressed: (event) => {
-                root.focusAllAppsGrid();
+                root.focusTabBar();
                 event.accepted = true;
             }
             Keys.onTabPressed: (event) => {
-                root.focusAllAppsGrid();
+                root.focusTabBar();
                 event.accepted = true;
             }
 
@@ -149,7 +149,8 @@ ColumnLayout {
         Layout.maximumWidth: Math.min(Kirigami.Units.gridUnit * 12, searchField.width)
         Layout.bottomMargin: Kirigami.Units.largeSpacing
 
-        implicitHeight: Kirigami.Units.gridUnit * 1.75
+        implicitHeight: Kirigami.Units.gridUnit * 1.5
+        font: Kirigami.Theme.smallFont
 
         model: [i18n("All Apps"), i18n("Categories")]
 
