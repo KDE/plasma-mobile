@@ -586,7 +586,11 @@ Item {
 
                 // Forward keyboard text to the search bar
                 Keys.onPressed: (event) => {
-                    if (event.text.trim().length > 0) {
+                    if (event.key === Qt.Key_Backspace) {
+                        appDrawerHeader.removeLastSearchCharacter();
+                        appDrawerHeader.forceActiveFocus();
+                        event.accepted = true;
+                    } else if (event.text.trim().length > 0) {
                         appDrawerHeader.addSearchText(event.text);
                         appDrawerHeader.forceActiveFocus();
                         event.accepted = true;
