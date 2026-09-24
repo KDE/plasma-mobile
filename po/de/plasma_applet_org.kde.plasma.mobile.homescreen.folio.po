@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:47+0000\n"
+"POT-Creation-Date: 2026-09-24 02:50+0000\n"
 "PO-Revision-Date: 2026-09-19 21:00+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -35,18 +35,18 @@ msgstr "Alle"
 msgid "Folder"
 msgstr "Ordner"
 
-#: qml/AppDrawerHeader.qml:95
+#: qml/AppDrawerHeader.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Anwendungen suchen …"
 
-#: qml/AppDrawerHeader.qml:150
+#: qml/AppDrawerHeader.qml:154
 #, kde-format
 msgid "All Apps"
 msgstr "Alle Anwendungen"
 
-#: qml/AppDrawerHeader.qml:150
+#: qml/AppDrawerHeader.qml:154
 #, kde-format
 msgid "Categories"
 msgstr "Kategorien"

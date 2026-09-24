@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:47+0000\n"
+"POT-Creation-Date: 2026-09-24 02:50+0000\n"
 "PO-Revision-Date: 2026-09-14 20:10+0200\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -31,18 +31,18 @@ msgstr "Všetko"
 msgid "Folder"
 msgstr "Priečinok"
 
-#: qml/AppDrawerHeader.qml:95
+#: qml/AppDrawerHeader.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Aplikácie"
 
-#: qml/AppDrawerHeader.qml:150
+#: qml/AppDrawerHeader.qml:154
 #, kde-format
 msgid "All Apps"
 msgstr "Všetky aplikácie"
 
-#: qml/AppDrawerHeader.qml:150
+#: qml/AppDrawerHeader.qml:154
 #, kde-format
 msgid "Categories"
 msgstr "Kategórie"

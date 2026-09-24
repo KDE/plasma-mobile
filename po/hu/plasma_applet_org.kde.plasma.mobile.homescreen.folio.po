@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-29 00:47+0000\n"
+"POT-Creation-Date: 2026-09-24 02:50+0000\n"
 "PO-Revision-Date: 2025-11-21 21:26+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -33,18 +33,18 @@ msgstr ""
 msgid "Folder"
 msgstr "Mappa"
 
-#: qml/AppDrawerHeader.qml:95
+#: qml/AppDrawerHeader.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Alkalmazások keresése…"
 
-#: qml/AppDrawerHeader.qml:150
+#: qml/AppDrawerHeader.qml:154
 #, kde-format
 msgid "All Apps"
 msgstr ""
 
-#: qml/AppDrawerHeader.qml:150
+#: qml/AppDrawerHeader.qml:154
 #, kde-format
 msgid "Categories"
 msgstr ""
