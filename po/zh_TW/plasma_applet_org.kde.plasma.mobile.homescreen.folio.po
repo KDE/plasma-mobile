@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-24 02:50+0000\n"
+"POT-Creation-Date: 2026-09-25 02:44+0000\n"
 "PO-Revision-Date: 2026-09-16 23:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -42,12 +42,12 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "搜尋應用程式…"
 
-#: qml/AppDrawerHeader.qml:154
+#: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
 msgstr "所有應用程式"
 
-#: qml/AppDrawerHeader.qml:154
+#: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
 msgstr "分類"

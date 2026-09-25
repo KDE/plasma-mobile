@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-24 02:50+0000\n"
+"POT-Creation-Date: 2026-09-25 02:44+0000\n"
 "PO-Revision-Date: 2026-08-29 20:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -39,12 +39,12 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Uygulamalar ara…"
 
-#: qml/AppDrawerHeader.qml:154
+#: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
 msgstr "Tüm Uygulamalar"
 
-#: qml/AppDrawerHeader.qml:154
+#: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
 msgstr "Kategoriler"
