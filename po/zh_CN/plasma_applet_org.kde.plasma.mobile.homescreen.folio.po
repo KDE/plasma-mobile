@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-24 00:47+0000\n"
+"POT-Creation-Date: 2026-09-25 00:48+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -40,12 +40,12 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "搜索应用程序…"
 
-#: qml/AppDrawerHeader.qml:154
+#: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
 msgstr "全部应用"
 
-#: qml/AppDrawerHeader.qml:154
+#: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
 msgstr "类别"
