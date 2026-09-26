@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"PO-Revision-Date: 2026-09-24 20:15-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: qml/NavigationPanelComponent.qml:77
+#, kde-format
+msgctxt "@action:button"
+msgid "Task switcher"
+msgstr "ۋەزىپە ئالماشتۇرغۇچ"
+
+#: qml/NavigationPanelComponent.qml:91
+#, kde-format
+msgctxt "@action:button"
+msgid "Home"
+msgstr "باش بەت"
+
+#: qml/NavigationPanelComponent.qml:104 qml/NavigationPanelComponent.qml:141
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide keyboard"
+msgstr "ھەرپتاختا يوشۇر"
+
+#: qml/NavigationPanelComponent.qml:105
+#, kde-format
+msgctxt "@action:button"
+msgid "Close app"
+msgstr "ئەپنى ياپ"
+
+#: qml/NavigationPanelComponent.qml:127
+#, kde-format
+msgctxt "@action:button"
+msgid "Rotate screen"
+msgstr "ئېكراننى ئايلاندۇر"
+
+#: qml/NavigationPanelComponent.qml:142
+#, kde-format
+msgctxt "@action:button"
+msgid "Show keyboard"
+msgstr "ھەرپتاختا كۆرسەت"

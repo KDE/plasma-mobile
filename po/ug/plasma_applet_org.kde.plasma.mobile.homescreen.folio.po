@@ -1,14 +1,14 @@
 # Uyghur translation for plasma_applet_org.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-25 00:48+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-09-24 20:15-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -22,12 +22,12 @@ msgstr ""
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "ھەممىسى"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "ھەممىسى"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -43,12 +43,12 @@ msgstr "ئىزدەش پىروگراممىسى…"
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "ھەممە ئەپ"
 
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "سەھىپە"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format

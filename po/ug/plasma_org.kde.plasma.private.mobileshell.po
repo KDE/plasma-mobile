@@ -1,14 +1,14 @@
 # Uyghur translation for plasma_org.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:47+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-09-24 20:16-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -56,15 +56,13 @@ msgid "Clear All Notifications"
 msgstr "بارلىق ئۇقتۇرۇشنى تازىلا"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "On"
+#, kde-format
 msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "ئوچۇق"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "Off"
+#, kde-format
 msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "تاقاق"
@@ -98,7 +96,7 @@ msgstr "خاتىرىلەش ئېقىمى"
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: qml/popups/volumeosd/DeviceListItem.qml:33
 #, kde-format
@@ -114,13 +112,13 @@ msgstr "%1 نىڭ قوشۇمچە تاللانمىسىنى كۆرسىتىدۇ"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -131,7 +129,7 @@ msgstr "ئۇقتۇرۇش ئاۋازى"
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
@@ -161,7 +159,7 @@ msgstr "ئاۋاش تەڭشىكىنى ئاچ"
 #: qml/statusbar/indicators/BatteryIndicator.qml:68
 #, kde-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
@@ -217,7 +215,7 @@ msgstr "جاۋاب قايتۇر"
 #, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr ""
+msgstr "%1:"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
@@ -268,13 +266,13 @@ msgstr[0] "%1 تۈر"
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr ""
+msgstr "%1/s"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
 #, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format

@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-25 00:48+0000\n"
-"PO-Revision-Date: 2026-08-02 19:47+0200\n"
+"PO-Revision-Date: 2026-09-25 18:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -23,12 +23,12 @@ msgstr ""
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -44,12 +44,12 @@ msgstr "Søk etter program …"
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "Alle appar"
 
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriar"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
@@ -59,7 +59,7 @@ msgstr "Generelt"
 #: qml/delegate/WidgetDelegate.qml:119
 #, kde-format
 msgid "This widget was not found."
-msgstr ""
+msgstr "Fann ikkje skjermelementet."
 
 #: qml/delegate/WidgetDelegate.qml:137
 #, kde-format
@@ -72,10 +72,9 @@ msgid "Options"
 msgstr "Val"
 
 #: qml/delegate/WidgetDelegateConfig.qml:207
-#, fuzzy, kde-format
-#| msgid "Widgets"
+#, kde-format
 msgid "Widget Options"
-msgstr "Skjermelement"
+msgstr "Element-val"
 
 #: qml/delegate/WidgetDelegateConfig.qml:247
 #, kde-format
@@ -96,7 +95,7 @@ msgstr "Fjern"
 #: qml/HomeScreenPage.qml:482
 #, kde-format
 msgid "Release to configure, drag to move"
-msgstr ""
+msgstr "Slepp for å setja opp, og dra for å flytta"
 
 #: qml/private/ConfirmDeleteFolderDialogLoader.qml:34
 #, kde-format
