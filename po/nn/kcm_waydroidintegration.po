@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-08-02 19:49+0200\n"
+"PO-Revision-Date: 2026-09-25 18:24+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -68,29 +68,29 @@ msgstr ""
 #: ui/WaydroidApplicationsPage.qml:24
 #, kde-format
 msgid "Waydroid applications"
-msgstr ""
+msgstr "Waydroid-program"
 
 #: ui/WaydroidApplicationsPage.qml:28
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr ""
+msgstr "Installer APK"
 
 #: ui/WaydroidApplicationsPage.qml:66
 #, kde-format
 msgid "You must select a local file"
-msgstr ""
+msgstr "Du må velja ei lokal mappe"
 
 #: ui/WaydroidApplicationsPage.qml:106
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr ""
+msgstr "Slett programmet"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
 msgid "General information"
-msgstr ""
+msgstr "Generell informasjon"
 
 #: ui/WaydroidConfigurationForm.qml:24
 #, kde-format
@@ -110,7 +110,7 @@ msgstr "Waydroid-status"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "Stoppar …"
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format

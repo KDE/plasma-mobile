@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-04 00:46+0000\n"
-"PO-Revision-Date: 2026-08-02 19:45+0200\n"
+"PO-Revision-Date: 2026-09-25 18:24+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -94,44 +94,44 @@ msgid "Show battery percentage in the status bar."
 msgstr ""
 
 #: ui/main.qml:116
-#, fuzzy, kde-format
+#, kde-format
 msgid "Status Bar Size"
-msgstr "Statuslinje"
+msgstr "Storleik på statuslinje"
 
 #: ui/main.qml:117
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "Storleik på toppanelet (treng omstart)."
 
 #: ui/main.qml:120
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "Ørliten"
 
 #: ui/main.qml:121
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 #: ui/main.qml:122
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Vanleg"
 
 #: ui/main.qml:123
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "Stor"
 
 #: ui/main.qml:124
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Veldig stor"
 
 #: ui/main.qml:140
 #, kde-format
@@ -175,11 +175,12 @@ msgstr "Øvre høgre skuff-modus"
 msgid "Mode when opening from the top right."
 msgstr "Modus ved opning frå oppe til høgre."
 
+# Trur ikkje det er snakk om snøggtastar her.
 #: ui/main.qml:201
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Snarvegar på låseskjermen"
 
 #: ui/main.qml:206
 #, kde-format
@@ -224,10 +225,9 @@ msgid "Show"
 msgstr "Vis"
 
 #: ui/QuickSettingsForm.qml:114
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Quick Settings Columns"
-msgstr "Snøgginnstillingar"
+msgstr "Kolonnar for snøgginnstillingar"
 
 #: ui/QuickSettingsForm.qml:115
 #, kde-format
