@@ -1,0 +1,54 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2026 Shinjo Park <kde@peremen.name>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"PO-Revision-Date: 2026-09-28 23:57+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: qml/NavigationPanelComponent.qml:77
+#, kde-format
+msgctxt "@action:button"
+msgid "Task switcher"
+msgstr "작업 전환기"
+
+#: qml/NavigationPanelComponent.qml:91
+#, kde-format
+msgctxt "@action:button"
+msgid "Home"
+msgstr "홈"
+
+#: qml/NavigationPanelComponent.qml:104 qml/NavigationPanelComponent.qml:141
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide keyboard"
+msgstr "키보드 숨기기"
+
+#: qml/NavigationPanelComponent.qml:105
+#, kde-format
+msgctxt "@action:button"
+msgid "Close app"
+msgstr "앱 닫기"
+
+#: qml/NavigationPanelComponent.qml:127
+#, kde-format
+msgctxt "@action:button"
+msgid "Rotate screen"
+msgstr "화면 회전"
+
+#: qml/NavigationPanelComponent.qml:142
+#, kde-format
+msgctxt "@action:button"
+msgid "Show keyboard"
+msgstr "키보드 표시"
