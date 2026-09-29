@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2023-02-19 17:59+0300\n"
+"PO-Revision-Date: 2026-09-28 19:08+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -77,7 +77,7 @@ msgstr "Отключение этого параметра может улучш
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Выдвижная панель быстрой настройки"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
@@ -101,32 +101,32 @@ msgstr "Растянутый режим"
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Режим верхней левой выдвижной панели"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Режим открытия из верхнего левого угла."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Режим верхней правой выдвижной панели"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Режим открытия из верхнего правого угла."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr ""
+msgstr "Изменение порядка элементов быстрой настройки в выдвижной панели."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "Включение виброотклика оболочки."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
@@ -136,7 +136,7 @@ msgstr "Интенсивность вибрации"
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr ""
+msgstr "Интенсивность виброотклика оболочки."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
@@ -164,7 +164,7 @@ msgstr "Длительность вибрации"
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "Продолжительность виброотклика."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
@@ -190,3 +190,5 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"Управление виброоткликом клавиатуры выполняется отдельно, в модуле "
+"параметров клавиатуры."
