@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-02-03 22:05+0100\n"
+"PO-Revision-Date: 2026-09-28 23:56+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -114,7 +114,7 @@ msgstr "Waydroid 상태"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "정지 중..."
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
