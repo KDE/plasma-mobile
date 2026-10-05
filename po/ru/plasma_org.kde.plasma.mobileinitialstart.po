@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:45+0000\n"
-"PO-Revision-Date: 2026-02-17 20:47+0200\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -58,7 +58,7 @@ msgstr "Добавить APN"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:60
 #, kde-format
 msgid "Name"
-msgstr "Имя"
+msgstr "Название"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:64
 #, kde-format
@@ -174,7 +174,7 @@ msgstr "Устройство готово к работе. <br /><br />Поль�
 #: modules/prepare/package/contents/ui/main.qml:18
 #, kde-format
 msgid "Before we get started…"
-msgstr "До начала работы…"
+msgstr "Прежде чем начать…"
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
@@ -220,8 +220,8 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
-"Проведите пальцем вверх из нижней части экрана для просмотра запущенных "
-"приложений. Перелистните для перехода на домашний экран."
+"Проведите пальцем вверх от нижнего края экрана, чтобы увидеть запущенные "
+"приложения. Быстро смахните вверх, чтобы перейти на главный экран."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
@@ -236,8 +236,7 @@ msgstr "Используйте кнопки на панели навигации
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
-"Выбранный способ навигации возможно изменить в разделе настройки позже."
+msgstr "Позже это можно изменить в параметрах системы."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format

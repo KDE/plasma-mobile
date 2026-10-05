@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-25 02:44+0000\n"
-"PO-Revision-Date: 2026-09-19 22:02+0200\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -182,7 +182,7 @@ msgstr "Эффект перехода"
 #: qml/settings/ConfigGeneral.qml:162
 #, kde-format
 msgid "Slide"
-msgstr "Слайды"
+msgstr "Сдвиг"
 
 #: qml/settings/ConfigGeneral.qml:163
 #, kde-format
@@ -192,12 +192,12 @@ msgstr "Куб"
 #: qml/settings/ConfigGeneral.qml:164
 #, kde-format
 msgid "Fade"
-msgstr "Постепенное исчезание"
+msgstr "Растворение"
 
 #: qml/settings/ConfigGeneral.qml:165
 #, kde-format
 msgid "Stack"
-msgstr "Стопки"
+msgstr "Стопка"
 
 #: qml/settings/ConfigGeneral.qml:166
 #, kde-format
@@ -251,12 +251,12 @@ msgstr "Полное"
 #: qml/settings/ConfigGeneral.qml:243
 #, kde-format
 msgid "Export layout"
-msgstr "Экспорт макета"
+msgstr "Экспорт компоновки"
 
 #: qml/settings/ConfigGeneral.qml:252
 #, kde-format
 msgid "Import layout"
-msgstr "Импорт макета"
+msgstr "Импорт компоновки"
 
 #: qml/settings/ConfigGeneral.qml:262
 #, kde-format

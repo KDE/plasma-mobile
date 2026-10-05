@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2022-12-23 09:51+0300\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: package/contents/ui/main.qml:11
 #, kde-format
 msgid "Shut Down"
-msgstr "Выключить компьютер"
+msgstr "Выключить"
 
 #: package/contents/ui/main.qml:13
 #, kde-format

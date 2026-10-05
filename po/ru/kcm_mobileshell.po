@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-04 00:46+0000\n"
-"PO-Revision-Date: 2026-02-15 14:29+0200\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -55,7 +55,7 @@ msgid ""
 "Auto-hide the status and navigation panels to allow applications to always "
 "be in fullscreen."
 msgstr ""
-"Автоматически скрывать панель состояния и навигации, чтобы приложения всегда "
+"Автоматически скрывать панели состояния и навигации, чтобы приложения всегда "
 "работали в полноэкранном режиме."
 
 #: ui/main.qml:69
@@ -150,7 +150,7 @@ msgstr "Фиксированный режим"
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr "Растянутый режим"
+msgstr "Развёрнутый режим"
 
 #: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
@@ -181,7 +181,7 @@ msgstr "Режим открытия из верхнего правого угл�
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr "Ярлыки на экране блокировки"
+msgstr "Быстрый запуск на экране блокировки"
 
 #: ui/main.qml:206
 #, kde-format
@@ -228,7 +228,7 @@ msgstr "Показать"
 #: ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings Columns"
-msgstr "Столбцы быстрых настроек"
+msgstr "Столбцы быстрой настройки"
 
 #: ui/QuickSettingsForm.qml:115
 #, kde-format
@@ -239,20 +239,17 @@ msgstr "Максимальное число столбцов в альбомно
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr ""
-"Настройка порядка параметров для быстрой настройки, расположенных на "
-"выдвижной панели, и их скрытие."
+msgstr "Порядок элементов быстрой настройки на выдвижной панели и их скрытие."
 
 #: ui/QuickSettingsForm.qml:166
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Отключённые параметры для быстрой настройки"
+msgstr "Отключённые элементы быстрой настройки"
 
 #: ui/QuickSettingsForm.qml:171
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
-"Повторное включение ранее отключённых параметров для быстрой настройки."
+msgstr "Повторное включение ранее отключённых элементов быстрой настройки."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
