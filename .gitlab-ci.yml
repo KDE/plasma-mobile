@@ -7,7 +7,9 @@ include:
       - /gitlab-templates/reuse-lint.yml
       - /gitlab-templates/linux-qt6.yml
       - /gitlab-templates/linux-qt6-next.yml
-      - /gitlab-templates/alpine-qt6.yml
+      # Alpine job disabled due to persistent failures
+      # See: https://invent.kde.org/plasma/plasma-mobile/-/jobs/5126929
+      # - /gitlab-templates/alpine-qt6.yml
       - /gitlab-templates/xml-lint.yml
       - /gitlab-templates/yaml-lint.yml
       - /gitlab-templates/qml-lint.yml
