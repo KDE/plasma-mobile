@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:47+0000\n"
-"PO-Revision-Date: 2026-09-06 19:34+0200\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -377,19 +377,19 @@ msgstr "%1 мин назад"
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr "до окончания %1 сек"
+msgstr "осталось %1 с"
 
 #: qml/widgets/notifications/NotificationsUtils.js:85
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr "до окончания %1 мин"
+msgstr "осталось %1 мин"
 
 #: qml/widgets/notifications/NotificationsUtils.js:88
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr "до окончания %1 ч"
+msgstr "осталось %1 ч"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:258
 #, kde-format

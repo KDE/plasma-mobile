@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2024-09-23 11:38+0300\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -45,7 +45,7 @@ msgstr "Веб-страница"
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
-msgstr "Программы"
+msgstr "Программное обеспечение"
 
 #: ui/main.qml:97
 #, kde-format
@@ -70,7 +70,7 @@ msgstr "Версия ядра"
 #: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
-msgstr "Архитектура"
+msgstr "Разрядность"
 
 #: ui/main.qml:126
 #, kde-format

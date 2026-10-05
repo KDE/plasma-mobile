@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-06-24 12:30+0300\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -22,17 +22,17 @@ msgstr ""
 #: contents/ui/main.qml:8
 #, kde-format
 msgid "Caffeine"
-msgstr "Caffeine"
+msgstr "Кофеин"
 
 #: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to disable sleep suspension"
-msgstr "Коснитесь для отключения перехода в режим сна"
+msgstr "Коснитесь, чтобы снова разрешить переход в режим сна"
 
 #: contents/ui/main.qml:10
 #, kde-format
 msgid "Tap to suspend sleep"
-msgstr "Коснитесь для включения перехода в режим сна"
+msgstr "Коснитесь, чтобы запретить переход в режим сна"
 
 #: contents/ui/main.qml:22
 #, kde-format

@@ -1,14 +1,14 @@
 # Uyghur translation for plasma_org.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-28 00:45+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-10-03 18:59-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -41,7 +41,7 @@ msgstr "© 2026 KDE جامائىتى"
 #: main.cpp:37
 #, kde-format
 msgid "Devin Lin"
-msgstr ""
+msgstr "Devin Lin"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
 #, kde-format
@@ -62,7 +62,7 @@ msgstr "ئاتى"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:64
 #, kde-format
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:68
 #, kde-format
@@ -82,17 +82,17 @@ msgstr "تور تۈرى"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "4G/3G/2G"
-msgstr ""
+msgstr "4G/3G/2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "3G/2G"
-msgstr ""
+msgstr "3G/2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
 msgid "2G"
-msgstr ""
+msgstr "2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:77
 #, kde-format
@@ -168,7 +168,7 @@ msgstr "تامام!"
 #: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
+msgstr "ئۈسكۈنە ئىشلىتىشكە تەييارلاندى.<br /><br />بەھۇزۇر ئىشلىتىڭ<b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:18
 #, kde-format
@@ -219,6 +219,8 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"ئاستىدىن ئۈستىگە سىيرىلسا ئىجرا قىلىنىۋاتقان پىروگراممىنى كۆرسىتىدۇ. ئۈستىگە "
+"تېز سىيرىلسا باش ئېكرانغا قايتىدۇ."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format

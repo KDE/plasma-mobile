@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-07 00:47+0000\n"
-"PO-Revision-Date: 2024-09-23 12:04+0300\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -51,7 +51,7 @@ msgstr "Аккра"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Adak"
-msgstr "Адах"
+msgstr "Адак"
 
 #: timezonesi18n.cpp:48
 #, kde-format
@@ -153,7 +153,7 @@ msgstr "Актобе"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Araguaina"
-msgstr "Арагуари"
+msgstr "Арагуаина"
 
 #: timezonesi18n.cpp:65
 #, kde-format
@@ -513,7 +513,7 @@ msgstr "Каймановы острова"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Center"
-msgstr "Центр"
+msgstr "Сентер"
 
 #: timezonesi18n.cpp:125
 #, kde-format
@@ -1011,7 +1011,7 @@ msgstr "Хошимин"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Hobart"
-msgstr "Хобро"
+msgstr "Хобарт"
 
 #: timezonesi18n.cpp:208
 #, kde-format
@@ -1269,7 +1269,7 @@ msgstr "Кувейт"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kwajalein"
-msgstr "Квайалейн"
+msgstr "Кваджалейн"
 
 #: timezonesi18n.cpp:251
 #, kde-format
@@ -1281,7 +1281,7 @@ msgstr "Ла-Пас"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "La Rioja"
-msgstr "Риоха"
+msgstr "Ла-Риоха"
 
 #: timezonesi18n.cpp:253
 #, kde-format
@@ -1359,7 +1359,7 @@ msgstr "Луисвилл"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Lower Princes"
-msgstr "водопад Нижняя Принцесса"
+msgstr "Лоуэр-Принс-Куотер"
 
 #: timezonesi18n.cpp:266
 #, kde-format
@@ -1449,7 +1449,7 @@ msgstr "Малабо"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Maldives"
-msgstr "Мальдивская Республика"
+msgstr "Мальдивы"
 
 #: timezonesi18n.cpp:281
 #, kde-format
@@ -1863,7 +1863,7 @@ msgstr "Перт"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Petersburg"
-msgstr "Петербург"
+msgstr "Питерсберг"
 
 #: timezonesi18n.cpp:350
 #, kde-format
@@ -2721,7 +2721,7 @@ msgstr "Ватикан"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Vevay"
-msgstr "Вивей"
+msgstr "Вевей"
 
 #: timezonesi18n.cpp:493
 #, kde-format
@@ -2918,7 +2918,7 @@ msgstr "Тихий океан"
 #: ui/main.qml:31
 #, kde-format
 msgid "Display"
-msgstr "Отображение"
+msgstr "Вид"
 
 #: ui/main.qml:37
 #, kde-format
@@ -2964,7 +2964,7 @@ msgstr "Системная дата"
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
-msgstr "Часовой пояс"
+msgstr "Выбор часового пояса"
 
 #: ui/main.qml:177
 #, kde-format

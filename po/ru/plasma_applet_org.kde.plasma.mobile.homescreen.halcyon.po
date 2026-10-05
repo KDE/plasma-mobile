@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-02-15 14:31+0200\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -28,7 +28,7 @@ msgstr "Папка"
 #: qml/config.qml:15
 #, kde-format
 msgid "General"
-msgstr "Основные"
+msgstr "Общие"
 
 #: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
 #, kde-format
@@ -38,7 +38,7 @@ msgstr "Удалить из избранного"
 #: qml/FavoritesGrid.qml:294
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr "Добавить приложения в избранное для их показа там."
+msgstr "Добавьте приложения в избранное, чтобы они появились здесь."
 
 #: qml/FolderGrid.qml:194
 #, kde-format
@@ -74,19 +74,19 @@ msgstr "Размытие фона"
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "None"
-msgstr "Отсутствует"
+msgstr "Нет"
 
 #: qml/settings/ConfigGeneral.qml:36
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Simple"
-msgstr "Простой"
+msgstr "Простое"
 
 #: qml/settings/ConfigGeneral.qml:37
 #, kde-format
 msgctxt "Wallpaper blur effect"
 msgid "Full"
-msgstr "Полный"
+msgstr "Полное"
 
 #: qml/settings/ConfigGeneral.qml:54
 #, kde-format

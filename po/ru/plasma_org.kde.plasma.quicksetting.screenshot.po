@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-20 00:47+0000\n"
-"PO-Revision-Date: 2023-01-29 13:30+0300\n"
+"PO-Revision-Date: 2026-10-04 09:38+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -26,7 +26,7 @@ msgstr "Снимок экрана"
 #: package/contents/ui/main.qml:12
 #, kde-format
 msgid "Tap to screenshot"
-msgstr "Нажмите чтобы сделать снимок экрана"
+msgstr "Коснитесь, чтобы сделать снимок экрана"
 
 #: screenshotutil.cpp:140
 #, kde-format
