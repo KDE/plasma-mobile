@@ -6,6 +6,7 @@
  */
 
 import QtQuick 2.8
+import QtQuick.Layouts 1.12
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -18,48 +19,32 @@ Item {
     property alias containsMouse: mouseArea.containsMouse
     property alias font: label.font
     property alias labelRendering: label.renderType
-    property alias circleOpacity: buttonRect.opacity
-    property alias circleVisiblity: buttonRect.visible
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
 
     signal clicked
 
     activeFocusOnTab: true
 
-    property int iconSize: Kirigami.Units.gridUnit
-
-    implicitWidth: Kirigami.Units.gridUnit * 14
-    implicitHeight: iconSize + Kirigami.Units.smallSpacing + label.implicitHeight
-
-    Rectangle {
-        id: buttonRect
-        width: root.width
-        height: iconSize * 2.2
-        radius: Kirigami.Units.cornerRadius
-        color: Kirigami.Theme.backgroundColor
-        opacity: mouseArea.containsPress ? 1 : 0.6
-        border {
-            color: Qt.rgba(255, 255, 255, 0.8)
-            width: 1
-        }
-    }
+    implicitHeight: Kirigami.Units.iconSizes.huge + label.implicitHeight + Kirigami.Units.smallSpacing
+    implicitWidth: Kirigami.Units.iconSizes.huge > label.implicitWidth ? Kirigami.Units.iconSizes.huge : label.implicitWidth
 
     Kirigami.Icon {
         id: icon
         anchors {
-            verticalCenter: buttonRect.verticalCenter
-            left: buttonRect.left
-            leftMargin: Kirigami.Units.mediumSpacing
+            horizontalCenter: root.horizontalCenter
+            top: root.top
         }
-        width: iconSize
-        height: iconSize
+        width: Kirigami.Units.iconSizes.huge
+        height: Kirigami.Units.iconSizes.huge
     }
 
     PlasmaComponents3.Label {
         id: label
         font.pointSize: Kirigami.Theme.defaultFont.pointSize + 1
         anchors {
-            centerIn: buttonRect
+            horizontalCenter: root.horizontalCenter
+            top: icon.bottom
+            topMargin: Kirigami.Units.smallSpacing
         }
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? Kirigami.Theme.backgroundColor : "transparent" //no outline, doesn't matter
@@ -75,6 +60,8 @@ Item {
         onClicked: root.clicked()
         anchors.fill: parent
     }
+
+    Layout.alignment: Qt.AlignCenter
 
     Keys.onEnterPressed: clicked()
     Keys.onReturnPressed: clicked()

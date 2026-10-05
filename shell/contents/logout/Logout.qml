@@ -17,6 +17,8 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 import org.kde.plasma.private.sessions 2.0
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
+import org.kde.breeze.components
+
 Item {
     id: root
 
@@ -29,6 +31,8 @@ Item {
     signal rebootRequested2(int opt)
     signal cancelRequested()
     signal lockScreenRequested()
+
+    readonly property bool landscape: root.width > root.height
 
     Controls.Action {
         onTriggered: root.cancelRequested()
@@ -77,7 +81,7 @@ Item {
         OpacityAnimator {
             target: background
             from: 0
-            to: 0.6
+            to: 0.8
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
@@ -95,6 +99,13 @@ Item {
         }
         ParallelAnimation {
             OpacityAnimator {
+                target: userview
+                from: 1
+                to: 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            OpacityAnimator {
                 target: buttons
                 from: 1
                 to: 0
@@ -103,7 +114,7 @@ Item {
             }
             OpacityAnimator {
                 target: background
-                from: 0.6
+                from: 0.8
                 to: 0
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
@@ -122,55 +133,82 @@ Item {
                     closeAnim.callback();
                 }
                 buttons.opacity = 1;
-                background.opacity = 0.6;
+                background.opacity = 0.8;
             }
         }
     }
 
+    KCoreAddons.KUser {
+        id: kuser
+    }
+
     Item {
-        id: buttons
-        anchors.fill: parent
-        opacity: 0
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: landscape ? parent.horizontalCenter : parent.right
+            bottom: landscape ? parent.right : parent.horizontalCenter
+        }
+        width: landscape ? parent.width / 2 : parent.width
+        height: landscape ? parent.height : parent.height / 2
 
-        ColumnLayout {
+        UserDelegate {
+            id: userview
+            width: Kirigami.Units.gridUnit * 8
+            height: Kirigami.Units.gridUnit * 9
             anchors.centerIn: parent
-            spacing: Kirigami.Units.gridUnit
+            constrainText: false
+            avatarPath: kuser.faceIconUrl
+            iconSource: "user-identity"
+            isCurrent: true
+            name: kuser.fullName
+        }
+    }
 
-            ActionButton {
-                iconSource: "system-reboot"
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
-                onClicked: {
-                    closeAnim.closeToBlack = true;
-                    closeAnim.execute(root.rebootRequested);
-                }
-            }
+    GridLayout {
+        id: buttons
 
-            ActionButton {
-                iconSource: "system-shutdown"
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
-                onClicked: {
-                    closeAnim.closeToBlack = true;
-                    closeAnim.execute(root.haltRequested);
-                }
-            }
+        anchors {
+            top: landscape ? undefined : parent.verticalCenter
+            horizontalCenter: landscape ? undefined : parent.horizontalCenter
+            left: landscape ? parent.horizontalCenter : undefined
+            verticalCenter: landscape ? parent.verticalCenter : undefined
+        }
+        rows: 2
+        columns: 2
+        rowSpacing: Kirigami.Units.gridUnit * 5
+        columnSpacing: Kirigami.Units.gridUnit * 5
 
-            ActionButton {
-                iconSource: "system-log-out"
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Log Out")
-                visible: ShellSettings.Settings.allowLogout
-                onClicked: {
-                    closeAnim.closeToBlack = true;
-                    closeAnim.execute(root.logoutRequested);
-                }
+
+        LogoutButton {
+            iconSource: "system-reboot"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
+            onClicked: {
+                closeAnim.closeToBlack = true;
+                closeAnim.execute(root.rebootRequested);
             }
         }
 
-        ActionButton {
-            anchors {
-                bottom: parent.bottom
-                bottomMargin: Kirigami.Units.gridUnit
-                horizontalCenter: parent.horizontalCenter
+        LogoutButton {
+            iconSource: "system-shutdown"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
+            onClicked: {
+                closeAnim.closeToBlack = true;
+                closeAnim.execute(root.haltRequested);
             }
+        }
+
+        LogoutButton {
+            iconSource: "system-log-out"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Log Out")
+            visible: ShellSettings.Settings.allowLogout
+            onClicked: {
+                closeAnim.closeToBlack = true;
+                closeAnim.execute(root.logoutRequested);
+            }
+        }
+        
+        LogoutButton {
             iconSource: "dialog-cancel"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Cancel")
             onClicked: {
