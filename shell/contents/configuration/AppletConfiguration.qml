@@ -60,9 +60,15 @@ Item {
     }
 
     Binding {
-        // Window bindings
-        root.Window.window.flags: Qt.FramelessWindowHint
-        root.Window.window.visibility: Window.Maximized
+        target: root.Window.window
+        property: "flags"
+        value: Qt.FramelessWindowHint
+    }
+
+    Binding {
+        target: root.Window.window
+        property: "visibility"
+        value: Window.Maximized
     }
 
     Component {
