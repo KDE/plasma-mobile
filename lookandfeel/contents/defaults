@@ -27,5 +27,5 @@ cursorTheme=breeze_cursors
 [kwinrc][org.kde.kdecoration2]
 library=org.kde.breeze
 
-[KSplash]
-Theme=org.kde.Breeze
+[ksplashrc][KSplash]
+Theme=org.kde.breeze.desktop

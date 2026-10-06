@@ -7,20 +7,16 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.core as PlasmaCore
-
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 
-Rectangle {
+Item {
     id: root
 
     property Item containment
-
-    color: (containment && containment.backgroundHints == PlasmaCore.Types.NoBackground) ? "transparent" : Kirigami.Theme.textColor
 
     Component.onCompleted: {
         initializeShellSingletons();
