@@ -52,6 +52,9 @@ class MobileShellSettings : public QObject
     // Auto Hide Panels
     Q_PROPERTY(bool autoHidePanelsEnabled READ autoHidePanelsEnabled WRITE setAutoHidePanelsEnabled NOTIFY autoHidePanelsEnabledChanged)
 
+    // Confirm Close All
+    Q_PROPERTY(bool confirmCloseAllEnabled READ confirmCloseAllEnabled WRITE setConfirmCloseAllEnabled NOTIFY confirmCloseAllEnabledChanged)
+
     // logout dialog
     Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
 
@@ -265,6 +268,18 @@ public:
     void setAutoHidePanelsEnabled(bool enabled);
 
     /**
+     * Whether Confirm Close All is enabled.
+     */
+    bool confirmCloseAllEnabled() const;
+
+    /**
+     * Set whether Confirm Close All is enabled.
+     *
+     * @param enabled
+     */
+    void setConfirmCloseAllEnabled(bool enabled);
+
+    /**
      * Whether logout button is shown in the logout/shutdown dialog.
      */
     bool allowLogout() const;
@@ -310,6 +325,7 @@ Q_SIGNALS:
     void quickSettingsColumnsChanged();
     void convergenceModeEnabledChanged();
     void autoHidePanelsEnabledChanged();
+    void confirmCloseAllEnabledChanged();
     void allowLogoutChanged();
     void lockscreenLeftButtonActionChanged();
     void lockscreenRightButtonActionChanged();

@@ -44,6 +44,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
             Q_EMIT autoHidePanelsEnabledChanged();
+            Q_EMIT confirmCloseAllEnabledChanged();
             Q_EMIT allowLogoutChanged();
         }
         if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
@@ -245,6 +246,19 @@ void MobileShellSettings::setAutoHidePanelsEnabled(bool enabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("autoHidePanelsEnabled", enabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::confirmCloseAllEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("confirmCloseAllEnabled", false);
+}
+
+void MobileShellSettings::setConfirmCloseAllEnabled(bool enabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("confirmCloseAllEnabled", enabled, KConfigGroup::Notify);
     m_config->sync();
 }
 

@@ -825,7 +825,7 @@ FocusScope {
                 text: closeRequested ? i18n("Confirm Close All") : i18n("Close All")
 
                 onClicked: {
-                    if (closeRequested) {
+                    if (closeRequested || !ShellSettings.Settings.confirmCloseAllEnabled) {
                         taskList.closeAll();
                     } else {
                         closeRequested = true;

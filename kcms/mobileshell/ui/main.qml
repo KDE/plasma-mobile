@@ -75,6 +75,20 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: autoHidePanels; below: doubleTapWakeup }
+
+            FormCard.FormSwitchDelegate {
+                id: confirmCloseAll
+                text: i18n("Confirm Close All")
+                description: i18n("Require confirmation before closing all apps in the task switcher.")
+                checked: ShellSettings.Settings.confirmCloseAllEnabled
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.confirmCloseAllEnabled) {
+                        ShellSettings.Settings.confirmCloseAllEnabled = checked;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {
