@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -30,7 +30,7 @@ msgstr "查看错误详情…"
 msgid "Open %1"
 msgstr "打开 %1"
 
-#: contents/configuration/AppletConfiguration.qml:90
+#: contents/configuration/AppletConfiguration.qml:96
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
 msgstr "配置 %1"
@@ -109,19 +109,19 @@ msgstr "显示数字键盘"
 msgid "Show keyboard"
 msgstr "显示全键盘"
 
-#: contents/logout/Logout.qml:141
+#: contents/logout/Logout.qml:185
 msgid "Restart"
 msgstr "重启"
 
-#: contents/logout/Logout.qml:150
+#: contents/logout/Logout.qml:194
 msgid "Shut Down"
 msgstr "关机"
 
-#: contents/logout/Logout.qml:159
+#: contents/logout/Logout.qml:203
 msgid "Log Out"
 msgstr "注销"
 
-#: contents/logout/Logout.qml:175
+#: contents/logout/Logout.qml:213
 msgid "Cancel"
 msgstr "取消"
 

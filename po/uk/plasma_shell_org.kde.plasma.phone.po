@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2026-08-01 14:04+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -30,7 +30,7 @@ msgstr "Переглянути подробиці щодо помилки…"
 msgid "Open %1"
 msgstr "Відкрити %1"
 
-#: contents/configuration/AppletConfiguration.qml:90
+#: contents/configuration/AppletConfiguration.qml:96
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
 msgstr "Налаштування %1"
@@ -111,19 +111,19 @@ msgstr "Показати цифрову панель"
 msgid "Show keyboard"
 msgstr "Показувати клавіатуру"
 
-#: contents/logout/Logout.qml:141
+#: contents/logout/Logout.qml:185
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: contents/logout/Logout.qml:150
+#: contents/logout/Logout.qml:194
 msgid "Shut Down"
 msgstr "Вимкнути"
 
-#: contents/logout/Logout.qml:159
+#: contents/logout/Logout.qml:203
 msgid "Log Out"
 msgstr "Вийти"
 
-#: contents/logout/Logout.qml:175
+#: contents/logout/Logout.qml:213
 msgid "Cancel"
 msgstr "Скасувати"
 

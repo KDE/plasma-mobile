@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2026-09-24 20:16-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -30,7 +30,7 @@ msgstr "خاتالىق تەپسىلاتىنى كۆرسەت…"
 msgid "Open %1"
 msgstr "%1 نى ئاچ"
 
-#: contents/configuration/AppletConfiguration.qml:90
+#: contents/configuration/AppletConfiguration.qml:96
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
 msgstr "%1 نى سەپلە"
@@ -111,19 +111,19 @@ msgstr "نومۇر تاختا كۆرسەت"
 msgid "Show keyboard"
 msgstr "ھەرپتاختا كۆرسەت"
 
-#: contents/logout/Logout.qml:141
+#: contents/logout/Logout.qml:185
 msgid "Restart"
 msgstr "قايتا قوزغات"
 
-#: contents/logout/Logout.qml:150
+#: contents/logout/Logout.qml:194
 msgid "Shut Down"
 msgstr "تاقا"
 
-#: contents/logout/Logout.qml:159
+#: contents/logout/Logout.qml:203
 msgid "Log Out"
 msgstr "تىزىمدىن چىق"
 
-#: contents/logout/Logout.qml:175
+#: contents/logout/Logout.qml:213
 msgid "Cancel"
 msgstr "ۋاز كەچ"
 

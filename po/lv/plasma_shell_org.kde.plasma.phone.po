@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2026-03-03 13:15+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -30,7 +30,7 @@ msgstr "Skatīt informāciju par kļūdu…"
 msgid "Open %1"
 msgstr "Atvērt „%1“"
 
-#: contents/configuration/AppletConfiguration.qml:90
+#: contents/configuration/AppletConfiguration.qml:96
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
 msgstr "Konfigurēt „%1“"
@@ -113,19 +113,19 @@ msgstr ""
 msgid "Show keyboard"
 msgstr ""
 
-#: contents/logout/Logout.qml:141
+#: contents/logout/Logout.qml:185
 msgid "Restart"
 msgstr ""
 
-#: contents/logout/Logout.qml:150
+#: contents/logout/Logout.qml:194
 msgid "Shut Down"
 msgstr ""
 
-#: contents/logout/Logout.qml:159
+#: contents/logout/Logout.qml:203
 msgid "Log Out"
 msgstr ""
 
-#: contents/logout/Logout.qml:175
+#: contents/logout/Logout.qml:213
 msgid "Cancel"
 msgstr ""
 

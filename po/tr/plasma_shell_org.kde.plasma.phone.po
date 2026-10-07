@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2026-08-01 19:26+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -29,7 +29,7 @@ msgstr "Hata Ayrıntılarını Görüntüle…"
 msgid "Open %1"
 msgstr "Aç: %1"
 
-#: contents/configuration/AppletConfiguration.qml:90
+#: contents/configuration/AppletConfiguration.qml:96
 msgctxt "The title of the applet configuration window"
 msgid "Configure %1"
 msgstr "Yapılandır: %1"
@@ -110,19 +110,19 @@ msgstr "Düğme Takımını Göster"
 msgid "Show keyboard"
 msgstr "Klavyeyi Göster"
 
-#: contents/logout/Logout.qml:141
+#: contents/logout/Logout.qml:185
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
-#: contents/logout/Logout.qml:150
+#: contents/logout/Logout.qml:194
 msgid "Shut Down"
 msgstr "Kapat"
 
-#: contents/logout/Logout.qml:159
+#: contents/logout/Logout.qml:203
 msgid "Log Out"
 msgstr "Oturumu Kapat"
 
-#: contents/logout/Logout.qml:175
+#: contents/logout/Logout.qml:213
 msgid "Cancel"
 msgstr "İptal"
 
