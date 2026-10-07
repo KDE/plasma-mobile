@@ -35,7 +35,9 @@ void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
     m_border = new EffectTouchBorder{m_effectState};
     m_taskModel = new TaskModel{parent};
     m_effect = parent;
-    m_effect->setViewCachingEnabled(true);
+
+    // Disable view caching for now - there is still background CPU usage from the KWin effect that makes it inefficient
+    // m_effect->setViewCachingEnabled(true);
 
     // Connect signals
     connect(m_effect, &QuickSceneEffect::activated, this, &MobileTaskSwitcherState::activated);
