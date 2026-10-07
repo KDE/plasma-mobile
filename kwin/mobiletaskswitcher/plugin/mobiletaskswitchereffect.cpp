@@ -105,7 +105,8 @@ void MobileTaskSwitcherState::updateWasInActiveTask(KWin::Window *window)
 {
     bool newWasInActiveTask = false;
     if (window) {
-        newWasInActiveTask = !window->isDesktop();
+        // A minimized app can remain active until the shell receives focus
+        newWasInActiveTask = !window->isDesktop() && window->isShown();
     }
     setWasInActiveTask(newWasInActiveTask);
 }
