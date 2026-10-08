@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-04 00:46+0000\n"
+"POT-Creation-Date: 2026-10-08 00:48+0000\n"
 "PO-Revision-Date: 2025-11-21 19:49+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -67,145 +67,155 @@ msgid "When the screen is off, double tap to wakeup the device."
 msgstr ""
 "Ha a képernyő ki van kapcsolva, koppintson duplán az eszköz felébresztéséhez."
 
-#: ui/main.qml:81
+#: ui/main.qml:83
+#, kde-format
+msgid "Confirm Close All"
+msgstr ""
+
+#: ui/main.qml:84
+#, kde-format
+msgid "Require confirmation before closing all apps in the task switcher."
+msgstr ""
+
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar"
 msgstr "Állapotsáv"
 
-#: ui/main.qml:87
+#: ui/main.qml:101
 #, kde-format
 msgid "Date in status bar"
 msgstr "Dátum az állapotsávon"
 
-#: ui/main.qml:88
+#: ui/main.qml:102
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 "Ha be van kapcsolva, a dátum az óra mellett jelenik meg az állapotsávon."
 
-#: ui/main.qml:101
+#: ui/main.qml:115
 #, kde-format
 msgid "Battery Percentage"
 msgstr "Akkumulátorszázalék"
 
-#: ui/main.qml:102
+#: ui/main.qml:116
 #, kde-format
 msgid "Show battery percentage in the status bar."
 msgstr "Akkumulátor töltöttségének megjelenítése százalékban az állapotsávon."
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Status Bar Size"
 msgstr "Állapotsáv mérete"
 
-#: ui/main.qml:117
+#: ui/main.qml:131
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "A felső panel mérete (újraindítást igényel)."
 
-#: ui/main.qml:120
+#: ui/main.qml:134
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Apró"
 
-#: ui/main.qml:121
+#: ui/main.qml:135
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Kicsi"
 
-#: ui/main.qml:122
+#: ui/main.qml:136
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normál"
 
-#: ui/main.qml:123
+#: ui/main.qml:137
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Nagy"
 
-#: ui/main.qml:124
+#: ui/main.qml:138
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Nagyon nagy"
 
-#: ui/main.qml:140
+#: ui/main.qml:154
 #, kde-format
 msgid "Action Drawer"
 msgstr "Csúszómenü"
 
-#: ui/main.qml:146
+#: ui/main.qml:160
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Rögzített mód"
 
-#: ui/main.qml:147
+#: ui/main.qml:161
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Kiterjesztett mód"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
+#: ui/main.qml:165 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
 msgid "Quick Settings"
 msgstr "Gyorsbeállítások"
 
-#: ui/main.qml:159
+#: ui/main.qml:173
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Bal felső csúszómenü"
 
-#: ui/main.qml:160
+#: ui/main.qml:174
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Mód a bal felső sarokból való megnyitáskor."
 
-#: ui/main.qml:181
+#: ui/main.qml:195
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Jobb felső csúszómenü."
 
-#: ui/main.qml:182
+#: ui/main.qml:196
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Mód a jobb felső sarokból való megnyitáskor."
 
-#: ui/main.qml:201
+#: ui/main.qml:215
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Parancsikonok a zárolt képernyőn"
 
-#: ui/main.qml:206
+#: ui/main.qml:220
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Nincs"
 
-#: ui/main.qml:207
+#: ui/main.qml:221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Zseblámpa"
 
-#: ui/main.qml:208
+#: ui/main.qml:222
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Bal gomb"
 
-#: ui/main.qml:234
+#: ui/main.qml:248
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

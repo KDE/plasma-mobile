@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-04 00:46+0000\n"
+"POT-Creation-Date: 2026-10-08 00:48+0000\n"
 "PO-Revision-Date: 2025-10-09 01:54+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -66,144 +66,154 @@ msgstr "두 번 탭하여 깨우기"
 msgid "When the screen is off, double tap to wakeup the device."
 msgstr "화면이 꺼져 있을 때 두 번 탭하여 장치를 깨웁니다."
 
-#: ui/main.qml:81
+#: ui/main.qml:83
+#, kde-format
+msgid "Confirm Close All"
+msgstr ""
+
+#: ui/main.qml:84
+#, kde-format
+msgid "Require confirmation before closing all apps in the task switcher."
+msgstr ""
+
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar"
 msgstr "상태 표시줄"
 
-#: ui/main.qml:87
+#: ui/main.qml:101
 #, kde-format
 msgid "Date in status bar"
 msgstr "상태 표시줄에 날짜 표시"
 
-#: ui/main.qml:88
+#: ui/main.qml:102
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "이 옵션을 사용하면 상태 표시줄의 시계 옆에 날짜를 표시합니다."
 
-#: ui/main.qml:101
+#: ui/main.qml:115
 #, kde-format
 msgid "Battery Percentage"
 msgstr "배터리 백분율"
 
-#: ui/main.qml:102
+#: ui/main.qml:116
 #, kde-format
 msgid "Show battery percentage in the status bar."
 msgstr "상태 표시줄에 배터리 백분율을 표시합니다."
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Status Bar Size"
 msgstr "상태 표시줄 크기"
 
-#: ui/main.qml:117
+#: ui/main.qml:131
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "위쪽 패널의 크기입니다(다시 시작 필요)."
 
-#: ui/main.qml:120
+#: ui/main.qml:134
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "매우 작게"
 
-#: ui/main.qml:121
+#: ui/main.qml:135
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "작게"
 
-#: ui/main.qml:122
+#: ui/main.qml:136
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "보통"
 
-#: ui/main.qml:123
+#: ui/main.qml:137
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "크게"
 
-#: ui/main.qml:124
+#: ui/main.qml:138
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "매우 크게"
 
-#: ui/main.qml:140
+#: ui/main.qml:154
 #, kde-format
 msgid "Action Drawer"
 msgstr "동작 서랍"
 
-#: ui/main.qml:146
+#: ui/main.qml:160
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "핀 모드"
 
-#: ui/main.qml:147
+#: ui/main.qml:161
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "확장 모드"
 
-#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
+#: ui/main.qml:165 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
 #, kde-format
 msgid "Quick Settings"
 msgstr "빠른 설정"
 
-#: ui/main.qml:159
+#: ui/main.qml:173
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "왼쪽 위 서랍 모드"
 
-#: ui/main.qml:160
+#: ui/main.qml:174
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "왼쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:181
+#: ui/main.qml:195
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "오른쪽 위 서랍 모드"
 
-#: ui/main.qml:182
+#: ui/main.qml:196
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "오른쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:201
+#: ui/main.qml:215
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "잠금 화면 바로 가기"
 
-#: ui/main.qml:206
+#: ui/main.qml:220
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "없음"
 
-#: ui/main.qml:207
+#: ui/main.qml:221
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "플래시"
 
-#: ui/main.qml:208
+#: ui/main.qml:222
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "카메라"
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "왼쪽 단추"
 
-#: ui/main.qml:234
+#: ui/main.qml:248
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
