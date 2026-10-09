@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-08 00:48+0000\n"
-"PO-Revision-Date: 2025-09-16 07:12+0200\n"
+"PO-Revision-Date: 2026-10-08 07:18+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.9\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -70,12 +70,12 @@ msgstr "Ko je zaslon izklopljen, dvakrat tapnite, da prebudite napravo."
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "Potrdi zaprtje vseh"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
-msgstr ""
+msgstr "Zahteva potrditev pred zaprtjem vseh aplikacij v preklopniku opravil."
 
 #: ui/main.qml:95
 #, kde-format

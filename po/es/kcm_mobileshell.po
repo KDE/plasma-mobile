@@ -1,15 +1,15 @@
 # Spanish translations for kcm_mobileshell.po package.
-# Copyright (C) 2022-2025 This file is copyright:
+# Copyright (C) 2022-2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Automatically generated, 2022.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2022-2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-08 00:48+0000\n"
-"PO-Revision-Date: 2025-10-20 20:21+0200\n"
+"PO-Revision-Date: 2026-10-08 13:38+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -74,12 +74,14 @@ msgstr ""
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "Confirmar el cierre de todas"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
 msgstr ""
+"Solicitar confirmación antes de cerrar todas las aplicaciones del selector "
+"de tareas."
 
 #: ui/main.qml:95
 #, kde-format

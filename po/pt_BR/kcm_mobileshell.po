@@ -1,21 +1,21 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
+# SPDX-FileCopyrightText: 2025-2026 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-08 00:48+0000\n"
-"PO-Revision-Date: 2025-09-16 09:26-0300\n"
+"PO-Revision-Date: 2026-10-08 06:47-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -70,12 +70,14 @@ msgstr ""
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "Confirmar fechar tudo"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
 msgstr ""
+"Exigir confirmação antes de fechar todos os aplicativos no alternador de "
+"tarefas."
 
 #: ui/main.qml:95
 #, kde-format

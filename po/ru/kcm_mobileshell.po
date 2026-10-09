@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-08 00:48+0000\n"
-"PO-Revision-Date: 2026-10-04 09:38+0200\n"
+"PO-Revision-Date: 2026-10-08 08:05+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -71,12 +71,14 @@ msgstr "Двойное касание для пробуждения устрой
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "Подтверждение закрытия всех приложений"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
 msgstr ""
+"Запрашивать подтверждение перед закрытием всех приложений в режиме "
+"переключения задач."
 
 #: ui/main.qml:95
 #, kde-format
