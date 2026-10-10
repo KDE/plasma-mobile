@@ -48,7 +48,7 @@ KCM.SimpleKCM {
                 }
             }
 
-            FormCard.FormDelegateSeparator { above: shellVibrationsButton; below: animationsSwitch }
+            FormCard.FormDelegateSeparator { above: animationsSwitch; below: autoHidePanels }
 
             FormCard.FormSwitchDelegate {
                 id: autoHidePanels
@@ -76,7 +76,21 @@ KCM.SimpleKCM {
                 }
             }
 
-            FormCard.FormDelegateSeparator { above: autoHidePanels; below: doubleTapWakeup }
+            FormCard.FormDelegateSeparator { above: doubleTapWakeup; below: overlayVirtualKeyboard }
+
+            FormCard.FormSwitchDelegate {
+                id: overlayVirtualKeyboard
+                text: i18n("Overlay Virtual Keyboard")
+                description: i18n("Show the virtual keyboard over application windows instead of resizing them.")
+                checked: ShellSettings.KWinSettings.overlayVirtualKeyboardOnWindows
+                onCheckedChanged: {
+                    if (checked != ShellSettings.KWinSettings.overlayVirtualKeyboardOnWindows) {
+                        ShellSettings.KWinSettings.overlayVirtualKeyboardOnWindows = checked;
+                    }
+                }
+            }
+
+            FormCard.FormDelegateSeparator { above: overlayVirtualKeyboard; below: confirmCloseAll }
 
             FormCard.FormSwitchDelegate {
                 id: confirmCloseAll

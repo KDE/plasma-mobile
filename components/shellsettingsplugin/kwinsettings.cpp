@@ -12,6 +12,7 @@
 const QString CONFIG_FILE = QStringLiteral("kwinrc");
 const QString OVERLAY_CONFIG_FILE = QStringLiteral("plasma-mobile/kwinrc");
 const QString WAYLAND_CONFIG_GROUP = QStringLiteral("Wayland");
+const QString WINDOWS_CONFIG_GROUP = QStringLiteral("Windows");
 const QString SCREEN_EDGES_CONFIG_GROUP = QStringLiteral("ScreenEdges");
 
 KWinSettings::KWinSettings(QObject *parent)
@@ -24,6 +25,8 @@ KWinSettings::KWinSettings(QObject *parent)
         Q_UNUSED(names)
         if (group.name() == WAYLAND_CONFIG_GROUP) {
             Q_EMIT doubleTapWakeupChanged();
+        } else if (group.name() == WINDOWS_CONFIG_GROUP) {
+            Q_EMIT overlayVirtualKeyboardOnWindowsChanged();
         } else if (group.name() == SCREEN_EDGES_CONFIG_GROUP) {
             Q_EMIT screenEdgeTouchTargetChanged();
         }
@@ -42,6 +45,24 @@ void KWinSettings::setDoubleTapWakeup(bool enabled)
         auto group = KConfigGroup{m_config, WAYLAND_CONFIG_GROUP};
         group.writeEntry("DoubleTapWakeup", enabled, KConfigGroup::Notify);
         m_config->sync();
+    }
+}
+
+bool KWinSettings::overlayVirtualKeyboardOnWindows() const
+{
+    auto group = KConfigGroup{m_config, WINDOWS_CONFIG_GROUP};
+    return group.readEntry("OverlayVirtualKeyboardOnWindows", false);
+}
+
+void KWinSettings::setOverlayVirtualKeyboardOnWindows(bool enabled)
+{
+    if (enabled != overlayVirtualKeyboardOnWindows()) {
+        auto group = KConfigGroup{m_config, WINDOWS_CONFIG_GROUP};
+        group.writeEntry("OverlayVirtualKeyboardOnWindows", enabled, KConfigGroup::Notify);
+        m_config->sync();
+
+        QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"));
+        QDBusConnection::sessionBus().send(message);
     }
 }
 

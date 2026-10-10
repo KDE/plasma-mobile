@@ -19,6 +19,8 @@ class KWinSettings : public QObject
     QML_SINGLETON
 
     Q_PROPERTY(bool doubleTapWakeup READ doubleTapWakeup WRITE setDoubleTapWakeup NOTIFY doubleTapWakeupChanged)
+    Q_PROPERTY(bool overlayVirtualKeyboardOnWindows READ overlayVirtualKeyboardOnWindows WRITE setOverlayVirtualKeyboardOnWindows NOTIFY
+                   overlayVirtualKeyboardOnWindowsChanged)
     Q_PROPERTY(int screenEdgeTouchTarget READ screenEdgeTouchTarget WRITE setScreenEdgeTouchTarget NOTIFY screenEdgeTouchTargetChanged)
 
 public:
@@ -37,6 +39,18 @@ public:
     void setDoubleTapWakeup(bool enabled);
 
     /**
+     * Whether the virtual keyboard overlays application windows instead of resizing them.
+     */
+    bool overlayVirtualKeyboardOnWindows() const;
+
+    /**
+     * Set whether the virtual keyboard overlays application windows.
+     *
+     * @param enabled
+     */
+    void setOverlayVirtualKeyboardOnWindows(bool enabled);
+
+    /**
      * Get the screen edge touch target value.
      */
     int screenEdgeTouchTarget() const;
@@ -50,6 +64,7 @@ public:
 
 Q_SIGNALS:
     void doubleTapWakeupChanged();
+    void overlayVirtualKeyboardOnWindowsChanged();
     void screenEdgeTouchTargetChanged();
 
 private:
