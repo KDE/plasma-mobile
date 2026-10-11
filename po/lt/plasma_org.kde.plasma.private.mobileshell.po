@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:47+0000\n"
-"PO-Revision-Date: 2026-01-09 13:00+0200\n"
+"PO-Revision-Date: 2026-10-10 22:27+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -57,15 +57,13 @@ msgid "Clear All Notifications"
 msgstr "Išvalyti visus pranešimus"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "On"
+#, kde-format
 msgctxt "@info:status quick setting is on"
 msgid "On"
 msgstr "Įjungta"
 
 #: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
-#, fuzzy, kde-format
-#| msgid "Off"
+#, kde-format
 msgctxt "@info:status quick setting is off"
 msgid "Off"
 msgstr "Išjungta"
