@@ -10,6 +10,7 @@
 
 #include <KConfigGroup>
 #include <KFileUtils>
+#include <KIO/OpenUrlJob>
 #include <KLocalizedString>
 #include <KNotification>
 #include <KNotificationJobUiDelegate>
@@ -91,6 +92,13 @@ void ShellUtil::launchApp(const QString &storageId)
     }
 
     auto job = new KIO::ApplicationLauncherJob(service, this);
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
+    job->start();
+}
+
+void ShellUtil::showAppInfo(const QString &storageId)
+{
+    auto job = new KIO::OpenUrlJob(QUrl("appstream:" + storageId), this);
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
     job->start();
 }

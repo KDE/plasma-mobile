@@ -401,6 +401,11 @@ Folio.DelegateTouchArea {
                                             text: i18n("Remove")
                                             enabled: !folio.FolioSettings.lockLayout
                                             onTriggered: root.folder.removeDelegate(delegate.index)
+                                        },
+                                        Kirigami.Action {
+                                            icon.name: "info"
+                                            text: i18n("App info")
+                                            onTriggered: MobileShell.ShellUtil.showAppInfo(application.storageId)
                                         }
                                     ]
                                 }

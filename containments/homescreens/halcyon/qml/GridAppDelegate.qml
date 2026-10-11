@@ -67,6 +67,11 @@ MouseArea {
                     Plasmoid.pinnedModel.addApp(application.storageId, 0);
                 }
             }
+            PlasmaComponents.MenuItem {
+                icon.name: "info"
+                text: i18n("App info")
+                onClicked: MobileShell.ShellUtil.showAppInfo(application.storageId)
+            }
             onClosed: dialogLoader.active = false
         }
     }

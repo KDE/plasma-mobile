@@ -193,6 +193,11 @@ MobileShell.GridView {
                         icon.name: "document-open-folder"
                         text: i18n("Move out of folder")
                         onTriggered: root.folder.moveAppOut(model.index)
+                    },
+                    Kirigami.Action {
+                        icon.name: "info"
+                        text: i18n("App info")
+                        onTriggered: MobileShell.ShellUtil.showAppInfo(application.storageId)
                     }
                 ]
 

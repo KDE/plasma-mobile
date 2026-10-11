@@ -63,6 +63,13 @@ public:
     Q_INVOKABLE void launchApp(const QString &storageId);
 
     /**
+     * Launch the page in the default software center corresponding to the application.
+     *
+     * @param storageId The storage id of the application of which you want to see the store page.
+     */
+    Q_INVOKABLE void showAppInfo(const QString &storageId);
+
+    /**
      * Whether the system is using 24 hour format.
      */
     Q_INVOKABLE bool isSystem24HourFormat();

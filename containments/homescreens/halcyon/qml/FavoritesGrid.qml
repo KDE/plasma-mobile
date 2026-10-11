@@ -223,6 +223,11 @@ MobileShell.GridView {
                         icon.name: "emblem-favorite"
                         text: i18n("Remove from favourites")
                         onTriggered: Plasmoid.pinnedModel.removeEntry(model.index)
+                    },
+                    Kirigami.Action {
+                        icon.name: "info"
+                        text: i18n("App info")
+                        onTriggered: MobileShell.ShellUtil.showAppInfo(application.storageId)
                     }
                 ]
 
