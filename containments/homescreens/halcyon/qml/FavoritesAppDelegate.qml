@@ -105,7 +105,7 @@ Item {
             Repeater {
                 model: menuActions
                 delegate: PlasmaComponents.MenuItem {
-                    icon.name: modelData.iconName
+                    icon.name: modelData.icon.name
                     text: modelData.text
                     onClicked: modelData.triggered()
                 }
