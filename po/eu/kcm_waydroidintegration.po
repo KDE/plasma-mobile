@@ -1,16 +1,16 @@
 # Translation for kcm_waydroidintegration.po to Euskara/Basque (eu).
 # Copyright (C) 2025-2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2025, 2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2025-2026 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# SPDX-FileCopyrightText: 2025, 2026 Iñigo Salvador Azurmendi <xalba@ni.eus>
+# SPDX-FileCopyrightText: Iñigo Salvador Azurmendi <xalba@ni.eus>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:47+0000\n"
-"PO-Revision-Date: 2026-01-04 23:12+0100\n"
+"PO-Revision-Date: 2026-10-11 19:07+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: ui/main.qml:18
 #, kde-format
 msgid "Waydroid Integration"
-msgstr "Waydroid bateratzea"
+msgstr "Waydroidekin bateratzea"
 
 #: ui/main.qml:31
 #, kde-format
@@ -33,7 +33,7 @@ msgstr "Waydroid ez dago instalatuta"
 #: ui/main.qml:38
 #, kde-format
 msgid "Check installation"
-msgstr "Ikuskatu instalazioa"
+msgstr "Instalazioa egiaztatu"
 
 #: ui/main.qml:51
 #, kde-format
@@ -61,7 +61,7 @@ msgstr "Waydroid saioa ez da exekutatzen ari."
 #: ui/main.qml:81
 #, kde-format
 msgid "Start the session"
-msgstr "Abiatu saioa"
+msgstr "Saioa abiatu"
 
 #: ui/main.qml:89
 #, kde-format
@@ -81,7 +81,7 @@ msgstr "Waydroid aplikazioak"
 #, kde-format
 msgctxt "@action:button"
 msgid "Install APK"
-msgstr "Instalatu APK"
+msgstr "APK instalatu"
 
 #: ui/WaydroidApplicationsPage.qml:66
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "Fitxategi lokal bat hautatu behar duzu"
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete the application"
-msgstr "Ezabatu aplikazioa"
+msgstr "Aplikazioa ezabatu"
 
 #: ui/WaydroidConfigurationForm.qml:19
 #, kde-format
@@ -117,7 +117,7 @@ msgstr "Waydroid-en egoera"
 #: ui/WaydroidConfigurationForm.qml:39
 #, kde-format
 msgid "Stopping..."
-msgstr ""
+msgstr "Geldiarazten…"
 
 #: ui/WaydroidConfigurationForm.qml:40
 #, kde-format
@@ -127,12 +127,12 @@ msgstr "Martxan"
 #: ui/WaydroidConfigurationForm.qml:49
 #, kde-format
 msgid "Stop session"
-msgstr "Gelditu saioa"
+msgstr "Saioa gelditu"
 
 #: ui/WaydroidConfigurationForm.qml:57
 #, kde-format
 msgid "Certify my device for Google Play Protect"
-msgstr "Ziurtatu nire gailua Google Play Protect-erako"
+msgstr "Nire gailua Google Play Protect-erako ziurtatu"
 
 #: ui/WaydroidConfigurationForm.qml:62
 #, kde-format
@@ -142,13 +142,13 @@ msgstr "Instalatutako aplikazioak"
 #: ui/WaydroidConfigurationForm.qml:67
 #, kde-format
 msgid "Reset Waydroid"
-msgstr "Berrezarri Waydroid"
+msgstr "Waydroid berrezarri"
 
 #: ui/WaydroidConfigurationForm.qml:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirm Waydroid Reset"
-msgstr "Baieztatu Waydroid berrezartzea"
+msgstr "Waydroid berrezartzea baieztatu"
 
 #: ui/WaydroidConfigurationForm.qml:74
 #, kde-format
@@ -156,7 +156,7 @@ msgid ""
 "Are you sure you want to reset Waydroid? This is a destructive action, and "
 "will wipe all user data."
 msgstr ""
-"Ziur zaude Waydroid berrezarri nahi duzula? Ekintza suntsigarria da, eta "
+"Waydroid berrezarri nahi duzula ziur zaude? Ekintza suntsigarria da, eta "
 "erabiltzaileen datu guztiak ezabatuko ditu."
 
 #: ui/WaydroidConfigurationForm.qml:92
@@ -265,7 +265,7 @@ msgstr "Sistema mota"
 #: ui/WaydroidInitialConfigurationForm.qml:34
 #, kde-format
 msgid "Configure Waydroid"
-msgstr "Konfiguratu Waydroid"
+msgstr "Waydroid konfiguratu"
 
 #~ msgid "%1Mb/s"
 #~ msgstr "%1Mb/s"

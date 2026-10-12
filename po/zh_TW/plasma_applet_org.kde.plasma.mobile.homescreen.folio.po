@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:48+0000\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
 "PO-Revision-Date: 2026-09-16 23:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -87,13 +87,18 @@ msgstr "移除元件"
 msgid "Configure widget"
 msgstr "設定元件"
 
-#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
-#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
+#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:313 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:424
 #, kde-format
 msgid "Remove"
 msgstr "移除"
 
-#: qml/HomeScreenPage.qml:482
+#: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/HomeScreenPage.qml:487
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "放開來設定，拖曳來移動"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.folio\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:48+0000\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
 "PO-Revision-Date: 2026-09-19 21:00+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -86,13 +86,18 @@ msgstr "Miniprogramm entfernen"
 msgid "Configure widget"
 msgstr "Miniprogramm einrichten"
 
-#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
-#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
+#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:313 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:424
 #, kde-format
 msgid "Remove"
 msgstr "Entfernen"
 
-#: qml/HomeScreenPage.qml:482
+#: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/HomeScreenPage.qml:487
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "Loslassen zum Einrichten, Ziehen zum Verschieben"

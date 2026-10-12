@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -34,7 +34,12 @@ msgstr "常规"
 msgid "Remove from favourites"
 msgstr "移出常用应用"
 
-#: qml/FavoritesGrid.qml:294
+#: qml/FavoritesGrid.qml:229 qml/FolderGrid.qml:199 qml/GridAppDelegate.qml:72
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/FavoritesGrid.qml:299
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "将应用程序添加到常用程序后，它们将在此显示"

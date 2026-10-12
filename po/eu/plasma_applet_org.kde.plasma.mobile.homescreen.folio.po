@@ -1,7 +1,7 @@
 # Translation for plasma_applet_org.kde.plasma.mobile.homescreen.po to Euskara/Basque (eu).
 # Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023-2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023, 2024, 2025.
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:48+0000\n"
-"PO-Revision-Date: 2025-08-14 10:42+0200\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
+"PO-Revision-Date: 2026-10-11 19:11+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: applicationlistmodel.cpp:177
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "Dena"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Dena"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -45,12 +45,12 @@ msgstr "Bilatu aplikazioak…"
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "Aplikazio guztiak"
 
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriak"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
@@ -87,13 +87,18 @@ msgstr "Kendu trepeta"
 msgid "Configure widget"
 msgstr "Konfiguratu trepeta"
 
-#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
-#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
+#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:313 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:424
 #, kde-format
 msgid "Remove"
 msgstr "Kendu"
 
-#: qml/HomeScreenPage.qml:482
+#: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/HomeScreenPage.qml:487
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "Askatu konfiguratzeko, arrastatu mugitzeko"

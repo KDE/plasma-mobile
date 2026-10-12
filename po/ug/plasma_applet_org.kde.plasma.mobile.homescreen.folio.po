@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:48+0000\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
 "PO-Revision-Date: 2026-09-24 20:15-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -85,13 +85,18 @@ msgstr "ئەپچىنى چىقىرىۋەت"
 msgid "Configure widget"
 msgstr "ئەپچە سەپلە"
 
-#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:308 qml/FolderView.qml:401
-#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:419
+#: qml/FavouritesBar.qml:233 qml/FavouritesBar.qml:313 qml/FolderView.qml:401
+#: qml/HomeScreenPage.qml:335 qml/HomeScreenPage.qml:424
 #, kde-format
 msgid "Remove"
 msgstr "چىقىرىۋەت"
 
-#: qml/HomeScreenPage.qml:482
+#: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/HomeScreenPage.qml:487
 #, kde-format
 msgid "Release to configure, drag to move"
 msgstr "سەپلەشتە قويۇۋېتىلىدۇ، يۆتكەشتە سۆرىلىدۇ"

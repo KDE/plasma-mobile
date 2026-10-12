@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -35,7 +35,12 @@ msgstr ""
 msgid "Remove from favourites"
 msgstr "प्रियतः निष्कासयन्तु"
 
-#: qml/FavoritesGrid.qml:294
+#: qml/FavoritesGrid.qml:229 qml/FolderGrid.qml:199 qml/GridAppDelegate.qml:72
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/FavoritesGrid.qml:299
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "भवतः प्रियतमेषु अनुप्रयोगाः योजयन्तु येन ते अत्र दर्शयन्ति।"

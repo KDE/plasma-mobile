@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mobile.homescreen.halcyon\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
 "PO-Revision-Date: 2026-05-17 12:14+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -34,7 +34,12 @@ msgstr "Allgemein"
 msgid "Remove from favourites"
 msgstr "Aus Favoriten entfernen"
 
-#: qml/FavoritesGrid.qml:294
+#: qml/FavoritesGrid.qml:229 qml/FolderGrid.qml:199 qml/GridAppDelegate.qml:72
+#, kde-format
+msgid "App info"
+msgstr ""
+
+#: qml/FavoritesGrid.qml:299
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr ""
