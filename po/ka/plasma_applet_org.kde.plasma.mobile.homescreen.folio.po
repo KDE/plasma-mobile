@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-12 00:54+0000\n"
-"PO-Revision-Date: 2026-08-29 04:18+0200\n"
+"PO-Revision-Date: 2026-10-12 07:04+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -94,7 +94,7 @@ msgstr "წაშლა"
 #: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
 #, kde-format
 msgid "App info"
-msgstr ""
+msgstr "აპის ინფორმაცია"
 
 #: qml/HomeScreenPage.qml:487
 #, kde-format
