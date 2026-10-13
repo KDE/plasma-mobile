@@ -33,7 +33,7 @@ Loader {
         Repeater {
             model: root.actions
             delegate: PC3.MenuItem {
-                icon.name: modelData.iconName
+                icon.name: modelData.icon.name
                 text: modelData.text
                 enabled: modelData.enabled
                 onClicked: modelData.triggered()
