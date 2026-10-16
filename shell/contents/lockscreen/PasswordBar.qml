@@ -44,6 +44,9 @@ Rectangle {
             while (root.lockScreenState.password.length > dotDisplayModel.count) {
                 dotDisplayModel.append({"char": root.lockScreenState.password.charAt(dotDisplayModel.count)});
             }
+            for (let i = 0; i < dotDisplayModel.count; ++i) {
+                dotDisplayModel.setProperty(i, "char", root.lockScreenState.password.charAt(i));
+            }
         }
     }
 
@@ -116,6 +119,7 @@ Rectangle {
         focus: root.isKeypadOpen && root.lockScreenState.isKeyboardMode
         z: 1
         inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+        readOnly: root.lockScreenState.waitingForAuth
 
         onFocusChanged: {
             if (focus) {
@@ -124,7 +128,6 @@ Rectangle {
         }
 
         property bool externalEdit: false
-        property string prevText: ""
 
         Connections {
             target: root.lockScreenState
@@ -133,6 +136,7 @@ Rectangle {
                 if (textField.text != root.lockScreenState.password) {
                     textField.externalEdit = true;
                     textField.text = root.lockScreenState.password;
+                    textField.externalEdit = false;
                 }
             }
         }
@@ -144,17 +148,21 @@ Rectangle {
         }
 
         onTextChanged: {
-            if (!externalEdit) {
-                if (prevText.length > text.length) { // backspace
-                    for (let i = 0; i < (prevText.length - text.length); i++) {
-                        root.backspace();
-                    }
-                } else if (text.length > 0) { // key enter
-                    root.keyPress(text.charAt(text.length - 1));
-                }
+            if (externalEdit) {
+                return;
             }
-            prevText = text;
-            externalEdit = false;
+            if (root.lockScreenState.waitingForAuth) {
+                externalEdit = true;
+                text = root.lockScreenState.password;
+                externalEdit = false;
+                return;
+            }
+
+            const previousPassword = root.lockScreenState.password;
+            root.previewCharIndex = text.length > previousPassword.length && text.startsWith(previousPassword) ? text.length - 1 : -2;
+            root.lockScreenState.resetPinLabel();
+            root.lockScreenState.password = text;
+            letterTimer.restart();
         }
     }
 
