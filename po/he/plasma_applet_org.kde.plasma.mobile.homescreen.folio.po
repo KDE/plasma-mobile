@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-12 00:54+0000\n"
-"PO-Revision-Date: 2026-08-30 21:44+0300\n"
+"PO-Revision-Date: 2026-10-15 17:25+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: applicationlistmodel.cpp:177
 #, kde-format
@@ -94,7 +94,7 @@ msgstr "הסרה"
 #: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
 #, kde-format
 msgid "App info"
-msgstr ""
+msgstr "פרטי היישומון"
 
 #: qml/HomeScreenPage.qml:487
 #, kde-format
