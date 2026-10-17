@@ -18,14 +18,21 @@ Kirigami.Page {
     topPadding: 0
     bottomPadding: 0
 
-    property int currentIndex: 0
+    property var currentModule: InitialStart.Wizard.steps[0]
+    readonly property int currentIndex: InitialStart.Wizard.steps.indexOf(currentModule)
     readonly property int stepCount: InitialStart.Wizard.stepsCount
     property bool showingLanding: true
 
-    // filled by items
-    property var currentStepItem
-    property var nextStepItem
-    property var previousStepItem
+    readonly property var currentStepItem: itemForIndex(currentIndex)
+    readonly property var nextStepItem: itemForIndex(currentIndex + 1)
+    readonly property var previousStepItem: itemForIndex(currentIndex - 1)
+
+    function itemForIndex(index) {
+        if (index < 0 || index >= stepCount || stepsRepeater.count === 0) {
+            return null;
+        }
+        return stepsRepeater.itemAt(InitialStart.Wizard.allSteps.indexOf(InitialStart.Wizard.steps[index]));
+    }
 
     readonly property bool onFinalPage: currentIndex === (stepCount - 1)
 
@@ -39,11 +46,6 @@ Kirigami.Page {
         id: previousStepAnim
         duration: 400
         easing.type: Easing.OutExpo
-        onFinished: {
-            if (root.previousStepItemX != 0) {
-                root.previousStepItem.visible = false;
-            }
-        }
     }
 
     NumberAnimation on currentStepItemX {
@@ -56,16 +58,27 @@ Kirigami.Page {
         id: nextStepAnim
         duration: 400
         easing.type: Easing.OutExpo
-        onFinished: {
-            if (root.nextStepItemX != 0) {
-                root.nextStepItem.visible = false;
-            }
-        }
     }
 
-    onStepCountChanged: {
-        // reset position
-        requestPreviousPage();
+    Connections {
+        target: InitialStart.Wizard
+
+        function onStepsChanged() {
+            previousStepAnim.stop();
+            currentStepAnim.stop();
+            nextStepAnim.stop();
+            root.previousStepItemX = 0;
+            root.currentStepItemX = 0;
+            root.nextStepItemX = 0;
+
+            // keep the selected module unless it is no longer available
+            if (!InitialStart.Wizard.steps.includes(root.currentModule)) {
+                root.currentModule = InitialStart.Wizard.steps[0];
+            }
+            if (!root.showingLanding && root.currentStepItem) {
+                stepHeading.changeText(root.currentStepItem.name);
+            }
+        }
     }
 
     function finishFinalPage() {
@@ -77,14 +90,16 @@ Kirigami.Page {
         if (previousStepAnim.running || currentStepAnim.running || nextStepAnim.running) {
             return;
         }
+        if (currentIndex < 0 || onFinalPage) {
+            return;
+        }
 
         previousStepItemX = 0;
 
-        currentIndex++;
+        currentModule = InitialStart.Wizard.steps[currentIndex + 1];
         stepHeading.changeText(currentStepItem.name);
 
         currentStepItemX = root.width;
-        currentStepItem.visible = true;
 
         previousStepAnim.to = -root.width;
         previousStepAnim.restart();
@@ -97,17 +112,16 @@ Kirigami.Page {
             return;
         }
 
-        if (currentIndex === 0) {
+        if (currentIndex <= 0) {
             root.showingLanding = true;
             landingComponent.returnToLanding();
         } else {
             nextStepItemX = 0;
 
-            currentIndex--;
+            currentModule = InitialStart.Wizard.steps[currentIndex - 1];
             stepHeading.changeText(currentStepItem.name);
 
             currentStepItemX = -root.width;
-            currentStepItem.visible = true;
 
             nextStepAnim.to = root.width;
             nextStepAnim.restart();
@@ -213,11 +227,14 @@ Kirigami.Page {
 
                 // setup steps
                 Repeater {
-                    model: InitialStart.Wizard.steps
+                    id: stepsRepeater
+                    model: InitialStart.Wizard.allSteps
 
                     delegate: MobileShell.BaseItem {
                         id: item
-                        visible: model.index === 0 // the binding is broken later
+                        visible: currentIndex >= 0 && (currentIndex === root.currentIndex
+                            || (currentIndex === root.currentIndex - 1 && previousStepAnim.running)
+                            || (currentIndex === root.currentIndex + 1 && nextStepAnim.running))
                         contentItem: modelData.contentItem
                         transform: Translate {
                             x: {
@@ -236,30 +253,7 @@ Kirigami.Page {
 
                         // pass up the property
                         property string name: modelData.name
-                        property int currentIndex: model.index
-
-                        function updateRootItems() {
-                            if (model.index === root.currentIndex) {
-                                root.currentStepItem = item;
-                            } else if (model.index === root.currentIndex - 1) {
-                                root.previousStepItem = item;
-                            } else if (model.index === root.currentIndex + 1) {
-                                root.nextStepItem = item;
-                            }
-                        }
-
-                        Component.onCompleted: {
-                            updateRootItems();
-                        }
-
-                        // keep root properties updated
-                        Connections {
-                            target: root
-
-                            function onCurrentIndexChanged() {
-                                item.updateRootItems();
-                            }
-                        }
+                        readonly property int currentIndex: InitialStart.Wizard.steps.indexOf(modelData)
                     }
                 }
             }

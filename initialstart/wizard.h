@@ -16,6 +16,7 @@ class Wizard : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QList<InitialStartModule *> steps READ steps NOTIFY stepsChanged)
+    Q_PROPERTY(QList<InitialStartModule *> allSteps READ allSteps CONSTANT)
     Q_PROPERTY(int stepsCount READ stepsCount NOTIFY stepsChanged)
     Q_PROPERTY(bool testingMode READ testingMode NOTIFY testingModeChanged)
 
@@ -28,6 +29,7 @@ public:
     bool testingMode();
 
     QList<InitialStartModule *> steps();
+    QList<InitialStartModule *> allSteps();
     int stepsCount();
 
 public Q_SLOTS:
