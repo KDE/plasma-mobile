@@ -47,7 +47,7 @@ InitialStartModule {
                     visible: screenBrightness.brightnessAvailable
                     wrapMode: Text.Wrap
                     horizontalAlignment: Text.AlignHCenter
-                    text: i18n("Adjust the screen brightness to be comfortable for the installation process.")
+                    text: i18n("Adjust the screen brightness.")
                 }
 
                 FormCard.FormCard {

@@ -71,7 +71,7 @@ InitialStartModule {
 
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
-                text: i18n("Connect to a WiFi network for network access.")
+                text: i18n("Connect to a Wi-Fi network for network access.")
             }
 
             FormCard.FormCard {
