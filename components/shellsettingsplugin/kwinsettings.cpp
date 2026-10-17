@@ -24,7 +24,12 @@ KWinSettings::KWinSettings(QObject *parent)
         Q_UNUSED(names)
         if (group.name() == WAYLAND_CONFIG_GROUP) {
             Q_EMIT doubleTapWakeupChanged();
-        } else if (group.name() == SCREEN_EDGES_CONFIG_GROUP) {
+        }
+    });
+
+    m_overlayConfigWatcher = KConfigWatcher::create(m_overlayConfig);
+    connect(m_overlayConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) {
+        if (group.name() == SCREEN_EDGES_CONFIG_GROUP && names.contains(QByteArrayLiteral("TouchTarget"))) {
             Q_EMIT screenEdgeTouchTargetChanged();
         }
     });
