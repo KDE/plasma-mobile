@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:45+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Irish Gaelic <kde-i18n-doc@kde.org>\n"
@@ -175,8 +175,7 @@ msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
-msgid ""
-"Adjust the screen brightness to be comfortable for the installation process."
+msgid "Adjust the screen brightness."
 msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:106
@@ -278,7 +277,7 @@ msgstr ""
 
 #: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
-msgid "Connect to a WiFi network for network access."
+msgid "Connect to a Wi-Fi network for network access."
 msgstr ""
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10

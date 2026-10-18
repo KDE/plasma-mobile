@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:45+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: 2026-03-02 04:56+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -174,9 +174,8 @@ msgstr "開始之前…"
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
-msgid ""
-"Adjust the screen brightness to be comfortable for the installation process."
-msgstr "請為安裝過程調整螢幕亮度到舒服的程度。"
+msgid "Adjust the screen brightness."
+msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -276,8 +275,9 @@ msgid "Network"
 msgstr "網路"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, kde-format
-msgid "Connect to a WiFi network for network access."
+#, fuzzy, kde-format
+#| msgid "Connect to a WiFi network for network access."
+msgid "Connect to a Wi-Fi network for network access."
 msgstr "連線到 WiFi 網路來存取網路。"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
@@ -314,6 +314,11 @@ msgstr "返回"
 #, kde-format
 msgid "Finish"
 msgstr "完成"
+
+#~ msgid ""
+#~ "Adjust the screen brightness to be comfortable for the installation "
+#~ "process."
+#~ msgstr "請為安裝過程調整螢幕亮度到舒服的程度。"
 
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "Wi-Fi 已停用"

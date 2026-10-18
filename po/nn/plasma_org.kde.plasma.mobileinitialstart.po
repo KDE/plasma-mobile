@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:45+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: 2026-08-02 19:43+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -178,9 +178,8 @@ msgstr "Før me set i gang …"
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
-msgid ""
-"Adjust the screen brightness to be comfortable for the installation process."
-msgstr "Juster lysstyrken slik at han er behageleg."
+msgid "Adjust the screen brightness."
+msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -284,8 +283,9 @@ msgid "Network"
 msgstr "Nettverk"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, kde-format
-msgid "Connect to a WiFi network for network access."
+#, fuzzy, kde-format
+#| msgid "Connect to a WiFi network for network access."
+msgid "Connect to a Wi-Fi network for network access."
 msgstr "Kopla til Wi-Fi-nettverk for tilgang til nettet."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
@@ -322,3 +322,8 @@ msgstr "Tilbake"
 #, kde-format
 msgid "Finish"
 msgstr "Fullfør"
+
+#~ msgid ""
+#~ "Adjust the screen brightness to be comfortable for the installation "
+#~ "process."
+#~ msgstr "Juster lysstyrken slik at han er behageleg."

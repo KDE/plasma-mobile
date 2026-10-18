@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:45+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: 2023-07-28 15:18+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -175,9 +175,8 @@ msgstr "Skôr než začneme..."
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
-msgid ""
-"Adjust the screen brightness to be comfortable for the installation process."
-msgstr "Upravte jas obrazovky tak, aby bol pohodlný pre proces inštalácie."
+msgid "Adjust the screen brightness."
+msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -279,8 +278,9 @@ msgid "Network"
 msgstr "Sieť"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, kde-format
-msgid "Connect to a WiFi network for network access."
+#, fuzzy, kde-format
+#| msgid "Connect to a WiFi network for network access."
+msgid "Connect to a Wi-Fi network for network access."
 msgstr "Pripojenie k sieti WiFi kvôli prístupu k sieti."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
@@ -317,6 +317,11 @@ msgstr "Späť"
 #, kde-format
 msgid "Finish"
 msgstr "Dokončiť"
+
+#~ msgid ""
+#~ "Adjust the screen brightness to be comfortable for the installation "
+#~ "process."
+#~ msgstr "Upravte jas obrazovky tak, aby bol pohodlný pre proces inštalácie."
 
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "Wi-Fi je vypnuté"

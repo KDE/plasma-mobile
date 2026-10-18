@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 00:50+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: 2023-05-03 23:34+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -92,19 +92,19 @@ msgstr ""
 msgid "Camera"
 msgstr ""
 
-#: contents/lockscreen/LockScreenState.qml:31
+#: contents/lockscreen/LockScreenState.qml:37
 msgid "Enter PIN"
 msgstr ""
 
-#: contents/lockscreen/LockScreenState.qml:32
+#: contents/lockscreen/LockScreenState.qml:38
 msgid "Wrong PIN"
 msgstr ""
 
-#: contents/lockscreen/PasswordBar.qml:187
+#: contents/lockscreen/PasswordBar.qml:195
 msgid "Show keypad"
 msgstr ""
 
-#: contents/lockscreen/PasswordBar.qml:187
+#: contents/lockscreen/PasswordBar.qml:195
 msgid "Show keyboard"
 msgstr ""
 

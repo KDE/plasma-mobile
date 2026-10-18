@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:45+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: 2025-03-20 08:10+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -177,11 +177,8 @@ msgstr "Antes de comezar…"
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
-msgid ""
-"Adjust the screen brightness to be comfortable for the installation process."
+msgid "Adjust the screen brightness."
 msgstr ""
-"Axuste o brillo da pantalla a un valor que lle resulte cómodo durante o "
-"proceso de instalación."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -285,8 +282,9 @@ msgid "Network"
 msgstr "Rede"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, kde-format
-msgid "Connect to a WiFi network for network access."
+#, fuzzy, kde-format
+#| msgid "Connect to a WiFi network for network access."
+msgid "Connect to a Wi-Fi network for network access."
 msgstr "Conecte a unha rede WiFi para acceder á rede."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
@@ -323,3 +321,10 @@ msgstr "Volver"
 #, kde-format
 msgid "Finish"
 msgstr "Finalizar"
+
+#~ msgid ""
+#~ "Adjust the screen brightness to be comfortable for the installation "
+#~ "process."
+#~ msgstr ""
+#~ "Axuste o brillo da pantalla a un valor que lle resulte cómodo durante o "
+#~ "proceso de instalación."

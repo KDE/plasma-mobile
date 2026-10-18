@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-28 00:45+0000\n"
+"POT-Creation-Date: 2026-10-18 00:51+0000\n"
 "PO-Revision-Date: 2024-12-25 19:35+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -179,9 +179,8 @@ msgstr "आरम्भस्य पूर्वं..."
 
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
-msgid ""
-"Adjust the screen brightness to be comfortable for the installation process."
-msgstr "संस्थापनप्रक्रियायाः कृते आरामदायकं भवितुं पटलस्य प्रकाशं समायोजयन्तु ।"
+msgid "Adjust the screen brightness."
+msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -283,8 +282,9 @@ msgid "Network"
 msgstr "जालकृति"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, kde-format
-msgid "Connect to a WiFi network for network access."
+#, fuzzy, kde-format
+#| msgid "Connect to a WiFi network for network access."
+msgid "Connect to a Wi-Fi network for network access."
 msgstr "संजालप्रवेशार्थं WiFi संजालेन सह सम्बद्धं कुर्वन्तु।"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
@@ -321,3 +321,8 @@ msgstr "पृष्ठभागः"
 #, kde-format
 msgid "Finish"
 msgstr "समापन"
+
+#~ msgid ""
+#~ "Adjust the screen brightness to be comfortable for the installation "
+#~ "process."
+#~ msgstr "संस्थापनप्रक्रियायाः कृते आरामदायकं भवितुं पटलस्य प्रकाशं समायोजयन्तु ।"
