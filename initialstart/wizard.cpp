@@ -98,6 +98,11 @@ QList<InitialStartModule *> Wizard::steps()
     return m_availableModuleItems;
 }
 
+QList<InitialStartModule *> Wizard::allSteps()
+{
+    return m_moduleItems;
+}
+
 int Wizard::stepsCount()
 {
     return m_availableModuleItems.size();
