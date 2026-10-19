@@ -158,7 +158,7 @@ Item {
         x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth
         y: dropPosition.pageRow * folio.HomeScreenState.pageCellHeight
 
-        layer.enabled: true
+        layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
         layer.effect: DelegateShadow {}
     }
 
@@ -479,7 +479,7 @@ Item {
                         }
                     }
 
-                    layer.enabled: widgetDelegate.editMode && folio.FolioSettings.lockLayout === false
+                    layer.enabled: (widgetDelegate.editMode && folio.FolioSettings.lockLayout === false) && GraphicsInfo.api !== GraphicsInfo.Software
                     layer.effect: DarkenEffect {}
 
                     PC3.ToolTip {

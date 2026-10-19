@@ -65,7 +65,7 @@ MouseArea {
         opacity: 0.25
         pixmap: thumbnailer.pixmap
 
-        layer.enabled: true
+        layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
         layer.effect: MultiEffect {
             source: previewBackground
             anchors.fill: parent

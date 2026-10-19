@@ -50,7 +50,7 @@ Item {
         opacity: 0.1
 
         // apply lighten, saturate and blur effect
-        layer.enabled: true
+        layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
         layer.effect: MultiEffect {
             brightness: 0.075
             maskEnabled: true

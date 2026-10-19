@@ -76,9 +76,11 @@ MouseArea {
             readonly property real positionX: folio.HomeScreenState.pageWidth * index + folio.HomeScreenState.pageViewX
             readonly property real progressToCenter: 1 - Math.min(1, Math.max(0, distanceToCenter / folio.HomeScreenState.pageWidth))
 
-            // Use layer to render all page items together in one texture
+            // Use layer to render all page items together in one texture.
+            // With software rendering, this would would render each page off-screen
             layer.enabled: Math.abs(index - folio.HomeScreenState.currentPage) <= 1
                            && !folio.HomeScreenState.isDraggingDelegate
+                           && GraphicsInfo.api !== GraphicsInfo.Software
             layer.smooth: true
 
             visible: opacity > 0

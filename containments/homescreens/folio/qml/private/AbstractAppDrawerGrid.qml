@@ -31,7 +31,8 @@ MobileShell.GridView {
 
     cacheBuffer: cellHeight * 20
     reuseItems: true
-    layer.enabled: true
+    // with software rendering, this would render the grid off-screen on every frame
+    layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
     keyNavigationEnabled: true
     highlightMoveDuration: 0
     highlightRangeMode: MobileShell.GridView.ApplyRange

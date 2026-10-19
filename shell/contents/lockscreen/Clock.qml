@@ -52,7 +52,7 @@ Item {
             font.weight: Font.Medium
             font.pointSize: 64
 
-            layer.enabled: true
+            layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
             layer.effect: MobileShell.TextDropShadow {
                 blurMax: 16
             }
@@ -66,7 +66,7 @@ Item {
             font.weight: Font.Bold
             font.pointSize: 12
 
-            layer.enabled: true
+            layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
             layer.effect: MobileShell.TextDropShadow {
                 blurMax: 16
             }
