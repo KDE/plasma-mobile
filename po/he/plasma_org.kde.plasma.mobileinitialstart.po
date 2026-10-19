@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:51+0000\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
 "PO-Revision-Date: 2026-02-13 09:48+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -299,7 +299,7 @@ msgstr "ברוך בואך אל<br/><b>פלזמה לניידים</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "פועל על גבי<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "הבא"
@@ -309,12 +309,12 @@ msgstr "הבא"
 msgid "Initial Start"
 msgstr "הפעלה ראשונה"
 
-#: qml/Wizard.qml:284
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "חזרה"
 
-#: qml/Wizard.qml:320
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "סיום"

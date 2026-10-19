@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2023, 2024, 2025, 2026.
+# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 Yuri Chornoivan <yurchor@ukr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:51+0000\n"
-"PO-Revision-Date: 2026-02-13 09:24+0200\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
+"PO-Revision-Date: 2026-10-18 20:47+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -178,7 +178,7 @@ msgstr "Перш, ніж ми почнемо."
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid "Adjust the screen brightness."
-msgstr ""
+msgstr "Скоригувати яскравість екрана."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -280,10 +280,9 @@ msgid "Network"
 msgstr "Мережа"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Connect to a WiFi network for network access."
+#, kde-format
 msgid "Connect to a Wi-Fi network for network access."
-msgstr "З'єднатися з мережею WiFi для доступу до мережі."
+msgstr "З'єднатися з мережею Wi-Fi для доступу до мережі."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -300,7 +299,7 @@ msgstr "Вітаємо у<br/><b>Plasma Mobile</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "На основі<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Далі"
@@ -310,12 +309,12 @@ msgstr "Далі"
 msgid "Initial Start"
 msgstr "Початковий запуск"
 
-#: qml/Wizard.qml:284
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Назад"
 
-#: qml/Wizard.qml:320
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Завершити"

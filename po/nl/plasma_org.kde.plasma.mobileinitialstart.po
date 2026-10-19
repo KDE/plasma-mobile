@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2023-2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:51+0000\n"
-"PO-Revision-Date: 2026-02-13 14:32+0100\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
+"PO-Revision-Date: 2026-10-18 14:43+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -178,7 +178,7 @@ msgstr "Voordat we verder gaan…"
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid "Adjust the screen brightness."
-msgstr ""
+msgstr "De schermhelderheid aanpassen."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -280,10 +280,9 @@ msgid "Network"
 msgstr "Netwerk"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Connect to a WiFi network for network access."
+#, kde-format
 msgid "Connect to a Wi-Fi network for network access."
-msgstr "Verbind met een WiFi-netwerk voor toegang tot het netwerk."
+msgstr "Verbind met een Wi-Fi-netwerk voor toegang tot het netwerk."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -300,7 +299,7 @@ msgstr "Welkome bij<br/><b>Plasma Mobile</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Aangedreven door<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Volgende"
@@ -310,12 +309,12 @@ msgstr "Volgende"
 msgid "Initial Start"
 msgstr "Initiële start"
 
-#: qml/Wizard.qml:284
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Terug"
 
-#: qml/Wizard.qml:320
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Voltooien"

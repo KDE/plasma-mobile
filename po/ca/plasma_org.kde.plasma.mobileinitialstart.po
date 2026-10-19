@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:51+0000\n"
-"PO-Revision-Date: 2026-03-29 13:13+0200\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
+"PO-Revision-Date: 2026-10-18 14:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -180,7 +180,7 @@ msgstr "Abans de començar…"
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid "Adjust the screen brightness."
-msgstr ""
+msgstr "Ajusta la lluminositat de la pantalla."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -282,8 +282,7 @@ msgid "Network"
 msgstr "Xarxa"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Connect to a WiFi network for network access."
+#, kde-format
 msgid "Connect to a Wi-Fi network for network access."
 msgstr "Connecta a una xarxa Wi-Fi per a l'accés a la xarxa."
 
@@ -302,7 +301,7 @@ msgstr "Us donem la benvinguda al<br/><b>Plasma Mobile</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Funciona amb<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:152 qml/Wizard.qml:303
+#: qml/LandingComponent.qml:152 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Següent"
@@ -312,12 +311,12 @@ msgstr "Següent"
 msgid "Initial Start"
 msgstr "Començament inicial"
 
-#: qml/Wizard.qml:284
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Enrere"
 
-#: qml/Wizard.qml:320
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Finalitza"
