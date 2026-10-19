@@ -161,7 +161,7 @@ Item {
                                 padding: Kirigami.Units.smallSpacing
 
                                 contentItem: QuickSettingsFullDelegate {
-                                    animationsEnabled: actionDrawer.intendedToBeVisible && root.fullViewProgress > 0 && flow.index === swipeView.currentIndex
+                                    animationsEnabled: ShellSettings.Settings.animationsEnabled && actionDrawer.intendedToBeVisible && root.fullViewProgress > 0 && flow.index === swipeView.currentIndex
                                     restrictedPermissions: actionDrawer.restrictedPermissions
 
                                     text: modelData.text
