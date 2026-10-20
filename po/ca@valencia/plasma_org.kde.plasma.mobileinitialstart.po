@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-19 00:48+0000\n"
-"PO-Revision-Date: 2026-03-29 13:13+0200\n"
+"PO-Revision-Date: 2026-10-18 14:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -180,7 +180,7 @@ msgstr "Abans de començar…"
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid "Adjust the screen brightness."
-msgstr ""
+msgstr "Ajusta la brillantor de la pantalla."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -282,8 +282,7 @@ msgid "Network"
 msgstr "Xarxa"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Connect to a WiFi network for network access."
+#, kde-format
 msgid "Connect to a Wi-Fi network for network access."
 msgstr "Connecta amb una xarxa Wi-Fi per a l'accés a la xarxa."
 
@@ -321,10 +320,3 @@ msgstr "Arrere"
 #, kde-format
 msgid "Finish"
 msgstr "Finalitza"
-
-#~ msgid ""
-#~ "Adjust the screen brightness to be comfortable for the installation "
-#~ "process."
-#~ msgstr ""
-#~ "Ajusteu la brillantor de la pantalla perquè siga confortable durant el "
-#~ "procés d'instal·lació."
