@@ -108,7 +108,7 @@ Folio.WidgetContainer {
         }
 
         // TODO implement blur behind, see plasma-workspace BasicAppletContainer for how to do this
-        layer.enabled: root.widget && root.widget.applet && root.widget.applet.effectiveBackgroundHints === PlasmaCore.Types.ShadowBackground
+        layer.enabled: (root.widget && root.widget.applet && root.widget.applet.effectiveBackgroundHints === PlasmaCore.Types.ShadowBackground) && GraphicsInfo.api !== GraphicsInfo.Software
         layer.effect: DelegateShadow {}
 
         PC3.Label {

@@ -98,8 +98,11 @@ Item {
         NumberAnimation { target: row; property: "scrollPosition"; from: 0; to: -root.textAdvanceWidth - row.spacing; duration: (root.textAdvanceWidth + row.spacing) / root.scrollSpeed }
     }
 
+    // without the mask (software renderer), at least keep the text inside the label
+    clip: root.charactersOverflowing && GraphicsInfo.api === GraphicsInfo.Software
+
     // gradient mask to smoothly fade the ends of the label when it is scrolling
-    layer.enabled: root.charactersOverflowing
+    layer.enabled: root.charactersOverflowing && GraphicsInfo.api !== GraphicsInfo.Software
     layer.effect: OpacityMask {
         maskSource: Rectangle {
             id: mask

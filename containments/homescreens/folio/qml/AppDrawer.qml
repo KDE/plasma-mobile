@@ -172,7 +172,7 @@ Item {
                 }
             }
 
-            layer.enabled: true
+            layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
             layer.effect: OpacityMask {
                 invert: true
 
@@ -237,7 +237,7 @@ Item {
             homeScreen: root.homeScreen
             clip: true
 
-            layer.enabled: true
+            layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
             layer.effect: OpacityMask {
                 maskSource: Rectangle {
                     id: categoryAppGridMask

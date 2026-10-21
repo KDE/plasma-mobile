@@ -53,7 +53,7 @@ MobileShell.BaseItem {
             font.weight: Font.Bold
             font.pointSize: 18
 
-            layer.enabled: true
+            layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
             layer.effect: MobileShell.TextDropShadow {}
 
             onTextChanged: {
@@ -86,7 +86,7 @@ MobileShell.BaseItem {
             font.weight: Font.Bold
             font.pointSize: 18
 
-            layer.enabled: true
+            layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
             layer.effect: MobileShell.TextDropShadow {}
 
             MouseArea {
