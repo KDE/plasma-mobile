@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 03:04+0000\n"
+"POT-Creation-Date: 2026-10-22 02:47+0000\n"
 "PO-Revision-Date: 2026-08-04 07:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -103,11 +103,11 @@ msgstr "輸入 PIN 碼"
 msgid "Wrong PIN"
 msgstr "錯誤 PIN 碼"
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keypad"
 msgstr "顯示數字鍵盤"
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keyboard"
 msgstr "顯示鍵盤"
 

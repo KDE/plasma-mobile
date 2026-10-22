@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 03:04+0000\n"
+"POT-Creation-Date: 2026-10-22 02:47+0000\n"
 "PO-Revision-Date: 2026-05-30 21:29+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -104,11 +104,11 @@ msgstr "PIN megadása"
 msgid "Wrong PIN"
 msgstr "Hibás PIN"
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keypad"
 msgstr ""
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keyboard"
 msgstr ""
 

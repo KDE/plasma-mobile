@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 03:04+0000\n"
+"POT-Creation-Date: 2026-10-22 02:47+0000\n"
 "PO-Revision-Date: 2025-11-22 12:07+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -105,11 +105,11 @@ msgstr "Sláðu inn PIN-númer"
 msgid "Wrong PIN"
 msgstr "Rangt PIN-númer"
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keypad"
 msgstr ""
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keyboard"
 msgstr ""
 
