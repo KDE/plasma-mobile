@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-18 00:51+0000\n"
+"POT-Creation-Date: 2026-10-22 00:52+0000\n"
 "PO-Revision-Date: 2026-08-01 09:19+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -104,11 +104,11 @@ msgstr "Introduïu el PIN"
 msgid "Wrong PIN"
 msgstr "PIN erroni"
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keypad"
 msgstr "Mostra el teclat numèric"
 
-#: contents/lockscreen/PasswordBar.qml:195
+#: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keyboard"
 msgstr "Mostra el teclat"
 
