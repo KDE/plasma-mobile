@@ -7,12 +7,19 @@
 #pragma once
 
 #include <QObject>
+#include <QSet>
 
 #include <kscreen/config.h>
 #include <qqmlregistration.h>
 #include <qtmetamacros.h>
 
+class QScreen;
 class SensorProxy;
+
+namespace KScreen
+{
+class Dpms;
+}
 
 class RotationUtil : public QObject
 {
@@ -46,9 +53,12 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void updateShowRotationButton();
+    void updateSensorClaim();
 
 private:
     void retrieveKScreen();
+    bool sensorNeeded() const;
+    bool anyDisplayOn() const;
 
     bool m_showRotationButton{false};
     KScreen::Output::Rotation m_rotateTo{KScreen::Output::Rotation::None};
@@ -57,4 +67,6 @@ private:
 
     KScreen::ConfigPtr m_config{nullptr};
     SensorProxy *m_sensorProxy{nullptr};
+    KScreen::Dpms *m_dpms{nullptr};
+    QSet<QScreen *> m_screensOff;
 };

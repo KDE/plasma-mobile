@@ -26,6 +26,7 @@ public:
 
     bool available() const;
     Orientation orientation() const;
+    bool claimed() const;
 
     void claimAccelerometer();
     void releaseAccelerometer();

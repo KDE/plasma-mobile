@@ -5,7 +5,8 @@
 
 #include <QDBusConnection>
 #include <QDBusInterface>
-#include <QDBusReply>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingReply>
 #include <QDBusServiceWatcher>
 #include <QVariantMap>
 
@@ -43,8 +44,9 @@ SensorProxy::SensorProxy(QObject *parent)
         m_claimed = false;
         if (shouldReclaim) {
             claimAccelerometer();
+        } else {
+            refreshProperties();
         }
-        refreshProperties();
     });
     connect(m_serviceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this]() {
         setAvailable(false);
@@ -76,6 +78,11 @@ SensorProxy::Orientation SensorProxy::orientation() const
     return m_orientation;
 }
 
+bool SensorProxy::claimed() const
+{
+    return m_claimed;
+}
+
 void SensorProxy::claimAccelerometer()
 {
     if (m_claimed) {
@@ -83,8 +90,13 @@ void SensorProxy::claimAccelerometer()
     }
 
     QDBusInterface sensorProxy(QString::fromLatin1(SERVICE), QString::fromLatin1(PATH), QString::fromLatin1(INTERFACE), QDBusConnection::systemBus());
-    sensorProxy.asyncCall(QStringLiteral("ClaimAccelerometer"));
     m_claimed = true;
+
+    auto *watcher = new QDBusPendingCallWatcher(sensorProxy.asyncCall(QStringLiteral("ClaimAccelerometer")), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
+        watcher->deleteLater();
+        refreshProperties();
+    });
 }
 
 void SensorProxy::releaseAccelerometer()
@@ -96,22 +108,31 @@ void SensorProxy::releaseAccelerometer()
     QDBusInterface sensorProxy(QString::fromLatin1(SERVICE), QString::fromLatin1(PATH), QString::fromLatin1(INTERFACE), QDBusConnection::systemBus());
     sensorProxy.asyncCall(QStringLiteral("ReleaseAccelerometer"));
     m_claimed = false;
+
+    setOrientation(Orientation::Undefined);
 }
 
 void SensorProxy::refreshProperties()
 {
     QDBusInterface properties(QString::fromLatin1(SERVICE), QString::fromLatin1(PATH), QString::fromLatin1(PROPERTIES_INTERFACE), QDBusConnection::systemBus());
 
-    const QDBusReply<QVariantMap> reply = properties.call(QStringLiteral("GetAll"), QString::fromLatin1(INTERFACE));
-    if (!reply.isValid()) {
-        setAvailable(false);
-        setOrientation(Orientation::Undefined);
-        return;
-    }
+    auto *watcher = new QDBusPendingCallWatcher(properties.asyncCall(QStringLiteral("GetAll"), QString::fromLatin1(INTERFACE)), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
+        watcher->deleteLater();
 
-    const QVariantMap propertiesMap = reply.value();
-    setAvailable(propertiesMap.value(QStringLiteral("HasAccelerometer")).toBool());
-    setOrientation(mapOrientation(propertiesMap.value(QStringLiteral("AccelerometerOrientation")).toString()));
+        const QDBusPendingReply<QVariantMap> reply = *watcher;
+        if (reply.isError()) {
+            setAvailable(false);
+            setOrientation(Orientation::Undefined);
+            return;
+        }
+
+        const QVariantMap propertiesMap = reply.value();
+        setAvailable(propertiesMap.value(QStringLiteral("HasAccelerometer")).toBool());
+        if (m_claimed) {
+            setOrientation(mapOrientation(propertiesMap.value(QStringLiteral("AccelerometerOrientation")).toString()));
+        }
+    });
 }
 
 void SensorProxy::propertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidatedProperties)
@@ -124,7 +145,7 @@ void SensorProxy::propertiesChanged(const QString &interface, const QVariantMap 
         setAvailable(changedProperties.value(QStringLiteral("HasAccelerometer")).toBool());
     }
 
-    if (changedProperties.contains(QStringLiteral("AccelerometerOrientation"))) {
+    if (m_claimed && changedProperties.contains(QStringLiteral("AccelerometerOrientation"))) {
         setOrientation(mapOrientation(changedProperties.value(QStringLiteral("AccelerometerOrientation")).toString()));
     }
 
