@@ -176,7 +176,7 @@ msgstr "Skôr než začneme..."
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid "Adjust the screen brightness."
-msgstr ""
+msgstr "Upravte jas obrazovky."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -278,10 +278,9 @@ msgid "Network"
 msgstr "Sieť"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Connect to a WiFi network for network access."
+#, kde-format
 msgid "Connect to a Wi-Fi network for network access."
-msgstr "Pripojenie k sieti WiFi kvôli prístupu k sieti."
+msgstr "Pripojenie k sieti Wi-Fi kvôli prístupu k sieti."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format

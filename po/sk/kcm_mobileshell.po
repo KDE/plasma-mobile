@@ -68,12 +68,13 @@ msgstr "When the screen is off, double tap to wakeup the device."
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "Potvrdiť zatvorenie všetkých"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
 msgstr ""
+"Vyžadovať potvrdenie pred zatvorením všetkých aplikácií v prepínači úloh."
 
 #: ui/main.qml:95
 #, kde-format

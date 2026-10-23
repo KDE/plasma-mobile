@@ -35,7 +35,7 @@ msgstr "Odstrániť z obľúbených"
 #: qml/FavoritesGrid.qml:229 qml/FolderGrid.qml:199 qml/GridAppDelegate.qml:72
 #, kde-format
 msgid "App info"
-msgstr ""
+msgstr "Informácie o aplikácii"
 
 #: qml/FavoritesGrid.qml:299
 #, kde-format
