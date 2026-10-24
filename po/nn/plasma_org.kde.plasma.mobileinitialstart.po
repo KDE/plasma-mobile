@@ -322,8 +322,3 @@ msgstr "Tilbake"
 #, kde-format
 msgid "Finish"
 msgstr "Fullfør"
-
-#~ msgid ""
-#~ "Adjust the screen brightness to be comfortable for the installation "
-#~ "process."
-#~ msgstr "Juster lysstyrken slik at han er behageleg."
