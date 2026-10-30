@@ -48,7 +48,9 @@ Item {
         let totalRows = Math.ceil(quickSettingsCount / columnCount);
         let maxRows = 5; // more than 5 is just disorienting
         let targetRows = Math.floor(Window.height * 0.65 / rowHeight);
-        return Math.min(maxRows, Math.min(totalRows, targetRows));
+              
+        // width (hence rowHeight) can briefly be <= 0 while the drawer is laid out
+        return Math.max(0, Math.min(maxRows, Math.min(totalRows, targetRows)));
     }
 
     readonly property int pageSize: rowCount * columnCount
@@ -140,7 +142,7 @@ Item {
                 Layout.preferredHeight: rowCount * rowHeight
 
                 Repeater {
-                    model: Math.ceil(quickSettingsCount / pageSize)
+                    model: pageSize > 0 ? Math.ceil(quickSettingsCount / pageSize) : 0
                     delegate: Flow {
                         id: flow
                         spacing: 0

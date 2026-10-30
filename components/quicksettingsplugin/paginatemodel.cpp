@@ -47,6 +47,9 @@ int PaginateModel::pageSize() const
 
 void PaginateModel::setPageSize(int count)
 {
+    // A negative page size makes rowsByPageSize() negative and the row
+    // insertions/removals below invalid (e.g. removing rows -840..-1).
+    count = qMax(0, count);
     if (count != d->m_pageSize) {
         const int oldSize = rowsByPageSize(d->m_pageSize);
         const int newSize = rowsByPageSize(count);
@@ -119,7 +122,7 @@ QHash<int, QByteArray> PaginateModel::roleNames() const
 
 int PaginateModel::rowsByPageSize(int size) const
 {
-    return d->m_hasStaticRowCount ? size : !d->m_sourceModel ? 0 : qMin(d->m_sourceModel->rowCount() - d->m_firstItem, size);
+    return qMax(0, d->m_hasStaticRowCount ? size : !d->m_sourceModel ? 0 : qMin(d->m_sourceModel->rowCount() - d->m_firstItem, size));
 }
 
 int PaginateModel::rowCount(const QModelIndex &parent) const
