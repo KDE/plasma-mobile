@@ -113,13 +113,13 @@ msgstr "Mostra les opcions addicionals per a %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/popups/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -160,7 +160,7 @@ msgstr "Obri la configuració d'àudio"
 #: qml/statusbar/indicators/BatteryIndicator.qml:68
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, kde-format
@@ -279,7 +279,7 @@ msgstr "%1/s"
 #, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format

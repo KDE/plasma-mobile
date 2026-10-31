@@ -296,28 +296,3 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla separadament en el mòdul de configuració "
 "del teclat."
-
-#~ msgid ""
-#~ "When active, it allow to wakeup the device just with double tap when the "
-#~ "screen is off."
-#~ msgstr ""
-#~ "Quan està actiu, permet despertar el dispositiu només toc doble quan la "
-#~ "pantalla està apagada."
-
-#~ msgid "Navigation Panel"
-#~ msgstr "Plafó de navegació"
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Mode de només gestos"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Si s'ha d'ocultar el plafó de navegació."
-
-#~ msgid "Always show keyboard toggle"
-#~ msgstr "Mostra sempre la commutació del teclat"
-
-#~ msgid ""
-#~ "Whether to always show the keyboard toggle button on the navigation panel."
-#~ msgstr ""
-#~ "Si sempre s'ha de mostrar el botó de commutació del teclat en el plafó de "
-#~ "navegació."
