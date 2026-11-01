@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-22 02:47+0000\n"
-"PO-Revision-Date: 2026-05-30 21:29+0200\n"
+"PO-Revision-Date: 2026-10-31 22:54+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -80,21 +80,19 @@ msgstr "Az elrendezés változtatásait a rendszeradminisztrátor korlátozta"
 
 #: contents/lockscreen/Keypad.qml:174
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: contents/lockscreen/Keypad.qml:175
-#, fuzzy
-#| msgid "Enter PIN"
 msgid "Enter"
-msgstr "PIN megadása"
+msgstr "Enter"
 
 #: contents/lockscreen/LockScreenContent.qml:27
 msgid "Flashlight"
-msgstr ""
+msgstr "Zseblámpa"
 
 #: contents/lockscreen/LockScreenContent.qml:28
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: contents/lockscreen/LockScreenState.qml:37
 msgid "Enter PIN"
@@ -106,27 +104,27 @@ msgstr "Hibás PIN"
 
 #: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keypad"
-msgstr ""
+msgstr "Számbillentyűzet megjelenítése"
 
 #: contents/lockscreen/PasswordBar.qml:196
 msgid "Show keyboard"
-msgstr ""
+msgstr "Billentyűzet megjelenítése"
 
 #: contents/logout/Logout.qml:141
 msgid "Restart"
-msgstr ""
+msgstr "Újraindítás"
 
 #: contents/logout/Logout.qml:150
 msgid "Shut Down"
-msgstr ""
+msgstr "Leállítás"
 
 #: contents/logout/Logout.qml:159
 msgid "Log Out"
-msgstr ""
+msgstr "Kijelentkezés"
 
 #: contents/logout/Logout.qml:175
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
