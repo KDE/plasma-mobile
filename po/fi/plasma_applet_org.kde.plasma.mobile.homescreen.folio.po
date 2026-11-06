@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-phone-components package.
-# SPDX-FileCopyrightText: 2018, 2021, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2021, 2023, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-25 02:44+0000\n"
-"PO-Revision-Date: 2025-09-03 18:32+0300\n"
+"PO-Revision-Date: 2026-10-05 15:43+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -21,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "Label indicating app category for all applications"
 msgid "All"
-msgstr ""
+msgstr "Kaikki"
 
 #: applicationlistmodel.cpp:267
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Kaikki"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -42,12 +42,12 @@ msgstr "Etsi sovelluksia…"
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "All Apps"
-msgstr ""
+msgstr "Kaikki sovellukset"
 
 #: qml/AppDrawerHeader.qml:155
 #, kde-format
 msgid "Categories"
-msgstr ""
+msgstr "Luokat"
 
 #: qml/config.qml:15 qml/settings/ConfigGeneral.qml:235
 #, kde-format
