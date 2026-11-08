@@ -20,6 +20,7 @@ const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
 const QString LOCKSCREEN_CONFIG_GROUP = QStringLiteral("Lockscreen");
 const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
+const QString HAPTICS_CONFIG_GROUP = QStringLiteral("Haptics");
 
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
@@ -30,7 +31,6 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
         Q_UNUSED(names)
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT vibrationsEnabledChanged();
-            Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT dateInStatusBarChanged();
             Q_EMIT statusBarScaleFactorChanged();
@@ -50,6 +50,9 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
         if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
             Q_EMIT lockscreenLeftButtonActionChanged();
             Q_EMIT lockscreenRightButtonActionChanged();
+        }
+        if (group.name() == HAPTICS_CONFIG_GROUP) {
+            Q_EMIT vibrationDurationChanged();
         }
         if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
             Q_EMIT quickSettingsColumnsChanged();
@@ -72,14 +75,21 @@ void MobileShellSettings::setVibrationsEnabled(bool vibrationsEnabled)
 
 int MobileShellSettings::vibrationDuration() const
 {
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("vibrationDuration", 10);
+    auto group = KConfigGroup{m_config, HAPTICS_CONFIG_GROUP};
+    return group.readEntry("duration", 10);
 }
 
 void MobileShellSettings::setVibrationDuration(int vibrationDuration)
 {
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    group.writeEntry("vibrationDuration", vibrationDuration, KConfigGroup::Notify);
+    auto group = KConfigGroup{m_config, HAPTICS_CONFIG_GROUP};
+    group.writeEntry("duration", vibrationDuration, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+void MobileShellSettings::resetVibrationDuration()
+{
+    auto group = KConfigGroup{m_config, HAPTICS_CONFIG_GROUP};
+    group.revertToDefault("duration", KConfigGroup::Notify);
     m_config->sync();
 }
 

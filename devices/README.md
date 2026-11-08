@@ -42,3 +42,4 @@ In order to test your changes, install the file to `/usr/share/plasma-mobile-dev
 $ plasma-mobile-envmanager --apply-settings
 $ plasmashell -p org.kde.plasma.mobileshell --replace
 ```
+

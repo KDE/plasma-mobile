@@ -88,6 +88,13 @@ void DevicePresets::initialize()
         writeGroup.sync();
     }
 
+    // Haptics tuning
+    auto presetHapticsGroup = KConfigGroup{presetConfig, u"Haptics"_s};
+
+    auto mobileHapticsGroup = KConfigGroup{m_mobileConfig, u"Haptics"_s};
+    setKey(presetHapticsGroup, presetHapticsGroup, mobileHapticsGroup, u"amplitude"_s, u"amplitude"_s);
+    setKey(presetHapticsGroup, presetHapticsGroup, mobileHapticsGroup, u"duration"_s, u"duration"_s);
+
     m_mobileConfig->sync();
 }
 

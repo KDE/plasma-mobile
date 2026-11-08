@@ -34,25 +34,30 @@ FormCard.FormCardPage {
 
         FormCard.FormDelegateSeparator { above: shellVibrationsSwitch; below: vibrationDurationDelegate }
 
-        FormCard.FormComboBoxDelegate {
+        FormCard.FormSpinBoxDelegate {
             id: vibrationDurationDelegate
-            text: i18n("Vibration Duration")
+            label: i18n("Vibration duration (ms)")
             description: i18n("How long shell vibrations should be.")
+            enabled: ShellSettings.Settings.vibrationsEnabled
 
-            model: [
-                {"name": i18nc("Long duration", "Long"), "value": 100},
-                {"name": i18nc("Medium duration", "Medium"), "value": 50},
-                {"name": i18nc("Short duration", "Short"), "value": 10}
-            ]
+            from: 1
+            to: 200
+            value: ShellSettings.Settings.vibrationDuration
 
-            textRole: "name"
-            valueRole: "value"
+            onValueModified: ShellSettings.Settings.vibrationDuration = value
+        }
 
-            Component.onCompleted: {
-                currentIndex = indexOfValue(ShellSettings.Settings.vibrationDuration);
-                dialog.parent = root;
+        FormCard.FormDelegateSeparator { above: vibrationDurationDelegate; below: resetDurationButton }
+
+        FormCard.FormButtonDelegate {
+            id: resetDurationButton
+            icon.name: "edit-reset"
+            text: i18n("Reset to default duration")
+            enabled: ShellSettings.Settings.vibrationsEnabled
+            onClicked: {
+                ShellSettings.Settings.resetVibrationDuration();
+                vibrationDurationDelegate.value = Qt.binding(() => ShellSettings.Settings.vibrationDuration);
             }
-            onCurrentValueChanged: ShellSettings.Settings.vibrationDuration = currentValue;
         }
     }
 

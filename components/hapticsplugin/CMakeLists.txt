@@ -4,6 +4,7 @@
 set_source_files_properties(dbus/org.sigxcpu.Feedback.Haptic.xml PROPERTIES INCLUDE vibrationevent.h)
 qt_add_dbus_interfaces(dbusinterface_SRCS
     dbus/org.sigxcpu.Feedback.Haptic.xml)
+qt_add_dbus_interface(dbusinterface_SRCS dbus/org.freedesktop.DBus.Properties.xml dbuspropertiesinterface)
 
 ecm_add_qml_module(hapticsplugin URI org.kde.plasma.private.mobileshell.hapticsplugin GENERATE_PLUGIN_SOURCE)
 target_sources(hapticsplugin PRIVATE
@@ -16,6 +17,7 @@ target_link_libraries(hapticsplugin PRIVATE
     Qt::Qml
     Qt::DBus
     KF6::CoreAddons
+    KF6::ConfigCore
     KF6::I18n
     QCoro::DBus
     QCoro::Qml

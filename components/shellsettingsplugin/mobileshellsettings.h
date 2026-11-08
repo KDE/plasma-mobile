@@ -105,6 +105,11 @@ public:
     void setVibrationDuration(int vibrationDuration);
 
     /**
+     * Remove the user's vibration duration, falling back to the device preset (or built-in) default.
+     */
+    Q_INVOKABLE void resetVibrationDuration();
+
+    /**
      * Whether animations are enabled in the shell.
      *
      * If false, vibrations will either be disabled or minimized as much as possible.
