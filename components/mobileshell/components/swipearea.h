@@ -63,6 +63,8 @@ Q_SIGNALS:
     void touchpadScrollEnded();
     void touchpadScrollMove(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
 
+    void wheelScrolled(qreal deltaX, qreal deltaY);
+
 protected:
     bool childMouseEventFilter(QQuickItem *item, QEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;

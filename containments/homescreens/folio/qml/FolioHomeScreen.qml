@@ -29,6 +29,7 @@ Item {
     property real rightMargin: 0
 
     property bool interactive: true
+    readonly property alias swipeArea: swipeArea
 
     // non-widget drop animation
     readonly property bool dropAnimationRunning: delegateDragItem.dropAnimationRunning || widgetDragItem.dropAnimationRunning

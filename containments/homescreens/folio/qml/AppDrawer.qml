@@ -67,6 +67,22 @@ Item {
         root.flickable.returnToBounds();
     }
 
+    Connections {
+        target: root.homeScreen ? root.homeScreen.swipeArea : null
+        enabled: root.opacity > 0 && root.folio.HomeScreenState.viewState === Folio.HomeScreenState.AppDrawerView
+
+        function onWheelScrolled(deltaX, deltaY) {
+            if (!root.flickable || !root.flickable.atYBeginning || deltaY >= 0) {
+                return;
+            }
+
+            const minY = 0 - root.flickable.topMargin;
+            const maxY = Math.max(minY, root.flickable.contentHeight - root.flickable.height + root.flickable.bottomMargin);
+            root.flickable.contentY = Math.max(minY, Math.min(maxY, root.flickable.contentY - deltaY));
+            root.flickable.returnToBounds();
+        }
+    }
+
     // App drawer container
     Item {
         id: appDrawerContainer

@@ -225,14 +225,31 @@ void SwipeArea::wheelEvent(QWheelEvent *event)
 
     event->setAccepted(false);
 
+    qreal deltaX = 0;
+    qreal deltaY = 0;
+
+    if (!event->pixelDelta().isNull()) {
+        deltaX = event->pixelDelta().x();
+        deltaY = event->pixelDelta().y();
+    } else if (!event->angleDelta().isNull()) {
+        deltaX = (event->angleDelta().x() / 120.0) * 40.0;
+        deltaY = (event->angleDelta().y() / 120.0) * 40.0;
+    }
+
+    if (m_mode == Mode::HorizontalOnly) {
+        deltaY = 0;
+    } else if (m_mode == Mode::VerticalOnly) {
+        deltaX = 0;
+    }
+
+    // Touchpad continuous scrolling handling
     switch (event->phase()) {
     case Qt::ScrollBegin:
         if (!m_touchpadScrolling) {
-            event->accept();
-
             m_touchpadScrolling = true;
             m_totalScrollDelta = QPointF{0, 0};
             Q_EMIT touchpadScrollStarted(event->points().first().position());
+            event->accept();
         }
         break;
     case Qt::ScrollEnd:
@@ -240,26 +257,29 @@ void SwipeArea::wheelEvent(QWheelEvent *event)
             m_touchpadScrolling = false;
             m_totalScrollDelta = QPointF{0, 0};
             Q_EMIT touchpadScrollEnded();
+            event->accept();
         }
         break;
     default:
         break;
     }
 
-    // HACK: if it isn't the touchpad, we never get the isBeginEvent() and isEndEvent() events
-    if (!m_touchpadScrolling) {
+    if (m_touchpadScrolling) {
+        for (auto &point : event->points()) {
+            event->addPassiveGrabber(point, this);
+        }
+
+        m_totalScrollDelta = QPointF{m_totalScrollDelta.x() + deltaX, m_totalScrollDelta.y() + deltaY};
+        Q_EMIT touchpadScrollMove(m_totalScrollDelta.x(), m_totalScrollDelta.y(), deltaX, deltaY);
+        event->accept();
         return;
     }
 
-    for (auto &point : event->points()) {
-        event->addPassiveGrabber(point, this);
+    // Mouse wheel (discrete clicks, phase == Qt::NoScrollPhase)
+    if (deltaX != 0 || deltaY != 0) {
+        Q_EMIT wheelScrolled(deltaX, deltaY);
+        event->accept();
     }
-
-    auto pixelDelta = event->pixelDelta();
-    m_totalScrollDelta = QPointF{m_totalScrollDelta + pixelDelta};
-    Q_EMIT touchpadScrollMove(m_totalScrollDelta.x(), m_totalScrollDelta.y(), pixelDelta.x(), pixelDelta.y());
-
-    event->accept();
 }
 
 void SwipeArea::setMoving(bool moving)
