@@ -275,7 +275,7 @@ AppDrawerAppGrid {
             from: "closed"; to: "opened"
             NumberAnimation {
                 property: "animationProgress"
-                duration: 800
+                duration: Kirigami.Units.veryLongDuration * 1.25
                 easing.type: Easing.OutExpo
             }
         },
@@ -284,12 +284,12 @@ AppDrawerAppGrid {
             ParallelAnimation {
                 NumberAnimation {
                     property: "animationProgress"
-                    duration: 700
+                    duration: Kirigami.Units.veryLongDuration
                     easing.type: Easing.OutExpo
                 }
                 NumberAnimation {
                     property: "contentY"
-                    duration: 700
+                    duration: Kirigami.Units.veryLongDuration
                     easing.type: Easing.OutExpo
                 }
             }
