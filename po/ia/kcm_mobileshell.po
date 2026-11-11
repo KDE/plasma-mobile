@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
 "PO-Revision-Date: 2026-01-30 10:32+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -272,8 +272,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Si ha vibrationes habilitate in le concha (shell)."
 
 #: ui/VibrationForm.qml:39
-#, kde-format
-msgid "Vibration Duration"
+#, fuzzy, kde-format
+#| msgid "Vibration Duration"
+msgid "Vibration duration (ms)"
 msgstr "Duration de Vibration"
 
 #: ui/VibrationForm.qml:40
@@ -281,25 +282,12 @@ msgstr "Duration de Vibration"
 msgid "How long shell vibrations should be."
 msgstr "Quanto longe deberea essere le vibrationes de concha (shell)."
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:55
 #, kde-format
-msgctxt "Long duration"
-msgid "Long"
-msgstr "Longe"
+msgid "Reset to default duration"
+msgstr ""
 
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "Medium duration"
-msgid "Medium"
-msgstr "Medie"
-
-#: ui/VibrationForm.qml:45
-#, kde-format
-msgctxt "Short duration"
-msgid "Short"
-msgstr "Breve"
-
-#: ui/VibrationForm.qml:60
+#: ui/VibrationForm.qml:65
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -307,6 +295,18 @@ msgid ""
 msgstr ""
 "Vibrationes de claviero es controlate separatemente inle modulo de "
 "preferentias de claviero."
+
+#~ msgctxt "Long duration"
+#~ msgid "Long"
+#~ msgstr "Longe"
+
+#~ msgctxt "Medium duration"
+#~ msgid "Medium"
+#~ msgstr "Medie"
+
+#~ msgctxt "Short duration"
+#~ msgid "Short"
+#~ msgstr "Breve"
 
 #~ msgid "Navigation Panel"
 #~ msgstr "Pannello de Navigation"

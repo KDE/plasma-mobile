@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
 "PO-Revision-Date: 2026-10-12 09:21+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -270,8 +270,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Se avere attivata la vibrazione nella shell."
 
 #: ui/VibrationForm.qml:39
-#, kde-format
-msgid "Vibration Duration"
+#, fuzzy, kde-format
+#| msgid "Vibration Duration"
+msgid "Vibration duration (ms)"
 msgstr "Durata vibrazione"
 
 #: ui/VibrationForm.qml:40
@@ -279,25 +280,12 @@ msgstr "Durata vibrazione"
 msgid "How long shell vibrations should be."
 msgstr "Quanto dovrebbe essere lunga la vibrazione della shell."
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:55
 #, kde-format
-msgctxt "Long duration"
-msgid "Long"
-msgstr "Lunga"
+msgid "Reset to default duration"
+msgstr ""
 
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "Medium duration"
-msgid "Medium"
-msgstr "Media"
-
-#: ui/VibrationForm.qml:45
-#, kde-format
-msgctxt "Short duration"
-msgid "Short"
-msgstr "Breve"
-
-#: ui/VibrationForm.qml:60
+#: ui/VibrationForm.qml:65
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -305,6 +293,18 @@ msgid ""
 msgstr ""
 "La vibrazione della tastiera è controllata separatamente nel modulo delle "
 "impostazioni della tastiera."
+
+#~ msgctxt "Long duration"
+#~ msgid "Long"
+#~ msgstr "Lunga"
+
+#~ msgctxt "Medium duration"
+#~ msgid "Medium"
+#~ msgstr "Media"
+
+#~ msgctxt "Short duration"
+#~ msgid "Short"
+#~ msgstr "Breve"
 
 #~ msgid ""
 #~ "When active, it allow to wakeup the device just with double tap when the "

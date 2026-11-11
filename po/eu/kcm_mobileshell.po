@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
 "PO-Revision-Date: 2026-10-11 18:58+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -269,8 +269,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Oskolean bibrazioak gaituta egon behar duten edo ez."
 
 #: ui/VibrationForm.qml:39
-#, kde-format
-msgid "Vibration Duration"
+#, fuzzy, kde-format
+#| msgid "Vibration Duration"
+msgid "Vibration duration (ms)"
 msgstr "Bibrazioen iraupena"
 
 #: ui/VibrationForm.qml:40
@@ -278,25 +279,12 @@ msgstr "Bibrazioen iraupena"
 msgid "How long shell vibrations should be."
 msgstr "Oskoleko bibrazioek zenbat iraun behar duten."
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:55
 #, kde-format
-msgctxt "Long duration"
-msgid "Long"
-msgstr "Luzea"
+msgid "Reset to default duration"
+msgstr ""
 
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "Medium duration"
-msgid "Medium"
-msgstr "Ertaina"
-
-#: ui/VibrationForm.qml:45
-#, kde-format
-msgctxt "Short duration"
-msgid "Short"
-msgstr "Laburra"
-
-#: ui/VibrationForm.qml:60
+#: ui/VibrationForm.qml:65
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -304,6 +292,18 @@ msgid ""
 msgstr ""
 "Teklatuaren bibrazioak bereizita kontrolatzen dira teklatuaren ezarpen "
 "moduluan."
+
+#~ msgctxt "Long duration"
+#~ msgid "Long"
+#~ msgstr "Luzea"
+
+#~ msgctxt "Medium duration"
+#~ msgid "Medium"
+#~ msgstr "Ertaina"
+
+#~ msgctxt "Short duration"
+#~ msgid "Short"
+#~ msgstr "Laburra"
 
 #~ msgid ""
 #~ "When active, it allow to wakeup the device just with double tap when the "

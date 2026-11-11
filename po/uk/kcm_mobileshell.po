@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
 "PO-Revision-Date: 2026-10-08 18:01+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -269,8 +269,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Визначає, чи буде увімкнено вібрацію в оболонці."
 
 #: ui/VibrationForm.qml:39
-#, kde-format
-msgid "Vibration Duration"
+#, fuzzy, kde-format
+#| msgid "Vibration Duration"
+msgid "Vibration duration (ms)"
 msgstr "Тривалість вібрації"
 
 #: ui/VibrationForm.qml:40
@@ -278,25 +279,12 @@ msgstr "Тривалість вібрації"
 msgid "How long shell vibrations should be."
 msgstr "Наскільки довгими мають бути вібрації оболонки."
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:55
 #, kde-format
-msgctxt "Long duration"
-msgid "Long"
-msgstr "Довга"
+msgid "Reset to default duration"
+msgstr ""
 
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "Medium duration"
-msgid "Medium"
-msgstr "Середня"
-
-#: ui/VibrationForm.qml:45
-#, kde-format
-msgctxt "Short duration"
-msgid "Short"
-msgstr "Коротка"
-
-#: ui/VibrationForm.qml:60
+#: ui/VibrationForm.qml:65
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -304,6 +292,18 @@ msgid ""
 msgstr ""
 "Керування вібраціями клавіатури виконується окремо у модулі параметрів "
 "клавіатури."
+
+#~ msgctxt "Long duration"
+#~ msgid "Long"
+#~ msgstr "Довга"
+
+#~ msgctxt "Medium duration"
+#~ msgid "Medium"
+#~ msgstr "Середня"
+
+#~ msgctxt "Short duration"
+#~ msgid "Short"
+#~ msgstr "Коротка"
 
 #~ msgid ""
 #~ "When active, it allow to wakeup the device just with double tap when the "

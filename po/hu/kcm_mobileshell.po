@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
 "PO-Revision-Date: 2025-11-21 19:49+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -267,8 +267,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Be legyen-e kapcsolva a rezgés a felületen."
 
 #: ui/VibrationForm.qml:39
-#, kde-format
-msgid "Vibration Duration"
+#, fuzzy, kde-format
+#| msgid "Vibration Duration"
+msgid "Vibration duration (ms)"
 msgstr "Rezgés időtartama"
 
 #: ui/VibrationForm.qml:40
@@ -276,31 +277,30 @@ msgstr "Rezgés időtartama"
 msgid "How long shell vibrations should be."
 msgstr "Mennyi ideig tartson a felület rezgése."
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:55
 #, kde-format
-msgctxt "Long duration"
-msgid "Long"
-msgstr "Hosszú"
+msgid "Reset to default duration"
+msgstr ""
 
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "Medium duration"
-msgid "Medium"
-msgstr "Közepes"
-
-#: ui/VibrationForm.qml:45
-#, kde-format
-msgctxt "Short duration"
-msgid "Short"
-msgstr "Rövid"
-
-#: ui/VibrationForm.qml:60
+#: ui/VibrationForm.qml:65
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
 "A billentyűzet rezgése külön szabályozható a billentyűzetbeállító modulban."
+
+#~ msgctxt "Long duration"
+#~ msgid "Long"
+#~ msgstr "Hosszú"
+
+#~ msgctxt "Medium duration"
+#~ msgid "Medium"
+#~ msgstr "Közepes"
+
+#~ msgctxt "Short duration"
+#~ msgid "Short"
+#~ msgstr "Rövid"
 
 #~ msgid "Navigation Panel"
 #~ msgstr "Navigációs panel"

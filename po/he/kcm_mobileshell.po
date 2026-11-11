@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:48+0000\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
 "PO-Revision-Date: 2026-10-09 10:08+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -263,8 +263,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "האם להפעיל רטט במעטפת."
 
 #: ui/VibrationForm.qml:39
-#, kde-format
-msgid "Vibration Duration"
+#, fuzzy, kde-format
+#| msgid "Vibration Duration"
+msgid "Vibration duration (ms)"
 msgstr "משך רטט"
 
 #: ui/VibrationForm.qml:40
@@ -272,30 +273,29 @@ msgstr "משך רטט"
 msgid "How long shell vibrations should be."
 msgstr "מה יהיה אורך הרטט במעטפת."
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:55
 #, kde-format
-msgctxt "Long duration"
-msgid "Long"
-msgstr "ארוך"
+msgid "Reset to default duration"
+msgstr ""
 
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "Medium duration"
-msgid "Medium"
-msgstr "בינוני"
-
-#: ui/VibrationForm.qml:45
-#, kde-format
-msgctxt "Short duration"
-msgid "Short"
-msgstr "קצר"
-
-#: ui/VibrationForm.qml:60
+#: ui/VibrationForm.qml:65
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "הרטט במקלדת נשלט בנפרד דרך מודול הגדרות המקלדת."
+
+#~ msgctxt "Long duration"
+#~ msgid "Long"
+#~ msgstr "ארוך"
+
+#~ msgctxt "Medium duration"
+#~ msgid "Medium"
+#~ msgstr "בינוני"
+
+#~ msgctxt "Short duration"
+#~ msgid "Short"
+#~ msgstr "קצר"
 
 #~ msgid ""
 #~ "When active, it allow to wakeup the device just with double tap when the "
