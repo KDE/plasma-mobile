@@ -133,6 +133,7 @@ Loader {
 
         WidgetExplorer {
             id: widgetExplorer
+            requireExplicitFormFactor: true
             containment: Plasmoid
 
             onShouldClose: root.requestClose()
