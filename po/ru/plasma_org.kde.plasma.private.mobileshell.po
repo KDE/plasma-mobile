@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2023-04-02 09:47+0300\n"
+"PO-Revision-Date: 2026-11-11 22:56+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -120,13 +120,13 @@ msgstr "Настройка громкости %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/osd/volume/ListItemBase.qml:257
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/osd/volume/StreamListItem.qml:21
 #, kde-format
@@ -152,13 +152,13 @@ msgstr "Включить звук"
 #: qml/osd/volume/VolumeOSD.qml:132
 #, kde-format
 msgid "100%"
-msgstr "100%"
+msgstr "100 %"
 
 #: qml/osd/volume/VolumeOSD.qml:142
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/osd/volume/VolumeOSD.qml:162
 #, kde-format
@@ -178,7 +178,7 @@ msgstr "Включить или отключить показ звуковых �
 #: qml/statusbar/indicators/BatteryIndicator.qml:36
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
