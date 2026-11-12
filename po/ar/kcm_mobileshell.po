@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-31 20:29+0400\n"
+"PO-Revision-Date: 2026-11-11 20:51+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -264,10 +264,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "ما إذا كان يجب تمكين الاهتزازات."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "مدة الاهتزاز"
+msgstr "مدة الاهتزاز (م ث)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -277,7 +276,7 @@ msgstr "كم من الوقت يجب أن تكون الاهتزازات."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "صفّر إلى المدة المبدئية"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

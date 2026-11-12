@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 18:56+0300\n"
+"PO-Revision-Date: 2026-11-11 20:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -265,10 +265,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Kabukta titreşimlerin olup olmayacağı."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Titreşim Süresi"
+msgstr "Titreşim süresi (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -278,7 +277,7 @@ msgstr "Kabuk titreşimlerinin ne kadar süreceği."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Öntanımlı süreye sıfırla"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

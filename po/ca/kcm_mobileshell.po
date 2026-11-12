@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 12:56+0200\n"
+"PO-Revision-Date: 2026-11-11 09:45+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -273,10 +273,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Si s'ha activat la vibració en l'intèrpret d'ordres."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Durada de la vibració"
+msgstr "Durada de la vibració (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -286,7 +285,7 @@ msgstr "Quant llarga ha de ser la vibració en l'intèrpret d'ordres."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Restableix a la durada predeterminada"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

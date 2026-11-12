@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 18:01+0300\n"
+"PO-Revision-Date: 2026-11-11 17:07+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -269,10 +269,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Визначає, чи буде увімкнено вібрацію в оболонці."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Тривалість вібрації"
+msgstr "Тривалість вібрації (у мс)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -282,7 +281,7 @@ msgstr "Наскільки довгими мають бути вібрації �
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Повернутися до типової тривалості"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

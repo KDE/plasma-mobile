@@ -289,15 +289,3 @@ msgid ""
 "module."
 msgstr ""
 "Tastaturvibrasjonar vert kontrollerte for seg, i modulen for tastaturoppsett."
-
-#~ msgctxt "Long duration"
-#~ msgid "Long"
-#~ msgstr "Lang"
-
-#~ msgctxt "Medium duration"
-#~ msgid "Medium"
-#~ msgstr "Middels"
-
-#~ msgctxt "Short duration"
-#~ msgid "Short"
-#~ msgstr "Kort"

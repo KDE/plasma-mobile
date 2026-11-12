@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 12:13+0200\n"
+"PO-Revision-Date: 2026-11-11 12:26+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -269,10 +269,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Povolení vibrací v shellu."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Délka vibrace"
+msgstr "Délka vibrace (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -282,7 +281,7 @@ msgstr "Délka vibrací v shellu."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Obnovit výchozí dobu trvání"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

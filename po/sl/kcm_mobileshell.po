@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 07:18+0200\n"
+"PO-Revision-Date: 2026-11-11 07:34+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -264,10 +264,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Ali naj bodo omogočene vibracije v shellu."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Trajanje vibracij"
+msgstr "Trajanje vibracij (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -277,7 +276,7 @@ msgstr "Kako dolgo naj trajajo vibracije v shellu."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Ponastavi na privzeto trajanje"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

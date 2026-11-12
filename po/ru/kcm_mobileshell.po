@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 08:05+0200\n"
-"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2026-11-11 07:46+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -269,10 +269,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Включение виброотклика оболочки."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Длительность вибрации"
+msgstr "Длительность вибрации (мс)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -282,7 +281,7 @@ msgstr "Продолжительность виброотклика."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Восстановить длительность по умолчанию"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
