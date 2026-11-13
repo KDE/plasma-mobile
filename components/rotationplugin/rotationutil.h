@@ -14,6 +14,11 @@
 
 class SensorProxy;
 
+namespace KScreen
+{
+class Dpms;
+}
+
 class RotationUtil : public QObject
 {
     Q_OBJECT
@@ -46,9 +51,11 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void updateShowRotationButton();
+    void updateSensorClaim();
 
 private:
     void retrieveKScreen();
+    bool sensorNeeded() const;
 
     bool m_showRotationButton{false};
     KScreen::Output::Rotation m_rotateTo{KScreen::Output::Rotation::None};
@@ -57,4 +64,6 @@ private:
 
     KScreen::ConfigPtr m_config{nullptr};
     SensorProxy *m_sensorProxy{nullptr};
+    KScreen::Dpms *m_dpms{nullptr};
+    bool m_displayOn{true};
 };

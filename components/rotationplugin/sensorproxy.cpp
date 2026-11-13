@@ -76,6 +76,11 @@ SensorProxy::Orientation SensorProxy::orientation() const
     return m_orientation;
 }
 
+bool SensorProxy::claimed() const
+{
+    return m_claimed;
+}
+
 void SensorProxy::claimAccelerometer()
 {
     if (m_claimed) {

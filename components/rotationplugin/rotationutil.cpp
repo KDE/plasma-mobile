@@ -10,6 +10,8 @@
 
 #include <QDebug>
 
+#include <KScreenDpms/Dpms>
+
 #include <kscreen/configmonitor.h>
 #include <kscreen/getconfigoperation.h>
 #include <kscreen/output.h>
@@ -50,12 +52,42 @@ RotationUtil::Rotation mapRotation(KScreen::Output::Rotation rotation)
 RotationUtil::RotationUtil(QObject *parent)
     : QObject{parent}
     , m_sensorProxy{new SensorProxy(this)}
+    , m_dpms{new KScreen::Dpms(this)}
 {
     retrieveKScreen();
 
     connect(m_sensorProxy, &SensorProxy::orientationChanged, this, &RotationUtil::updateShowRotationButton);
     connect(m_sensorProxy, &SensorProxy::availableChanged, this, &RotationUtil::updateShowRotationButton);
-    m_sensorProxy->claimAccelerometer();
+    connect(m_dpms, &KScreen::Dpms::modeChanged, this, [this](KScreen::Dpms::Mode mode) {
+        m_displayOn = mode == KScreen::Dpms::On;
+        updateSensorClaim();
+    });
+}
+
+bool RotationUtil::sensorNeeded() const
+{
+    if (!m_displayOn || !m_config) {
+        return false;
+    }
+
+    // same outputs as in updateShowRotationButton()
+    for (KScreen::OutputPtr output : m_config->outputs()) {
+        if (output && output->autoRotatePolicy() == KScreen::Output::AutoRotatePolicy::Never) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Keeping the accelerometer claimed makes iio-sensor-proxy stream it, also while suspended
+void RotationUtil::updateSensorClaim()
+{
+    if (sensorNeeded()) {
+        m_sensorProxy->claimAccelerometer();
+    } else {
+        m_sensorProxy->releaseAccelerometer();
+    }
+    updateShowRotationButton();
 }
 
 void RotationUtil::retrieveKScreen()
@@ -71,13 +103,17 @@ void RotationUtil::retrieveKScreen()
 
         // update all screens with event connect
         for (KScreen::OutputPtr output : m_config->outputs()) {
-            connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &RotationUtil::updateShowRotationButton);
+            connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &RotationUtil::updateSensorClaim);
         }
 
         // listen to all new screens and connect
         connect(m_config.data(), &KScreen::Config::outputAdded, this, [this](const auto &output) {
-            connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &RotationUtil::updateShowRotationButton);
+            connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &RotationUtil::updateSensorClaim);
+            updateSensorClaim();
         });
+        connect(m_config.data(), &KScreen::Config::outputRemoved, this, &RotationUtil::updateSensorClaim);
+
+        updateSensorClaim();
     });
 }
 
@@ -126,6 +162,12 @@ RotationUtil::Rotation RotationUtil::currentRotation() const
 void RotationUtil::updateShowRotationButton()
 {
     if (!m_config) {
+        return;
+    }
+
+    if (!m_sensorProxy->claimed()) {
+        m_showRotationButton = false;
+        Q_EMIT rotationChanged();
         return;
     }
 

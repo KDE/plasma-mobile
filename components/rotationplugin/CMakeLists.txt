@@ -15,6 +15,7 @@ target_link_libraries(rotationplugin PRIVATE
     Qt::Quick
     Plasma::Plasma
     KF6::Screen
+    KF6::ScreenDpms
     Qt::Qml
 )
 
