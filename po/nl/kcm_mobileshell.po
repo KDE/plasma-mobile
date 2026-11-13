@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 20:03+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"PO-Revision-Date: 2026-11-12 18:26+0100\n"
+"Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -268,10 +268,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Of trillingen in de shell zijn ingeschakeld."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Tijdsduur trillingen"
+msgstr "Tijdsduur trillingen (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -281,7 +280,7 @@ msgstr "Hoe lang shell-trillingen zouden moeten zijn."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Terugzetten naar standaard tijdsduur"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

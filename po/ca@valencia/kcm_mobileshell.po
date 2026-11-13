@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 12:56+0200\n"
+"PO-Revision-Date: 2026-11-11 09:45+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -272,10 +272,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Si s'ha marcat la vibració en l'intèrpret d'ordres."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Duració de la vibració"
+msgstr "Duració de la vibració (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -285,7 +284,7 @@ msgstr "Quant llarga ha de ser la vibració en l'intèrpret d'ordres."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Restablix a la duració predeterminada"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
@@ -295,15 +294,3 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla per separat en el mòdul de configuració "
 "del teclat."
-
-#~ msgctxt "Long duration"
-#~ msgid "Long"
-#~ msgstr "Llarga"
-
-#~ msgctxt "Medium duration"
-#~ msgid "Medium"
-#~ msgstr "Mitjana"
-
-#~ msgctxt "Short duration"
-#~ msgid "Short"
-#~ msgstr "Curta"
