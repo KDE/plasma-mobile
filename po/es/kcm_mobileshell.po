@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 13:38+0100\n"
+"PO-Revision-Date: 2026-11-11 11:43+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -274,10 +274,9 @@ msgstr ""
 "Controla si se deben activar las vibraciones en el intérprete de órdenes."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Duración de la vibración"
+msgstr "Duración de la vibración (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -287,7 +286,7 @@ msgstr "Duración que deben tener las vibraciones del intérprete de órdenes."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Restablecer a la duración predeterminada"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
@@ -297,15 +296,3 @@ msgid ""
 msgstr ""
 "Las vibraciones del teclado se controlan de forma separada en el módulo de "
 "ajustes del teclado."
-
-#~ msgctxt "Long duration"
-#~ msgid "Long"
-#~ msgstr "Larga"
-
-#~ msgctxt "Medium duration"
-#~ msgid "Medium"
-#~ msgstr "Media"
-
-#~ msgctxt "Short duration"
-#~ msgid "Short"
-#~ msgstr "Corta"

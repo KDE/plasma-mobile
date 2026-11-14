@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-09 10:08+0300\n"
+"PO-Revision-Date: 2026-11-13 11:46+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -263,10 +263,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "האם להפעיל רטט במעטפת."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "משך רטט"
+msgstr "משך זמן רטט (מילישניות)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -276,7 +275,7 @@ msgstr "מה יהיה אורך הרטט במעטפת."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "איפוס למשך זמן ברירת המחדל"
 
 #: ui/VibrationForm.qml:65
 #, kde-format

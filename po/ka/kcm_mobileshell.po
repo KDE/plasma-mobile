@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2026-10-08 05:38+0200\n"
+"PO-Revision-Date: 2026-11-13 02:43+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -267,10 +267,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "ჩართულია თუ არა ვიბრაცია გარსიდან."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "ვიბრაციის ხანგრძლივობა"
+msgstr "ვიბრაციის ხანგრძლივობა (მწმ)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -280,7 +279,7 @@ msgstr "რამდენი ხანი გაგრძელდება ვ
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "ჩამოყრა ნაგულისხმევ ხანგრძლივობაზე"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
