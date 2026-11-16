@@ -1,0 +1,265 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-09-04 00:47+0000\n"
+"PO-Revision-Date: 2026-11-14 19:40+0100\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: ui/main.qml:18
+#, kde-format
+msgid "Waydroid Integration"
+msgstr "Уклапање Waydroid‑а"
+
+#: ui/main.qml:31
+#, kde-format
+msgid "Waydroid is not installed"
+msgstr "Waydroid није инсталиран"
+
+#: ui/main.qml:38
+#, kde-format
+msgid "Check installation"
+msgstr "Провери инсталацију"
+
+#: ui/main.qml:51
+#, kde-format
+msgid ""
+"Downloading Android and vendor images.\n"
+"It can take a few minutes."
+msgstr ""
+"Преузимам одразе Андроида и произвођача.\n"
+"Може потрајати неколико минута."
+
+#: ui/main.qml:66
+#, kde-format
+msgid ""
+"Waydroid is resetting.\n"
+"It can take a few seconds."
+msgstr ""
+"Waydroid се ресетује.\n"
+"Може потрајати неколико секунди."
+
+#: ui/main.qml:75
+#, kde-format
+msgid "The Waydroid session is not running."
+msgstr "Сесија Waydroid‑а није покренута."
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Start the session"
+msgstr "Покрени сесију"
+
+#: ui/main.qml:89
+#, kde-format
+msgid ""
+"Waydroid session is starting.\n"
+"It can take a few seconds."
+msgstr ""
+"Сесија Waydroid‑а се покреће.\n"
+"Може потрајати неколико секунди."
+
+#: ui/WaydroidApplicationsPage.qml:24
+#, kde-format
+msgid "Waydroid applications"
+msgstr "Програми Waydroid‑а"
+
+#: ui/WaydroidApplicationsPage.qml:28
+#, kde-format
+msgctxt "@action:button"
+msgid "Install APK"
+msgstr "Инсталирај APK"
+
+#: ui/WaydroidApplicationsPage.qml:66
+#, kde-format
+msgid "You must select a local file"
+msgstr "Морате изабрати локални фајл"
+
+#: ui/WaydroidApplicationsPage.qml:106
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete the application"
+msgstr "Обриши програм"
+
+#: ui/WaydroidConfigurationForm.qml:19
+#, kde-format
+msgid "General information"
+msgstr "Општи подаци"
+
+#: ui/WaydroidConfigurationForm.qml:24
+#, kde-format
+msgid "IP address"
+msgstr "ИП адреса"
+
+#: ui/WaydroidConfigurationForm.qml:28
+#, kde-format
+msgid "Copy"
+msgstr "Копирај"
+
+#: ui/WaydroidConfigurationForm.qml:37
+#, kde-format
+msgid "Waydroid status"
+msgstr "Стање Waydroid‑а"
+
+#: ui/WaydroidConfigurationForm.qml:39
+#, kde-format
+msgid "Stopping..."
+msgstr "Заустављам..."
+
+#: ui/WaydroidConfigurationForm.qml:40
+#, kde-format
+msgid "Running"
+msgstr "У погону"
+
+#: ui/WaydroidConfigurationForm.qml:49
+#, kde-format
+msgid "Stop session"
+msgstr "Заустави сесију"
+
+#: ui/WaydroidConfigurationForm.qml:57
+#, kde-format
+msgid "Certify my device for Google Play Protect"
+msgstr "Овери мој уређај за Google Play Protect"
+
+#: ui/WaydroidConfigurationForm.qml:62
+#, kde-format
+msgid "Installed applications"
+msgstr "Инсталирани програми"
+
+#: ui/WaydroidConfigurationForm.qml:67
+#, kde-format
+msgid "Reset Waydroid"
+msgstr "Ресетуј Waydroid"
+
+#: ui/WaydroidConfigurationForm.qml:73
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirm Waydroid Reset"
+msgstr "Потврда ресетовања Waydroid‑а"
+
+#: ui/WaydroidConfigurationForm.qml:74
+#, kde-format
+msgid ""
+"Are you sure you want to reset Waydroid? This is a destructive action, and "
+"will wipe all user data."
+msgstr ""
+"Желите ли заиста да ресетујете Waydroid? Ово је разорна радња, која ће "
+"обрисати све корисничке податке."
+
+#: ui/WaydroidConfigurationForm.qml:92
+#, kde-format
+msgid "Waydroid properties"
+msgstr "Својства Waydroid‑а"
+
+#: ui/WaydroidConfigurationForm.qml:103
+#, kde-format
+msgid "May require restarting the Waydroid session to apply"
+msgstr ""
+"Можда ће бити потребно поново покренути сесију Waydroid‑а да би се применило"
+
+#: ui/WaydroidConfigurationForm.qml:120
+#, kde-format
+msgid "Multi Windows"
+msgstr "Више прозора"
+
+#: ui/WaydroidConfigurationForm.qml:121
+#, kde-format
+msgid "Enables/Disables window integration with the desktop"
+msgstr "Укључује/искључује уклапање прозора у површ"
+
+#: ui/WaydroidConfigurationForm.qml:133
+#, kde-format
+msgid "Suspend"
+msgstr "Суспендовање"
+
+#: ui/WaydroidConfigurationForm.qml:134
+#, kde-format
+msgid ""
+"Let the Waydroid container sleep (after the display timeout) when no apps "
+"are active"
+msgstr ""
+"Нека контејнер Waydroid‑а спава (по прековремену екрана) кад ниједан програм "
+"није активан"
+
+#: ui/WaydroidConfigurationForm.qml:146
+#, kde-format
+msgid "UEvent"
+msgstr "UEvent"
+
+#: ui/WaydroidConfigurationForm.qml:147
+#, kde-format
+msgid "Allow android direct access to hotplugged devices"
+msgstr "Дозволи Андроиду непосредан приступ уређајима утакнутим у ходу"
+
+#: ui/WaydroidDownloadStatus.qml:39
+#, kde-format
+msgid "Downloading %1MB/%2MB Speed %3"
+msgstr "Преузимам %1/%2 MB, брзина %3"
+
+#: ui/WaydroidDownloadStatus.qml:47
+#, kde-format
+msgid "%1MB/s"
+msgstr "%1 MB/s"
+
+#: ui/WaydroidDownloadStatus.qml:49
+#, kde-format
+msgid "%1kB/s"
+msgstr "%1 kB/s"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:23
+#, kde-format
+msgid "Google Play Protect configuration"
+msgstr "Постава за Google Play Protect"
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:33
+#, kde-format
+msgid ""
+"Fetching your Android ID.\n"
+"It can take a few seconds."
+msgstr ""
+"Добављам ваш андроид ИД.\n"
+"Може потрајати неколико секунди."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:65
+#, kde-format
+msgid ""
+"When launching Waydroid with GAPPS for the first time, you will be notified "
+"that the device is not certified for Google Play Protect. To self certify "
+"your device, paste the Android ID in the field on the website. Then, give "
+"the Google services some minutes to reflect the change and restart Waydroid."
+msgstr ""
+"Кад први пут покренете Waydroid са GAPPS‑ом, бићете обавештени да уређај "
+"није оверен за Google Play Protect. Да бисте сами оверили уређај, налепите "
+"андроид ИД у поље на веб сајту. Затим дајте сервисима Гугла неколико минута "
+"да примене измену и поново покрените Waydroid."
+
+#: ui/WaydroidGooglePlayProtectConfigurationPage.qml:70
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy Android ID and open the website"
+msgstr "Копирај андроид ИД и отвори веб сајт"
+
+#: ui/WaydroidInitialConfigurationForm.qml:15
+#, kde-format
+msgid "Initial configuration"
+msgstr "Почетна постава"
+
+#: ui/WaydroidInitialConfigurationForm.qml:21
+#, kde-format
+msgid "System type"
+msgstr "Тип система"
+
+#: ui/WaydroidInitialConfigurationForm.qml:34
+#, kde-format
+msgid "Configure Waydroid"
+msgstr "Подеси Waydroid"
