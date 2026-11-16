@@ -34,6 +34,10 @@
   <name xml:lang="ru">Оболочка KDE Plasma Mobile</name>
   <name xml:lang="sk">Prostredie KDE Plasma Mobile</name>
   <name xml:lang="sl">KDE Plasma Mobile Shell</name>
+  <name xml:lang="sr">КДЕ шкољка мобилне Плазме</name>
+  <name xml:lang="sr-Latn">KDE školjka mobilne Plasme</name>
+  <name xml:lang="sr-ijekavian">КДЕ шкољка мобилне Плазме</name>
+  <name xml:lang="sr-ijekavianlatin">KDE školjka mobilne Plasme</name>
   <name xml:lang="sv">KDE Plasma mobilskal</name>
   <name xml:lang="tr">KDE Plasma Cep Kabuğu</name>
   <name xml:lang="ug">KDE Plasma كۆچمە Shell</name>
@@ -64,6 +68,10 @@
   <summary xml:lang="ru">Оболочка Plasma от KDE для устройств мобильного форм-фактора</summary>
   <summary xml:lang="sk">Prostredie KDE Plasma pre mobilné zariadenia</summary>
   <summary xml:lang="sl">KDE's Plasma shell za mobilne naprave</summary>
+  <summary xml:lang="sr">плазма шкољка из КДЕ‑а за уређаје мобилног облика</summary>
+  <summary xml:lang="sr-Latn">plasma školjka iz KDE‑a za uređaje mobilnog oblika</summary>
+  <summary xml:lang="sr-ijekavian">плазма шкољка из КДЕ‑а за уређаје мобилног облика</summary>
+  <summary xml:lang="sr-ijekavianlatin">plasma školjka iz KDE‑a za uređaje mobilnog oblika</summary>
   <summary xml:lang="sv">KDE:s Plasma skal för mobilapparater</summary>
   <summary xml:lang="tr">Taşınabilir biçimdeki aygıtlar için KDE’nin Plasma kabuğu</summary>
   <summary xml:lang="ug">KDE Plasma نىڭ كۆچمە شەكىلدىكى ئۈسكۈنىدە ئىشلىتىدىغان Shell پىروگراممىسى</summary>
@@ -103,6 +111,10 @@
       <caption xml:lang="ru">Оболочка Plasma Mobile, используемая на экране мобильного форм-фактора</caption>
       <caption xml:lang="sk">Prostredie Plasma Mobile používané na obrazovke mobilného zariadenia</caption>
       <caption xml:lang="sl">Plasma Mobile shell uporabljen za zaslon oblikovan za mobilno napravo</caption>
+      <caption xml:lang="sr">Шкољка мобилне Плазме на екрану мобилног облика</caption>
+      <caption xml:lang="sr-Latn">Školjka mobilne Plasme na ekranu mobilnog oblika</caption>
+      <caption xml:lang="sr-ijekavian">Шкољка мобилне Плазме на екрану мобилног облика</caption>
+      <caption xml:lang="sr-ijekavianlatin">Školjka mobilne Plasme na ekranu mobilnog oblika</caption>
       <caption xml:lang="sv">Plasma mobilskal använt på mobilskärm</caption>
       <caption xml:lang="tr">Plasma Cep kabuğu, taşınabilir biçimli bir aygıtta kullanılırken</caption>
       <caption xml:lang="ug">Plasma Mobile نىڭ كۆچمە شەكىلدىكى ئۈسكۈنىدە ئىشلىتىدىغان Shell پىروگراممىسى</caption>
