@@ -1,0 +1,131 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-10-22 00:52+0000\n"
+"PO-Revision-Date: 2026-11-14 19:40+0100\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: contents/applet/AppletError.qml:168
+msgid "Copy to Clipboard"
+msgstr "Kopiraj u klipbord"
+
+#: contents/applet/AppletError.qml:191
+msgid "View Error Details…"
+msgstr "Prikaži detalje greške…"
+
+#: contents/applet/CompactApplet.qml:88
+msgid "Open %1"
+msgstr "Otvori %1"
+
+#: contents/configuration/AppletConfiguration.qml:96
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Podešavanje: %1"
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Tapet"
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Promena domaćeg ekrana"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Izbor domaćeg ekrana"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Promeniti domaći ekran u %1?"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"Postavke trenutnog domaćeg ekrana su sačuvane i biće vraćene ako se vratite "
+"na njega."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
+msgid "Wallpaper Plugin"
+msgstr "Priključak tapeta"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
+msgid "The wallpaper plugin to use."
+msgstr "Priključak tapeta koji će se koristiti."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
+msgid "Wallpaper Plugins"
+msgstr "Priključci tapeta"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
+msgid "Get New Plugins…"
+msgstr "Dobavi nove priključke…"
+
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Sistemski administrator je ograničio izmene rasporeda"
+
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr "Backspace"
+
+#: contents/lockscreen/Keypad.qml:175
+msgid "Enter"
+msgstr "Enter"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+msgid "Flashlight"
+msgstr "Baterijska lampa"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr "Fotoaparat"
+
+#: contents/lockscreen/LockScreenState.qml:37
+msgid "Enter PIN"
+msgstr "Unesite PIN"
+
+#: contents/lockscreen/LockScreenState.qml:38
+msgid "Wrong PIN"
+msgstr "Pogrešan PIN"
+
+#: contents/lockscreen/PasswordBar.qml:196
+msgid "Show keypad"
+msgstr "Prikaži numeričku tastaturu"
+
+#: contents/lockscreen/PasswordBar.qml:196
+msgid "Show keyboard"
+msgstr "Prikaži tastaturu"
+
+#: contents/logout/Logout.qml:185
+msgid "Restart"
+msgstr "Ponovo pokreni"
+
+#: contents/logout/Logout.qml:194
+msgid "Shut Down"
+msgstr "Ugasi"
+
+#: contents/logout/Logout.qml:203
+msgid "Log Out"
+msgstr "Odjavi me"
+
+#: contents/logout/Logout.qml:213
+msgid "Cancel"
+msgstr "Odustani"
+
+#: contents/views/Panel.qml:318
+msgid "Panel Focus Indicator"
+msgstr "Pokazatelj fokusa panela"

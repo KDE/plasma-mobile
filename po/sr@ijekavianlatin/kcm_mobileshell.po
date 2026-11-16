@@ -1,0 +1,287 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-11-10 13:44+0000\n"
+"PO-Revision-Date: 2026-11-14 19:40+0100\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavianlatin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr "Školjka"
+
+#: ui/main.qml:27
+#, kde-format
+msgid "General"
+msgstr "Opšte"
+
+#: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
+#, kde-format
+msgid "Shell Vibrations"
+msgstr "Vibracije školjke"
+
+#: ui/main.qml:41
+#, kde-format
+msgid "Animations"
+msgstr "Animacije"
+
+#: ui/main.qml:42
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr "Ako je ovo isključeno, animacije će biti svedene na najmanju mjeru."
+
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Automatsko sakrivanje panela"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+"Automatski sakriva panele stanja i navigacije, da bi programi uvijek mogli "
+"da budu preko cijelog ekrana."
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "Buđenje dvostrukim tapom"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr "Kad je ekran isključen, dvostruko tapnite da probudite uređaj."
+
+#: ui/main.qml:83
+#, kde-format
+msgid "Confirm Close All"
+msgstr "Potvrda zatvaranja svih"
+
+#: ui/main.qml:84
+#, kde-format
+msgid "Require confirmation before closing all apps in the task switcher."
+msgstr "Traži potvrdu prije zatvaranja svih programa u mjenjaču zadataka."
+
+#: ui/main.qml:95
+#, kde-format
+msgid "Status Bar"
+msgstr "Traka stanja"
+
+#: ui/main.qml:101
+#, kde-format
+msgid "Date in status bar"
+msgstr "Datum na traci stanja"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "If on, date will be shown next to the clock in the status bar."
+msgstr "Ako je uključeno, datum se prikazuje pored sata na traci stanja."
+
+#: ui/main.qml:115
+#, kde-format
+msgid "Battery Percentage"
+msgstr "Procenat baterije"
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "Prikaži procenat baterije na traci stanja."
+
+#: ui/main.qml:130
+#, kde-format
+msgid "Status Bar Size"
+msgstr "Veličina trake stanja"
+
+#: ui/main.qml:131
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Veličina gornjeg panela (zahtijeva ponovno pokretanje)."
+
+#: ui/main.qml:134
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr "sićušna"
+
+#: ui/main.qml:135
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr "mala"
+
+#: ui/main.qml:136
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr "normalna"
+
+#: ui/main.qml:137
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr "velika"
+
+#: ui/main.qml:138
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr "vrlo velika"
+
+#: ui/main.qml:154
+#, kde-format
+msgid "Action Drawer"
+msgstr "Fioka radnji"
+
+#: ui/main.qml:160
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr "prikačeni režim"
+
+#: ui/main.qml:161
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr "rašireni režim"
+
+#: ui/main.qml:165 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
+#, kde-format
+msgid "Quick Settings"
+msgstr "Brze postavke"
+
+#: ui/main.qml:173
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr "Režim fioke iz gornjeg lijevog ugla"
+
+#: ui/main.qml:174
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr "Režim pri otvaranju iz gornjeg lijevog ugla."
+
+#: ui/main.qml:195
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr "Režim fioke iz gornjeg desnog ugla"
+
+#: ui/main.qml:196
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr "Režim pri otvaranju iz gornjeg desnog ugla."
+
+#: ui/main.qml:215
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "Prečice na zaključanom ekranu"
+
+#: ui/main.qml:220
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "ništa"
+
+#: ui/main.qml:221
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "baterijska lampa"
+
+#: ui/main.qml:222
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "fotoaparat"
+
+#: ui/main.qml:226
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Lijevo dugme"
+
+#: ui/main.qml:248
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Desno dugme"
+
+#: ui/QuickSettingsForm.qml:89
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide"
+msgstr "Sakrij"
+
+#: ui/QuickSettingsForm.qml:89
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr "Prikaži"
+
+#: ui/QuickSettingsForm.qml:114
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "Kolone brzih postavki"
+
+#: ui/QuickSettingsForm.qml:115
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "Najveći broj kolona u pejzažnom usmjerenju."
+
+#: ui/QuickSettingsForm.qml:128
+#, kde-format
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr ""
+"Prilagodite redoslijed brzih postavki u padajućem panelu ili ih sakrijte."
+
+#: ui/QuickSettingsForm.qml:166
+#, kde-format
+msgid "Disabled Quick Settings"
+msgstr "Isključene brze postavke"
+
+#: ui/QuickSettingsForm.qml:171
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr "Ponovo uključite prethodno isključene brze postavke."
+
+#: ui/VibrationForm.qml:26
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr "Da li su vibracije u školjci uključene."
+
+#: ui/VibrationForm.qml:39
+#, kde-format
+msgid "Vibration duration (ms)"
+msgstr "Trajanje vibracije (ms)"
+
+#: ui/VibrationForm.qml:40
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr "Koliko dugo traju vibracije školjke."
+
+#: ui/VibrationForm.qml:55
+#, kde-format
+msgid "Reset to default duration"
+msgstr "Vrati na podrazumijevano trajanje"
+
+#: ui/VibrationForm.qml:65
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr ""
+"Vibracije tastature podešavaju se zasebno, u modulu postavki tastature."

@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-19 00:48+0000\n"
-"PO-Revision-Date: 2026-08-02 19:43+0200\n"
+"PO-Revision-Date: 2026-11-15 09:59+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 27.03.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -179,7 +179,7 @@ msgstr "Før me set i gang …"
 #: modules/prepare/package/contents/ui/main.qml:50
 #, kde-format
 msgid "Adjust the screen brightness."
-msgstr ""
+msgstr "Juster lysstyrken på skjermen."
 
 #: modules/prepare/package/contents/ui/main.qml:106
 #, kde-format
@@ -283,8 +283,7 @@ msgid "Network"
 msgstr "Nettverk"
 
 #: modules/wifi/package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Connect to a WiFi network for network access."
+#, kde-format
 msgid "Connect to a Wi-Fi network for network access."
 msgstr "Kopla til Wi-Fi-nettverk for tilgang til nettet."
 

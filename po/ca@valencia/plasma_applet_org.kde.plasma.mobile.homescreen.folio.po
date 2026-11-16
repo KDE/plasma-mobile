@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-12 00:54+0000\n"
-"PO-Revision-Date: 2026-10-12 10:13+0200\n"
+"PO-Revision-Date: 2026-11-15 09:49+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -271,7 +271,7 @@ msgstr "Exporta la disposició a"
 #: qml/settings/ConfigGeneral.qml:281
 #, kde-format
 msgid "Import layout from"
-msgstr "Exporta la disposició des de"
+msgstr "Importa la disposició des de"
 
 #: qml/settings/ConfigGeneral.qml:292 qml/settings/ConfigGeneral.qml:299
 #, kde-format
