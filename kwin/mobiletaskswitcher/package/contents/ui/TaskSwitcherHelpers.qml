@@ -243,7 +243,7 @@ QtObject {
     }
 
     // get the xPosition where the task will be centered on the screen
-    function xPositionFromTaskIndex(index: int): int {
+    function xPositionFromTaskIndex(index: int): real {
         return -index * (taskWidth + taskSpacing);
     }
 

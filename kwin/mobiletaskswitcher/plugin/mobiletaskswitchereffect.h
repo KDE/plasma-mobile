@@ -62,7 +62,6 @@ public:
         // currentlyBeingOpened and currentlyBeingClosed
         Inactive, // Task switcher is not fully showing
         Active, // Task switcher is active and gesture not in progress anymore
-        Stopped // When is this the case?
     };
     Q_ENUM(Status)
 

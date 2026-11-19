@@ -82,9 +82,6 @@ bool MobileTaskSwitcherState::gestureInProgress() const
 
 void MobileTaskSwitcherState::setGestureInProgress(bool gestureInProgress)
 {
-    if (m_status == Status::Stopped) {
-        return;
-    }
     m_effectState->setInProgress(gestureInProgress);
 }
 

@@ -126,7 +126,7 @@ MouseArea {
     property bool setOffsetDurationImmediately: true
 
     // set the task offset value with an animation unless specified otherwise
-    function setTaskOffsetValue(value: int, immediately = false, taskEasing = ((taskSwitcherHelpers.notHomeScreenState || (value != 0)) && (baseTaskOffset != taskSwitcherHelpers.taskOffsetValue)) ? Easing.InOutQuart : Easing.OutQuart): void {
+    function setTaskOffsetValue(value: real, immediately = false, taskEasing = ((taskSwitcherHelpers.notHomeScreenState || (value != 0)) && (baseTaskOffset != taskSwitcherHelpers.taskOffsetValue)) ? Easing.InOutQuart : Easing.OutQuart): void {
         if (baseTaskOffset == value && immediately) {
             baseTaskOffset = value + 1;
         }

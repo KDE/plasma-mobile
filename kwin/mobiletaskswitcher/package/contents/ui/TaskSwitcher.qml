@@ -119,8 +119,6 @@ FocusScope {
         // reset the offset to have the task drawer off screen
         taskList.setTaskOffsetValue(state.wasInActiveTask ? taskSwitcherHelpers.taskOffsetValue : taskSwitcherHelpers.homeOffsetValue, true);
 
-        // task index from the last time using the switcher
-        state.initialTaskIndex = Math.min(state.currentTaskIndex, tasksCount - 1);
         if (state.wasInActiveTask) {
             // if we were in an active task instead set initial task index to the position of that task
             state.initialTaskIndex = taskSwitcherHelpers.getTaskIndexFromWindow(KWinComponents.Workspace.activeWindow);
@@ -159,6 +157,22 @@ FocusScope {
 
     function hide(): void {
         state.deactivate(false);
+    }
+
+    function activateCurrentTask(): void {
+        if (taskList.count === 0) {
+            hide();
+            return;
+        }
+
+        if (taskList.count > 1 &&
+            state.elapsedTimeSinceStart != -1 &&
+            state.elapsedTimeSinceStart < state.doubleClickInterval) {
+            taskSwitcherHelpers.openApp(1);
+            return;
+        }
+
+        taskSwitcherHelpers.openApp(state.currentTaskIndex);
     }
 
     Connections {
@@ -382,7 +396,7 @@ FocusScope {
             if (taskList.count === 0) {
                 // dismiss the gesture if the task list is empty
                 root.taskSwitcherHelpers.close();
-            } if (root.taskSwitcherHelpers.isInTaskScrubMode) {
+            } else if (root.taskSwitcherHelpers.isInTaskScrubMode) {
                 // TODO! do we want to handle upwards flick to dismiss in task scrub mode?
                 let unmodifiedYposition = Math.abs(root.state.touchYPosition)
                 root.backgroundColorOpacity = 1;
@@ -417,10 +431,6 @@ FocusScope {
             } else if (root.taskSwitcherHelpers.gestureState == TaskSwitcherHelpers.GestureStates.Home) {
                 root.taskSwitcherHelpers.close();
             }
-        }
-
-        function onVelocityChanged(): void {
-
         }
 
         function onXPositionChanged(): void {
@@ -504,21 +514,7 @@ FocusScope {
             opaqueBar: false
 
             // Trigger home action on tap
-            onHandleClicked: {
-                if (taskList.count === 0) {
-                    root.hide();
-                } else {
-                    if (taskList.count > 1 &&
-                        root.state.elapsedTimeSinceStart != -1 &&
-                        root.state.elapsedTimeSinceStart < root.state.doubleClickInterval) {
-                        root.taskSwitcherHelpers.openApp(1);
-                        return;
-                    }
-
-                    const currentIndex = root.state.currentTaskIndex;
-                    root.taskSwitcherHelpers.openApp(root.state.currentTaskIndex);
-                }
-            }
+            onHandleClicked: root.activateCurrentTask()
         }
     }
 
@@ -547,21 +543,7 @@ FocusScope {
                 iconSource: "mobile-task-switcher"
                 shrinkSize: 4
 
-                onTriggered: {
-                    if (taskList.count === 0) {
-                        root.hide();
-                    } else {
-                        if (taskList.count > 1 &&
-                            root.state.elapsedTimeSinceStart != -1 &&
-                            root.state.elapsedTimeSinceStart < root.state.doubleClickInterval) {
-                            root.taskSwitcherHelpers.openApp(1);
-                            return;
-                        }
-
-                        const currentIndex = root.state.currentTaskIndex;
-                        root.taskSwitcherHelpers.openApp(root.state.currentTaskIndex);
-                    }
-                }
+                onTriggered: root.activateCurrentTask()
             }
 
             // home button
