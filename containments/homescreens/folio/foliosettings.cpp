@@ -241,7 +241,7 @@ void FolioSettings::load()
     m_showFavouritesBarBackground = generalGroup.readEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, true);
     m_pageTransitionEffect = static_cast<PageTransitionEffect>(generalGroup.readEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)SlideTransition));
     m_wallpaperBlurEffect = static_cast<WallpaperBlurEffect>(generalGroup.readEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, (int)Full));
-    m_doubleTapToLock = generalGroup.readEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, true);
+    m_doubleTapToLock = generalGroup.readEntry(CFG_KEY_DOUBLE_TAP_TO_LOCK, false);
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
