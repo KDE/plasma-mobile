@@ -264,10 +264,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "Či majú byť v shelli povolené vibrácie."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "Trvanie vibrácie"
+msgstr "Trvanie vibrácie (ms)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -277,7 +276,7 @@ msgstr "Aké dlhé by mali byť vibrácie shellu."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "Obnoviť predvolené trvanie"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
