@@ -23,6 +23,36 @@ MouseArea {
     readonly property TaskSwitcherController controller: taskSwitcher.controller
     readonly property TaskSwitcherPlugin.TaskNavigator navigator: controller.navigator
 
+    // Draws a task at a previous place on the screen, and animates it to where it is laid out now
+    component MorphTransition: TaskSwitcherPlugin.RectTransition {
+        id: transition
+
+        // animate the item from the rectangle (in scene coordinates, see contentRect()) to where it is now
+        function animateFrom(item: Item, rect: rect): void {
+            animation.stop();
+            progress = 0;
+            if (rect.width <= 0) {
+                return;
+            }
+            setTarget(item, rect);
+            animation.restart();
+        }
+
+        function stop(): void {
+            animation.stop();
+            progress = 0;
+        }
+
+        readonly property NumberAnimation animation: NumberAnimation {
+            target: transition
+            property: "progress"
+            from: 1
+            to: 0
+            duration: Kirigami.Units.veryLongDuration * 1.25
+            easing.type: Easing.OutCubic
+        }
+    }
+
     readonly property int count: repeater.count
 
     // number of tasks being dragged, to know whether a task is being swiped up
@@ -47,6 +77,12 @@ MouseArea {
         index: root.navigator.displayedTaskIndex
     }
 
+    // how the whole grid moves while opening and closing
+    readonly property GridMotion gridMotion: GridMotion {
+        active: root.geometry.isGridLayout
+        taskList: root
+    }
+
     function getTaskAt(index: int): Task {
         return repeater.itemAt(index);
     }
@@ -60,6 +96,41 @@ MouseArea {
             }
         }
         return tasks;
+    }
+
+    // ~~ morphing ~~
+    // Animates the tasks to their new place when the layout changes, instead of jumping there.
+    // Call beginMorph() before the change, and endMorph() with its result after it.
+
+    // Remember where the tasks are on the screen, the result is passed to endMorph().
+    function beginMorph(animated = true): var {
+        if (!animated) {
+            return null;
+        }
+        const rects = new Map();
+        for (const task of tasks()) {
+            rects.set(task, task.morphTransition.contentRect(task));
+        }
+        return rects;
+    }
+
+    // animate the tasks from the places remembered by beginMorph()
+    function endMorph(rects: var): void {
+        for (const task of tasks()) {
+            const rect = rects?.get(task);
+            if (rect) {
+                task.morphTransition.animateFrom(task, rect);
+            } else {
+                task.morphTransition.stop();
+            }
+        }
+    }
+
+    // run change(), which changes the layout
+    function morph(animated: bool, change: var): void {
+        const rects = beginMorph(animated);
+        change();
+        endMorph(rects);
     }
 
     function closeAll(): void {
@@ -76,12 +147,18 @@ MouseArea {
         }
     }
 
-    transform: Scale {
-        origin.x: root.width / 2
-        origin.y: root.height / 2
-        xScale: root.navigator.scale
-        yScale: root.navigator.scale
-    }
+    transform: [
+        Translate {
+            x: root.gridMotion.xOffset / Math.max(0.01, root.navigator.scale)
+            y: root.gridMotion.yOffset
+        },
+        Scale {
+            origin.x: root.width / 2
+            origin.y: root.height / 2
+            xScale: root.navigator.scale
+            yScale: root.navigator.scale
+        }
+    ]
 
     // tapping on the background goes home
     onClicked: controller.hide()
@@ -104,6 +181,7 @@ MouseArea {
             id: task
 
             readonly property bool isCurrentTask: currentIndex == root.navigator.displayedTaskIndex
+            readonly property bool launching: root.controller.launchingTask === currentIndex
 
             taskSwitcher: root.taskSwitcher
 
@@ -118,19 +196,9 @@ MouseArea {
                 index: task.currentIndex
             }
 
-            // the x position in the list, animated when the tasks before it are closed in the opened task drawer
-            // (not when the task switcher is set up)
-            property real listX: placement.x
-            Behavior on listX {
-                enabled: root.controller.taskDrawerOpened
-                NumberAnimation {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-
             // how the task moves in the carousel while opening and closing
             readonly property CarouselTaskMotion motion: CarouselTaskMotion {
+                active: !root.geometry.isGridLayout
                 taskList: root
                 taskIndex: task.currentIndex
                 placement: task.placement
@@ -138,15 +206,28 @@ MouseArea {
             }
 
             // the place in the layout, with the motion on top of it
-            x: listX + repeater.leftMargin - root.geometry.layout.displayedScrollPosition + motion.xOffset
+            x: placement.x + repeater.leftMargin - root.geometry.layout.displayedScrollPosition + motion.xOffset
             y: root.taskY + placement.rowOffset + motion.yOffset
             scale: motion.scale
             darken: motion.darken
 
+            // ~~ transitions ~~
+
+            // when launching a task in the grid, it grows from its place to the window, without the rest of the grid moving
+            readonly property TaskSwitcherPlugin.RectTransition launchTransition: TaskSwitcherPlugin.RectTransition {
+                anchorY: root.geometry.taskHeaderHeight
+                progress: task.launching ? root.controller.launchProgress : 0
+            }
+            // when the layout changes, it is drawn at its old place on the screen and animates to the new one
+            readonly property MorphTransition morphTransition: MorphTransition {
+                anchorY: root.geometry.taskHeaderHeight
+            }
+            transform: [launchTransition, morphTransition]
+
             // ~~ appearance ~~
 
-            // the current task is above the others
-            z: isCurrentTask ? 1 : 0
+            // the current task is above the others, then a task being swiped away, and the launched task above all
+            z: launching ? 3 : (dragOffset > 0 ? 2 : (isCurrentTask ? 1 : 0))
 
             // only show header once task switcher is opened
             showHeader: !root.taskSwitcherState.gestureInProgress && !root.taskSwitcherState.closing && !root.controller.isInTaskScrubMode

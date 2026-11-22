@@ -89,6 +89,29 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: confirmCloseAll; below: taskSwitcherLayoutDelegate }
+
+            FormCard.FormComboBoxDelegate {
+                id: taskSwitcherLayoutDelegate
+                text: i18n("Task Switcher Layout")
+                description: i18n("How open apps are arranged in the task switcher.")
+
+                model: [
+                    {"name": i18nc("Task switcher layout", "Automatic"), "value": ShellSettings.Settings.TaskSwitcherLayoutAutomatic},
+                    {"name": i18nc("Task switcher layout, a single row of apps", "Carousel"), "value": ShellSettings.Settings.TaskSwitcherLayoutCarousel},
+                    {"name": i18nc("Task switcher layout, multiple rows of apps", "Grid"), "value": ShellSettings.Settings.TaskSwitcherLayoutGrid}
+                ]
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.taskSwitcherLayout);
+                    dialog.parent = root;
+                }
+                onCurrentValueChanged: ShellSettings.Settings.taskSwitcherLayout = currentValue
+            }
         }
 
         FormCard.FormHeader {

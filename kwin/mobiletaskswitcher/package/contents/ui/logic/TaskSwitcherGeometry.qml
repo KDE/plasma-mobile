@@ -8,6 +8,7 @@ import QtQuick
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell.taskswitcherplugin as TaskSwitcherPlugin
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import "../view"
 
 /**
@@ -19,21 +20,45 @@ QtObject {
     // We assume that the taskSwitcher is the size of the entire screen.
     required property TaskSwitcher taskSwitcher
 
+    property TaskSwitcherPlugin.TaskLayout layout: carouselLayout
+
     // ~~ screen ~~
 
     // dimensions of a real window on the screen
     readonly property real windowHeight: taskSwitcher.height - taskSwitcher.topMargin - taskSwitcher.bottomMargin
     readonly property real windowWidth: taskSwitcher.width - taskSwitcher.leftMargin - taskSwitcher.rightMargin
 
-    // ~~ layout ~~
+    // ~~ layouts ~~
 
-    // where the tasks are placed
-    readonly property TaskSwitcherPlugin.TaskLayout layout: TaskSwitcherPlugin.CarouselTaskLayout {
+    readonly property TaskSwitcherPlugin.CarouselTaskLayout carouselLayout: TaskSwitcherPlugin.CarouselTaskLayout {
         count: root.taskSwitcher.tasksCount
         windowSize: Qt.size(root.windowWidth, root.windowHeight)
         spacing: root.taskSpacing
         headerHeight: root.taskHeaderHeight
     }
+
+    // The grid is used on large screens (tablets)
+    readonly property TaskSwitcherPlugin.GridTaskLayout gridLayout: TaskSwitcherPlugin.GridTaskLayout {
+        count: root.taskSwitcher.tasksCount
+        windowSize: Qt.size(root.windowWidth, root.windowHeight)
+        spacing: root.taskSpacing
+        headerHeight: root.taskHeaderHeight
+    }
+
+    readonly property bool useGrid: {
+        switch (ShellSettings.Settings.taskSwitcherLayout) {
+        case ShellSettings.Settings.TaskSwitcherLayoutCarousel:
+            return false;
+        case ShellSettings.Settings.TaskSwitcherLayoutGrid:
+            return true;
+        default:
+            return windowWidth >= gridMinimumWidth && windowHeight >= gridMinimumHeight;
+        }
+    }
+    readonly property real gridMinimumWidth: Kirigami.Units.gridUnit * 36
+    readonly property real gridMinimumHeight: Kirigami.Units.gridUnit * 30
+
+    readonly property bool isGridLayout: layout === gridLayout
 
     // ~~ tasks ~~
 

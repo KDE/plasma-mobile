@@ -55,6 +55,9 @@ class MobileShellSettings : public QObject
     // Confirm Close All
     Q_PROPERTY(bool confirmCloseAllEnabled READ confirmCloseAllEnabled WRITE setConfirmCloseAllEnabled NOTIFY confirmCloseAllEnabledChanged)
 
+    // Task switcher layout
+    Q_PROPERTY(TaskSwitcherLayout taskSwitcherLayout READ taskSwitcherLayout WRITE setTaskSwitcherLayout NOTIFY taskSwitcherLayoutChanged)
+
     // logout dialog
     Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
 
@@ -70,6 +73,13 @@ public:
         Expanded /** The drawer is fully expanded when pulled down.*/
     };
     Q_ENUM(ActionDrawerMode)
+
+    enum TaskSwitcherLayout {
+        TaskSwitcherLayoutAutomatic = 0, /** A grid on large screens (tablets), otherwise a carousel.*/
+        TaskSwitcherLayoutCarousel, /** A single row of tasks.*/
+        TaskSwitcherLayoutGrid /** Multiple rows of tasks.*/
+    };
+    Q_ENUM(TaskSwitcherLayout)
 
     enum LockscreenButtonAction {
         None, // hide the button
@@ -285,6 +295,18 @@ public:
     void setConfirmCloseAllEnabled(bool enabled);
 
     /**
+     * The layout of the tasks in the task switcher.
+     */
+    TaskSwitcherLayout taskSwitcherLayout() const;
+
+    /**
+     * Set the layout of the tasks in the task switcher.
+     *
+     * @param layout
+     */
+    void setTaskSwitcherLayout(TaskSwitcherLayout layout);
+
+    /**
      * Whether logout button is shown in the logout/shutdown dialog.
      */
     bool allowLogout() const;
@@ -331,6 +353,7 @@ Q_SIGNALS:
     void convergenceModeEnabledChanged();
     void autoHidePanelsEnabledChanged();
     void confirmCloseAllEnabledChanged();
+    void taskSwitcherLayoutChanged();
     void allowLogoutChanged();
     void lockscreenLeftButtonActionChanged();
     void lockscreenRightButtonActionChanged();

@@ -190,14 +190,100 @@ qreal CarouselTaskLayout::scrollMaximum() const
     return 0;
 }
 
+bool CarouselTaskLayout::zoomsIntoTask() const
+{
+    return true;
+}
+
 qreal CarouselTaskLayout::scrollPositionForTask(int index) const
 {
     return taskX(index);
 }
 
+qreal CarouselTaskLayout::restingScrollPosition(qreal scrollPosition, int currentIndex) const
+{
+    Q_UNUSED(scrollPosition)
+    return scrollPositionForTask(currentIndex);
+}
+
 qreal CarouselTaskLayout::columnAt(qreal scrollPosition) const
 {
     return -scrollPosition / step();
+}
+
+// ~~ GridTaskLayout ~~
+
+// number of rows
+static constexpr int GRID_ROWS = 2;
+// portion of the window height used by the rows
+static constexpr qreal GRID_HEIGHT_FACTOR = 0.78;
+// the grid tasks are much smaller than the window, so the over drag shrinking must not depend on
+// their scale like in the carousel, otherwise the tasks quickly disappear. This is similar to the carousel on a phone.
+static constexpr qreal GRID_OVER_DRAG_SCALE_RANGE = 0.6;
+
+int GridTaskLayout::rows() const
+{
+    return GRID_ROWS;
+}
+
+qreal GridTaskLayout::previewScale() const
+{
+    const qreal windowHeight = windowSize().height();
+    if (windowHeight <= 0) {
+        return 0.1;
+    }
+    // fit the rows of tasks into a portion of the height
+    const qreal previewHeight = (windowHeight * GRID_HEIGHT_FACTOR - (rows() - 1) * spacing()) / rows() - headerHeight();
+    return std::max(0.1, previewHeight / windowHeight);
+}
+
+qreal GridTaskLayout::overDragScaleRange() const
+{
+    return GRID_OVER_DRAG_SCALE_RANGE;
+}
+
+bool GridTaskLayout::contentFits() const
+{
+    return contentWidth() <= windowSize().width() - 2 * spacing();
+}
+
+qreal GridTaskLayout::scrollMaximum() const
+{
+    // the most recent column is on the right edge
+    if (contentFits()) {
+        return (taskWidth() - contentWidth()) / 2;
+    }
+    return taskWidth() / 2 + spacing() - windowSize().width() / 2;
+}
+
+qreal GridTaskLayout::scrollMinimum() const
+{
+    // the oldest column is on the left edge
+    if (contentFits()) {
+        return scrollMaximum();
+    }
+    return windowSize().width() / 2 + taskWidth() / 2 - spacing() - contentWidth();
+}
+
+bool GridTaskLayout::zoomsIntoTask() const
+{
+    return false;
+}
+
+qreal GridTaskLayout::scrollPositionForTask(int index) const
+{
+    return clampScroll(scrollMaximum() - columnOf(index) * step());
+}
+
+qreal GridTaskLayout::restingScrollPosition(qreal scrollPosition, int currentIndex) const
+{
+    Q_UNUSED(currentIndex)
+    return clampScroll(scrollPosition);
+}
+
+qreal GridTaskLayout::columnAt(qreal scrollPosition) const
+{
+    return (scrollMaximum() - scrollPosition) / step();
 }
 
 // ~~ TaskPlacement ~~

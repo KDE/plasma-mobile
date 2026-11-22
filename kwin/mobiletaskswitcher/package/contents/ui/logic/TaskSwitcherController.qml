@@ -70,8 +70,9 @@ QtObject {
     // ~~ lifecycle ~~
 
     // Prepare for showing the task switcher, either when it is activated or when a gesture starts while it is closing.
-    function initialSetup(): void {
-        reset();
+    // animateLayout: animate the tasks from where they are, when restarting while the switcher is shown
+    function initialSetup(animateLayout = false): void {
+        reset(animateLayout);
         startAtOrigin();
         if (!state.gestureInProgress) {
             openFromButton();
@@ -79,11 +80,17 @@ QtObject {
     }
 
     // forget what is left over from the last time the task switcher was shown
-    function reset(): void {
+    function reset(animateLayout: bool): void {
         taskSwitcher.resetView();
         cancelAnimations();
         navigator.startedInApp = state.isAppWindow(KWinComponents.Workspace.activeWindow);
         gesture.reset();
+
+        taskList.morph(animateLayout, () => {
+            launchingTask = -1;
+            launchProgress = 0;
+            switchLayout();
+        });
 
         closingFactor = 1;
         navigator.closingScale = 1;
@@ -108,7 +115,15 @@ QtObject {
         openedWithButton = true;
         drawerOffset.set(0, navigator.startedInApp);
         taskSwitcher.backgroundColorOpacity = 1;
+        const inPlace = !targetLayout.zoomsIntoTask;
+        if (inPlace) {
+            navigator.yPosition = geometry.openedYPosition;
+        }
         open();
+        if (inPlace && navigator.startedInApp) {
+            const task = taskList.getTaskAt(navigator.currentTaskIndex);
+            task?.morphTransition.animateFrom(task, geometry.windowRect);
+        }
     }
 
     function open(): void {
@@ -145,10 +160,19 @@ QtObject {
         openAnim.stop();
         cancelAnimations();
 
-        animateGoToTaskIndex(index, duration);
+        const task = taskList.getTaskAt(index);
+        const zoom = geometry.layout.zoomsIntoTask;
+        if (!zoom) {
+            // only the opened task grows out of its place in the grid to the window, the grid stays in place
+            task.launchTransition.setTarget(task, geometry.windowRect);
+            launchingTask = index;
+            navigator.currentTaskIndex = index;
+        } else {
+            animateGoToTaskIndex(index, duration);
+        }
         state.beginClosing(TaskSwitcherPlugin.MobileTaskSwitcherState.Phase.LaunchingTask);
-        launchAnim.restart();
-        KWinComponents.Workspace.activeWindow = taskList.getTaskAt(index).window;
+        (zoom ? launchAnim : gridLaunchAnim).restart();
+        KWinComponents.Workspace.activeWindow = task.window;
     }
 
     // open the current task, or the previous one when invoked twice quickly
@@ -171,6 +195,7 @@ QtObject {
         const wasClosing = state.closing;
         closeTransition.stop();
         launchAnim.stop();
+        gridLaunchAnim.stop();
         xAnim.stop();
         if (wasClosing) {
             state.cancelClosing();
@@ -216,7 +241,7 @@ QtObject {
             navigator.startedInApp = state.launchingTask;
             drawerOffset.set(navigator.startedInApp ? drawerOffset.appValue : drawerOffset.homeValue, true);
             state.restartFromClosing();
-            initialSetup();
+            initialSetup(true);
         } else if (openAnim.running) {
             // a new gesture started while the task drawer was animating open, treat it as opened
             cancelAnimations();
@@ -333,9 +358,11 @@ QtObject {
     // made as variables to keep x anim in task list and task scrub icon list in sync
     property int xAnimDuration: Kirigami.Units.longDuration * 2
     property int xAnimEasingType: Easing.OutExpo
+    property int xAnimTargetIndex: 0
 
     // go to the task index, animated
     function animateGoToTaskIndex(index: int, duration = Kirigami.Units.longDuration * 2, easing = Easing.OutExpo): void {
+        xAnimTargetIndex = index;
         xAnimDuration = duration;
         xAnimEasingType = easing;
         xAnim.to = geometry.layout.scrollPositionForTask(index) - (gesture.intent === TaskSwitcherPlugin.TaskSwitcherGesture.Intent.HorizontalSwipe && !state.gestureInProgress && !navigator.onHomeScreen ? geometry.taskSpacing / 2 : 0);
@@ -350,23 +377,86 @@ QtObject {
     readonly property Connections tasksModelConnections: Connections {
         target: root.taskSwitcher.tasksModel
 
+        property var rectsBeforeRemoval: null
+
+        function onRowsAboutToBeRemoved(): void {
+            rectsBeforeRemoval = root.taskList.beginMorph();
+        }
+
         function onRowsRemoved(parent: var, first: int, last: int): void {
-            root.handleTasksRemoved(first, last);
+            const rects = rectsBeforeRemoval;
+            rectsBeforeRemoval = null;
+
+            const count = root.taskSwitcher.tasksModel.rowCount();
+            if (count === 0) {
+                root.hide();
+                return;
+            }
+            root.navigator.removeTasks(first, last, count);
+
+            // once the task list was updated
+            Qt.callLater(() => {
+                root.xAnim.stop();
+                root.navigator.restInLayout();
+                root.taskList.endMorph(rects);
+            });
         }
     }
 
-    // keep the current task in view when the tasks first..last are removed
-    function handleTasksRemoved(first: int, last: int): void {
-        const count = taskSwitcher.tasksModel.rowCount();
-        if (count === 0) {
-            hide();
+    // ~~ layout ~~
+
+    // Whether the grid may be shown.
+    // In grid view, apps are still first shown in a carousel when the user first opens up the task switcher with a gesture
+    readonly property bool gridAllowed: !navigator.startedInApp || !state.gestureInProgress || taskDrawerOpened
+
+    // The layout to show (scrubbing mode is in carousel)
+    readonly property TaskSwitcherPlugin.TaskLayout targetLayout: geometry.useGrid && gridAllowed && !isInTaskScrubMode ? geometry.gridLayout : geometry.carouselLayout
+    onTargetLayoutChanged: Qt.callLater(root.updateLayout)
+
+    function updateLayout(): void {
+        if (geometry.layout !== targetLayout && !state.closing) {
+            taskList.morph(true, root.switchLayout);
+        }
+    }
+
+    // switch to targetLayout, keeping the tasks where they are in it
+    function switchLayout(): void {
+        if (geometry.layout === targetLayout) {
             return;
         }
+        const oldLayout = geometry.layout;
+        const oldOpenedYPosition = geometry.openedYPosition;
+        geometry.layout = targetLayout;
 
-        if (navigator.removeTasks(first, last, count)) {
-            // at the same speed as the tasks moving into the place of the removed ones, so that the
-            // current task appears not to move
-            animateGoToTaskIndex(navigator.currentTaskIndex, Kirigami.Units.longDuration, Easing.InOutQuad);
+        if (openAnim.running && !state.gestureInProgress) {
+            finishOpeningIn(targetLayout);
+        } else {
+            keepPositionIn(targetLayout, oldLayout, oldOpenedYPosition);
+        }
+    }
+
+    function finishOpeningIn(layout: TaskSwitcherPlugin.TaskLayout): void {
+        const targetIndex = xAnim.running ? xAnimTargetIndex : navigator.currentTaskIndex;
+        openAnim.stop();
+        xAnim.stop();
+        navigator.yPosition = geometry.openedYPosition;
+        navigator.goToTask(targetIndex);
+        if (!isInTaskScrubMode) {
+            state.openingFinished();
+        }
+    }
+
+    // keep the same position relative to the current task, and the same open progress
+    function keepPositionIn(layout: TaskSwitcherPlugin.TaskLayout, oldLayout: TaskSwitcherPlugin.TaskLayout, oldOpenedYPosition: real): void {
+        navigator.keepPosition(oldLayout, layout);
+        if (!state.gestureInProgress) {
+            navigator.yPosition = navigator.yPosition * geometry.openedYPosition / oldOpenedYPosition;
+        }
+        if (openAnim.running) {
+            openAnim.restart();
+        }
+        if (xAnim.running) {
+            animateGoToTaskIndex(xAnimTargetIndex, xAnimDuration, xAnimEasingType);
         }
     }
 
@@ -374,6 +464,10 @@ QtObject {
 
     // fades out the task switcher when closing
     property real closingFactor: 1
+
+    // Grid only: the task being launched, which grows from its place in the grid to the window (launchProgress 0 to 1)
+    property int launchingTask: -1
+    property real launchProgress: 0
 
     readonly property NumberAnimation xAnim: NumberAnimation {
         target: root.navigator
@@ -431,6 +525,17 @@ QtObject {
         target: root.navigator
         property: "yPosition"
         to: 0
+        duration: 300
+        easing.type: Easing.OutQuint
+        onFinished: root.state.closingFinished()
+    }
+
+    // Launching a task in the grid: only the task grows to its window, see launchingTask
+    readonly property NumberAnimation gridLaunchAnim: NumberAnimation {
+        target: root
+        property: "launchProgress"
+        from: 0
+        to: 1
         duration: 300
         easing.type: Easing.OutQuint
         onFinished: root.state.closingFinished()

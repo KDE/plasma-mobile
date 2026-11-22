@@ -60,6 +60,8 @@ class TaskNavigator : public QObject
     Q_PROPERTY(bool overDragged READ overDragged NOTIFY scaleChanged)
     // How far the task list follows the finger further up than the opened position, with resistance
     Q_PROPERTY(qreal overDragOffset READ overDragOffset NOTIFY scaleChanged)
+    // How far the task list is opened, from 0 (the current task fills the screen) to 1 (opened)
+    Q_PROPERTY(qreal openProgress READ openProgress NOTIFY scaleChanged)
 
 public:
     explicit TaskNavigator(QObject *parent = nullptr);
@@ -90,6 +92,7 @@ public:
     qreal scale() const;
     bool overDragged() const;
     qreal overDragOffset() const;
+    qreal openProgress() const;
 
     // start at the task, as the one the task switcher was invoked from
     Q_INVOKABLE void start(int index);
@@ -99,7 +102,11 @@ public:
     Q_INVOKABLE void followTouch(qreal touchX, qreal touchY);
     // Make the task at the scroll position current, if tracking
     Q_INVOKABLE void updateCurrentTask();
-    Q_INVOKABLE bool removeTasks(int first, int last, int count);
+    // Keep the same position relative to the current task in the new layout
+    Q_INVOKABLE void keepPosition(TaskLayout *from, TaskLayout *to);
+    // Move to where the layout rests, e.g. after tasks were removed
+    Q_INVOKABLE void restInLayout();
+    Q_INVOKABLE void removeTasks(int first, int last, int count);
 
     // The task to go to after a gesture moved the list sideways: only the tasks on the left (older) are switched to
     Q_INVOKABLE int nearestTask() const;

@@ -45,6 +45,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT convergenceModeEnabledChanged();
             Q_EMIT autoHidePanelsEnabledChanged();
             Q_EMIT confirmCloseAllEnabledChanged();
+            Q_EMIT taskSwitcherLayoutChanged();
             Q_EMIT allowLogoutChanged();
         }
         if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
@@ -269,6 +270,19 @@ void MobileShellSettings::setConfirmCloseAllEnabled(bool enabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("confirmCloseAllEnabled", enabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+MobileShellSettings::TaskSwitcherLayout MobileShellSettings::taskSwitcherLayout() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return (TaskSwitcherLayout)group.readEntry("taskSwitcherLayout", (int)TaskSwitcherLayout::TaskSwitcherLayoutAutomatic);
+}
+
+void MobileShellSettings::setTaskSwitcherLayout(TaskSwitcherLayout layout)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("taskSwitcherLayout", (int)layout, KConfigGroup::Notify);
     m_config->sync();
 }
 

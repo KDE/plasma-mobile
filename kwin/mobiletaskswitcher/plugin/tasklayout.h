@@ -20,7 +20,7 @@ class TaskLayout : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
-    QML_UNCREATABLE("Abstract base class, use CarouselTaskLayout")
+    QML_UNCREATABLE("Abstract base class, use CarouselTaskLayout or GridTaskLayout")
 
     // ~~ inputs ~~
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY layoutChanged)
@@ -46,6 +46,8 @@ class TaskLayout : public QObject
     Q_PROPERTY(qreal rowsOverhang READ rowsOverhang NOTIFY layoutChanged)
     // how much the task list shrinks when dragged further up than its opened position
     Q_PROPERTY(qreal overDragScaleRange READ overDragScaleRange NOTIFY layoutChanged)
+    // Whether the task list zooms into a task to launch it.
+    Q_PROPERTY(bool zoomsIntoTask READ zoomsIntoTask CONSTANT)
 
     // ~~ scrolling ~~
     // the range the scroll position rests in
@@ -73,6 +75,7 @@ public:
     virtual qreal overDragScaleRange() const = 0;
     virtual qreal scrollMinimum() const = 0;
     virtual qreal scrollMaximum() const = 0;
+    virtual bool zoomsIntoTask() const = 0;
 
     int columnCount() const;
     qreal taskWidth() const;
@@ -93,6 +96,8 @@ public:
     // the task shown at the scroll position, in the same row as currentIndex
     Q_INVOKABLE int taskAt(qreal scrollPosition, int currentIndex) const;
     Q_INVOKABLE qreal clampScroll(qreal scrollPosition) const;
+    // where the list rests from the scroll position, with currentIndex as the current task
+    Q_INVOKABLE virtual qreal restingScrollPosition(qreal scrollPosition, int currentIndex) const = 0;
 
 Q_SIGNALS:
     void layoutChanged();
@@ -129,10 +134,43 @@ public:
     qreal overDragScaleRange() const override;
     qreal scrollMinimum() const override;
     qreal scrollMaximum() const override;
+    bool zoomsIntoTask() const override;
     qreal scrollPositionForTask(int index) const override;
+    // always on the current task
+    qreal restingScrollPosition(qreal scrollPosition, int currentIndex) const override;
 
 protected:
     qreal columnAt(qreal scrollPosition) const override;
+};
+
+/**
+ * Multiple rows of smaller tasks for large screens.
+ */
+class GridTaskLayout : public TaskLayout
+{
+    Q_OBJECT
+    QML_ELEMENT
+
+public:
+    using TaskLayout::TaskLayout;
+
+    int rows() const override;
+    qreal previewScale() const override;
+    qreal overDragScaleRange() const override;
+    qreal scrollMinimum() const override;
+    qreal scrollMaximum() const override;
+    bool zoomsIntoTask() const override;
+    // the scroll position where the task's column is on the right edge, as far as the grid can scroll
+    qreal scrollPositionForTask(int index) const override;
+    // anywhere within the range
+    qreal restingScrollPosition(qreal scrollPosition, int currentIndex) const override;
+
+protected:
+    // the column on the right edge
+    qreal columnAt(qreal scrollPosition) const override;
+
+private:
+    bool contentFits() const;
 };
 
 /**

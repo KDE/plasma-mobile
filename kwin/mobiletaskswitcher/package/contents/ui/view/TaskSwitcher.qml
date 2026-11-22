@@ -175,7 +175,7 @@ FocusScope {
 
                 anchors {
                     bottom: taskList.bottom
-                    bottomMargin: root.geometry.restingTaskY * 0.75
+                    bottomMargin: (root.geometry.restingTaskY - root.geometry.layout.rowsOverhang) * 0.75
                     horizontalCenter: taskList.horizontalCenter
                 }
             }

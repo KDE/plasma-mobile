@@ -15,6 +15,9 @@ import "../view"
 QtObject {
     id: root
 
+    // only applies when active (in the carousel), otherwise the offsets are 0 and the scale 1
+    required property bool active
+
     required property TaskList taskList
     required property TaskSwitcherPlugin.TaskPlacement placement
     required property int taskIndex
@@ -32,8 +35,11 @@ QtObject {
     // The current task stays in place when the gesture started in it, or in the opened task drawer
     readonly property bool staysInPlace: isCurrentTask && !navigator.onHomeScreen
 
-    readonly property real xOffset: resistanceXOffset - slideInXOffset
+    readonly property real xOffset: active ? resistanceXOffset - slideInXOffset : 0
     readonly property real yOffset: {
+        if (!active) {
+            return 0;
+        }
         if (navigator.startedInApp || controller.taskDrawerOpened) {
             return taskList.taskSwitcher.height / 4 * resistanceFactor;
         }
@@ -41,10 +47,13 @@ QtObject {
         return taskList.taskY / (controller.openedWithButton ? 1 : slideOutScale) - taskList.taskY;
     }
 
-    readonly property real scale: (staysInPlace || controller.openedWithButton) ? 1 : (1 + resistanceFactor) * slideOutScale
+    readonly property real scale: (!active || staysInPlace || controller.openedWithButton) ? 1 : (1 + resistanceFactor) * slideOutScale
 
     // darken the task as it gets away from the center of the screen
     readonly property real darken: {
+        if (!active) {
+            return 0;
+        }
         const centeredX = (taskList.width - geometry.taskWidth) / 2;
         // in task widths, while opening and closing relative to where the current task is placed
         const distanceFromCenter = Math.abs(taskX - centeredX - (controller.opening || controller.state.closing ? currentPlacement.scrollPosition - navigator.xPosition : 0)) / geometry.taskWidth;

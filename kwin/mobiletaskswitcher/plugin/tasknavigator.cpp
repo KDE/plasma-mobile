@@ -273,6 +273,15 @@ qreal TaskNavigator::scale() const
     return std::min(maxScale, maxScale - subtract);
 }
 
+qreal TaskNavigator::openProgress() const
+{
+    if (!m_layout || m_layout->previewScale() <= 0 || m_layout->previewScale() >= 1) {
+        return 1;
+    }
+    const qreal maxScale = 1 / m_layout->previewScale();
+    return std::clamp((maxScale - scale()) / (maxScale - 1), 0.0, 1.0);
+}
+
 void TaskNavigator::updateCurrentTask()
 {
     if (m_tracking && m_layout) {
@@ -280,7 +289,25 @@ void TaskNavigator::updateCurrentTask()
     }
 }
 
-bool TaskNavigator::removeTasks(int first, int last, int count)
+void TaskNavigator::keepPosition(TaskLayout *from, TaskLayout *to)
+{
+    if (!from || !to) {
+        return;
+    }
+    const qreal offset = m_xPosition - from->scrollPositionForTask(m_currentTaskIndex);
+    const qreal stepRatio = (to->taskWidth() + to->spacing()) / (from->taskWidth() + from->spacing());
+    setXPosition(to->scrollPositionForTask(m_currentTaskIndex) + offset * stepRatio);
+}
+
+void TaskNavigator::restInLayout()
+{
+    if (m_layout) {
+        setXPosition(m_layout->restingScrollPosition(m_xPosition, m_currentTaskIndex));
+    }
+    updateCurrentTask();
+}
+
+void TaskNavigator::removeTasks(int first, int last, int count)
 {
     int index = m_currentTaskIndex;
     if (last < index) {
@@ -288,13 +315,7 @@ bool TaskNavigator::removeTasks(int first, int last, int count)
     } else if (first <= index) {
         index = first;
     }
-    index = std::max(0, std::min(index, count - 1));
-
-    if (index == m_currentTaskIndex) {
-        return false;
-    }
-    setCurrentTaskIndex(index);
-    return true;
+    setCurrentTaskIndex(std::max(0, std::min(index, count - 1)));
 }
 
 int TaskNavigator::nearestTask() const

@@ -12,6 +12,7 @@ target_sources(mobiletaskswitcherplugin PRIVATE
     taskswitchergesture.cpp
     tasklayout.cpp
     tasknavigator.cpp
+    recttransition.cpp
     effecttouchborder.cpp
     taskfiltermodel.cpp
     taskmodel.cpp)
