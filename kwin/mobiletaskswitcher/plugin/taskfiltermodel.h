@@ -32,6 +32,8 @@ public:
 
     Q_INVOKABLE void refresh();
 
+    Q_INVOKABLE int indexOf(KWin::Window *window) const;
+
     QString screenName() const;
     void setScreenName(const QString &screenName);
 

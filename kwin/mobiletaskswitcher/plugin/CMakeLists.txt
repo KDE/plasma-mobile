@@ -9,6 +9,9 @@ ecm_add_qml_module(mobiletaskswitcherplugin
 
 target_sources(mobiletaskswitcherplugin PRIVATE
     mobiletaskswitchereffect.cpp
+    taskswitchergesture.cpp
+    tasklayout.cpp
+    tasknavigator.cpp
     effecttouchborder.cpp
     taskfiltermodel.cpp
     taskmodel.cpp)

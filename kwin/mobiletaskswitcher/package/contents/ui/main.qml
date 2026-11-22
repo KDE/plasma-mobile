@@ -8,6 +8,7 @@ import org.kde.kwin
 import org.kde.plasma.private.mobileshell.taskswitcherplugin as TaskSwitcherPlugin
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
+import "view"
 
 SceneEffect {
     id: root

@@ -7,8 +7,7 @@
 
 #include <QDBusConnection>
 #include <QDBusMessage>
-#include <QDBusReply>
-#include <QKeyEvent>
+#include <QGuiApplication>
 #include <QMetaObject>
 #include <QQuickItem>
 #include <window.h>
@@ -20,7 +19,6 @@ namespace KWin
 
 MobileTaskSwitcherState::MobileTaskSwitcherState(QObject *parent)
     : QObject{parent}
-    , m_doubleClickTimer{new QElapsedTimer{}}
     , m_shutdownTimer{new QTimer{this}}
 {
     // Configure close timer
@@ -41,9 +39,10 @@ void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
 
     // Connect signals
     connect(m_effect, &QuickSceneEffect::activated, this, &MobileTaskSwitcherState::activated);
-    connect(m_effect, &QuickSceneEffect::deactivated, this, &MobileTaskSwitcherState::deactivated);
     connect(this, &MobileTaskSwitcherState::gestureEnabledChanged, this, &MobileTaskSwitcherState::refreshBorders);
-    connect(m_border, &EffectTouchBorder::touchPositionChanged, this, &MobileTaskSwitcherState::processTouchPositionChanged);
+    connect(m_border, &EffectTouchBorder::touchPositionChanged, this, [this](qreal primaryDelta, qreal orthogonalDelta) {
+        Q_EMIT touchMoved(orthogonalDelta, primaryDelta);
+    });
     connect(this, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
         if (gestureInProgress()) {
             invokeEffect();
@@ -80,138 +79,87 @@ bool MobileTaskSwitcherState::gestureInProgress() const
     return m_effectState->inProgress();
 }
 
-void MobileTaskSwitcherState::setGestureInProgress(bool gestureInProgress)
+bool MobileTaskSwitcherState::isAppWindow(KWin::Window *window) const
 {
-    m_effectState->setInProgress(gestureInProgress);
+    // A minimized app can remain active until the shell receives focus
+    return window && !window->isDesktop() && window->isShown();
 }
 
-bool MobileTaskSwitcherState::wasInActiveTask() const
+MobileTaskSwitcherState::Phase MobileTaskSwitcherState::phase() const
 {
-    return m_wasInActiveTask;
+    return m_phase;
 }
 
-void MobileTaskSwitcherState::setWasInActiveTask(bool wasInActiveTask)
+void MobileTaskSwitcherState::setPhase(Phase phase)
 {
-    if (m_wasInActiveTask != wasInActiveTask) {
-        m_wasInActiveTask = wasInActiveTask;
-        Q_EMIT wasInActiveTaskChanged();
+    if (m_phase != phase) {
+        m_phase = phase;
+        Q_EMIT phaseChanged();
     }
 }
 
-void MobileTaskSwitcherState::updateWasInActiveTask(KWin::Window *window)
+bool MobileTaskSwitcherState::taskDrawerOpened() const
 {
-    bool newWasInActiveTask = false;
-    if (window) {
-        // A minimized app can remain active until the shell receives focus
-        newWasInActiveTask = !window->isDesktop() && window->isShown();
-    }
-    setWasInActiveTask(newWasInActiveTask);
+    return m_taskDrawerOpened;
 }
 
-qreal MobileTaskSwitcherState::touchXPosition() const
+void MobileTaskSwitcherState::setTaskDrawerOpened(bool taskDrawerOpened)
 {
-    return m_touchXPosition;
-}
-
-qreal MobileTaskSwitcherState::touchYPosition() const
-{
-    return m_touchYPosition;
-}
-
-qreal MobileTaskSwitcherState::xVelocity() const
-{
-    return m_xVelocity;
-}
-
-qreal MobileTaskSwitcherState::yVelocity() const
-{
-    return m_yVelocity;
-}
-
-qreal MobileTaskSwitcherState::totalSquaredVelocity() const
-{
-    return m_totalSquaredVelocity;
-}
-
-qreal MobileTaskSwitcherState::flickVelocityThreshold() const
-{
-    return m_flickVelocityThreshold;
-}
-
-void MobileTaskSwitcherState::setFlickVelocityThreshold(qreal flickVelocityThreshold)
-{
-    if (m_flickVelocityThreshold != flickVelocityThreshold) {
-        m_flickVelocityThreshold = flickVelocityThreshold;
-        Q_EMIT flickVelocityThresholdChanged();
+    if (m_taskDrawerOpened != taskDrawerOpened) {
+        m_taskDrawerOpened = taskDrawerOpened;
+        Q_EMIT taskDrawerOpenedChanged();
     }
 }
 
-qreal MobileTaskSwitcherState::xPosition() const
+bool MobileTaskSwitcherState::isClosing() const
 {
-    return m_xPosition;
+    return m_phase == Phase::ClosingToHome || m_phase == Phase::LaunchingTask;
 }
 
-void MobileTaskSwitcherState::setXPosition(qreal xPosition)
+bool MobileTaskSwitcherState::isClosingToHome() const
 {
-    if (m_xPosition != xPosition) {
-        m_xPosition = xPosition;
-        Q_EMIT xPositionChanged();
+    return m_phase == Phase::ClosingToHome;
+}
+
+bool MobileTaskSwitcherState::isLaunchingTask() const
+{
+    return m_phase == Phase::LaunchingTask;
+}
+
+void MobileTaskSwitcherState::openingFinished()
+{
+    if (m_phase == Phase::Visible) {
+        setTaskDrawerOpened(true);
     }
 }
 
-qreal MobileTaskSwitcherState::yPosition() const
+void MobileTaskSwitcherState::beginClosing(Phase target)
 {
-    return m_yPosition;
+    if (m_phase == Phase::Hidden || (target != Phase::ClosingToHome && target != Phase::LaunchingTask)) {
+        return;
+    }
+    setPhase(target);
 }
 
-void MobileTaskSwitcherState::setYPosition(qreal yPosition)
+void MobileTaskSwitcherState::cancelClosing()
 {
-    if (m_yPosition != yPosition) {
-        m_yPosition = yPosition;
-        Q_EMIT yPositionChanged();
+    if (isClosing()) {
+        setPhase(Phase::Visible);
     }
 }
 
-MobileTaskSwitcherState::Status MobileTaskSwitcherState::status() const
+void MobileTaskSwitcherState::closingFinished()
 {
-    return m_status;
+    // Stay in the closing phase until the effect has stopped, the last frame is still being shown
+    setTaskDrawerOpened(false);
+    deactivate(true);
 }
 
-void MobileTaskSwitcherState::setStatus(Status status)
+void MobileTaskSwitcherState::restartFromClosing()
 {
-    if (m_status != status) {
-        if (status == Status::Inactive) {
-            setYPosition(0);
-        }
-        m_status = status;
-        Q_EMIT statusChanged();
-    }
-}
-
-int MobileTaskSwitcherState::currentTaskIndex() const
-{
-    return m_currentTaskIndex;
-}
-
-void MobileTaskSwitcherState::setCurrentTaskIndex(int newTaskIndex)
-{
-    if (m_currentTaskIndex != newTaskIndex) {
-        m_currentTaskIndex = newTaskIndex;
-        Q_EMIT currentTaskIndexChanged();
-    }
-}
-
-int MobileTaskSwitcherState::initialTaskIndex() const
-{
-    return m_initialTaskIndex;
-}
-
-void MobileTaskSwitcherState::setInitialTaskIndex(int newTaskIndex)
-{
-    if (m_initialTaskIndex != newTaskIndex) {
-        m_initialTaskIndex = newTaskIndex;
-        Q_EMIT initialTaskIndexChanged();
-    }
+    // A new gesture took over while the switcher was closing
+    setTaskDrawerOpened(false);
+    setPhase(Phase::Visible);
 }
 
 TaskModel *MobileTaskSwitcherState::taskModel() const
@@ -219,72 +167,9 @@ TaskModel *MobileTaskSwitcherState::taskModel() const
     return m_taskModel;
 }
 
-void MobileTaskSwitcherState::restartDoubleClickTimer()
+bool MobileTaskSwitcherState::isDoubleToggle() const
 {
-    m_doubleClickTimer->restart();
-}
-
-void MobileTaskSwitcherState::calculateFilteredVelocity(qreal primaryDelta, qreal orthogonalDelta)
-{
-    qint64 frameTime = 0;
-    if (!m_frameTimer.isValid()) {
-        m_previousPrimaryDelta = primaryDelta;
-        m_previousOrthogonalDelta = orthogonalDelta;
-        m_frameTimer.start();
-        return;
-    }
-    frameTime = m_frameTimer.restart();
-    if (frameTime == 0) {
-        // Skip because otherwise we get NaN later on. Not sure why this triggers as often as it does
-        return;
-    }
-
-    qreal framePrimaryDelta = primaryDelta - m_previousPrimaryDelta;
-    qreal frameOrthogonalDelta = orthogonalDelta - m_previousOrthogonalDelta;
-    m_previousPrimaryDelta = primaryDelta;
-    m_previousOrthogonalDelta = orthogonalDelta;
-
-    // Implements an exponentially weighted moving average (EWMA) filter (= exponential smoothing)
-    // Smoothing factor is approximated each event to achieve a chosen filter time constant
-    qreal smoothingFactor = std::min(frameTime / (1000 * m_filterTimeConstant), 0.8);
-    m_yVelocity = m_yVelocity + smoothingFactor * (framePrimaryDelta / frameTime - m_yVelocity);
-    m_xVelocity = m_xVelocity + smoothingFactor * (frameOrthogonalDelta / frameTime - m_xVelocity);
-    m_totalSquaredVelocity = m_yVelocity * m_yVelocity + m_xVelocity * m_xVelocity;
-    Q_EMIT velocityChanged();
-}
-
-void MobileTaskSwitcherState::clearVelocityFilter()
-{
-    m_frameTimer.invalidate();
-    m_previousPrimaryDelta = 0;
-    m_previousOrthogonalDelta = 0;
-    m_xVelocity = 0;
-    m_yVelocity = 0;
-    m_totalSquaredVelocity = 0;
-    Q_EMIT velocityChanged();
-}
-
-void MobileTaskSwitcherState::resetGestureState()
-{
-    m_touchXPosition = 0;
-    m_touchYPosition = 0;
-    clearVelocityFilter();
-}
-
-void MobileTaskSwitcherState::processTouchPositionChanged(qreal primaryDelta, qreal orthogonalDelta)
-{
-    calculateFilteredVelocity(primaryDelta, orthogonalDelta);
-    m_touchXPosition = orthogonalDelta;
-    m_touchYPosition = primaryDelta;
-    Q_EMIT touchPositionChanged();
-}
-
-qint64 MobileTaskSwitcherState::getElapsedTimeSinceStart()
-{
-    if (m_doubleClickTimer->isValid()) {
-        return m_doubleClickTimer->elapsed();
-    }
-    return -1;
+    return m_toggleTimer.isValid() && m_toggleTimer.elapsed() < qApp->doubleClickInterval();
 }
 
 void MobileTaskSwitcherState::toggle()
@@ -294,7 +179,7 @@ void MobileTaskSwitcherState::toggle()
     }
 
     if (!m_effect->isRunning()) {
-        restartDoubleClickTimer();
+        m_toggleTimer.restart();
         activate();
     } else {
         deactivate(false);
@@ -307,7 +192,6 @@ void MobileTaskSwitcherState::activate()
         return;
     }
 
-    resetGestureState();
     m_effectState->setInProgress(false);
     invokeEffect();
 }
@@ -334,14 +218,10 @@ void MobileTaskSwitcherState::realDeactivate()
     }
 
     m_effectState->setInProgress(false);
-    setStatus(MobileTaskSwitcherState::Status::Inactive);
+    setTaskDrawerOpened(false);
     m_effect->setRunning(false);
+    setPhase(Phase::Hidden);
     setDBusState(false);
-}
-
-void MobileTaskSwitcherState::quickDeactivate()
-{
-    m_shutdownTimer->start(0);
 }
 
 void MobileTaskSwitcherState::setDBusState(bool active)
@@ -359,8 +239,9 @@ void MobileTaskSwitcherState::setDBusState(bool active)
 void MobileTaskSwitcherState::invokeEffect()
 {
     m_shutdownTimer->stop();
-    resetGestureState();
-    setInitialTaskIndex(currentTaskIndex()); // TODO! this is only until the crashing bug is fixed and recency sorting is in
+    if (m_phase == Phase::Hidden) {
+        setPhase(Phase::Visible);
+    }
     m_effect->setRunning(true);
     setDBusState(true);
 }

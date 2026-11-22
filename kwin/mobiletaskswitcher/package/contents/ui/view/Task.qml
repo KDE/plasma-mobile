@@ -9,23 +9,21 @@ import QtQuick
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kwin 3.0 as KWinComponents
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import "../logic"
 
 Item {
     id: delegate
 
-    required property var taskSwitcher
-    property var taskSwitcherHelpers: taskSwitcher.taskSwitcherHelpers
+    required property TaskSwitcher taskSwitcher
+    readonly property TaskSwitcherGeometry geometry: taskSwitcher.geometry
+    readonly property TaskSwitcherController controller: taskSwitcher.controller
 
     required property QtObject window
 
     required property var model
-
-    required property real previewHeight
-    required property real previewWidth
 
     readonly property real dragOffset: -control.y
 
@@ -51,7 +49,7 @@ Item {
         if (!ShellSettings.Settings.convergenceModeEnabled) {
             delegate.window.setMaximize(true, true);
         }
-        delegate.taskSwitcherHelpers.openApp(model.index);
+        delegate.controller.openApp(model.index);
     }
 
     function minimizeApp(): void {
@@ -145,7 +143,6 @@ Item {
             to: 0
             onFinished: {
                 if (to != 0) { // close app
-                    delegate.taskSwitcherHelpers.lastClosedTask = delegate.currentIndex;
                     delegate.closeApp();
                     uncloseTimer.start();
                 }
@@ -196,20 +193,17 @@ Item {
                     icon.name: "window-close"
                     icon.width: Kirigami.Units.iconSizes.smallMedium
                     icon.height: Kirigami.Units.iconSizes.smallMedium
-                    onClicked: {
-                        delegate.taskSwitcherHelpers.lastClosedTask = delegate.currentIndex;
-                        delegate.closeApp()
-                    }
+                    onClicked: delegate.closeApp()
                 }
             }
 
             // app preview
             Rectangle {
                 id: appView
-                Layout.preferredWidth: delegate.taskSwitcherHelpers.previewWidth
-                Layout.preferredHeight: delegate.taskSwitcherHelpers.previewHeight
-                Layout.maximumWidth: delegate.taskSwitcherHelpers.previewWidth
-                Layout.maximumHeight: delegate.taskSwitcherHelpers.previewHeight
+                Layout.preferredWidth: delegate.geometry.previewWidth
+                Layout.preferredHeight: delegate.geometry.previewHeight
+                Layout.maximumWidth: delegate.geometry.previewWidth
+                Layout.maximumHeight: delegate.geometry.previewHeight
 
                 radius: Kirigami.Units.largeSpacing
                 color: Qt.rgba(0, 0, 0, 0.2)

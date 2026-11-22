@@ -49,6 +49,16 @@ void TaskFilterModel::refresh()
     sort(0);
 }
 
+int TaskFilterModel::indexOf(Window *window) const
+{
+    for (int row = 0; row < rowCount(); ++row) {
+        if (data(index(row, 0), TaskModel::WindowRole).value<Window *>() == window) {
+            return row;
+        }
+    }
+    return -1;
+}
+
 QString TaskFilterModel::screenName() const
 {
     return m_output ? m_output->name() : QString();
