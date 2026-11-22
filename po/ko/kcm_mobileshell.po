@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 13:44+0000\n"
-"PO-Revision-Date: 2025-10-09 01:54+0200\n"
+"PO-Revision-Date: 2026-11-21 22:26+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -69,12 +69,12 @@ msgstr "화면이 꺼져 있을 때 두 번 탭하여 장치를 깨웁니다."
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "모두 닫기 확인"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
-msgstr ""
+msgstr "작업 전환기에서 모든 앱을 닫기 전에 확인합니다."
 
 #: ui/main.qml:95
 #, kde-format
@@ -263,10 +263,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "셸에 진동 단추를 활성화할지 여부입니다."
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "진동 시간"
+msgstr "진동 시간(밀리초)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -276,7 +275,7 @@ msgstr "셸 진동의 지속 시간입니다."
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "기본 시간으로 초기화"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
