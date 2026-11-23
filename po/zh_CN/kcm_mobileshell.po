@@ -67,12 +67,12 @@ msgstr "当屏幕关闭时，双击唤醒设备。"
 #: ui/main.qml:83
 #, kde-format
 msgid "Confirm Close All"
-msgstr ""
+msgstr "确认关闭全部"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Require confirmation before closing all apps in the task switcher."
-msgstr ""
+msgstr "关闭任务切换器中所有应用前需要用户确认。"
 
 #: ui/main.qml:95
 #, kde-format
@@ -261,10 +261,9 @@ msgid "Whether to have vibrations enabled in the shell."
 msgstr "是否在外壳程序中启用振动。"
 
 #: ui/VibrationForm.qml:39
-#, fuzzy, kde-format
-#| msgid "Vibration Duration"
+#, kde-format
 msgid "Vibration duration (ms)"
-msgstr "振动持续时间"
+msgstr "振动持续时间 (毫秒)"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
@@ -274,7 +273,7 @@ msgstr "设置外壳程序的振动持续时间。"
 #: ui/VibrationForm.qml:55
 #, kde-format
 msgid "Reset to default duration"
-msgstr ""
+msgstr "重置为默认时长"
 
 #: ui/VibrationForm.qml:65
 #, kde-format
@@ -282,15 +281,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "键盘振动由键盘设置模块独立控制。"
-
-#~ msgctxt "Long duration"
-#~ msgid "Long"
-#~ msgstr "长"
-
-#~ msgctxt "Medium duration"
-#~ msgid "Medium"
-#~ msgstr "中"
-
-#~ msgctxt "Short duration"
-#~ msgid "Short"
-#~ msgstr "短"

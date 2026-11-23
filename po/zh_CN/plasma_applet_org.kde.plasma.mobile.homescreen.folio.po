@@ -94,7 +94,7 @@ msgstr "移除"
 #: qml/FavouritesBar.qml:239 qml/FolderView.qml:407 qml/HomeScreenPage.qml:341
 #, kde-format
 msgid "App info"
-msgstr ""
+msgstr "应用信息"
 
 #: qml/HomeScreenPage.qml:487
 #, kde-format
