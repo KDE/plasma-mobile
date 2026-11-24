@@ -189,6 +189,14 @@ Item {
         }
     }
 
+    // Prevent interaction with homescreen when a window is maximized
+    MouseArea {
+        anchors.fill: parent
+        visible: windowMaximizedTracker.showingWindow || MobileShellState.ShellDBusClient.isTaskSwitcherVisible
+        hoverEnabled: true
+        onWheel: (wheel) => wheel.accepted = true
+    }
+
     // App start animation component
     MobileShell.StartupFeedbackWindows {
         id: startupFeedbackWindows
