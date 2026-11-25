@@ -16,6 +16,7 @@
   <name xml:lang="ca-valencia">Espai de treball Plasma Mobile de KDE</name>
   <name xml:lang="cs">Rozhraní KDE Plasma Mobile</name>
   <name xml:lang="de">KDE Plasma Mobile-Umgebung</name>
+  <name xml:lang="el">Κέλυφος KDE Plasma Mobile</name>
   <name xml:lang="es">Entorno KDE Plasma Móvil</name>
   <name xml:lang="eu">KDE Plasma Mugikor Oskola</name>
   <name xml:lang="fi">KDE Plasma Mobile -käyttöliittymä</name>
@@ -50,6 +51,7 @@
   <summary xml:lang="ca-valencia">Espai de treball Plasma de KDE per a dispositius de factor de forma mòbil</summary>
   <summary xml:lang="cs">Prostředí Plasma od KDE pro zařízení s mobilním rozhraním</summary>
   <summary xml:lang="de">Plasma-Umgebung von KDE für Mobilgeräte</summary>
+  <summary xml:lang="el">Το κέλυφος Plasma του KDE για κινητές συσκευές</summary>
   <summary xml:lang="es">Entorno de Plasma de KDE para dispositivos con factor de forma móvil</summary>
   <summary xml:lang="eu">Mugikor forma faktorea duten gailuetarako KDEren Plasma Oskola</summary>
   <summary xml:lang="fi">KDE Plasman käyttöliittymä mobiililaitteille</summary>
@@ -93,6 +95,7 @@
       <caption xml:lang="ca-valencia">Espai de treball Plasma Mobile que s'utilitza en una pantalla de factor de forma mòbil</caption>
       <caption xml:lang="cs">Prostředí Plasma Mobile používané na displeji mobilního zařízení</caption>
       <caption xml:lang="de">Plasma Mobile Shell auf dem Bildschirm eines Mobilgeräts</caption>
+      <caption xml:lang="el">Το κέλυφος του Plasma Mobile στην οθόνη μιας κινητής συσκευής</caption>
       <caption xml:lang="es">El entorno Plasma Mobile en uso en una pantalla con factor de forma móvil</caption>
       <caption xml:lang="eu">Mugikor forma faktoreko pantaila batean Plasma Mugikor oskola erabiltzen</caption>
       <caption xml:lang="fi">Plasma Mobilen käyttöliittymä käytössä mobiilinäytöllä</caption>
