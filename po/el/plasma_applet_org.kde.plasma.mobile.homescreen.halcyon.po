@@ -1,0 +1,109 @@
+# Greek translations for plasma-mobile.
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Automatically generated, 2026.
+#
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-10-12 00:54+0000\n"
+"PO-Revision-Date: 2026-11-21 17:26+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: pinnedmodel.cpp:146
+#, kde-format
+msgctxt "Default application folder name."
+msgid "Folder"
+msgstr "Φάκελος"
+
+#: qml/config.qml:15
+#, kde-format
+msgid "General"
+msgstr "Γενικά"
+
+#: qml/FavoritesGrid.qml:224 qml/FolderGrid.qml:189
+#, kde-format
+msgid "Remove from favourites"
+msgstr "Αφαίρεση από τα αγαπημένα"
+
+#: qml/FavoritesGrid.qml:229 qml/FolderGrid.qml:199 qml/GridAppDelegate.qml:72
+#, kde-format
+msgid "App info"
+msgstr "Πληροφορίες εφαρμογής"
+
+#: qml/FavoritesGrid.qml:299
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "Προσθέστε εφαρμογές στα αγαπημένα για να εμφανιστούν εδώ."
+
+#: qml/FolderGrid.qml:194
+#, kde-format
+msgid "Move out of folder"
+msgstr "Μετακίνηση εκτός φακέλου"
+
+#: qml/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "Προσθήκη στα αγαπημένα"
+
+#: qml/GridAppList.qml:68
+#, kde-format
+msgid "Applications"
+msgstr "Εφαρμογές"
+
+#: qml/settings/ConfigGeneral.qml:17
+#, kde-format
+msgid "Homescreen Settings"
+msgstr "Ρυθμίσεις αρχικής οθόνης"
+
+#: qml/settings/ConfigGeneral.qml:26
+#, kde-format
+msgid "Homescreen"
+msgstr "Αρχική οθόνη"
+
+#: qml/settings/ConfigGeneral.qml:32
+#, kde-format
+msgid "Wallpaper blur effect"
+msgstr "Εφέ θόλωσης ταπετσαρίας"
+
+#: qml/settings/ConfigGeneral.qml:35
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "None"
+msgstr "Κανένα"
+
+#: qml/settings/ConfigGeneral.qml:36
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Simple"
+msgstr "Απλό"
+
+#: qml/settings/ConfigGeneral.qml:37
+#, kde-format
+msgctxt "Wallpaper blur effect"
+msgid "Full"
+msgstr "Πλήρες"
+
+#: qml/settings/ConfigGeneral.qml:54
+#, kde-format
+msgid "Double tap to lock device"
+msgstr "Διπλό άγγιγμα για κλείδωμα της συσκευής"
+
+#: qml/settings/SettingsScreen.qml:71
+#, kde-format
+msgid "Wallpapers"
+msgstr "Ταπετσαρίες"
+
+#: qml/settings/SettingsScreen.qml:99
+#, kde-format
+msgid "Settings"
+msgstr "Ρυθμίσεις"

@@ -1,0 +1,108 @@
+# Greek translations for plasma-mobile.
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Automatically generated, 2026.
+#
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:54+0000\n"
+"PO-Revision-Date: 2026-11-21 17:22+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Πληροφορίες συστήματος"
+
+#: ui/main.qml:26
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: ui/main.qml:47
+#, kde-format
+msgid "Operating System"
+msgstr "Λειτουργικό σύστημα"
+
+#: ui/main.qml:58
+#, kde-format
+msgid "Webpage"
+msgstr "Ιστοσελίδα"
+
+#: ui/main.qml:92
+#, kde-format
+msgctxt "@title:group"
+msgid "Software"
+msgstr "Λογισμικό"
+
+#: ui/main.qml:97
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "Έκδοση KDE Plasma"
+
+#: ui/main.qml:104
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "Έκδοση KDE Frameworks"
+
+#: ui/main.qml:111
+#, kde-format
+msgid "Qt Version"
+msgstr "Έκδοση Qt"
+
+#: ui/main.qml:118
+#, kde-format
+msgid "Kernel Version"
+msgstr "Έκδοση πυρήνα"
+
+#: ui/main.qml:125
+#, kde-format
+msgid "OS Type"
+msgstr "Τύπος λειτουργικού συστήματος"
+
+#: ui/main.qml:126
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1 bit"
+
+#: ui/main.qml:131
+#, kde-format
+msgctxt "@title:group"
+msgid "Hardware"
+msgstr "Υλικό"
+
+#: ui/main.qml:136
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "Επεξεργαστής"
+msgstr[1] "Επεξεργαστές"
+
+#: ui/main.qml:143
+#, kde-format
+msgid "Memory"
+msgstr "Μνήμη"
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 RAM"
+
+#: ui/main.qml:149
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "Άγνωστη"

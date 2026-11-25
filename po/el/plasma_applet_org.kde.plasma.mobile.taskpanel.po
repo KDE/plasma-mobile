@@ -1,0 +1,56 @@
+# Greek translations for plasma-mobile.
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Automatically generated, 2026.
+#
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"PO-Revision-Date: 2026-11-21 17:26+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: qml/NavigationPanelComponent.qml:77
+#, kde-format
+msgctxt "@action:button"
+msgid "Task switcher"
+msgstr "Εναλλαγή εργασιών"
+
+#: qml/NavigationPanelComponent.qml:91
+#, kde-format
+msgctxt "@action:button"
+msgid "Home"
+msgstr "Αρχική"
+
+#: qml/NavigationPanelComponent.qml:104 qml/NavigationPanelComponent.qml:141
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide keyboard"
+msgstr "Απόκρυψη πληκτρολογίου"
+
+#: qml/NavigationPanelComponent.qml:105
+#, kde-format
+msgctxt "@action:button"
+msgid "Close app"
+msgstr "Κλείσιμο εφαρμογής"
+
+#: qml/NavigationPanelComponent.qml:127
+#, kde-format
+msgctxt "@action:button"
+msgid "Rotate screen"
+msgstr "Περιστροφή οθόνης"
+
+#: qml/NavigationPanelComponent.qml:142
+#, kde-format
+msgctxt "@action:button"
+msgid "Show keyboard"
+msgstr "Εμφάνιση πληκτρολογίου"

@@ -1,0 +1,134 @@
+# Greek translations for plasma-mobile.
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Automatically generated, 2026.
+#
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-10-22 00:52+0000\n"
+"PO-Revision-Date: 2026-11-21 17:32+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: contents/applet/AppletError.qml:168
+msgid "Copy to Clipboard"
+msgstr "Αντιγραφή στο πρόχειρο"
+
+#: contents/applet/AppletError.qml:191
+msgid "View Error Details…"
+msgstr "Προβολή λεπτομερειών σφάλματος…"
+
+#: contents/applet/CompactApplet.qml:88
+msgid "Open %1"
+msgstr "Άνοιγμα %1"
+
+#: contents/configuration/AppletConfiguration.qml:96
+msgctxt "The title of the applet configuration window"
+msgid "Configure %1"
+msgstr "Διαμόρφωση %1"
+
+#: contents/configuration/ContainmentConfiguration.qml:30
+msgid "Wallpaper"
+msgstr "Ταπετσαρία"
+
+#: contents/configuration/ContainmentConfiguration.qml:35
+msgid "Change Homescreen"
+msgstr "Αλλαγή αρχικής οθόνης"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:26
+msgid "Select Homescreen"
+msgstr "Επιλογή αρχικής οθόνης"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:58
+msgid "Change homescreen to %1?"
+msgstr "Να αλλάξει η αρχική οθόνη σε %1;"
+
+#: contents/configuration/private/ChangeContainmentModule.qml:59
+msgid ""
+"Your current homescreen's settings are saved, and will be restored if you "
+"switch back."
+msgstr ""
+"Οι ρυθμίσεις της τρέχουσας αρχικής οθόνης σας αποθηκεύονται και θα "
+"επανέλθουν αν την επιλέξετε ξανά."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:48
+msgid "Wallpaper Plugin"
+msgstr "Πρόσθετο ταπετσαρίας"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:49
+msgid "The wallpaper plugin to use."
+msgstr "Το πρόσθετο ταπετσαρίας που θα χρησιμοποιηθεί."
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:84
+msgid "Wallpaper Plugins"
+msgstr "Πρόσθετα για ταπετσαρίες"
+
+#: contents/configuration/private/ChangeWallpaperModule.qml:89
+msgid "Get New Plugins…"
+msgstr "Λήψη νέων πρόσθετων…"
+
+#: contents/configuration/private/ConfigListPage.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+"Οι αλλαγές διάταξης έχουν περιοριστεί από τον διαχειριστή του συστήματος"
+
+#: contents/lockscreen/Keypad.qml:174
+msgid "Backspace"
+msgstr "Backspace"
+
+#: contents/lockscreen/Keypad.qml:175
+msgid "Enter"
+msgstr "Enter"
+
+#: contents/lockscreen/LockScreenContent.qml:27
+msgid "Flashlight"
+msgstr "Φακός"
+
+#: contents/lockscreen/LockScreenContent.qml:28
+msgid "Camera"
+msgstr "Κάμερα"
+
+#: contents/lockscreen/LockScreenState.qml:37
+msgid "Enter PIN"
+msgstr "Εισαγωγή PIN"
+
+#: contents/lockscreen/LockScreenState.qml:38
+msgid "Wrong PIN"
+msgstr "Λάθος PIN"
+
+#: contents/lockscreen/PasswordBar.qml:196
+msgid "Show keypad"
+msgstr "Εμφάνιση αριθμητικού πληκτρολογίου"
+
+#: contents/lockscreen/PasswordBar.qml:196
+msgid "Show keyboard"
+msgstr "Εμφάνιση πληκτρολογίου"
+
+#: contents/logout/Logout.qml:185
+msgid "Restart"
+msgstr "Επανεκκίνηση"
+
+#: contents/logout/Logout.qml:194
+msgid "Shut Down"
+msgstr "Τερματισμός"
+
+#: contents/logout/Logout.qml:203
+msgid "Log Out"
+msgstr "Αποσύνδεση"
+
+#: contents/logout/Logout.qml:213
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: contents/views/Panel.qml:318
+msgid "Panel Focus Indicator"
+msgstr "Δείκτης εστίασης πίνακα"
