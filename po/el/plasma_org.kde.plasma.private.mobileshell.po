@@ -1,0 +1,400 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-08-01 00:50+0000\n"
+"PO-Revision-Date: 2026-11-21 17:30+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: notifications/notificationfileinfo.cpp:169
+#, kde-format
+msgid "Open with %1"
+msgstr "Άνοιγμα με %1"
+
+#: notifications/notificationfileinfo.cpp:173
+#, kde-format
+msgid "Open with…"
+msgstr "Άνοιγμα με…"
+
+#: notifications/notificationfilemenu.cpp:109
+#: qml/widgets/notifications/NotificationJobItem.qml:217
+#, kde-format
+msgid "Open Containing Folder"
+msgstr "Άνοιγμα περιέχοντος φακέλου"
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr "&Αντιγραφή"
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr "Αντιγραφή τοποθεσίας"
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr "Ιδιότητες"
+
+#: qml/actiondrawer/private/ContentContainer.qml:151
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Εκκαθάριση όλων των ειδοποιήσεων"
+
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, kde-format
+msgctxt "@info:status quick setting is on"
+msgid "On"
+msgstr "Ενεργό"
+
+#: qml/actiondrawer/private/QuickSettingsDelegate.qml:37
+#, kde-format
+msgctxt "@info:status quick setting is off"
+msgid "Off"
+msgstr "Ανενεργό"
+
+#: qml/dataproviders/SignalStrengthInfo.qml:21
+#, kde-format
+msgid "SIM Locked"
+msgstr "Κλειδωμένη SIM"
+
+#: qml/popups/volumeosd/AudioApplet.qml:89
+#, kde-format
+msgid "Output Devices"
+msgstr "Συσκευές εξόδου"
+
+#: qml/popups/volumeosd/AudioApplet.qml:118
+#, kde-format
+msgid "Input Devices"
+msgstr "Συσκευές εισόδου"
+
+#: qml/popups/volumeosd/AudioApplet.qml:148
+#, kde-format
+msgid "Playback Streams"
+msgstr "Ροές αναπαραγωγής"
+
+#: qml/popups/volumeosd/AudioApplet.qml:199
+#, kde-format
+msgid "Recording Streams"
+msgstr "Ροές εγγραφής"
+
+#: qml/popups/volumeosd/DeviceListItem.qml:24
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/popups/volumeosd/DeviceListItem.qml:33
+#, kde-format
+msgid "Device name not found"
+msgstr "Το όνομα της συσκευής δεν βρέθηκε"
+
+#: qml/popups/volumeosd/ListItemBase.qml:123
+#, kde-format
+msgid "Show additional options for %1"
+msgstr "Εμφάνιση επιπλέον επιλογών για το %1"
+
+#: qml/popups/volumeosd/ListItemBase.qml:215
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/popups/volumeosd/ListItemBase.qml:230
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr "100%"
+
+#: qml/popups/volumeosd/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr "Ήχοι ειδοποίησης"
+
+#: qml/popups/volumeosd/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/popups/volumeosd/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr "Το όνομα της ροής δεν βρέθηκε"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Unmute"
+msgstr "Αποσίγαση"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:161
+#, kde-format
+msgid "Mute"
+msgstr "Σίγαση"
+
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:210
+#, kde-format
+msgid "configure audio streams"
+msgstr "Διαμόρφωση ροών ήχου"
+
+#: qml/popups/volumeosd/VolumeOSD.qml:225
+#, kde-format
+msgid "Open audio settings"
+msgstr "Άνοιγμα ρυθμίσεων ήχου"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:68
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/widgets/krunner/KRunnerScreen.qml:68
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search…"
+msgstr "Αναζήτηση…"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:172
+#, kde-format
+msgid "No media playing"
+msgstr "Δε γίνεται αναπαραγωγή πολυμέσων"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:200
+#, kde-format
+msgid "Previous track"
+msgstr "Προηγούμενο κομμάτι"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:211
+#, kde-format
+msgid "Play or Pause media"
+msgstr "Αναπαραγωγή ή παύση πολυμέσων"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:224
+#, kde-format
+msgid "Next track"
+msgstr "Επόμενο κομμάτι"
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:32
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy Link Address"
+msgstr "Αντιγραφή διεύθυνσης συνδέσμου"
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:44
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: qml/widgets/notifications/NotificationEditContextMenu.qml:61
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Select All"
+msgstr "Επιλογή όλων"
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:58
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr "Απάντηση"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:31
+#, kde-format
+msgctxt "Row description, e.g. Source"
+msgid "%1:"
+msgstr "%1:"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:102
+#, kde-format
+msgctxt "How many bytes have been copied"
+msgid "%2 of %1"
+msgstr "%2 από %1"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:106
+#, fuzzy, kde-format
+msgctxt "How many files have been copied"
+msgid "%2 of %1 file"
+msgid_plural "%2 of %1 files"
+msgstr[0] "%2 από %1 αρχείο"
+msgstr[1] "%2 από %1 αρχεία"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:109
+#, fuzzy, kde-format
+msgctxt "How many dirs have been copied"
+msgid "%2 of %1 folder"
+msgid_plural "%2 of %1 folders"
+msgstr[0] "%2 από %1 φάκελο"
+msgstr[1] "%2 από %1 φακέλους"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:112
+#, fuzzy, kde-format
+msgctxt "How many items (that includes files and dirs) have been copied"
+msgid "%2 of %1 item"
+msgid_plural "%2 of %1 items"
+msgstr[0] "%2 από %1 αντικείμενο"
+msgstr[1] "%2 από %1 αντικείμενα"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:120
+#, fuzzy, kde-format
+msgid "%1 file"
+msgid_plural "%1 files"
+msgstr[0] "%1 αρχείο"
+msgstr[1] "%1 αρχεία"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:122
+#, fuzzy, kde-format
+msgid "%1 folder"
+msgid_plural "%1 folders"
+msgstr[0] "%1 φάκελος"
+msgstr[1] "%1 φάκελοι"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:124
+#, fuzzy, kde-format
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] "%1 αντικείμενο"
+msgstr[1] "%1 αντικείμενα"
+
+#: qml/widgets/notifications/NotificationJobDetails.qml:141
+#, kde-format
+msgctxt "Bytes per second"
+msgid "%1/s"
+msgstr "%1/s"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:115
+#, kde-format
+msgctxt "Percentage of a job"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:130
+#, kde-format
+msgctxt "Hides/expands item details"
+msgid "Details"
+msgstr "Λεπτομέρειες"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:141
+#, kde-format
+msgctxt "Pause running job"
+msgid "Pause"
+msgstr "Παύση"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:150
+#, kde-format
+msgctxt "Cancel running job"
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:181
+#: qml/widgets/notifications/ThumbnailStrip.qml:134
+#, kde-format
+msgid "More Options…"
+msgstr "Περισσότερες επιλογές…"
+
+#: qml/widgets/notifications/NotificationJobItem.qml:209
+#, kde-format
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr "Γράψτε μια απάντηση…"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr "Αποστολή"
+
+#: qml/widgets/notifications/NotificationsUtils.js:15
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr "%1 (σε παύση)"
+
+#: qml/widgets/notifications/NotificationsUtils.js:20
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr "%1 (απέτυχε)"
+
+#: qml/widgets/notifications/NotificationsUtils.js:22
+#, kde-format
+msgid "Job Failed"
+msgstr "Αποτυχία εργασίας"
+
+#: qml/widgets/notifications/NotificationsUtils.js:25
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr "%1 (ολοκληρώθηκε)"
+
+#: qml/widgets/notifications/NotificationsUtils.js:27
+#, kde-format
+msgid "Job Finished"
+msgstr "Ολοκληρωμένη εργασία"
+
+#: qml/widgets/notifications/NotificationsUtils.js:45
+#, kde-format
+msgid "now"
+msgstr "τώρα"
+
+#: qml/widgets/notifications/NotificationsUtils.js:50
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr "πριν από %1 λ."
+
+#: qml/widgets/notifications/NotificationsUtils.js:82
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr "απομένουν %1 δ."
+
+#: qml/widgets/notifications/NotificationsUtils.js:85
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr "απομένουν %1 λ."
+
+#: qml/widgets/notifications/NotificationsUtils.js:88
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr "απομένουν %1 ώ."
+
+#: qml/widgets/notifications/NotificationsWidget.qml:258
+#, kde-format
+msgid "Notification service not available"
+msgstr "Η υπηρεσία ειδοποιήσεων δεν είναι διαθέσιμη"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:267
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr "Οι ειδοποιήσεις παρέχονται επί του παρόντος από το «%1 %2»"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:429
+#, kde-format
+msgid "Show Fewer"
+msgstr "Εμφάνιση λιγότερων"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:431
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr "Εμφάνιση %1 περισσότερων"

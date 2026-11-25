@@ -1,0 +1,297 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2026 Petros Vidalis <pvidalis@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-07-04 00:46+0000\n"
+"PO-Revision-Date: 2026-11-21 17:25+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.3\n"
+
+#: ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr "Κέλυφος"
+
+#: ui/main.qml:27
+#, kde-format
+msgid "General"
+msgstr "Γενικά"
+
+#: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
+#, kde-format
+msgid "Shell Vibrations"
+msgstr "Δονήσεις κελύφους"
+
+#: ui/main.qml:41
+#, kde-format
+msgid "Animations"
+msgstr "Εφέ κίνησης"
+
+#: ui/main.qml:42
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr ""
+"Αν απενεργοποιήσετε αυτή την επιλογή, τα εφέ κίνησης θα περιοριστούν όσο "
+"γίνεται."
+
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr "Αυτόματη απόκρυψη πινάκων"
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"Auto-hide the status and navigation panels to allow applications to always "
+"be in fullscreen."
+msgstr ""
+"Αποκρύπτει αυτόματα τους πίνακες κατάστασης και πλοήγησης ώστε οι εφαρμογές "
+"να μπορούν να εμφανίζονται πάντα σε πλήρη οθόνη."
+
+#: ui/main.qml:69
+#, kde-format
+msgid "Double Tap to Wakeup"
+msgstr "Διπλό άγγιγμα για αφύπνιση"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "When the screen is off, double tap to wakeup the device."
+msgstr ""
+"Όταν η οθόνη είναι σβηστή, αγγίξτε τη δύο φορές για να αφυπνίσετε τη συσκευή."
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Status Bar"
+msgstr "Γραμμή κατάστασης"
+
+#: ui/main.qml:87
+#, kde-format
+msgid "Date in status bar"
+msgstr "Ημερομηνία στη γραμμή κατάστασης"
+
+#: ui/main.qml:88
+#, kde-format
+msgid "If on, date will be shown next to the clock in the status bar."
+msgstr ""
+"Αν ενεργοποιηθεί, η ημερομηνία θα εμφανίζεται δίπλα στο ρολόι στη γραμμή "
+"κατάστασης."
+
+#: ui/main.qml:101
+#, kde-format
+msgid "Battery Percentage"
+msgstr "Ποσοστό μπαταρίας"
+
+#: ui/main.qml:102
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr "Εμφάνιση του ποσοστού της μπαταρίας στη γραμμή κατάστασης."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Status Bar Size"
+msgstr "Μέγεθος γραμμής κατάστασης"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Μέγεθος του επάνω πίνακα (απαιτεί επανεκκίνηση)."
+
+#: ui/main.qml:120
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr "Ελάχιστο"
+
+#: ui/main.qml:121
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr "Μικρό"
+
+#: ui/main.qml:122
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr "Κανονικό"
+
+#: ui/main.qml:123
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr "Μεγάλο"
+
+#: ui/main.qml:124
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr "Πολύ μεγάλο"
+
+#: ui/main.qml:140
+#, kde-format
+msgid "Action Drawer"
+msgstr "Συρτάρι ενεργειών"
+
+#: ui/main.qml:146
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr "Καρφιτσωμένο"
+
+#: ui/main.qml:147
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr "Αναπτυγμένο"
+
+#: ui/main.qml:151 ui/QuickSettingsForm.qml:20 ui/QuickSettingsForm.qml:106
+#, kde-format
+msgid "Quick Settings"
+msgstr "Γρήγορες ρυθμίσεις"
+
+#: ui/main.qml:159
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr "Προβολή συρταριού από επάνω αριστερά"
+
+#: ui/main.qml:160
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr "Τρόπος εμφάνισης όταν ανοίγει από επάνω αριστερά."
+
+#: ui/main.qml:181
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr "Προβολή συρταριού από επάνω δεξιά"
+
+#: ui/main.qml:182
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr "Τρόπος εμφάνισης όταν ανοίγει από επάνω δεξιά."
+
+#: ui/main.qml:201
+#, kde-format
+msgctxt "@title:group, shortcuts available from lock screen"
+msgid "Lock Screen Shortcuts"
+msgstr "Συντομεύσεις οθόνης κλειδώματος"
+
+#: ui/main.qml:206
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr "Καμία"
+
+#: ui/main.qml:207
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr "Φακός"
+
+#: ui/main.qml:208
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr "Κάμερα"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr "Αριστερό κουμπί"
+
+#: ui/main.qml:234
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr "Δεξί κουμπί"
+
+#: ui/QuickSettingsForm.qml:89
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide"
+msgstr "Απόκρυψη"
+
+#: ui/QuickSettingsForm.qml:89
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr "Εμφάνιση"
+
+#: ui/QuickSettingsForm.qml:114
+#, kde-format
+msgid "Quick Settings Columns"
+msgstr "Στήλες γρήγορων ρυθμίσεων"
+
+#: ui/QuickSettingsForm.qml:115
+#, kde-format
+msgid "Maximum number of columns in landscape orientation."
+msgstr "Μέγιστος αριθμός στηλών σε οριζόντιο προσανατολισμό."
+
+#: ui/QuickSettingsForm.qml:128
+#, kde-format
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr ""
+"Αλλάξτε τη σειρά των γρήγορων ρυθμίσεων στον αναπτυσσόμενο πίνακα ή "
+"αποκρύψτε τες."
+
+#: ui/QuickSettingsForm.qml:166
+#, kde-format
+msgid "Disabled Quick Settings"
+msgstr "Απενεργοποιημένες γρήγορες ρυθμίσεις"
+
+#: ui/QuickSettingsForm.qml:171
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr "Ενεργοποιήστε ξανά γρήγορες ρυθμίσεις που είχαν απενεργοποιηθεί."
+
+#: ui/VibrationForm.qml:26
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr "Αν θα είναι ενεργές οι δονήσεις του κελύφους."
+
+#: ui/VibrationForm.qml:39
+#, kde-format
+msgid "Vibration Duration"
+msgstr ""
+
+#: ui/VibrationForm.qml:40
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr "Πόσο θα διαρκούν οι δονήσεις του κελύφους."
+
+#: ui/VibrationForm.qml:43
+#, kde-format
+msgctxt "Long duration"
+msgid "Long"
+msgstr ""
+
+#: ui/VibrationForm.qml:44
+#, kde-format
+msgctxt "Medium duration"
+msgid "Medium"
+msgstr ""
+
+#: ui/VibrationForm.qml:45
+#, kde-format
+msgctxt "Short duration"
+msgid "Short"
+msgstr ""
+
+#: ui/VibrationForm.qml:60
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr ""
+"Οι δονήσεις του πληκτρολογίου ρυθμίζονται χωριστά στο άρθρωμα ρυθμίσεων "
+"πληκτρολογίου."
