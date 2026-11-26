@@ -11,6 +11,7 @@ include:
       - /gitlab-templates/xml-lint.yml
       - /gitlab-templates/yaml-lint.yml
       - /gitlab-templates/qml-lint.yml
+      - /gitlab-templates/cppcheck.yml
 
 posix-script-compliance:
   image:

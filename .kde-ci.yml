@@ -29,6 +29,7 @@ Options:
  require-passing-tests-on: ['@all']
  run-qmllint: true
  enable-lsan: True
+ cppcheck-arguments: '--enable=warning,style,performance'
 
 RuntimeDependencies:
  - 'on': ['Linux']
