@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/plasma_applet_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/plasma_applet_org.kde."
 "plasma.mobile.homescreen.halcyon.pot\n"
-"X-Crowdin-File-ID: 43223\n"
+"X-Crowdin-File-ID: 52682\n"
 
 #: pinnedmodel.cpp:146
 #, kde-format
