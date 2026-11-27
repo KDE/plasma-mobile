@@ -61,6 +61,22 @@ FormCard.FormCardPage {
         }
     }
 
+    FormCard.FormCard {
+        Layout.topMargin: Kirigami.Units.gridUnit
+
+        FormCard.FormSwitchDelegate {
+            id: notificationVibrationsSwitch
+            text: i18n("Notification Vibrations")
+            description: i18n("Whether to vibrate when a notification is shown.")
+            checked: ShellSettings.Settings.notificationVibrationsEnabled
+            onCheckedChanged: {
+                if (checked != ShellSettings.Settings.notificationVibrationsEnabled) {
+                    ShellSettings.Settings.notificationVibrationsEnabled = checked;
+                }
+            }
+        }
+    }
+
     FormCard.FormSectionText {
         text: i18n("Keyboard vibrations are controlled separately in the keyboard settings module.")
     }

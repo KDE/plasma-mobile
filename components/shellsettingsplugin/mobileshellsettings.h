@@ -27,6 +27,8 @@ class MobileShellSettings : public QObject
     // general
     Q_PROPERTY(bool vibrationsEnabled READ vibrationsEnabled WRITE setVibrationsEnabled NOTIFY vibrationsEnabledChanged)
     Q_PROPERTY(int vibrationDuration READ vibrationDuration WRITE setVibrationDuration NOTIFY vibrationDurationChanged)
+    Q_PROPERTY(bool notificationVibrationsEnabled READ notificationVibrationsEnabled WRITE setNotificationVibrationsEnabled NOTIFY
+                   notificationVibrationsEnabledChanged)
     Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
 
     // status bar
@@ -108,6 +110,20 @@ public:
      * Remove the user's vibration duration, falling back to the device preset (or built-in) default.
      */
     Q_INVOKABLE void resetVibrationDuration();
+
+    /**
+     * Get whether the device vibrates when a notification popup is shown.
+     *
+     * This is separate from vibrationsEnabled, which controls shell (button) haptics.
+     */
+    bool notificationVibrationsEnabled() const;
+
+    /**
+     * Set whether the device vibrates when a notification popup is shown.
+     *
+     * @param notificationVibrationsEnabled Whether notification vibrations are enabled.
+     */
+    void setNotificationVibrationsEnabled(bool notificationVibrationsEnabled);
 
     /**
      * Whether animations are enabled in the shell.
@@ -316,6 +332,7 @@ public:
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationDurationChanged();
+    void notificationVibrationsEnabledChanged();
     void navigationPanelEnabledChanged();
     void gesturePanelEnabledChanged();
     void alwaysShowKeyboardToggleOnNavigationPanelChanged();

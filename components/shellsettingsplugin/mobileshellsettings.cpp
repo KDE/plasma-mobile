@@ -31,6 +31,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
         Q_UNUSED(names)
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT vibrationsEnabledChanged();
+            Q_EMIT notificationVibrationsEnabledChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT dateInStatusBarChanged();
             Q_EMIT statusBarScaleFactorChanged();
@@ -90,6 +91,19 @@ void MobileShellSettings::resetVibrationDuration()
 {
     auto group = KConfigGroup{m_config, HAPTICS_CONFIG_GROUP};
     group.revertToDefault("duration", KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::notificationVibrationsEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("notificationVibrationsEnabled", true);
+}
+
+void MobileShellSettings::setNotificationVibrationsEnabled(bool notificationVibrationsEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("notificationVibrationsEnabled", notificationVibrationsEnabled, KConfigGroup::Notify);
     m_config->sync();
 }
 

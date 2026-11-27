@@ -103,7 +103,17 @@ void VibrationManager::setProfile(const QString &profile)
 
 QCoro::Task<void> VibrationManager::vibrateTask(int durationMs)
 {
+    const VibrationEvent event{1.0, static_cast<quint32>(std::max(1, durationMs))};
+    co_await vibratePatternTask({event});
+}
+
+QCoro::Task<void> VibrationManager::vibratePatternTask(VibrationEventList pattern)
+{
     QPointer<VibrationManager> guard(this);
+
+    if (pattern.isEmpty()) {
+        co_return;
+    }
 
     // Only create interface when needed.
     if (!m_interface) {
@@ -126,10 +136,12 @@ QCoro::Task<void> VibrationManager::vibrateTask(int durationMs)
         co_return;
     }
 
-    const QString appId = QStringLiteral("org.kde.plasmashell");
-    const VibrationEvent event{m_amplitude, static_cast<quint32>(std::max(1, durationMs))};
-    const VibrationEventList pattern = {event};
+    // Scale by the device tuning
+    for (auto &event : pattern) {
+        event.amplitude = std::clamp(event.amplitude, 0.0, 1.0) * m_amplitude;
+    }
 
+    const QString appId = QStringLiteral("org.kde.plasmashell");
     QDBusPendingReply<bool> reply = co_await m_interface->Vibrate(appId, pattern);
 
     if (!guard) {
@@ -144,4 +156,21 @@ QCoro::Task<void> VibrationManager::vibrateTask(int durationMs)
 QCoro::QmlTask VibrationManager::vibrate(int durationMs)
 {
     return vibrateTask(durationMs);
+}
+
+QCoro::QmlTask VibrationManager::vibratePattern(const QVariantList &pattern)
+{
+    VibrationEventList events;
+    events.reserve(pattern.size());
+
+    for (const QVariant &entry : pattern) {
+        const QVariantList pair = entry.toList();
+        if (pair.size() != 2) {
+            qWarning() << "Invalid vibration pattern entry, expected [amplitude, durationMs]:" << entry;
+            return vibratePatternTask({});
+        }
+        events.append(VibrationEvent{pair[0].toDouble(), static_cast<quint32>(std::max(1, pair[1].toInt()))});
+    }
+
+    return vibratePatternTask(events);
 }

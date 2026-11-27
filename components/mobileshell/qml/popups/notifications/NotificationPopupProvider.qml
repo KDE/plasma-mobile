@@ -8,6 +8,8 @@ import QtQuick
 import QtQuick.Layouts
 
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.hapticsplugin as HapticsPlugin
 
 import org.kde.notificationmanager as NotificationManager
 import org.kde.plasma.clock
@@ -58,6 +60,68 @@ QtObject {
 
             return urgencies;
         }
+    }
+
+    // Alert (sound hint + vibration) when new notification popups appear
+    property QtObject __popupAlerts: Connections {
+        target: notificationProvider.popupNotificationsModel
+
+        function onRowsInserted(parent, first, last) {
+            for (let row = first; row <= last; ++row) {
+                notificationProvider.alertForPopup(notificationProvider.popupNotificationsModel.index(row, 0, parent));
+            }
+        }
+    }
+
+    // Short double buzz, as [amplitude, durationMs] pairs
+    readonly property var notificationVibrationPattern: [[1.0, 60], [0.0, 80], [1.0, 60]]
+
+    readonly property int maxAlertAgeMs: 5000
+    readonly property int minVibrationIntervalMs: 1000
+    property var __alertedIds: []
+    property real __lastVibrationTime: 0
+
+    function alertForPopup(idx) {
+        const model = notificationProvider.popupNotificationsModel;
+
+        if (model.data(idx, NotificationManager.Notifications.TypeRole) !== NotificationManager.Notifications.NotificationType) {
+            return;
+        }
+
+        const id = model.data(idx, NotificationManager.Notifications.IdRole);
+        if (__alertedIds.includes(id)) {
+            return;
+        }
+
+        const created = model.data(idx, NotificationManager.Notifications.CreatedRole);
+        if (!created || Date.now() - created.getTime() > maxAlertAgeMs) {
+            return;
+        }
+
+        // Reassign rather than mutate in place, and only remember the most recent ids
+        __alertedIds = __alertedIds.concat([id]).slice(-50);
+
+        // Plays the sound hint for notifications that don't play their own sound (ex. non-KNotification apps)
+        model.playSoundHint(idx);
+
+        if (!ShellSettings.Settings.notificationVibrationsEnabled) {
+            return;
+        }
+        if (model.data(idx, NotificationManager.Notifications.UrgencyRole) === NotificationManager.Notifications.LowUrgency) {
+            return;
+        }
+        if (model.data(idx, NotificationManager.Notifications.UserActionFeedbackRole)) {
+            return;
+        }
+
+        // Avoid a burst of vibrations when many notifications arrive at once
+        const now = Date.now();
+        if (now - __lastVibrationTime < minVibrationIntervalMs) {
+            return;
+        }
+        __lastVibrationTime = now;
+
+        HapticsPlugin.VibrationManager.vibratePattern(notificationVibrationPattern);
     }
 
     // TODO use pulseaudio-qt for this once it becomes a framework

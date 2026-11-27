@@ -37,6 +37,7 @@ public:
 
     QCoro::Task<void> vibrateTask(int durationMs);
     Q_INVOKABLE QCoro::QmlTask vibrate(int durationMs);
+    Q_INVOKABLE QCoro::QmlTask vibratePattern(const QVariantList &pattern);
 
 Q_SIGNALS:
     void profileChanged();
@@ -47,6 +48,7 @@ private:
     void loadDeviceTuning();
     void connectToFeedbackd();
     QCoro::Task<void> fetchProfile();
+    QCoro::Task<void> vibratePatternTask(VibrationEventList pattern);
     void setProfile(const QString &profile);
 
     OrgSigxcpuFeedbackHapticInterface *m_interface{nullptr};
